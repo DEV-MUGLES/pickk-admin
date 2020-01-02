@@ -1,6 +1,10 @@
-export const WHITE = "#FFF";
-export const LIGHT_GREY = "#F0F0F0";
-export const REGULAR_GREY = "#d8d8d8";
-export const MIDDLE_GREY = "#999999";
-export const BLACK = "#333";
-export const BACKGROUND_BLACK = "#121212";
+enum Colors {
+  White = "#FFF",
+  LightGrey = "#F0F0F0",
+  RegularGrey = "#D8D8D8",
+  MiddleGrey = "#999",
+  Black = "#333",
+  BackgroundBlack = "#121212"
+}
+
+export default Colors;
