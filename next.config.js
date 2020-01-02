@@ -5,16 +5,7 @@ const { parsed: localEnv } = require("dotenv").config();
 const webpack = require("webpack");
 
 const withLess = require("@zeit/next-less");
-const lessToJS = require("less-vars-to-js");
-const fs = require("fs");
-const path = require("path");
-
-const themeVariables = lessToJS(
-  fs.readFileSync(
-    path.resolve(__dirname, "./src/assets/antd-custom.less"),
-    "utf8"
-  )
-);
+import themeVars from "@src/styles/theme";
 
 module.exports = withImages(
   withCSS(
@@ -22,7 +13,7 @@ module.exports = withImages(
       withLess({
         lessLoaderOptions: {
           javascriptEnabled: true,
-          modifyVars: themeVariables // make your antd custom effective
+          modifyVars: themeVars
         },
         webpack: (config, { isServer }) => {
           if (isServer) {
