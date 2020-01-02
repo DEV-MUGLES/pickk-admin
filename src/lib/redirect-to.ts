@@ -1,6 +1,9 @@
 import Router from "next/router";
 
-export default function redirectTo(destination, { res = null, status = null }) {
+export default function redirectTo(
+  destination: Location,
+  { res = null, status = null }
+) {
   if (res) {
     res.writeHead(status || 302, { Location: destination });
     res.end();

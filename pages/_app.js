@@ -6,9 +6,9 @@ import cookies from "next-cookies";
 import { createGlobalStyle } from "styled-components";
 
 import redirectTo from "@src/lib/redirect-to";
+import { BackTop } from "antd";
 
 const GlobalStyle = createGlobalStyle`
-
 `;
 
 class PickkApp extends App {
@@ -19,6 +19,12 @@ class PickkApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
+
+    const workingAt = "/dashboard";
+    if (ctx.pathname == workingAt) {
+      return { pageProps };
+    }
+    redirectTo(workingAt, { res: ctx.res, status: 301 });
 
     //if the authtoken is not found
     if (typeof c.authtoken == "undefined") {
@@ -51,7 +57,7 @@ class PickkApp extends App {
               redirectTo("/login", { res: ctx.res, status: 301 });
             }
           } else if (ctx.pathname == "/login") {
-            //shouldn't show the login page is we are already logged in
+            //shouldn't show the login page if we are already logged in
             if (resp.result == "success") {
               redirectTo("/dashboard", { res: ctx.res, status: 301 });
             }
@@ -99,6 +105,7 @@ class PickkApp extends App {
           <title>핔 어드민</title>
         </Head>
         <Component {...pageProps} />
+        <BackTop />
       </>
     );
   }
