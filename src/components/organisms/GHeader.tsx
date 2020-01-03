@@ -58,9 +58,7 @@ export default function GHeader() {
         <Space level={2} direction="ROW" />
         <Dropdown overlay={dropDownMenu} trigger={["click"]}>
           <a href="#" style={{ color: Colors.White }}>
-            <Badge dot>
-              <Avatar shape="square" icon="user" size="small" />
-            </Badge>
+            <Avatar shape="square" icon="user" size="small" />
             <Icon type="down" style={{ marginLeft: 6 }} />
           </a>
         </Dropdown>

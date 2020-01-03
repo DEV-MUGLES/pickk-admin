@@ -20,22 +20,22 @@ class PickkApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
+    // 개발 편의성을 위한 코드 : workingAt에 작업할 page pathname을 적는다.
     const workingAt = "/dashboard";
     if (ctx.pathname == workingAt) {
       return { pageProps };
     }
     redirectTo(workingAt, { res: ctx.res, status: 301 });
+    if (response !== null) {
+      return { response };
+    } else return { pageProps };
+    //
 
-    //if the authtoken is not found
     if (typeof c.authtoken == "undefined") {
-      //don't do anything if we are on a page that doesn't require credentials
       if (ctx.pathname == "/login" || ctx.pathname == "/forgot-password")
         return { pageProps };
-      //if we are on any other page, redirect to the login page
       else redirectTo("/login", { res: ctx.res, status: 301 });
-    }
-    //if we do have an auth token to check
-    else {
+    } else {
       var response = await fetch(
         "https://jsonplaceholder.typicode.com/todos/1",
         {
@@ -47,38 +47,27 @@ class PickkApp extends App {
         .then(r => r.json())
         .then(resp => {
           if (ctx.pathname == "/") {
-            //if auth check was successful, send to dashboard
             if (resp.result == "success")
               redirectTo("/dashboard", { res: ctx.res, status: 301 });
             else {
-              //setting the cookie to expire way back when removes it
               document.cookie =
                 "authtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
               redirectTo("/login", { res: ctx.res, status: 301 });
             }
           } else if (ctx.pathname == "/login") {
-            //shouldn't show the login page if we are already logged in
             if (resp.result == "success") {
               redirectTo("/dashboard", { res: ctx.res, status: 301 });
-            }
-
-            //if it wasn't successful, stay where we are
-            else
+            } else
               return {
                 ...pageProps,
                 ...{ query: ctx.query, authtoken: c.authtoken }
               };
-          }
-
-          //any other page that requires a login
-          else {
-            //if auth check was successful, stay where we are
+          } else {
             if (resp.result == "success")
               return {
                 ...pageProps,
                 ...{ query: ctx.query, authtoken: c.authtoken }
               };
-            //if it wasn't successful, clear the authtoken since it must be expired or invalid and redirect to login
             else {
               document.cookie =
                 "authtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
