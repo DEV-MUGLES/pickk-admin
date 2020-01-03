@@ -1,15 +1,15 @@
 import Button from "../";
-import ButtonProps, { AntdButtonProps } from "../button";
+import ButtonProps from "../button";
 
 export interface IProps extends ButtonProps {
   Icon: React.ReactElement;
 }
 
 export default function IconButton(props: IProps) {
-  const basicProps: ButtonProps = props;
+  const buttonProps: ButtonProps = props;
 
   return (
-    <Button {...basicProps}>
+    <Button {...buttonProps}>
       {props.Icon}
       {props.children}
     </Button>
