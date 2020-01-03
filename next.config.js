@@ -5,7 +5,7 @@ const { parsed: localEnv } = require("dotenv").config();
 const webpack = require("webpack");
 
 const withLess = require("@zeit/next-less");
-import themeVars from "@src/styles/theme";
+const themeVars = require("./antd-theme");
 
 module.exports = withImages(
   withCSS(
