@@ -36,6 +36,5 @@ const StyledContent = styled(Content)`
   margin: 24px 16px 0;
   overflow: initial;
   padding: 24;
-  background: #fff;
   text-align: center;
 `;

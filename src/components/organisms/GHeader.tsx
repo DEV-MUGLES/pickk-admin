@@ -77,6 +77,7 @@ const StyledHeader = styled(Header)`
   left: 0;
   top: 0;
   width: 100%;
+  z-index: 1000;
 `;
 
 const Right = styled.div`

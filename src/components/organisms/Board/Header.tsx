@@ -1,5 +1,6 @@
 import { PageHeader, Popover, Button, Typography } from "antd";
 import styled from "styled-components";
+import Colors from "@src/components/atoms/colors";
 
 export type BoardHeaderProps = {
   title: string;
@@ -30,13 +31,18 @@ export default function BoardHeader({
   };
 
   return (
-    <PageHeader
+    <StyledPageHeader
       title={title}
       subTitle={subTitle}
       extra={[getHelpPopoverButton(helpTexts)]}
     />
   );
 }
+
+const StyledPageHeader = styled(PageHeader)`
+  height: fit-content;
+  background-color: ${Colors.White};
+`;
 
 const StyledUl = styled.ul`
   padding: 0;
