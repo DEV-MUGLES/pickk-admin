@@ -8,6 +8,7 @@ module.exports = withImages(
   withCSS(
     withSourceMaps({
       webpack: config => {
+        config.node = { fs: "empty" };
         config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
         return config;
       }
