@@ -73,11 +73,7 @@ const StyledHeader = styled(Header)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: fixed;
-  left: 0;
-  top: 0;
   width: 100%;
-  z-index: 1000;
 `;
 
 const Right = styled.div`

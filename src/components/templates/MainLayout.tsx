@@ -16,21 +16,16 @@ export default function MainLayout({ children }: IProps) {
       <GHeader />
       <Layout>
         <SiderGNB />
-        <LayoutRight>
+        <Layout>
           <StyledContent>{children}</StyledContent>
           <Footer style={{ textAlign: "center" }}>
             Ant Design ©2018 Created by Ant UED
           </Footer>
-        </LayoutRight>
+        </Layout>
       </Layout>
     </Layout>
   );
 }
-
-const LayoutRight = styled(Layout)`
-  margin-top: 64px;
-  margin-left: 200px;
-`;
 
 const StyledContent = styled(Content)`
   margin: 24px 16px 0;

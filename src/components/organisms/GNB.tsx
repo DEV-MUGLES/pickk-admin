@@ -112,9 +112,5 @@ export default function GNB() {
 const StyledSider = styled(Sider)`
   && {
     overflow: auto;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 64px;
   }
 `;
