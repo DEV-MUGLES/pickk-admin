@@ -11,6 +11,7 @@ export const getDateTimeNumbers = () => {
     seconds: today.getSeconds()
   };
 };
+
 export const getDateTimeStrings = () => {
   const today = new Date();
   const parse = (num: number) => addLeadingZeros(num, 2);

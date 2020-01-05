@@ -5,13 +5,19 @@ import { Typography } from "antd";
 import ExcelDownloadButton, {
   ExcelDownloadButtonProps
 } from "@src/components/molecules/button/ExcelDownload";
+import TableReloadButton from "@src/components/molecules/button/TableReload";
+import Space from "@src/components/atoms/space";
 
-export default function TableHeader(props: ExcelDownloadButtonProps) {
+export type TableHeaderProps = ExcelDownloadButtonProps;
+
+export default function TableHeader(props: TableHeaderProps) {
   return (
     <Wrapper>
       <Typography.Text strong style={{ marginRight: "auto" }}>
-        {props.title + ` (총 ${props.dataSource.length}개)`}
+        {`${props.title} 목록 (총 ${props.dataSource.length}개)`}
       </Typography.Text>
+      <TableReloadButton />
+      <Space direction="ROW" />
       <ExcelDownloadButton {...props} />
     </Wrapper>
   );

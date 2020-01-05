@@ -32,7 +32,10 @@ export default function ExcelDownloadButton({
     <ExcelFile
       filename={fileName}
       element={
-        <Button icon="file-excel" style={{ color: "green" }}>
+        <Button
+          icon="file-excel"
+          style={{ color: "green", borderColor: "green" }}
+        >
           엑셀 다운
         </Button>
       }
