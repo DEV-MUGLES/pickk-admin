@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import ReactExport from "react-export-excel";
 import { getDateTimeStrings } from "@src/lib/DateParser";
-import { addLeadingZeros } from "@src/lib/NumberParser";
 
 const { ExcelFile, ExcelSheet, ExcelColumn } = ReactExport;
 
@@ -32,7 +31,11 @@ export default function ExcelDownloadButton({
   return (
     <ExcelFile
       filename={fileName}
-      element={<Button icon="file-excel">엑셀 다운</Button>}
+      element={
+        <Button icon="file-excel" style={{ color: "green" }}>
+          엑셀 다운
+        </Button>
+      }
     >
       <ExcelSheet data={dataSource} name={title}>
         {getExcelColumns(columns)}
