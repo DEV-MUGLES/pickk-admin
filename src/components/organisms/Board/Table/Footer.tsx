@@ -1,21 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "antd";
-import Space from "@src/components/atoms/space";
-import { TableActionType } from "./table";
 
-export type TableActionBarProps = {
+import { TableActionType } from "./table";
+import Space from "@src/components/atoms/space";
+
+export type TableFooterProps = {
   selectedRowKeys: number[];
-  actions?: TableActionType;
+  footActions?: TableActionType;
 };
 
-export default function TableActionBar({
+export default function TableFooter({
   selectedRowKeys,
-  actions
-}: TableActionBarProps) {
+  footActions
+}: TableFooterProps) {
   return (
     <Wrapper>
-      {actions.map((item, index) => (
+      {footActions.map((item, index) => (
         <>
           <Button
             disabled={selectedRowKeys.length === 0}
@@ -36,4 +37,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 100%;
+  align-items: center;
 `;
