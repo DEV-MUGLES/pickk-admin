@@ -12,9 +12,9 @@ type IProps = {
 
 export default function MainLayout({ children }: IProps) {
   return (
-    <Layout>
+    <>
       <GHeader />
-      <Layout>
+      <Wrapper>
         <SiderGNB />
         <Layout>
           <StyledContent>{children}</StyledContent>
@@ -22,10 +22,15 @@ export default function MainLayout({ children }: IProps) {
             Ant Design ©2018 Created by Ant UED
           </Footer>
         </Layout>
-      </Layout>
-    </Layout>
+      </Wrapper>
+    </>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const StyledContent = styled(Content)`
   margin: 24px 16px 0;
