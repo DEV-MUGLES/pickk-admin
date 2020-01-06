@@ -40,7 +40,7 @@ export default function ExcelDownloadButton({
         </Button>
       }
     >
-      <ExcelSheet data={dataSource} name={title}>
+      <ExcelSheet name={title} data={dataSource}>
         {getExcelColumns(columns)}
       </ExcelSheet>
     </ExcelFile>

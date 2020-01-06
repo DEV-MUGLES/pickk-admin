@@ -1,5 +1,6 @@
 import { Layout, Menu, Icon } from "antd";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -66,8 +67,10 @@ const MENU_ITEMS = [
 ];
 
 export default function GNB() {
+  const router = useRouter();
+
   return (
-    <StyledSider>
+    <StyledSider collapsible>
       <div
         style={{
           height: "32px",
@@ -75,19 +78,21 @@ export default function GNB() {
           margin: "16px"
         }}
       />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["0"]}>
-        {MENU_ITEMS.map((item, index) => {
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[router.pathname]}>
+        {MENU_ITEMS.map(item => {
           if (!item.title)
             return (
-              <Menu.Item key={index}>
-                <Icon type={item.iconType} />
-                <span className="nav-text">{item.text}</span>
+              <Menu.Item key={item.link}>
+                <a href={item.link}>
+                  <Icon type={item.iconType} />
+                  <span className="nav-text">{item.text}</span>
+                </a>
               </Menu.Item>
             );
           else {
             return (
               <SubMenu
-                key={index}
+                key={`sub_${item.title}`}
                 title={
                   <span>
                     <Icon type={item.iconType} />
@@ -95,9 +100,11 @@ export default function GNB() {
                   </span>
                 }
               >
-                {item.items.map((item, _index) => (
-                  <Menu.Item key={index + "_" + _index}>
-                    <span className="nav-text">{item.text}</span>
+                {item.items.map(item => (
+                  <Menu.Item key={item.link}>
+                    <a href={item.link}>
+                      <span className="nav-text">{item.text}</span>
+                    </a>
                   </Menu.Item>
                 ))}
               </SubMenu>
@@ -112,5 +119,6 @@ export default function GNB() {
 const StyledSider = styled(Sider)`
   && {
     overflow: auto;
+    width: 200px;
   }
 `;
