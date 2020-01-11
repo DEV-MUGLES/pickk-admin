@@ -6,7 +6,7 @@ import { TableActionType } from "./table";
 
 export type TableActionBarProps = {
   selectedRowKeys: number[];
-  actions?: TableActionType;
+  actions?: TableActionType[];
 };
 
 export default function TableActionBar({

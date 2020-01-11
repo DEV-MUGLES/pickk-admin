@@ -7,7 +7,7 @@ import Space from "@src/components/atoms/space";
 
 export type TableFooterProps = {
   selectedRowKeys: number[];
-  footActions?: TableActionType;
+  footActions?: TableActionType[];
 };
 
 export default function TableFooter({
