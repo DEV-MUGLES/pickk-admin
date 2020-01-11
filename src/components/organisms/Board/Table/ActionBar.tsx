@@ -16,7 +16,7 @@ export default function TableActionBar({
   return (
     <Wrapper>
       {actions.map((item, index) => (
-        <>
+        <React.Fragment key={"action_" + index}>
           <Button
             disabled={selectedRowKeys.length === 0}
             key={index}
@@ -26,7 +26,7 @@ export default function TableActionBar({
             {item.text}
           </Button>
           <Space direction="ROW" />
-        </>
+        </React.Fragment>
       ))}
     </Wrapper>
   );

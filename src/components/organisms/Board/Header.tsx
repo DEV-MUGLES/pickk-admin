@@ -4,7 +4,7 @@ import Colors from "@src/components/atoms/colors";
 
 export type BoardHeaderProps = {
   title: string;
-  subTitle: string;
+  subTitle?: string;
   helpTexts: string[];
 };
 
@@ -17,7 +17,7 @@ export default function BoardHeader({
     const content = (
       <StyledUl>
         {helpTexts.map((item, index) => (
-          <li key={index}>
+          <li key={"info_" + index}>
             <Typography.Paragraph>{item}</Typography.Paragraph>
           </li>
         ))}
@@ -34,7 +34,7 @@ export default function BoardHeader({
     <StyledPageHeader
       title={title}
       subTitle={subTitle}
-      extra={[getHelpPopoverButton(helpTexts)]}
+      extra={getHelpPopoverButton(helpTexts)}
     />
   );
 }

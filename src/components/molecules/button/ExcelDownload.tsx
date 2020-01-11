@@ -2,7 +2,8 @@ import { Button } from "antd";
 import ReactExport from "react-export-excel";
 import { getDateTimeStrings } from "@src/lib/DateParser";
 
-const { ExcelFile, ExcelSheet, ExcelColumn } = ReactExport;
+const { ExcelFile } = ReactExport;
+const { ExcelSheet, ExcelColumn } = ExcelFile;
 
 export type ExcelDownloadButtonProps = {
   title: string;

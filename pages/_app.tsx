@@ -3,15 +3,12 @@ import App from "next/app";
 import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 import cookies from "next-cookies";
-import { createGlobalStyle } from "styled-components";
 
 import redirectTo from "@src/lib/redirect-to";
 import { BackTop } from "antd";
 
-const GlobalStyle = createGlobalStyle`
-`;
-
 class PickkApp extends App {
+  /*
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
     const c = cookies(ctx);
@@ -20,17 +17,8 @@ class PickkApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    // 개발 편의성을 위한 코드 : workingAt에 작업할 page pathname을 적는다.
-    const workingAt = "/dashboard";
-    if (ctx.pathname == workingAt) {
-      return { pageProps };
-    }
-    redirectTo(workingAt, { res: ctx.res, status: 301 });
-    if (response !== null) {
-      return { response };
-    } else return { pageProps };
-    //
-
+    return { pageProps };
+    
     if (typeof c.authtoken == "undefined") {
       if (ctx.pathname == "/login" || ctx.pathname == "/forgot-password")
         return { pageProps };
@@ -84,14 +72,14 @@ class PickkApp extends App {
     if (response !== null) {
       return { response };
     } else return { pageProps };
-  }
+    
+  }*/
   render() {
     const { Component, pageProps } = this.props;
     return (
       <>
-        <GlobalStyle />
         <Head>
-          <title>핔 어드민</title>
+          <title>핔 스토어 어드민</title>
         </Head>
         <Component {...pageProps} />
         <BackTop />
