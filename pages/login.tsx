@@ -22,8 +22,8 @@ export default function Login() {
 
           <LoginForm></LoginForm>
     </Content>
-    <Space level={2} direction="COL" />
-    <GFooter/>
+    <Space level={8} direction="COL" />
+    <GFooter style={{backgroundColor:'#001529', color:Colors.LightGrey}}/>
     </Layout>
   );
 }
