@@ -11,18 +11,17 @@ const { Header, Content, Footer } = Layout;
 export default function LoginForm() {
     
     const [loginFormState, setLoginFormState] = useState({id:'', pw:''});
-    const handleLoginFormChange = (e) => setLoginFormState({...loginFormState, [e.target.name]:[e.target.value],});
+    const handleLoginFormChange = (e) => setLoginFormState({...loginFormState, [e.target.name]:e.target.value,});
     const [isRememberIDPW, setIsRememberIDPW] = useState(true);
-    const [isKeepLogin, setIsKeepLogin] = useState(true);
     const handleLoginFormSubmit = () => {
-        const state = {'isRememberIDPW' : isRememberIDPW, 'isKeepLogin' : isKeepLogin, 'loginFormState' : {'id' : loginFormState.id, 'pw' : loginFormState.pw}}
+        const state = {'isRememberIDPW' : isRememberIDPW, 'loginFormState' : {'id' : loginFormState.id, 'pw' : loginFormState.pw}}
         console.log(state);
     }
     
   return (
       <LoginFormLayout>
         <LoginFormContent>
-        <LoginFormTitle level={2}>로그인</LoginFormTitle>
+        <Title level={2}>로그인</Title>
             <Space level={2} direction="COL" />
             <Input
             name="id"
@@ -43,16 +42,12 @@ export default function LoginForm() {
                 style={{width:"400px"}}
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
             />
-            <Space level={4} direction="COL" />
+            <Space level={1} direction="COL" />
 
-            <CheckboxWrapper>
-                <Checkbox checked={isRememberIDPW} onClick={() => setIsRememberIDPW(!isRememberIDPW)}>아이디/비밀번호 기억하기</Checkbox>
-                <Space level={0.5} direction="COL" />
-                <Checkbox checked={isKeepLogin} style={{margin:'0px'}} onClick={() => setIsKeepLogin(!isKeepLogin)}>로그인 유지하기</Checkbox>
-            </CheckboxWrapper>
-            <Space level={4} direction="COL" />
+            <Checkbox checked={isRememberIDPW} onClick={() => setIsRememberIDPW(!isRememberIDPW)}>아이디/비밀번호 기억하기</Checkbox>
+            <Space level={5} direction="COL" />
 
-            <Button type="primary" onClick={handleLoginFormSubmit}>로그인</Button>
+            <LoginButton type="primary" onClick={handleLoginFormSubmit}>로그인</LoginButton>
             <Space level={4} direction="COL" />
         </LoginFormContent>
         <LoginFormFooter>
@@ -73,27 +68,17 @@ const LoginFormLayout = styled(Layout)`
   padding:50px;
 `
 
-const LoginFormTitle = styled(Title)`
-    width:fit-content
-    margin-left:0px;
-    margin-right:auto;
-`
-
 const LoginFormContent = styled(Content)`
     display:flex;
     flex-direction:column;
-    align-items:center;
+`
+
+const LoginButton = styled(Button)`
+    width:100px;
+    margin: 0 auto;
 `
 
 const LoginFormFooter = styled(Footer)`
     background-color: ${Colors.White};
 `
 
-const CheckboxWrapper = styled.div`
-  margin-left:0;
-  margin-right:auto;
-
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-`
