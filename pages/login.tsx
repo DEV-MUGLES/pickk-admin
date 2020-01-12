@@ -8,11 +8,10 @@ import LoginForm from "@src/components/organisms/LoginForm";
 import GFooter from "@src/components/organisms/GFooter";
 
 export default function Login() {
-  const { Header, Footer, Sider, Content } = Layout;
+  const { Content } = Layout;
   return (
     <Layout>
-    <Layout>
-      <Content style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+    <Content style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         <Space level={10} direction="COL" />
           <LogoDefaultIcon
                   style={{ width: "80px", height: "48px" }}
@@ -22,8 +21,7 @@ export default function Login() {
           <Space level={2} direction="COL" />
 
           <LoginForm></LoginForm>
-      </Content>
-    </Layout>
+    </Content>
     <Space level={2} direction="COL" />
     <GFooter/>
     </Layout>
