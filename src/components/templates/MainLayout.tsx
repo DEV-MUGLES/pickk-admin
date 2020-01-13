@@ -1,17 +1,17 @@
-import styled from "styled-components";
-import { Layout } from "antd";
+import styled from 'styled-components';
+import {Layout} from 'antd';
 
-import SiderGNB from "../organisms/GNB";
-import GHeader from "../organisms/GHeader";
-import GFooter from "../organisms/GFooter";
+import SiderGNB from '../organisms/GNB';
+import GHeader from '../organisms/GHeader';
+import GFooter from '../organisms/GFooter';
 
-const { Content, Footer } = Layout;
+const {Content, Footer} = Layout;
 
 type IProps = {
   children: React.ReactNode;
 };
 
-export default function MainLayout({ children }: IProps) {
+export default function MainLayout({children}: IProps) {
   return (
     <>
       <GHeader />
@@ -19,7 +19,7 @@ export default function MainLayout({ children }: IProps) {
         <SiderGNB />
         <Layout>
           <StyledContent>{children}</StyledContent>
-         <GFooter/>
+          <GFooter />
         </Layout>
       </Wrapper>
     </>

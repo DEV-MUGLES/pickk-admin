@@ -1,12 +1,11 @@
-import IconProps from "../icon/icon";
+import IconProps from '../icon/icon';
 
-export default function LogoDefaultIcon({ style, fill }: IconProps) {
+export default function LogoDefaultIcon({style, fill}: IconProps) {
   return (
     <svg
       style={style}
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 46.342 27.351"
-    >
+      viewBox="0 0 46.342 27.351">
       <g fill={fill}>
         <g transform="translate(-715.219 -277.945)">
           <g transform="translate(744.539 279.716)">

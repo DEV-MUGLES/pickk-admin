@@ -2,7 +2,7 @@ import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
 import Board from '@src/components/templates/Board';
 
-export default function ClaimReturn() {
+export default function Products() {
   const columns = [
     {
       width: 150,
@@ -44,19 +44,20 @@ export default function ClaimReturn() {
 
   const actions = [
     {
-      text: '송장수정',
-      onClick: (nums: number[]) => {
-        return;
-      },
-    },
-    {
-      text: '판매자 직접 반품',
+      icon: 'delete',
+      text: '선택삭제',
       onClick: num => {
         return;
       },
     },
     {
-      text: '판매자 직접 교환',
+      text: '특정 피커 구독 할인 설정',
+      onClick: num => {
+        return;
+      },
+    },
+    {
+      text: '선택 상품 구독 할인 설정',
       onClick: num => {
         return;
       },
@@ -66,12 +67,12 @@ export default function ClaimReturn() {
   return (
     <MainLayout>
       <Board
-        title="반품 관리"
-        subTitle="구매자가 요청한 반품 주문건에 대해 완료/거부처리를 진행하실 수 있는 메뉴입니다."
+        title="상품 조회/수정"
+        subTitle="등록한 상품을 조회/수정할 수 있는 메뉴입니다."
         helpTexts={[
-          `판매자께서 직접 반품접수 하고자 하신다면 배송중 주문관리 메뉴에서 처리해주세요.`,
-          `반품요청 사유가 구매자 귀책인 경우 반품배송비가 자동 청구되고 판매자 귀책인 경우 청구되지 않습니다.`,
-          `수거완료 후 +3영업일 이내 반품처리를 진행하지 않으시면 페널티가 부과되오니 주의해 주세요.`,
+          `기본적으로 "최근 3개월 이내 신규등록","판매중"의 상품을 우선 노출 해 주고 있으며  판매대기/품절 등 모든 상품을 조회하시려면 "판매상태"를 전체로 체크하여 조회하시면 됩니다.`,
+          '상단에 판매상태별 상품 건수 확인이 가능하며, 건수를 클릭 시 상품목록에 등록한 상품이 조회됩니다.',
+          `특정 상품의 조회를 원하신다면, "검색어" 기능을 사용해서 상품번호/상품명/제조사명 등 원하시는 유형으로 조회하실 수 있습니다.`,
         ]}
         {...{columns, actions}}
       />

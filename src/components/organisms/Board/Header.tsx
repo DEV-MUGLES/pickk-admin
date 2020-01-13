@@ -1,6 +1,6 @@
-import { PageHeader, Popover, Button, Typography } from "antd";
-import styled from "styled-components";
-import Colors from "@src/components/atoms/colors";
+import {PageHeader, Popover, Button, Typography} from 'antd';
+import styled from 'styled-components';
+import Colors from '@src/components/atoms/colors';
 
 export type BoardHeaderProps = {
   title: string;
@@ -11,13 +11,13 @@ export type BoardHeaderProps = {
 export default function BoardHeader({
   title,
   subTitle,
-  helpTexts
+  helpTexts,
 }: BoardHeaderProps) {
-  const getHelpPopoverButton = (helpTexts: string[]) => {
+  const getHelpPopoverButton = () => {
     const content = (
       <StyledUl>
         {helpTexts.map((item, index) => (
-          <li key={"info_" + index}>
+          <li key={'info_' + index}>
             <Typography.Paragraph>{item}</Typography.Paragraph>
           </li>
         ))}
@@ -34,7 +34,7 @@ export default function BoardHeader({
     <StyledPageHeader
       title={title}
       subTitle={subTitle}
-      extra={getHelpPopoverButton(helpTexts)}
+      extra={getHelpPopoverButton()}
     />
   );
 }

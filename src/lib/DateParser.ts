@@ -1,4 +1,4 @@
-import { addLeadingZeros } from "./NumberParser";
+import {addLeadingZeros} from './NumberParser';
 
 export const getDateTimeNumbers = () => {
   const today = new Date();
@@ -8,7 +8,7 @@ export const getDateTimeNumbers = () => {
     day: today.getDate(),
     hours: today.getHours(),
     minutes: today.getMinutes(),
-    seconds: today.getSeconds()
+    seconds: today.getSeconds(),
   };
 };
 
@@ -21,6 +21,6 @@ export const getDateTimeStrings = () => {
     day: parse(today.getDate()),
     hours: parse(today.getHours()),
     minutes: parse(today.getMinutes()),
-    seconds: parse(today.getSeconds())
+    seconds: parse(today.getSeconds()),
   };
 };

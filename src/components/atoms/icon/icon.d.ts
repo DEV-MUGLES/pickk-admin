@@ -1,4 +1,4 @@
-import ColorProps from "../colors";
+import ColorProps from '../colors';
 
 export default interface IconProps {
   style: React.CSSProperties;

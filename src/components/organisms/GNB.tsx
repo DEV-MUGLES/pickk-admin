@@ -80,7 +80,7 @@ export default function GNB() {
       />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[router.pathname]}>
         {MENU_ITEMS.map(item => {
-          if (!item.title)
+          if (!item.title) {
             return (
               <Menu.Item key={item.link}>
                 <a href={item.link}>
@@ -89,7 +89,7 @@ export default function GNB() {
                 </a>
               </Menu.Item>
             );
-          else {
+          } else {
             return (
               <SubMenu
                 key={`sub_${item.title}`}
@@ -99,10 +99,10 @@ export default function GNB() {
                     <span>{item.title}</span>
                   </span>
                 }>
-                {item.items.map(item => (
-                  <Menu.Item key={item.link}>
-                    <a href={item.link}>
-                      <span className="nav-text">{item.text}</span>
+                {item.items.map(subItem => (
+                  <Menu.Item key={subItem.link}>
+                    <a href={subItem.link}>
+                      <span className="nav-text">{subItem.text}</span>
                     </a>
                   </Menu.Item>
                 ))}

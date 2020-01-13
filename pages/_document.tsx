@@ -2,13 +2,8 @@
 // Event handlers like onClick can't be added to this file
 
 // ./pages/_document.js
-import Document, {
-  Head,
-  Main,
-  NextScript,
-  DocumentContext
-} from "next/document";
-import { ServerStyleSheet } from "styled-components";
+import Document, {Head, Main, NextScript, DocumentContext} from 'next/document';
+import {ServerStyleSheet} from 'styled-components';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -17,7 +12,7 @@ export default class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
         });
       const initialProps = await Document.getInitialProps(ctx);
 
@@ -28,7 +23,7 @@ export default class MyDocument extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        )
+        ),
       };
     } finally {
       sheet.seal();
@@ -43,8 +38,7 @@ export default class MyDocument extends Document {
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/images/favicon-16x16.png"
-          ></link>
+            href="/images/favicon-16x16.png"></link>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
           <link rel="stylesheet" href="/antd.min.css" />

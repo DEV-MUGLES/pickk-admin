@@ -1,11 +1,11 @@
-import React from "react";
-import App from "next/app";
-import Head from "next/head";
-import fetch from "isomorphic-unfetch";
-import cookies from "next-cookies";
+import React from 'react';
+import App from 'next/app';
+import Head from 'next/head';
+import fetch from 'isomorphic-unfetch';
+import cookies from 'next-cookies';
 
-import redirectTo from "@src/lib/redirect-to";
-import { BackTop } from "antd";
+import redirectTo from '@src/lib/redirect-to';
+import {BackTop} from 'antd';
 
 class PickkApp extends App {
   /*
@@ -16,9 +16,7 @@ class PickkApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-
     return { pageProps };
-    
     if (typeof c.authtoken == "undefined") {
       if (ctx.pathname == "/login" || ctx.pathname == "/forgot-password")
         return { pageProps };
@@ -72,10 +70,9 @@ class PickkApp extends App {
     if (response !== null) {
       return { response };
     } else return { pageProps };
-    
   }*/
   render() {
-    const { Component, pageProps } = this.props;
+    const {Component, pageProps} = this.props;
     return (
       <>
         <Head>

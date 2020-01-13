@@ -1,8 +1,8 @@
-import Space from "../atoms/space";
-import styled from "styled-components";
+import Space from '../atoms/space';
+import styled from 'styled-components';
 
-import Header, { BoardHeaderProps } from "../organisms/Board/Header";
-import Table, { BoardTableProps } from "../organisms/Board/Table";
+import Header, {BoardHeaderProps} from '../organisms/Board/Header';
+import Table, {BoardTableProps} from '../organisms/Board/Table';
 
 export type BoardProps = BoardHeaderProps & BoardTableProps;
 

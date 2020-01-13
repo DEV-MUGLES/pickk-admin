@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { Button, DatePicker } from "antd";
-import styled from "styled-components";
+import {Button, DatePicker} from 'antd';
+import styled from 'styled-components';
 
 export default function Home() {
   return (

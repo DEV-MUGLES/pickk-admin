@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { Button } from "antd";
+import React from 'react';
+import styled from 'styled-components';
+import {Button} from 'antd';
 
-import { TableActionType } from "./table";
-import Space from "@src/components/atoms/space";
+import {TableActionType} from './table';
+import Space from '@src/components/atoms/space';
 
 export type TableFooterProps = {
   selectedRowKeys: number[];
@@ -12,7 +12,7 @@ export type TableFooterProps = {
 
 export default function TableFooter({
   selectedRowKeys,
-  footActions
+  footActions,
 }: TableFooterProps) {
   return (
     <Wrapper>
@@ -22,8 +22,7 @@ export default function TableFooter({
             disabled={selectedRowKeys.length === 0}
             key={index}
             icon={item.icon}
-            onClick={() => item.onClick(selectedRowKeys)}
-          >
+            onClick={() => item.onClick(selectedRowKeys)}>
             {item.text}
           </Button>
           <Space direction="ROW" />
