@@ -1,12 +1,18 @@
 import {Layout} from 'antd'
+import styled from "styled-components";
 
 const {Footer} = Layout;
 
 export default function LoginFooter() {
     return(
-        <Footer style={{ textAlign: "center" }}>
+        <StyledFooter>
             로그인푸터
-        </Footer>
+        </StyledFooter>
     );  
     
 }
+
+
+const StyledFooter = styled(Footer)`
+    text-align:center;
+`
