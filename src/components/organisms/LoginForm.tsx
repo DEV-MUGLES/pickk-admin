@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { Layout, Input, Icon, Checkbox, Button ,Typography } from 'antd';
 import styled from "styled-components";
 import Colors from "@src/components/atoms/colors";
-import { Layout, Input, Icon, Checkbox, Button ,Typography } from 'antd';
 import Space from "@src/components/atoms/space";
 
 const { Title } = Typography;
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 export default function LoginForm() {
     
