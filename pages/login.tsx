@@ -13,25 +13,25 @@ const { Content } = Layout;
 export default function Login() {
   return (
     <Layout>
-    <StyledContent>
-        <Space level={10} direction="COL" />
+    <StyledContent >
+        <Space level={10}/>
           <LogoDefaultIcon
                   style={{ width: "80px", height: "48px" }}
                   fill={Colors.Black}
           />
           <div>pickk admin</div>
-          <Space level={2} direction="COL" />
+          <Space level={2}/>
 
           <LoginForm/>
     </StyledContent>
-    <Space level={8} direction="COL" />
+    <Space level={8}/>
     <GFooter style={{backgroundColor:'#001529', color:Colors.LightGrey}}/>
     </Layout>
   );
 }
 
 const StyledContent = styled(Content)`
-    display:'flex';
-    flex-direction:'column';
-    align-items:'center'
+    display:flex;
+    flex-direction:column;
+    align-items:center
 `

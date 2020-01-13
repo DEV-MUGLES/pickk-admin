@@ -21,8 +21,8 @@ export default function LoginForm() {
   return (
       <LoginFormLayout>
         <LoginFormContent>
-        <Title level={2}>로그인</Title>
-            <Space level={2} direction="COL" />
+            <Title level={2}>로그인</Title>
+            <Space level={2}/>
             <Input
             name="id"
             value={loginFormState.id}
@@ -32,7 +32,7 @@ export default function LoginForm() {
             style={{width:"400px"}}
             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
             />
-            <Space level={1} direction="COL" />
+            <Space level={1}/>
             <Input
                 name="pw"
                 value={loginFormState.pw}
@@ -42,13 +42,13 @@ export default function LoginForm() {
                 style={{width:"400px"}}
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
             />
-            <Space level={1} direction="COL" />
+            <Space level={1}/>
 
             <Checkbox checked={isRememberIDPW} onClick={() => setIsRememberIDPW(!isRememberIDPW)}>아이디/비밀번호 기억하기</Checkbox>
-            <Space level={5} direction="COL" />
+            <Space level={5}/>
 
             <LoginButton type="primary" onClick={handleLoginFormSubmit}>로그인</LoginButton>
-            <Space level={4} direction="COL" />
+            <Space level={4}/>
         </LoginFormContent>
         <LoginFormFooter>
             로그인 푸터입니당
