@@ -20,7 +20,7 @@ export default function Login() {
           <div>pickk admin</div>
           <Space level={2} direction="COL" />
 
-          <LoginForm></LoginForm>
+          <LoginForm/>
     </Content>
     <Space level={8} direction="COL" />
     <GFooter style={{backgroundColor:'#001529', color:Colors.LightGrey}}/>
