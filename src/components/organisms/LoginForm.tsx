@@ -14,7 +14,6 @@ export default function LoginForm() {
     const [isRememberIDPW, setIsRememberIDPW] = useState(true);
     const handleLoginFormSubmit = () => {
         const state = {'isRememberIDPW' : isRememberIDPW, 'loginFormState' : {'id' : loginFormState.id, 'pw' : loginFormState.pw}}
-        console.log(state);
     }
 
     const inputStyle = {width:"400px"};
