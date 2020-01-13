@@ -17,6 +17,9 @@ export default function LoginForm() {
         const state = {'isRememberIDPW' : isRememberIDPW, 'loginFormState' : {'id' : loginFormState.id, 'pw' : loginFormState.pw}}
         console.log(state);
     }
+
+    const inputStyle = {width:"400px"};
+    const inputPrefixStyle = {color: "rgba(0,0,0,.25)"}
     
   return (
       <LoginFormLayout>
@@ -29,18 +32,18 @@ export default function LoginForm() {
             placeholder="아이디"
             onChange={handleLoginFormChange}
             size="large"
-            style={{width:"400px"}}
-            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            style={inputStyle}
+            prefix={<Icon type="user" style={inputPrefixStyle} />}
             />
             <Space level={1}/>
-            <Input
+            <Input.Password
                 name="pw"
                 value={loginFormState.pw}
                 placeholder="비밀번호"
                 onChange={handleLoginFormChange}        
                 size="large"
-                style={{width:"400px"}}
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                style={inputStyle}
+                prefix={<Icon type="lock" style={inputPrefixStyle} />}
             />
             <Space level={1}/>
 
