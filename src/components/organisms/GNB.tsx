@@ -1,69 +1,69 @@
-import { Layout, Menu, Icon } from "antd";
-import styled from "styled-components";
-import { useRouter } from "next/router";
+import {Layout, Menu, Icon} from 'antd';
+import styled from 'styled-components';
+import {useRouter} from 'next/router';
 
-const { Sider } = Layout;
-const { SubMenu } = Menu;
+const {Sider} = Layout;
+const {SubMenu} = Menu;
 
 const MENU_ITEMS = [
   {
-    iconType: "dashboard",
-    text: "대시보드",
-    link: "/dashboard"
+    iconType: 'dashboard',
+    text: '대시보드',
+    link: '/dashboard',
   },
   {
-    iconType: "skin",
-    text: "상품 관리",
-    link: "/products"
+    iconType: 'skin',
+    text: '상품 관리',
+    link: '/products',
   },
   {
-    title: "판매 관리",
-    iconType: "shop",
+    title: '판매 관리',
+    iconType: 'shop',
     items: [
       {
-        text: "주문 조회",
-        link: "/order"
+        text: '주문 조회',
+        link: '/order',
       },
       {
-        text: "발주/발송 관리",
-        link: "/delivery"
+        text: '발주/발송 관리',
+        link: '/delivery',
       },
       {
-        text: "배송현황 관리",
-        link: "/delivery/situation"
+        text: '배송현황 관리',
+        link: '/delivery/situation',
       },
       {
-        text: "취소 관리",
-        link: "/claim/cancel"
+        text: '취소 관리',
+        link: '/claim/cancel',
       },
       {
-        text: "반품 관리",
-        link: "/claim/return"
+        text: '반품 관리',
+        link: '/claim/return',
       },
       {
-        text: "교환 관리",
-        link: "/claim/exchange"
-      }
-    ]
+        text: '교환 관리',
+        link: '/claim/exchange',
+      },
+    ],
   },
   {
-    title: "정산 관리",
-    iconType: "dollar",
+    title: '정산 관리',
+    iconType: 'dollar',
     items: [
       {
-        text: "정산 내역",
-        link: "/settle"
+        text: '정산 내역',
+        link: '/settle',
       },
       {
-        text: "정산 내역 상세",
-        link: "/settle/detail"
+        text: '정산 내역 상세',
+        link: '/settle/detail',
       },
       {
-        text: "세금계산서 조회",
-        link: "/tax"
-      }
-    ]
-  }
+        text: '세금계산서 조회',
+        link: '/tax',
+      },
+    ],
+  },
 ];
 
 export default function GNB() {
@@ -73,9 +73,9 @@ export default function GNB() {
     <StyledSider collapsible>
       <div
         style={{
-          height: "32px",
-          background: "rgba(255, 255, 255, 0.2)",
-          margin: "16px"
+          height: '32px',
+          background: 'rgba(255, 255, 255, 0.2)',
+          margin: '16px',
         }}
       />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[router.pathname]}>
@@ -98,8 +98,7 @@ export default function GNB() {
                     <Icon type={item.iconType} />
                     <span>{item.title}</span>
                   </span>
-                }
-              >
+                }>
                 {item.items.map(item => (
                   <Menu.Item key={item.link}>
                     <a href={item.link}>

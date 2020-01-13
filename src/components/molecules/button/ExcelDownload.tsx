@@ -1,30 +1,30 @@
-import { Button } from "antd";
-import ReactExport from "react-export-excel";
-import { getDateTimeStrings } from "@src/lib/DateParser";
+import {Button} from 'antd';
+import ReactExport from 'react-export-excel';
+import {getDateTimeStrings} from '@src/lib/DateParser';
 
-const { ExcelFile } = ReactExport;
-const { ExcelSheet, ExcelColumn } = ExcelFile;
+const {ExcelFile} = ReactExport;
+const {ExcelSheet, ExcelColumn} = ExcelFile;
 
 export type ExcelDownloadButtonProps = {
   title: string;
-  columns: {
+  columns: Array<{
     title: string;
     key: string;
-  }[];
-  dataSource: {}[];
+  }>;
+  dataSource: Array<{}>;
 };
 
 export default function ExcelDownloadButton({
   title,
   columns,
-  dataSource
+  dataSource,
 }: ExcelDownloadButtonProps) {
-  const { year, month, day, hours, minutes, seconds } = getDateTimeStrings();
-  const fileName = `[핔]${title.replace(" ", "")}_${year.substring(
-    2
+  const {year, month, day, hours, minutes, seconds} = getDateTimeStrings();
+  const fileName = `[핔]${title.replace(' ', '')}_${year.substring(
+    2,
   )}${month}${day}_${hours}${minutes}${seconds}`;
 
-  const getExcelColumns = columns =>
+  const getExcelColumns = () =>
     columns.map((item, index) => (
       <ExcelColumn key={index} label={item.title} value={item.key} />
     ));
@@ -35,14 +35,12 @@ export default function ExcelDownloadButton({
       element={
         <Button
           icon="file-excel"
-          style={{ color: "green", borderColor: "green" }}
-        >
+          style={{color: 'green', borderColor: 'green'}}>
           엑셀 다운
         </Button>
-      }
-    >
+      }>
       <ExcelSheet name={title} data={dataSource}>
-        {getExcelColumns(columns)}
+        {getExcelColumns()}
       </ExcelSheet>
     </ExcelFile>
   );

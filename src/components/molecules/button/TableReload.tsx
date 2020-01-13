@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Button } from "antd";
+import {useState} from 'react';
+import {Button} from 'antd';
 
-import Colors from "@src/components/atoms/colors";
+import Colors from '@src/components/atoms/colors';
 
 export default function TableReloadButton() {
   const [isLoading, setLoading] = useState(false);
@@ -9,9 +9,8 @@ export default function TableReloadButton() {
   return (
     <Button
       icon="reload"
-      style={{ color: Colors.Primary, borderColor: Colors.Primary }}
-      loading={isLoading}
-    >
+      style={{color: Colors.Primary, borderColor: Colors.Primary}}
+      loading={isLoading}>
       새로 고침
     </Button>
   );
