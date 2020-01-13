@@ -7,11 +7,13 @@ import Space from "@src/components/atoms/space";
 import LoginForm from "@src/components/organisms/LoginForm";
 import GFooter from "@src/components/organisms/GFooter";
 
+
+const { Content } = Layout;
+
 export default function Login() {
-  const { Content } = Layout;
   return (
     <Layout>
-    <Content style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+    <StyledContent>
         <Space level={10} direction="COL" />
           <LogoDefaultIcon
                   style={{ width: "80px", height: "48px" }}
@@ -21,9 +23,15 @@ export default function Login() {
           <Space level={2} direction="COL" />
 
           <LoginForm/>
-    </Content>
+    </StyledContent>
     <Space level={8} direction="COL" />
     <GFooter style={{backgroundColor:'#001529', color:Colors.LightGrey}}/>
     </Layout>
   );
 }
+
+const StyledContent = styled(Content)`
+    display:'flex';
+    flex-direction:'column';
+    align-items:'center'
+`
