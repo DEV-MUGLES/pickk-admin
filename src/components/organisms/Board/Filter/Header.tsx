@@ -25,7 +25,7 @@ export default function Header(
    );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
     width: 100%;
     display: flex;
     flex-direction: row;
