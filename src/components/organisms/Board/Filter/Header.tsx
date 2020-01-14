@@ -18,9 +18,9 @@ export default function Header(
         <StyledTypographyText strong>
             {title}
         </StyledTypographyText>
-        <Tooltip placement="bottomRight" title={guideText}>
-            <Button icon="info-circle" />
-        </Tooltip>
+        <GuideText>
+            {guideText}
+        </GuideText>
     </Wrapper>
    );
 }
@@ -30,8 +30,16 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items:center;
+    margin-right:auto;
 `;
 
 const StyledTypographyText = styled(Typography.Text)`
-    margin-right:auto;
+    padding-right:12px;
+`;
+
+const GuideText = styled.div`
+    margin: 5px 12px 5px 0;
+    color: rgba(0,0,0,.45);
+    font-size:14px;
+    line-height:22px;
 `;
