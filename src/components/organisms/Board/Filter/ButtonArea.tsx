@@ -29,15 +29,14 @@ const Wrapper = styled.div`
     width: fit-content;
     display: flex;
     flex-direction: row;
-    align-items:center;
+    align-items: center;
 `;
 
 const SubmitButton = styled(Button)`
     width: 100px;
 `;
 
-const ResetButton = styled(Button)`
-    width: 100px;
+const ResetButton = styled(SubmitButton)`
     color: ${Colors.Primary};
     border-color: ${Colors.Primary}
 `;
