@@ -15,9 +15,9 @@ export default function Header(
 ) {
   return (
     <Wrapper>
-        <StyledTypographyText strong>
+        <TitleText strong>
             {title}
-        </StyledTypographyText>
+        </TitleText>
         <GuideText>
             {guideText}
         </GuideText>
@@ -33,13 +33,12 @@ const Wrapper = styled.div`
     margin-right:auto;
 `;
 
-const StyledTypographyText = styled(Typography.Text)`
+const TitleText = styled(Typography.Text)`
     padding-right:12px;
 `;
 
-const GuideText = styled.div`
+const GuideText = styled(Typography.Text)`
     margin: 5px 12px 5px 0;
     color: rgba(0,0,0,.45);
     font-size:14px;
-    line-height:22px;
 `;
