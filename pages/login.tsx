@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import LoginForm from '@src/components/organisms/LoginForm';
 import GFooter from '@src/components/organisms/GFooter';
 import Colors from '@src/components/atoms/colors';
-import LogoDefaultIcon from '@src/components/atoms/logo/default';
+import LogoAdminIcon from '@src/components/atoms/logo/admin';
 import Space from '@src/components/atoms/space';
 
 const {Content} = Layout;
@@ -15,11 +15,10 @@ export default function Login() {
     <Layout>
       <StyledContent>
         <Space level={10} />
-        <LogoDefaultIcon
-          style={{width: '80px', height: '48px'}}
+        <LogoAdminIcon
+          style={{width: '120px', height: '72px'}}
           fill={Colors.Black}
         />
-        <div>pickk admin</div>
         <Space level={2} />
 
         <LoginForm />
