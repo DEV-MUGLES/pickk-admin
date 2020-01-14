@@ -1,5 +1,6 @@
 enum Colors {
   White = '#FFF',
+  CreamWhite = '#F8F8F8',
   LightGrey = '#F0F0F0',
   RegularGrey = '#D8D8D8',
   MiddleGrey = '#999',
