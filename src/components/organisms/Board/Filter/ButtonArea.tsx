@@ -18,7 +18,7 @@ export default function ButtonArea(
 ) {
   return (
     <Wrapper>
-        <SearchButton icon="search" type="primary" onClick={handleSubmit}>검색</SearchButton>
+        <SubmitButton icon="search" type="primary" onClick={handleSubmit}>조회</SubmitButton>
         <Space direction="ROW" />
         <ResetButton icon="undo" onClick={handleReset}>초기화</ResetButton>
     </Wrapper>
@@ -32,7 +32,7 @@ const Wrapper = styled.header`
     align-items:center;
 `;
 
-const SearchButton = styled(Button)`
+const SubmitButton = styled(Button)`
     width: 100px;
 `;
 
