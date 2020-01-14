@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import LoginForm from '@src/components/organisms/LoginForm';
 import GFooter from '@src/components/organisms/GFooter';
-import Colors from '@src/components/atoms/colors';
 import LogoAdminIcon from '@src/components/atoms/logo/admin';
+import Colors from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
 
 const {Content} = Layout;
