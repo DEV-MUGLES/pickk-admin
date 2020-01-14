@@ -20,7 +20,7 @@ export default function ButtonArea(
     <Wrapper>
         <SearchButton icon="search" type="primary" onClick={handleSubmit}>검색</SearchButton>
         <Space direction="ROW" />
-        <ResetButton icon="reload" onClick={handleReset}>초기화</ResetButton>
+        <ResetButton icon="undo" onClick={handleReset}>초기화</ResetButton>
     </Wrapper>
    );
 }
