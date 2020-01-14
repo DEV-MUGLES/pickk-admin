@@ -25,7 +25,7 @@ export default function ButtonArea(
    );
 }
 
-const Wrapper = styled.header`
+const Wrapper = styled.div`
     width: fit-content;
     display: flex;
     flex-direction: row;
