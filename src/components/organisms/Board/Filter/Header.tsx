@@ -1,5 +1,5 @@
 import React from 'react';
-import {Typography, Tooltip, Button} from 'antd';
+import {Typography} from 'antd';
 import styled from 'styled-components';
 
 export type BoardFilterHeaderProps = {
