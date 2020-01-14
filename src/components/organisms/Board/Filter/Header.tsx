@@ -30,7 +30,6 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items:center;
-    margin-right:auto;
 `;
 
 const TitleText = styled(Typography.Text)`
