@@ -48,7 +48,6 @@ const LabelWrapper = styled.div`
   flex: 1;
   padding: 10px 20px;
   text-align: left;
-  border: 1px solid ${Colors.White};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -58,7 +57,6 @@ const InputWrapper = styled.div`
   flex: 4;
   padding: 10px 20px;
   text-align: left;
-  border: 1px solid ${Colors.White};
 `;
 
 const StyledText = styled(Text)`

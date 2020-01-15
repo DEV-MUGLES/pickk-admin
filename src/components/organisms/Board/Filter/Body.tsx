@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import BoardFilterRow, {
   BoardFilterRowProps,
-} from '@src/components/molecules/BoardFilterRow';
+} from '@src/components/molecules/BoardFilter/BodyRow';
 import Colors from '@src/components/atoms/colors';
 
 export type BoardFilterBodyProps = {
@@ -20,7 +20,6 @@ export default function FilterBody({inputs}: BoardFilterBodyProps) {
 }
 
 const InputsWrapper = styled.div`
-  background-color: ${Colors.CreamWhite};
   width: 100%;
   padding: 0 35px;
   margin: 10px 0;
