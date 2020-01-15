@@ -4,6 +4,7 @@ import {Layout} from 'antd';
 import SiderGNB from '../organisms/GNB';
 import GHeader from '../organisms/GHeader';
 import GFooter from '../organisms/GFooter';
+import Colors from '../atoms/colors';
 
 const {Content, Footer} = Layout;
 
@@ -17,10 +18,10 @@ export default function MainLayout({children}: IProps) {
       <GHeader />
       <Wrapper>
         <SiderGNB />
-        <Layout>
+        <StyledLayout>
           <StyledContent>{children}</StyledContent>
           <GFooter />
-        </Layout>
+        </StyledLayout>
       </Wrapper>
     </>
   );
@@ -36,4 +37,8 @@ const StyledContent = styled(Content)`
   overflow: initial;
   padding: 24;
   text-align: center;
+`;
+
+const StyledLayout = styled(Layout)`
+  background-color: #eaedf0;
 `;
