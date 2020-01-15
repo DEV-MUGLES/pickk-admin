@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import {Typography, Tooltip, Icon} from 'antd';
+import styled from 'styled-components';
+
 import Space from '@src/components/atoms/space';
 import Colors from '@src/components/atoms/colors';
 
