@@ -23,5 +23,4 @@ const InputsWrapper = styled.div`
   width: 100%;
   padding: 0 35px;
   margin: 10px 0;
-  border-box: box-sizing;
 `;
