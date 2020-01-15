@@ -26,7 +26,7 @@ export default function BoardFilterRow({
           <>
             <Space size={8} direction="ROW" />
             <Tooltip placement="right" title={guideText}>
-              <Icon type="info-circle" style={{color: Colors.MiddleGrey}} />
+              <StyledIcon type="info-circle" />
             </Tooltip>
           </>
         )}
@@ -47,7 +47,6 @@ const Wrapper = styled.div`
 const LabelWrapper = styled.div`
   flex: 1;
   padding: 10px 20px;
-  text-align: left;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -56,9 +55,12 @@ const LabelWrapper = styled.div`
 const InputWrapper = styled.div`
   flex: 4;
   padding: 10px 20px;
-  text-align: left;
 `;
 
 const StyledText = styled(Text)`
   margin-bottom: 2px;
+`;
+
+const StyledIcon = styled(Icon)`
+  color: ${Colors.MiddleGrey};
 `;
