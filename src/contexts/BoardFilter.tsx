@@ -24,7 +24,11 @@ export const useBoardFilterContext = () => useContext(BoardFilterContext);
 export const withBoardFilterContext = (
   WrappedComponent: React.FunctionComponent<BoardProps>,
 ) => (props: BoardProps) => {
-  const initialFormState = getInitialFormState(props.inputs);
+  if (!props.filter) {
+    return <WrappedComponent {...props} />;
+  }
+
+  const initialFormState = getInitialFormState(props.filter.inputs);
   const [form, setForm] = useState(initialFormState);
 
   const initForm = () => {

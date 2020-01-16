@@ -9,18 +9,23 @@ import Table, {BoardTableProps} from '../organisms/Board/Table';
 import Space from '../atoms/space';
 
 export type BoardProps = BoardHeaderProps &
-  Omit<BoardFilterProps, 'onSubmit'> &
-  BoardTableProps;
+  BoardTableProps & {
+    filter?: Omit<BoardFilterProps, 'onSubmit'>;
+  };
 
 function Board(props: BoardProps) {
   const headerProps: BoardHeaderProps = props;
-  const filterProps: Omit<BoardFilterProps, 'onSubmit'> = props;
   const tableProps: BoardTableProps = props;
 
   const [filterParameter, setFilterParameter] = useState({});
 
   const handleFilterSubmit = filterForm => {
     setFilterParameter(filterForm);
+  };
+
+  const filterProps: BoardFilterProps = {
+    ...props.filter,
+    onSubmit: handleFilterSubmit,
   };
 
   return (
