@@ -8,6 +8,9 @@ import Colors from '@src/components/atoms/colors';
 const {Text} = Typography;
 
 export type BoardFilterRowProps = {
+  name: string;
+  // tslint:disable-next-line: no-any
+  defaultValue: any;
   labelText: string;
   guideText?: string;
   // tslint:disable-next-line: no-any
@@ -15,6 +18,8 @@ export type BoardFilterRowProps = {
 };
 
 export default function BoardFilterRow({
+  name,
+  defaultValue,
   labelText,
   guideText,
   Component,
