@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import BoardFilterRow, {
   BoardFilterRowProps,
 } from '@src/components/molecules/BoardFilter/BodyRow';
-import Colors from '@src/components/atoms/colors';
 
 export type BoardFilterBodyProps = {
   inputs: BoardFilterRowProps[];
