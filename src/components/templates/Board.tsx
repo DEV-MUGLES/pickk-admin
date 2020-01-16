@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Header, {BoardHeaderProps} from '../organisms/Board/Header';
 import Table, {BoardTableProps} from '../organisms/Board/Table';
+import Filter from '@src/components/organisms/Board/Filter';
 
 export type BoardProps = BoardHeaderProps & BoardTableProps;
 
@@ -13,6 +14,8 @@ export default function Board(props: BoardProps) {
   return (
     <Wrapper>
       <Header {...headerProps} />
+      <Space level={2} />
+      <Filter/>
       <Space level={2} />
       <Table {...tableProps} />
     </Wrapper>

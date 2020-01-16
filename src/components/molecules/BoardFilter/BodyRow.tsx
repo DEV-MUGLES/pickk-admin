@@ -12,12 +12,15 @@ export type BoardFilterRowProps = {
   guideText?: string;
   // tslint:disable-next-line: no-any
   Component: React.ComponentType<any>;
+  // tslint:disable-next-line: no-any
+  [propName: string]: any;
 };
 
 export default function BoardFilterRow({
   labelText,
   guideText,
   Component,
+  ...componentProps
 }: BoardFilterRowProps) {
   return (
     <Wrapper>
@@ -33,7 +36,7 @@ export default function BoardFilterRow({
         )}
       </LabelWrapper>
       <InputWrapper>
-        <Component />
+        <Component {...componentProps}/>
       </InputWrapper>
     </Wrapper>
   );
@@ -51,11 +54,18 @@ const LabelWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
+  height:fit-content;
+  margin-top:6px;
 `;
 
 const InputWrapper = styled.div`
   flex: 4;
   padding: 10px 20px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content: flex-start;
 `;
 
 const StyledText = styled(Text)`
