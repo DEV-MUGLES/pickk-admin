@@ -15,6 +15,8 @@ export type BoardFilterRowProps = {
   guideText?: string;
   // tslint:disable-next-line: no-any
   Component: React.ComponentType<any>;
+  // tslint:disable-next-line: no-any
+  [propertyName: string]: any;
 };
 
 export default function BoardFilterRow({
@@ -23,6 +25,7 @@ export default function BoardFilterRow({
   labelText,
   guideText,
   Component,
+  ...componentProps
 }: BoardFilterRowProps) {
   return (
     <Wrapper>
@@ -38,7 +41,7 @@ export default function BoardFilterRow({
         )}
       </LabelWrapper>
       <InputWrapper>
-        <Component />
+        <Component {...componentProps} />
       </InputWrapper>
     </Wrapper>
   );
