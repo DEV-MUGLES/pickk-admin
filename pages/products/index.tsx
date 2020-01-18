@@ -5,6 +5,7 @@ import Board from '@src/components/templates/Board';
 import {BoardFilterProps} from '@src/components/organisms/Board/Filter';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 import SelectInput from '@src/components/molecules/BoardFilter/input/SelectInput';
+import Select from '@src/components/molecules/BoardFilter/input/Select';
 import moment from 'moment';
 
 export default function Products() {
@@ -100,6 +101,21 @@ export default function Products() {
         {name: '상품번호', value: 'productNum'},
         {name: '송장번호', value: 'invoiceNum'}],
       Component: SelectInput,
+    },
+    {
+      name: 'orderState',
+      defaultValue: {
+        type: 'newOrder',
+      },
+      labelText: '주문상태',
+      guideText: '주문상태 부가 설명입니다',
+      select: [{name: '신규주문', value: 'newOrder'},
+        {name: '발주확인', value: 'confirmedOrder'},
+        {name: '발주확인해제', value: 'cancelConfirmedOrder'},
+        {name: '배송중', value: 'shippingOrder'},
+        {name: '배송완료', value: 'shippedOrder'},
+      ],
+      Component: Select,
     },
   ];
   return (
