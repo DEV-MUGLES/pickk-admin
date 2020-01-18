@@ -2,6 +2,10 @@ import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
 import Board from '@src/components/templates/Board';
 
+import {BoardFilterProps} from '@src/components/organisms/Board/Filter';
+import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+import moment from 'moment';
+
 export default function Products() {
   const columns = [
     {
@@ -41,7 +45,6 @@ export default function Products() {
       sorter: (a, b) => a.subscriptionDiscount - b.subscriptionDiscount,
     },
   ];
-
   const actions = [
     {
       icon: 'delete',
@@ -64,6 +67,23 @@ export default function Products() {
     },
   ];
 
+  const inputs: BoardFilterProps['inputs'] = [
+    {
+      name: 'period',
+      defaultValue: {
+        type: 'registerProductDate',
+        startDate: moment().format('YYYY-MM-DD'),
+        endDate: moment().format('YYYY-MM-DD'),
+      },
+      labelText: '상세조건',
+      guideText: '상세조건 부가 설명입니다',
+      select: [{name: '상품등록일', value: 'registerProductDate'},
+        {name: '판매시작일', value: 'startSellingDate'},
+        {name: '판매종료일', value: 'endSellingDate'}],
+      quickButton: true,
+      Component: Datepicker,
+    },
+  ];
   return (
     <MainLayout>
       <Board
@@ -75,6 +95,7 @@ export default function Products() {
           `특정 상품의 조회를 원하신다면, "검색어" 기능을 사용해서 상품번호/상품명/제조사명 등 원하시는 유형으로 조회하실 수 있습니다.`,
         ]}
         {...{columns, actions}}
+        filter={{title: '상세 조회하기', guideText: '', inputs}}
       />
     </MainLayout>
   );

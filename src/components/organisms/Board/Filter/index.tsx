@@ -1,70 +1,48 @@
-import React, { useState } from 'react';
-import {Layout} from 'antd';
+import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 
+import {useBoardFilterContext} from '@src/contexts/BoardFilter';
+
+import FilterHeader, {BoardFilterHeaderProps} from './Header';
+import FilterBody, {BoardFilterBodyProps} from './Body';
+import FilterButtonArea, {BoardFilterButtonAreaProps} from './ButtonArea';
 import Colors from '@src/components/atoms/colors';
-import Header from '@src/components/organisms/Board/Filter/Header';
-import Body from '@src/components/organisms/Board/Filter/Body';
-import ButtonArea from '@src/components/organisms/Board/Filter/ButtonArea';
-import DatePicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 
-const {Content} = Layout;
+export type BoardFilterProps = BoardFilterHeaderProps &
+  BoardFilterBodyProps & {
+    onSubmit;
+  };
 
-export default function BoardFilter(
-) {
-  const [filterState, setFilterState] = useState({});
+export default function BoardFilter(props: BoardFilterProps) {
+  const headerProps: BoardFilterHeaderProps = props;
+  const bodyProps: BoardFilterBodyProps = props;
 
-  const [choicedSelectValue, setChoicedSelectValue] = useState('registerProductDate');
-  const [choicedStartDate, setChoicedStartDate] = useState(moment());
-  const [choicedEndDate, setChoicedEndDate] = useState(moment());
-
-  const bodyprops = [{labelText: '상세조건', guideText: '상세조건 부가 설명입니다.', Component: DatePicker,
-    select: [{name: '상품등록일', value: 'registerProductDate'},
-    {name: '판매시작일', value: 'startSellingDate'},
-    {name: '판매종료일', value: 'endSellingDate'}],
-    quickButton: true,
-    choicedSelectValue,
-    setChoicedSelectValue,
-    choicedStartDate,
-    choicedEndDate,
-    setChoicedStartDate,
-    setChoicedEndDate,
-  }];
+  const BoardFilterContext = useBoardFilterContext();
 
   const handleSubmit = () => {
-    console.log(choicedSelectValue);
-    console.log(choicedStartDate);
-    console.log(choicedEndDate);
+    props.onSubmit(BoardFilterContext.state.form);
   };
 
-  const handleReset = () => {
-    setChoicedSelectValue('registerProductDate');
-    setChoicedStartDate(moment());
-    setChoicedEndDate(moment());
-    console.log('reset');
+  const buttonAreaProps: BoardFilterButtonAreaProps = {
+    handleSubmit,
   };
 
-  return(
-      <StyledLayout>
-          <StyledContent>
-            <Header title={"조회하기"} guideText={"이것은 조회하기의 임시 텍스트입니다."}/>
-            <Body inputs={bodyprops}></Body>
-            <ButtonArea handleSubmit={handleSubmit} handleReset={handleReset}></ButtonArea>
-          </StyledContent>
-      </StyledLayout>
+  if (!props.inputs) {
+    return <></>;
+  }
+  return (
+    <Wrapper>
+      <FilterHeader {...headerProps} />
+      <FilterBody {...bodyProps} />
+      <FilterButtonArea {...buttonAreaProps} />
+    </Wrapper>
   );
 }
 
-const StyledLayout = styled(Layout)`
-    display:flex;
-    flex-direction:column;
-    background-color:${Colors.White};
-    padding: 16px 24px;
-`;
-
-const StyledContent = styled(Content)`
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+const Wrapper = styled.div`
+  background-color: ${Colors.White};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 24px;
 `;

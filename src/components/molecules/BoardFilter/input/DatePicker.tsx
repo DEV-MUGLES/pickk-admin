@@ -3,33 +3,38 @@ import { Select, Typography, Button, Radio, DatePicker } from 'antd';
 import styled from 'styled-components';
 import moment from 'moment';
 
+import {useBoardFilterContext} from '@src/contexts/BoardFilter';
 import Space from '@src/components/atoms/space';
 
+const { Option } = Select;
+const { RangePicker } = DatePicker;
+
 export type DatePickerProps = {
+    name: string;
     select?: [{ name: string, value: string}];
     quickButton?: boolean;
-    choicedSelectValue: string;
-    setChoicedSelectValue: React.Dispatch<React.SetStateAction<string>>;
-    choicedStartDate: moment.Moment;
-    choicedEndDate: moment.Moment;
-    setChoicedStartDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
-    setChoicedEndDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
 };
 
-export default function Header(
+export default function Datepicker(
     {
+        name,
         select,
         quickButton,
-        choicedSelectValue,
-        setChoicedSelectValue,
-        choicedStartDate,
-        choicedEndDate,
-        setChoicedStartDate,
-        setChoicedEndDate,
     }: DatePickerProps,
 ) {
-    const { Option } = Select;
-    const { RangePicker } = DatePicker;
+    const BoardFilterContext = useBoardFilterContext();
+
+    console.log(BoardFilterContext.state.form);
+
+    // tslint:disable-next-line: no-any
+    const handleChange = (key: string, value: any) => {
+      BoardFilterContext.action.setProperty(name + '_' + key, value);
+    };
+
+    const handleChoicedSelectChange = (value) => {
+        handleChange('type', value);
+    };
+
     const [choicedQuickButton, setChoicedQuickButton] = useState('today');
     const quickButtonList = [{name: '오늘', value: 'today'},
         {name: '1주일', value: 'oneWeek'},
@@ -37,40 +42,37 @@ export default function Header(
         {name: '3개월', value: 'threeMonth'},
         {name: '6개월', value: 'sixMonth'}];
 
-    const handleChoicedSelectChange = (value) => {
-        setChoicedSelectValue(value);
-    };
-
     const handleChoicedQuickButtonChange = (e) => {
         setChoicedQuickButton(e.target.value);
         if ( e.target.value === 'today') {
-            setChoicedStartDate(moment());
-            setChoicedEndDate(moment());
+            handleChange('startDate', moment().format('YYYY-MM-DD'));
+            handleChange('endDate', moment().format('YYYY-MM-DD'));
         } else if ( e.target.value === 'oneWeek') {
-            setChoicedStartDate(moment(moment().subtract(1, 'weeks').calendar()));
-            setChoicedEndDate(moment());
+            handleChange('startDate', moment().subtract(1, 'weeks').format('YYYY-MM-DD'));
+            handleChange('endDate', moment().format('YYYY-MM-DD'));
         } else if ( e.target.value === 'oneMonth') {
-            setChoicedStartDate(moment(moment().subtract(1, 'months').calendar()));
-            setChoicedEndDate(moment());
+            handleChange('startDate', moment().subtract(1, 'months').format('YYYY-MM-DD'));
+            handleChange('endDate', moment().format('YYYY-MM-DD'));
         } else if ( e.target.value === 'threeMonth') {
-            setChoicedStartDate(moment(moment().subtract(3, 'months').calendar()));
-            setChoicedEndDate(moment());
+            handleChange('startDate', moment().subtract(3, 'months').format('YYYY-MM-DD'));
+            handleChange('endDate', moment().format('YYYY-MM-DD'));
         } else if ( e.target.value === 'sixMonth') {
-            setChoicedStartDate(moment(moment().subtract(6, 'months').calendar()));
-            setChoicedEndDate(moment());
+            handleChange('startDate', moment().subtract(6, 'months').format('YYYY-MM-DD'));
+            handleChange('endDate', moment().format('YYYY-MM-DD'));
         }
     };
 
     const handleChoicedDateChange = (date) => {
-        setChoicedStartDate(moment(date[0]));
-        setChoicedEndDate(moment(date[1]));
+        handleChange('startDate', moment(date[0]).format('YYYY-MM-DD'));
+        handleChange('endDate', moment(date[1]).format('YYYY-MM-DD'));
     };
 
     return (
         <Wrapper>
         {select && (
             <RowWrapper>
-                <Select value={choicedSelectValue} style={{ width: 120 }} onChange={handleChoicedSelectChange}>
+                <Select value={BoardFilterContext.state.form[`${name}_type`]}
+                 style={{ width: 120 }} onChange={handleChoicedSelectChange}>
                     {select.map((item, index) => (
                         <Option value={item.value}>
                             <Typography.Text>{item.name}</Typography.Text>
@@ -95,7 +97,10 @@ export default function Header(
             </RowWrapper>
         )}
         <RangePicker name="choicedSelectValue"
-            value={[moment(choicedStartDate), moment(choicedEndDate)]} onChange={handleChoicedDateChange}/>
+            value={[moment(BoardFilterContext.state.form[`${name}_startDate`]),
+            moment(BoardFilterContext.state.form[`${name}_endDate`])]}
+            onChange={handleChoicedDateChange}
+        />
         </Wrapper>
     );
 }
