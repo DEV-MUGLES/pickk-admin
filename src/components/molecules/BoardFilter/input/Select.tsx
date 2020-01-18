@@ -6,15 +6,15 @@ import {useBoardFilterContext} from '@src/contexts/BoardFilter';
 
 const {Option} = Select;
 
-export type SelectInputProps = {
+export type SelectorProps = {
   name: string;
   select?: [{name: string; value: string}];
 };
 
-export default function SelectInput({
+export default function Selector({
   name,
   select,
-}: SelectInputProps) {
+}: SelectorProps) {
   const BoardFilterContext = useBoardFilterContext();
   const {form} = BoardFilterContext.state;
   const {setForm} = BoardFilterContext.action;
