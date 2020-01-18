@@ -36,8 +36,7 @@ export default function SelectInput({
   };
 
   return (
-    <Wrapper>
-          <StyledSelect
+    <StyledSelect
             value={form[`${name}_type`]}
             onChange={handleChoicedSelectChange}>
             {select.map(item => (
@@ -45,16 +44,9 @@ export default function SelectInput({
                 <Typography.Text>{item.name}</Typography.Text>
               </Option>
             ))}
-          </StyledSelect>
-    </Wrapper>
+    </StyledSelect>
   );
 }
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-`;
 
 const StyledSelect = styled(Select)`
     width: 127px;
