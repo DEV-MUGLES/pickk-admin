@@ -6,6 +6,7 @@ import {BoardFilterProps} from '@src/components/organisms/Board/Filter';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 import SelectInput from '@src/components/molecules/BoardFilter/input/SelectInput';
 import Select from '@src/components/molecules/BoardFilter/input/Selector';
+import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import moment from 'moment';
 
 export default function Products() {
@@ -116,6 +117,14 @@ export default function Products() {
         {name: '배송완료', value: 'shippedOrder'},
       ],
       Component: Select,
+    },
+    {
+      name: 'productName',
+      defaultValue: {
+        query: '',
+      },
+      labelText: '상품명',
+      Component: InputBox,
     },
   ];
   return (
