@@ -5,7 +5,7 @@ import Board from '@src/components/templates/Board';
 import {BoardFilterProps} from '@src/components/organisms/Board/Filter';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 import SelectInput from '@src/components/molecules/BoardFilter/input/SelectInput';
-import Select from '@src/components/molecules/BoardFilter/input/Select';
+import Select from '@src/components/molecules/BoardFilter/input/Selector';
 import moment from 'moment';
 
 export default function Products() {
