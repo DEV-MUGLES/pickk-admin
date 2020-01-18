@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Select, Typography, Input} from 'antd';
 import styled from 'styled-components';
-import moment from 'moment';
 
 import {useBoardFilterContext} from '@src/contexts/BoardFilter';
 import Space from '@src/components/atoms/space';
