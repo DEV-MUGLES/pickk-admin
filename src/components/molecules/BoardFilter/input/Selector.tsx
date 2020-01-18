@@ -8,7 +8,7 @@ const {Option} = Select;
 
 export type SelectorProps = {
   name: string;
-  select?: [{name: string; value: string}];
+  select: [{name: string; value: string}];
 };
 
 export default function Selector({
