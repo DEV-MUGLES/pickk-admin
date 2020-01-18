@@ -4,6 +4,7 @@ import Board from '@src/components/templates/Board';
 
 import {BoardFilterProps} from '@src/components/organisms/Board/Filter';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+import SelectInput from '@src/components/molecules/BoardFilter/input/SelectInput';
 import moment from 'moment';
 
 export default function Products() {
@@ -75,13 +76,30 @@ export default function Products() {
         startDate: moment().format('YYYY-MM-DD'),
         endDate: moment().format('YYYY-MM-DD'),
       },
-      labelText: '상세조건',
-      guideText: '상세조건 부가 설명입니다',
+      labelText: '조회기간',
+      guideText: '조회기간 부가 설명입니다',
       select: [{name: '상품등록일', value: 'registerProductDate'},
-        {name: '판매시작일', value: 'startSellingDate'},
-        {name: '판매종료일', value: 'endSellingDate'}],
+      {name: '판매시작일', value: 'startSellingDate'},
+      {name: '판매종료일', value: 'endSellingDate'}],
       quickButton: true,
       Component: Datepicker,
+    },
+    {
+      name: 'detailedCondition',
+      defaultValue: {
+        type: 'receiverName',
+      },
+      labelText: '상세조건',
+      guideText: '상세조건 부가 설명입니다',
+      select: [{name: '수취인명', value: 'receiverName'},
+        {name: '구매자명', value: 'buyerName'},
+        {name: '구매자연락처', value: 'buyerPhoneNum'},
+        {name: '구매자ID', value: 'buyerID'},
+        {name: '주문번호', value: 'orderNum'},
+        {name: '상품주문번호', value: 'productOrderNum'},
+        {name: '상품번호', value: 'productNum'},
+        {name: '송장번호', value: 'invoiceNum'}],
+      Component: SelectInput,
     },
   ];
   return (
