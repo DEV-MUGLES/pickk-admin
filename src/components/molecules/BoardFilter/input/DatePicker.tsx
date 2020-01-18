@@ -85,16 +85,15 @@ export default function Datepicker({
     <Wrapper>
       {select && (
         <>
-          <Select
+          <StyledSelect
             value={form[`${name}_type`]}
-            style={{width: 120}}
             onChange={handleChoicedSelectChange}>
             {select.map(item => (
               <Option key={item.name} value={item.value}>
                 <Typography.Text>{item.name}</Typography.Text>
               </Option>
             ))}
-          </Select>
+          </StyledSelect>
           <Space level={1} />
         </>
       )}
@@ -128,4 +127,8 @@ export default function Datepicker({
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const StyledSelect = styled(Select)`
+    width:127px;
 `;
