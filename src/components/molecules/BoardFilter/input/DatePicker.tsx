@@ -104,16 +104,15 @@ export default function Datepicker({
           <Space level={1} />
         </>
       )}
-      <Radio.Group
+      <StyledRadioGroup
             value={choicedQuickButton}
-            style={{width: 'fit-content'}}
             onChange={handleChoicedQuickButtonChange}>
             {quickButtonList.map(item => (
               <Radio.Button key={item.name} value={item.value}>
                 {item.name}
               </Radio.Button>
             ))}
-      </Radio.Group>
+      </StyledRadioGroup>
       <Space level={1} />
       <RangePicker
         name="choicedSelectValue"
@@ -128,10 +127,14 @@ export default function Datepicker({
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `;
 
 const StyledSelect = styled(Select)`
     width:127px;
+`;
+
+const StyledRadioGroup = styled(Radio.Group)`
+    width:fit-content;
 `;
