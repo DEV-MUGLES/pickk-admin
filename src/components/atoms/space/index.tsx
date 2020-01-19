@@ -10,18 +10,13 @@ type IProps = {
 };
 
 export default function Space(props: IProps) {
+  const length = props.size ? `${props.size}px` : `${4 + props.level * 8}px`;
+  const thickness = '0.1px';
+
   const _Space = styled.div`
     background-color: transparent;
-    ${props.direction === 'COL' &&
-      `
-            width:0.1px;
-            height:${4 + props.level * 8}px;
-        `}
-    ${props.direction === 'ROW' &&
-      `
-            height:0.1px;
-            width:${4 + props.level * 8}px;
-        `}
+    width:${props.direction === 'COL' ? thickness : length};
+    height:${props.direction === 'ROW' ? thickness : length};
   `;
   return <_Space className={props.className} />;
 }
