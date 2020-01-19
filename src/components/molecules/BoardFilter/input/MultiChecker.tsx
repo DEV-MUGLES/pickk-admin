@@ -3,6 +3,7 @@ import {Checkbox} from 'antd';
 import styled from 'styled-components';
 
 import {useBoardFilterContext} from '@src/contexts/BoardFilter';
+import Space from '@src/components/atoms/space';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -49,13 +50,14 @@ export default function MultiChecker({
 
   return (
     <Wrapper>
-      <StyledCheckbox
+      <Checkbox
         indeterminate={indeterminate}
         onChange={handleCheckAllChange}
         checked={checkAll}
       >
         전체
-      </StyledCheckbox>
+      </Checkbox>
+      <Space direction="ROW" size={8}/>
     <CheckboxGroup
       options={allOptionNames}
       value={form[`${name}_choices`]}
@@ -69,8 +71,4 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: fit-content;
-`;
-
-const StyledCheckbox = styled(Checkbox)`
-  margin-right:8px;
 `;
