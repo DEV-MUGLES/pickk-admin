@@ -74,13 +74,14 @@ export default function Products() {
     {
       name: 'period',
       defaultValue: {
-        type: 'registerProductDate',
+        type: 'all',
         startDate: moment().format('YYYY-MM-DD'),
         endDate: moment().format('YYYY-MM-DD'),
       },
       labelText: '조회기간',
       guideText: '조회기간 부가 설명입니다',
-      select: [{name: '상품등록일', value: 'registerProductDate'},
+      select: [{name: '전체', value: 'all'},
+      {name: '상품등록일', value: 'registerProductDate'},
       {name: '판매시작일', value: 'startSellingDate'},
       {name: '판매종료일', value: 'endSellingDate'}],
       quickButton: true,
@@ -89,11 +90,13 @@ export default function Products() {
     {
       name: 'detailedCondition',
       defaultValue: {
-        type: 'receiverName',
+        type: 'all',
+        query: '',
       },
       labelText: '상세조건',
       guideText: '상세조건 부가 설명입니다',
-      select: [{name: '수취인명', value: 'receiverName'},
+      select: [{name: '전체', value: 'all'},
+        {name: '수취인명', value: 'receiverName'},
         {name: '구매자명', value: 'buyerName'},
         {name: '구매자연락처', value: 'buyerPhoneNum'},
         {name: '구매자ID', value: 'buyerID'},
@@ -106,11 +109,13 @@ export default function Products() {
     {
       name: 'orderState',
       defaultValue: {
-        type: 'newOrder',
+        type: 'all',
+        query: '',
       },
       labelText: '주문상태',
       guideText: '주문상태 부가 설명입니다',
-      select: [{name: '신규주문', value: 'newOrder'},
+      select: [{name: '전체', value: 'all'},
+        {name: '신규주문', value: 'newOrder'},
         {name: '발주확인', value: 'confirmedOrder'},
         {name: '발주확인해제', value: 'cancelConfirmedOrder'},
         {name: '배송중', value: 'shippingOrder'},
