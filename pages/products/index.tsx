@@ -7,6 +7,7 @@ import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 import SelectInput from '@src/components/molecules/BoardFilter/input/SelectInput';
 import Select from '@src/components/molecules/BoardFilter/input/Selector';
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
+import MultiChecker from '@src/components/molecules/BoardFilter/input/MultiChecker';
 import moment from 'moment';
 
 export default function Products() {
@@ -130,6 +131,23 @@ export default function Products() {
       },
       labelText: '상품명',
       Component: InputBox,
+    },
+    {
+      name: 'sellingState',
+      defaultValue: {
+        choices: ['판매대기', '판매중', '품절', '승인대기', '판매중지', '판매종료', '판매금지'],
+      },
+      labelText: '판매상태',
+      guideText: '판매상태 부가 설명입니다',
+      options: [{name: '판매대기', value: 'waitSelling'},
+        {name: '판매중', value: 'nowSelling'},
+        {name: '품절', value: 'soldOut'},
+        {name: '승인대기', value: 'waitConfirm'},
+        {name: '판매중지', value: 'stopSelling'},
+        {name: '판매종료', value: 'endSelling'},
+        {name: '판매금지', value: 'banSelling'},
+      ],
+      Component: MultiChecker,
     },
   ];
   return (
