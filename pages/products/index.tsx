@@ -85,7 +85,6 @@ export default function Products() {
       {name: '상품등록일', value: 'registerProductDate'},
       {name: '판매시작일', value: 'startSellingDate'},
       {name: '판매종료일', value: 'endSellingDate'}],
-      quickButton: true,
       Component: Datepicker,
     },
     {

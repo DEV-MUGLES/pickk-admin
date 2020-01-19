@@ -12,13 +12,11 @@ const {RangePicker} = DatePicker;
 export type DatePickerProps = {
   name: string;
   select?: Array<{name: string; value: string}>;
-  quickButton?: boolean;
 };
 
 export default function Datepicker({
   name,
   select,
-  quickButton,
 }: DatePickerProps) {
   const BoardFilterContext = useBoardFilterContext();
   const {form} = BoardFilterContext.state;
@@ -97,9 +95,7 @@ export default function Datepicker({
           <Space level={1} />
         </>
       )}
-      {quickButton && (
-        <>
-          <Radio.Group
+      <Radio.Group
             value={choicedQuickButton}
             style={{width: 'fit-content'}}
             onChange={handleChoicedQuickButtonChange}>
@@ -108,10 +104,8 @@ export default function Datepicker({
                 {item.name}
               </Radio.Button>
             ))}
-          </Radio.Group>
-          <Space level={1} />
-        </>
-      )}
+      </Radio.Group>
+      <Space level={1} />
       <RangePicker
         name="choicedSelectValue"
         value={[
