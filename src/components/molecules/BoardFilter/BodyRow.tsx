@@ -49,6 +49,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  border-bottom: 1px solid ${Colors.LightGrey};
 `;
 
 const LabelWrapper = styled.div`
@@ -59,7 +60,7 @@ const LabelWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   height:fit-content;
-  margin-top:6px;
+  margin-top:4px;
 `;
 
 const InputWrapper = styled.div`
