@@ -48,28 +48,37 @@ export default function Datepicker({
   ];
 
   const handleChoicedQuickButtonChange = e => {
-    setChoicedQuickButton(e.target.value);
+    const { value } = e.target;
+    setChoicedQuickButton(value);
     let startDate;
     const endDate = moment().format('YYYY-MM-DD');
-    if (e.target.value === 'today') {
-      startDate = moment().format('YYYY-MM-DD');
-    } else if (e.target.value === 'oneWeek') {
-      startDate = moment()
+
+    switch (value) {
+      case 'today':
+        startDate = moment().format('YYYY-MM-DD');
+        break;
+      case 'oneWeek':
+        startDate = moment()
         .subtract(1, 'weeks')
         .format('YYYY-MM-DD');
-    } else if (e.target.value === 'oneMonth') {
-      startDate = moment()
+        break;
+      case 'oneMonth':
+        startDate = moment()
         .subtract(1, 'months')
         .format('YYYY-MM-DD');
-    } else if (e.target.value === 'threeMonth') {
-      startDate = moment()
+        break;
+      case 'threeMonth':
+        startDate = moment()
         .subtract(3, 'months')
         .format('YYYY-MM-DD');
-    } else if (e.target.value === 'sixMonth') {
-      startDate = moment()
+        break;
+      case 'sixMonth':
+        startDate = moment()
         .subtract(6, 'months')
         .format('YYYY-MM-DD');
-    }
+        break;
+      }
+
     handleChange({startDate, endDate});
   };
 
