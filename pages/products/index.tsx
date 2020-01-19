@@ -76,7 +76,7 @@ export default function Products() {
       name: 'period',
       defaultValue: {
         type: 'all',
-        startDate: moment().format('YYYY-MM-DD'),
+        startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
         endDate: moment().format('YYYY-MM-DD'),
       },
       labelText: '조회기간',

@@ -40,7 +40,7 @@ export default function Datepicker({
     handleChange({type: value});
   };
 
-  const [choicedQuickButton, setChoicedQuickButton] = useState('today');
+  const [choicedQuickButton, setChoicedQuickButton] = useState('oneMonth');
   const quickButtonList = [
     {name: '오늘', value: 'today'},
     {name: '1주일', value: 'oneWeek'},
