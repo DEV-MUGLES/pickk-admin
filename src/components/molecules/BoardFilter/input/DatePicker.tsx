@@ -11,7 +11,7 @@ const {RangePicker} = DatePicker;
 
 export type DatePickerProps = {
   name: string;
-  select?: [{name: string; value: string}];
+  select?: Array<{name: string; value: string}>;
   quickButton?: boolean;
 };
 

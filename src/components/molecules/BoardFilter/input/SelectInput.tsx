@@ -9,7 +9,7 @@ const {Option} = Select;
 
 export type SelectInputProps = {
   name: string;
-  select: [{name: string; value: string}];
+  select: Array<{name: string; value: string}>;
 };
 
 export default function SelectInput({
