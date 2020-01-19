@@ -15,6 +15,9 @@ export default function MultiChecker({
   name,
   options,
 }: MultiCheckerProps) {
+  const [indeterminate, setIndeterminate] = useState(true);
+  const [checkAll, setCheckAll] = useState(true);
+
   const BoardFilterContext = useBoardFilterContext();
   const {form} = BoardFilterContext.state;
   const {setForm} = BoardFilterContext.action;
@@ -31,9 +34,6 @@ export default function MultiChecker({
     });
   };
   const allOptionNames = options.map(item => item.name);
-
-  const [indeterminate, setIndeterminate] = useState(true);
-  const [checkAll, setCheckAll] = useState(true);
 
   const handleCheckedNameChange = checkedList => {
     handleChange({choices: checkedList});
