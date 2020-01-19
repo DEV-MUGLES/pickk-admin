@@ -63,7 +63,7 @@ const LabelWrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
-  flex: 4;
+  flex: 5;
   padding: 10px 20px;
   display:flex;
   flex-direction:row;
