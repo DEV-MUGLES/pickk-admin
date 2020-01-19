@@ -9,7 +9,7 @@ const {Text} = Typography;
 
 export type BoardFilterRowProps = {
   // tslint:disable-next-line: no-any
-  defaultValue?: any;
+  defaultValue: any;
   labelText: string;
   guideText?: string;
   // tslint:disable-next-line: no-any
