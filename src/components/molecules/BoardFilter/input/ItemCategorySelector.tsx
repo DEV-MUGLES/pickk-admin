@@ -18,7 +18,7 @@ export default function NestedSelector({
   const [isMajorSelected, setMajorSelected] = useState(false);
   const [isMinorSelected, setMinorSelected] = useState(false);
 
-  const majorOptions = itemCate.ROOT;
+  const initialMajorValues = itemCate.ROOT;
 
   const BoardFilterContext = useBoardFilterContext();
   const {form} = BoardFilterContext.state;
@@ -61,7 +61,7 @@ export default function NestedSelector({
                     <Option key={'all'} value={'all'}>
                         <Typography.Text>전체</Typography.Text>
                     </Option>
-                    {majorOptions.map(item => (
+                    {initialMajorValues.map(item => (
                     <Option key={item} value={item}>
                         <Typography.Text>{itemCateEnToKo[item]}</Typography.Text>
                     </Option>
