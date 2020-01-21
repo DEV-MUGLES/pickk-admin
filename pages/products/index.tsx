@@ -5,9 +5,10 @@ import Board from '@src/components/templates/Board';
 import {BoardFilterProps} from '@src/components/organisms/Board/Filter';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 import SelectInput from '@src/components/molecules/BoardFilter/input/SelectInput';
-import Select from '@src/components/molecules/BoardFilter/input/Selector';
+import Selector from '@src/components/molecules/BoardFilter/input/Selector';
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import MultiChecker from '@src/components/molecules/BoardFilter/input/MultiChecker';
+import NestedSelector from '@src/components/molecules/BoardFilter/input/NestedSelector';
 import moment from 'moment';
 
 export default function Products() {
@@ -121,7 +122,7 @@ export default function Products() {
         {name: '배송중', value: 'shippingOrder'},
         {name: '배송완료', value: 'shippedOrder'},
       ],
-      Component: Select,
+      Component: Selector,
     },
     {
       name: 'productName',
@@ -147,6 +148,16 @@ export default function Products() {
         {name: '판매금지', value: 'banSelling'},
       ],
       Component: MultiChecker,
+    },
+    {
+      name: 'category',
+      defaultValue: {
+        major: 'all',
+        minor: 'all',
+        final: 'all',
+      },
+      labelText: '카테고리',
+      Component: NestedSelector,
     },
   ];
   return (
