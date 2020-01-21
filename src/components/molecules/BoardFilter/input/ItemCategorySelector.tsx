@@ -37,16 +37,14 @@ export default function NestedSelector({
   };
 
   const handleChoicedMajorChange = value => {
-    const majorSelected = (value !== 'all');
     handleChange({major: value, minor: 'all', final: 'all'});
-    setMajorSelected(majorSelected);
+    setMajorSelected(value !== 'all');
     setMinorSelected(false);
   };
 
   const handleChoicedMinorChange = value => {
-    const minorSelected = (value !== 'all');
     handleChange({minor: value, final: 'all'});
-    setMinorSelected(minorSelected);
+    setMinorSelected(value !== 'all');
   };
 
   const handleChoicedFinalChange = value => {
