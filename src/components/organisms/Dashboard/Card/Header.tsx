@@ -6,16 +6,17 @@ import CardReloadButton, {CardReloadButtonProps} from '@src/components/molecules
 
 export type DashboardCardHeaderProps = {
   title: string;
-} & CardReloadButtonProps;
+} & Partial<CardReloadButtonProps>;
 
 export default function DashboardCardHeader(
   props: DashboardCardHeaderProps,
 ) {
-    const cardReloadButtonProps: CardReloadButtonProps = props;
+    const partialCardReloadButtonProps: Partial<CardReloadButtonProps> = props;
+    const cardReloadButtonProps = partialCardReloadButtonProps as CardReloadButtonProps;
     return (
     <Wrapper>
         <Typography.Text strong>{props.title}</Typography.Text>
-        <CardReloadButton {...cardReloadButtonProps} />
+        {cardReloadButtonProps && <CardReloadButton {... cardReloadButtonProps} />}
     </Wrapper>
   );
 }
