@@ -8,7 +8,7 @@ import SelectInput from '@src/components/molecules/BoardFilter/input/SelectInput
 import Selector from '@src/components/molecules/BoardFilter/input/Selector';
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import MultiChecker from '@src/components/molecules/BoardFilter/input/MultiChecker';
-import NestedSelector from '@src/components/molecules/BoardFilter/input/NestedSelector';
+import ItemCategorySelector from '@src/components/molecules/BoardFilter/input/ItemCategorySelector';
 import moment from 'moment';
 
 export default function Products() {
@@ -157,7 +157,7 @@ export default function Products() {
         final: 'all',
       },
       labelText: '카테고리',
-      Component: NestedSelector,
+      Component: ItemCategorySelector,
     },
   ];
   return (
