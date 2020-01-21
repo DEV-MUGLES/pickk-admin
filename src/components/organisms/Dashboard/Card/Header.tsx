@@ -3,22 +3,20 @@ import {Typography} from 'antd';
 import styled from 'styled-components';
 
 import CardReloadButton from '@src/components/molecules/button/CardReload';
+import {CardReloadButtonProps} from '@src/components/molecules/button/CardReload';
 
 export type DashboardCardHeaderProps = {
   title: string;
-  time: string;
-  onClick: () => void;
-};
+} & CardReloadButtonProps;
 
-export default function DashboardCardHeader({
-  title,
-  time,
-  onClick,
-}: DashboardCardHeaderProps) {
+export default function DashboardCardHeader(
+  props: DashboardCardHeaderProps,
+) {
+    const cardReloadButtonProps: CardReloadButtonProps = props;
     return (
     <Wrapper>
-        <Typography.Text strong>{title}</Typography.Text>
-        <CardReloadButton time={time} onClick={onClick} />
+        <Typography.Text strong>{props.title}</Typography.Text>
+        <CardReloadButton {...cardReloadButtonProps} />
     </Wrapper>
   );
 }
