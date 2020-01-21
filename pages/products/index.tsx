@@ -2,6 +2,15 @@ import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
 import Board from '@src/components/templates/Board';
 
+import {BoardFilterProps} from '@src/components/organisms/Board/Filter';
+import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+import SelectInput from '@src/components/molecules/BoardFilter/input/SelectInput';
+import Selector from '@src/components/molecules/BoardFilter/input/Selector';
+import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
+import MultiChecker from '@src/components/molecules/BoardFilter/input/MultiChecker';
+import ItemCategorySelector from '@src/components/molecules/BoardFilter/input/ItemCategorySelector';
+import moment from 'moment';
+
 export default function Products() {
   const columns = [
     {
@@ -41,7 +50,6 @@ export default function Products() {
       sorter: (a, b) => a.subscriptionDiscount - b.subscriptionDiscount,
     },
   ];
-
   const actions = [
     {
       icon: 'delete',
@@ -64,6 +72,94 @@ export default function Products() {
     },
   ];
 
+  const inputs: BoardFilterProps['inputs'] = [
+    {
+      name: 'period',
+      defaultValue: {
+        type: 'all',
+        startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
+        endDate: moment().format('YYYY-MM-DD'),
+      },
+      labelText: '조회기간',
+      guideText: '조회기간 부가 설명입니다',
+      select: [{name: '전체', value: 'all'},
+      {name: '상품등록일', value: 'registerProductDate'},
+      {name: '판매시작일', value: 'startSellingDate'},
+      {name: '판매종료일', value: 'endSellingDate'}],
+      Component: Datepicker,
+    },
+    {
+      name: 'detailedCondition',
+      defaultValue: {
+        type: 'all',
+        query: '',
+      },
+      labelText: '상세조건',
+      guideText: '상세조건 부가 설명입니다',
+      select: [{name: '전체', value: 'all'},
+        {name: '수취인명', value: 'receiverName'},
+        {name: '구매자명', value: 'buyerName'},
+        {name: '구매자연락처', value: 'buyerPhoneNum'},
+        {name: '구매자ID', value: 'buyerID'},
+        {name: '주문번호', value: 'orderNum'},
+        {name: '상품주문번호', value: 'productOrderNum'},
+        {name: '상품번호', value: 'productNum'},
+        {name: '송장번호', value: 'invoiceNum'}],
+      Component: SelectInput,
+    },
+    {
+      name: 'orderState',
+      defaultValue: {
+        type: 'all',
+        query: '',
+      },
+      labelText: '주문상태',
+      guideText: '주문상태 부가 설명입니다',
+      select: [{name: '전체', value: 'all'},
+        {name: '신규주문', value: 'newOrder'},
+        {name: '발주확인', value: 'confirmedOrder'},
+        {name: '발주확인해제', value: 'cancelConfirmedOrder'},
+        {name: '배송중', value: 'shippingOrder'},
+        {name: '배송완료', value: 'shippedOrder'},
+      ],
+      Component: Selector,
+    },
+    {
+      name: 'productName',
+      defaultValue: {
+        query: '',
+      },
+      labelText: '상품명',
+      Component: InputBox,
+    },
+    {
+      name: 'sellingState',
+      defaultValue: {
+        choices: ['판매대기', '판매중', '품절', '승인대기', '판매중지', '판매종료', '판매금지'],
+      },
+      labelText: '판매상태',
+      guideText: '판매상태 부가 설명입니다',
+      options: [{name: '판매대기', value: 'waitSelling'},
+        {name: '판매중', value: 'nowSelling'},
+        {name: '품절', value: 'soldOut'},
+        {name: '승인대기', value: 'waitConfirm'},
+        {name: '판매중지', value: 'stopSelling'},
+        {name: '판매종료', value: 'endSelling'},
+        {name: '판매금지', value: 'banSelling'},
+      ],
+      Component: MultiChecker,
+    },
+    {
+      name: 'category',
+      defaultValue: {
+        major: 'all',
+        minor: 'all',
+        final: 'all',
+      },
+      labelText: '카테고리',
+      Component: ItemCategorySelector,
+    },
+  ];
   return (
     <MainLayout>
       <Board
@@ -75,6 +171,7 @@ export default function Products() {
           `특정 상품의 조회를 원하신다면, "검색어" 기능을 사용해서 상품번호/상품명/제조사명 등 원하시는 유형으로 조회하실 수 있습니다.`,
         ]}
         {...{columns, actions}}
+        filter={{title: '상세 조회하기', guideText: '', inputs}}
       />
     </MainLayout>
   );

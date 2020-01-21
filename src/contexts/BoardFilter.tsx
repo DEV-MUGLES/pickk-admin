@@ -14,7 +14,10 @@ const BoardFilterContext = createContext({
 const getInitialFormState = (inputs: BoardFilterRowProps[]) => {
   const initialFormState = {};
   inputs.map(item => {
-    initialFormState[item.name] = item.defaultValue;
+    Object.keys(item.defaultValue).map(defaultValueKey => {
+      initialFormState[`${item.name}_${defaultValueKey}`] =
+      item.defaultValue[defaultValueKey];
+    });
   });
   return initialFormState;
 };

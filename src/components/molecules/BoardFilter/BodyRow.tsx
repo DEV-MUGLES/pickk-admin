@@ -8,7 +8,6 @@ import Colors from '@src/components/atoms/colors';
 const {Text} = Typography;
 
 export type BoardFilterRowProps = {
-  name: string;
   // tslint:disable-next-line: no-any
   defaultValue: any;
   labelText: string;
@@ -20,7 +19,6 @@ export type BoardFilterRowProps = {
 };
 
 export default function BoardFilterRow({
-  name,
   defaultValue,
   labelText,
   guideText,
@@ -51,6 +49,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  border-bottom: 1px solid ${Colors.LightGrey};
 `;
 
 const LabelWrapper = styled.div`
@@ -59,11 +58,18 @@ const LabelWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
+  height:fit-content;
+  margin-top:4px;
 `;
 
 const InputWrapper = styled.div`
-  flex: 4;
+  flex: 5;
   padding: 10px 20px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content: flex-start;
 `;
 
 const StyledText = styled(Text)`
