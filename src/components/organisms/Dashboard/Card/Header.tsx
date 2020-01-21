@@ -2,8 +2,7 @@ import React from 'react';
 import {Typography} from 'antd';
 import styled from 'styled-components';
 
-import CardReloadButton from '@src/components/molecules/button/CardReload';
-import {CardReloadButtonProps} from '@src/components/molecules/button/CardReload';
+import CardReloadButton, {CardReloadButtonProps} from '@src/components/molecules/button/CardReload';
 
 export type DashboardCardHeaderProps = {
   title: string;
