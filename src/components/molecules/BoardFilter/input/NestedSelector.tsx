@@ -3,7 +3,7 @@ import {Select, Typography} from 'antd';
 import styled from 'styled-components';
 
 import {useBoardFilterContext} from '@src/contexts/BoardFilter';
-import {itemCate, itemCateEnToKo} from '@src/models/item';
+import {itemCate, itemCateEnToKo} from '@src/models/ItemCategory';
 import Space from '@src/components/atoms/space';
 
 const {Option} = Select;
