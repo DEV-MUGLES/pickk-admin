@@ -12,8 +12,8 @@ export const getDateTimeNumbers = (input?: number) => {
   };
 };
 
-export const getDateTimeStrings = (input?: string) => {
-  const date = new Date(Number(input));
+export const getDateTimeStrings = (input?: number) => {
+  const date = new Date(input);
   const parse = (num: number) => addLeadingZeros(num, 2);
   return {
     year: date.getFullYear().toString(),

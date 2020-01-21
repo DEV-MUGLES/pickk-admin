@@ -14,7 +14,7 @@ export default function CardReloadButton({
     time,
     onClick,
 }: CardReloadButtonProps) {
-    const {hours, minutes} = getDateTimeStrings(time);
+    const {hours, minutes} = getDateTimeStrings(Number(time));
     return (
         <Wrapper>
             <StyledText>최근</StyledText>
