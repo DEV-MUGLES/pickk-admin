@@ -1,26 +1,26 @@
 import {addLeadingZeros} from './NumberParser';
 
-export const getDateTimeNumbers = () => {
-  const today = new Date();
+export const getDateTimeNumbers = (input?: number) => {
+  const date = new Date(input);
   return {
-    year: today.getFullYear(),
-    month: today.getMonth() + 1,
-    day: today.getDate(),
-    hours: today.getHours(),
-    minutes: today.getMinutes(),
-    seconds: today.getSeconds(),
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    hours: date.getHours(),
+    minutes: date.getMinutes(),
+    seconds: date.getSeconds(),
   };
 };
 
-export const getDateTimeStrings = () => {
-  const today = new Date();
+export const getDateTimeStrings = (input?: number) => {
+  const date = new Date(input);
   const parse = (num: number) => addLeadingZeros(num, 2);
   return {
-    year: today.getFullYear().toString(),
-    month: parse(today.getMonth() + 1),
-    day: parse(today.getDate()),
-    hours: parse(today.getHours()),
-    minutes: parse(today.getMinutes()),
-    seconds: parse(today.getSeconds()),
+    year: date.getFullYear().toString(),
+    month: parse(date.getMonth() + 1),
+    day: parse(date.getDate()),
+    hours: parse(date.getHours()),
+    minutes: parse(date.getMinutes()),
+    seconds: parse(date.getSeconds()),
   };
 };
