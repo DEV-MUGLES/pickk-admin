@@ -3,6 +3,7 @@ import {Typography} from 'antd';
 import styled from 'styled-components';
 
 import CardReloadButton, {CardReloadButtonProps} from '@src/components/molecules/button/CardReload';
+import Colors from '@src/components/atoms/colors';
 
 export type DashboardCardHeaderProps = {
   title: string;
@@ -15,7 +16,7 @@ export default function DashboardCardHeader(
     const cardReloadButtonProps = partialCardReloadButtonProps as CardReloadButtonProps;
     return (
     <Wrapper>
-        <Typography.Text strong>{props.title}</Typography.Text>
+        <StyledText strong>{props.title}</StyledText>
         {cardReloadButtonProps && <CardReloadButton {... cardReloadButtonProps} />}
     </Wrapper>
   );
@@ -28,4 +29,10 @@ const Wrapper = styled.header`
   align-items: center;
   width: 100%;
   height: fit-content;
+  padding-bottom:10px;
+  border-bottom: 1px solid ${Colors.LightGrey};
+`;
+
+const StyledText = styled(Typography.Text)`
+    font-size: 16px;
 `;

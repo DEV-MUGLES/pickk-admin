@@ -34,5 +34,6 @@ const Wrapper = styled.div`
 `;
 
 const StyledText = styled(Typography.Text)`
-    font-size:11px;
+    font-size:12px;
+    margin-top:2px;
 `;
