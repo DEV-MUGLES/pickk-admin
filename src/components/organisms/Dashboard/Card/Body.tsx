@@ -14,7 +14,10 @@ export type DashboardCardBodyProps = {
 };
 
 export default function DashboardCardBody(
-  props: DashboardCardBodyProps,
+  {
+      icon,
+      data,
+  }: DashboardCardBodyProps,
 ) {
     const fieldValues = { waitPayment: 10, newOrder: 0, goToday: 7, reservePurchase: 132,
         prepareShipping: 0, nowShipping: 0, doneShipping: 0,
@@ -23,9 +26,9 @@ export default function DashboardCardBody(
 
     return (
     <Wrapper>
-        <StyledIcon type={props.icon} />
+        <StyledIcon type={icon} />
         <InfoWrapper>
-            {props.data.map(item => (
+            {data.map(item => (
                 <InfoRow>
                     <Text>{item.label}</Text>
                     <FieldValueWrapper>
