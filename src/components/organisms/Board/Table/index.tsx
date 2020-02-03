@@ -10,12 +10,18 @@ import Colors from '@src/components/atoms/colors';
 export type BoardTableProps = {
   title: string;
   columns: Array<{title: string; key: string}>;
+  // tslint:disable-next-line: no-any
+  dataSource: any[];
+  // tslint:disable-next-line: no-any
+  expandedRowRender?: (record: any) => JSX.Element;
 } & Pick<TableActionBarProps, 'actions'> &
   Pick<TableFooterProps, 'footActions'>;
 
 export default function BoardTable({
   title,
   columns,
+  dataSource,
+  expandedRowRender,
   actions,
   footActions,
 }: BoardTableProps) {
@@ -30,25 +36,14 @@ export default function BoardTable({
     ...{selectedRowKeys, footActions},
   };
 
-  const dataSource = [];
-  for (let i = 1; i < 92; ++i) {
-    dataSource.push({
-      key: i,
-      category: '맨투맨/스웨트셔츠',
-      itemName: '기모 짱짱 맨투맨 (그레이)' + i,
-      originalPrice: 39000 + i,
-      salePrice: 19900 - i,
-      subscriptionDiscount: 5 % i,
-    });
-  }
-
   return (
     <Wrapper>
       <Table
         {...{columns, dataSource, rowSelection}}
         columns={columns}
+        scroll={{ x: true }}
         size="small"
-        tableLayout="fixed"
+        expandedRowRender={expandedRowRender}
         title={() => (
           <>
             <Header {...{title, columns, dataSource}} />
@@ -71,5 +66,5 @@ const Wrapper = styled.div`
   background-color: ${Colors.White};
   display: flex;
   align-itmes: flex-start;
-  text-align: left;
+  text-align: left;s
 `;
