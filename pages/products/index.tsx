@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { Input, Typography, DatePicker, Button, Modal } from 'antd';
+import styled from 'styled-components';
 import MainLayout from '@src/components/templates/MainLayout';
 import Board from '@src/components/templates/Board';
 
@@ -10,46 +12,306 @@ import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import MultiChecker from '@src/components/molecules/BoardFilter/input/MultiChecker';
 import ItemCategorySelector from '@src/components/molecules/BoardFilter/input/ItemCategorySelector';
 import moment from 'moment';
+import Space from '@src/components/atoms/space';
+import Colors from '@src/components/atoms/colors';
+
+const { Text } = Typography;
+const {RangePicker} = DatePicker;
+const { Search } = Input;
 
 export default function Products() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const modalOpen = () => {
+    setIsModalOpen(true);
+  };
+  const modalClose = e => {
+    setIsModalOpen(false);
+  };
+  const handleSubmit = e => {
+    setIsLoading(true);
+  };
+
+  const addModal = () => (
+          <Modal
+            visible={isModalOpen}
+            title="Title"
+            onOk={handleSubmit}
+            onCancel={modalClose}
+            footer={[
+              <Button key="back" onClick={modalClose}>
+                Return
+              </Button>,
+              <Button key="submit" type="primary" loading={isLoading} onClick={handleSubmit}>
+                Submit
+              </Button>,
+            ]}
+          >
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Modal>
+      );
+
   const columns = [
     {
-      width: 150,
       title: '카테고리',
-      dataIndex: 'category',
-      key: 'category',
-      sorter: (a, b) => a.category > b.category,
+      dataIndex: 'itemMinorType',
+      key: 'itemMinorType',
+      sorter: (a, b) => a.itemMinorType > b.itemMinorType,
     },
     {
       title: '상품명',
-      dataIndex: 'itemName',
-      key: 'itemName',
+      dataIndex: 'name',
+      key: 'name',
       render: text => <a>{text}</a>,
-      sorter: (a, b) => a.itemName > b.itemName,
+      sorter: (a, b) => a.name > b.name,
     },
     {
-      width: 100,
+      title: '구독할인율',
+      dataIndex: 'subscribeDiscountRate',
+      key: 'subscribeDiscountRate',
+      sorter: (a, b) => a.subscribeDiscountRate - b.subscribeDiscountRate,
+    },
+    {
+      title: '구독할인기간',
+      dataIndex: 'subscribeDiscountPeriod',
+      key: 'subscribeDiscountPeriod',
+      sorter: (a, b) => a.subscribeDiscountPeriod > b.subscribeDiscountPeriod,
+    },
+    {
+      title: '상품번호',
+      dataIndex: 'id',
+      key: 'id',
+      sorter: (a, b) => a.id > b.id,
+    },
+    {
       title: '정가',
       dataIndex: 'originalPrice',
       key: 'originalPrice',
       sorter: (a, b) => a.originalPrice - b.originalPrice,
     },
     {
-      width: 100,
       title: '할인가',
       dataIndex: 'salePrice',
       key: 'salePrice',
       sorter: (a, b) => a.salePrice - b.salePrice,
     },
     {
-      width: 100,
-      title: '구독 할인',
-      dataIndex: 'subscriptionDiscount',
-      key: 'subscriptionDiscount',
-      render: (num: number) => <span>{num}%</span>,
-      sorter: (a, b) => a.subscriptionDiscount - b.subscriptionDiscount,
+      title: '리뷰수',
+      dataIndex: 'reviewCount',
+      key: 'reviewCount',
+      sorter: (a, b) => a.reviewCount - b.reviewCount,
+    },
+    {
+      title: '총조회수',
+      dataIndex: 'totalViewCount',
+      key: 'totalViewCount',
+      sorter: (a, b) => a.totalViewCount - b.totalViewCount,
+    },
+    {
+      title: '판매수',
+      dataIndex: 'salesCount',
+      key: 'salesCount',
+      sorter: (a, b) => a.salesCount - b.salesCount,
+    },
+    {
+      title: '색상',
+      dataIndex: 'colors',
+      key: 'colors',
+      sorter: (a, b) => a.colors > b.colors,
+    },
+    {
+      title: '사이즈',
+      dataIndex: 'sizes',
+      key: 'sizes',
+      sorter: (a, b) => a.sizes > b.sizes,
+    },
+    {
+      title: '기타옵션',
+      dataIndex: 'options',
+      key: 'options',
+      sorter: (a, b) => a.options > b.options,
     },
   ];
+
+  const colorList = ['화이트', '그레이', '블랙'];
+  let colorListString = '';
+  colorListString += colorList.map(item => item);
+
+  const sizeList = ['XS', 'S', 'M', 'L', 'XL'];
+  let sizeListString = '';
+  sizeListString += sizeList.map(item => item);
+
+  const dataSource = [];
+  for (let i = 1; i < 92; ++i) {
+    dataSource.push({
+      key: i,
+      id: 'id',
+      itemMinorType: '맨투맨',
+      name: '기모 짱짱 맨투맨 (그레이)' + i,
+      subscribeDiscountRate: 5 % i,
+      subscribeDiscountPeriod: `2020/01/10-2020/02/0${i % 9 + 1}`,
+      originalPrice: 39000 + i,
+      salePrice: 19900 - i,
+      reviewCount: i,
+      totalViewCount: 200 - i,
+      salesCount: 92 - i,
+      colors: colorListString,
+      sizes: sizeListString,
+      options: '',
+    });
+  }
+
+  let influencerData = [
+    {
+      key: 1,
+      name: '박효진박효진',
+      subscriberNumber: '12만',
+    },
+    {
+      key: 2,
+      name: '최수민최수민',
+      subscriberNumber: '33만',
+    },
+    {
+      key: 3,
+      name: '깡깡깡스스스',
+      subscriberNumber: '19만',
+    },
+  ];
+  for (let i = 1; i < 92; ++i) {
+    dataSource.push({
+      key: i,
+      id: 'id',
+      itemMinorType: '맨투맨',
+      name: '기모 짱짱 맨투맨 (그레이)' + i,
+      subscribeDiscountRate: 5 % i,
+      subscribeDiscountPeriod: `2020/01/10-2020/02/0${i % 9 + 1}`,
+      originalPrice: 39000 + i,
+      salePrice: 19900 - i,
+      reviewCount: i,
+      totalViewCount: 200 - i,
+      salesCount: 92 - i,
+      colors: colorListString,
+      sizes: sizeListString,
+      options: '',
+    });
+  }
+
+  const expandedRowRender = record => {
+
+    const influencerSaleData = [];
+    for (let i = 1; i < 5; ++i) {
+      influencerSaleData.push({
+        key: i,
+        name: `스타일리스트${i}`,
+        subscribeDiscountRate: 5 % i,
+        subscribeDiscountPeriod: `2020/01/10-2020/02/0${i % 9 + 1}`,
+      });
+    }
+
+    return(
+    <ExpandedRowWrapper>
+      <Space/>
+        <Row>
+            <Text style={{color: "black"}}>구독 할인</Text>
+            <Space direction="ROW" level={4}/>
+            <Input size="small" value={record.subscribeDiscountRate} style={{width: "40px"}} />
+            <Space direction="ROW"/>
+            <span> %</span>
+            <Space direction="ROW" level={2}/>
+            <RangePicker
+              name="choicedSelectValue"
+              size="small"
+              style={{width: "250px"}}
+              value={[
+                moment(record.subscribeDiscountPeriod.substring(0, 10)),
+                moment(record.subscribeDiscountPeriod.substring(11, 21)),
+              ]}
+            />
+            <Space direction="ROW" level={2}/>
+            <Button size="small">변경</Button>
+            <Space direction="ROW"/>
+            <Button size="small" style={{color: Colors.Primary}}>초기화</Button>
+        </Row>
+        <Space level={2}/>
+        <Text style={{color: "black"}}>인플루언서 할인</Text>
+        <Space level={1}/>
+        {influencerSaleData.map((item, index) => (
+        <>
+            <Row>
+                    <Text>{index + 1}</Text>
+                    <Space direction="ROW" level={2}/>
+                    <Text>{item.name}</Text>
+                    <Space direction="ROW" level={2}/>
+                    <Input size="small" value={item.subscribeDiscountRate} style={{width: "40px"}} />
+                    <Space direction="ROW"/>
+                    <span> %</span>
+                    <Space direction="ROW" level={2}/>
+                    <RangePicker
+                      name="choicedSelectValue"
+                      size="small"
+                      style={{width: "250px"}}
+                      value={[
+                        moment(item.subscribeDiscountPeriod.substring(0, 10)),
+                        moment(item.subscribeDiscountPeriod.substring(11, 21)),
+                      ]}
+                    />
+                    <Space direction="ROW" level={2}/>
+                    <Button size="small">변경</Button>
+                    <Space direction="ROW"/>
+                    <Button size="small" style={{color: "#f33"}}>삭제</Button>
+            </Row>
+            <Space/>
+        </>
+        ))}
+        <Space/>
+        <Button type="primary" onClick={modalOpen} size="small" block>
+            추가
+        </Button>
+        <Modal
+            visible={isModalOpen}
+            title="인플루언서 찾기"
+            onOk={handleSubmit}
+            onCancel={modalClose}
+            footer={[
+              <Button key="back" onClick={modalClose}>
+                닫기
+              </Button>,
+              <Button key="submit" type="primary" loading={isLoading} onClick={handleSubmit}>
+                다음
+              </Button>,
+            ]}
+          >
+          <Search placeholder="이름으로 검색" onSearch={value => {
+            influencerData = influencerData.filter(data => (data.name.includes(value)));
+            }} enterButton />
+          <Space level={2}/>
+          <SearchResultWrapper>
+          {influencerData.map((item, index) => (
+            <>
+                <Button block>
+                  <Row>
+                        <Text>{index + 1}</Text>
+                        <Space direction="ROW" level={12}/>
+                        <Text style={{color: "black"}}>{item.name}</Text>
+                        <Space direction="ROW" level={2}/>
+                        <Text>구독자 수 : {item.subscriberNumber}명</Text>
+                        <Space direction="ROW" level={2}/>
+                    </Row>
+                </Button>
+                <Space level={1}/>
+            </>
+            ))}
+            </SearchResultWrapper>
+          </Modal>
+
+    </ExpandedRowWrapper>
+    ); };
+
   const actions = [
     {
       icon: 'delete',
@@ -170,9 +432,27 @@ export default function Products() {
           '상단에 판매상태별 상품 건수 확인이 가능하며, 건수를 클릭 시 상품목록에 등록한 상품이 조회됩니다.',
           `특정 상품의 조회를 원하신다면, "검색어" 기능을 사용해서 상품번호/상품명/제조사명 등 원하시는 유형으로 조회하실 수 있습니다.`,
         ]}
-        {...{columns, actions}}
+        {...{columns, dataSource, expandedRowRender, actions}}
         filter={{title: '상세 조회하기', guideText: '', inputs}}
       />
     </MainLayout>
   );
 }
+
+const ExpandedRowWrapper = styled.div`
+    display:flex;
+    flex-direction:column;
+    width: 800px;
+`;
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const SearchResultWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+`;
