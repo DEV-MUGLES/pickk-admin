@@ -26,16 +26,15 @@ export type InfluencerDiscountRowProps = {
   index: number;
   data: InfluencerDiscountProps;
   // tslint:disable-next-line: no-any
-  setData: React.Dispatch<React.SetStateAction<InfluencerDiscountProps>>;
-  // tslint:disable-next-line: no-any
-  handleDelete: (key: any) => void;
+  setData: (data: InfluencerDiscountProps) => void;
+  deleteData: () => void;
 };
 
 export default function InfluencerDiscountRow({
   index,
   data,
   setData,
-  handleDelete,
+  deleteData,
 }: InfluencerDiscountRowProps) {
   const handleSubscribeDiscountRateChange = e => {
     setData({...data, ...{subscribeDiscountRate: e.target.value}});
@@ -89,7 +88,7 @@ export default function InfluencerDiscountRow({
       <Space direction="ROW" />
       <Popconfirm
         title="정말 삭제하시겠습니까？"
-        onConfirm={() => handleDelete(data.key)}
+        onConfirm={deleteData}
         okText="예"
         cancelText="아니오"
         icon={<Icon type="question-circle-o" style={{color: '#f33'}} />}>
