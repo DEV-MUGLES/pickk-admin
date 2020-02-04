@@ -1,107 +1,118 @@
 import React from 'react';
-import { Input, Typography, DatePicker, Button, Popconfirm, Icon, message  } from 'antd';
+import {
+  Input,
+  Typography,
+  DatePicker,
+  Button,
+  Popconfirm,
+  Icon,
+  message,
+} from 'antd';
 import styled from 'styled-components';
 
-import { DiscountRowProps } from '@src/components/molecules/Row/Discount/Subscription';
+import {DiscountRowProps} from '@src/components/molecules/Row/Discount/Subscription';
 import Space from '@src/components/atoms/space';
 import moment from 'moment';
 
-const { Text } = Typography;
+const {Text} = Typography;
 const {RangePicker} = DatePicker;
 
 export type InfluencerDiscountProps = {
-    key: number,
-    name: string,
+  key: number;
+  name: string;
 } & DiscountRowProps;
 
 export type InfluencerDiscountRowProps = {
-    index: number,
-    data: InfluencerDiscountProps,
-    // tslint:disable-next-line: no-any
-    setData: (data: any) => void,
-    // tslint:disable-next-line: no-any
-    handleDelete: (key: any) => void,
+  index: number;
+  data: InfluencerDiscountProps;
+  // tslint:disable-next-line: no-any
+  setData: React.Dispatch<React.SetStateAction<InfluencerDiscountProps>>;
+  // tslint:disable-next-line: no-any
+  handleDelete: (key: any) => void;
 };
 
 export default function InfluencerDiscountRow({
-        index,
-        data,
-        setData,
-        handleDelete,
-    }: InfluencerDiscountRowProps ) {
-
+  index,
+  data,
+  setData,
+  handleDelete,
+}: InfluencerDiscountRowProps) {
   const handleSubscribeDiscountRateChange = e => {
-        setData({...data, ...{subscribeDiscountRate: e.target.value}});
-    };
+    setData({...data, ...{subscribeDiscountRate: e.target.value}});
+  };
 
   const handleSubscribeDiscountPeriodChange = date => {
-        const subscribeDiscountStartPeriod = moment(date[0]).format('YYYY-MM-DD');
-        const subscribeDiscountEndPeriod = moment(date[1]).format('YYYY-MM-DD');
-        setData({...data, ...{subscribeDiscountStartPeriod, subscribeDiscountEndPeriod}});
-    };
+    const subscribeDiscountStartPeriod = moment(date[0]).format('YYYY-MM-DD');
+    const subscribeDiscountEndPeriod = moment(date[1]).format('YYYY-MM-DD');
+    setData({
+      ...data,
+      ...{subscribeDiscountStartPeriod, subscribeDiscountEndPeriod},
+    });
+  };
 
   const handleSubmit = () => {
-        message.success('변경 완료');
-    };
+    message.success('변경 완료');
+  };
 
-  return(
-  <Wrapper>
-        <Text>{index + 1}</Text>
-        <Space direction="ROW" level={4}/>
-        <Text>{data.name}</Text>
-        <Space direction="ROW" level={4}/>
-        <DiscountRateInput size="small" value={data.subscribeDiscountRate}
-                   onChange={handleSubscribeDiscountRateChange}/>
-        <Space direction="ROW"/>
-        <Text>%</Text>
-        <Space direction="ROW" level={4}/>
-        <DiscountPeriodPicker
+  return (
+    <Wrapper>
+      <Text>{index + 1}</Text>
+      <Space direction="ROW" level={4} />
+      <Text>{data.name}</Text>
+      <Space direction="ROW" level={4} />
+      <DiscountRateInput
+        size="small"
+        value={data.subscribeDiscountRate}
+        onChange={handleSubscribeDiscountRateChange}
+      />
+      <Space direction="ROW" />
+      <Text>%</Text>
+      <Space direction="ROW" level={4} />
+      <DiscountPeriodPicker
         name="choicedSelectValue"
         size="small"
         value={[
-            moment(data.subscribeDiscountStartPeriod),
-            moment(data.subscribeDiscountEndPeriod),
+          moment(data.subscribeDiscountStartPeriod),
+          moment(data.subscribeDiscountEndPeriod),
         ]}
         onChange={handleSubscribeDiscountPeriodChange}
-        />
-        <Space direction="ROW" level={4}/>
-        <Popconfirm
-                title="정말 변경하시겠습니까？"
-                onConfirm={handleSubmit}
-                okText="예"
-                cancelText="아니오"
-                icon={<Icon type="question-circle-o" />}
-            >
-                <Button size="small">변경</Button>
-            </Popconfirm>
-          <Space direction="ROW"/>
-          <Popconfirm
-                title="정말 삭제하시겠습니까？"
-                onConfirm={() => handleDelete(data.key)}
-                okText="예"
-                cancelText="아니오"
-                icon={<Icon type="question-circle-o" style={{color: "#f33"}}/>}
-            >
-                <DeleteButton size="small">삭제</DeleteButton>
-            </Popconfirm>
-  </Wrapper>
+      />
+      <Space direction="ROW" level={4} />
+      <Popconfirm
+        title="정말 변경하시겠습니까？"
+        onConfirm={handleSubmit}
+        okText="예"
+        cancelText="아니오"
+        icon={<Icon type="question-circle-o" />}>
+        <Button size="small">변경</Button>
+      </Popconfirm>
+      <Space direction="ROW" />
+      <Popconfirm
+        title="정말 삭제하시겠습니까？"
+        onConfirm={() => handleDelete(data.key)}
+        okText="예"
+        cancelText="아니오"
+        icon={<Icon type="question-circle-o" style={{color: '#f33'}} />}>
+        <DeleteButton size="small">삭제</DeleteButton>
+      </Popconfirm>
+    </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const DiscountRateInput = styled(Input)`
-    width: 40px;
+  width: 40px;
 `;
 
 const DiscountPeriodPicker = styled(RangePicker)`
-    width: 400px;
+  width: 400px;
 `;
 
 const DeleteButton = styled(Button)`
-    color: #f33;
+  color: #f33;
 `;
