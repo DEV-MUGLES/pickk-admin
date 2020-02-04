@@ -18,7 +18,6 @@ const {Text} = Typography;
 const {RangePicker} = DatePicker;
 
 export type InfluencerDiscountProps = {
-  key: number;
   name: string;
 } & DiscountRowProps;
 
@@ -57,8 +56,7 @@ export default function InfluencerDiscountRow({
     <Wrapper>
       <Text>{index + 1}</Text>
       <Space direction="ROW" level={4} />
-      <Text>{data.name}</Text>
-      <Space direction="ROW" level={4} />
+      <Text style={{marginRight: 'auto'}}>{data.name}</Text>
       <DiscountRateInput
         size="small"
         value={data.subscribeDiscountRate}
@@ -102,6 +100,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 790px;
 `;
 
 const DiscountRateInput = styled(Input)`
