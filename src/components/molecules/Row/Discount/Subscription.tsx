@@ -36,10 +36,10 @@ export default function SubscriptionDiscountRow({
   });
 
   // tslint:disable-next-line: no-any
-  const handleChange = (newData: any) => {
+  const handleChange = (data: any) => {
     setSubscribeDiscountData({
       ...subscribeDiscountData,
-      ...newData,
+      ...data,
     });
   };
 
