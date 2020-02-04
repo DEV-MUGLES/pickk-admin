@@ -56,7 +56,7 @@ export default function InfluencerDiscountRow({
     <Wrapper>
       <Text>{index + 1}</Text>
       <Space direction="ROW" level={4} />
-      <Text style={{marginRight: 'auto'}}>{data.name}</Text>
+      <Name>{data.name}</Name>
       <DiscountRateInput
         size="small"
         value={data.subscribeDiscountRate}
@@ -101,6 +101,10 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   width: 790px;
+`;
+
+const Name = styled(Text)`
+  margin-right: auto;
 `;
 
 const DiscountRateInput = styled(Input)`
