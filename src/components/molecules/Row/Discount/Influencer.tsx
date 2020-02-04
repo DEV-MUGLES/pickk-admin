@@ -41,7 +41,6 @@ export default function InfluencerDiscountRow({
     };
 
   const handleSubmit = () => {
-        console.log(data);
         message.success('변경 완료');
     };
 
