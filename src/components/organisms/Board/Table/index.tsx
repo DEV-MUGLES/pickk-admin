@@ -39,11 +39,10 @@ export default function BoardTable({
   return (
     <Wrapper>
       <Table
-        {...{columns, dataSource, rowSelection}}
+        {...{columns, dataSource, rowSelection, expandedRowRender}}
         columns={columns}
         scroll={{ x: true }}
         size="small"
-        expandedRowRender={expandedRowRender}
         title={() => (
           <>
             <Header {...{title, columns, dataSource}} />
