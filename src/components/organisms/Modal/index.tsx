@@ -12,7 +12,7 @@ export default function InfluencerDiscountSetModal({
   const [phaseTitle, setPhaseTitle] = useState('인플루언서 찾기');
   const [selectedInfluencerData, setSelectedInfluencerData] = useState(null);
 
-  const modalClose = () => {
+  const closeModal = () => {
     setIsModalOpen(false);
     setPhase(0);
   };
@@ -93,7 +93,7 @@ export default function InfluencerDiscountSetModal({
       visible={isModalOpen}
       width={400}
       title={phaseTitle}
-      onCancel={modalClose}
+      onCancel={closeModal}
       footer={null}>
       {phase === 0 && (
         <Phase0
@@ -112,7 +112,7 @@ export default function InfluencerDiscountSetModal({
             setPhaseTitle,
             selectedInfluencerData,
             handleDiscountDataChange,
-            modalClose,
+            closeModal,
           }}
         />
       )}

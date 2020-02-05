@@ -15,7 +15,7 @@ export default function Phase1({
   setPhaseTitle,
   selectedInfluencerData,
   handleDiscountDataChange,
-  modalClose,
+  closeModal,
 }) {
   const handleDiscountRateChange = e => {
     handleDiscountDataChange({discountRate: e.target.value});
@@ -30,7 +30,7 @@ export default function Phase1({
 
   const handleSubmit = () => {
     message.success('추가 완료');
-    modalClose();
+    closeModal();
     setPhaseTitle('인플루언서 찾기');
     setPhase(0);
   };

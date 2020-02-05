@@ -36,7 +36,7 @@ export default function InfluencerDiscountSection({
     message.success('삭제 완료');
   };
 
-  const modalOpen = () => {
+  const openModal = () => {
     setIsModalOpen(true);
   };
 
@@ -62,7 +62,7 @@ export default function InfluencerDiscountSection({
         </>
       ))}
       <Space />
-      <Button type="primary" size="small" onClick={modalOpen} block>
+      <Button type="primary" size="small" onClick={openModal} block>
         추가
       </Button>
       <InfluencerDiscountSetModal {...{isModalOpen, setIsModalOpen}} />
