@@ -12,6 +12,7 @@ const {RangePicker} = DatePicker;
 
 export default function Phase1({
   setPhase,
+  setPhaseTitle,
   selectedInfluencerData,
   handleDiscountDataChange,
   modalClose,
@@ -30,6 +31,7 @@ export default function Phase1({
   const handleSubmit = () => {
     message.success('추가 완료');
     modalClose();
+    setPhaseTitle('인플루언서 찾기');
     setPhase(0);
   };
 
@@ -39,7 +41,7 @@ export default function Phase1({
         <SearchResultRow>
           <Space direction="ROW" />
           <Img
-            src={selectedInfluencerData.imgSrc}
+            src={selectedInfluencerData.avatar}
             circle={true}
             width="35px"
             height="35px"

@@ -11,6 +11,7 @@ const {Search} = Input;
 
 export default function Phase0({
   setPhase,
+  setPhaseTitle,
   influencerData,
   setSelectedInfluencerData,
 }) {
@@ -30,6 +31,7 @@ export default function Phase0({
     setSelectedInfluencerData(
       allInfluencerData.find(data => data.name === name),
     );
+    setPhaseTitle('할인율 설정하기');
     setPhase(1);
   };
 
@@ -56,7 +58,7 @@ export default function Phase0({
           influencerSearchResult.map(item => (
             <SearchResultRow>
               <Space direction="ROW" />
-              <Img src={item.imgSrc} circle={true} width="35px" height="35px" />
+              <Img src={item.avatar} circle={true} width="35px" height="35px" />
               <Space direction="ROW" level={1} />
               <Name ellipsis>{item.name}</Name>
               <SubscriberNumber>
