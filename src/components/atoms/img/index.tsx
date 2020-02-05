@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 type IProps = {
   src: string;
   width?: string | number;
@@ -13,6 +14,7 @@ type IProps = {
   over?: boolean;
   border?: boolean;
 };
+
 export default (props: IProps) => {
   const Img = styled.img`
     width: ${props.width || '100%'};
