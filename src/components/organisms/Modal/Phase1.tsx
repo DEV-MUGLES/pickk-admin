@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import Img from '@src/components/atoms/img';
 import Space from '@src/components/atoms/space';
-import moment from 'moment';
 import Colors from '@src/components/atoms/colors';
+import moment from 'moment';
 
 const {Text} = Typography;
 const {RangePicker} = DatePicker;
