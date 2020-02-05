@@ -11,7 +11,6 @@ const {Search} = Input;
 
 export type Phase0Props = {
   setPhase: React.Dispatch<React.SetStateAction<number>>;
-  setPhaseTitle: React.Dispatch<React.SetStateAction<string>>;
   influencerData: Array<{
     avatar: string;
     name: string;
@@ -22,7 +21,6 @@ export type Phase0Props = {
 
 export default function Phase0({
   setPhase,
-  setPhaseTitle,
   influencerData,
   setSelectedInfluencerData,
 }: Phase0Props) {
@@ -42,7 +40,6 @@ export default function Phase0({
     setSelectedInfluencerData(
       allInfluencerData.find(data => data.name === name),
     );
-    setPhaseTitle('할인율 설정하기');
     setPhase(1);
   };
 

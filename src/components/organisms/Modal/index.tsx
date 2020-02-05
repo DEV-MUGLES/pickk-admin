@@ -9,7 +9,6 @@ export default function InfluencerDiscountSetModal({
   setIsModalOpen,
 }) {
   const [phase, setPhase] = useState(0);
-  const [phaseTitle, setPhaseTitle] = useState('인플루언서 찾기');
   const [selectedInfluencerData, setSelectedInfluencerData] = useState(null);
 
   const closeModal = () => {
@@ -92,14 +91,13 @@ export default function InfluencerDiscountSetModal({
     <Modal
       visible={isModalOpen}
       width={400}
-      title={phaseTitle}
+      title={phase === 0 ? '인플루언서 찾기' : '할인율 설정하기'}
       onCancel={closeModal}
       footer={null}>
       {phase === 0 && (
         <Phase0
           {...{
             setPhase,
-            setPhaseTitle,
             influencerData,
             setSelectedInfluencerData,
           }}
@@ -109,7 +107,6 @@ export default function InfluencerDiscountSetModal({
         <Phase1
           {...{
             setPhase,
-            setPhaseTitle,
             selectedInfluencerData,
             handleDiscountDataChange,
             closeModal,

@@ -1,18 +1,17 @@
 import React from 'react';
 import {Typography, Input, Button, DatePicker, message} from 'antd';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import Img from '@src/components/atoms/img';
 import Space from '@src/components/atoms/space';
 import Colors from '@src/components/atoms/colors';
-import moment from 'moment';
 
 const {Text} = Typography;
 const {RangePicker} = DatePicker;
 
 export type Phase1Props = {
   setPhase: React.Dispatch<React.SetStateAction<number>>;
-  setPhaseTitle: React.Dispatch<React.SetStateAction<string>>;
   // tslint:disable-next-line: no-any
   selectedInfluencerData: any;
   // tslint:disable-next-line: no-any
@@ -22,7 +21,6 @@ export type Phase1Props = {
 
 export default function Phase1({
   setPhase,
-  setPhaseTitle,
   selectedInfluencerData,
   handleDiscountDataChange,
   closeModal,
@@ -41,7 +39,6 @@ export default function Phase1({
   const handleSubmit = () => {
     message.success('추가 완료');
     closeModal();
-    setPhaseTitle('인플루언서 찾기');
     setPhase(0);
   };
 
