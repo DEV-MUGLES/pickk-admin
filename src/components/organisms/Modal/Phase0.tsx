@@ -10,7 +10,7 @@ const {Text} = Typography;
 const {Search} = Input;
 
 export default function Phase0({
-  setPhaseNumber,
+  setPhase,
   influencerData,
   setSelectedInfluencerData,
 }) {
@@ -30,7 +30,7 @@ export default function Phase0({
     setSelectedInfluencerData(
       allInfluencerData.find(data => data.name === name),
     );
-    setPhaseNumber(1);
+    setPhase(1);
   };
 
   return (

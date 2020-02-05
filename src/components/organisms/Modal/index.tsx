@@ -8,12 +8,12 @@ export default function InfluencerDiscountSetModal({
   isModalOpen,
   setIsModalOpen,
 }) {
-  const [phaseNumber, setPhaseNumber] = useState(0);
+  const [phase, setPhase] = useState(0);
   const [selectedInfluencerData, setSelectedInfluencerData] = useState(null);
 
   const modalClose = () => {
     setIsModalOpen(false);
-    setPhaseNumber(0);
+    setPhase(0);
   };
 
   // tslint:disable-next-line: no-any
@@ -91,18 +91,16 @@ export default function InfluencerDiscountSetModal({
     <Modal
       visible={isModalOpen}
       width={400}
-      title={phaseNumber === 0 ? '인플루언서 찾기' : '할인율 설정하기'}
+      title={phase === 0 ? '인플루언서 찾기' : '할인율 설정하기'}
       onCancel={modalClose}
       footer={null}>
-      {phaseNumber === 0 && (
-        <Phase0
-          {...{setPhaseNumber, influencerData, setSelectedInfluencerData}}
-        />
+      {phase === 0 && (
+        <Phase0 {...{setPhase, influencerData, setSelectedInfluencerData}} />
       )}
-      {phaseNumber === 1 && (
+      {phase === 1 && (
         <Phase1
           {...{
-            setPhaseNumber,
+            setPhase,
             selectedInfluencerData,
             handleDiscountDataChange,
             modalClose,

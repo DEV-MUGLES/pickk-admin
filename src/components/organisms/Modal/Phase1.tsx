@@ -11,7 +11,7 @@ const {Text} = Typography;
 const {RangePicker} = DatePicker;
 
 export default function Phase1({
-  setPhaseNumber,
+  setPhase,
   selectedInfluencerData,
   handleDiscountDataChange,
   modalClose,
@@ -30,7 +30,7 @@ export default function Phase1({
   const handleSubmit = () => {
     message.success('추가 완료');
     modalClose();
-    setPhaseNumber(0);
+    setPhase(0);
   };
 
   return (
