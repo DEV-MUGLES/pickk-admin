@@ -37,11 +37,7 @@ export default function Phase0({
 
   return (
     <Wrapper>
-      <Search
-        placeholder="이름으로 검색"
-        onSearch={value => handleSearch(value)}
-        enterButton
-      />
+      <Search placeholder="이름으로 검색" onSearch={handleSearch} enterButton />
       <Space level={1} />
       {query && (
         <QueryInfo>
