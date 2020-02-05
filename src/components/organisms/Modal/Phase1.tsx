@@ -21,7 +21,7 @@ export default function Phase1({
     handleDiscountDataChange({discountRate: e.target.value});
   };
 
-  const handleDiscountPeriodChange = date => {
+  const handleDiscountPeriodChange = (date: [moment.Moment, moment.Moment]) => {
     handleDiscountDataChange({
       discountStartPeriod: moment(date[0]).format('YYYY-MM-DD'),
       discountEndPeriod: moment(date[1]).format('YYYY-MM-DD'),
