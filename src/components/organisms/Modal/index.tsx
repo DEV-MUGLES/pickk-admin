@@ -26,62 +26,62 @@ export default function InfluencerDiscountSetModal({
 
   const influencerData = [
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '깡스스스스타일리스트',
       subscriberNumber: '38만',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '진진호',
       subscriberNumber: '5만',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '까마귀효진',
       subscriberNumber: '3123',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '티벳수민',
       subscriberNumber: '223',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '깡스타일리스트',
       subscriberNumber: '38만',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '진진호',
       subscriberNumber: '5만',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '까마귀효진',
       subscriberNumber: '3123',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '티벳수민',
       subscriberNumber: '223',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '깡스타일리스트',
       subscriberNumber: '38만',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '진진호',
       subscriberNumber: '5만',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '까마귀효진',
       subscriberNumber: '3123',
     },
     {
-      imgSrc: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
+      avatar: 'https://i.ytimg.com/vi/ex3EjW-kR5Q/maxresdefault.jpg',
       name: '티벳수민',
       subscriberNumber: '223',
     },
