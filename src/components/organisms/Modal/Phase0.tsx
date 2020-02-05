@@ -9,12 +9,23 @@ import Colors from '@src/components/atoms/colors';
 const {Text} = Typography;
 const {Search} = Input;
 
+export type Phase0Props = {
+  setPhase: React.Dispatch<React.SetStateAction<number>>;
+  setPhaseTitle: React.Dispatch<React.SetStateAction<string>>;
+  influencerData: Array<{
+    avatar: string;
+    name: string;
+    subscriberNumber: string;
+  }>;
+  setSelectedInfluencerData: React.Dispatch<any>;
+};
+
 export default function Phase0({
   setPhase,
   setPhaseTitle,
   influencerData,
   setSelectedInfluencerData,
-}) {
+}: Phase0Props) {
   const [influencerSearchResult, setInfluencerSearchResult] = useState(null);
   const [query, setQuery] = useState(null);
 

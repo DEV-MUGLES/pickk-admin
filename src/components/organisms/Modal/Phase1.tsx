@@ -10,13 +10,23 @@ import moment from 'moment';
 const {Text} = Typography;
 const {RangePicker} = DatePicker;
 
+export type Phase1Props = {
+  setPhase: React.Dispatch<React.SetStateAction<number>>;
+  setPhaseTitle: React.Dispatch<React.SetStateAction<string>>;
+  // tslint:disable-next-line: no-any
+  selectedInfluencerData: any;
+  // tslint:disable-next-line: no-any
+  handleDiscountDataChange: (data: any) => void;
+  closeModal: () => void;
+};
+
 export default function Phase1({
   setPhase,
   setPhaseTitle,
   selectedInfluencerData,
   handleDiscountDataChange,
   closeModal,
-}) {
+}: Phase1Props) {
   const handleDiscountRateChange = e => {
     handleDiscountDataChange({discountRate: e.target.value});
   };
