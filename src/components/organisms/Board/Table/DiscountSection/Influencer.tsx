@@ -6,6 +6,7 @@ import InfluencerDiscountRow, {
   InfluencerDiscountProps,
 } from '@src/components/molecules/Row/Discount/Influencer';
 import Space from '@src/components/atoms/space';
+import InfluencerDiscountSetModal from '@src/components/organisms/Modal';
 
 const {Text} = Typography;
 
@@ -17,6 +18,7 @@ export default function InfluencerDiscountSection({
   influencerDiscountData,
 }: InfluencerDiscountSectionProps) {
   const [dataList, setDataList] = useState(influencerDiscountData);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRowChange = index => data => {
     setDataList([
@@ -32,6 +34,10 @@ export default function InfluencerDiscountSection({
       ...dataList.slice(index + 1, dataList.length),
     ]);
     message.success('삭제 완료');
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
   return (
@@ -56,9 +62,10 @@ export default function InfluencerDiscountSection({
         </>
       ))}
       <Space />
-      <Button type="primary" size="small" block>
+      <Button type="primary" size="small" onClick={openModal} block>
         추가
       </Button>
+      <InfluencerDiscountSetModal {...{isModalOpen, setIsModalOpen}} />
     </Wrapper>
   );
 }

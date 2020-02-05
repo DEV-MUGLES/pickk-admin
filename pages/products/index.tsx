@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import { Input, Typography, DatePicker, Button, Modal } from 'antd';
+import React from 'react';
 import styled from 'styled-components';
 import MainLayout from '@src/components/templates/MainLayout';
 import Board from '@src/components/templates/Board';
@@ -13,49 +12,8 @@ import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import MultiChecker from '@src/components/molecules/BoardFilter/input/MultiChecker';
 import ItemCategorySelector from '@src/components/molecules/BoardFilter/input/ItemCategorySelector';
 import moment from 'moment';
-import Space from '@src/components/atoms/space';
-import Colors from '@src/components/atoms/colors';
-
-const { Text } = Typography;
-const {RangePicker} = DatePicker;
-const { Search } = Input;
 
 export default function Products() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const modalOpen = () => {
-    setIsModalOpen(true);
-  };
-  const modalClose = e => {
-    setIsModalOpen(false);
-  };
-  const handleSubmit = e => {
-    setIsLoading(true);
-  };
-
-  const addModal = () => (
-          <Modal
-            visible={isModalOpen}
-            title="Title"
-            onOk={handleSubmit}
-            onCancel={modalClose}
-            footer={[
-              <Button key="back" onClick={modalClose}>
-                Return
-              </Button>,
-              <Button key="submit" type="primary" loading={isLoading} onClick={handleSubmit}>
-                Submit
-              </Button>,
-            ]}
-          >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-          </Modal>
-      );
-
   const columns = [
     {
       title: '카테고리',
@@ -139,7 +97,7 @@ export default function Products() {
       id: 'id',
       itemMinorType: '맨투맨',
       name: '기모 짱짱 맨투맨 (그레이)' + i,
-      subscribeDiscountRate: 5 % i,
+      subscribeDiscountRate: ((5 * i) % 30) + 5,
       subscribeDiscountStartPeriod: `2020-01-1${(i % 9) + 1}`,
       subscribeDiscountEndPeriod: `2020-02-0${(i % 9) + 1}`,
       originalPrice: 39000 + i,
@@ -152,23 +110,20 @@ export default function Products() {
       options: '',
       influencerDiscountData: [
         {
-          key: '스타일리스트1',
-          name: '스타일리스트1',
-          subscribeDiscountRate: 5,
+          name: '깡스타일리스트',
+          subscribeDiscountRate: 10,
           subscribeDiscountStartPeriod: `2020-01-11`,
           subscribeDiscountEndPeriod: `2020-02-04`,
         },
         {
-          key: '스타일리스트2',
-          name: '스타일리스트2',
-          subscribeDiscountRate: 3,
+          name: '진진호',
+          subscribeDiscountRate: 6,
           subscribeDiscountStartPeriod: `2020-01-01`,
           subscribeDiscountEndPeriod: `2020-02-07`,
         },
         {
-          key: '스타일리스트3',
-          name: '스타일리스트3',
-          subscribeDiscountRate: 4,
+          name: '그레잇수민',
+          subscribeDiscountRate: 7,
           subscribeDiscountStartPeriod: `2020-01-18`,
           subscribeDiscountEndPeriod: `2020-02-02`,
         },
@@ -321,19 +276,19 @@ export default function Products() {
 }
 
 const ExpandedRowWrapper = styled.div`
-    display:flex;
-    flex-direction:column;
-    width: 800px;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
 `;
 
 const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const SearchResultWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
