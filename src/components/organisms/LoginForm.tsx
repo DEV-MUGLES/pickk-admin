@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useRouter} from 'next/router';
 import {Layout, Input, Icon, Checkbox, Button, Typography} from 'antd';
 import styled from 'styled-components';
 
@@ -11,6 +12,7 @@ const {Title} = Typography;
 const {Content, Footer} = Layout;
 
 export default function LoginForm() {
+  const router = useRouter();
   const [loginFormState, setLoginFormState] = useState({
     email: '',
     password: '',
@@ -21,6 +23,8 @@ export default function LoginForm() {
       .post('/partner/token/', loginFormState)
       .then(res => {
         setCookie('authtoken', res.data.access);
+        setCookie('refreshtoken', res.data.refresh);
+        router.push('/dashboard');
       });
   };
 
