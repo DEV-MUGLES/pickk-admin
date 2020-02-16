@@ -21,7 +21,7 @@ class PickkApp extends App {
       else redirectTo('/login', {res: ctx.res, status: 301});
     } else {
       var response = await fetch(
-        'https://jsonplaceholder.typicode.com/todos/1',
+        process.env.API_HOST + '/partner/token/verify/',
         {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
@@ -31,7 +31,7 @@ class PickkApp extends App {
         .then(r => r.status)
         .then(status => {
           if (ctx.pathname == '/') {
-            if (status === 'success')
+            if (status === 200)
               redirectTo('/dashboard', {res: ctx.res, status: 301});
             else {
               document.cookie =
@@ -39,7 +39,7 @@ class PickkApp extends App {
               redirectTo('/login', {res: ctx.res, status: 301});
             }
           } else if (ctx.pathname == '/login') {
-            if (status === 'success') {
+            if (status === 200) {
               redirectTo('/dashboard', {res: ctx.res, status: 301});
             } else
               return {
@@ -47,7 +47,7 @@ class PickkApp extends App {
                 ...{query: ctx.query, authtoken: c.authtoken},
               };
           } else {
-            if (status === 'success')
+            if (status === 200)
               return {
                 ...pageProps,
                 ...{query: ctx.query, authtoken: c.authtoken},
