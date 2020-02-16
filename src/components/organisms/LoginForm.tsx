@@ -31,9 +31,6 @@ export default function LoginForm() {
   const handleLoginFormChange = e =>
     setLoginFormState({...loginFormState, [e.target.name]: e.target.value});
   const [isRememberIDPW, setIsRememberIDPW] = useState(true);
-  const handleSubmit = () => {
-    handleLoginFormSubmit();
-  };
 
   const inputStyle = {width: '400px'};
   const inputPrefixStyle = {color: 'rgba(0,0,0,.25)'};
@@ -71,7 +68,7 @@ export default function LoginForm() {
         </Checkbox>
         <Space level={5} />
 
-        <LoginButton type="primary" onClick={handleSubmit}>
+        <LoginButton type="primary" onClick={handleLoginFormSubmit}>
           로그인
         </LoginButton>
         <Space level={4} />
