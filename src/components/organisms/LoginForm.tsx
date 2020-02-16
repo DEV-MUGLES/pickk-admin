@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
+import {useRouter} from 'next/router';
 import {Layout, Input, Icon, Checkbox, Button, Typography} from 'antd';
 import styled from 'styled-components';
 
+import base from '@src/lib/services/Api';
+import {setCookie} from '@src/lib/utils/Cookies';
 import Colors from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
 
@@ -9,16 +12,25 @@ const {Title} = Typography;
 const {Content, Footer} = Layout;
 
 export default function LoginForm() {
-  const [loginFormState, setLoginFormState] = useState({id: '', pw: ''});
+  const router = useRouter();
+  const [loginFormState, setLoginFormState] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleLoginFormSubmit = () => {
+    base()
+      .post('/partner/token/', loginFormState)
+      .then(res => {
+        setCookie('authtoken', res.data.access);
+        setCookie('refreshtoken', res.data.refresh);
+        router.push('/dashboard');
+      });
+  };
+
   const handleLoginFormChange = e =>
     setLoginFormState({...loginFormState, [e.target.name]: e.target.value});
   const [isRememberIDPW, setIsRememberIDPW] = useState(true);
-  const handleLoginFormSubmit = () => {
-    const state = {
-      isRememberIDPW,
-      loginFormState: {id: loginFormState.id, pw: loginFormState.pw},
-    };
-  };
 
   const inputStyle = {width: '400px'};
   const inputPrefixStyle = {color: 'rgba(0,0,0,.25)'};
@@ -29,8 +41,8 @@ export default function LoginForm() {
         <Title level={2}>로그인</Title>
         <Space level={2} />
         <Input
-          name="id"
-          value={loginFormState.id}
+          name="email"
+          value={loginFormState.email}
           placeholder="아이디"
           onChange={handleLoginFormChange}
           size="large"
@@ -39,8 +51,8 @@ export default function LoginForm() {
         />
         <Space level={1} />
         <Input.Password
-          name="pw"
-          value={loginFormState.pw}
+          name="password"
+          value={loginFormState.password}
           placeholder="비밀번호"
           onChange={handleLoginFormChange}
           size="large"
