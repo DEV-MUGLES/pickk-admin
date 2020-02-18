@@ -28,7 +28,6 @@ export const refresh = () => {
     .then(res => {
       setCookie('authtoken', res.data.access);
       setCookie('refreshtoken', res.data.refresh);
-      Router.push('/dashboard');
     });
 };
 const UserService = {
