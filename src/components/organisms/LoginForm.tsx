@@ -1,32 +1,19 @@
 import React, {useState} from 'react';
-import {useRouter} from 'next/router';
 import {Layout, Input, Icon, Checkbox, Button, Typography} from 'antd';
 import styled from 'styled-components';
 
-import base from '@src/lib/services/Api';
-import {setCookie} from '@src/lib/utils/Cookies';
 import Colors from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
+import UserService from '@src/lib/services/User';
 
 const {Title} = Typography;
 const {Content, Footer} = Layout;
 
 export default function LoginForm() {
-  const router = useRouter();
   const [loginFormState, setLoginFormState] = useState({
     email: '',
     password: '',
   });
-
-  const handleLoginFormSubmit = () => {
-    base()
-      .post('/partner/token/', loginFormState)
-      .then(res => {
-        setCookie('authtoken', res.data.access);
-        setCookie('refreshtoken', res.data.refresh);
-        router.push('/dashboard');
-      });
-  };
 
   const handleLoginFormChange = e =>
     setLoginFormState({...loginFormState, [e.target.name]: e.target.value});
@@ -68,7 +55,11 @@ export default function LoginForm() {
         </Checkbox>
         <Space level={5} />
 
-        <LoginButton type="primary" onClick={handleLoginFormSubmit}>
+        <LoginButton
+          type="primary"
+          onClick={() =>
+            UserService.login(loginFormState.email, loginFormState.password)
+          }>
           로그인
         </LoginButton>
         <Space level={4} />

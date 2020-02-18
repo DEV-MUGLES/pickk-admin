@@ -1,29 +1,20 @@
-import {useRouter} from 'next/router';
 import {Layout, Avatar, Badge, Dropdown, Menu, Icon} from 'antd';
 import Button from '@src/components/atoms/button';
 import styled from 'styled-components';
 
-import {removeCookie} from '@src/lib/utils/Cookies';
 import IconButton from '../atoms/button/icon';
 import LogoDefaultIcon from '../atoms/logo/default';
 import Colors from '../atoms/colors';
 import Space from '../atoms/space';
+import UserService from '@src/lib/services/User';
 
 const {Header} = Layout;
 
 export default function GHeader() {
-  const router = useRouter();
-
-  const handleLogout = () => {
-    removeCookie('authtoken');
-    removeCookie('refreshtoken');
-    router.push('/login');
-  };
-
   const dropDownMenu = (
     <Menu style={{width: 90, fontWeight: 300}}>
       <Menu.Item key="0">내 정보</Menu.Item>
-      <Menu.Item key="1" onClick={handleLogout}>
+      <Menu.Item key="1" onClick={UserService.logout}>
         로그아웃
       </Menu.Item>
       <Menu.Divider />
