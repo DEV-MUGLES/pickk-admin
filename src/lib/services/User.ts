@@ -1,7 +1,7 @@
 import Router from 'next/router';
 
 import base from '@src/lib/services/Api';
-import {setCookie} from '@src/lib/utils/Cookies';
+import {setCookie, removeCookie} from '@src/lib/utils/Cookies';
 
 export const login = (email: string, password: string) => {
   base()
@@ -13,8 +13,15 @@ export const login = (email: string, password: string) => {
     });
 };
 
+export const logout = () => {
+  removeCookie('authtoken');
+  removeCookie('refreshtoken');
+  Router.push('/login');
+};
+
 const UserService = {
   login,
+  logout,
 };
 
 export default UserService;
