@@ -1,6 +1,8 @@
 import {useState, useContext, createContext} from 'react';
-import {BoardFilterRowProps} from '@src/components/molecules/BoardFilter/BodyRow';
+
+import {getBoardModelByName} from '@src/models/board';
 import {BoardProps} from '@src/components/templates/Board';
+import {BoardFilterRowProps} from '@src/components/molecules/BoardFilter/BodyRow';
 
 const BoardFilterContext = createContext({
   state: {form: {}},
@@ -16,7 +18,7 @@ const getInitialFormState = (inputs: BoardFilterRowProps[]) => {
   inputs.map(item => {
     Object.keys(item.defaultValue).map(defaultValueKey => {
       initialFormState[`${item.name}_${defaultValueKey}`] =
-      item.defaultValue[defaultValueKey];
+        item.defaultValue[defaultValueKey];
     });
   });
   return initialFormState;
@@ -31,7 +33,10 @@ export const withBoardFilterContext = (
     return <WrappedComponent {...props} />;
   }
 
-  const initialFormState = getInitialFormState(props.filter.inputs);
+  const boardModel = getBoardModelByName(props.name);
+  const {inputs} = boardModel;
+
+  const initialFormState = getInitialFormState(inputs);
   const [form, setForm] = useState(initialFormState);
 
   const initForm = () => {
