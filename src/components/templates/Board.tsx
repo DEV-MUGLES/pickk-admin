@@ -34,8 +34,6 @@ function Board(props: BoardProps) {
       return {
         ...item,
         itemMinorType: '니트',
-        originalPrice: addCommaToNumber(item.originalPrice) + '원',
-        salePrice: addCommaToNumber(item.salePrice) + '원',
         reviewCount: 5,
         totalViewCount: 5,
         salesCount: 5,

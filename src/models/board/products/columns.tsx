@@ -1,3 +1,5 @@
+import {addCommaToNumber} from '@src/lib/NumberParser';
+
 const columns = [
   {
     title: '카테고리',
@@ -11,7 +13,7 @@ const columns = [
     title: '상품명',
     dataIndex: 'name',
     key: 'name',
-    render: text => <a>{text}</a>,
+    render: value => <a>{value}</a>,
     sorter: (a, b) => a.name > b.name,
     width: 200,
     ellipsis: true,
@@ -20,6 +22,7 @@ const columns = [
     title: '정가',
     dataIndex: 'originalPrice',
     key: 'originalPrice',
+    render: value => <div>{addCommaToNumber(value)}원</div>,
     sorter: (a, b) => a.originalPrice > b.originalPrice,
     width: 100,
     ellipsis: true,
@@ -28,6 +31,7 @@ const columns = [
     title: '할인가',
     dataIndex: 'salePrice',
     key: 'salePrice',
+    render: value => <div>{addCommaToNumber(value)}원</div>,
     sorter: (a, b) => a.salePrice > b.salePrice,
     width: 100,
     ellipsis: true,
