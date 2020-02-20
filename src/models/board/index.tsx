@@ -28,15 +28,27 @@ export interface BoardModelType {
   actions: actionsType;
   columns: columnsType;
   inputs: inputsType;
+  name: string;
+  path: string;
 }
 
-export class BoardModel implements BoardModelType {
+export default class BoardModel implements BoardModelType {
+  static getPathByName = (name: string) => {
+    if (name === 'products') {
+      return '/items';
+    }
+  };
+
   actions: actionsType;
   columns: columnsType;
   inputs: inputsType;
+  name: string;
+  path: string;
 
-  useBoardModelData = (path, variables) =>
-    useAxios('GET', `/${path}`, {variables});
+  constructor(name) {
+    this.name = name;
+    this.path = BoardModel.getPathByName(name);
+  }
 }
 
 export const getBoardModelByName = (name: string) => {

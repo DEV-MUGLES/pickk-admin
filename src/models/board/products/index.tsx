@@ -1,20 +1,29 @@
-import {useAxios} from '@src/lib/services/Api';
 import {BoardModelType, actionsType, columnsType, inputsType} from '..';
 import columns from './columns';
 import inputs from './inputs';
 
 export class BoardModel implements BoardModelType {
+  static getPathByName = (name: string) => {
+    if (name === 'products') {
+      return '/items';
+    }
+  };
+
   actions: actionsType;
   columns: columnsType;
   inputs: inputsType;
+  name: string;
+  path: string;
 
-  useBoardModelData = (path, variables) =>
-    useAxios('GET', `/${path}`, {variables});
+  constructor(name) {
+    this.name = name;
+    this.path = BoardModel.getPathByName(name);
+  }
 }
 
 export default class ProductsBoardModel extends BoardModel {
   constructor() {
-    super();
+    super('products');
     this.columns = columns;
     this.inputs = inputs;
   }

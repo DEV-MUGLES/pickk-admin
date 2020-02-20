@@ -2,12 +2,14 @@ import {useState} from 'react';
 import styled from 'styled-components';
 
 import {getBoardModelByName} from '@src/models/board';
+import {BoardModel} from '@src/models/board/products';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {withBoardFilterContext} from '@src/contexts/BoardFilter';
 import Header, {BoardHeaderProps} from '../organisms/Board/Header';
 import Filter, {BoardFilterProps} from '../organisms/Board/Filter';
 import Table, {BoardTableProps} from '../organisms/Board/Table';
 import Space from '../atoms/space';
+import {useAxios} from '@src/lib/services/Api';
 
 export type BoardProps = BoardHeaderProps & {
   name: string;
@@ -17,11 +19,14 @@ export type BoardProps = BoardHeaderProps & {
 
 function Board(props: BoardProps) {
   const boardModel = getBoardModelByName(props.name);
+  const {loading, error, data} = useAxios(
+    'GET',
+    BoardModel.getPathByName(props.name),
+    {
+      brand: 1,
+    },
+  );
   const {columns, actions, inputs} = boardModel;
-
-  const {loading, error, data} = boardModel.useBoardModelData('items', {
-    brand: 1,
-  });
 
   let dataSource = [];
   if (data) {
