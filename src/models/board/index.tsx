@@ -6,7 +6,7 @@ export type actionsType = Array<{
   icon?: string;
   text: string;
   // tslint:disable-next-line: no-any
-  onClick: (numList: number[]) => void;
+  onClick: (rows: number[]) => void;
 }>;
 
 export type columnsType = Array<{
