@@ -12,8 +12,7 @@ export type BoardTableProps = {
   columns: Array<{title: string; key: string}>;
   // tslint:disable-next-line: no-any
   dataSource: any[];
-  // tslint:disable-next-line: no-any
-  expandedRowRender?: (record: any) => JSX.Element;
+  loading: boolean;
 } & Pick<TableActionBarProps, 'actions'> &
   Pick<TableFooterProps, 'footActions'>;
 
@@ -21,9 +20,9 @@ export default function BoardTable({
   title,
   columns,
   dataSource,
-  expandedRowRender,
   actions,
   footActions,
+  loading,
 }: BoardTableProps) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
@@ -38,10 +37,11 @@ export default function BoardTable({
 
   return (
     <Wrapper>
-      <Table
-        {...{columns, dataSource, rowSelection, expandedRowRender}}
+      <DataTable
+        {...{columns, dataSource, rowSelection, loading}}
+        tableLayout="fixed"
         columns={columns}
-        scroll={{ x: true }}
+        scroll={{x: true}}
         size="small"
         title={() => (
           <>
@@ -65,5 +65,9 @@ const Wrapper = styled.div`
   background-color: ${Colors.White};
   display: flex;
   align-itmes: flex-start;
-  text-align: left;s
+  text-align: left;
+`;
+
+const DataTable = styled(Table)`
+  width: 100%;
 `;
