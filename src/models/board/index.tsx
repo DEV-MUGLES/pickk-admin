@@ -14,7 +14,7 @@ export type columnsType = Array<{
   dataIndex: string;
   key: string;
   // tslint:disable-next-line: no-any
-  render?: (text: any) => JSX.Element;
+  render?: (value: string | number) => JSX.Element;
   // tslint:disable-next-line: no-any
   sorter: (a: any, b: any) => any;
   width: number;
