@@ -13,6 +13,13 @@ export const login = (email: string, password: string) => {
       setCookie('authtoken', res.data.access);
       setCookie('refreshtoken', res.data.refresh);
       Router.push('/dashboard');
+    })
+    .catch(err => {
+      if (!err.response || err.response.status !== 401) {
+        alert('문제가 발생했습니다. 다시 시도해주세요.');
+        return;
+      }
+      alert('ID/비밀번호가 잘못 입력되었습니다.');
     });
 };
 
