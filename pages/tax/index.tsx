@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import Board from '@src/components/templates/Board';
+import Board from '@src/components/templates/Board/Item';
 
 export default function Tax() {
   const columns = [

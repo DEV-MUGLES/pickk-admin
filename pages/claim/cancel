@@ -1,8 +1,8 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import Board from '@src/components/templates/Board';
+import Board from '@src/components/templates/Board/Item';
 
-export default function ClaimReturn() {
+export default function ClaimCancel() {
   const columns = [
     {
       title: '상품주문번호',
@@ -31,16 +31,10 @@ export default function ClaimReturn() {
       sorter: (a, b) => a.orderState > b.orderState,
     },
     {
-      title: '반품처리상태',
+      title: '취소처리상태',
       dataIndex: 'state',
       key: 'state',
       sorter: (a, b) => a.state > b.state,
-    },
-    {
-      title: '수거상태',
-      dataIndex: 'isPickedUp',
-      key: 'isPickedUp',
-      sorter: (a, b) => a.isPickedUp > b.isPickedUp,
     },
     {
       title: '결제일',
@@ -49,46 +43,28 @@ export default function ClaimReturn() {
       sorter: (a, b) => a.paidAt > b.paidAt,
     },
     {
-      title: '반품요청일',
+      title: '취소요청일',
       dataIndex: 'requestedAt',
       key: 'requestedAt',
       sorter: (a, b) => a.requestedAt > b.requestedAt,
     },
     {
-      title: '반품사유',
+      title: '취소사유',
       dataIndex: 'refundReason',
       key: 'refundReason',
-      sorter: (a, b) => a.refundReason > b.refundReason,
+      sorter: (a, b) => a.cancelledReason > b.cancelledReason,
     },
     {
-      title: '반품승인일',
+      title: '취소승인일',
       dataIndex: 'approvedAt',
       key: 'approvedAt',
       sorter: (a, b) => a.approvedAt > b.approvedAt,
     },
     {
-      title: '반품완료일',
+      title: '취소완료일',
       dataIndex: 'pickedUpAt',
       key: 'pickedUpAt',
       sorter: (a, b) => a.pickedUpAt > b.pickedUpAt,
-    },
-    {
-      title: '반품배송비',
-      dataIndex: 'pickUpFee',
-      key: 'pickUpFee',
-      sorter: (a, b) => a.pickUpFee > b.pickUpFee,
-    },
-    {
-      title: '환불일',
-      dataIndex: 'completedAt',
-      key: 'completedAt',
-      sorter: (a, b) => a.completedAt > b.completedAt,
-    },
-    {
-      title: '자동환불예정일',
-      dataIndex: 'dueDate',
-      key: 'dueDate',
-      sorter: (a, b) => a.dueDate > b.dueDate,
     },
     {
       title: '상품명',
@@ -145,19 +121,19 @@ export default function ClaimReturn() {
     dataSource.push({
       id: 'id',
       merchantUid: 'merchantUid',
-      createdAt: `2020/01/0${i % 9 + 1}`,
+      createdAt: `2020/01/0${(i % 9) + 1}`,
       orderState: '주문완료',
       state: '배송완료',
       collectState: '수거중',
-      paidAt: `2020/01/0${i % 9 + 1}`,
-      requestedAt: `2020/01/0${i % 9 + 1}`,
+      paidAt: `2020/01/0${(i % 9) + 1}`,
+      requestedAt: `2020/01/0${(i % 9) + 1}`,
       refundReason: '단순변심',
-      approvedAt: `2020/01/0${i % 9 + 1}`,
-      pickedUpAt: `2020/01/0${i % 9 + 1}`,
+      approvedAt: `2020/01/0${(i % 9) + 1}`,
+      pickedUpAt: `2020/01/0${(i % 9) + 1}`,
       refundPendingState: '환불보류',
       pickUpFee: '3000',
-      completedAt: `2020/01/0${i % 9 + 1}`,
-      dueDate: `2020/01/0${i % 9 + 1}`,
+      completedAt: `2020/01/0${(i % 9) + 1}`,
+      dueDate: `2020/01/0${(i % 9) + 1}`,
       name: '기모 짱짱 맨투맨 (그레이)' + i,
       color: '화이트',
       size: 'L',
@@ -193,12 +169,10 @@ export default function ClaimReturn() {
   return (
     <MainLayout>
       <Board
-        title="반품 관리"
-        subTitle="구매자가 요청한 반품 주문건에 대해 완료/거부처리를 진행하실 수 있는 메뉴입니다."
+        title="취소 관리"
+        subTitle="구매자가 요청한 취소 주문건에 대해 완료/거부처리를 진행하실 수 있는 메뉴입니다."
         helpTexts={[
-          `판매자께서 직접 반품접수 하고자 하신다면 배송중 주문관리 메뉴에서 처리해주세요.`,
-          `반품요청 사유가 구매자 귀책인 경우 반품배송비가 자동 청구되고 판매자 귀책인 경우 청구되지 않습니다.`,
-          `수거완료 후 +3영업일 이내 반품처리를 진행하지 않으시면 페널티가 부과되오니 주의해 주세요.`,
+          `발송전 주문건을 취소하고자 하신다면 발주/발송관리 메뉴에서, 구매확정 완료된 주문건을 취소하고자 하신다면 구매확정 내역 메뉴에서 취소처리가 가능합니다.`,
         ]}
         {...{columns, dataSource, actions}}
       />

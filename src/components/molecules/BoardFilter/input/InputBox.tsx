@@ -1,43 +1,25 @@
 import React from 'react';
 import {Input} from 'antd';
 import styled from 'styled-components';
-
-import {useBoardFilterContext} from '@src/contexts/BoardFilter';
+import {useBoardContext} from '@src/contexts/Board';
 
 export type InputBoxProps = {
   name: string;
 };
 
-export default function InputBox({
-  name,
-}: InputBoxProps) {
-  const BoardFilterContext = useBoardFilterContext();
-  const {form} = BoardFilterContext.state;
-  const {setForm} = BoardFilterContext.action;
+export default function InputBox({name}: InputBoxProps) {
+  const {state, action} = useBoardContext();
+  const {filter} = state;
+  const {handleFilterChange} = action;
 
   // tslint:disable-next-line: no-any
-  const handleChange = (data: any) => {
-    const newData = {};
-    Object.keys(data).map(key => {
-      newData[name + '_' + key] = data[key];
-    });
-    setForm({
-      ...form,
-      ...newData,
-    });
+  const handleChange = e => {
+    handleFilterChange({[name]: e.target.value});
   };
 
-  const handleInputQueryChange = e => {
-    handleChange({query: e.target.value});
-  };
-
-  return (
-          <StyledInput
-            onChange={handleInputQueryChange}
-          />
-  );
+  return <StyledInput value={filter[name]} onChange={handleChange} />;
 }
 
 const StyledInput = styled(Input)`
-    width:246px;
+  width: 246px;
 `;

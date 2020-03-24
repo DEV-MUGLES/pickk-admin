@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import Board from '@src/components/templates/Board';
+import Board from '@src/components/templates/Board/Product';
 
 export default function ClaimExchange() {
   const columns = [
@@ -133,18 +133,18 @@ export default function ClaimExchange() {
     dataSource.push({
       id: 'id',
       merchantUid: 'merchantUid',
-      createdAt: `2020/01/0${i % 9 + 1}`,
+      createdAt: `2020/01/0${(i % 9) + 1}`,
       orderState: '주문완료',
       state: '배송완료',
-      paidAt: `2020/01/0${i % 9 + 1}`,
-      requestedAt: `2020/01/0${i % 9 + 1}`,
+      paidAt: `2020/01/0${(i % 9) + 1}`,
+      requestedAt: `2020/01/0${(i % 9) + 1}`,
       exchangeReason: '단순변심',
-      approvedAt: `2020/01/0${i % 9 + 1}`,
-      pickedUpAt: `2020/01/0${i % 9 + 1}`,
+      approvedAt: `2020/01/0${(i % 9) + 1}`,
+      pickedUpAt: `2020/01/0${(i % 9) + 1}`,
       redeliveryState: '',
       redeliveryFee: '3000',
-      completedAt: `2020/01/0${i % 9 + 1}`,
-      dueDate: `2020/01/0${i % 9 + 1}`,
+      completedAt: `2020/01/0${(i % 9) + 1}`,
+      dueDate: `2020/01/0${(i % 9) + 1}`,
       name: '기모 짱짱 맨투맨 (그레이)' + i,
       color: '화이트',
       size: 'L',

@@ -1,11 +1,11 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import Board from '@src/components/templates/Board';
+import ProductBoard from '@src/components/templates/Board/Item';
 
 export default function Products() {
   return (
     <MainLayout>
-      <Board
+      <ProductBoard
         name="products"
         title="상품 조회/수정"
         subTitle="등록한 상품을 조회/수정할 수 있는 메뉴입니다."
@@ -14,7 +14,6 @@ export default function Products() {
           '상단에 판매상태별 상품 건수 확인이 가능하며, 건수를 클릭 시 상품목록에 등록한 상품이 조회됩니다.',
           `특정 상품의 조회를 원하신다면, "검색어" 기능을 사용해서 상품번호/상품명/제조사명 등 원하시는 유형으로 조회하실 수 있습니다.`,
         ]}
-        filter={{title: '상세 조회하기', guideText: ''}}
       />
     </MainLayout>
   );

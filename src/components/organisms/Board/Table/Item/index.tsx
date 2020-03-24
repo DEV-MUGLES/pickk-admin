@@ -1,62 +1,29 @@
 import {useState} from 'react';
+import styled from 'styled-components';
 import {Table, Divider} from 'antd';
 
-import Header from './Header';
-import Footer, {TableFooterProps} from './Footer';
-import ActionBar, {TableActionBarProps} from './ActionBar';
-import styled from 'styled-components';
+import Header from '../Header';
+import Footer, {TableFooterProps} from '../Footer';
+import ActionBar, {TableActionBarProps} from '../ActionBar';
 import Colors from '@src/components/atoms/colors';
-import {useBoardContext} from '@src/contexts/Board';
 
 export type BoardTableProps = {
+  title: string;
+  columns: Array<{title: string; key: string}>;
   // tslint:disable-next-line: no-any
+  dataSource: any[];
+  loading: boolean;
 } & Pick<TableActionBarProps, 'actions'> &
   Pick<TableFooterProps, 'footActions'>;
 
-export default function BoardTable({actions, footActions}: BoardTableProps) {
-  const {state, action} = useBoardContext();
-  const {tableData, loading} = state;
-
-  const title = '상품 조회';
-
-  const columns = [
-    {
-      title: '상품명',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '정가',
-      dataIndex: 'originalPrice',
-      key: 'originalPrice',
-    },
-    {
-      title: '할인가',
-      dataIndex: 'salePrice',
-      key: 'salePrice',
-    },
-    {
-      title: 'SKU일련번호',
-      dataIndex: 'skuPrefix',
-      key: 'skuPrefix',
-    },
-    {
-      title: '구독할인율',
-      dataIndex: 'subsDiscountRate',
-      key: 'subsDiscountRate',
-    },
-    {
-      title: '리뷰 수',
-      dataIndex: 'reviewCount',
-      key: 'reviewCount',
-    },
-    {
-      title: '구매 수',
-      dataIndex: 'purchasedCount',
-      key: 'purchasedCount',
-    },
-  ];
-
+export default function BoardTable({
+  title,
+  columns,
+  dataSource,
+  actions,
+  footActions,
+  loading,
+}: BoardTableProps) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
@@ -71,14 +38,14 @@ export default function BoardTable({actions, footActions}: BoardTableProps) {
   return (
     <Wrapper>
       <DataTable
-        {...{columns, dataSource: tableData, rowSelection, loading}}
+        {...{columns, dataSource, rowSelection, loading}}
         tableLayout="fixed"
         columns={columns}
         scroll={{x: true}}
         size="small"
         title={() => (
           <>
-            <Header {...{title, columns, dataSource: tableData}} />
+            <Header {...{title, columns, dataSource}} />
             {actions && (
               <>
                 <Divider style={{fontSize: 10}} />

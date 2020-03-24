@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import Board from '@src/components/templates/Board';
+import Board from '@src/components/templates/Board/Product';
 
 export default function Delivery() {
   const columns = [
@@ -130,7 +130,7 @@ export default function Delivery() {
       deliveryTraceUrl: 'https://pickk.one/',
       addressStr: '서울특별시 송파구 잠실로 88 레이크팰리스 125-201',
       zipCode: '05607',
-      createdAt: `2020/01/0${i % 9 + 1}`,
+      createdAt: `2020/01/0${(i % 9) + 1}`,
       state: '배송중',
       claimState: '교환',
       name: '기모 짱짱 맨투맨 (그레이)' + i,

@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import Board from '@src/components/templates/Board';
+import Board from '@src/components/templates/Board/Product';
 
 export default function Order() {
   const columns = [
@@ -94,7 +94,7 @@ export default function Order() {
     dataSource.push({
       id: 'id',
       merchantUid: 'merchantUid',
-      createdAt: `2020/01/0${i % 9 + 1}`,
+      createdAt: `2020/01/0${(i % 9) + 1}`,
       state: '배송중',
       claimState: '교환',
       name: '기모 짱짱 맨투맨 (그레이)' + i,

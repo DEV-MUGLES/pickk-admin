@@ -14,7 +14,7 @@ const MENU_ITEMS = [
   {
     iconType: 'skin',
     text: '상품 관리',
-    link: '/products',
+    link: '/items',
   },
   {
     title: '판매 관리',

@@ -3,8 +3,8 @@ import {Select, Typography, Radio, DatePicker} from 'antd';
 import styled from 'styled-components';
 import moment from 'moment';
 
-import {useBoardFilterContext} from '@src/contexts/BoardFilter';
 import Space from '@src/components/atoms/space';
+import {useBoardContext} from '@src/contexts/Board';
 
 const {Option} = Select;
 const {RangePicker} = DatePicker;
@@ -14,13 +14,10 @@ export type DatePickerProps = {
   select?: Array<{name: string; value: string}>;
 };
 
-export default function Datepicker({
-  name,
-  select,
-}: DatePickerProps) {
-  const BoardFilterContext = useBoardFilterContext();
-  const {form} = BoardFilterContext.state;
-  const {setForm} = BoardFilterContext.action;
+export default function Datepicker({name, select}: DatePickerProps) {
+  const {state, action} = useBoardContext();
+  const {filter} = state;
+  const {handleFilterChange} = action;
 
   // tslint:disable-next-line: no-any
   const handleChange = (data: any) => {
@@ -28,10 +25,7 @@ export default function Datepicker({
     Object.keys(data).map(key => {
       newData[name + '_' + key] = data[key];
     });
-    setForm({
-      ...form,
-      ...newData,
-    });
+    handleFilterChange(newData);
   };
 
   const handleChoicedSelectChange = value => {
@@ -48,7 +42,7 @@ export default function Datepicker({
   ];
 
   const handleChoicedQuickButtonChange = e => {
-    const { value } = e.target;
+    const {value} = e.target;
     setChoicedQuickButton(value);
     let startDate;
     const endDate = moment().format('YYYY-MM-DD');
@@ -59,25 +53,25 @@ export default function Datepicker({
         break;
       case 'oneWeek':
         startDate = moment()
-        .subtract(1, 'weeks')
-        .format('YYYY-MM-DD');
+          .subtract(1, 'weeks')
+          .format('YYYY-MM-DD');
         break;
       case 'oneMonth':
         startDate = moment()
-        .subtract(1, 'months')
-        .format('YYYY-MM-DD');
+          .subtract(1, 'months')
+          .format('YYYY-MM-DD');
         break;
       case 'threeMonth':
         startDate = moment()
-        .subtract(3, 'months')
-        .format('YYYY-MM-DD');
+          .subtract(3, 'months')
+          .format('YYYY-MM-DD');
         break;
       case 'sixMonth':
         startDate = moment()
-        .subtract(6, 'months')
-        .format('YYYY-MM-DD');
+          .subtract(6, 'months')
+          .format('YYYY-MM-DD');
         break;
-      }
+    }
 
     handleChange({startDate, endDate});
   };
@@ -93,7 +87,7 @@ export default function Datepicker({
       {select && (
         <>
           <StyledSelect
-            value={form[`${name}_type`]}
+            value={filter[`${name}_type`]}
             onChange={handleChoicedSelectChange}>
             {select.map(item => (
               <Option key={item.name} value={item.value}>
@@ -105,20 +99,20 @@ export default function Datepicker({
         </>
       )}
       <StyledRadioGroup
-            value={choicedQuickButton}
-            onChange={handleChoicedQuickButtonChange}>
-            {quickButtonList.map(item => (
-              <Radio.Button key={item.name} value={item.value}>
-                {item.name}
-              </Radio.Button>
-            ))}
+        value={choicedQuickButton}
+        onChange={handleChoicedQuickButtonChange}>
+        {quickButtonList.map(item => (
+          <Radio.Button key={item.name} value={item.value}>
+            {item.name}
+          </Radio.Button>
+        ))}
       </StyledRadioGroup>
       <Space level={1} />
       <RangePicker
         name="choicedSelectValue"
         value={[
-          moment(form[`${name}_startDate`]),
-          moment(form[`${name}_endDate`]),
+          moment(filter[`${name}_startDate`]),
+          moment(filter[`${name}_endDate`]),
         ]}
         onChange={handleChoicedDateChange}
       />
@@ -127,14 +121,14 @@ export default function Datepicker({
 }
 
 const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledSelect = styled(Select)`
-    width:127px;
+  width: 127px;
 `;
 
 const StyledRadioGroup = styled(Radio.Group)`
-    width:fit-content;
+  width: fit-content;
 `;

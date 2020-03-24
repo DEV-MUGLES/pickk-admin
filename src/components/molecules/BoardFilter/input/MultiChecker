@@ -2,20 +2,17 @@ import React, {useState} from 'react';
 import {Checkbox} from 'antd';
 import styled from 'styled-components';
 
-import {useBoardFilterContext} from '@src/contexts/BoardFilter';
+import {useBoardFilterContext} from '@src/contexts/Board';
 import Space from '@src/components/atoms/space';
 
 const CheckboxGroup = Checkbox.Group;
 
 export type MultiCheckerProps = {
   name: string;
-  options: Array<{name: string, value: string}>;
+  options: Array<{name: string; value: string}>;
 };
 
-export default function MultiChecker({
-  name,
-  options,
-}: MultiCheckerProps) {
+export default function MultiChecker({name, options}: MultiCheckerProps) {
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(true);
 
@@ -38,12 +35,16 @@ export default function MultiChecker({
 
   const handleCheckedNameChange = checkedList => {
     handleChange({choices: checkedList});
-    setIndeterminate(!!checkedList.length && checkedList.length < allOptionNames.length);
+    setIndeterminate(
+      !!checkedList.length && checkedList.length < allOptionNames.length,
+    );
     setCheckAll(checkedList.length === allOptionNames.length);
   };
 
   const handleCheckAllChange = e => {
-    e.target.checked ? handleChange({choices: allOptionNames}) : handleChange({choices: []});
+    e.target.checked
+      ? handleChange({choices: allOptionNames})
+      : handleChange({choices: []});
     setIndeterminate(false);
     setCheckAll(e.target.checked);
   };
@@ -53,17 +54,16 @@ export default function MultiChecker({
       <Checkbox
         indeterminate={indeterminate}
         onChange={handleCheckAllChange}
-        checked={checkAll}
-      >
+        checked={checkAll}>
         전체
       </Checkbox>
-      <Space direction="ROW" size={8}/>
-    <CheckboxGroup
-      options={allOptionNames}
-      value={form[`${name}_choices`]}
-      onChange={handleCheckedNameChange}
-    />
-  </Wrapper>
+      <Space direction="ROW" size={8} />
+      <CheckboxGroup
+        options={allOptionNames}
+        value={form[`${name}_choices`]}
+        onChange={handleCheckedNameChange}
+      />
+    </Wrapper>
   );
 }
 

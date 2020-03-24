@@ -2,27 +2,22 @@ import React from 'react';
 import {Button} from 'antd';
 import styled from 'styled-components';
 
-import {useBoardFilterContext} from '@src/contexts/BoardFilter';
+import {useBoardContext} from '@src/contexts/Board';
 
 import Colors from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
 
-export type BoardFilterButtonAreaProps = {
-  handleSubmit: () => void;
-};
-
-export default function FilterButtonArea({
-  handleSubmit,
-}: BoardFilterButtonAreaProps) {
-  const BoardFilterContext = useBoardFilterContext();
+export default function FilterButtonArea() {
+  const {action} = useBoardContext();
+  const {submitFilter, initFilter} = action;
 
   return (
     <Wrapper>
-      <SubmitButton icon="search" type="primary" onClick={handleSubmit}>
+      <SubmitButton icon="search" type="primary" onClick={submitFilter}>
         조회
       </SubmitButton>
       <Space direction="ROW" />
-      <ResetButton icon="undo" onClick={BoardFilterContext.action.initForm}>
+      <ResetButton icon="undo" onClick={initFilter}>
         초기화
       </ResetButton>
     </Wrapper>

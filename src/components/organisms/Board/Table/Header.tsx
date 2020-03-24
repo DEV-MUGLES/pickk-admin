@@ -14,7 +14,9 @@ export default function TableHeader(props: TableHeaderProps) {
   return (
     <Wrapper>
       <Typography.Text strong style={{marginRight: 'auto'}}>
-        {`${props.title} 목록 (총 ${props.dataSource.length}개)`}
+        {`${props.title} 목록 (총 ${
+          props.dataSource ? props.dataSource.length : '...'
+        }개)`}
       </Typography.Text>
       <TableReloadButton />
       <Space direction="ROW" />
