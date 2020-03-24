@@ -18,15 +18,15 @@ export default function BoardFilter(props: BoardFilterProps) {
     return <></>;
   }
   return (
-    <Wrapper>
+    <FilterWrapper>
       <FilterHeader {...headerProps} />
       <FilterBody {...bodyProps} />
       <FilterButtonArea />
-    </Wrapper>
+    </FilterWrapper>
   );
 }
 
-const Wrapper = styled.div`
+export const FilterWrapper = styled.div`
   background-color: ${Colors.White};
   display: flex;
   flex-direction: column;

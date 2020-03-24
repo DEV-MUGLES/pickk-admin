@@ -1,7 +1,5 @@
 import base from './Api';
-import {Filter} from '@src/types';
-import {Item} from '@src/types/Item';
-import {Product} from '@src/types/Product';
+import {Filter, Item, Product} from '@src/types';
 
 const getItemList = async (
   filter: Filter,

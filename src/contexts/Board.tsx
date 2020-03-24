@@ -2,9 +2,9 @@ import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
 
 import Header, {BoardHeaderProps} from '../components/organisms/Board/Header';
-import {BoardProps} from '@src/board/item';
 import {Filter} from '@src/types/Board';
 import Space from '@src/components/atoms/space';
+import {BoardProps} from '@src/board/props';
 
 const BoardContext = createContext({
   state: {filter: null, newFilter: null, tableData: null, loading: null},
@@ -54,6 +54,7 @@ export const withBoardContext = (
       <BoardWrapper>
         <Space level={2} />
         <Header {...(props as BoardHeaderProps)} />
+        <Space level={2} />
         <WrappedComponent {...(props as BoardProps)} />
         <Space level={2} />
       </BoardWrapper>
