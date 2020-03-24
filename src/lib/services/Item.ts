@@ -1,7 +1,15 @@
 import base from './Api';
 import {Filter} from '@src/types';
+import {Item} from '@src/types/Item';
 
-const getItemList = async (filter: Filter) => {
+const getItemList = async (
+  filter: Filter,
+): Promise<{
+  count: number;
+  next: string;
+  previous: string;
+  results: Item[];
+}> => {
   console.log(filter);
   return base(true)
     .get(`/partner/items/`, {

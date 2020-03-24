@@ -1,5 +1,5 @@
 import {useAxiosQuery} from '../Api';
 import ItemService from '@src/lib/services/Item';
-import Item from 'antd/lib/list/Item';
+import {Item} from '@src/types/Item';
 
 export const useItemTable = useAxiosQuery<Item>(ItemService.getItemList);

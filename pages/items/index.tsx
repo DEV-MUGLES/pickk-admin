@@ -1,11 +1,11 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import ProductBoard from '@src/components/templates/Board/Item';
+import ItemBoard from '@src/board/item';
 
-export default function Products() {
+export default function Items() {
   return (
     <MainLayout>
-      <ProductBoard
+      <ItemBoard
         name="products"
         title="상품 조회/수정"
         subTitle="등록한 상품을 조회/수정할 수 있는 메뉴입니다."
