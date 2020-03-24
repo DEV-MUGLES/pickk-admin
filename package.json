@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "cp ./.env.dev ./.env && node server",
-    "build": "cp ./.env.prod ./.env && next build",
-    "start": "cp ./.env.prod ./.env && node server",
+    "build": "next build",
+    "start": "node server",
     "now-test": "cp ./.env.prod.test ./.env.prod && now",
     "now-prod": "cp ./.env.prod.real ./.env.prod && now --prod"
   },
