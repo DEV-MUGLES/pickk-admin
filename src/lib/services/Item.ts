@@ -11,7 +11,7 @@ const getItemList = async (
 }> =>
   base(true)
     .get(`/partner/items/`, {
-      params: {...filter, isReviewd: true, limit: 150, offset: 0},
+      params: filter,
     })
     .then(res => res.data);
 
