@@ -15,7 +15,7 @@ export type Placement = {
   status: OrderStatus;
   brandName: string;
   itemName: string;
-  optionw: string[];
+  options: string[];
   quantity: number;
   buyerName: string;
   buyerPhone: string;
