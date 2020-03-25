@@ -30,6 +30,7 @@ export default function MainLayout({children}: IProps) {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  min-height: calc(100vh - 64px);
 `;
 
 const StyledContent = styled(Content)`
