@@ -8,7 +8,7 @@ import PlacementPreview from './preview';
 import {BoardProps} from '../props';
 
 import {withBoardContext} from '@src/contexts/Board';
-import {useItemTable} from '@src/hooks/table/Item';
+import {usePlacementTable} from '@src/hooks/table/Placement';
 
 function PlacementBoard({title}: BoardProps) {
   return (
@@ -22,8 +22,4 @@ function PlacementBoard({title}: BoardProps) {
   );
 }
 
-export default withBoardContext(
-  PlacementBoard,
-  {name: 'newOrder'},
-  useItemTable,
-);
+export default withBoardContext(PlacementBoard, {}, usePlacementTable);
