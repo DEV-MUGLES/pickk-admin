@@ -7,18 +7,32 @@ export type InputBoxProps = {
   name: string;
 };
 
-export default function InputBox({name}: InputBoxProps) {
+function InputBox({name}: InputBoxProps) {
   const {state, action} = useBoardContext();
   const {filter} = state;
-  const {handleFilterChange} = action;
+  const {handleFilterChange, applyPreview} = action;
 
   // tslint:disable-next-line: no-any
   const handleChange = e => {
     handleFilterChange({[name]: e.target.value});
   };
 
-  return <StyledInput value={filter[name]} onChange={handleChange} />;
+  const handleEnterDown = e => {
+    if (e.key === 'Enter') {
+      applyPreview({...filter, [name]: e.target.value});
+    }
+  };
+
+  return (
+    <StyledInput
+      value={filter[name]}
+      onChange={handleChange}
+      onKeyDown={handleEnterDown}
+    />
+  );
 }
+
+export default React.memo(InputBox);
 
 const StyledInput = styled(Input)`
   width: 246px;

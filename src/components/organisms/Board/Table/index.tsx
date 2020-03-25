@@ -1,11 +1,12 @@
 import {useState} from 'react';
+import styled from 'styled-components';
 import {Table, Divider} from 'antd';
 
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
 import ActionBar, {TableActionBarProps} from './ActionBar';
-import styled from 'styled-components';
 import Colors from '@src/components/atoms/colors';
+
 import {useBoardContext} from '@src/contexts/Board';
 
 export type BoardTableProps = {
@@ -21,7 +22,7 @@ export default function BoardTable({
   actions,
   footActions,
 }: BoardTableProps) {
-  const {state, action} = useBoardContext();
+  const {state} = useBoardContext();
   const {tableData, loading} = state;
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
