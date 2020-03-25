@@ -1,0 +1,62 @@
+import {addCommaToNumber} from '@src/lib/NumberParser';
+
+export const itemColumns = [
+  {
+    title: '상품명',
+    dataIndex: 'name',
+    key: 'name',
+    sorter: (a, b) => a.name > b.name,
+    width: 200,
+    ellipsis: true,
+  },
+  {
+    title: '정가',
+    dataIndex: 'originalPrice',
+    key: 'originalPrice',
+    render: value => <div>{addCommaToNumber(value)}원</div>,
+    sorter: (a, b) => a.originalPrice > b.originalPrice,
+    width: 70,
+    ellipsis: true,
+  },
+  {
+    title: '할인가',
+    dataIndex: 'salePrice',
+    key: 'salePrice',
+    render: value => <div>{addCommaToNumber(value)}원</div>,
+    sorter: (a, b) => a.salePrice > b.salePrice,
+    width: 70,
+    ellipsis: true,
+  },
+  {
+    title: 'SKU일련번호',
+    dataIndex: 'skuPrefix',
+    key: 'skuPrefix',
+    sorter: (a, b) => a.skuPrefix - b.skuPrefix,
+    width: 70,
+    ellipsis: true,
+  },
+  {
+    title: '구독할인율',
+    dataIndex: 'subsDiscountRate',
+    key: 'subsDiscountRate',
+    sorter: (a, b) => a.subsDiscountRate - b.subsDiscountRate,
+    width: 50,
+    ellipsis: true,
+  },
+  {
+    title: '리뷰 수',
+    dataIndex: 'reviewCount',
+    key: 'reviewCount',
+    sorter: (a, b) => a.reviewCount - b.reviewCount,
+    width: 50,
+    ellipsis: true,
+  },
+  {
+    title: '구매 수',
+    dataIndex: 'purchasedCount',
+    key: 'purchasedCount',
+    sorter: (a, b) => a.purchasedCount - b.purchasedCount,
+    width: 50,
+    ellipsis: true,
+  },
+];

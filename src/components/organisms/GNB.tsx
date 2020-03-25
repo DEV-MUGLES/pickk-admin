@@ -26,7 +26,7 @@ const MENU_ITEMS = [
       },
       {
         text: '발주/발송 관리',
-        link: '/delivery',
+        link: '/placements',
       },
       {
         text: '배송현황 관리',

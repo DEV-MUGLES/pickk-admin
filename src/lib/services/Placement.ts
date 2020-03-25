@@ -1,17 +1,14 @@
 import base from './Api';
-import {Filter} from '@src/types';
+import {PlacementPreview} from '@src/types';
 
-const getItemList = async (filter: Filter) => {
-  console.log(filter);
-  return base(true)
-    .get(`/partner/items/`, {
-      params: {...filter, isReviewd: true, limit: 150, offset: 0},
-    })
-    .then(res => res.data);
+const getPreviewList = (): Promise<PlacementPreview> =>
+  base(true)
+    .get('/partner/placements/preview/')
+    .then(res => res.data)
+    .catch(err => console.log(err.response));
+
+const PlacementService = {
+  getPreviewList,
 };
 
-const ItemService = {
-  getItemList,
-};
-
-export default ItemService;
+export default PlacementService;

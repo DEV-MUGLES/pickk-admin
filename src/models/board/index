@@ -1,6 +1,4 @@
 import {BoardFilterProps} from '@src/components/organisms/Board/Filter';
-import ProductsBoardModel from './products';
-import {useAxios} from '@src/lib/services/Api';
 
 export type actionsType = Array<{
   icon?: string;
@@ -31,30 +29,3 @@ export interface BoardModelType {
   name: string;
   path: string;
 }
-
-export default class BoardModel implements BoardModelType {
-  static getPathByName = (name: string) => {
-    if (name === 'products') {
-      return '/items';
-    }
-  };
-
-  actions: actionsType;
-  columns: columnsType;
-  inputs: inputsType;
-  name: string;
-  path: string;
-
-  constructor(name) {
-    this.name = name;
-    this.path = BoardModel.getPathByName(name);
-  }
-}
-
-export const getBoardModelByName = (name: string) => {
-  let boardModel;
-  if (name === 'products') {
-    boardModel = new ProductsBoardModel();
-  }
-  return boardModel;
-};

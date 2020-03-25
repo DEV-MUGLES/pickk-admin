@@ -10,52 +10,19 @@ import {useBoardContext} from '@src/contexts/Board';
 
 export type BoardTableProps = {
   // tslint:disable-next-line: no-any
+  title: string;
+  columns: any;
 } & Pick<TableActionBarProps, 'actions'> &
   Pick<TableFooterProps, 'footActions'>;
 
-export default function BoardTable({actions, footActions}: BoardTableProps) {
+export default function BoardTable({
+  title,
+  columns,
+  actions,
+  footActions,
+}: BoardTableProps) {
   const {state, action} = useBoardContext();
   const {tableData, loading} = state;
-
-  const title = '상품 조회';
-
-  const columns = [
-    {
-      title: '상품명',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '정가',
-      dataIndex: 'originalPrice',
-      key: 'originalPrice',
-    },
-    {
-      title: '할인가',
-      dataIndex: 'salePrice',
-      key: 'salePrice',
-    },
-    {
-      title: 'SKU일련번호',
-      dataIndex: 'skuPrefix',
-      key: 'skuPrefix',
-    },
-    {
-      title: '구독할인율',
-      dataIndex: 'subsDiscountRate',
-      key: 'subsDiscountRate',
-    },
-    {
-      title: '리뷰 수',
-      dataIndex: 'reviewCount',
-      key: 'reviewCount',
-    },
-    {
-      title: '구매 수',
-      dataIndex: 'purchasedCount',
-      key: 'purchasedCount',
-    },
-  ];
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 

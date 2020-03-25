@@ -2,14 +2,18 @@ import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
 
 import Header, {BoardHeaderProps} from '../components/organisms/Board/Header';
-
-import {BoardProps} from '@src/components/templates/Board/Item';
 import {Filter} from '@src/types/Board';
 import Space from '@src/components/atoms/space';
+import {BoardProps} from '@src/board/props';
 
 const BoardContext = createContext({
   state: {filter: null, newFilter: null, tableData: null, loading: null},
-  action: {handleFilterChange: null, submitFilter: null, initFilter: null},
+  action: {
+    handleFilterChange: null,
+    submitFilter: null,
+    initFilter: null,
+    reload: null,
+  },
 });
 
 export const useBoardContext = () => useContext(BoardContext);
@@ -19,9 +23,10 @@ export const withBoardContext = (
   defaultFilter: Filter,
   useTable,
 ) => (props: BoardProps & BoardHeaderProps) => {
+  const [toRerender, setToRerender] = useState(0);
   const [filter, setFilter] = useState(defaultFilter);
   const [newFilter, setNewFilter] = useState(defaultFilter);
-  const {loading, data} = useTable([newFilter]);
+  const {loading, data} = useTable([newFilter, toRerender]);
 
   const initFilter = () => {
     setFilter({});
@@ -35,9 +40,13 @@ export const withBoardContext = (
     setNewFilter(filter);
   };
 
+  const reload = () => {
+    setToRerender(toRerender + 1);
+  };
+
   const boardStore = {
     state: {filter, newFilter, tableData: data ? data.results : null, loading},
-    action: {handleFilterChange, submitFilter, initFilter},
+    action: {handleFilterChange, submitFilter, initFilter, reload},
   };
 
   return (
@@ -45,6 +54,7 @@ export const withBoardContext = (
       <BoardWrapper>
         <Space level={2} />
         <Header {...(props as BoardHeaderProps)} />
+        <Space level={2} />
         <WrappedComponent {...(props as BoardProps)} />
         <Space level={2} />
       </BoardWrapper>

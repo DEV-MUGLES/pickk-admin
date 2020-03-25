@@ -1,4 +1,5 @@
 export type Item = {
+  id: number;
   name: string;
   originalPrice: number;
   salePrice: number;
@@ -7,4 +8,5 @@ export type Item = {
   reviewCount: number;
   purchasedCount: number;
   options: number[];
+  isStockManaged: boolean;
 };

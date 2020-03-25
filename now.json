@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "public": false,
+  "builds": [{"src": "next.config.js", "use": "@now/next"}],
+  "build": {
+    "env": {
+      "NODE_ENV": "@pickk-admin-node-env",
+      "PORT": "@pickk-admin-port",
+      "API_HOST": "@pickk-admin-api-host"
+    }
+  }
+}
