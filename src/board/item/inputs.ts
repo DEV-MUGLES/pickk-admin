@@ -1,7 +1,5 @@
-import moment from 'moment';
-
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+import CheckBox from '@src/components/molecules/BoardFilter/input/CheckBox';
 
 export const itemInputs = [
   {
@@ -13,22 +11,12 @@ export const itemInputs = [
     Component: InputBox,
   },
   {
-    name: 'period',
-
+    name: 'isReviewed',
     defaultValue: {
-      type: 'all',
-      startDate: moment()
-        .subtract(1, 'months')
-        .format('YYYY-MM-DD'),
-      endDate: moment().format('YYYY-MM-DD'),
+      query: '',
     },
-    labelText: '조회기간',
-    select: [
-      {name: '전체', value: 'all'},
-      {name: '상품등록일', value: 'registerProductDate'},
-      {name: '판매시작일', value: 'startSellingDate'},
-      {name: '판매종료일', value: 'endSellingDate'},
-    ],
-    Component: Datepicker,
+    labelText: '리뷰 필터링',
+    guideText: '리뷰가 있는 상품만 필터링하여 볼 수 있는 기능입니다.',
+    Component: CheckBox,
   },
 ];
