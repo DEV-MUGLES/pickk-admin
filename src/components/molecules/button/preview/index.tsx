@@ -14,29 +14,18 @@ export type PreviewProps = {
   iconType: string;
   label: string;
   count: number;
-  filter: Filter;
-  index: number;
-  selectedPreview: number;
-  setSelectedPreview: React.Dispatch<React.SetStateAction<number>>;
+  filterValue: Filter;
 };
 
-function Preview({
-  iconType,
-  label,
-  count,
-  filter,
-  selectedPreview,
-  setSelectedPreview,
-  index,
-}: PreviewProps) {
-  const {filter: prevFilter} = useBoardContext().state;
+function Preview({iconType, label, count, filterValue}: PreviewProps) {
+  const {filter} = useBoardContext().state;
   const {applyPreview} = useBoardContext().action;
-  const isSelected =
-    selectedPreview === index || prevFilter.name === filter.name;
+  const isSelected = Object.keys(filterValue).every(
+    key => filterValue[key] === filter[key],
+  );
 
   const handleClick = () => {
-    applyPreview(filter);
-    setSelectedPreview(index);
+    applyPreview(filterValue);
   };
 
   return (
