@@ -2,9 +2,11 @@ import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
 
 import Header, {BoardHeaderProps} from '../components/organisms/Board/Header';
-import {Filter} from '@src/types/Board';
+import {BoardTableProps} from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
+
 import {BoardProps} from '@src/board/props';
+import {Filter} from '@src/types/Board';
 
 const BoardContext = createContext({
   state: {filter: null, newFilter: null, tableData: null, loading: null},
@@ -22,7 +24,11 @@ export const withBoardContext = (
   WrappedComponent: React.FunctionComponent<BoardProps>,
   defaultFilter: Filter,
   useTable,
-) => (props: BoardProps & BoardHeaderProps) => {
+) => (
+  props: BoardProps &
+    BoardHeaderProps &
+    Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>,
+) => {
   const [toRerender, setToRerender] = useState(0);
   const [filter, setFilter] = useState(defaultFilter);
   const [newFilter, setNewFilter] = useState(defaultFilter);
@@ -45,7 +51,16 @@ export const withBoardContext = (
   };
 
   const boardStore = {
-    state: {filter, newFilter, tableData: data ? data.results : null, loading},
+    state: {
+      filter,
+      newFilter,
+      tableData: data
+        ? data.results.map(v => {
+            return {...v, key: v.id};
+          })
+        : null,
+      loading,
+    },
     action: {handleFilterChange, submitFilter, initFilter, reload},
   };
 
