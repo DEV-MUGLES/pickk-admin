@@ -22,4 +22,8 @@ function PlacementBoard({title}: BoardProps) {
   );
 }
 
-export default withBoardContext(PlacementBoard, {name: ''}, useItemTable);
+export default withBoardContext(
+  PlacementBoard,
+  {name: 'newOrder'},
+  useItemTable,
+);

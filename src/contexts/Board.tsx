@@ -15,6 +15,7 @@ const BoardContext = createContext({
     submitFilter: null,
     initFilter: null,
     reload: null,
+    applyPreview: null,
   },
 });
 
@@ -35,7 +36,8 @@ export const withBoardContext = (
   const {loading, data} = useTable([newFilter, toRerender]);
 
   const initFilter = () => {
-    setFilter({});
+    setFilter(defaultFilter);
+    setNewFilter(defaultFilter);
   };
 
   const handleFilterChange = (data: Filter) => {
@@ -50,6 +52,11 @@ export const withBoardContext = (
     setToRerender(toRerender + 1);
   };
 
+  const applyPreview = data => {
+    setFilter(data);
+    setNewFilter(data);
+  };
+
   const boardStore = {
     state: {
       filter,
@@ -61,7 +68,13 @@ export const withBoardContext = (
         : null,
       loading,
     },
-    action: {handleFilterChange, submitFilter, initFilter, reload},
+    action: {
+      handleFilterChange,
+      submitFilter,
+      initFilter,
+      reload,
+      applyPreview,
+    },
   };
 
   return (
