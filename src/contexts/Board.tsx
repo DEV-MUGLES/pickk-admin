@@ -35,6 +35,8 @@ export const withBoardContext = (
   const [newFilter, setNewFilter] = useState(defaultFilter);
   const {loading, data} = useTable([newFilter, toRerender]);
 
+  console.log(data);
+
   const initFilter = () => {
     setFilter(defaultFilter);
     setNewFilter(defaultFilter);
@@ -62,7 +64,7 @@ export const withBoardContext = (
       filter,
       newFilter,
       tableData: data
-        ? data.results.map(v => {
+        ? data.map(v => {
             return {...v, key: v.id};
           })
         : null,
