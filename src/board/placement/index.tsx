@@ -22,4 +22,8 @@ function PlacementBoard({title}: BoardProps) {
   );
 }
 
-export default withBoardContext(PlacementBoard, {}, usePlacementTable);
+export default withBoardContext(
+  PlacementBoard,
+  {status: null},
+  usePlacementTable,
+);
