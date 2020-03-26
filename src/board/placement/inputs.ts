@@ -1,16 +1,9 @@
-import moment from 'moment';
-
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 import Selector from '@src/components/molecules/BoardFilter/input/Selector';
-import {OrderStatus} from '@src/types/Order';
 
 export const itemInputs = [
   {
     name: 'name',
-    defaultValue: {
-      query: '',
-    },
     labelText: '상품명',
     Component: InputBox,
   },
