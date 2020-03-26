@@ -1,6 +1,7 @@
 import {Button} from 'antd';
 import ReactExport from 'react-export-excel';
 import {getDateTimeStrings} from '@src/lib/DateParser';
+import {useBoardContext} from '@src/contexts/Board';
 
 const {ExcelFile} = ReactExport;
 const {ExcelSheet, ExcelColumn} = ExcelFile;
@@ -19,7 +20,11 @@ export default function ExcelDownloadButton({
   columns,
   dataSource,
 }: ExcelDownloadButtonProps) {
-  const {year, month, day, hours, minutes, seconds} = getDateTimeStrings();
+  const {parseExcelData} = useBoardContext().action;
+
+  const {year, month, day, hours, minutes, seconds} = getDateTimeStrings(
+    new Date().getTime(),
+  );
   const fileName = `[핔]${title.replace(' ', '')}_${year.substring(
     2,
   )}${month}${day}_${hours}${minutes}${seconds}`;
@@ -39,7 +44,7 @@ export default function ExcelDownloadButton({
           엑셀 다운
         </Button>
       }>
-      <ExcelSheet name={title} data={dataSource}>
+      <ExcelSheet name={title} data={parseExcelData(dataSource)}>
         {getExcelColumns()}
       </ExcelSheet>
     </ExcelFile>
