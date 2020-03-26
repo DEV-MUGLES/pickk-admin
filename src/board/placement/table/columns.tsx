@@ -4,7 +4,7 @@ import {getDateTimeStrings} from '@src/lib/DateParser';
 import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 
-export const itemColumns = [
+export const placementColumns = [
   {
     title: '주분번호',
     dataIndex: 'orderMerchantUid',
@@ -168,11 +168,12 @@ export const itemColumns = [
     title: '배송추적',
     dataIndex: 'trackingViewUrl',
     key: 'trackingViewUrl',
-    render: value => (
-      <a href={value} target="_blank">
-        <Button size="small">배송추적</Button>
-      </a>
-    ),
+    render: value =>
+      value ? (
+        <a href={value} target="_blank">
+          <Button size="small">배송추적</Button>
+        </a>
+      ) : null,
     sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
     width: 100,
     ellipsis: true,

@@ -16,6 +16,7 @@ const BoardContext = createContext({
     initFilter: null,
     reload: null,
     applyPreview: null,
+    parseExcelData: null,
   },
 });
 
@@ -25,6 +26,7 @@ export const withBoardContext = (
   WrappedComponent: React.FunctionComponent<BoardProps>,
   defaultFilter: Filter,
   useTable,
+  parseExcelData,
 ) => (
   props: BoardProps &
     BoardHeaderProps &
@@ -34,8 +36,6 @@ export const withBoardContext = (
   const [filter, setFilter] = useState(defaultFilter);
   const [newFilter, setNewFilter] = useState(defaultFilter);
   const {loading, data} = useTable([newFilter, toRerender]);
-
-  console.log(data);
 
   const initFilter = () => {
     setFilter(defaultFilter);
@@ -76,6 +76,7 @@ export const withBoardContext = (
       initFilter,
       reload,
       applyPreview,
+      parseExcelData,
     },
   };
 
