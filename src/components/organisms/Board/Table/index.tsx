@@ -41,7 +41,6 @@ export default function BoardTable({
       <DataTable
         {...{columns, dataSource: tableData, rowSelection, loading}}
         tableLayout="fixed"
-        columns={columns}
         scroll={{x: true}}
         size="small"
         title={() => (

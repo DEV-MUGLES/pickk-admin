@@ -7,6 +7,7 @@ import Preview from '@src/components/molecules/button/preview';
 import Colors from '@src/components/atoms/colors';
 
 const LABEL_TEXTS = [
+  /*
   {
     label: '발송 전 취소 요청',
     iconType: 'close',
@@ -16,12 +17,12 @@ const LABEL_TEXTS = [
     label: '발송 전 배송지 변경',
     iconType: 'environment',
     filterValue: {name: 'exchange'},
-  },
-  {label: '신규 주문', iconType: 'shopping', filterValue: {name: 'newOrder'}},
+  },*/
+  {label: '신규 주문', iconType: 'shopping', filterValue: {status: 'PAID'}},
   {
     label: '발주 확인 완료',
     iconType: 'check',
-    filterValue: {name: 'confirmed'},
+    filterValue: {status: 'PLACED'},
   },
 ];
 
@@ -31,13 +32,15 @@ export default function PlacementPreview() {
   if (previewData) {
     return (
       <PreviewWrapper>
-        {Object.values(previewData).map((value, index) => (
-          <Preview
-            key={LABEL_TEXTS[index].label}
-            {...LABEL_TEXTS[index]}
-            count={value}
-          />
-        ))}
+        {Object.values(previewData)
+          .filter((_, i) => i > 1)
+          .map((value, index) => (
+            <Preview
+              key={LABEL_TEXTS[index].label}
+              {...LABEL_TEXTS[index]}
+              count={value}
+            />
+          ))}
       </PreviewWrapper>
     );
   }
