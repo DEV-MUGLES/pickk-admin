@@ -2,6 +2,7 @@ import {Upload, Button} from 'antd';
 import * as XLSX from 'xlsx';
 
 import {TableActionType} from '@src/components/organisms/Board/Table/table';
+import {useBoardContext} from '@src/contexts/Board';
 
 export const placementActions: TableActionType[] = [
   {
@@ -17,31 +18,41 @@ export const placementActions: TableActionType[] = [
     },
   },
   {
-    Component: (
-      <Upload
-        showUploadList={false}
-        beforeUpload={file => {
-          const reader = new FileReader();
-          reader.onload = e => {
-            const data = e.target.result;
-            const readedData = XLSX.read(data, {type: 'binary'});
-            const wsname = readedData.SheetNames[0];
-            const ws = readedData.Sheets[wsname];
+    Component: () => {
+      const {tableData} = useBoardContext().state;
 
-            /* Convert array to json*/
-            const dataParse = XLSX.utils.sheet_to_json(ws, {header: 1});
+      return (
+        <Upload
+          showUploadList={false}
+          beforeUpload={file => {
+            const reader = new FileReader();
+            reader.onload = e => {
+              const data = e.target.result;
+              const readedData = XLSX.read(data, {type: 'binary'});
+              const wsname = readedData.SheetNames[0];
+              const ws = readedData.Sheets[wsname];
 
-            const result = dataParse.slice(1).map(record => {
-              return {courier: record[17], trackerCode: record[18]};
-            });
-            console.log(result);
-          };
-          reader.readAsBinaryString(file);
-          return false;
-        }}>
-        <Button>엑셀일괄발송</Button>
-      </Upload>
-    ),
+              /* Convert array to json*/
+              const dataParse = XLSX.utils.sheet_to_json(ws, {header: 1});
+
+              const result = dataParse.slice(1).map(record => {
+                return {
+                  id: tableData.find(
+                    row => row.orderItemMerchantUid === record[1],
+                  ).id,
+                  courier: record[17],
+                  trackerCode: record[18],
+                };
+              });
+              console.log(result);
+            };
+            reader.readAsBinaryString(file);
+            return false;
+          }}>
+          <Button>엑셀일괄발송</Button>
+        </Upload>
+      );
+    },
   },
   /*{
     text: '구독 할인 설정',
