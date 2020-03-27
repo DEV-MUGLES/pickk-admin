@@ -33,7 +33,7 @@ export default function StockModal({id, closeModal}: StockModalProps) {
     ]);
   };
 
-  const handleStockSubmit = index => async () => {
+  const handleStockSubmit = (id, index) => async () => {
     if (stocks[index] === null) {
       message.error('수량을 올바르게 입력해주세요.');
     } else {
@@ -55,7 +55,7 @@ export default function StockModal({id, closeModal}: StockModalProps) {
         footer={null}>
         <OptionsWrapper>
           {products.map((product, index) => {
-            const {sku, options, stock, priceVariant} = product;
+            const {id, sku, options, stock, priceVariant} = product;
             const optionsStr = options.join('/');
             return (
               <>
@@ -81,7 +81,7 @@ export default function StockModal({id, closeModal}: StockModalProps) {
                     type="primary"
                     size="small"
                     shape="round"
-                    onClick={handleStockSubmit(index)}>
+                    onClick={handleStockSubmit(id, index)}>
                     수정
                   </Button>
                 </OptionsRow>
