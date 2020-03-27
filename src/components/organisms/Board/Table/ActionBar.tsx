@@ -24,7 +24,7 @@ export default function TableActionBar({
     <Wrapper>
       {actions.map((item, index) =>
         item.Component ? (
-          item.Component
+          <item.Component />
         ) : (
           <React.Fragment key={'action_' + index}>
             <Button
