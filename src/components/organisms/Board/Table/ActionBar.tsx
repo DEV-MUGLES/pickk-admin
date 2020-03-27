@@ -22,30 +22,26 @@ export default function TableActionBar({
 
   return (
     <Wrapper>
-      {actions.map((item, index) =>
-        item.Component ? (
-          <item.Component />
-        ) : (
-          <React.Fragment key={'action_' + index}>
-            <Button
-              disabled={selectedRowKeys.length === 0}
-              key={index}
-              icon={item.icon}
-              onClick={async () => {
-                try {
-                  await item.onClick(selectedRowKeys.map(v => tableData[v].id));
-                  message.success('완료되었습니다.');
-                  reload();
-                } catch (err) {
-                  message.error('실패! - ' + err.response.data.errorMessage);
-                }
-              }}>
-              {item.text}
-            </Button>
-            <Space direction="ROW" />
-          </React.Fragment>
-        ),
-      )}
+      {actions.map((item, index) => (
+        <React.Fragment key={'action_' + index}>
+          <Button
+            disabled={selectedRowKeys.length === 0}
+            key={index}
+            icon={item.icon}
+            onClick={async () => {
+              try {
+                await item.onClick(selectedRowKeys);
+                message.success('완료되었습니다.');
+                reload();
+              } catch (err) {
+                message.error('실패! - ' + err);
+              }
+            }}>
+            {item.text}
+          </Button>
+          <Space direction="ROW" />
+        </React.Fragment>
+      ))}
     </Wrapper>
   );
 }

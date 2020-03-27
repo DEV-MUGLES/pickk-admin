@@ -7,6 +7,7 @@ export const addLeadingZeros = (num: number, length: number) => {
 };
 
 export const addCommaToNumber = (num: number) => {
+  if (num === 0) return '0';
   const numString = num.toString();
   let result = '';
   let i = 0;

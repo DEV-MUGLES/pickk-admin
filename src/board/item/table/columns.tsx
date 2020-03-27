@@ -6,7 +6,7 @@ export const itemColumns = [
     dataIndex: 'name',
     key: 'name',
     sorter: (a, b) => b.name - a.name,
-    width: 200,
+    width: 150,
     ellipsis: true,
   },
   {
@@ -15,7 +15,7 @@ export const itemColumns = [
     key: 'originalPrice',
     render: value => <div>{addCommaToNumber(value)}원</div>,
     sorter: (a, b) => b.originalPrice - a.originalPrice,
-    width: 70,
+    width: 50,
     ellipsis: true,
   },
   {
@@ -24,7 +24,7 @@ export const itemColumns = [
     key: 'salePrice',
     render: value => <div>{addCommaToNumber(value)}원</div>,
     sorter: (a, b) => b.salePrice - a.salePrice,
-    width: 70,
+    width: 50,
     ellipsis: true,
   },
   {
@@ -32,7 +32,7 @@ export const itemColumns = [
     dataIndex: 'skuPrefix',
     key: 'skuPrefix',
     sorter: (a, b) => b.skuPrefix - a.skuPrefix,
-    width: 70,
+    width: 50,
     ellipsis: true,
   },
   {
