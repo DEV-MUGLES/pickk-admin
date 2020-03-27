@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {Modal, InputNumber, Button, message, Typography} from 'antd';
+import {Modal, InputNumber, Button, message, Typography, Spin} from 'antd';
 
 import {useProductList} from '@src/hooks/table';
 import ProductService from '@src/lib/services/Product';
@@ -46,15 +46,16 @@ export default function StockModal({id, closeModal}: StockModalProps) {
     }
   };
 
-  if (products) {
-    return (
-      <Modal
-        title="재고 관리"
-        visible={id >= 0}
-        onCancel={closeModal}
-        footer={null}>
-        <OptionsWrapper>
-          {products.map((product, index) => {
+  return (
+    <Modal
+      title="재고 관리"
+      visible={id >= 0}
+      onCancel={closeModal}
+      footer={null}>
+      <OptionsWrapper>
+        {loading && <Spin tip="Loading..." />}
+        {products &&
+          products.map((product, index) => {
             const {id, sku, options, stock, priceVariant} = product;
             const optionsStr = options.join('/');
             return (
@@ -88,11 +89,9 @@ export default function StockModal({id, closeModal}: StockModalProps) {
               </React.Fragment>
             );
           })}
-        </OptionsWrapper>
-      </Modal>
-    );
-  }
-  return <></>;
+      </OptionsWrapper>
+    </Modal>
+  );
 }
 
 const OptionsWrapper = styled.div`
