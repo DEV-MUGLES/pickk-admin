@@ -4,11 +4,12 @@ import Table from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
 import {itemInputs} from './inputs';
-import {itemColumns} from './table/columns';
+import {placementColumns, placementActions} from './table';
 import {BoardProps} from '../props';
 
 import {withBoardContext} from '@src/contexts/Board';
 import {usePlacementTable} from '@src/hooks/table/Placement';
+import {parseTable} from './table/data-parser';
 
 function PlacementBoard({title}: BoardProps) {
   return (
@@ -17,7 +18,11 @@ function PlacementBoard({title}: BoardProps) {
       <Space level={2} />
       <Filter title={title} inputs={itemInputs} />
       <Space level={2} />
-      <Table title={title} columns={itemColumns} />
+      <Table
+        title={title}
+        columns={placementColumns}
+        actions={placementActions}
+      />
     </>
   );
 }
@@ -26,4 +31,5 @@ export default withBoardContext(
   PlacementBoard,
   {status: null},
   usePlacementTable,
+  parseTable,
 );

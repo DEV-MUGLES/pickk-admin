@@ -4,9 +4,9 @@ import {getDateTimeStrings} from '@src/lib/DateParser';
 import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 
-export const itemColumns = [
+export const placementColumns = [
   {
-    title: '주분번호',
+    title: '주문번호',
     dataIndex: 'orderMerchantUid',
     key: 'orderMerchantUid',
     sorter: (a, b) => b.orderMerchantUid - a.orderMerchantUid,
@@ -46,7 +46,7 @@ export const itemColumns = [
     dataIndex: 'status',
     key: 'status',
     sorter: (a, b) => b.status - a.status,
-    width: 70,
+    width: 100,
     ellipsis: true,
   },
   {
@@ -54,7 +54,7 @@ export const itemColumns = [
     dataIndex: 'itemName',
     key: 'itemName',
     sorter: (a, b) => b.itemName - a.itemName,
-    width: 130,
+    width: 150,
     ellipsis: true,
   },
   {
@@ -71,7 +71,7 @@ export const itemColumns = [
     dataIndex: 'quantity',
     key: 'quantity',
     sorter: (a, b) => b.quantity - a.quantity,
-    width: 50,
+    width: 75,
     ellipsis: true,
   },
   {
@@ -79,7 +79,7 @@ export const itemColumns = [
     dataIndex: 'buyerName',
     key: 'buyerName',
     sorter: (a, b) => b.buyerName - a.buyerName,
-    width: 70,
+    width: 100,
     ellipsis: true,
   },
   {
@@ -88,7 +88,7 @@ export const itemColumns = [
     key: 'buyerPhone',
     render: value => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
     sorter: (a, b) => b.buyerPhone - a.buyerPhone,
-    width: 130,
+    width: 125,
     ellipsis: true,
   },
   {
@@ -96,7 +96,7 @@ export const itemColumns = [
     dataIndex: 'buyerEmail',
     key: 'buyerEmail',
     sorter: (a, b) => b.buyerEmail - a.buyerEmail,
-    width: 150,
+    width: 175,
     ellipsis: true,
   },
   {
@@ -104,7 +104,7 @@ export const itemColumns = [
     dataIndex: 'addressName',
     key: 'addressName',
     sorter: (a, b) => b.addressName - a.addressName,
-    width: 70,
+    width: 75,
     ellipsis: true,
   },
   {
@@ -113,7 +113,7 @@ export const itemColumns = [
     key: 'addressPhone',
     render: value => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
     sorter: (a, b) => b.addressPhone - a.addressPhone,
-    width: 130,
+    width: 125,
     ellipsis: true,
   },
   {
@@ -121,7 +121,7 @@ export const itemColumns = [
     dataIndex: 'addressPostCode',
     key: 'addressPostCode',
     sorter: (a, b) => b.addressPostCode - a.addressPostCode,
-    width: 70,
+    width: 75,
     ellipsis: true,
   },
   {
@@ -168,11 +168,12 @@ export const itemColumns = [
     title: '배송추적',
     dataIndex: 'trackingViewUrl',
     key: 'trackingViewUrl',
-    render: value => (
-      <a href={value} target="_blank">
-        <Button size="small">배송추적</Button>
-      </a>
-    ),
+    render: value =>
+      value ? (
+        <a href={value} target="_blank">
+          <Button size="small">배송추적</Button>
+        </a>
+      ) : null,
     sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
     width: 100,
     ellipsis: true,

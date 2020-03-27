@@ -61,4 +61,5 @@ export default withBoardContext(
   ItemBoard,
   {name: null, isReviewed: false},
   useItemTable,
+  v => v,
 );
