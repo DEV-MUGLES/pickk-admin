@@ -30,11 +30,11 @@ export default function TableActionBar({
             icon={item.icon}
             onClick={async () => {
               try {
-                await item.onClick(selectedRowKeys.map(v => tableData[v].id));
+                await item.onClick(selectedRowKeys);
                 message.success('완료되었습니다.');
                 reload();
               } catch (err) {
-                message.error('실패! - ' + err.response.data.errorMessage);
+                message.error('실패! - ' + err);
               }
             }}>
             {item.text}
