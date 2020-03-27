@@ -41,7 +41,7 @@ export const placementActions: TableActionType[] = [
                     row => row.orderItemMerchantUid === record[1],
                   ).id,
                   courier: record[17],
-                  trackerCode: record[18],
+                  trackingCode: record[18],
                 };
               });
               console.log(result);
