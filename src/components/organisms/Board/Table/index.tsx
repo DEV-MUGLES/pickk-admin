@@ -40,7 +40,6 @@ export default function BoardTable({
     <Wrapper>
       <DataTable
         {...{columns, dataSource: tableData, rowSelection, loading}}
-        tableLayout="fixed"
         scroll={{x: true}}
         size="small"
         title={() => (
@@ -66,6 +65,7 @@ const Wrapper = styled.div`
   display: flex;
   align-itmes: flex-start;
   text-align: left;
+  width: calc(100vw - 250px);
 `;
 
 const DataTable = styled(Table)`
