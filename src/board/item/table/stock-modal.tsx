@@ -58,7 +58,7 @@ export default function StockModal({id, closeModal}: StockModalProps) {
             const {id, sku, options, stock, priceVariant} = product;
             const optionsStr = options.join('/');
             return (
-              <>
+              <React.Fragment key={id}>
                 <OptionsRow>
                   <Text>{sku}</Text>
                   <Space direction="ROW" level={2} />
@@ -85,7 +85,7 @@ export default function StockModal({id, closeModal}: StockModalProps) {
                     수정
                   </Button>
                 </OptionsRow>
-              </>
+              </React.Fragment>
             );
           })}
         </OptionsWrapper>
