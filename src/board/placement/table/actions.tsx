@@ -9,15 +9,10 @@ const {confirm} = Modal;
 
 export const placementActions: TableActionType[] = [
   {
-    text: '발주확인',
-    onClick: async (ids: number[]) => {
-      console.log(ids);
-    },
-  },
-  {
     text: '발송처리',
     onClick: async (ids: number[]) => {
       console.log(ids);
+      return Promise.resolve(true);
     },
   },
   {
