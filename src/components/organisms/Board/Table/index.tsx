@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import styled from 'styled-components';
-import {Table, Divider} from 'antd';
+import {Table, Divider, Modal, Icon, message} from 'antd';
 
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
@@ -10,6 +10,8 @@ import Colors from '@src/components/atoms/colors';
 import {useBoardContext} from '@src/contexts/Board';
 import ItemService from '@src/lib/services/Item';
 import StockInitModal from '@src/board/item/table/modal/stock/init';
+
+const {confirm} = Modal;
 
 export type BoardTableProps = {
   // tslint:disable-next-line: no-any
@@ -24,8 +26,9 @@ export default function BoardTable({
   actions,
   footActions,
 }: BoardTableProps) {
-  const {state} = useBoardContext();
+  const {state, action} = useBoardContext();
   const {tableData, loading} = state;
+  const {reload} = action;
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,14 +36,32 @@ export default function BoardTable({
     setIsModalOpen(false);
   };
 
+  const handleOffClicked = () =>
+    confirm({
+      title: '재고 관리 기능을 끄시겠습니까?',
+      icon: <Icon type="ExclamationCircleOutlined" />,
+      content: '모든 재고 수량이 0으로 초기화됩니다.',
+      okText: '예',
+      okType: 'danger',
+      cancelText: '아니오',
+      async onOk() {
+        await ItemService.manageStockOff(selectedRowKeys);
+        message.success('완료되었습니다.');
+        reload();
+      },
+    });
+
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
   const newItemActions = [
     {
       text: '재고관리 ON',
-      onClick: async (ids: number[]) => {
-        await ItemService.manageStock(true, ids);
+      onClick: () => {
         setIsModalOpen(true);
       },
+    },
+    {
+      text: '재고관리 OFF',
+      onClick: handleOffClicked,
     },
     ...actions,
   ];
@@ -76,9 +97,7 @@ export default function BoardTable({
         footer={footActions ? () => <Footer {...footerProps} /> : null}
         pagination={{position: 'bottom'}}
       />
-      {isModalOpen && (
-        <StockInitModal {...{modalData, isModalOpen, closeModal}} />
-      )}
+      <StockInitModal {...{modalData, isModalOpen, closeModal}} />
     </Wrapper>
   );
 }
