@@ -15,9 +15,9 @@ export const placementColumns = [
   },
   {
     title: '상품주문번호',
-    dataIndex: 'orderItemMerchantUid',
-    key: 'orderItemMerchantUid',
-    sorter: (a, b) => b.orderItemMerchantUid - a.orderItemMerchantUid,
+    dataIndex: 'merchantUid',
+    key: 'merchantUid',
+    sorter: (a, b) => b.merchantUid - a.merchantUid,
     width: 150,
     ellipsis: true,
   },
