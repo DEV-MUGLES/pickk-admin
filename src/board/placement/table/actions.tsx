@@ -37,9 +37,7 @@ export const placementActions: TableActionType[] = [
 
               const result = dataParse.slice(1).map(record => {
                 return {
-                  id: tableData.find(
-                    row => row.orderItemMerchantUid === record[1],
-                  ).id,
+                  id: tableData.find(row => row.merchantUid === record[1]).id,
                   courier: record[17],
                   trackingCode: record[18],
                 };

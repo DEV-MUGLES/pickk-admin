@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import PlacementPreview from './preview';
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
@@ -29,7 +31,14 @@ function PlacementBoard({title}: BoardProps) {
 
 export default withBoardContext(
   PlacementBoard,
-  {status: null},
+  {
+    status: null,
+    lookupDate: 'paid',
+    startDate: moment()
+      .subtract(1, 'months')
+      .format('YYYY-MM-DD'),
+    endDate: moment().format('YYYY-MM-DD'),
+  },
   usePlacementTable,
   parseTable,
 );

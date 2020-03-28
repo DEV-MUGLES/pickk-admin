@@ -9,7 +9,7 @@ export type PlacementPreview = {
 
 export type Placement = {
   orderMerchantUid: string;
-  orderItemMerchantUid: string;
+  merchantUid: string;
   productSku: string;
   paidAt: Date;
   status: OrderStatus;
