@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import {Modal, InputNumber, Button, message, Typography} from 'antd';
 
 import Colors from '@src/components/atoms/colors';
+import ItemService from '@src/lib/services/Item';
+import {useBoardContext} from '@src/contexts/Board';
 
 const {Text} = Typography;
 
@@ -17,11 +19,13 @@ export default function StockInitModal({
   isModalOpen,
   closeModal,
 }: StockInitModalProps) {
+  const {action} = useBoardContext();
+  const {reload} = action;
   const [stocks, setStocks] = useState([]);
 
   useEffect(() => {
     setStocks(modalData.map(() => 5));
-  }, []);
+  }, [modalData]);
 
   const handleStockInput = index => value => {
     setStocks([
@@ -31,12 +35,23 @@ export default function StockInitModal({
     ]);
   };
 
+  const handleSubmit = async () => {
+    const items = modalData.map((item, index) => ({
+      id: item.id,
+      stock: stocks[index],
+    }));
+    await ItemService.manageStockOn(items);
+    message.success('완료되었습니다.');
+    closeModal();
+    reload();
+  };
+
   return (
     <Modal
       title="재고 관리 ON"
       visible={isModalOpen}
-      footer={null}
-      closeIcon={<></>}>
+      onCancel={closeModal}
+      footer={null}>
       <OptionsWrapper>
         <Row>
           <Name strong>상품명</Name>
@@ -51,7 +66,7 @@ export default function StockInitModal({
                 <Name>{name}</Name>
                 <Sku>{skuPrefix}</Sku>
                 <StockInput
-                  min={0}
+                  min={1}
                   max={10000}
                   size="small"
                   defaultValue={5}
@@ -64,7 +79,9 @@ export default function StockInitModal({
         })}
       </OptionsWrapper>
       <SubmitArea>
-        <Button type="primary">완료</Button>
+        <Button type="primary" onClick={handleSubmit}>
+          완료
+        </Button>
       </SubmitArea>
     </Modal>
   );
