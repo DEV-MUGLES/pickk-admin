@@ -8,6 +8,8 @@ import ActionBar, {TableActionBarProps} from './ActionBar';
 import Colors from '@src/components/atoms/colors';
 
 import {useBoardContext} from '@src/contexts/Board';
+import ItemService from '@src/lib/services/Item';
+import StockInitModal from '@src/board/item/table/modal/stock/init';
 
 export type BoardTableProps = {
   // tslint:disable-next-line: no-any
@@ -26,15 +28,33 @@ export default function BoardTable({
   const {tableData, loading} = state;
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
+  const newItemActions = [
+    {
+      text: '재고관리 ON',
+      onClick: async (ids: number[]) => {
+        await ItemService.manageStock(true, ids);
+        setIsModalOpen(true);
+      },
+    },
+    ...actions,
+  ];
 
   const actionBarProps: TableActionBarProps = {
-    ...{selectedRowKeys, actions},
+    ...{selectedRowKeys, actions: newItemActions},
   };
   const footerProps: TableFooterProps = {
     ...{selectedRowKeys, footActions},
   };
+
+  let modalData = [];
+  if (tableData)
+    modalData = tableData.filter(data => selectedRowKeys.includes(data.id));
 
   return (
     <Wrapper>
@@ -56,6 +76,9 @@ export default function BoardTable({
         footer={footActions ? () => <Footer {...footerProps} /> : null}
         pagination={{position: 'bottom'}}
       />
+      {isModalOpen && (
+        <StockInitModal {...{modalData, isModalOpen, closeModal}} />
+      )}
     </Wrapper>
   );
 }
