@@ -16,8 +16,7 @@ export default function TableActionBar({
   selectedRowKeys,
   actions,
 }: TableActionBarProps) {
-  const {state, action} = useBoardContext();
-  const {tableData} = state;
+  const {action} = useBoardContext();
   const {reload} = action;
 
   return (
@@ -31,8 +30,6 @@ export default function TableActionBar({
             onClick={async () => {
               try {
                 await item.onClick(selectedRowKeys);
-                message.success('완료되었습니다.');
-                reload();
               } catch (err) {
                 message.error('실패! - ' + err);
               }
