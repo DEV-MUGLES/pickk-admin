@@ -56,16 +56,21 @@ export const placementActions: TableActionType[] = [
                   </div>
                 ),
                 onOk() {
-                  const result = dataParse.slice(1).map(record => {
-                    return {
-                      id: tableData.find(row => row.merchantUid === record[1])
-                        .id,
-                      merchantUid: record[1] !== undefined ? record[1] : '',
-                      courier: record[17] !== undefined ? record[17] : '',
-                      trackingCode: record[18] !== undefined ? record[18] : '',
-                    };
-                  });
-                  OrderItemService.ship(result);
+                  try {
+                    const result = dataParse.slice(1).map(record => {
+                      return {
+                        merchantUid: record[1] !== undefined ? record[1] : '',
+                        courier: record[17] !== undefined ? record[17] : '',
+                        trackingCode:
+                          record[18] !== undefined ? record[18] : '',
+                      };
+                    });
+                    OrderItemService.ship(result);
+                  } catch {
+                    message.error(
+                      '비정상적인 엑셀 파일입니다. (주문번호가 변조됐을 수 있습니다.)',
+                    );
+                  }
                 },
                 onCancel() {
                   message.warning('엑셀일괄발송이 취소되었습니다.');
