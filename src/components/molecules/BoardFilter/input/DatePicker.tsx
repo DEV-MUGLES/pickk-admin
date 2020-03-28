@@ -19,17 +19,8 @@ export default function Datepicker({name, select}: DatePickerProps) {
   const {filter} = state;
   const {handleFilterChange} = action;
 
-  // tslint:disable-next-line: no-any
-  const handleChange = (data: any) => {
-    const newData = {};
-    Object.keys(data).map(key => {
-      newData[name + '_' + key] = data[key];
-    });
-    handleFilterChange(newData);
-  };
-
   const handleChoicedSelectChange = value => {
-    handleChange({type: value});
+    handleFilterChange({lookupDate: value});
   };
 
   const [choicedQuickButton, setChoicedQuickButton] = useState('oneMonth');
@@ -73,13 +64,13 @@ export default function Datepicker({name, select}: DatePickerProps) {
         break;
     }
 
-    handleChange({startDate, endDate});
+    handleFilterChange({startDate, endDate});
   };
 
   const handleChoicedDateChange = date => {
     const startDate = moment(date[0]).format('YYYY-MM-DD');
     const endDate = moment(date[1]).format('YYYY-MM-DD');
-    handleChange({startDate, endDate});
+    handleFilterChange({startDate, endDate});
   };
 
   return (
@@ -87,7 +78,7 @@ export default function Datepicker({name, select}: DatePickerProps) {
       {select && (
         <>
           <StyledSelect
-            value={filter[`${name}_type`]}
+            value={filter['lookupDate']}
             onChange={handleChoicedSelectChange}>
             {select.map(item => (
               <Option key={item.name} value={item.value}>
@@ -110,10 +101,7 @@ export default function Datepicker({name, select}: DatePickerProps) {
       <Space level={1} />
       <RangePicker
         name="choicedSelectValue"
-        value={[
-          moment(filter[`${name}_startDate`]),
-          moment(filter[`${name}_endDate`]),
-        ]}
+        value={[moment(filter[`startDate`]), moment(filter[`endDate`])]}
         onChange={handleChoicedDateChange}
       />
     </Wrapper>
