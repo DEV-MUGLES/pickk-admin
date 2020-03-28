@@ -11,7 +11,7 @@ import {BoardProps} from '../props';
 
 import {withBoardContext} from '@src/contexts/Board';
 import {usePlacementTable} from '@src/hooks/table/Placement';
-import {parseTable} from './table/data-parser';
+import {parseTable} from '../order-items/table/data-parser';
 
 function PlacementBoard({title}: BoardProps) {
   return (
