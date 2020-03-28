@@ -1,5 +1,12 @@
 import {OrderStatus, ClaimStatus} from './Order';
 
+export type OrderItemShip = {
+  id: number;
+  merchantUid: string;
+  courier: string;
+  trackingCode: string;
+};
+
 export type OrderItem = {
   id: number;
   orderMerchantUid: string;
