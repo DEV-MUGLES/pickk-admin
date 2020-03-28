@@ -11,7 +11,7 @@ import {useItemTable} from '@src/hooks/table/Item';
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
 import {BoardProps} from '../props';
-import StockModal from './table/stock-modal';
+import StockSetModal from './table/modal/stock/set';
 
 const {Text} = Typography;
 
@@ -51,7 +51,7 @@ function ItemBoard({
       <Filter title={title} inputs={itemInputs} />
       <Space level={2} />
       <Table title={title} columns={newItemColumns} actions={itemActions} />
-      <StockModal id={index} closeModal={closeModal} />
+      <StockSetModal id={index} closeModal={closeModal} />
       <Space level={2} />
     </>
   );
