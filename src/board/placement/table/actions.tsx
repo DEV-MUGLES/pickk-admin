@@ -34,11 +34,14 @@ export const placementActions: TableActionType[] = [
               const dataParse = XLSX.utils.sheet_to_json(ws, {header: 1});
 
               const count = {};
-              dataParse.slice(1).forEach(record => {
-                const status = record[4];
-                count[status] =
-                  count[status] !== undefined ? count[status] + 1 : 1;
-              });
+              dataParse
+                .slice(1)
+                .filter(record => record[4] !== undefined)
+                .forEach(record => {
+                  const status = record[4];
+                  count[status] =
+                    count[status] !== undefined ? count[status] + 1 : 1;
+                });
 
               confirm({
                 title: '입력한 주문 개수를 확인해주세요.',
@@ -51,15 +54,19 @@ export const placementActions: TableActionType[] = [
                   </div>
                 ),
                 onOk() {
-                  const result = dataParse.slice(1).map(record => {
-                    return {
-                      id: tableData.find(row => row.merchantUid === record[1])
-                        .id,
-                      merchantUid: record[1] !== undefined ? record[1] : '',
-                      courier: record[17] !== undefined ? record[17] : '',
-                      trackingCode: record[18] !== undefined ? record[18] : '',
-                    };
-                  });
+                  const result = dataParse
+                    .slice(1)
+                    .filter(record => record[4] !== undefined)
+                    .map(record => {
+                      return {
+                        id: tableData.find(row => row.merchantUid === record[1])
+                          .id,
+                        merchantUid: record[1] !== undefined ? record[1] : '',
+                        courier: record[17] !== undefined ? record[17] : '',
+                        trackingCode:
+                          record[18] !== undefined ? record[18] : '',
+                      };
+                    });
                   OrderItemService.ship(result);
                 },
                 onCancel() {
