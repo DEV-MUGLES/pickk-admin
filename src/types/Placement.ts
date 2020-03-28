@@ -1,4 +1,4 @@
-import {OrderStatus} from './Order';
+import {OrderStatus, ClaimStatus} from './Order';
 
 export type PlacementPreview = {
   cancelledBeforeShippingCount: number;
@@ -12,7 +12,7 @@ export type Placement = {
   merchantUid: string;
   productSku: string;
   paidAt: Date;
-  status: OrderStatus;
+  status: OrderStatus | ClaimStatus;
   brandName: string;
   itemName: string;
   options: string[];
