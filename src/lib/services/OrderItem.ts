@@ -1,7 +1,7 @@
 import {message} from 'antd';
 
 import base from './Api';
-import {OrderItemShip} from '@src/types/OrderItem';
+import {Filter, OrderItemShip, OrderItem} from '@src/types';
 
 const ship = async (ships: OrderItemShip[]) =>
   base(true)
@@ -24,8 +24,16 @@ const ship = async (ships: OrderItemShip[]) =>
       message.error('실패했습니다. - ' + err);
     });
 
+const getList = (filter: Filter): Promise<OrderItem[]> =>
+  base(true)
+    .get('/partner/order_items/', {
+      params: filter,
+    })
+    .then(res => res.data);
+
 const OrderItemService = {
   ship,
+  getList,
 };
 
 export default OrderItemService;

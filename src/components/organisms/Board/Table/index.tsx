@@ -65,7 +65,7 @@ const Wrapper = styled.div`
   display: flex;
   align-itmes: flex-start;
   text-align: left;
-  width: calc(100vw - 250px);
+  width: calc(100vw - 232px);
 `;
 
 const DataTable = styled(Table)`

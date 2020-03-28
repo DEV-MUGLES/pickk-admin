@@ -3,3 +3,5 @@ export * from './Board';
 export * from './Item';
 export * from './Placement';
 export * from './Product';
+export * from './Order';
+export * from './OrderItem';
