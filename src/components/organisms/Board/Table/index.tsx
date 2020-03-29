@@ -8,6 +8,7 @@ import ActionBar, {TableActionBarProps} from './ActionBar';
 import Colors from '@src/components/atoms/colors';
 
 import {useBoardContext} from '@src/contexts/Board';
+import SubsDiscountRateModal from '@src/board/item/table/modal/subs-discount-rate';
 
 export type BoardTableProps = {
   // tslint:disable-next-line: no-any
@@ -26,15 +27,30 @@ export default function BoardTable({
   const {tableData, loading} = state;
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [discountModal, setDiscountModal] = useState(false);
 
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
 
+  const newItemActions = [
+    ...actions,
+    {
+      text: '구독 할인 설정',
+      onClick: (ids: number[]) => {
+        setDiscountModal(true);
+      },
+    },
+  ];
+
   const actionBarProps: TableActionBarProps = {
-    ...{selectedRowKeys, actions},
+    ...{selectedRowKeys, actions: newItemActions},
   };
   const footerProps: TableFooterProps = {
     ...{selectedRowKeys, footActions},
   };
+
+  let modalData = [];
+  if (tableData)
+    modalData = tableData.filter(data => selectedRowKeys.includes(data.id));
 
   return (
     <Wrapper>
@@ -56,6 +72,15 @@ export default function BoardTable({
         footer={footActions ? () => <Footer {...footerProps} /> : null}
         pagination={{position: 'bottom'}}
       />
+      {discountModal && (
+        <SubsDiscountRateModal
+          visible={discountModal}
+          onClose={() => {
+            setDiscountModal(false);
+          }}
+          modalData={modalData}
+        />
+      )}
     </Wrapper>
   );
 }
