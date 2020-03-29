@@ -1,6 +1,7 @@
 import {Button} from 'antd';
 
 import {orderItemColumns} from '@src/board/order-items/table';
+import {stringSorter} from '@src/lib/sorter';
 
 export const placementColumns = [
   ...orderItemColumns.slice(0, orderItemColumns.length - 3),
@@ -8,7 +9,7 @@ export const placementColumns = [
     title: '택배사',
     dataIndex: 'courier',
     key: 'courier',
-    sorter: (a, b) => b.courier - a.courier,
+    sorter: (a, b) => stringSorter(b.courier, a.courier),
     width: 100,
     ellipsis: true,
   },
