@@ -51,6 +51,7 @@ export const withBoardContext = (
   const initFilter = () => {
     setFilter(defaultFilter);
     setNewFilter(defaultFilter);
+    setSelectedRowKeys([]);
   };
 
   const handleFilterChange = (data: Filter) => {
@@ -59,10 +60,12 @@ export const withBoardContext = (
 
   const submitFilter = () => {
     setNewFilter(filter);
+    setSelectedRowKeys([]);
   };
 
   const reload = () => {
     setToRerender(toRerender + 1);
+    setSelectedRowKeys([]);
   };
 
   const applyPreview = data => {
@@ -72,6 +75,7 @@ export const withBoardContext = (
     };
     setFilter(newData);
     setNewFilter(newData);
+    setSelectedRowKeys([]);
   };
 
   const boardStore = {
