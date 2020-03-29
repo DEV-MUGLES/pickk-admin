@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import styled from 'styled-components';
 import {Table, Divider} from 'antd';
 
@@ -22,10 +21,9 @@ export default function BoardTable({
   actions,
   footActions,
 }: BoardTableProps) {
-  const {state} = useBoardContext();
-  const {tableData, loading} = state;
-
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const {state, action} = useBoardContext();
+  const {tableData, loading, selectedRowKeys} = state;
+  const {setSelectedRowKeys} = action;
 
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
 
