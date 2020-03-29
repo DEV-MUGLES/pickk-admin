@@ -31,9 +31,10 @@ export default function TableActionBar({
               icon={item.icon}
               onClick={async () => {
                 try {
-                  await item.onClick(selectedRowKeys);
-                  message.success('완료되었습니다.');
-                  reload();
+                  const result = await item.onClick(selectedRowKeys);
+                  if (result) {
+                    reload();
+                  }
                 } catch (err) {
                   message.error('실패! - ' + err);
                 }

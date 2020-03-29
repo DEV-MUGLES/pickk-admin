@@ -9,12 +9,6 @@ const {confirm} = Modal;
 
 export const placementActions: TableActionType[] = [
   {
-    text: '발주확인',
-    onClick: async (ids: number[]) => {
-      console.log(ids);
-    },
-  },
-  {
     Component: () => (
       <Upload
         showUploadList={false}

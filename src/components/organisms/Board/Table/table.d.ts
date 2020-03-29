@@ -1,6 +1,6 @@
 export type TableActionType = {
   icon?: string;
   text?: string;
-  onClick?: (number) => void;
+  onClick?: (number) => Promise<boolean>;
   Component?: React.FunctionComponent<any>;
 };
