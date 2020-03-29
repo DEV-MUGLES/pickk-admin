@@ -16,7 +16,7 @@ export type StockModalProps = {
 
 export default function StockModal({id, closeModal}: StockModalProps) {
   const [stocks, setStocks] = useState([]);
-  const {data: products, loading, error} = useProductList([id]);
+  const {data: products, loading} = useProductList([id]);
 
   useEffect(() => {
     if (products) {
@@ -33,16 +33,27 @@ export default function StockModal({id, closeModal}: StockModalProps) {
     ]);
   };
 
-  const handleStockSubmit = (id, index) => async () => {
-    if (stocks[index] === null) {
+  const handleStockSubmit = async () => {
+    const ids = products.map(product => product.id);
+    if (!stocks.every(stock => stock !== null)) {
       message.error('수량을 올바르게 입력해주세요.');
-    } else {
-      try {
-        await ProductService.setStock(id, stocks[index]);
-        message.success(`수량이 ${stocks[index]}(으)로 변경되었습니다.`);
-      } catch (err) {
-        message.error('err');
-      }
+      return;
+    }
+
+    const stockData = ids.map((id, index) => {
+      return {
+        id,
+        stock: stocks[index],
+      };
+    });
+
+    try {
+      await ProductService.setStock(stockData);
+      message.success(`수량이 일괄 적용되었습니다.`);
+    } catch (err) {
+      message.error('err');
+    } finally {
+      closeModal();
     }
   };
 
@@ -78,18 +89,20 @@ export default function StockModal({id, closeModal}: StockModalProps) {
                   />
                   <Text>개</Text>
                   <Space direction="ROW" level={2} />
-                  <Button
-                    type="primary"
-                    size="small"
-                    shape="round"
-                    onClick={handleStockSubmit(id, index)}>
-                    수정
-                  </Button>
                 </OptionsRow>
               </React.Fragment>
             );
           })}
       </OptionsWrapper>
+      <Space level={1} />
+      <Button
+        style={{width: '100%'}}
+        type="primary"
+        size="default"
+        shape="round"
+        onClick={handleStockSubmit}>
+        일괄 적용
+      </Button>
     </Modal>
   );
 }

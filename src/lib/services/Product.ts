@@ -1,11 +1,8 @@
 import base from './Api';
 
-const setStock = async (id: number, stock: number) =>
+const setStock = async (stockData: {id: number; stock: number}[]) =>
   base(true)
-    .patch(`/partner/products/`, {
-      id,
-      stock,
-    })
+    .patch(`/partner/products/`, stockData)
     .then(res => res.data);
 
 const ProductService = {
