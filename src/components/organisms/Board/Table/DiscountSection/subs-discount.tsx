@@ -29,7 +29,7 @@ const discountReducer = (state, action) => {
   }
 };
 
-export default function SubsDiscount({id, name, skuPrefix}) {
+export default function SubsDiscount({id, name, skuPrefix, subsDiscountRate}) {
   const [discountInfo, dispatchDiscountInfo] = useReducer(
     discountReducer,
     initialDiscountState,
@@ -79,6 +79,7 @@ export default function SubsDiscount({id, name, skuPrefix}) {
           <Name>{name}</Name>
           <InnerRow>
             <Sku>{skuPrefix}</Sku>
+            <Sku>{subsDiscountRate}</Sku>
             <Data>
               <InputNumber
                 min={0}
@@ -115,6 +116,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   width: 100%;
   margin-bottom: 8px;
 `;
@@ -124,6 +126,7 @@ const InnerRow = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Name = styled(Text).attrs({

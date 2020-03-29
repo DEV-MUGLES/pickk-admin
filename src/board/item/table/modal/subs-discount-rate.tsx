@@ -4,34 +4,62 @@ import {Modal, Typography} from 'antd';
 
 import SubsDiscount from '@src/components/organisms/Board/Table/DiscountSection/subs-discount';
 
+import {Item} from '@src/types';
+
+import {useBoardContext} from '@src/contexts/Board';
+
 const {Text} = Typography;
 
-export default function SubsDiscountRateModal({visible, onClose, modalData}) {
-  return (
-    <Modal
-      title="구독할인율 설정"
-      visible={visible}
-      onCancel={onClose}
-      footer={null}
-      width="80%">
-      <OptionsWrapper>
-        <Row>
-          <Name strong>상품명</Name>
-          <InnerRow>
-            <Label strong>SKU일련번호</Label>
-            <Label strong>구독할인율</Label>
-            <TimeLabel strong>할인시작시점</TimeLabel>
-            <TimeLabel strong>할인종료시점</TimeLabel>
-            <Label strong>확인</Label>
-          </InnerRow>
-        </Row>
-        {modalData.map(item => {
-          const {id, skuPrefix, name} = item;
-          return <SubsDiscount key={id} {...{id, name, skuPrefix}} />;
-        })}
-      </OptionsWrapper>
-    </Modal>
-  );
+export type SubsDiscountRateModalProps = {
+  visible: boolean;
+  onClose: any;
+  modalData: Item[];
+};
+
+export default function SubsDiscountRateModal({
+  visible,
+  onClose,
+  modalData,
+}: SubsDiscountRateModalProps) {
+  const {reload} = useBoardContext().action;
+
+  if (modalData) {
+    return (
+      <Modal
+        title="구독할인율 설정"
+        visible={visible}
+        onCancel={() => {
+          onClose();
+          reload();
+        }}
+        footer={null}
+        width="80%">
+        <OptionsWrapper>
+          <Row>
+            <Name strong>상품명</Name>
+            <InnerRow>
+              <Label strong>SKU일련번호</Label>
+              <Label strong>구독할인율 (현재)</Label>
+              <Label strong>구독할인율 (설정)</Label>
+              <TimeLabel strong>할인시작시점</TimeLabel>
+              <TimeLabel strong>할인종료시점</TimeLabel>
+              <Label strong>확인</Label>
+            </InnerRow>
+          </Row>
+          {modalData.map(item => {
+            const {id, skuPrefix, name, subsDiscountRate} = item;
+            return (
+              <SubsDiscount
+                key={id}
+                {...{id, name, skuPrefix, subsDiscountRate}}
+              />
+            );
+          })}
+        </OptionsWrapper>
+      </Modal>
+    );
+  }
+  return <></>;
 }
 
 const OptionsWrapper = styled.div`
