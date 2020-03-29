@@ -1,8 +1,10 @@
+import {useState} from 'react';
 import moment from 'moment';
 
 import PlacementPreview from './preview';
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
+import ShipModal from './table/modal/ship';
 import Space from '@src/components/atoms/space';
 
 import {itemInputs} from './inputs';
@@ -17,7 +19,15 @@ import {OrderStatus} from '@src/types';
 import {message} from 'antd';
 
 function PlacementBoard({title}: BoardProps) {
-  const {tableData} = useBoardContext().state;
+  const {tableData, selectedRowKeys} = useBoardContext().state;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const modalData = tableData
+    ? tableData.filter(data => selectedRowKeys.includes(data.id))
+    : null;
 
   const newPlacementActions = [
     {
@@ -39,7 +49,13 @@ function PlacementBoard({title}: BoardProps) {
         return Promise.resolve(true);
       },
     },
-    ,
+    {
+      text: '발송처리',
+      onClick: async (ids: number[]) => {
+        setIsModalOpen(true);
+        return Promise.resolve(false);
+      },
+    },
     ...placementActions,
   ];
 
@@ -54,6 +70,7 @@ function PlacementBoard({title}: BoardProps) {
         columns={placementColumns}
         actions={newPlacementActions}
       />
+      <ShipModal {...{modalData, isModalOpen, closeModal}} />
     </>
   );
 }

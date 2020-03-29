@@ -15,6 +15,7 @@ const BoardContext = createContext({
     tableData: null,
     loading: null,
     defaultFilter: null,
+    selectedRowKeys: [],
   },
   action: {
     handleFilterChange: null,
@@ -23,6 +24,7 @@ const BoardContext = createContext({
     reload: null,
     applyPreview: null,
     parseExcelData: null,
+    setSelectedRowKeys: null,
   },
 });
 
@@ -42,12 +44,14 @@ export const withBoardContext = (
   const [filter, setFilter] = useState(defaultFilter);
   const [newFilter, setNewFilter] = useState(defaultFilter);
   const {loading, data} = useTable([newFilter, toRerender]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   console.log(newFilter);
 
   const initFilter = () => {
     setFilter(defaultFilter);
     setNewFilter(defaultFilter);
+    setSelectedRowKeys([]);
   };
 
   const handleFilterChange = (data: Filter) => {
@@ -56,10 +60,12 @@ export const withBoardContext = (
 
   const submitFilter = () => {
     setNewFilter(filter);
+    setSelectedRowKeys([]);
   };
 
   const reload = () => {
     setToRerender(toRerender + 1);
+    setSelectedRowKeys([]);
   };
 
   const applyPreview = data => {
@@ -69,6 +75,7 @@ export const withBoardContext = (
     };
     setFilter(newData);
     setNewFilter(newData);
+    setSelectedRowKeys([]);
   };
 
   const boardStore = {
@@ -82,6 +89,7 @@ export const withBoardContext = (
         : null,
       loading,
       defaultFilter,
+      selectedRowKeys,
     },
     action: {
       handleFilterChange,
@@ -90,6 +98,7 @@ export const withBoardContext = (
       reload,
       applyPreview,
       parseExcelData,
+      setSelectedRowKeys,
     },
   };
 
