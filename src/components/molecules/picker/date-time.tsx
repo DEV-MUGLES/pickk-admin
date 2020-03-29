@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import moment, {Moment} from 'moment';
 import {DatePicker} from 'antd';
 
 import {ItemSubsDiscountRateInfo} from '@src/types';
@@ -15,67 +15,55 @@ export default function DateTimePicker({
   dateTime,
   onChange,
 }: DateTimePickerProps) {
-  const defaultValue = type === 'start' ? dateTime.startAt : dateTime.endAt;
+  const defaultValue =
+    type === 'start'
+      ? dateTime.startAt
+        ? moment(dateTime.startAt)
+        : null
+      : dateTime.endAt
+      ? moment(dateTime.endAt)
+      : null;
 
   const handleDate = (_, dateString) => {
     onChange(type, dateString);
   };
 
-  const handleDisableDate = currentDate => {
-    if (type === 'end') {
-      const startAt = new Date(dateTime.startAt);
-      return (
-        new Date(startAt.setDate(startAt.getDate())) > new Date(currentDate)
-      );
-    } else {
-      const now = new Date(Date.now());
-      return new Date(now.setDate(now.getDate() - 1)) > new Date(currentDate);
-    }
-  };
+  const disabledDate = (current: Moment) =>
+    current.isBefore(
+      type === 'end' ? dateTime.startAt : moment().subtract(1, 'days'),
+    );
 
-  const handleDisableTime = date => {
-    const hours = [];
-    const minutes = [];
-    const seconds = [];
+  const disabledTime = (date: Moment) => {
+    const startAt = moment(dateTime.startAt);
 
-    if (type === 'end') {
-      const startAt = new Date(dateTime.startAt);
-      const startDate = new Date(dateTime.startAt).setHours(0, 0, 0, 0);
-      const curDate = new Date(date).setHours(0, 0, 0, 0);
-
-      if (startDate === curDate) {
-        for (let i = startAt.getHours(); i >= 0; i--) {
-          hours.push(i);
-        }
-        for (let i = startAt.getMinutes(); i >= 0; i--) {
-          minutes.push(i);
-        }
-        for (let i = startAt.getSeconds(); i >= 0; i--) {
-          seconds.push(i);
-        }
-      }
+    if (type !== 'end' || !startAt.isSame(date, 'day')) {
+      return {
+        disabledHours: () => [],
+        disabledMinutes: () => [],
+        disabledSeconds: () => [],
+      };
     }
 
     return {
-      disabledHours: () => {
-        return hours;
-      },
-      disabledMinutes: () => {
-        return minutes;
-      },
-      disabledSeconds: () => {
-        return seconds;
-      },
+      disabledHours: () => [...Array(startAt.hours()).keys()],
+      disabledMinutes: () =>
+        startAt.isSame(date, 'hours')
+          ? [...Array(startAt.minutes()).keys()]
+          : [],
+      disabledSeconds: () =>
+        startAt.isSame(date, 'minutes')
+          ? [...Array(startAt.seconds()).keys()]
+          : [],
     };
   };
 
   return (
     <DatePicker
       showTime
-      defaultValue={moment(defaultValue, 'YYYY-MM-DD HH:mm:ss')}
+      defaultValue={defaultValue}
       onChange={handleDate}
-      disabledDate={handleDisableDate}
-      disabledTime={handleDisableTime}
+      disabledDate={disabledDate}
+      disabledTime={disabledTime}
     />
   );
 }
