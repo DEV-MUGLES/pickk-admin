@@ -5,7 +5,7 @@ import Colors from '@src/components/atoms/colors';
 export type BoardHeaderProps = {
   title: string;
   subTitle?: string;
-  helpTexts: string[];
+  helpTexts?: string[];
 };
 
 export default function BoardHeader({
@@ -34,7 +34,7 @@ export default function BoardHeader({
     <StyledPageHeader
       title={title}
       subTitle={subTitle}
-      extra={getHelpPopoverButton()}
+      extra={helpTexts ? getHelpPopoverButton() : null}
     />
   );
 }
