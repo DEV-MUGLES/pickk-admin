@@ -1,9 +1,10 @@
 import moment from 'moment';
+
+import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import Selector from '@src/components/molecules/BoardFilter/input/Selector';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
-import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 
-export const itemInputs = [
+export const orderItemInputs = [
   {
     name: 'period',
     defaultValue: {
@@ -26,10 +27,17 @@ export const itemInputs = [
     labelText: '주문상태',
     select: [
       {name: '전체', value: null},
-      {name: '발주대기', value: 'PAID'},
-      {name: '발송대기', value: 'PLACED'},
-      {name: '배송중', value: 'SHIPPING'},
-      {name: '배송완료', value: 'DELIVERED'},
+      {name: '결제 완료', value: 'PAID'},
+      {name: '발송 준비', value: 'PLACED'},
+      {name: '발송 완료', value: 'SHIPPING'},
+      {name: '배송 완료', value: 'DELIVERED'},
+      {name: '취소 요청', value: 'CANCEL_REQUESTED'},
+      {name: '취소 완료', value: 'CANCELLED'},
+      {name: '교환 요청', value: 'EXCHANGE_REQUESTED'},
+      {name: '교환 완료', value: 'EXCHANGED'},
+      {name: '반품 요청', value: 'REFUND_REQUESTED'},
+      {name: '반품 완료', value: 'REFUNDED'},
+      {name: '구매 확정', value: 'CONFIRMED'},
     ],
     Component: Selector,
   },

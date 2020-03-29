@@ -18,14 +18,17 @@ export type PreviewProps = {
 };
 
 function Preview({iconType, label, count, filterValue}: PreviewProps) {
-  const {filter} = useBoardContext().state;
-  const {applyPreview} = useBoardContext().action;
-  const isSelected = Object.keys(filterValue).every(
-    key => filterValue[key] === filter[key],
+  const {state, action} = useBoardContext();
+  const {filter, defaultFilter} = state;
+  const {applyPreview} = action;
+
+  const newFilterValue = {...defaultFilter, ...filterValue};
+  const isSelected = Object.keys(newFilterValue).every(
+    key => newFilterValue[key] === filter[key],
   );
 
   const handleClick = () => {
-    applyPreview(filterValue);
+    applyPreview(newFilterValue);
   };
 
   return (

@@ -22,7 +22,7 @@ const MENU_ITEMS = [
     items: [
       {
         text: '주문 조회',
-        link: '/order',
+        link: '/order-items',
       },
       {
         text: '발주/발송 관리',

@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import styled from 'styled-components';
 import {Table, Divider, Modal, Icon, message} from 'antd';
 
@@ -10,6 +9,7 @@ import Colors from '@src/components/atoms/colors';
 import {useBoardContext} from '@src/contexts/Board';
 import ItemService from '@src/lib/services/Item';
 import StockInitModal from '@src/board/item/table/modal/stock/init';
+import {useState} from 'react';
 
 const {confirm} = Modal;
 
@@ -27,16 +27,15 @@ export default function BoardTable({
   footActions,
 }: BoardTableProps) {
   const {state, action} = useBoardContext();
-  const {tableData, loading} = state;
-  const {reload} = action;
+  const {tableData, loading, selectedRowKeys} = state;
+  const {reload, setSelectedRowKeys} = action;
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  const handleOffClicked = () =>
+  const handleOffClicked = async () => {
     confirm({
       title: '재고 관리 기능을 끄시겠습니까?',
       icon: <Icon type="ExclamationCircleOutlined" />,
@@ -49,14 +48,20 @@ export default function BoardTable({
         message.success('완료되었습니다.');
         reload();
       },
+      onCancel() {
+        message.warning('취소되었습니다.');
+      },
     });
+    return Promise.resolve(false);
+  };
 
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
   const newItemActions = [
     {
       text: '재고관리 ON',
-      onClick: () => {
+      onClick: async () => {
         setIsModalOpen(true);
+        return Promise.resolve(false);
       },
     },
     {
@@ -107,7 +112,7 @@ const Wrapper = styled.div`
   display: flex;
   align-itmes: flex-start;
   text-align: left;
-  width: calc(100vw - 250px);
+  width: calc(100vw - 232px);
 `;
 
 const DataTable = styled(Table)`
