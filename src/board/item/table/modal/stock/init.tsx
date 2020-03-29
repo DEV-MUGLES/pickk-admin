@@ -10,20 +10,21 @@ const {Text} = Typography;
 
 export type StockInitModalProps = {
   modalData: any;
-  isModalOpen: boolean;
-  closeModal: () => void;
+  isInitModalOpen: boolean;
+  closeInitModal: () => void;
 };
 
 export default function StockInitModal({
   modalData,
-  isModalOpen,
-  closeModal,
+  isInitModalOpen,
+  closeInitModal,
 }: StockInitModalProps) {
   const {action} = useBoardContext();
   const {reload} = action;
   const [stocks, setStocks] = useState([]);
 
   useEffect(() => {
+    if (!modalData) return;
     setStocks(modalData.map(() => 5));
   }, [modalData]);
 
@@ -42,49 +43,52 @@ export default function StockInitModal({
     }));
     await ItemService.manageStockOn(items);
     message.success('완료되었습니다.');
-    closeModal();
+    closeInitModal();
     reload();
   };
 
-  return (
-    <Modal
-      title="재고 관리 ON"
-      visible={isModalOpen}
-      onCancel={closeModal}
-      footer={null}>
-      <OptionsWrapper>
-        <Row>
-          <Name strong>상품명</Name>
-          <Sku strong>SKU일련번호</Sku>
-          <Stock strong>재고</Stock>
-        </Row>
-        {modalData.map((item, index) => {
-          const {id, skuPrefix, name} = item;
-          return (
-            <React.Fragment key={id}>
-              <Row>
-                <Name>{name}</Name>
-                <Sku>{skuPrefix}</Sku>
-                <StockInput
-                  min={1}
-                  max={10000}
-                  size="small"
-                  defaultValue={5}
-                  onChange={handleStockInput(index)}
-                />
-                <Text>개</Text>
-              </Row>
-            </React.Fragment>
-          );
-        })}
-      </OptionsWrapper>
-      <SubmitArea>
-        <Button type="primary" onClick={handleSubmit}>
-          완료
-        </Button>
-      </SubmitArea>
-    </Modal>
-  );
+  if (modalData) {
+    return (
+      <Modal
+        title="재고 관리 ON"
+        visible={isInitModalOpen}
+        onCancel={closeInitModal}
+        footer={null}>
+        <OptionsWrapper>
+          <Row>
+            <Name strong>상품명</Name>
+            <Sku strong>SKU일련번호</Sku>
+            <Stock strong>재고</Stock>
+          </Row>
+          {modalData.map((item, index) => {
+            const {id, skuPrefix, name} = item;
+            return (
+              <React.Fragment key={id}>
+                <Row>
+                  <Name>{name}</Name>
+                  <Sku>{skuPrefix}</Sku>
+                  <StockInput
+                    min={1}
+                    max={10000}
+                    size="small"
+                    defaultValue={5}
+                    onChange={handleStockInput(index)}
+                  />
+                  <Text>개</Text>
+                </Row>
+              </React.Fragment>
+            );
+          })}
+        </OptionsWrapper>
+        <SubmitArea>
+          <Button type="primary" onClick={handleSubmit}>
+            완료
+          </Button>
+        </SubmitArea>
+      </Modal>
+    );
+  }
+  return <></>;
 }
 
 const OptionsWrapper = styled.div`
