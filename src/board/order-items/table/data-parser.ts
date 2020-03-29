@@ -1,6 +1,7 @@
-import {Placement} from '@src/types';
 import {getDateTimeStrings} from '@src/lib/DateParser';
 import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
+
+import {Placement} from '@src/types';
 
 export const parseTable = (table: Placement[]) =>
   table ? table.map(record => parseRecord(record)) : null;
@@ -21,7 +22,7 @@ export const parseRecord = (record: Placement) => {
       : null,
   };
   Object.keys(result).forEach(key => {
-    if (!result[key]) {
+    if (!result[key] || result[key] === undefined) {
       result[key] = '';
     }
   });

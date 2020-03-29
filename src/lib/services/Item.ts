@@ -13,9 +13,14 @@ const getItem = (id: number): Promise<Item> =>
     .get(`/partner/items/${id}/`)
     .then(res => res.data);
 
-const manageStock = (on: boolean, ids: number[]) =>
+const manageStockOn = (item: Array<{id: number; stock: number}>) =>
   base(true)
-    .post('/partner/items/manage_stock/', {on, ids})
+    .patch(`/partner/items/manage_stock/on/`, item)
+    .then(res => res.data);
+
+const manageStockOff = (ids: number[]) =>
+  base(true)
+    .post('/partner/items/manage_stock/off/', {ids})
     .then(res => res.data);
 
 const getProductList = (id: number): Promise<Product[]> =>
@@ -50,7 +55,8 @@ const updateItemDiscountRate = (
 const ItemService = {
   getList,
   getItem,
-  manageStock,
+  manageStockOn,
+  manageStockOff,
   getProductList,
   getItemDiscountRateList,
   updateItemDiscountRate,

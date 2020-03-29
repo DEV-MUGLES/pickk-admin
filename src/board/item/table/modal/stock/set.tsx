@@ -9,12 +9,12 @@ import Space from '@src/components/atoms/space';
 
 const {Text} = Typography;
 
-export type StockModalProps = {
+export type StockSetModalProps = {
   id: number;
   closeModal: () => void;
 };
 
-export default function StockModal({id, closeModal}: StockModalProps) {
+export default function StockSetModal({id, closeModal}: StockSetModalProps) {
   const [stocks, setStocks] = useState([]);
   const {data: products, loading} = useProductList([id]);
 
@@ -66,33 +66,35 @@ export default function StockModal({id, closeModal}: StockModalProps) {
       <OptionsWrapper>
         {loading && <Spin tip="Loading..." />}
         {products &&
-          products.map((product, index) => {
-            const {id, sku, options, stock, priceVariant} = product;
-            const optionsStr = options.join('/');
-            return (
-              <React.Fragment key={id}>
-                <OptionsRow>
-                  <Text>{sku}</Text>
-                  <Space direction="ROW" level={2} />
-                  <Options>{optionsStr}</Options>
-                  <Space direction="ROW" level={2} />
-                  <OptionPrice>
-                    {addCommaToNumber(priceVariant) + '원'}
-                  </OptionPrice>
-                  <Space direction="ROW" level={4} />
-                  <StockInput
-                    min={0}
-                    max={10000}
-                    size="small"
-                    defaultValue={stock}
-                    onChange={handleStockInput(index)}
-                  />
-                  <Text>개</Text>
-                  <Space direction="ROW" level={2} />
-                </OptionsRow>
-              </React.Fragment>
-            );
-          })}
+          products
+            .sort((a, b) => (a.sku > b.sku ? 1 : a.sku === b.sku ? 0 : -1))
+            .map((product, index) => {
+              const {id, sku, options, stock, priceVariant} = product;
+              const optionsStr = options.join('/');
+              return (
+                <React.Fragment key={id}>
+                  <OptionsRow>
+                    <Text>{sku}</Text>
+                    <Space direction="ROW" level={2} />
+                    <Options>{optionsStr}</Options>
+                    <Space direction="ROW" level={2} />
+                    <OptionPrice>
+                      {addCommaToNumber(priceVariant) + '원'}
+                    </OptionPrice>
+                    <Space direction="ROW" level={4} />
+                    <StockInput
+                      min={0}
+                      max={10000}
+                      size="small"
+                      defaultValue={stock}
+                      onChange={handleStockInput(index)}
+                    />
+                    <Text>개</Text>
+                    <Space direction="ROW" level={2} />
+                  </OptionsRow>
+                </React.Fragment>
+              );
+            })}
       </OptionsWrapper>
       <Space level={1} />
       <Button

@@ -1,5 +1,6 @@
-import {Cookies} from 'react-cookie';
+import {message} from 'antd';
 import Router from 'next/router';
+import {Cookies} from 'react-cookie';
 
 import base from '@src/lib/services/Api';
 import {setCookie, removeCookie} from '@src/lib/utils/Cookies';
@@ -16,10 +17,10 @@ export const login = (email: string, password: string) => {
     })
     .catch(err => {
       if (!err.response || err.response.status !== 401) {
-        alert('문제가 발생했습니다. 다시 시도해주세요.');
+        message.error('문제가 발생했습니다. 다시 시도해주세요.');
         return;
       }
-      alert('ID/비밀번호가 잘못 입력되었습니다.');
+      message.error('ID/비밀번호가 잘못 입력되었습니다.');
     });
 };
 

@@ -1,6 +1,5 @@
-import {useState} from 'react';
 import styled from 'styled-components';
-import {Table, Divider} from 'antd';
+import {Table, Divider, Modal} from 'antd';
 
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
@@ -8,7 +7,8 @@ import ActionBar, {TableActionBarProps} from './ActionBar';
 import Colors from '@src/components/atoms/colors';
 
 import {useBoardContext} from '@src/contexts/Board';
-import SubsDiscountRateModal from '@src/board/item/table/modal/subs-discount-rate';
+
+const {confirm} = Modal;
 
 export type BoardTableProps = {
   // tslint:disable-next-line: no-any
@@ -23,34 +23,18 @@ export default function BoardTable({
   actions,
   footActions,
 }: BoardTableProps) {
-  const {state} = useBoardContext();
-  const {tableData, loading} = state;
-
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [discountModal, setDiscountModal] = useState(false);
+  const {state, action} = useBoardContext();
+  const {tableData, loading, selectedRowKeys} = state;
+  const {setSelectedRowKeys} = action;
 
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
 
-  const newItemActions = [
-    ...actions,
-    {
-      text: '구독 할인 설정',
-      onClick: (ids: number[]) => {
-        setDiscountModal(true);
-      },
-    },
-  ];
-
   const actionBarProps: TableActionBarProps = {
-    ...{selectedRowKeys, actions: newItemActions},
+    ...{selectedRowKeys, actions},
   };
   const footerProps: TableFooterProps = {
     ...{selectedRowKeys, footActions},
   };
-
-  let modalData = [];
-  if (tableData)
-    modalData = tableData.filter(data => selectedRowKeys.includes(data.id));
 
   return (
     <Wrapper>
@@ -72,15 +56,6 @@ export default function BoardTable({
         footer={footActions ? () => <Footer {...footerProps} /> : null}
         pagination={{position: 'bottom'}}
       />
-      {discountModal && (
-        <SubsDiscountRateModal
-          visible={discountModal}
-          onClose={() => {
-            setDiscountModal(false);
-          }}
-          modalData={modalData}
-        />
-      )}
     </Wrapper>
   );
 }
@@ -90,7 +65,7 @@ const Wrapper = styled.div`
   display: flex;
   align-itmes: flex-start;
   text-align: left;
-  width: calc(100vw - 250px);
+  width: calc(100vw - 232px);
 `;
 
 const DataTable = styled(Table)`
