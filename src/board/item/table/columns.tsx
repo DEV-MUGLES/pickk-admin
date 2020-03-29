@@ -1,11 +1,12 @@
 import {addCommaToNumber} from '@src/lib/NumberParser';
+import {stringSorter} from '@src/lib/sorter';
 
 export const itemColumns = [
   {
     title: '상품명',
     dataIndex: 'name',
     key: 'name',
-    sorter: (a, b) => b.name - a.name,
+    sorter: (a, b) => stringSorter(b.name, a.name),
     width: 150,
     ellipsis: true,
   },
@@ -31,7 +32,7 @@ export const itemColumns = [
     title: 'SKU일련번호',
     dataIndex: 'skuPrefix',
     key: 'skuPrefix',
-    sorter: (a, b) => b.skuPrefix - a.skuPrefix,
+    sorter: (a, b) => stringSorter(b.skuPrefix, a.skuPrefix),
     width: 50,
     ellipsis: true,
   },
