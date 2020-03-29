@@ -21,9 +21,9 @@ export default function TableHeader(props: TableHeaderProps) {
       </Typography.Text>
       <TableReloadButton />
       <Space direction="ROW" />
-      <CsvDownloadButton {...props} />
-      <Space direction="ROW" size={4} />
       <ExcelDownloadButton {...props} />
+      <Space direction="ROW" size={4} />
+      <CsvDownloadButton {...props} />
     </Wrapper>
   );
 }
