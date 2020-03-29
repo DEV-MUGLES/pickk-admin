@@ -51,7 +51,7 @@ export default function DateTimePicker({
           ? [...Array(startAt.minutes()).keys()]
           : [],
       disabledSeconds: () =>
-        startAt.isSame(date, 'minutes')
+        startAt.isSame(date, 'hours') && startAt.isSame(date, 'minutes')
           ? [...Array(startAt.seconds()).keys()]
           : [],
     };
