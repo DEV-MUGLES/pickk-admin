@@ -20,7 +20,6 @@ export default function Login() {
           fill={Colors.Black}
         />
         <Space level={2} />
-
         <LoginForm />
       </StyledContent>
       <Space level={8} />

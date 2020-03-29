@@ -15,12 +15,22 @@ export default function LoginForm() {
     password: '',
   });
 
-  const handleLoginFormChange = e =>
-    setLoginFormState({...loginFormState, [e.target.name]: e.target.value});
   const [isRememberIDPW, setIsRememberIDPW] = useState(true);
 
   const inputStyle = {width: '400px'};
   const inputPrefixStyle = {color: 'rgba(0,0,0,.25)'};
+
+  const handleLoginFormChange = e =>
+    setLoginFormState({...loginFormState, [e.target.name]: e.target.value});
+
+  const handleLogin = () =>
+    UserService.login(loginFormState.email, loginFormState.password);
+
+  const handlePasswordKeyDown = e => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
 
   return (
     <LoginFormLayout>
@@ -42,6 +52,7 @@ export default function LoginForm() {
           value={loginFormState.password}
           placeholder="비밀번호"
           onChange={handleLoginFormChange}
+          onKeyDown={handlePasswordKeyDown}
           size="large"
           style={inputStyle}
           prefix={<Icon type="lock" style={inputPrefixStyle} />}
@@ -55,11 +66,7 @@ export default function LoginForm() {
         </Checkbox>
         <Space level={5} />
 
-        <LoginButton
-          type="primary"
-          onClick={() =>
-            UserService.login(loginFormState.email, loginFormState.password)
-          }>
+        <LoginButton type="primary" onClick={() => handleLogin}>
           로그인
         </LoginButton>
         <Space level={4} />
