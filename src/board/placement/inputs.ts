@@ -27,7 +27,7 @@ export const itemInputs = [
     select: [
       {name: '전체', value: null},
       {name: '결제완료', value: 'PAID'},
-      {name: '발주완료', value: 'PLACED'},
+      {name: '발송준비', value: 'PLACED'},
       {name: '발송완료', value: 'SHIPPING'},
       {name: '배송완료', value: 'DELIVERED'},
     ],
