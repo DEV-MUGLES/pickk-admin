@@ -58,7 +58,7 @@ export default function StockInitModal({
           <Row>
             <Name strong>상품명</Name>
             <Sku strong>SKU일련번호</Sku>
-            <Stock strong>재고</Stock>
+            <Stock strong>옵션별 초기 재고</Stock>
           </Row>
           {modalData.map((item, index) => {
             const {id, skuPrefix, name} = item;
@@ -107,7 +107,7 @@ const Row = styled.div`
 `;
 
 const StockInput = styled(InputNumber)`
-  width: 60px;
+  width: 100px;
 `;
 
 const SubmitArea = styled.div`
@@ -132,5 +132,5 @@ const Sku = styled(Text)`
 `;
 
 const Stock = styled(Text)`
-  width: 75px;
+  width: 100px;
 `;
