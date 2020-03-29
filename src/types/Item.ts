@@ -10,3 +10,11 @@ export type Item = {
   options: number[];
   isStockManaged: boolean;
 };
+
+export type ItemSubsDiscountRateInfo = {
+  id?: number;
+  discountRate: number;
+  startAt: string;
+  endAt: string;
+  item?: number;
+};

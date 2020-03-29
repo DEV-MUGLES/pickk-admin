@@ -14,6 +14,7 @@ import {BoardProps} from '../props';
 import StockSetModal from './table/modal/stock/set';
 import ItemService from '@src/lib/services/Item';
 import StockInitModal from './table/modal/stock/init';
+import SubsDiscountRateModal from './table/modal/subs-discount-rate';
 
 const {Text} = Typography;
 const {confirm} = Modal;
@@ -35,6 +36,8 @@ function ItemBoard({
   const closeInitModal = () => {
     setInitModalOpen(false);
   };
+
+  const [discountModal, setDiscountModal] = useState(false);
 
   const newItemColumns = [
     ...itemColumns,
@@ -90,6 +93,13 @@ function ItemBoard({
       text: '재고관리 OFF',
       onClick: handleOffClicked,
     },
+    {
+      text: '구독 할인 설정',
+      onClick: (ids: number[]) => {
+        setDiscountModal(true);
+        return Promise.resolve(false);
+      },
+    },
   ];
 
   const modalData = tableData
@@ -104,6 +114,13 @@ function ItemBoard({
       <StockSetModal id={index} closeModal={closeModal} />
       <Space level={2} />
       <StockInitModal {...{modalData, isInitModalOpen, closeInitModal}} />
+      <SubsDiscountRateModal
+        visible={discountModal}
+        onClose={() => {
+          setDiscountModal(false);
+        }}
+        modalData={modalData}
+      />
     </>
   );
 }
