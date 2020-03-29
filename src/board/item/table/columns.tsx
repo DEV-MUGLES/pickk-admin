@@ -44,14 +44,14 @@ export const itemColumns = [
     width: 50,
     ellipsis: true,
   },
-  {
+  /*{
     title: '리뷰 수',
     dataIndex: 'reviewCount',
     key: 'reviewCount',
     sorter: (a, b) => b.reviewCount - a.reviewCount,
     width: 50,
     ellipsis: true,
-  },
+  },*/
   {
     title: '구매 수',
     dataIndex: 'purchasedCount',
