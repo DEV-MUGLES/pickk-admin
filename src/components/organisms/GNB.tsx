@@ -6,11 +6,11 @@ const {Sider} = Layout;
 const {SubMenu} = Menu;
 
 const MENU_ITEMS = [
-  {
+  /*{
     iconType: 'dashboard',
     text: '대시보드',
     link: '/dashboard',
-  },
+  },*/
   {
     iconType: 'skin',
     text: '상품 관리',
@@ -27,7 +27,7 @@ const MENU_ITEMS = [
       {
         text: '발주/발송 관리',
         link: '/placements',
-      },
+      } /*
       {
         text: '배송현황 관리',
         link: '/delivery/situation',
@@ -43,9 +43,9 @@ const MENU_ITEMS = [
       {
         text: '교환 관리',
         link: '/claim/exchange',
-      },
+      },*/,
     ],
-  },
+  } /*
   {
     title: '정산 관리',
     iconType: 'dollar',
@@ -63,7 +63,7 @@ const MENU_ITEMS = [
         link: '/tax',
       },
     ],
-  },
+  },*/,
 ];
 
 export default function GNB() {

@@ -32,7 +32,7 @@ class PickkApp extends App {
         .then(status => {
           if (ctx.pathname == '/') {
             if (status === 200)
-              redirectTo('/dashboard', {res: ctx.res, status: 301});
+              redirectTo('/items', {res: ctx.res, status: 301});
             else {
               document.cookie =
                 'authtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
@@ -40,7 +40,7 @@ class PickkApp extends App {
             }
           } else if (ctx.pathname == '/login') {
             if (status === 200) {
-              redirectTo('/dashboard', {res: ctx.res, status: 301});
+              redirectTo('/items', {res: ctx.res, status: 301});
             } else
               return {
                 ...pageProps,
