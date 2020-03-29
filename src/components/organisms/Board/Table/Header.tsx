@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import {Typography} from 'antd';
 
+import TableReloadButton from '@src/components/molecules/button/TableReload';
+import CsvDownloadButton from '@src/components/molecules/button/CsvDownload';
 import ExcelDownloadButton, {
   ExcelDownloadButtonProps,
 } from '@src/components/molecules/button/ExcelDownload';
-import TableReloadButton from '@src/components/molecules/button/TableReload';
 import Space from '@src/components/atoms/space';
 
 export type TableHeaderProps = ExcelDownloadButtonProps;
@@ -20,6 +21,8 @@ export default function TableHeader(props: TableHeaderProps) {
       </Typography.Text>
       <TableReloadButton />
       <Space direction="ROW" />
+      <CsvDownloadButton {...props} />
+      <Space direction="ROW" size={4} />
       <ExcelDownloadButton {...props} />
     </Wrapper>
   );
