@@ -8,9 +8,14 @@ const getList = (filter: Filter): Promise<Item[]> =>
     })
     .then(res => res.data);
 
-const manageStock = (on: boolean, ids: number[]) =>
+const manageStockOn = (item: Array<{id: number; stock: number}>) =>
   base(true)
-    .post('/partner/items/manage_stock/', {on, ids})
+    .patch(`/partner/items/manage_stock/on/`, item)
+    .then(res => res.data);
+
+const manageStockOff = (ids: number[]) =>
+  base(true)
+    .post('/partner/items/manage_stock/off/', {ids})
     .then(res => res.data);
 
 const getProductList = (id: number): Promise<Product[]> =>
@@ -20,7 +25,8 @@ const getProductList = (id: number): Promise<Product[]> =>
 
 const ItemService = {
   getList,
-  manageStock,
+  manageStockOn,
+  manageStockOff,
   getProductList,
 };
 

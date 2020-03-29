@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Table, Divider} from 'antd';
+import {Table, Divider, Modal} from 'antd';
 
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
@@ -7,6 +7,8 @@ import ActionBar, {TableActionBarProps} from './ActionBar';
 import Colors from '@src/components/atoms/colors';
 
 import {useBoardContext} from '@src/contexts/Board';
+
+const {confirm} = Modal;
 
 export type BoardTableProps = {
   // tslint:disable-next-line: no-any

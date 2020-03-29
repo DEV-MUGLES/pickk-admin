@@ -9,12 +9,12 @@ import Space from '@src/components/atoms/space';
 
 const {Text} = Typography;
 
-export type StockModalProps = {
+export type StockSetModalProps = {
   id: number;
   closeModal: () => void;
 };
 
-export default function StockModal({id, closeModal}: StockModalProps) {
+export default function StockSetModal({id, closeModal}: StockSetModalProps) {
   const [stocks, setStocks] = useState([]);
   const {data: products, loading, error} = useProductList([id]);
 
@@ -46,50 +46,61 @@ export default function StockModal({id, closeModal}: StockModalProps) {
     }
   };
 
+  const content = () => {
+    if (products) {
+      products.sort(function(a, b) {
+        const skuA = a.sku; // ignore upper and lowercase
+        const skuB = b.sku; // ignore upper and lowercase
+        if (skuA < skuB) {
+          return -1;
+        }
+        if (skuA > skuB) {
+          return 1;
+        }
+      });
+      return products.map((product, index) => {
+        const {id, sku, options, stock, priceVariant} = product;
+        const optionsStr = options.join('/');
+        return (
+          <React.Fragment key={id}>
+            <OptionsRow>
+              <Text>{sku}</Text>
+              <Space direction="ROW" level={2} />
+              <Options>{optionsStr}</Options>
+              <Space direction="ROW" level={2} />
+              <OptionPrice>{addCommaToNumber(priceVariant) + '원'}</OptionPrice>
+              <Space direction="ROW" level={4} />
+              <StockInput
+                min={0}
+                max={10000}
+                size="small"
+                defaultValue={stock}
+                onChange={handleStockInput(index)}
+              />
+              <Text>개</Text>
+              <Space direction="ROW" level={2} />
+              <Button
+                type="primary"
+                size="small"
+                shape="round"
+                onClick={handleStockSubmit(id, index)}>
+                수정
+              </Button>
+            </OptionsRow>
+          </React.Fragment>
+        );
+      });
+    } else if (loading) return <Spin tip="Loading..." />;
+    else return <></>;
+  };
+
   return (
     <Modal
       title="재고 관리"
       visible={id >= 0}
       onCancel={closeModal}
       footer={null}>
-      <OptionsWrapper>
-        {loading && <Spin tip="Loading..." />}
-        {products &&
-          products.map((product, index) => {
-            const {id, sku, options, stock, priceVariant} = product;
-            const optionsStr = options.join('/');
-            return (
-              <React.Fragment key={id}>
-                <OptionsRow>
-                  <Text>{sku}</Text>
-                  <Space direction="ROW" level={2} />
-                  <Options>{optionsStr}</Options>
-                  <Space direction="ROW" level={2} />
-                  <OptionPrice>
-                    {addCommaToNumber(priceVariant) + '원'}
-                  </OptionPrice>
-                  <Space direction="ROW" level={4} />
-                  <StockInput
-                    min={0}
-                    max={10000}
-                    size="small"
-                    defaultValue={stock}
-                    onChange={handleStockInput(index)}
-                  />
-                  <Text>개</Text>
-                  <Space direction="ROW" level={2} />
-                  <Button
-                    type="primary"
-                    size="small"
-                    shape="round"
-                    onClick={handleStockSubmit(id, index)}>
-                    수정
-                  </Button>
-                </OptionsRow>
-              </React.Fragment>
-            );
-          })}
-      </OptionsWrapper>
+      <OptionsWrapper>{content()}</OptionsWrapper>
     </Modal>
   );
 }
