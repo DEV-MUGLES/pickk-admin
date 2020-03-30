@@ -5,9 +5,9 @@ import {DatePicker} from 'antd';
 import {ItemSubsDiscountRateInfo} from '@src/types';
 
 export type DateTimePickerProps = {
-  type: 'start' | 'end';
+  type: 'startAt' | 'endAt';
   dateTime: ItemSubsDiscountRateInfo;
-  onChange: (type: 'start' | 'end', data: string) => void;
+  onChange: (type: 'startAt' | 'endAt', data: string) => void;
 };
 
 export default function DateTimePicker({
@@ -16,7 +16,7 @@ export default function DateTimePicker({
   onChange,
 }: DateTimePickerProps) {
   const defaultValue =
-    type === 'start'
+    type === 'startAt'
       ? dateTime.startAt
         ? moment(dateTime.startAt)
         : null
@@ -24,19 +24,19 @@ export default function DateTimePicker({
       ? moment(dateTime.endAt)
       : null;
 
-  const handleDate = (_, dateString) => {
-    onChange(type, dateString);
+  const handleDate = (date: Moment) => {
+    onChange(type, date.format());
   };
 
   const disabledDate = (current: Moment) =>
     current.isBefore(
-      type === 'end' ? dateTime.startAt : moment().subtract(1, 'days'),
+      type === 'endAt' ? dateTime.startAt : moment().subtract(1, 'days'),
     );
 
   const disabledTime = (date: Moment) => {
     const startAt = moment(dateTime.startAt);
 
-    if (type !== 'end' || !startAt.isSame(date, 'day')) {
+    if (type !== 'endAt' || !startAt.isSame(date, 'day')) {
       return {
         disabledHours: () => [],
         disabledMinutes: () => [],
