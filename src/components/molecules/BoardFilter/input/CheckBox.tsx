@@ -16,5 +16,5 @@ export default function CheckBox({name}: CheckBoxProps) {
     handleFilterChange({[name]: e.target.checked});
   };
 
-  return <Checkbox value={filter[name]} onChange={handleChange} />;
+  return <Checkbox checked={filter[name]} onChange={handleChange} />;
 }
