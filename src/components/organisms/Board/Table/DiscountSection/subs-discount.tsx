@@ -10,7 +10,7 @@ import {ItemSubsDiscountRateInfo} from '@src/types';
 import DateTimePicker from '@src/components/molecules/picker/date-time';
 
 const {Text} = Typography;
-const curTime = moment().format('YYYY-MM-DDTHH:mm:ss');
+const curTime = moment().format();
 
 export const initialDiscountState: ItemSubsDiscountRateInfo = {
   discountRate: 0,
@@ -18,12 +18,24 @@ export const initialDiscountState: ItemSubsDiscountRateInfo = {
   endAt: curTime,
 };
 
-const discountReducer = (state, action) => {
+const discountReducer = (
+  state: ItemSubsDiscountRateInfo,
+  action: {
+    type: 'init' | 'discountRate' | 'startAt' | 'endAt';
+    discountInfo?: ItemSubsDiscountRateInfo;
+    discountRate?: number;
+    date?: string;
+  },
+) => {
   switch (action.type) {
     case 'init':
-      return {...(action as ItemSubsDiscountRateInfo)};
-    case 'update':
-      return {...state, ...(action as ItemSubsDiscountRateInfo)};
+      return {...action.discountInfo};
+    case 'discountRate':
+      return {...state, discountRate: action.discountRate};
+    case 'startAt':
+      return {...state, startAt: action.date};
+    case 'endAt':
+      return {...state, endAt: action.date};
     default:
       return state;
   }
@@ -36,20 +48,11 @@ export default function SubsDiscount({id, name, skuPrefix, subsDiscountRate}) {
   );
   const [init, setInit] = useState(false);
 
-  const handleDateTime = (type: 'start' | 'end', data: string) => {
-    const newAt = data.replace(' ', 'T') + '+09:00';
-
-    if (type === 'start') {
-      dispatchDiscountInfo({
-        type: 'update',
-        startAt: newAt,
-      });
-    } else {
-      dispatchDiscountInfo({
-        type: 'update',
-        endAt: newAt,
-      });
-    }
+  const handleDateTime = (type: 'startAt' | 'endAt', date: string) => {
+    dispatchDiscountInfo({
+      type,
+      date,
+    });
   };
 
   const handleApplyDiscountInfo = async () => {
@@ -69,7 +72,10 @@ export default function SubsDiscount({id, name, skuPrefix, subsDiscountRate}) {
   if (data) {
     const numOfDiscount = data.length;
     if (numOfDiscount > 0 && !init) {
-      dispatchDiscountInfo({type: 'init', ...data[numOfDiscount - 1]});
+      dispatchDiscountInfo({
+        type: 'init',
+        discountInfo: data[numOfDiscount - 1],
+      });
       setInit(true);
     }
 
@@ -87,17 +93,20 @@ export default function SubsDiscount({id, name, skuPrefix, subsDiscountRate}) {
                 style={{width: '50px'}}
                 value={discountInfo.discountRate}
                 onChange={value => {
-                  dispatchDiscountInfo({type: 'update', discountRate: value});
+                  dispatchDiscountInfo({
+                    type: 'discountRate',
+                    discountRate: value,
+                  });
                 }}
               />
             </Data>
             <DateTimePicker
-              type="start"
+              type="startAt"
               dateTime={discountInfo}
               onChange={handleDateTime}
             />
             <DateTimePicker
-              type="end"
+              type="endAt"
               dateTime={discountInfo}
               onChange={handleDateTime}
             />
