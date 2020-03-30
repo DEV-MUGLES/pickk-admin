@@ -13,7 +13,7 @@ export const login = (email: string, password: string) => {
     .then(res => {
       setCookie('authtoken', res.data.access);
       setCookie('refreshtoken', res.data.refresh);
-      Router.push('/dashboard');
+      Router.push('/items');
     })
     .catch(err => {
       if (!err.response || err.response.status !== 401) {
