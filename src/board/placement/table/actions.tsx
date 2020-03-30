@@ -26,7 +26,7 @@ export const placementActions: TableActionType[] = [
 
             const count = {};
             dataParse.slice(1).forEach(record => {
-              const status = record[4];
+              const status = record[3];
               count[status] =
                 count[status] !== undefined ? count[status] + 1 : 1;
             });
@@ -46,8 +46,8 @@ export const placementActions: TableActionType[] = [
                   const result = dataParse.slice(1).map(record => {
                     return {
                       merchantUid: record[1] !== undefined ? record[1] : '',
-                      courier: record[17] !== undefined ? record[17] : '',
-                      trackingCode: record[18] !== undefined ? record[18] : '',
+                      courier: record[20] !== undefined ? record[20] : '',
+                      trackingCode: record[21] !== undefined ? record[21] : '',
                     };
                   });
                   console.log(result);

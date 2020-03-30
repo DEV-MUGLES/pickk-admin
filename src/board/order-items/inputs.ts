@@ -19,6 +19,7 @@ export const orderItemInputs = [
       {name: '결제일', value: 'paid'},
       {name: '발주확인일', value: 'placed'},
       {name: '발송처리일', value: 'shipping'},
+      {name: '배송완료일', value: 'delivered'},
     ],
     Component: Datepicker,
   },

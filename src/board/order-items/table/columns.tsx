@@ -29,6 +29,14 @@ export const orderItemColumns = [
     ellipsis: true,
   },
   {
+    title: '주문상태',
+    dataIndex: 'status',
+    key: 'status',
+    sorter: (a, b) => stringSorter(b.status, a.status),
+    width: 100,
+    ellipsis: true,
+  },
+  {
     title: '주문일시',
     dataIndex: 'paidAt',
     key: 'paidAt',
@@ -41,10 +49,38 @@ export const orderItemColumns = [
     ellipsis: true,
   },
   {
-    title: '주문상태',
-    dataIndex: 'status',
-    key: 'status',
-    sorter: (a, b) => stringSorter(b.status, a.status),
+    title: '발주일시',
+    dataIndex: 'placedAt',
+    key: 'placedAt',
+    render: value => {
+      const {year, month, day} = getDateTimeStrings(value);
+      return <div>{`${year}.${month}.${day}`}</div>;
+    },
+    sorter: (a, b) => stringSorter(b.placedAt, a.placedAt),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '발송일시',
+    dataIndex: 'shippedAt',
+    key: 'shippedAt',
+    render: value => {
+      const {year, month, day} = getDateTimeStrings(value);
+      return <div>{`${year}.${month}.${day}`}</div>;
+    },
+    sorter: (a, b) => stringSorter(b.shippedAt, a.shippedAt),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '배송완료일시',
+    dataIndex: 'deliveredAt',
+    key: 'deliveredAt',
+    render: value => {
+      const {year, month, day} = getDateTimeStrings(value);
+      return <div>{`${year}.${month}.${day}`}</div>;
+    },
+    sorter: (a, b) => stringSorter(b.deliveredAt, a.deliveredAt),
     width: 100,
     ellipsis: true,
   },

@@ -12,6 +12,9 @@ export type OrderItem = {
   merchantUid: string;
   productSku: string;
   paidAt: Date;
+  placedAt: Date;
+  shippedAt: Date;
+  deliveredAt: Date;
   status: OrderStatus | ClaimStatus;
   itemName: string;
   options: string[];

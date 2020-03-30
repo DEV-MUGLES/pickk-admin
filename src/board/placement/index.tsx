@@ -7,7 +7,7 @@ import Table from '@src/components/organisms/Board/Table';
 import ShipModal from './table/modal/ship';
 import Space from '@src/components/atoms/space';
 
-import {itemInputs} from './inputs';
+import {placementInputs} from './inputs';
 import {placementColumns, placementActions} from './table';
 import {BoardProps} from '../props';
 
@@ -63,7 +63,7 @@ function PlacementBoard({title}: BoardProps) {
     <>
       <PlacementPreview />
       <Space level={2} />
-      <Filter title={title} inputs={itemInputs} />
+      <Filter title={title} inputs={placementInputs} />
       <Space level={2} />
       <Table
         title={title}

@@ -60,4 +60,17 @@ export const itemColumns = [
     width: 50,
     ellipsis: true,
   },
+  {
+    title: '제품링크',
+    dataIndex: 'purchaseUrl',
+    key: 'purchaseUrl',
+    sorter: (a, b) => stringSorter(a.purchaseUrl, b.purchaseUrl),
+    render: value => (
+      <a href={value} target="_blank">
+        {value}
+      </a>
+    ),
+    width: 70,
+    ellipsis: true,
+  },
 ];

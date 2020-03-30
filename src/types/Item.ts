@@ -9,6 +9,7 @@ export type Item = {
   purchasedCount: number;
   options: number[];
   isStockManaged: boolean;
+  purchaseUrl: string;
 };
 
 export type ItemSubsDiscountRateInfo = {

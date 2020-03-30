@@ -13,6 +13,9 @@ export const parseRecord = (record: Placement) => {
   const result = {
     ...record,
     paidAt: `${year}.${month}.${day}`,
+    placedAt: `${year}.${month}.${day}`,
+    shippedAt: `${year}.${month}.${day}`,
+    deliveredAt: `${year}.${month}.${day}`,
     options: record.options.join('-'),
     buyerPhone: record.buyerPhone
       ? addDashToPhoneNumber(record.buyerPhone)
