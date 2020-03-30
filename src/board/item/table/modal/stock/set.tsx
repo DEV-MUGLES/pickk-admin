@@ -62,39 +62,52 @@ export default function StockSetModal({id, closeModal}: StockSetModalProps) {
       title="재고 관리"
       visible={id >= 0}
       onCancel={closeModal}
-      footer={null}>
+      footer={null}
+      width="fit-content">
       <OptionsWrapper>
         {loading && <Spin tip="Loading..." />}
-        {products &&
-          products
-            .sort((a, b) => (a.sku > b.sku ? 1 : a.sku === b.sku ? 0 : -1))
-            .map((product, index) => {
-              const {id, sku, options, stock, priceVariant} = product;
-              const optionsStr = options.join('/');
-              return (
-                <React.Fragment key={id}>
-                  <OptionsRow>
-                    <Text>{sku}</Text>
-                    <Space direction="ROW" level={2} />
-                    <Options>{optionsStr}</Options>
-                    <Space direction="ROW" level={2} />
-                    <OptionPrice>
-                      {addCommaToNumber(priceVariant) + '원'}
-                    </OptionPrice>
-                    <Space direction="ROW" level={4} />
-                    <StockInput
-                      min={0}
-                      max={10000}
-                      size="small"
-                      defaultValue={stock}
-                      onChange={handleStockInput(index)}
-                    />
-                    <Text>개</Text>
-                    <Space direction="ROW" level={2} />
-                  </OptionsRow>
-                </React.Fragment>
-              );
-            })}
+        {products && (
+          <>
+            <OptionsRow>
+              <Sku>SKU일련번호</Sku>
+              <Space direction="ROW" level={2} />
+              <Options>상품옵션</Options>
+              <Space direction="ROW" level={2} />
+              <OptionPrice>옵션별 추가금액</OptionPrice>
+              <Space direction="ROW" level={4} />
+              <Stock>재고</Stock>
+            </OptionsRow>
+            {products
+              .sort((a, b) => (a.sku > b.sku ? 1 : a.sku === b.sku ? 0 : -1))
+              .map((product, index) => {
+                const {id, sku, options, stock, priceVariant} = product;
+                const optionsStr = options.join('/');
+                return (
+                  <React.Fragment key={id}>
+                    <OptionsRow>
+                      <Sku>{sku}</Sku>
+                      <Space direction="ROW" level={2} />
+                      <Options>{optionsStr}</Options>
+                      <Space direction="ROW" level={2} />
+                      <OptionPrice>
+                        {addCommaToNumber(priceVariant) + '원'}
+                      </OptionPrice>
+                      <Space direction="ROW" level={4} />
+                      <StockInput
+                        min={0}
+                        max={10000}
+                        size="small"
+                        defaultValue={stock}
+                        onChange={handleStockInput(index)}
+                      />
+                      <Text>개</Text>
+                      <Space direction="ROW" level={2} />
+                    </OptionsRow>
+                  </React.Fragment>
+                );
+              })}
+          </>
+        )}
       </OptionsWrapper>
       <Space level={1} />
       <Button
@@ -112,7 +125,8 @@ export default function StockSetModal({id, closeModal}: StockSetModalProps) {
 const OptionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: fit-content;
+  min-width: 538px;
   height: 300px;
   overflow: auto;
 `;
@@ -120,8 +134,12 @@ const OptionsWrapper = styled.div`
 const OptionsRow = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: fit-content;
   margin-bottom: 8px;
+`;
+
+const Sku = styled(Text)`
+  width: 120px;
 `;
 
 const Options = styled(Text).attrs({
@@ -131,8 +149,11 @@ const Options = styled(Text).attrs({
 `;
 
 const OptionPrice = styled(Text)`
-  width: 70px;
-  margin-right: auto;
+  width: 100px;
+  margin-left: auto;
+`;
+const Stock = styled(Text)`
+  width: 60px;
 `;
 
 const StockInput = styled(InputNumber)`
