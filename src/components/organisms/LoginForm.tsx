@@ -66,7 +66,7 @@ export default function LoginForm() {
         </Checkbox>
         <Space level={5} />
 
-        <LoginButton type="primary" onClick={() => handleLogin}>
+        <LoginButton type="primary" onClick={handleLogin}>
           로그인
         </LoginButton>
         <Space level={4} />
