@@ -12,7 +12,7 @@ const {Content} = Layout;
 
 export default function Login() {
   return (
-    <Layout>
+    <Layout style={{height: '100vh'}}>
       <StyledContent>
         <Space level={10} />
         <LogoAdminIcon
@@ -23,7 +23,7 @@ export default function Login() {
         <LoginForm />
       </StyledContent>
       <Space level={8} />
-      <GFooter style={{backgroundColor: '#001529', color: Colors.LightGrey}} />
+      <GFooter style={{backgroundColor: '#001529', color: '#a3acbf'}} />
     </Layout>
   );
 }
@@ -32,4 +32,6 @@ const StyledContent = styled(Content)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: auto;
+  flex: 1;
 `;

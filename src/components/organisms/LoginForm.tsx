@@ -6,7 +6,7 @@ import Colors from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
 import UserService from '@src/lib/services/User';
 
-const {Title} = Typography;
+const {Title, Text} = Typography;
 const {Content, Footer} = Layout;
 
 export default function LoginForm() {
@@ -73,9 +73,11 @@ export default function LoginForm() {
         <LoginButton type="primary" onClick={handleLogin} loading={loading}>
           로그인
         </LoginButton>
-        <Space level={4} />
       </LoginFormContent>
-      <LoginFormFooter>로그인 푸터입니당</LoginFormFooter>
+      <LoginFormFooter>
+        <Title level={4}> 문의번호</Title>
+        <Text>070-4142-0027, 010-9508-2801</Text>
+      </LoginFormFooter>
     </LoginFormLayout>
   );
 }
@@ -94,6 +96,7 @@ const LoginFormLayout = styled(Layout)`
 const LoginFormContent = styled(Content)`
   display: flex;
   flex-direction: column;
+  height: fit-content;
 `;
 
 const LoginButton = styled(Button)`
@@ -103,4 +106,8 @@ const LoginButton = styled(Button)`
 
 const LoginFormFooter = styled(Footer)`
   background-color: ${Colors.White};
+  width: 100%;
+  padding: 0;
+  border-top: 1px solid ${Colors.RegularGrey};
+  padding-top: 16px;
 `;

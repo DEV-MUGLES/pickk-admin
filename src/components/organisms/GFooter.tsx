@@ -11,19 +11,20 @@ type GFooterProps = {
 export default function GFooter({style}: GFooterProps) {
   return (
     <StyledGFooter style={style}>
-      <p>
-        핔㈜는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 상품, 상품정보,
-        거래에 관한 의무와 책임은 판매자에게 있습니다.
-      </p>
-      <p>
-        또한 판매자와 구매자간의 직거래에 대하여 당사는 관여하지 않기 때문에
-        거래에 대해서는 책임을 지지 않습니다.
-      </p>
-      <p>Copyright © NAVER Corp. All rights reserved</p>
+      | 상호 : (주)생각하는머글들 | 주소 : 서울특별시 서초구 강남대로 101안길 17
+      403호 | 사업자등록번호 : 435-88-01445 | 통신판매업신고 : 제
+      2020-서울서초-0486 | 이메일 : cs@mugles.com
+      <br />
+      2020 © mugles inc. All rights reserved
     </StyledGFooter>
   );
 }
 
 const StyledGFooter = styled(Footer)`
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
+  font-size: 12px;
 `;
