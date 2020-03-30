@@ -4,16 +4,14 @@ import {Button} from 'antd';
 
 import {TableActionType} from './table';
 import Space from '@src/components/atoms/space';
+import {isEqualArray} from '@src/lib/utils';
 
 export type TableFooterProps = {
   selectedRowKeys: number[];
   footActions?: TableActionType[];
 };
 
-export default function TableFooter({
-  selectedRowKeys,
-  footActions,
-}: TableFooterProps) {
+function TableFooter({selectedRowKeys, footActions}: TableFooterProps) {
   return (
     <Wrapper>
       {footActions.map((item, index) => (
@@ -31,6 +29,9 @@ export default function TableFooter({
     </Wrapper>
   );
 }
+export default React.memo(TableFooter, (prev, next) =>
+  isEqualArray(prev.selectedRowKeys, next.selectedRowKeys),
+);
 
 const Wrapper = styled.div`
   display: flex;

@@ -6,16 +6,14 @@ import Space from '@src/components/atoms/space';
 import {TableActionType} from './table';
 
 import {useBoardContext} from '@src/contexts/Board';
+import {isEqualArray} from '@src/lib/utils';
 
 export type TableActionBarProps = {
   selectedRowKeys: number[];
   actions?: TableActionType[];
 };
 
-export default function TableActionBar({
-  selectedRowKeys,
-  actions,
-}: TableActionBarProps) {
+function TableActionBar({selectedRowKeys, actions}: TableActionBarProps) {
   const {reload} = useBoardContext().action;
 
   return (
@@ -50,6 +48,10 @@ export default function TableActionBar({
     </Wrapper>
   );
 }
+
+export default React.memo(TableActionBar, (prev, next) =>
+  isEqualArray(prev.selectedRowKeys, next.selectedRowKeys),
+);
 
 const Wrapper = styled.div`
   display: flex;

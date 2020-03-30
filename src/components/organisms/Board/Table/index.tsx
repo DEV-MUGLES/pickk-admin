@@ -1,5 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
-import {Table, Divider, Modal} from 'antd';
+import {Table, Divider} from 'antd';
 
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
@@ -8,21 +9,14 @@ import Colors from '@src/components/atoms/colors';
 
 import {useBoardContext} from '@src/contexts/Board';
 
-const {confirm} = Modal;
-
 export type BoardTableProps = {
-  // tslint:disable-next-line: no-any
   title: string;
+  // tslint:disable-next-line: no-any
   columns: any;
 } & Pick<TableActionBarProps, 'actions'> &
   Pick<TableFooterProps, 'footActions'>;
 
-export default function BoardTable({
-  title,
-  columns,
-  actions,
-  footActions,
-}: BoardTableProps) {
+function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
   const {state, action} = useBoardContext();
   const {tableData, loading, selectedRowKeys} = state;
   const {setSelectedRowKeys} = action;
@@ -59,6 +53,8 @@ export default function BoardTable({
     </Wrapper>
   );
 }
+
+export default React.memo(BoardTable);
 
 const Wrapper = styled.div`
   background-color: ${Colors.White};

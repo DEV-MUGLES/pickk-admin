@@ -2,7 +2,7 @@ import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
 import PlacementBoard from '@src/board/placement';
 
-export default function Items() {
+export default function Placements() {
   return (
     <MainLayout>
       <PlacementBoard

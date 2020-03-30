@@ -8,10 +8,11 @@ import ExcelDownloadButton, {
   ExcelDownloadButtonProps,
 } from '@src/components/molecules/button/ExcelDownload';
 import Space from '@src/components/atoms/space';
+import {isEqualObject} from '@src/lib/utils';
 
 export type TableHeaderProps = ExcelDownloadButtonProps;
 
-export default function TableHeader(props: TableHeaderProps) {
+function TableHeader(props: TableHeaderProps) {
   return (
     <Wrapper>
       <Typography.Text strong style={{marginRight: 'auto'}}>
@@ -27,6 +28,10 @@ export default function TableHeader(props: TableHeaderProps) {
     </Wrapper>
   );
 }
+
+export default React.memo(TableHeader, (prev, next) =>
+  isEqualObject(prev.dataSource, next.dataSource),
+);
 
 const Wrapper = styled.div`
   display: flex;
