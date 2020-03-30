@@ -7,7 +7,7 @@ import {setCookie, removeCookie} from '@src/lib/utils/Cookies';
 
 const cookies = new Cookies();
 
-export const login = (email: string, password: string) => {
+export const login = (email: string, password: string) =>
   base()
     .post('/partner/token/', {email, password})
     .then(res => {
@@ -22,7 +22,6 @@ export const login = (email: string, password: string) => {
       }
       message.error('ID/비밀번호가 잘못 입력되었습니다.');
     });
-};
 
 export const logout = () => {
   removeCookie('authtoken');

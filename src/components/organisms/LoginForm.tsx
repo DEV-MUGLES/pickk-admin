@@ -16,6 +16,7 @@ export default function LoginForm() {
   });
 
   const [isRememberIDPW, setIsRememberIDPW] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const inputStyle = {width: '400px'};
   const inputPrefixStyle = {color: 'rgba(0,0,0,.25)'};
@@ -23,8 +24,11 @@ export default function LoginForm() {
   const handleLoginFormChange = e =>
     setLoginFormState({...loginFormState, [e.target.name]: e.target.value});
 
-  const handleLogin = () =>
-    UserService.login(loginFormState.email, loginFormState.password);
+  const handleLogin = async () => {
+    setLoading(true);
+    await UserService.login(loginFormState.email, loginFormState.password);
+    setLoading(false);
+  };
 
   const handlePasswordKeyDown = e => {
     if (e.key === 'Enter') {
@@ -66,7 +70,7 @@ export default function LoginForm() {
         </Checkbox>
         <Space level={5} />
 
-        <LoginButton type="primary" onClick={handleLogin}>
+        <LoginButton type="primary" onClick={handleLogin} loading={loading}>
           로그인
         </LoginButton>
         <Space level={4} />
