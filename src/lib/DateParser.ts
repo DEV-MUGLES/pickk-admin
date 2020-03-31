@@ -1,4 +1,5 @@
 import {addLeadingZeros} from './NumberParser';
+import moment from 'moment';
 
 export const getDateTimeNumbers = (input?: number) => {
   const date = new Date(input);
@@ -29,6 +30,5 @@ export const getTimeString = (input?: number | Date) => {
   if (!input) {
     return '-';
   }
-  const {year, month, day, hours, minutes, seconds} = getDateTimeStrings(input);
-  return `${year.slice(2, 4)}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+  return moment(input).format('YY/MM/DD hh:mm:ss');
 };
