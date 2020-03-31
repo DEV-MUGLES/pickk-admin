@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import moment from 'moment';
 
-import PlacementPreview from './preview';
+import Preview from '../../components/organisms/Board/preview';
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
 import ShipModal from './table/modal/ship';
@@ -17,6 +17,8 @@ import {parseTable} from '../order-items/table/data-parser';
 import PlacementService from '@src/lib/services/Placement';
 import {OrderStatus} from '@src/types';
 import {message} from 'antd';
+import {placementPreviewData} from './preview-data';
+import {usePlacementPreview} from '@src/hooks';
 
 function PlacementBoard({title}: BoardProps) {
   const {tableData, selectedRowKeys} = useBoardContext().state;
@@ -61,7 +63,10 @@ function PlacementBoard({title}: BoardProps) {
 
   return (
     <>
-      <PlacementPreview />
+      <Preview
+        data={placementPreviewData}
+        usePreviewData={usePlacementPreview}
+      />
       <Space level={2} />
       <Filter title={title} inputs={placementInputs} />
       <Space level={2} />
