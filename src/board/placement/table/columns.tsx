@@ -10,7 +10,7 @@ export const placementColumns = [
     dataIndex: 'courier',
     key: 'courier',
     sorter: (a, b) => stringSorter(b.courier, a.courier),
-    width: 100,
+    width: 90,
     ellipsis: true,
   },
   {
@@ -18,7 +18,7 @@ export const placementColumns = [
     dataIndex: 'trackingCode',
     key: 'trackingCode',
     sorter: (a, b) => b.trackingCode - a.trackingCode,
-    width: 150,
+    width: 120,
     ellipsis: true,
   },
   {
@@ -32,8 +32,7 @@ export const placementColumns = [
         </a>
       ) : null,
     sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
-    width: 100,
-    ellipsis: true,
+    width: 90,
   },
   ...orderItemColumns.slice(
     orderItemColumns.length - 3,

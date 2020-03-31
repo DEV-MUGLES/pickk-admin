@@ -12,7 +12,7 @@ export const getDateTimeNumbers = (input?: number) => {
   };
 };
 
-export const getDateTimeStrings = (input?: number) => {
+export const getDateTimeStrings = (input?: number | Date) => {
   const date = new Date(input);
   const parse = (num: number) => addLeadingZeros(num, 2);
   return {
@@ -23,4 +23,12 @@ export const getDateTimeStrings = (input?: number) => {
     minutes: parse(date.getMinutes()),
     seconds: parse(date.getSeconds()),
   };
+};
+
+export const getTimeString = (input?: number | Date) => {
+  if (!input) {
+    return '-';
+  }
+  const {year, month, day, hours, minutes, seconds} = getDateTimeStrings(input);
+  return `${year.slice(2, 4)}/${month}/${day} ${hours}:${minutes}:${seconds}`;
 };

@@ -1,4 +1,4 @@
-import {getDateTimeStrings} from '@src/lib/DateParser';
+import {getTimeString} from '@src/lib/DateParser';
 import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
@@ -9,7 +9,7 @@ export const orderItemColumns = [
     dataIndex: 'orderMerchantUid',
     key: 'orderMerchantUid',
     sorter: (a, b) => b.orderMerchantUid - a.orderMerchantUid,
-    width: 150,
+    width: 120,
     ellipsis: true,
   },
   {
@@ -17,7 +17,7 @@ export const orderItemColumns = [
     dataIndex: 'merchantUid',
     key: 'merchantUid',
     sorter: (a, b) => b.merchantUid - a.merchantUid,
-    width: 150,
+    width: 140,
     ellipsis: true,
   },
   {
@@ -33,55 +33,45 @@ export const orderItemColumns = [
     dataIndex: 'status',
     key: 'status',
     sorter: (a, b) => stringSorter(b.status, a.status),
-    width: 100,
+    width: 70,
     ellipsis: true,
   },
   {
     title: '주문일시',
     dataIndex: 'paidAt',
     key: 'paidAt',
-    render: value => {
-      const {year, month, day} = getDateTimeStrings(value);
-      return <div>{`${year}.${month}.${day}`}</div>;
-    },
+    render: value => <div>{getTimeString(value)}</div>,
     sorter: (a, b) => stringSorter(b.paidAt, a.paidAt),
-    width: 100,
+    width: 140,
     ellipsis: true,
   },
   {
     title: '발주일시',
     dataIndex: 'placedAt',
     key: 'placedAt',
-    render: value => {
-      const {year, month, day} = getDateTimeStrings(value);
-      return <div>{`${year}.${month}.${day}`}</div>;
-    },
+    render: value => <div>{getTimeString(value)}</div>,
     sorter: (a, b) => stringSorter(b.placedAt, a.placedAt),
-    width: 100,
+    width: 140,
     ellipsis: true,
   },
   {
     title: '발송일시',
     dataIndex: 'shippedAt',
     key: 'shippedAt',
-    render: value => {
-      const {year, month, day} = getDateTimeStrings(value);
-      return <div>{`${year}.${month}.${day}`}</div>;
-    },
+    render: value => <div>{getTimeString(value)}</div>,
+
     sorter: (a, b) => stringSorter(b.shippedAt, a.shippedAt),
-    width: 100,
+    width: 140,
     ellipsis: true,
   },
   {
     title: '배송완료일시',
     dataIndex: 'deliveredAt',
     key: 'deliveredAt',
-    render: value => {
-      const {year, month, day} = getDateTimeStrings(value);
-      return <div>{`${year}.${month}.${day}`}</div>;
-    },
+    render: value => <div>{getTimeString(value)}</div>,
+
     sorter: (a, b) => stringSorter(b.deliveredAt, a.deliveredAt),
-    width: 100,
+    width: 140,
     ellipsis: true,
   },
   {
@@ -89,7 +79,7 @@ export const orderItemColumns = [
     dataIndex: 'itemName',
     key: 'itemName',
     sorter: (a, b) => stringSorter(b.itemName, a.itemName),
-    width: 150,
+    width: 200,
     ellipsis: true,
   },
   {
