@@ -17,7 +17,7 @@ export type PreviewProps = {
   filterValue: Filter;
 };
 
-function Preview({iconType, label, count, filterValue}: PreviewProps) {
+function PreviewButton({iconType, label, count, filterValue}: PreviewProps) {
   const {state, action} = useBoardContext();
   const {filter, defaultFilter} = state;
   const {applyPreview} = action;
@@ -57,7 +57,7 @@ function Preview({iconType, label, count, filterValue}: PreviewProps) {
   );
 }
 
-export default React.memo(Preview);
+export default React.memo(PreviewButton);
 
 const Wrapper = styled.div`
   display: flex;

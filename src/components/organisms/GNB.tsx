@@ -27,11 +27,11 @@ const MENU_ITEMS = [
       {
         text: '발주/발송 관리',
         link: '/placements',
-      } /*
+      },
       {
         text: '배송현황 관리',
-        link: '/delivery/situation',
-      },
+        link: '/shipments',
+      } /*
       {
         text: '취소 관리',
         link: '/claim/cancel',
@@ -44,6 +44,7 @@ const MENU_ITEMS = [
         text: '교환 관리',
         link: '/claim/exchange',
       },*/,
+      ,
     ],
   } /*
   {
