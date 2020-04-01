@@ -8,18 +8,17 @@ export default function Preview({data, usePreviewData}) {
   const {data: previewValue} = usePreviewData([]);
 
   if (previewValue) {
-    console.log(previewValue);
     return (
       <PreviewWrapper>
         {Object.values(previewValue)
-          .filter((_, i) => !data[i].disabled)
           .map((value, index) => (
             <PreviewButton
               key={data[index].label}
               {...data[index]}
               count={value}
             />
-          ))}
+          ))
+          .filter((_, i) => !data[i].disabled)}
       </PreviewWrapper>
     );
   }
