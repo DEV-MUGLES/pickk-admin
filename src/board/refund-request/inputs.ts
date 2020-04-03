@@ -1,16 +1,47 @@
-import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import CheckBox from '@src/components/molecules/BoardFilter/input/CheckBox';
+import moment from 'moment';
 
-export const itemInputs = [
+import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
+import Selector from '@src/components/molecules/BoardFilter/input/Selector';
+import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+
+export const refundRequestInputs = [
   {
-    name: 'name',
-    labelText: '상품명',
-    Component: InputBox,
+    name: 'period',
+    defaultValue: {
+      type: 'all',
+      startDate: moment()
+        .subtract(1, 'months')
+        .format('YYYY-MM-DD'),
+      endDate: moment().format('YYYY-MM-DD'),
+    },
+    labelText: '조회기간',
+    select: [
+      {name: '결제일', value: 'paid'},
+      {name: '반품요청일', value: 'requested'},
+      {name: '반품발송일', value: 'pickUpStarted'},
+      {name: '반품완료일', value: 'confirmed'},
+    ],
+    Component: Datepicker,
   },
   {
-    name: 'isReviewed',
-    labelText: '리뷰 필터링',
-    guideText: '리뷰가 있는 상품만 필터링하여 볼 수 있는 기능입니다.',
-    Component: CheckBox,
+    name: 'status',
+    labelText: '주문상태',
+    select: [
+      {name: '전체', value: null},
+      {name: '반품 요청', value: 'REFUND_REQUESTED'},
+      {name: '수거 중', value: 'PICKING'},
+      {name: '수거 완료', value: 'PICKED'},
+      {name: '반품 완료', value: 'REFUND_CONFIRMED'},
+      {name: '반품 거부', value: 'REFUND_REJECTED'},
+      {name: '반품 취소', value: 'REFUND_CANCELLED'},
+    ],
+    Component: Selector,
+  },
+  {
+    name: 'keyword',
+    labelText: '상세조건',
+    Component: InputBox,
+    guideText:
+      '수취인명/구매자명/구매자자연락처/구매자이메일/주문번호/상품별주문번호/상품번호/송장번호를 검색할 수 있습니다.',
   },
 ];
