@@ -8,3 +8,4 @@ export * from './OrderItem';
 export * from './Shipment';
 export * from './RefundRequest';
 export * from './CancelRequest';
+export * from './ExchangeRequest';
