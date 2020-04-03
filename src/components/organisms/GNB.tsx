@@ -31,14 +31,14 @@ const MENU_ITEMS = [
       {
         text: '배송현황 관리',
         link: '/shipments',
-      } /*
+      },
       {
         text: '취소 관리',
-        link: '/claim/cancel',
-      }*/,
+        link: '/request/cancel',
+      },
       {
         text: '반품 관리',
-        link: '/refund-requests',
+        link: '/request/refund',
       } /*,
       {
         text: '교환 관리',
