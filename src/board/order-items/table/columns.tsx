@@ -33,7 +33,7 @@ export const orderItemColumns = [
     dataIndex: 'status',
     key: 'status',
     sorter: (a, b) => stringSorter(b.status, a.status),
-    width: 70,
+    width: 90,
     ellipsis: true,
   },
   {
