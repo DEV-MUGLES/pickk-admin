@@ -35,11 +35,11 @@ const MENU_ITEMS = [
       {
         text: '취소 관리',
         link: '/claim/cancel',
-      },
+      }*/,
       {
         text: '반품 관리',
-        link: '/claim/return',
-      },
+        link: '/refund-requests',
+      } /*,
       {
         text: '교환 관리',
         link: '/claim/exchange',
