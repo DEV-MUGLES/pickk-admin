@@ -6,3 +6,4 @@ export * from './Product';
 export * from './Order';
 export * from './OrderItem';
 export * from './Shipment';
+export * from './RefundRequest';
