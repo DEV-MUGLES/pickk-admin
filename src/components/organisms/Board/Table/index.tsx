@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Table, Divider} from 'antd';
 
@@ -21,11 +21,11 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
   const {tableData, loading, selectedRowKeys} = state;
   const {setSelectedRowKeys} = action;
 
+  const [pageSize, setPageSize] = useState(10);
+  console.log(pageSize);
+
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
 
-  const actionBarProps: TableActionBarProps = {
-    ...{selectedRowKeys, actions},
-  };
   const footerProps: TableFooterProps = {
     ...{selectedRowKeys, footActions},
   };
@@ -38,17 +38,30 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
         size="small"
         title={() => (
           <>
-            <Header {...{title, columns, dataSource: tableData}} />
+            <Header
+              {...{
+                title,
+                columns,
+                dataSource: tableData,
+              }}
+            />
             {actions && (
               <>
                 <Divider style={{fontSize: 10}} />
-                <ActionBar {...actionBarProps} />
+                <ActionBar
+                  {...{
+                    selectedRowKeys,
+                    actions,
+                    pageSize,
+                    setPageSize,
+                  }}
+                />
               </>
             )}
           </>
         )}
         footer={footActions ? () => <Footer {...footerProps} /> : null}
-        pagination={{position: 'bottom'}}
+        pagination={{position: 'bottom', pageSize}}
       />
     </Wrapper>
   );

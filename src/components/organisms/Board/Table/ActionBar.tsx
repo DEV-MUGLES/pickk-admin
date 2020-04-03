@@ -7,13 +7,18 @@ import {TableActionType} from './table';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {isEqualArray} from '@src/lib/utils';
+import TablePageSizeSelect, {
+  TablePageSizeSelectProps,
+} from '@src/components/molecules/select/table-page-size';
 
 export type TableActionBarProps = {
   selectedRowKeys: number[];
   actions?: TableActionType[];
-};
+} & TablePageSizeSelectProps;
 
-function TableActionBar({selectedRowKeys, actions}: TableActionBarProps) {
+function TableActionBar(props: TableActionBarProps) {
+  const {selectedRowKeys, actions} = props;
+
   const {reload} = useBoardContext().action;
 
   return (
@@ -45,12 +50,16 @@ function TableActionBar({selectedRowKeys, actions}: TableActionBarProps) {
           <Space direction="ROW" />
         </React.Fragment>
       ))}
+      <TablePageSizeSelect {...(props as TablePageSizeSelectProps)} />
     </Wrapper>
   );
 }
 
-export default React.memo(TableActionBar, (prev, next) =>
-  isEqualArray(prev.selectedRowKeys, next.selectedRowKeys),
+export default React.memo(
+  TableActionBar,
+  (prev, next) =>
+    isEqualArray(prev.selectedRowKeys, next.selectedRowKeys) &&
+    prev.pageSize === next.pageSize,
 );
 
 const Wrapper = styled.div`
