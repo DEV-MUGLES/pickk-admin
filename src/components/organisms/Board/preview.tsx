@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PreviewButton from '@src/components/molecules/button/preview';
 import Colors from '@src/components/atoms/colors';
 
-export default function Preview({data, usePreviewData}) {
+function Preview({data, usePreviewData}) {
   const {data: previewValue} = usePreviewData([]);
 
   if (previewValue) {
@@ -24,6 +24,8 @@ export default function Preview({data, usePreviewData}) {
   }
   return <></>;
 }
+
+export default React.memo(Preview);
 
 const PreviewWrapper = styled.div`
   display: flex;
