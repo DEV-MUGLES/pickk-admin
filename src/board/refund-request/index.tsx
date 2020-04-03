@@ -12,8 +12,8 @@ import {refundRequestPreviewData} from './preview-data';
 import {refundRequestColumns, refundRequestActions, parseTable} from './table';
 import {BoardProps} from '../props';
 
-import {useRefundRequestPreview} from '@src/hooks/RefundRequest';
-import {useRefundRequestTable} from '@src/hooks/table/RefundRequest';
+import {useRefundRequestPreview} from '@src/hooks/ClaimRequest';
+import {useRefundRequestTable} from '@src/hooks/table/ClaimRequest';
 
 function RefundRequestBoard({
   title,
