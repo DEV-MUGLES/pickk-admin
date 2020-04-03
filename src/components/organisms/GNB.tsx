@@ -39,11 +39,11 @@ const MENU_ITEMS = [
       {
         text: '반품 관리',
         link: '/request/refund',
-      } /*,
+      },
       {
         text: '교환 관리',
-        link: '/claim/exchange',
-      },*/,
+        link: '/request/exchange',
+      },
       ,
     ],
   } /*

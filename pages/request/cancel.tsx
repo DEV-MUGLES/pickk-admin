@@ -7,7 +7,7 @@ export default function CancelRequests() {
     <MainLayout>
       <CancelRequestBoard
         title="취소 관리"
-        subTitle="구매자가 요청한 취소 주문건에 대해 완료/거부처리를 진행하실 수 있는 메뉴입니다."
+        subTitle="구매자가 요청한/완료된 취소 주문건들을 조회하실 수 있는 메뉴입니다."
       />
     </MainLayout>
   );
