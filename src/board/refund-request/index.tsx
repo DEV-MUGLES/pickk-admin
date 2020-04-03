@@ -1,17 +1,19 @@
+import moment from 'moment';
+
+import Preview from '@src/components/organisms/Board/preview';
 import Filter from '@src/components/organisms/Board/Filter';
 import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
 import {withBoardContext} from '@src/contexts/Board';
-import {useRefundRequestTable} from '@src/hooks/table/RefundRequest';
 
 import {refundRequestInputs} from './inputs';
+import {refundRequestPreviewData} from './preview-data';
 import {refundRequestColumns, refundRequestActions, parseTable} from './table';
 import {BoardProps} from '../props';
-import moment from 'moment';
-import Preview from '@src/components/organisms/Board/preview';
+
 import {useRefundRequestPreview} from '@src/hooks/RefundRequest';
-import {refundRequestPreviewData} from './preview-data';
+import {useRefundRequestTable} from '@src/hooks/table/RefundRequest';
 
 function RefundRequestBoard({
   title,
