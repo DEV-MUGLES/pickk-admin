@@ -2,6 +2,7 @@ import {getTimeString} from '@src/lib/DateParser';
 import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
 import {stringSorter} from '@src/lib/sorter';
 import {Button} from 'antd';
+import {addCommaToNumber} from '@src/lib/NumberParser';
 
 export const refundRequestColumns = [
   {
@@ -72,6 +73,24 @@ export const refundRequestColumns = [
     key: 'reason',
     sorter: (a, b) => stringSorter(b.reason, a.reason),
     width: 200,
+    ellipsis: true,
+  },
+  {
+    title: '환불 금액',
+    dataIndex: 'refundAmount',
+    key: 'refundAmount',
+    render: (value) => <div>{addCommaToNumber(value)}원</div>,
+    sorter: (a, b) => b.refundAmount - a.refundAmount,
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '반품 배송비',
+    dataIndex: 'subtractedShippingFee',
+    key: 'subtractedShippingFee',
+    render: (value) => <div>{addCommaToNumber(value)}원</div>,
+    sorter: (a, b) => b.subtractedShippingFee - a.subtractedShippingFee,
+    width: 100,
     ellipsis: true,
   },
   {

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {Modal, message, Icon} from 'antd';
 
 import Preview from '@src/components/organisms/Board/preview';
 import Filter from '@src/components/organisms/Board/Filter';
@@ -16,13 +17,22 @@ import {useRefundRequestPreview} from '@src/hooks/ClaimRequest';
 import {useRefundRequestTable} from '@src/hooks/table/ClaimRequest';
 import {PickingStatus, RefundStatus} from '@src/types';
 import RefundRequestService from '@src/lib/services/RefundRequest';
-import {message} from 'antd';
+import {useState} from 'react';
+import RefundConfirmModal from './table/modal/confirm';
+
+const {confirm} = Modal;
 
 function RefundRequestBoard({
   title,
 }: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
   const {state} = useBoardContext();
   const {tableData} = state;
+
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const newRefundActions = [
     {
@@ -52,6 +62,12 @@ function RefundRequestBoard({
     {
       text: '반품완료',
       onClick: async (ids: number[]) => {
+        if (ids.length !== 1) {
+          message.warning(
+            `반품 일괄 처리는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.`,
+          );
+          return Promise.resolve(false);
+        }
         if (
           !ids.every(
             (id) =>
@@ -62,13 +78,9 @@ function RefundRequestBoard({
           message.warning('수거 완료된 요청만 반품 완료처리할 수 있습니다.');
           return Promise.resolve(false);
         }
-        try {
-          await RefundRequestService.confirm(ids);
-          return Promise.resolve(true);
-        } catch (err) {
-          message.error('실패했습니다. - ' + err);
-          return Promise.resolve(false);
-        }
+        setSelectedRecord(tableData.find((record) => record.id === ids[0]));
+        setIsModalOpen(true);
+        return Promise.resolve(false);
       },
     },
     ...refundRequestActions,
@@ -88,6 +100,11 @@ function RefundRequestBoard({
         actions={newRefundActions}
       />
       <Space level={2} />
+      <RefundConfirmModal
+        record={selectedRecord}
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+      />
     </>
   );
 }

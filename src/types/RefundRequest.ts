@@ -10,6 +10,8 @@ export type RefundRequest = {
   pickUpStartedAt: Date;
   confirmedAt: Date;
   reason: string;
+  refundAmount: number;
+  subtractedShippingFee: number;
   courier: string;
   trackingCode: string;
   trackingViewUrl: string;
