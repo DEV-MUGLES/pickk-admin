@@ -92,7 +92,7 @@ export default function SubsDiscount({id, name, skuPrefix, subsDiscountRate}) {
                 max={100}
                 style={{width: '50px'}}
                 value={discountInfo.discountRate}
-                onChange={value => {
+                onChange={(value) => {
                   dispatchDiscountInfo({
                     type: 'discountRate',
                     discountRate: value,
