@@ -20,29 +20,54 @@ import {useExchangeRequestPreview} from '@src/hooks/ClaimRequest';
 import {useExchangeRequestTable} from '@src/hooks/table/ClaimRequest';
 import {message} from 'antd';
 import ExchangeRequestService from '@src/lib/services/ExchangeRequest';
-import {PickingStatus} from '@src/types';
+import {PickingStatus, ExchangeStatus} from '@src/types';
+import {useState} from 'react';
+import ShipModal from '../placement/table/modal/ship';
 
 function ExchangeRequestBoard({
   title,
 }: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
-  const {tableData} = useBoardContext().state;
+  const {state} = useBoardContext();
+  const {tableData, selectedRowKeys} = state;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const modalData = tableData
+    ? tableData.filter((data) => selectedRowKeys.includes(data.id))
+    : null;
 
   const newExchangeActions = [
     {
       text: '수거완료',
       onClick: async (ids: number[]) => {
         if (
-          !ids.every(
-            id =>
-              tableData.find(record => record.id === id).exchangeStatus ===
-              PickingStatus.Picking,
-          )
+          !ids.every((id) => {
+            const record = tableData.find((row) => row.id === id);
+            return (
+              record.exchangeStatus === PickingStatus.Picking ||
+              record.exchangeStatus === ExchangeStatus.ExchangeRequested
+            );
+          })
         ) {
-          message.warning('수거 중인 요청만 완료처리할 수 있습니다.');
+          message.warning('수거중인 요청만 완료처리할 수 있습니다.');
           return Promise.resolve(false);
         }
-        await ExchangeRequestService.pick(ids);
-        return Promise.resolve(true);
+        try {
+          await ExchangeRequestService.pick(ids);
+          return Promise.resolve(true);
+        } catch (err) {
+          message.error('실패했습니다. - ' + err);
+          return Promise.resolve(false);
+        }
+      },
+    },
+    {
+      text: '재발송처리',
+      onClick: async (ids: number[]) => {
+        setIsModalOpen(true);
+        return Promise.resolve(false);
       },
     },
     ...exchangeRequestActions,
@@ -63,6 +88,7 @@ function ExchangeRequestBoard({
         actions={newExchangeActions}
       />
       <Space level={2} />
+      <ShipModal {...{modalData, isModalOpen, closeModal}} />
     </>
   );
 }
@@ -70,11 +96,9 @@ function ExchangeRequestBoard({
 export default withBoardContext(
   ExchangeRequestBoard,
   {
-    status: 'EXCHANGE_REQUESTED',
+    status: 'REQUESTED',
     lookupDate: 'paid',
-    startDate: moment()
-      .subtract(1, 'months')
-      .format('YYYY-MM-DD'),
+    startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
     endDate: moment().format('YYYY-MM-DD'),
   },
   useExchangeRequestTable,

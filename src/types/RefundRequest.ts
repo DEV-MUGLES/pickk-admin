@@ -4,8 +4,7 @@ export type RefundRequest = {
   id: number;
   orderMerchantUid: string;
   orderStatus: OrderStatus;
-  refundStatus: RefundStatus;
-  pickingStatus: PickingStatus;
+  refundStatus: RefundStatus | PickingStatus;
   paidAt: Date;
   requestedAt: Date;
   pickUpStartedAt: Date;
@@ -38,6 +37,7 @@ export enum PickingStatus {
 
 export type RefundRequestPreview = {
   requested: number;
+  picking: number;
   picked: number;
   confirmed: number;
 };

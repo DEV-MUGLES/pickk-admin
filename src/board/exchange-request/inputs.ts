@@ -9,9 +9,7 @@ export const exchangeRequestInputs = [
     name: 'period',
     defaultValue: {
       type: 'all',
-      startDate: moment()
-        .subtract(1, 'months')
-        .format('YYYY-MM-DD'),
+      startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
     },
     labelText: '조회기간',
@@ -27,12 +25,13 @@ export const exchangeRequestInputs = [
     labelText: '주문상태',
     select: [
       {name: '전체', value: null},
-      {name: '교환 요청', value: 'EXCHANGE_REQUESTED'},
-      {name: '수거 중', value: 'EXCHANGE_PICKING'},
-      {name: '수거 완료', value: 'EXCHANGE_PICKED'},
-      {name: '교환 완료', value: 'EXCHANGE_CONFIRMED'},
-      {name: '교환 거부', value: 'EXCHANGE_REJECTED'},
-      {name: '교환 취소', value: 'EXCHANGE_CANCELLED'},
+      {name: '교환 요청', value: 'REQUESTED'},
+      {name: '수거 중', value: 'PICKING'},
+      {name: '수거 완료', value: 'PICKED'},
+      {name: '교환 배송 중', value: 'RESHIPPING'},
+      {name: '교환 배송 완료', value: 'REDELIVERED'},
+      {name: '교환 거부', value: 'REJECTED'},
+      {name: '교환 취소', value: 'CANCELLED'},
     ],
     Component: Selector,
   },

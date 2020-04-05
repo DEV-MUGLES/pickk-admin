@@ -2,7 +2,12 @@ export const exchangeRequestPreviewData = [
   {
     label: '교환 요청',
     iconType: 'shopping',
-    filterValue: {status: 'EXCHANGE_REQUESTED'},
+    filterValue: {status: 'REQUESTED'},
+  },
+  {
+    label: '교환 수거 중',
+    iconType: 'check',
+    filterValue: {status: 'PICKING'},
   },
   {
     label: '교환 수거 완료',
@@ -10,8 +15,8 @@ export const exchangeRequestPreviewData = [
     filterValue: {status: 'PICKED'},
   },
   {
-    label: '교환 완료',
+    label: '교환 배송 완료',
     iconType: 'shopping',
-    filterValue: {status: 'EXCHANGE_CONFIRMED'},
+    filterValue: {status: 'REDELIVERED'},
   },
 ];

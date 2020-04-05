@@ -9,9 +9,7 @@ export const cancelRequestInputs = [
     name: 'period',
     defaultValue: {
       type: 'all',
-      startDate: moment()
-        .subtract(1, 'months')
-        .format('YYYY-MM-DD'),
+      startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
     },
     labelText: '조회기간',
@@ -27,10 +25,9 @@ export const cancelRequestInputs = [
     labelText: '주문상태',
     select: [
       {name: '전체', value: null},
-      {name: '취소 요청', value: 'CANCEL_REQUESTED'},
-      {name: '취소 완료', value: 'CANCEL_CONFIRMED'},
-      {name: '취소 실패', value: 'CANCEL_FAILED'},
-      {name: '취소 거부', value: 'CANCEL_REJECTED'},
+      {name: '취소 요청', value: 'REQUESTED'},
+      {name: '취소 완료', value: 'CONFIRMED'},
+      {name: '취소 거부', value: 'REJECTED'},
     ],
     Component: Selector,
   },

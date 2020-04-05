@@ -33,7 +33,7 @@ const MENU_ITEMS = [
         link: '/shipments',
       },
       {
-        text: '취소 관리',
+        text: '취소 조회',
         link: '/request/cancel',
       },
       {
@@ -80,7 +80,7 @@ export default function GNB() {
         }}
       />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[router.pathname]}>
-        {MENU_ITEMS.map(item => {
+        {MENU_ITEMS.map((item) => {
           if (!item.title) {
             return (
               <Menu.Item key={item.link}>
@@ -100,7 +100,7 @@ export default function GNB() {
                     <span>{item.title}</span>
                   </span>
                 }>
-                {item.items.map(subItem => (
+                {item.items.map((subItem) => (
                   <Menu.Item key={subItem.link}>
                     <a href={subItem.link}>
                       <span className="nav-text">{subItem.text}</span>

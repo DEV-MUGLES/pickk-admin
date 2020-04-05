@@ -37,18 +37,10 @@ export const exchangeRequestColumns = [
     ellipsis: true,
   },
   {
-    title: '재배송상태',
-    dataIndex: 'reshipStatus',
-    key: 'reshipStatus',
-    sorter: (a, b) => stringSorter(b.reshipStatus, a.reshipStatus),
-    width: 110,
-    ellipsis: true,
-  },
-  {
     title: '결제일',
     dataIndex: 'paidAt',
     key: 'paidAt',
-    render: value => <div>{getTimeString(value)}</div>,
+    render: (value) => <div>{getTimeString(value)}</div>,
     sorter: (a, b) => stringSorter(b.paidAt, a.paidAt),
     width: 140,
     ellipsis: true,
@@ -57,7 +49,7 @@ export const exchangeRequestColumns = [
     title: '교환요청일',
     dataIndex: 'requestedAt',
     key: 'requestedAt',
-    render: value => <div>{getTimeString(value)}</div>,
+    render: (value) => <div>{getTimeString(value)}</div>,
     sorter: (a, b) => stringSorter(b.requestedAt, a.requestedAt),
     width: 140,
     ellipsis: true,
@@ -66,7 +58,7 @@ export const exchangeRequestColumns = [
     title: '교환완료일',
     dataIndex: 'confirmedAt',
     key: 'confirmedAt',
-    render: value => <div>{getTimeString(value)}</div>,
+    render: (value) => <div>{getTimeString(value)}</div>,
 
     sorter: (a, b) => stringSorter(b.confirmedAt, a.confirmedAt),
     width: 140,
@@ -100,7 +92,7 @@ export const exchangeRequestColumns = [
     title: '반품\n배송추적',
     dataIndex: 'exchangeTrackingViewUrl',
     key: 'exchangeTrackingViewUrl',
-    render: value =>
+    render: (value) =>
       value ? (
         <a href={value} target="_blank">
           <Button size="small">배송추적</Button>
@@ -129,7 +121,7 @@ export const exchangeRequestColumns = [
     title: '재배송\n배송추적',
     dataIndex: 'reshipTrackingViewUrl',
     key: 'reshipTrackingViewUrl',
-    render: value =>
+    render: (value) =>
       value ? (
         <a href={value} target="_blank">
           <Button size="small">배송추적</Button>
@@ -142,7 +134,7 @@ export const exchangeRequestColumns = [
     title: '상품명',
     dataIndex: 'itemName',
     key: 'itemName',
-    render: value => value,
+    render: (value) => value,
     sorter: (a, b) => stringSorter(b.itemName, a.itemName),
     width: 200,
     ellipsis: true,
@@ -151,7 +143,7 @@ export const exchangeRequestColumns = [
     title: '옵션',
     dataIndex: 'options',
     key: 'options',
-    render: value => value.join('/'),
+    render: (value) => value.join('/'),
     sorter: (a, b) => stringSorter(b.options.join('/'), a.options.join('/')),
     width: 100,
     ellipsis: true,
@@ -168,7 +160,7 @@ export const exchangeRequestColumns = [
     title: '교환옵션',
     dataIndex: 'exchangeOptions',
     key: 'exchangeOptions',
-    render: value => value.join('/'),
+    render: (value) => value.join('/'),
     sorter: (a, b) =>
       stringSorter(b.exchangeOptions.join('/'), a.exchangeOptions.join('/')),
     width: 100,
@@ -202,7 +194,7 @@ export const exchangeRequestColumns = [
     title: '구매자 연락처',
     dataIndex: 'buyerPhone',
     key: 'buyerPhone',
-    render: value => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
+    render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
     sorter: (a, b) => stringSorter(b.buyerPhone, a.buyerPhone),
     width: 125,
     ellipsis: true,
@@ -219,7 +211,7 @@ export const exchangeRequestColumns = [
     title: '수취인 연락처',
     dataIndex: 'addressPhone',
     key: 'addressPhone',
-    render: value => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
+    render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
     sorter: (a, b) => stringSorter(b.addressPhone, a.addressPhone),
     width: 125,
     ellipsis: true,

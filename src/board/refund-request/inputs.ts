@@ -9,9 +9,7 @@ export const refundRequestInputs = [
     name: 'period',
     defaultValue: {
       type: 'all',
-      startDate: moment()
-        .subtract(1, 'months')
-        .format('YYYY-MM-DD'),
+      startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
     },
     labelText: '조회기간',
@@ -28,12 +26,12 @@ export const refundRequestInputs = [
     labelText: '주문상태',
     select: [
       {name: '전체', value: null},
-      {name: '반품 요청', value: 'REFUND_REQUESTED'},
+      {name: '반품 요청', value: 'REQUESTED'},
       {name: '수거 중', value: 'PICKING'},
       {name: '수거 완료', value: 'PICKED'},
-      {name: '반품 완료', value: 'REFUND_CONFIRMED'},
-      {name: '반품 거부', value: 'REFUND_REJECTED'},
-      {name: '반품 취소', value: 'REFUND_CANCELLED'},
+      {name: '반품 완료', value: 'CONFIRMED'},
+      {name: '반품 거부', value: 'REJECTED'},
+      {name: '반품 취소', value: 'CANCELLED'},
     ],
     Component: Selector,
   },

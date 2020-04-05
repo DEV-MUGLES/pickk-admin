@@ -5,8 +5,7 @@ export type ExchangeRequest = {
   orderMerchantUid: string;
   merchantUid: string;
   orderStatus: OrderStatus;
-  exchangeStatus: ExchangeStatus | PickingStatus;
-  reshipStatus: PickingStatus;
+  exchangeStatus: ExchangeStatus | PickingStatus | ReshipStatus;
   paidAt: Date;
   requestedAt: Date;
   confirmedAt: Date;
@@ -36,8 +35,14 @@ export enum ExchangeStatus {
   ExchangeCanceld = '교환 요청 취소',
 }
 
+export enum ReshipStatus {
+  Reshipping = '교환 배송 중',
+  Redelivered = '교환 배송 완료',
+}
+
 export type ExchangeRequestPreview = {
   requested: number;
+  picking: number;
   picked: number;
   confirmed: number;
 };

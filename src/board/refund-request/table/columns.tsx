@@ -29,18 +29,10 @@ export const refundRequestColumns = [
     ellipsis: true,
   },
   {
-    title: '수거상태',
-    dataIndex: 'pickingStatus',
-    key: 'pickingStatus',
-    sorter: (a, b) => stringSorter(b.pickingStatus, a.pickingStatus),
-    width: 110,
-    ellipsis: true,
-  },
-  {
     title: '결제일',
     dataIndex: 'paidAt',
     key: 'paidAt',
-    render: value => <div>{getTimeString(value)}</div>,
+    render: (value) => <div>{getTimeString(value)}</div>,
     sorter: (a, b) => stringSorter(b.paidAt, a.paidAt),
     width: 140,
     ellipsis: true,
@@ -49,7 +41,7 @@ export const refundRequestColumns = [
     title: '반품요청일',
     dataIndex: 'requestedAt',
     key: 'requestedAt',
-    render: value => <div>{getTimeString(value)}</div>,
+    render: (value) => <div>{getTimeString(value)}</div>,
     sorter: (a, b) => stringSorter(b.requestedAt, a.requestedAt),
     width: 140,
     ellipsis: true,
@@ -58,7 +50,7 @@ export const refundRequestColumns = [
     title: '반품발송일',
     dataIndex: 'pickUpStartedAt',
     key: 'pickUpStartedAt',
-    render: value => <div>{getTimeString(value)}</div>,
+    render: (value) => <div>{getTimeString(value)}</div>,
 
     sorter: (a, b) => stringSorter(b.pickUpStartedAt, a.pickUpStartedAt),
     width: 140,
@@ -68,7 +60,7 @@ export const refundRequestColumns = [
     title: '반품완료일',
     dataIndex: 'confirmedAt',
     key: 'confirmedAt',
-    render: value => <div>{getTimeString(value)}</div>,
+    render: (value) => <div>{getTimeString(value)}</div>,
 
     sorter: (a, b) => stringSorter(b.confirmedAt, a.confirmedAt),
     width: 140,
@@ -102,7 +94,7 @@ export const refundRequestColumns = [
     title: '배송추적',
     dataIndex: 'trackingViewUrl',
     key: 'trackingViewUrl',
-    render: value =>
+    render: (value) =>
       value ? (
         <a href={value} target="_blank">
           <Button size="small">배송추적</Button>
@@ -115,7 +107,7 @@ export const refundRequestColumns = [
     title: '상품명(전체)',
     dataIndex: 'itemNames',
     key: 'itemNames',
-    render: value => value.join('-'),
+    render: (value) => value.join('-'),
     sorter: (a, b) =>
       stringSorter(b.itemNames.join('-'), a.itemNames.join('-')),
     width: 200,
@@ -125,11 +117,11 @@ export const refundRequestColumns = [
     title: '옵션(전체)',
     dataIndex: 'options',
     key: 'options',
-    render: value => value.map(v => v.join('/')).join(','),
+    render: (value) => value.map((v) => v.join('/')).join(','),
     sorter: (a, b) =>
       stringSorter(
-        b.options.map(v => v.join('/')).join(','),
-        a.options.map(v => v.join('/')).join(','),
+        b.options.map((v) => v.join('/')).join(','),
+        a.options.map((v) => v.join('/')).join(','),
       ),
     width: 200,
     ellipsis: true,
@@ -154,7 +146,7 @@ export const refundRequestColumns = [
     title: '구매자 연락처',
     dataIndex: 'buyerPhone',
     key: 'buyerPhone',
-    render: value => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
+    render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
     sorter: (a, b) => stringSorter(b.buyerPhone, a.buyerPhone),
     width: 125,
     ellipsis: true,
@@ -171,7 +163,7 @@ export const refundRequestColumns = [
     title: '수취인 연락처',
     dataIndex: 'orderAddressPhone',
     key: 'orderAddressPhone',
-    render: value => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
+    render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
     sorter: (a, b) => stringSorter(b.orderAddressPhone, a.orderAddressPhone),
     width: 125,
     ellipsis: true,
