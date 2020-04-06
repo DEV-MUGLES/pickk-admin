@@ -3,7 +3,7 @@ export const isEqualObject = (a, b): boolean => {
   if (!a || !b) return false;
   return (
     Object.keys(a).length === Object.keys(b).length &&
-    Object.keys(a).every(key => a[key] === b[key])
+    Object.keys(a).every((key) => a[key] === b[key])
   );
 };
 
@@ -22,10 +22,14 @@ export const isEqualArray = (a: any[], b: any[], compare?): boolean => {
   return a.every((_, i) => (compare ? compare(a[i], b[i]) : a[i] === b[i]));
 };
 
+export const range = (start: number, end: number) =>
+  [...Array(end - start).keys()].map((i) => i + start);
+
 const Util = {
   isEqualObject,
   isEqualSizeObject,
   isEqualArray,
+  range,
 };
 
 export default Util;

@@ -66,7 +66,7 @@ export const withBoardContext = (
     setSelectedRowKeys([]);
   };
 
-  const applyPreview = data => {
+  const applyPreview = (data) => {
     const newData = {
       ...defaultFilter,
       ...data,
@@ -81,7 +81,7 @@ export const withBoardContext = (
       filter,
       newFilter,
       tableData: data
-        ? data.map(v => {
+        ? data.map((v) => {
             return {...v, key: v.id};
           })
         : null,
