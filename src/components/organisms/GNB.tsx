@@ -31,7 +31,7 @@ const MENU_ITEMS = [
       {
         text: '배송현황 관리',
         link: '/shipments',
-      },
+      } /*
       {
         text: '취소 조회',
         link: '/request/cancel',
@@ -44,7 +44,7 @@ const MENU_ITEMS = [
         text: '교환 관리',
         link: '/request/exchange',
       },
-      ,
+      ,*/,
     ],
   } /*
   {
