@@ -46,8 +46,6 @@ export const withBoardContext = (
   const {loading, data} = useTable([newFilter, toRerender]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-  console.log(data);
-
   const initFilter = () => {
     setFilter(defaultFilter);
     setNewFilter(defaultFilter);

@@ -27,7 +27,7 @@ export default function ShipModal({
   useEffect(() => {
     if (!modalData) return;
     setShipments(
-      modalData.map(record => {
+      modalData.map((record) => {
         const {merchantUid, courier, trackingCode} = record;
         return {
           merchantUid,
@@ -38,7 +38,7 @@ export default function ShipModal({
     );
   }, [modalData]);
 
-  const handleShipmentsChange = index => async e => {
+  const handleShipmentsChange = (index) => async (e) => {
     setShipments([
       ...shipments.slice(0, index),
       {
@@ -50,6 +50,7 @@ export default function ShipModal({
   };
 
   const handleSubmit = async () => {
+    console.log(shipments);
     await OrderItemService.ship(shipments);
     closeModal();
     reload();

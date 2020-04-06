@@ -33,18 +33,18 @@ const MENU_ITEMS = [
         link: '/shipments',
       } /*
       {
-        text: '취소 관리',
-        link: '/claim/cancel',
+        text: '취소 조회',
+        link: '/request/cancel',
       },
       {
         text: '반품 관리',
-        link: '/claim/return',
+        link: '/request/refund',
       },
       {
         text: '교환 관리',
-        link: '/claim/exchange',
-      },*/,
-      ,
+        link: '/request/exchange',
+      },
+      ,*/,
     ],
   } /*
   {
@@ -80,7 +80,7 @@ export default function GNB() {
         }}
       />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[router.pathname]}>
-        {MENU_ITEMS.map(item => {
+        {MENU_ITEMS.map((item) => {
           if (!item.title) {
             return (
               <Menu.Item key={item.link}>
@@ -100,7 +100,7 @@ export default function GNB() {
                     <span>{item.title}</span>
                   </span>
                 }>
-                {item.items.map(subItem => (
+                {item.items.map((subItem) => (
                   <Menu.Item key={subItem.link}>
                     <a href={subItem.link}>
                       <span className="nav-text">{subItem.text}</span>
