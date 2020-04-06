@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Layout, Input, Icon, Checkbox, Button, Typography} from 'antd';
+import React, {useState, useEffect, CSSProperties} from 'react';
+import {Layout, Input, Icon, Checkbox, Button, Typography, message} from 'antd';
 import styled from 'styled-components';
 
 import Colors from '@src/components/atoms/colors';
@@ -18,11 +18,16 @@ export default function LoginForm() {
   const [isRememberIDPW, setIsRememberIDPW] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const inputStyle = {width: '400px'};
+  const inputStyle: CSSProperties = {width: '400px'};
   const inputPrefixStyle = {color: 'rgba(0,0,0,.25)'};
 
-  const handleLoginFormChange = e =>
+  const handleLoginFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(e.target.value)) {
+      message.warning('한글 입력은 지원하지 않습니다. 영문으로 전환해주세요.');
+      return;
+    }
     setLoginFormState({...loginFormState, [e.target.name]: e.target.value});
+  };
 
   const handleLogin = async () => {
     setLoading(true);
@@ -30,7 +35,7 @@ export default function LoginForm() {
     setLoading(false);
   };
 
-  const handlePasswordKeyDown = e => {
+  const handlePasswordKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleLogin();
     }

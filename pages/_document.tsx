@@ -12,7 +12,8 @@ export default class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
         });
       const initialProps = await Document.getInitialProps(ctx);
 
@@ -34,6 +35,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="ko">
         <Head>
+          <link rel="stylesheet" href="/antd.min.css" />
           <link
             rel="icon"
             type="image/png"
@@ -41,13 +43,11 @@ export default class MyDocument extends Document {
             href="/images/favicon-16x16.png"></link>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
-          <link rel="stylesheet" href="/antd.min.css" />
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
-        <style></style>
       </html>
     );
   }
