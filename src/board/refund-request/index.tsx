@@ -112,7 +112,7 @@ function RefundRequestBoard({
 export default withBoardContext(
   RefundRequestBoard,
   {
-    status: 'REQUESTED',
+    status: null,
     lookupDate: 'paid',
     startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
     endDate: moment().format('YYYY-MM-DD'),

@@ -96,7 +96,7 @@ function ExchangeRequestBoard({
 export default withBoardContext(
   ExchangeRequestBoard,
   {
-    status: 'REQUESTED',
+    status: null,
     lookupDate: 'paid',
     startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
     endDate: moment().format('YYYY-MM-DD'),

@@ -36,7 +36,7 @@ function CancelRequestBoard({
 export default withBoardContext(
   CancelRequestBoard,
   {
-    status: 'REQUESTED',
+    status: null,
     lookupDate: 'paid',
     startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
     endDate: moment().format('YYYY-MM-DD'),
