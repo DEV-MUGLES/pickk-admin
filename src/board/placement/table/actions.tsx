@@ -5,6 +5,7 @@ import CSVReader from 'react-csv-reader';
 
 import {TableActionType} from '@src/components/organisms/Board/Table/table';
 import OrderItemService from '@src/lib/services/OrderItem';
+import PlacementService from '@src/lib/services/Placement';
 
 const {confirm} = Modal;
 
@@ -13,9 +14,9 @@ export const placementActions: TableActionType[] = [
     Component: () => (
       <Upload
         showUploadList={false}
-        beforeUpload={file => {
+        beforeUpload={(file) => {
           const reader = new FileReader();
-          reader.onload = e => {
+          reader.onload = (e) => {
             const data = e.target.result;
             const readedData = XLSX.read(data, {type: 'binary'});
             const wsname = readedData.SheetNames[0];
@@ -25,7 +26,7 @@ export const placementActions: TableActionType[] = [
             const dataParse = XLSX.utils.sheet_to_json(ws, {header: 1});
 
             const count = {};
-            dataParse.slice(1).forEach(record => {
+            dataParse.slice(1).forEach((record) => {
               const status = record[3];
               count[status] =
                 count[status] !== undefined ? count[status] + 1 : 1;
@@ -36,14 +37,14 @@ export const placementActions: TableActionType[] = [
               icon: <Icon type="ExclamationCircleOutlined" />,
               content: (
                 <div>
-                  {Object.keys(count).map(status => (
+                  {Object.keys(count).map((status) => (
                     <p key={status}>{`${status} : ${count[status]}개`}</p>
                   ))}
                 </div>
               ),
               onOk() {
                 try {
-                  const result = dataParse.slice(1).map(record => {
+                  const result = dataParse.slice(1).map((record) => {
                     return {
                       merchantUid: record[1] !== undefined ? record[1] : '',
                       courier: record[20] !== undefined ? record[20] : '',
@@ -84,9 +85,9 @@ export const placementActions: TableActionType[] = [
             <CSVReader
               cssClass="csv-reader-input"
               label="Select CSV with secret Death Star statistics"
-              onFileLoaded={dataCsv => {
+              onFileLoaded={(dataCsv) => {
                 const count = {};
-                dataCsv.forEach(record => {
+                dataCsv.forEach((record) => {
                   const status = record['주문상태'];
                   count[status] =
                     count[status] !== undefined ? count[status] + 1 : 1;
@@ -96,14 +97,14 @@ export const placementActions: TableActionType[] = [
                   icon: <Icon type="ExclamationCircleOutlined" />,
                   content: (
                     <div>
-                      {Object.keys(count).map(status => (
+                      {Object.keys(count).map((status) => (
                         <p key={status}>{`${status} : ${count[status]}개`}</p>
                       ))}
                     </div>
                   ),
                   onOk() {
                     try {
-                      const result = dataCsv.map(record => {
+                      const result = dataCsv.map((record) => {
                         return {
                           merchantUid: record['상품주문번호']
                             ? record['상품주문번호'].toString()
@@ -148,12 +149,23 @@ export const placementActions: TableActionType[] = [
       );
     },
   },
-  /*{
-    text: '구독 할인 설정',
-    onClick: (nums: number[]) => {
-      return;
+  {
+    text: '주문 취소',
+    onClick: async (nums: number[]) => {
+      if (nums.length !== 1) {
+        message.warning(
+          '주문 일괄 취소는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
+        );
+        return Promise.resolve(false);
+      }
+      try {
+        await PlacementService.cancel(nums[0]);
+        return Promise.resolve(true);
+      } catch {
+        return Promise.resolve(false);
+      }
     },
-  },*/
+  },
 ];
 
 const Input = styled.input``;
