@@ -6,6 +6,7 @@ export type Settlement = {
   productSku: string;
   paidAt: Date;
   status: OrderStatus;
+  settleStatus: SettleStatus;
   brandName: string;
   itemName: string;
   options: string[];
@@ -25,3 +26,9 @@ export type Settlement = {
   referenceAmount: number;
   expectedDate: Date;
 };
+
+export enum SettleStatus {
+  Confirmed = '정산 완료',
+  Issued = '정산 이슈',
+  Pending = '미정산',
+}

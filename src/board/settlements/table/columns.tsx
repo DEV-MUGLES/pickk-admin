@@ -47,6 +47,14 @@ export const settlementColumns = [
     ellipsis: true,
   },
   {
+    title: '정산상태',
+    dataIndex: 'settleStatus',
+    key: 'settleStatus',
+    sorter: (a, b) => stringSorter(b.settleStatus, a.settleStatus),
+    width: 90,
+    ellipsis: true,
+  },
+  {
     title: '구매확정일시',
     dataIndex: 'confirmedAt',
     key: 'confirmedAt',
