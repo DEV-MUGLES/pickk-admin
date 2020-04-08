@@ -46,13 +46,19 @@ export const placementActions: TableActionType[] = [
               ),
               onOk() {
                 try {
-                  const result = dataParse.slice(1).map((record) => {
-                    return {
-                      merchantUid: record[1] !== undefined ? record[1] : '',
-                      courier: record[20] !== undefined ? record[20] : '',
-                      trackingCode: record[21] !== undefined ? record[21] : '',
-                    };
-                  });
+                  const result = dataParse
+                    .slice(1)
+                    .map((record) => {
+                      return {
+                        merchantUid: record[1] !== undefined ? record[1] : '',
+                        courier: record[20] !== undefined ? record[20] : '',
+                        trackingCode:
+                          record[21] !== undefined ? record[21] : '',
+                      };
+                    })
+                    .filter((record) =>
+                      Object.values(record).every((value) => value !== ''),
+                    );
                   console.log(result);
                   OrderItemService.ship(result);
                 } catch {
@@ -109,20 +115,24 @@ export const placementActions: TableActionType[] = [
                   ),
                   onOk() {
                     try {
-                      const result = dataCsv.map((record) => {
-                        return {
-                          merchantUid: record['상품주문번호']
-                            ? record['상품주문번호'].toString()
-                            : '',
-                          courier:
-                            record['택배사'] !== undefined
-                              ? record['택배사']
+                      const result = dataCsv
+                        .map((record) => {
+                          return {
+                            merchantUid: record['상품주문번호']
+                              ? record['상품주문번호'].toString()
                               : '',
-                          trackingCode: record['송장번호']
-                            ? record['송장번호'].toString()
-                            : '',
-                        };
-                      });
+                            courier:
+                              record['택배사'] !== undefined
+                                ? record['택배사']
+                                : '',
+                            trackingCode: record['송장번호']
+                              ? record['송장번호'].toString()
+                              : '',
+                          };
+                        })
+                        .filter((record) =>
+                          Object.values(record).every((value) => value !== ''),
+                        );
                       console.log(result);
                       OrderItemService.ship(result);
                     } catch {
