@@ -21,6 +21,14 @@ export const exchangeRequestColumns = [
     ellipsis: true,
   },
   {
+    title: '구매자명',
+    dataIndex: 'buyerName',
+    key: 'buyerName',
+    sorter: (a, b) => stringSorter(b.buyerName, a.buyerName),
+    width: 100,
+    ellipsis: true,
+  },
+  {
     title: '주문상태',
     dataIndex: 'orderStatus',
     key: 'orderStatus',
@@ -180,14 +188,6 @@ export const exchangeRequestColumns = [
     key: 'quantity',
     sorter: (a, b) => b.quantity - a.quantity,
     width: 75,
-    ellipsis: true,
-  },
-  {
-    title: '구매자명',
-    dataIndex: 'buyerName',
-    key: 'buyerName',
-    sorter: (a, b) => stringSorter(b.buyerName, a.buyerName),
-    width: 100,
     ellipsis: true,
   },
   {
