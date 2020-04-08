@@ -13,9 +13,9 @@ export const placementActions: TableActionType[] = [
     Component: () => (
       <Upload
         showUploadList={false}
-        beforeUpload={file => {
+        beforeUpload={(file) => {
           const reader = new FileReader();
-          reader.onload = e => {
+          reader.onload = (e) => {
             const data = e.target.result;
             const readedData = XLSX.read(data, {type: 'binary'});
             const wsname = readedData.SheetNames[0];
@@ -25,8 +25,11 @@ export const placementActions: TableActionType[] = [
             const dataParse = XLSX.utils.sheet_to_json(ws, {header: 1});
 
             const count = {};
-            dataParse.slice(1).forEach(record => {
+            dataParse.slice(1).forEach((record) => {
               const status = record[3];
+              if (status === undefined) {
+                return;
+              }
               count[status] =
                 count[status] !== undefined ? count[status] + 1 : 1;
             });
@@ -36,14 +39,14 @@ export const placementActions: TableActionType[] = [
               icon: <Icon type="ExclamationCircleOutlined" />,
               content: (
                 <div>
-                  {Object.keys(count).map(status => (
+                  {Object.keys(count).map((status) => (
                     <p key={status}>{`${status} : ${count[status]}개`}</p>
                   ))}
                 </div>
               ),
               onOk() {
                 try {
-                  const result = dataParse.slice(1).map(record => {
+                  const result = dataParse.slice(1).map((record) => {
                     return {
                       merchantUid: record[1] !== undefined ? record[1] : '',
                       courier: record[20] !== undefined ? record[20] : '',
@@ -84,10 +87,13 @@ export const placementActions: TableActionType[] = [
             <CSVReader
               cssClass="csv-reader-input"
               label="Select CSV with secret Death Star statistics"
-              onFileLoaded={dataCsv => {
+              onFileLoaded={(dataCsv) => {
                 const count = {};
-                dataCsv.forEach(record => {
+                dataCsv.forEach((record) => {
                   const status = record['주문상태'];
+                  if (status === undefined) {
+                    return;
+                  }
                   count[status] =
                     count[status] !== undefined ? count[status] + 1 : 1;
                 });
@@ -96,14 +102,14 @@ export const placementActions: TableActionType[] = [
                   icon: <Icon type="ExclamationCircleOutlined" />,
                   content: (
                     <div>
-                      {Object.keys(count).map(status => (
+                      {Object.keys(count).map((status) => (
                         <p key={status}>{`${status} : ${count[status]}개`}</p>
                       ))}
                     </div>
                   ),
                   onOk() {
                     try {
-                      const result = dataCsv.map(record => {
+                      const result = dataCsv.map((record) => {
                         return {
                           merchantUid: record['상품주문번호']
                             ? record['상품주문번호'].toString()
