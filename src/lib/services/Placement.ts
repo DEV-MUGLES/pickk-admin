@@ -35,7 +35,7 @@ const place = (ids: number[]) =>
 
 const cancel = async (id: number) => {
   return base(true)
-    .post(`/partner/placements/${id}/cancel`)
+    .post(`/partner/placements/${id}/cancel/`)
     .then(() => {
       message.success(`취소 완료되었습니다.`);
     })
