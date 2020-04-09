@@ -22,4 +22,15 @@ export const settlementInputs = [
     Component: Selector,
     guideText: '해당 월에 정산예정인 주문건만 필터링합니다.',
   },
+  {
+    name: 'settleStatus',
+    labelText: '정산상태',
+    select: [
+      {name: '전체', value: null},
+      {name: '정산됨', value: 'CONFIRMED'},
+      {name: '정산 이슈', value: 'ISSUED'},
+      {name: '미정산', value: 'PENDING'},
+    ],
+    Component: Selector,
+  },
 ];

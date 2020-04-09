@@ -31,7 +31,7 @@ const MENU_ITEMS = [
       {
         text: '배송현황 관리',
         link: '/shipments',
-      } /*
+      },
       {
         text: '취소 조회',
         link: '/request/cancel',
@@ -44,17 +44,17 @@ const MENU_ITEMS = [
         text: '교환 관리',
         link: '/request/exchange',
       },
-      ,*/,
+      ,
     ],
-  } /*
+  },
   {
     title: '정산 관리',
     iconType: 'dollar',
     items: [
       {
         text: '정산 내역',
-        link: '/settle',
-      },
+        link: '/settlements',
+      } /*
       {
         text: '정산 내역 상세',
         link: '/settle/detail',
@@ -62,9 +62,9 @@ const MENU_ITEMS = [
       {
         text: '세금계산서 조회',
         link: '/tax',
-      },
+      },*/,
     ],
-  },*/,
+  },
 ];
 
 export default function GNB() {
