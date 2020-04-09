@@ -34,9 +34,12 @@ const pick = (ids: number[]) =>
     })
     .catch((err) => message.error('실패했습니다. - ' + err));
 
-const confirm = async (id: number, fullAmount: boolean) => {
+const confirm = async (id: number, shippingFee?: 'FULL' | 'HALF') => {
   return base(true)
-    .post(`/partner/refund_requests/${id}/confirm/?fullAmount=${fullAmount}`)
+    .post(
+      `/partner/refund_requests/${id}/confirm/` +
+        (shippingFee ? `?shippingFee=${shippingFee}` : ''),
+    )
     .then((res) => {
       message.success(`반품 완료되었습니다.`);
     })

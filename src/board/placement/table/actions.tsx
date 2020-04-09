@@ -59,7 +59,6 @@ export const placementActions: TableActionType[] = [
                     .filter((record) =>
                       Object.values(record).every((value) => value !== ''),
                     );
-                  console.log(result);
                   OrderItemService.ship(result);
                 } catch {
                   message.error(
@@ -133,7 +132,6 @@ export const placementActions: TableActionType[] = [
                         .filter((record) =>
                           Object.values(record).every((value) => value !== ''),
                         );
-                      console.log(result);
                       OrderItemService.ship(result);
                     } catch {
                       message.error(

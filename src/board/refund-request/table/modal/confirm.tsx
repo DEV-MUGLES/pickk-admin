@@ -25,8 +25,8 @@ export default function RefundConfirmModal({
 }: RefundConfirmModalProps) {
   const {reload} = useBoardContext().action;
 
-  const handleSubmit = (fullAmount: boolean) => async () => {
-    await RefundRequestService.confirm(record.id, fullAmount);
+  const handleSubmit = (shippingFee?: 'FULL' | 'HALF') => async () => {
+    await RefundRequestService.confirm(record.id, shippingFee);
     closeModal();
     reload();
   };
@@ -46,11 +46,16 @@ export default function RefundConfirmModal({
           <Text>반품 배송비 : {addCommaToNumber(subtractedShippingFee)}원</Text>
           <Text>차감된 환불 금액 : {addCommaToNumber(refundAmount)}원</Text>
           <SubmitArea>
-            <Button type="primary" onClick={handleSubmit(false)}>
-              배송비 차감 환불 ({addCommaToNumber(refundAmount)}원)
+            <Button type="primary" onClick={handleSubmit('FULL')}>
+              왕복 배송비 차감 환불 ({addCommaToNumber(refundAmount)}원)
             </Button>
             <Space />
-            <Button type="primary" onClick={handleSubmit(true)}>
+            <Button type="primary" onClick={handleSubmit('HALF')}>
+              편도 배송비 차감 환불 (
+              {addCommaToNumber(refundAmount + subtractedShippingFee / 2)}원)
+            </Button>
+            <Space />
+            <Button type="primary" onClick={handleSubmit()}>
               전액 환불 (
               {addCommaToNumber(refundAmount + subtractedShippingFee)}원)
             </Button>
