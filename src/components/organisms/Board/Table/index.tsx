@@ -22,7 +22,6 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
   const {setSelectedRowKeys} = action;
 
   const [pageSize, setPageSize] = useState(10);
-  console.log(pageSize);
 
   const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
 

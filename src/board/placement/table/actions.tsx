@@ -28,6 +28,9 @@ export const placementActions: TableActionType[] = [
             const count = {};
             dataParse.slice(1).forEach((record) => {
               const status = record[3];
+              if (status === undefined) {
+                return;
+              }
               count[status] =
                 count[status] !== undefined ? count[status] + 1 : 1;
             });
@@ -44,14 +47,19 @@ export const placementActions: TableActionType[] = [
               ),
               onOk() {
                 try {
-                  const result = dataParse.slice(1).map((record) => {
-                    return {
-                      merchantUid: record[1] !== undefined ? record[1] : '',
-                      courier: record[20] !== undefined ? record[20] : '',
-                      trackingCode: record[21] !== undefined ? record[21] : '',
-                    };
-                  });
-                  console.log(result);
+                  const result = dataParse
+                    .slice(1)
+                    .map((record) => {
+                      return {
+                        merchantUid: record[1] !== undefined ? record[1] : '',
+                        courier: record[20] !== undefined ? record[20] : '',
+                        trackingCode:
+                          record[21] !== undefined ? record[21] : '',
+                      };
+                    })
+                    .filter((record) =>
+                      Object.values(record).every((value) => value !== ''),
+                    );
                   OrderItemService.ship(result);
                 } catch {
                   message.error(
@@ -89,6 +97,9 @@ export const placementActions: TableActionType[] = [
                 const count = {};
                 dataCsv.forEach((record) => {
                   const status = record['주문상태'];
+                  if (status === undefined) {
+                    return;
+                  }
                   count[status] =
                     count[status] !== undefined ? count[status] + 1 : 1;
                 });
@@ -104,21 +115,24 @@ export const placementActions: TableActionType[] = [
                   ),
                   onOk() {
                     try {
-                      const result = dataCsv.map((record) => {
-                        return {
-                          merchantUid: record['상품주문번호']
-                            ? record['상품주문번호'].toString()
-                            : '',
-                          courier:
-                            record['택배사'] !== undefined
-                              ? record['택배사']
+                      const result = dataCsv
+                        .map((record) => {
+                          return {
+                            merchantUid: record['상품주문번호']
+                              ? record['상품주문번호'].toString()
                               : '',
-                          trackingCode: record['송장번호']
-                            ? record['송장번호'].toString()
-                            : '',
-                        };
-                      });
-                      console.log(result);
+                            courier:
+                              record['택배사'] !== undefined
+                                ? record['택배사']
+                                : '',
+                            trackingCode: record['송장번호']
+                              ? record['송장번호'].toString()
+                              : '',
+                          };
+                        })
+                        .filter((record) =>
+                          Object.values(record).every((value) => value !== ''),
+                        );
                       OrderItemService.ship(result);
                     } catch {
                       message.error(
