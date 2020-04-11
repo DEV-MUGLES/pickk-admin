@@ -52,9 +52,9 @@ export const placementActions: TableActionType[] = [
                     .map((record) => {
                       return {
                         merchantUid: record[1] !== undefined ? record[1] : '',
-                        courier: record[20] !== undefined ? record[20] : '',
+                        courier: record[21] !== undefined ? record[21] : '',
                         trackingCode:
-                          record[21] !== undefined ? record[21] : '',
+                          record[22] !== undefined ? record[22] : '',
                       };
                     })
                     .filter((record) =>
@@ -136,12 +136,12 @@ export const placementActions: TableActionType[] = [
                       OrderItemService.ship(result);
                     } catch {
                       message.error(
-                        '비정상적인 엑셀 파일입니다. (주문번호가 변조됐을 수 있습니다.)',
+                        '비정상적인 CSV 파일입니다. (주문번호가 변조됐을 수 있습니다.)',
                       );
                     }
                   },
                   onCancel() {
-                    message.warning('엑셀일괄발송이 취소되었습니다.');
+                    message.warning('CSV일괄발송이 취소되었습니다.');
                   },
                 });
               }}

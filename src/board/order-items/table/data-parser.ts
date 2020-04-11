@@ -4,7 +4,7 @@ import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
 import {Placement} from '@src/types';
 
 export const parseTable = (table: Placement[]) =>
-  table ? table.map(record => parseRecord(record)) : null;
+  table ? table.map((record) => parseRecord(record)) : null;
 
 export const parseRecord = (record: Placement) => {
   const result = {
@@ -13,6 +13,7 @@ export const parseRecord = (record: Placement) => {
     placedAt: getTimeString(record.placedAt),
     shippedAt: getTimeString(record.shippedAt),
     deliveredAt: getTimeString(record.deliveredAt),
+    combinedAddress: `${record.baseAddress} ${record.detailAddress}`,
     options: record.options.join('-'),
     buyerPhone: record.buyerPhone
       ? addDashToPhoneNumber(record.buyerPhone)
@@ -21,7 +22,7 @@ export const parseRecord = (record: Placement) => {
       ? addDashToPhoneNumber(record.addressPhone)
       : null,
   };
-  Object.keys(result).forEach(key => {
+  Object.keys(result).forEach((key) => {
     if (!result[key] || result[key] === undefined) {
       result[key] = '';
     }
