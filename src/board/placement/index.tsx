@@ -28,7 +28,7 @@ function PlacementBoard({title}: BoardProps) {
   };
 
   const modalData = tableData
-    ? tableData.filter(data => selectedRowKeys.includes(data.id))
+    ? tableData.filter((data) => selectedRowKeys.includes(data.id))
     : null;
 
   const newPlacementActions = [
@@ -37,8 +37,8 @@ function PlacementBoard({title}: BoardProps) {
       onClick: async (ids: number[]) => {
         if (
           !ids.every(
-            id =>
-              tableData.find(record => record.id === id).status ===
+            (id) =>
+              tableData.find((record) => record.id === id).status ===
               OrderStatus.Paid,
           )
         ) {
@@ -83,11 +83,9 @@ function PlacementBoard({title}: BoardProps) {
 export default withBoardContext(
   PlacementBoard,
   {
-    status: null,
+    status: 'PAID',
     lookupDate: 'paid',
-    startDate: moment()
-      .subtract(1, 'months')
-      .format('YYYY-MM-DD'),
+    startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
     endDate: moment().format('YYYY-MM-DD'),
   },
   usePlacementTable,
