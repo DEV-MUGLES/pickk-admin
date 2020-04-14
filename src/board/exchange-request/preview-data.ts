@@ -26,13 +26,13 @@ export const exchangeRequestPreviewData = [
   },
   {
     label: '교환 취소',
-    iconType: 'check',
+    iconType: 'stop',
     filterValue: {status: 'CANCELLED'},
     disabled: true,
   },
   {
     label: '교환 거부',
-    iconType: 'shopping',
+    iconType: 'close',
     filterValue: {status: 'REJECTED'},
     disabled: true,
   },
