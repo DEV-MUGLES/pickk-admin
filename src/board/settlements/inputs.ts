@@ -1,6 +1,7 @@
 import moment from 'moment';
 
 import Selector from '@src/components/molecules/BoardFilter/input/Selector';
+import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import {range} from '@src/lib/utils';
 
 export const settlementInputs = [
@@ -32,5 +33,12 @@ export const settlementInputs = [
       {name: '미정산', value: 'PENDING'},
     ],
     Component: Selector,
+  },
+  {
+    name: 'keyword',
+    labelText: '통합검색',
+    Component: InputBox,
+    guideText:
+      '수취인명/구매자명/구매자연락처/구매자이메일/주문번호/상품별주문번호/상품번호/송장번호/상품명을 검색할 수 있습니다.',
   },
 ];
