@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {message} from 'antd';
 import moment from 'moment';
 
 import Preview from '../../components/organisms/Board/preview';
@@ -6,19 +7,20 @@ import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
 import ShipModal from './table/modal/ship';
 import Space from '@src/components/atoms/space';
+import StockSetModal from '../item/table/modal/stock/set';
 
 import {placementInputs} from './inputs';
 import {placementColumns, placementActions} from './table';
 import {BoardProps} from '../props';
-
-import {withBoardContext, useBoardContext} from '@src/contexts/Board';
-import {usePlacementTable} from '@src/hooks/table/Placement';
+import {placementPreviewData} from './preview-data';
 import {parseTable} from '../order-items/table/data-parser';
+
 import PlacementService from '@src/lib/services/Placement';
 import {OrderStatus} from '@src/types';
-import {message} from 'antd';
-import {placementPreviewData} from './preview-data';
+
+import {usePlacementTable} from '@src/hooks/table/Placement';
 import {usePlacementPreview} from '@src/hooks';
+import {withBoardContext, useBoardContext} from '@src/contexts/Board';
 
 function PlacementBoard({title}: BoardProps) {
   const {tableData, selectedRowKeys} = useBoardContext().state;
@@ -26,6 +28,11 @@ function PlacementBoard({title}: BoardProps) {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const closeStockModal = () => {
+    setIndex(-1);
+  };
+  const [index, setIndex] = useState(-1);
 
   const modalData = tableData
     ? tableData.filter((data) => selectedRowKeys.includes(data.id))
@@ -59,6 +66,26 @@ function PlacementBoard({title}: BoardProps) {
       },
     },
     ...placementActions,
+    {
+      text: '주문 취소',
+      onClick: async (nums: number[]) => {
+        if (nums.length !== 1) {
+          message.warning(
+            '주문 일괄 취소는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
+          );
+          return Promise.resolve(false);
+        }
+        try {
+          await PlacementService.cancel(nums[0]);
+          if (confirm('취소된 제품의 재고를 다시 설정하시겠습니까?')) {
+            setIndex(nums[0]);
+          }
+          return Promise.resolve(true);
+        } catch {
+          return Promise.resolve(false);
+        }
+      },
+    },
   ];
 
   return (
@@ -75,6 +102,7 @@ function PlacementBoard({title}: BoardProps) {
         columns={placementColumns}
         actions={newPlacementActions}
       />
+      <StockSetModal id={index} closeModal={closeStockModal} />
       <ShipModal {...{modalData, isModalOpen, closeModal}} />
     </>
   );
