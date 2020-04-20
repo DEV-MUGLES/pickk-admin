@@ -163,23 +163,6 @@ export const placementActions: TableActionType[] = [
       );
     },
   },
-  {
-    text: '주문 취소',
-    onClick: async (nums: number[]) => {
-      if (nums.length !== 1) {
-        message.warning(
-          '주문 일괄 취소는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
-        );
-        return Promise.resolve(false);
-      }
-      try {
-        await PlacementService.cancel(nums[0]);
-        return Promise.resolve(true);
-      } catch {
-        return Promise.resolve(false);
-      }
-    },
-  },
 ];
 
 const Input = styled.input``;
