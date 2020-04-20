@@ -1,35 +1,28 @@
-export const settlementPreviewData = [
+import moment from 'moment';
+
+export const settlementCountPreviewData = [
   {
-    label: '정산 완료',
+    label: '이번달 정산완료',
     iconType: 'check',
-    filterValue: {settleStatus: 'CONFIRMED'},
+    filterValue: {
+      expected: moment().format('YYYY-MM'),
+      settleStatus: 'CONFIRMED',
+    },
   },
   {
-    label: '정산 이슈',
+    label: '이번달 정산이슈',
     iconType: 'exclamatin',
-    filterValue: {settleStatus: 'ISSUED'},
+    filterValue: {
+      expected: moment().format('YYYY-MM'),
+      settleStatus: 'ISSUED',
+    },
   },
   {
-    label: '미정산',
+    label: '전체기간 미정산',
     iconType: 'ellipsis',
-    filterValue: {settleStatus: 'PENDING'},
-  },
-  {
-    label: '미정산',
-    iconType: 'ellipsis',
-    filterValue: {settleStatus: 'PENDING'},
-    disabled: true,
-  },
-  {
-    label: '미정산',
-    iconType: 'ellipsis',
-    filterValue: {settleStatus: 'PENDING'},
-    disabled: true,
-  },
-  {
-    label: '미정산',
-    iconType: 'ellipsis',
-    filterValue: {settleStatus: 'PENDING'},
-    disabled: true,
+    filterValue: {
+      expected: null,
+      settleStatus: 'PENDING',
+    },
   },
 ];

@@ -33,11 +33,14 @@ export enum SettleStatus {
   Pending = '미정산',
 }
 
-export type SettlementPreview = {
-  confirmedCount: number;
-  issuedCount: number;
-  pendingCount: number;
+export type SettlementAmountPreview = {
   confirmedAmountThisMonth: number;
   issuedAmount: number;
   confirmedAmountNextMonth: number;
+};
+
+export type SettlementCountPreview = {
+  confirmedCount: number;
+  issuedCount: number;
+  pendingCount: number;
 };

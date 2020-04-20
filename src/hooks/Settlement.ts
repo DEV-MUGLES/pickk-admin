@@ -1,7 +1,11 @@
 import {useAxiosQuery} from './Api';
 import SettlementService from '@src/lib/services/Settlement';
-import {SettlementPreview} from '@src/types';
+import {SettlementAmountPreview, SettlementCountPreview} from '@src/types';
 
-export const useSettlementtPreview = useAxiosQuery<SettlementPreview>(
-  SettlementService.getPreviewList,
+export const useSettlementCountPreview = useAxiosQuery<SettlementCountPreview>(
+  SettlementService.getCountPreviewList,
 );
+
+export const useSettlementAmountPreview = useAxiosQuery<
+  SettlementAmountPreview
+>(SettlementService.getAmountPreviewList);

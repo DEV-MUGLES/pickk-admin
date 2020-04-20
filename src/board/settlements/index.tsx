@@ -4,26 +4,29 @@ import Table from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
 import {settlementInputs} from './inputs';
-import {settlementPreviewData} from './preview-data';
+import {settlementCountPreviewData} from './preview-data';
 import {settlementColumns} from './table';
 import {BoardProps} from '../props';
 
 import {parseTable} from './table/data-parser';
 
 import {useSettlementTable} from '@src/hooks/table/Settlement';
-import {useSettlementtPreview} from '@src/hooks/Settlement';
+import {useSettlementCountPreview} from '@src/hooks/Settlement';
 
 import {withBoardContext} from '@src/contexts/Board';
+import SettlementAmountPreview from './amount-preview';
 
 function SettlementBoard({title}: BoardProps) {
   return (
     <>
       <Preview
-        data={settlementPreviewData}
-        usePreviewData={useSettlementtPreview}
+        data={settlementCountPreviewData}
+        usePreviewData={useSettlementCountPreview}
       />
       <Space level={2} />
       <Filter title={title} inputs={settlementInputs} />
+      <Space level={2} />
+      <SettlementAmountPreview />
       <Space level={2} />
       <Table title={title} columns={settlementColumns} />
     </>
