@@ -26,7 +26,7 @@ const Wrapper = styled.header`
   align-items: center;
 `;
 
-const TitleText = styled(Typography.Text)`
+export const TitleText = styled(Typography.Text)`
   padding-right: 12px;
 `;
 
