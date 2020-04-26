@@ -8,6 +8,7 @@ export type PlacementPreview = {
 };
 
 export type Placement = OrderItem & {
+  itemId: number;
   courier: string;
   trackingCode: string;
   trackingViewUrl: string;
