@@ -78,7 +78,7 @@ function PlacementBoard({title}: BoardProps) {
         try {
           await PlacementService.cancel(nums[0]);
           if (confirm('취소된 제품의 재고를 다시 설정하시겠습니까?')) {
-            setIndex(nums[0]);
+            setIndex(tableData.find((record) => record.id === nums[0]).itemId);
           }
           return Promise.resolve(true);
         } catch {
