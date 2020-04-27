@@ -17,15 +17,16 @@ export type StockSetModalProps = {
 export default function StockSetModal({id, closeModal}: StockSetModalProps) {
   const [stocks, setStocks] = useState([]);
   const {data: products, loading} = useProductList([id]);
+  const [isSubmitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (products) {
-      const initStocks = products.map(product => product.stock);
+      const initStocks = products.map((product) => product.stock);
       setStocks(initStocks);
     }
   }, [products]);
 
-  const handleStockInput = index => value => {
+  const handleStockInput = (index) => (value) => {
     setStocks([
       ...stocks.slice(0, index),
       value,
@@ -34,8 +35,12 @@ export default function StockSetModal({id, closeModal}: StockSetModalProps) {
   };
 
   const handleStockSubmit = async () => {
-    const ids = products.map(product => product.id);
-    if (!stocks.every(stock => stock !== null)) {
+    if (isSubmitting) {
+      return;
+    }
+
+    const ids = products.map((product) => product.id);
+    if (!stocks.every((stock) => stock !== null)) {
       message.error('수량을 올바르게 입력해주세요.');
       return;
     }
@@ -47,12 +52,14 @@ export default function StockSetModal({id, closeModal}: StockSetModalProps) {
       };
     });
 
+    setSubmitting(true);
     try {
       await ProductService.setStock(stockData);
       message.success(`수량이 일괄 적용되었습니다.`);
     } catch (err) {
       message.error('err');
     } finally {
+      setSubmitting(false);
       closeModal();
     }
   };
