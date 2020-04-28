@@ -46,7 +46,7 @@ export default function RefundConfirmModal({
           <Text>반품 배송비 : {addCommaToNumber(subtractedShippingFee)}원</Text>
           <Text>차감된 환불 금액 : {addCommaToNumber(refundAmount)}원</Text>
           <SubmitArea>
-            <Button type="primary" onClick={handleSubmit('FULL')}>
+            <Button type="primary" onClick={handleSubmit()}>
               왕복 배송비 차감 환불 ({addCommaToNumber(refundAmount)}원)
             </Button>
             <Space />
@@ -55,7 +55,7 @@ export default function RefundConfirmModal({
               {addCommaToNumber(refundAmount + subtractedShippingFee / 2)}원)
             </Button>
             <Space />
-            <Button type="primary" onClick={handleSubmit()}>
+            <Button type="primary" onClick={handleSubmit('FULL')}>
               전액 환불 (
               {addCommaToNumber(refundAmount + subtractedShippingFee)}원)
             </Button>
