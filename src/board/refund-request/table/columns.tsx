@@ -10,7 +10,7 @@ export const refundRequestColumns = [
     dataIndex: 'orderMerchantUid',
     key: 'orderMerchantUid',
     sorter: (a, b) => stringSorter(b.orderMerchantUid, a.orderMerchantUid),
-    width: 120,
+    width: 150,
     ellipsis: true,
   },
   {
