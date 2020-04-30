@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/xlsx": "0.0.36",
     "antd": "^3.26.5",
+    "antd-prompt": "^0.2.0",
     "axios": "^0.19.2",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",

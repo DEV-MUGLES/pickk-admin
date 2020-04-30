@@ -8,7 +8,7 @@ import {withBoardContext} from '@src/contexts/Board';
 import {useOrderItemTable} from '@src/hooks/table/OrderItem';
 
 import {orderItemInputs} from './inputs';
-import {orderItemColumns} from './table';
+import {orderItemActions, orderItemColumns} from './table';
 import {BoardProps} from '../props';
 import {parseTable} from './table/data-parser';
 
@@ -19,7 +19,11 @@ function OrderItemBoard({
     <>
       <Filter title={title} inputs={orderItemInputs} />
       <Space level={2} />
-      <Table title={title} columns={orderItemColumns} />
+      <Table
+        title={title}
+        columns={orderItemColumns}
+        actions={orderItemActions}
+      />
       <Space level={2} />
     </>
   );
@@ -30,9 +34,7 @@ export default withBoardContext(
   {
     status: null,
     lookupDate: 'paid',
-    startDate: moment()
-      .subtract(1, 'months')
-      .format('YYYY-MM-DD'),
+    startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
     endDate: moment().format('YYYY-MM-DD'),
   },
   useOrderItemTable,
