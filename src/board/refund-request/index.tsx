@@ -1,6 +1,9 @@
+import {useState} from 'react';
 import moment from 'moment';
-import {Modal, message, Icon} from 'antd';
+import {message} from 'antd';
 
+import RefundConfirmModal from './table/modal/confirm';
+import ExchangeRequestModal from '../order-items/table/modal/exchangeRequest';
 import Preview from '@src/components/organisms/Board/preview';
 import Filter from '@src/components/organisms/Board/Filter';
 import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
@@ -15,12 +18,8 @@ import {BoardProps} from '../props';
 
 import {useRefundRequestPreview} from '@src/hooks/ClaimRequest';
 import {useRefundRequestTable} from '@src/hooks/table/ClaimRequest';
-import {PickingStatus, RefundStatus} from '@src/types';
 import RefundRequestService from '@src/lib/services/RefundRequest';
-import {useState} from 'react';
-import RefundConfirmModal from './table/modal/confirm';
-
-const {confirm} = Modal;
+import {PickingStatus, RefundStatus} from '@src/types';
 
 function RefundRequestBoard({
   title,
@@ -28,10 +27,20 @@ function RefundRequestBoard({
   const {state} = useBoardContext();
   const {tableData} = state;
 
+  const [exchangeRequestIds, setExchangeRequestIds] = useState({
+    id: -1,
+    itemId: -1,
+  });
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+  const [isExchangeRequestModalOpen, setIsExchangeRequestModalOpen] = useState(
+    false,
+  );
+  const closeExchangeRequestModal = () => {
+    setIsExchangeRequestModalOpen(false);
   };
 
   const newRefundActions = [
@@ -84,6 +93,30 @@ function RefundRequestBoard({
       },
     },
     ...refundRequestActions,
+    {
+      text: '교환으로 변경',
+      onClick: async (ids: number[]) => {
+        if (ids.length !== 1) {
+          message.warning(
+            `교환으로 변경 일괄 처리는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.`,
+          );
+          return Promise.resolve(false);
+        }
+        const record = tableData.find((row) => row.id === ids[0]);
+        if (record.items.length !== 1) {
+          message.warning(
+            `여러개의 아이템에 대한 주문건을 교환으로 변경할 수 없습니다.`,
+          );
+          return Promise.resolve(false);
+        }
+        setExchangeRequestIds({
+          id: ids[0],
+          itemId: record.items[0].id,
+        });
+        setIsExchangeRequestModalOpen(true);
+        return Promise.resolve(false);
+      },
+    },
   ];
   return (
     <>
@@ -104,6 +137,14 @@ function RefundRequestBoard({
         record={selectedRecord}
         isModalOpen={isModalOpen}
         closeModal={closeModal}
+      />
+      <ExchangeRequestModal
+        {...exchangeRequestIds}
+        {...{
+          isModalOpen: isExchangeRequestModalOpen,
+          closeModal: closeExchangeRequestModal,
+        }}
+        claimed={true}
       />
     </>
   );

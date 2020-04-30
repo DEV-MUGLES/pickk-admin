@@ -1,7 +1,7 @@
 import {message} from 'antd';
 
 import base from './Api';
-import {Filter, OrderItemShip, OrderItem} from '@src/types';
+import {Filter, OrderItemShip, OrderItem, ItemOption} from '@src/types';
 
 const ship = async (ships: OrderItemShip[]) =>
   base(true)
@@ -56,10 +56,36 @@ const refundRequest = (id: number, reason: string) =>
       throw err;
     });
 
+const exchangeRequest = (id: number, changeTo: ItemOption, reason: string) =>
+  base(true)
+    .post(`/partner/order_items/${id}/exchange_request/`, {changeTo, reason})
+    .then(() => {
+      message.success(`교환요청으로 전환되었습니다.`);
+    })
+    .catch((err) => {
+      switch (err?.response?.status) {
+        case 400:
+          alert(`${err.response.data?.errorMessage}\n다시 확인해주세요.`);
+          break;
+        case 404:
+          alert(`해당 주문을 찾을 수 없습니다.\n다시 확인해주세요.`);
+          break;
+        default:
+          alert(
+            `${
+              err.response.data?.errorMessage || '반품으로 변경에 실패했습니다.'
+            }\n운영팀으로 문의 주시면 신속히 처리해드리겠습니다.\n이용에 불편을 드려 죄송합니다.`,
+          );
+          break;
+      }
+      throw err;
+    });
+
 const OrderItemService = {
   ship,
   getList,
   refundRequest,
+  exchangeRequest,
 };
 
 export default OrderItemService;

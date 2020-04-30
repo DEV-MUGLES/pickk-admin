@@ -14,6 +14,11 @@ const getItem = (id: number): Promise<Item> =>
     .get(`/partner/items/${id}/`)
     .then((res) => res.data);
 
+const getOptions = (id: number) =>
+  base()
+    .get(`/items/${id}/options/`)
+    .then((res) => res.data);
+
 const manageStockOn = (item: Array<{id: number; stock: number}>) =>
   base(true)
     .patch(`/partner/items/manage_stock/on/`, item)
@@ -63,6 +68,7 @@ const updateItemDiscountRate = (
 const ItemService = {
   getList,
   getItem,
+  getOptions,
   manageStockOn,
   manageStockOff,
   getProductList,
