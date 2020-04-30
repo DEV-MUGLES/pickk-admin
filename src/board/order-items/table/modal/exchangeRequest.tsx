@@ -74,7 +74,9 @@ export default function ExchangeRequestModal({
         await OrderItemService.exchangeRequest(id, options, reason);
       }
       resetModal();
-    } catch {}
+    } catch {
+      resetModal();
+    }
     reload();
   };
 

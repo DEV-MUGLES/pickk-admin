@@ -61,11 +61,13 @@ function OrderItemBoard({
         actions={newOrderItemActions}
       />
       <Space level={2} />
-      <ExchangeRequestModal
-        {...exchangeRequestIds}
-        {...{isModalOpen, closeModal}}
-        claimed={false}
-      />
+      {isModalOpen && (
+        <ExchangeRequestModal
+          {...exchangeRequestIds}
+          {...{isModalOpen, closeModal}}
+          claimed={false}
+        />
+      )}
     </>
   );
 }
