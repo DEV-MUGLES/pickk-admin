@@ -33,10 +33,31 @@ const pick = (ids: number[]) =>
       }
     });
 
+const switchToRefundRequest = (id: number) =>
+  base(true)
+    .post(`/partner/exchange_requests/${id}/switch_to_refund/`)
+    .then(() => message.success(`반품으로 전환되었습니다.`))
+    .catch((err) => {
+      switch (err?.response?.status) {
+        case 400:
+          alert(`${err.response.data?.errorMessage}\n다시 확인해주세요.`);
+          break;
+        default:
+          alert(
+            `${
+              err.response.data?.errorMessage || '반품으로 변경에 실패했습니다.'
+            }\n운영팀으로 문의 주시면 신속히 처리해드리겠습니다.\n이용에 불편을 드려 죄송합니다.`,
+          );
+          break;
+      }
+      throw err;
+    });
+
 const ExchangeRequestService = {
   getPreviewList,
   getList,
   pick,
+  switchToRefundRequest,
 };
 
 export default ExchangeRequestService;
