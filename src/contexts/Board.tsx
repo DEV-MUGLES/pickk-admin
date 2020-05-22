@@ -57,7 +57,11 @@ export const withBoardContext = (
   };
 
   const submitFilter = () => {
-    setNewFilter(filter);
+    const temp = {...filter};
+    if (!temp.isReviewed) {
+      delete temp.isReviewed;
+    }
+    setNewFilter(temp);
     setSelectedRowKeys([]);
   };
 

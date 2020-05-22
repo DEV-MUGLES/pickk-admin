@@ -41,9 +41,10 @@ function OrderItemBoard({
           );
           return Promise.resolve(false);
         }
+        const record = tableData.find((row) => row.id === ids[0]);
         setExchangeRequestIds({
           id: ids[0],
-          itemId: tableData.find((record) => record.id === ids[0]).itemId,
+          itemId: record.itemId,
         });
         setIsModalOpen(true);
         return Promise.resolve(false);

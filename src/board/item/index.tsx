@@ -103,7 +103,7 @@ function ItemBoard({
   ];
 
   const modalData = tableData
-    ? tableData.filter(data => selectedRowKeys.includes(data.id))
+    ? tableData.filter((data) => selectedRowKeys.includes(data.id))
     : null;
 
   return (
@@ -127,7 +127,7 @@ function ItemBoard({
 
 export default withBoardContext(
   ItemBoard,
-  {name: null, isReviewed: false},
+  {name: null, isReviewed: null},
   useItemTable,
-  v => v,
+  (v) => v,
 );
