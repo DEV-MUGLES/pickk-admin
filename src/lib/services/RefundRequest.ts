@@ -48,7 +48,10 @@ const confirm = async (id: number, shippingFee?: 'FULL' | 'HALF') => {
     .then((res) => {
       message.success(`반품 완료되었습니다.`);
     })
-    .catch((err) => message.error('실패했습니다. - ' + err));
+    .catch((err) => {
+      console.log(err.response);
+      message.error('실패했습니다. - ' + err.response.data?.errorMessage);
+    });
 };
 
 const switchToExchangeRequest = (id: number, changeTo: ItemOption) =>
