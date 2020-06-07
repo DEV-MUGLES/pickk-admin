@@ -9,6 +9,7 @@ import OrderItemService from '@src/lib/services/OrderItem';
 import RefundRequestService from '@src/lib/services/RefundRequest';
 import {useItemOptions} from '@src/hooks/Item';
 import {ItemOption} from '@src/types';
+import {isEqualArray} from '@src/lib/utils';
 
 const {Text} = Typography;
 const {Option} = Select;
@@ -30,6 +31,7 @@ export default function ExchangeRequestModal({
 }: ExchangeRequestModalProps) {
   const [options, setOptions] = useState<ItemOption>({});
   const [reason, setReason] = useState('');
+  const [productId, setProductId] = useState(null);
 
   const {reload} = useBoardContext().action;
 
@@ -69,9 +71,9 @@ export default function ExchangeRequestModal({
     }
     try {
       if (claimed) {
-        await RefundRequestService.switchToExchangeRequest(id, options);
+        await RefundRequestService.switchToExchangeRequest(id, productId);
       } else {
-        await OrderItemService.exchangeRequest(id, options, reason);
+        await OrderItemService.exchangeRequest(id, productId, reason);
       }
       resetModal();
     } catch {
@@ -81,10 +83,21 @@ export default function ExchangeRequestModal({
   };
 
   const handleOptionChange = (name: string) => (value: string) => {
-    setOptions({
+    const newOptions = {
       ...options,
       [name]: value,
-    });
+    };
+    setOptions(newOptions);
+    if (Object.values(newOptions).every((optionValue) => optionValue !== '')) {
+      const {products} = data;
+      setProductId(
+        Number(
+          Object.keys(products).find((id) =>
+            isEqualArray(products[id].values, Object.values(newOptions)),
+          ),
+        ),
+      );
+    }
   };
 
   if (data) {

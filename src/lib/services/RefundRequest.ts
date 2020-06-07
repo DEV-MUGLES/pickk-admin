@@ -54,7 +54,7 @@ const confirm = async (id: number, shippingFee?: 'FULL' | 'HALF') => {
     });
 };
 
-const switchToExchangeRequest = (id: number, changeTo: ItemOption) =>
+const switchToExchangeRequest = (id: number, changeTo: number) =>
   base(true)
     .post(`/partner/refund_requests/${id}/switch_to_exchange/`, {changeTo})
     .then(() => message.success(`교환으로 전환되었습니다.`))

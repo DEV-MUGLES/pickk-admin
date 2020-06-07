@@ -21,15 +21,21 @@ export type ItemSubsDiscountRateInfo = {
 };
 
 export type ItemOptionsResponse = {
-  id: number;
   options: {
     values: {
       [valueName: string]: string[];
     };
     isSoldout: number[][];
     optionPriceVariants: PriceVariant[];
-    productPriceVariants: PriceVariant[];
   };
+  products: {
+    [productName: string]: Product;
+  };
+};
+
+export type Product = {
+  priceVariant: number;
+  values: string[];
 };
 
 export type PriceVariant = {

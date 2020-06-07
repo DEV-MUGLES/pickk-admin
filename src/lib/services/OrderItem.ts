@@ -56,7 +56,7 @@ const refundRequest = (id: number, reason: string) =>
       throw err;
     });
 
-const exchangeRequest = (id: number, changeTo: ItemOption, reason: string) =>
+const exchangeRequest = (id: number, changeTo: number, reason: string) =>
   base(true)
     .post(`/partner/order_items/${id}/exchange_request/`, {changeTo, reason})
     .then(() => {
