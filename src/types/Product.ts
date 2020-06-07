@@ -1,4 +1,4 @@
-export type Product = {
+export type IProduct = {
   id: number;
   sku: string;
   options: string[];

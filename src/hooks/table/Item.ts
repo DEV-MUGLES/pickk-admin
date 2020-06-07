@@ -1,10 +1,10 @@
 import {useAxiosQuery} from '../Api';
 import ItemService from '@src/lib/services/Item';
-import {Item, Product, ItemSubsDiscountRateInfo} from '@src/types';
+import {Item, ItemSubsDiscountRateInfo, IProduct} from '@src/types';
 
 export const useItemTable = useAxiosQuery<Item[]>(ItemService.getList);
 
-export const useProductList = useAxiosQuery<Product[]>(
+export const useProductList = useAxiosQuery<IProduct[]>(
   ItemService.getProductList,
 );
 
