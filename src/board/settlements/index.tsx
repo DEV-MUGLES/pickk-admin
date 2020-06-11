@@ -26,8 +26,8 @@ function SettlementBoard({title}: BoardProps) {
       <Space level={2} />
       <Filter title={title} inputs={settlementInputs} />
       <Space level={2} />
-      <SettlementAmountPreview />
-      <Space level={2} />
+      {/*<SettlementAmountPreview />
+      <Space level={2} />*/}
       <Table title={title} columns={settlementColumns} />
     </>
   );
