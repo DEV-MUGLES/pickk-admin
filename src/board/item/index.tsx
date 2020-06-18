@@ -15,6 +15,7 @@ import StockSetModal from './table/modal/stock/set';
 import ItemService from '@src/lib/services/Item';
 import StockInitModal from './table/modal/stock/init';
 import SubsDiscountRateModal from './table/modal/subs-discount-rate';
+import InfluencerSubsDiscountRateModal from './table/modal/influencer-subs-discount-rate';
 
 const {Text} = Typography;
 const {confirm} = Modal;
@@ -38,9 +39,35 @@ function ItemBoard({
   };
 
   const [discountModal, setDiscountModal] = useState(false);
+  const [
+    influencerSubsDiscountIndex,
+    setInfluencerSubsDiscountIndex,
+  ] = useState(null);
 
   const newItemColumns = [
-    ...itemColumns,
+    ...itemColumns.slice(0, 4),
+    {
+      title: '구독할인율(기본)',
+      dataIndex: 'subsDiscountRate',
+      key: 'subsDiscountRate',
+      sorter: (a, b) => b.subsDiscountRate - a.subsDiscountRate,
+      width: 70,
+      render: (value, record) => {
+        const {id} = record;
+        return (
+          <>
+            <Text>{value}% </Text>
+            <Button
+              size="small"
+              onClick={() => setInfluencerSubsDiscountIndex(id)}>
+              설정
+            </Button>
+          </>
+        );
+      },
+      ellipsis: true,
+    },
+    ...itemColumns.slice(4),
     {
       title: '재고관리',
       dataIndex: 'isStockManaged',
@@ -121,6 +148,14 @@ function ItemBoard({
         }}
         modalData={modalData}
       />
+      {influencerSubsDiscountIndex && (
+        <InfluencerSubsDiscountRateModal
+          index={influencerSubsDiscountIndex}
+          onClose={() => {
+            setInfluencerSubsDiscountIndex(null);
+          }}
+        />
+      )}
     </>
   );
 }

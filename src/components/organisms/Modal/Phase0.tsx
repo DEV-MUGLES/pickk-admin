@@ -5,43 +5,40 @@ import styled from 'styled-components';
 import Img from '@src/components/atoms/img';
 import Space from '@src/components/atoms/space';
 import Colors from '@src/components/atoms/colors';
+import UserService from '@src/lib/services/User';
+import {User} from '@src/types/User';
 
 const {Text} = Typography;
 const {Search} = Input;
 
 export type Phase0Props = {
   setPhase: React.Dispatch<React.SetStateAction<number>>;
-  influencerData: Array<{
-    avatar: string;
-    name: string;
-    subscriberNumber: string;
-  }>;
   setSelectedInfluencerData: React.Dispatch<any>;
 };
 
 export default function Phase0({
   setPhase,
-  influencerData,
   setSelectedInfluencerData,
 }: Phase0Props) {
-  const [influencerSearchResult, setInfluencerSearchResult] = useState(null);
+  const [influencerSearchResult, setInfluencerSearchResult] = useState<User[]>(
+    null,
+  );
   const [query, setQuery] = useState(null);
 
-  const allInfluencerData = influencerData;
-
-  const handleSearch = (value: string) => {
+  const handleSearch = async (value: string) => {
     value ? setQuery(value) : setQuery('전체');
-    setInfluencerSearchResult(
-      allInfluencerData.filter(data => data.name.includes(value)),
-    );
+    const influencers = await UserService.search(value);
+    setInfluencerSearchResult(influencers);
   };
 
-  const selectInfluencer = (name: string) => () => {
+  const selectInfluencer = (id: number) => () => {
     setSelectedInfluencerData(
-      allInfluencerData.find(data => data.name === name),
+      influencerSearchResult.find((data) => data.id === id),
     );
     setPhase(1);
   };
+
+  console.log(influencerSearchResult);
 
   return (
     <Wrapper>
@@ -54,30 +51,33 @@ export default function Phase0({
       )}
       <Space level={1} />
       <SearchResultWrapper>
-        {influencerSearchResult && influencerSearchResult.length === 0 && (
+        {influencerSearchResult?.length === 0 && (
           <Text>검색 결과가 없습니다.</Text>
         )}
-        {influencerSearchResult &&
-          influencerSearchResult.length !== 0 &&
-          influencerSearchResult.map(item => (
-            <SearchResultRow>
-              <Space direction="ROW" />
-              <Img src={item.avatar} circle={true} width="35px" height="35px" />
-              <Space direction="ROW" level={1} />
-              <Name ellipsis>{item.name}</Name>
-              <SubscriberNumber>
-                구독자 : {item.subscriberNumber}명
-              </SubscriberNumber>
-              <Button
-                type="primary"
-                size="small"
-                onClick={selectInfluencer(item.name)}
-                ghost>
-                선택
-              </Button>
-              <Space direction="ROW" />
-            </SearchResultRow>
-          ))}
+        {influencerSearchResult?.map((user) => (
+          <SearchResultRow>
+            <Space direction="ROW" />
+            <Img
+              src={user.profileImageUrl}
+              circle={true}
+              width="35px"
+              height="35px"
+            />
+            <Space direction="ROW" level={1} />
+            <Name ellipsis>{user.name}</Name>
+            <SubscriberNumber>
+              구독자 : {user.followersCount}명
+            </SubscriberNumber>
+            <Button
+              type="primary"
+              size="small"
+              onClick={selectInfluencer(user.id)}
+              ghost>
+              선택
+            </Button>
+            <Space direction="ROW" />
+          </SearchResultRow>
+        ))}
       </SearchResultWrapper>
     </Wrapper>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Typography, Input, Button, DatePicker, message} from 'antd';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -7,39 +7,58 @@ import Img from '@src/components/atoms/img';
 import Space from '@src/components/atoms/space';
 import Colors from '@src/components/atoms/colors';
 
+import {User} from '@src/types/User';
+import ItemService from '@src/lib/services/Item';
+
 const {Text} = Typography;
 const {RangePicker} = DatePicker;
 
 export type Phase1Props = {
+  itemPk: number;
   setPhase: React.Dispatch<React.SetStateAction<number>>;
-  // tslint:disable-next-line: no-any
-  selectedInfluencerData: any;
+  selectedInfluencerData: User;
   // tslint:disable-next-line: no-any
   handleDiscountDataChange: (data: any) => void;
   closeModal: () => void;
 };
 
 export default function Phase1({
+  itemPk,
   setPhase,
   selectedInfluencerData,
   handleDiscountDataChange,
   closeModal,
 }: Phase1Props) {
-  const handleDiscountRateChange = e => {
-    handleDiscountDataChange({discountRate: e.target.value});
+  const [body, setBody] = useState(
+    {} as {discountRate: number; startAt: string; endAt: string},
+  );
+
+  const handleDiscountRateChange = (e) => {
+    setBody({...body, discountRate: Number(e.target.value)});
   };
 
   const handleDiscountPeriodChange = (date: [moment.Moment, moment.Moment]) => {
-    handleDiscountDataChange({
-      discountStartPeriod: moment(date[0]).format('YYYY-MM-DD'),
-      discountEndPeriod: moment(date[1]).format('YYYY-MM-DD'),
+    setBody({
+      ...body,
+      startAt: moment(date[0]).format(),
+      endAt: moment(date[1]).format(),
     });
   };
 
-  const handleSubmit = () => {
-    message.success('추가 완료');
-    closeModal();
-    setPhase(0);
+  const handleSubmit = async () => {
+    try {
+      await ItemService.discountsCreate(itemPk, {
+        userId: selectedInfluencerData.id,
+        ...body,
+      });
+      message.success('추가 완료');
+      closeModal();
+      setPhase(0);
+    } catch (err) {
+      message.error(
+        err.response.data?.errorMessage || err.response.data?.nonFieldErrors[0],
+      );
+    }
   };
 
   return (
@@ -48,14 +67,14 @@ export default function Phase1({
         <SearchResultRow>
           <Space direction="ROW" />
           <Img
-            src={selectedInfluencerData.avatar}
+            src={selectedInfluencerData.profileImageUrl}
             circle={true}
             width="35px"
             height="35px"
           />
           <Space direction="ROW" level={1} />
           <Name>{selectedInfluencerData.name}</Name>
-          <Text>구독자 : {selectedInfluencerData.subscriberNumber}명</Text>
+          <Text>구독자 : {selectedInfluencerData.followersCount}명</Text>
           <Space direction="ROW" />
         </SearchResultRow>
       )}

@@ -5,24 +5,24 @@ import {Button, InputNumber, Typography, message} from 'antd';
 
 import ItemService from '@src/lib/services/Item';
 import {useDiscountList} from '@src/hooks/table';
-import {ItemSubsDiscountRateInfo} from '@src/types';
+import {ItemDiscount} from '@src/types';
 
 import DateTimePicker from '@src/components/molecules/picker/date-time';
 
 const {Text} = Typography;
 const curTime = moment().format();
 
-export const initialDiscountState: ItemSubsDiscountRateInfo = {
+export const initialDiscountState: ItemDiscount = {
   discountRate: 0,
   startAt: curTime,
   endAt: curTime,
 };
 
 const discountReducer = (
-  state: ItemSubsDiscountRateInfo,
+  state: ItemDiscount,
   action: {
     type: 'init' | 'discountRate' | 'startAt' | 'endAt';
-    discountInfo?: ItemSubsDiscountRateInfo;
+    discountInfo?: ItemDiscount;
     discountRate?: number;
     date?: string;
   },

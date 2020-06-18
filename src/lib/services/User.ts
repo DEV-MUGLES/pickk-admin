@@ -4,18 +4,19 @@ import {Cookies} from 'react-cookie';
 
 import base from '@src/lib/services/Api';
 import {setCookie, removeCookie} from '@src/lib/utils/Cookies';
+import {User} from '@src/types/User';
 
 const cookies = new Cookies();
 
 export const login = (email: string, password: string) =>
   base()
     .post('/partner/token/', {email, password})
-    .then(res => {
+    .then((res) => {
       setCookie('authtoken', res.data.access);
       setCookie('refreshtoken', res.data.refresh);
       Router.push('/items');
     })
-    .catch(err => {
+    .catch((err) => {
       if (!err.response || err.response.status !== 401) {
         message.error('문제가 발생했습니다. 다시 시도해주세요.');
         return;
@@ -32,15 +33,22 @@ export const logout = () => {
 export const refresh = () => {
   base()
     .post('/partner/token/refresh/', {refresh: cookies.get('refreshtoken')})
-    .then(res => {
+    .then((res) => {
       setCookie('authtoken', res.data.access);
       setCookie('refreshtoken', res.data.refresh);
     });
 };
+
+export const search = (name: string): Promise<User[]> =>
+  base(true)
+    .get('/partner/users/', {params: {name}})
+    .then((res) => res.data.results);
+
 const UserService = {
   login,
   logout,
   refresh,
+  search,
 };
 
 export default UserService;

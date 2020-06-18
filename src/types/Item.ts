@@ -1,3 +1,5 @@
+import {User} from './User';
+
 export type Item = {
   id: number;
   name: string;
@@ -12,8 +14,9 @@ export type Item = {
   purchaseUrl: string;
 };
 
-export type ItemSubsDiscountRateInfo = {
+export type ItemDiscount = {
   id?: number;
+  user?: User;
   discountRate: number;
   startAt: string;
   endAt: string;

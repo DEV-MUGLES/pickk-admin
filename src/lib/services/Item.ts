@@ -1,5 +1,5 @@
 import base from './Api';
-import {Filter, Item, Product, ItemSubsDiscountRateInfo} from '@src/types';
+import {Filter, Item, Product, ItemDiscount} from '@src/types';
 import {message} from 'antd';
 
 const getList = (filter: Filter): Promise<Item[]> =>
@@ -34,17 +34,15 @@ const getProductList = (id: number): Promise<Product[]> =>
     .get(`/partner/items/${id}/products`)
     .then((res) => res.data);
 
-const getItemDiscountRateList = (
-  itemPk: number,
-): Promise<ItemSubsDiscountRateInfo[]> =>
+const getItemDiscountRateList = (itemPk: number): Promise<ItemDiscount[]> =>
   base(true)
     .get(`/partner/items/${itemPk}/discounts/`)
     .then((res) => res.data);
 
 const createItemDiscountRate = (
   itemPk: number,
-  data: ItemSubsDiscountRateInfo,
-): Promise<ItemSubsDiscountRateInfo> =>
+  data: ItemDiscount,
+): Promise<ItemDiscount> =>
   base(true)
     .post(`/partner/items/${itemPk}/discounts/`, data)
     .then(() => message.success('할인율이 업데이트 되었습니다.'));
@@ -52,8 +50,8 @@ const createItemDiscountRate = (
 const updateItemDiscountRate = (
   itemPk: number,
   id: number,
-  data: ItemSubsDiscountRateInfo,
-): Promise<ItemSubsDiscountRateInfo> =>
+  data: ItemDiscount,
+): Promise<ItemDiscount> =>
   base(true)
     .patch(`/partner/items/${itemPk}/discounts/${id}/`, data)
     .then(() => message.success('할인율이 업데이트 되었습니다.'))
@@ -65,6 +63,38 @@ const updateItemDiscountRate = (
       message.error('기본 구독할인율 보다 낮게 설정할 수 없습니다.');
     });
 
+const discountsList = (itemPk: number) =>
+  base(true)
+    .get(`/partner/items/${itemPk}/discounts/`)
+    .then((res) => res.data);
+
+const discountsCreate = (
+  itemPk: number,
+  body: {userId: number; discountRate: number; startAt: string; endAt: string},
+) =>
+  base(true)
+    .post(`/partner/items/${itemPk}/discounts/`, body)
+    .then((res) => res.data);
+
+const discountsPartialUpdate = (
+  itemPk: number,
+  id: number,
+  body: Partial<{
+    userId: number;
+    discountRate: number;
+    startAt: string;
+    endAt: string;
+  }>,
+) =>
+  base(true)
+    .patch(`/partner/items/${itemPk}/discounts/${id}/`, body)
+    .then((res) => res.data);
+
+const discountsDelete = (itemPk: number, id: number) =>
+  base(true)
+    .delete(`/partner/items/${itemPk}/discounts/${id}/`)
+    .then((res) => res.data);
+
 const ItemService = {
   getList,
   getItem,
@@ -75,6 +105,10 @@ const ItemService = {
   getItemDiscountRateList,
   updateItemDiscountRate,
   createItemDiscountRate,
+  discountsList,
+  discountsCreate,
+  discountsPartialUpdate,
+  discountsDelete,
 };
 
 export default ItemService;

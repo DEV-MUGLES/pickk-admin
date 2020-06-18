@@ -2,11 +2,11 @@ import React from 'react';
 import moment, {Moment} from 'moment';
 import {DatePicker} from 'antd';
 
-import {ItemSubsDiscountRateInfo} from '@src/types';
+import {ItemDiscount} from '@src/types';
 
 export type DateTimePickerProps = {
   type: 'startAt' | 'endAt';
-  dateTime: ItemSubsDiscountRateInfo;
+  dateTime: ItemDiscount;
   onChange: (type: 'startAt' | 'endAt', data: string) => void;
 };
 
