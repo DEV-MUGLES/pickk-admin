@@ -14,7 +14,7 @@ export const itemColumns = [
     title: '정가',
     dataIndex: 'originalPrice',
     key: 'originalPrice',
-    render: value => <div>{addCommaToNumber(value)}원</div>,
+    render: (value) => <div>{addCommaToNumber(value)}원</div>,
     sorter: (a, b) => b.originalPrice - a.originalPrice,
     width: 70,
     ellipsis: true,
@@ -23,7 +23,7 @@ export const itemColumns = [
     title: '할인가',
     dataIndex: 'salePrice',
     key: 'salePrice',
-    render: value => <div>{addCommaToNumber(value)}원</div>,
+    render: (value) => <div>{addCommaToNumber(value)}원</div>,
     sorter: (a, b) => b.salePrice - a.salePrice,
     width: 70,
     ellipsis: true,
@@ -37,21 +37,13 @@ export const itemColumns = [
     ellipsis: true,
   },
   {
-    title: '구독할인율',
-    dataIndex: 'subsDiscountRate',
-    key: 'subsDiscountRate',
-    sorter: (a, b) => b.subsDiscountRate - a.subsDiscountRate,
-    width: 70,
-    ellipsis: true,
-  },
-  /*{
     title: '리뷰 수',
-    dataIndex: 'reviewCount',
-    key: 'reviewCount',
-    sorter: (a, b) => b.reviewCount - a.reviewCount,
+    dataIndex: 'postCount',
+    key: 'postCount',
+    sorter: (a, b) => b.postCount - a.postCount,
     width: 50,
     ellipsis: true,
-  },*/
+  },
   {
     title: '구매 수',
     dataIndex: 'purchasedCount',
@@ -65,7 +57,7 @@ export const itemColumns = [
     dataIndex: 'purchaseUrl',
     key: 'purchaseUrl',
     sorter: (a, b) => stringSorter(a.purchaseUrl, b.purchaseUrl),
-    render: value => (
+    render: (value) => (
       <a href={value} target="_blank">
         {value}
       </a>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Input,
   Typography,
@@ -13,6 +13,8 @@ import styled from 'styled-components';
 import {DiscountRowProps} from '@src/components/molecules/Row/Discount/Subscription';
 import Space from '@src/components/atoms/space';
 import moment from 'moment';
+import {ItemDiscount} from '@src/types';
+import ItemService from '@src/lib/services/Item';
 
 const {Text} = Typography;
 const {RangePicker} = DatePicker;
@@ -23,44 +25,70 @@ export type InfluencerDiscountProps = {
 
 export type InfluencerDiscountRowProps = {
   index: number;
-  data: InfluencerDiscountProps;
+  data: ItemDiscount;
+  onChange: () => void;
   // tslint:disable-next-line: no-any
-  setData: (data: InfluencerDiscountProps) => void;
-  deleteData: () => void;
 };
 
-export default function InfluencerDiscountRow({
-  index,
-  data,
-  setData,
-  deleteData,
-}: InfluencerDiscountRowProps) {
-  const handleSubscribeDiscountRateChange = e => {
-    setData({...data, ...{subscribeDiscountRate: e.target.value}});
+export default function InfluencerDiscountRow(
+  props: InfluencerDiscountRowProps,
+) {
+  const {index, onChange} = props;
+  const [data, setData] = useState(props.data);
+  const handleDiscountRateChange = (e) => {
+    setData({...data, ...{discountRate: e.target.value}});
   };
 
-  const handleSubscribeDiscountPeriodChange = date => {
-    const subscribeDiscountStartPeriod = moment(date[0]).format('YYYY-MM-DD');
-    const subscribeDiscountEndPeriod = moment(date[1]).format('YYYY-MM-DD');
+  const handleSubscribeDiscountPeriodChange = (date) => {
+    const startAt = moment(date[0]).format();
+    const endAt = moment(date[1]).format();
     setData({
       ...data,
-      ...{subscribeDiscountStartPeriod, subscribeDiscountEndPeriod},
+      ...{startAt, endAt},
     });
   };
 
-  const handleSubmit = () => {
-    message.success('변경 완료');
+  const handleSubmit = async () => {
+    try {
+      await ItemService.discountsPartialUpdate(data.item, data.id, {
+        discountRate: data.discountRate,
+        startAt: data.startAt,
+        endAt: data.endAt,
+      });
+      onChange();
+      message.success('변경 완료');
+    } catch (err) {
+      message.error(
+        '문제가 발생했습니다 - ' +
+          (err.response.data?.errorMessage ||
+            err.response.data?.nonFieldErrors[0]),
+      );
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await ItemService.discountsDelete(data.item, data.id);
+      onChange();
+      message.success('삭제 완료');
+    } catch (err) {
+      message.error(
+        '문제가 발생했습니다 - ' +
+          (err.response.data?.errorMessage ||
+            err.response.data?.nonFieldErrors[0]),
+      );
+    }
   };
 
   return (
     <Wrapper>
       <Text>{index + 1}</Text>
       <Space direction="ROW" level={4} />
-      <Name>{data.name}</Name>
+      <Name>{data.user.name}</Name>
       <DiscountRateInput
         size="small"
-        value={data.subscribeDiscountRate}
-        onChange={handleSubscribeDiscountRateChange}
+        value={data.discountRate}
+        onChange={handleDiscountRateChange}
       />
       <Space direction="ROW" />
       <Text>%</Text>
@@ -68,10 +96,7 @@ export default function InfluencerDiscountRow({
       <DiscountPeriodPicker
         name="choicedSelectValue"
         size="small"
-        value={[
-          moment(data.subscribeDiscountStartPeriod),
-          moment(data.subscribeDiscountEndPeriod),
-        ]}
+        value={[moment(data.startAt), moment(data.endAt)]}
         onChange={handleSubscribeDiscountPeriodChange}
       />
       <Space direction="ROW" level={4} />
@@ -86,7 +111,7 @@ export default function InfluencerDiscountRow({
       <Space direction="ROW" />
       <Popconfirm
         title="정말 삭제하시겠습니까？"
-        onConfirm={deleteData}
+        onConfirm={handleDelete}
         okText="예"
         cancelText="아니오"
         icon={<Icon type="question-circle-o" style={{color: '#f33'}} />}>
