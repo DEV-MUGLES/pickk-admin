@@ -97,9 +97,7 @@ export default withBoardContext(
   ExchangeRequestBoard,
   {
     status: null,
-    lookupDate: 'paid',
-    startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
-    endDate: moment().format('YYYY-MM-DD'),
+    startDate: '2000-01-01',
   },
   useExchangeRequestTable,
   parseTable,
