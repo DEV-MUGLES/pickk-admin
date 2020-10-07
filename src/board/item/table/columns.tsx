@@ -38,9 +38,9 @@ export const itemColumns = [
   },
   {
     title: '리뷰 수',
-    dataIndex: 'postCount',
-    key: 'postCount',
-    sorter: (a, b) => b.postCount - a.postCount,
+    dataIndex: 'reviewCount',
+    key: 'reviewCount',
+    sorter: (a, b) => b.reviewCount - a.reviewCount,
     width: 50,
     ellipsis: true,
   },
