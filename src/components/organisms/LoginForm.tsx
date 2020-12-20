@@ -81,7 +81,7 @@ export default function LoginForm() {
       </LoginFormContent>
       <LoginFormFooter>
         <Title level={4}> 문의번호</Title>
-        <Text>070-4142-0027, 010-9508-2801</Text>
+        <Text>070-4142-0027</Text>
       </LoginFormFooter>
     </LoginFormLayout>
   );
