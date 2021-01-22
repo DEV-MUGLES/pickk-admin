@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import Img from '@src/components/atoms/img';
 import Space from '@src/components/atoms/space';
-import Colors from '@src/components/atoms/colors';
+import {GREY} from '@src/components/atoms/colors';
 
 import {User} from '@src/types/User';
 import ItemService from '@src/lib/services/Item';
@@ -118,7 +118,7 @@ const SearchResultRow = styled.div`
 
 const Name = styled(Text)`
   margin-right: auto;
-  color: ${Colors.Black};
+  color: ${GREY[800]};
 `;
 
 const DiscountFieldWrapper = styled.div`

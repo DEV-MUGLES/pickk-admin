@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import LoginForm from '@src/components/organisms/LoginForm';
 import GFooter from '@src/components/organisms/GFooter';
 import LogoAdminIcon from '@src/components/atoms/logo/admin';
-import Colors from '@src/components/atoms/colors';
+import {GREY} from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
 
 const {Content} = Layout;
@@ -17,7 +17,7 @@ export default function Login() {
         <Space level={10} />
         <LogoAdminIcon
           style={{width: '120px', height: '72px'}}
-          fill={Colors.Black}
+          fill={GREY[800]}
         />
         <Space level={2} />
         <LoginForm />

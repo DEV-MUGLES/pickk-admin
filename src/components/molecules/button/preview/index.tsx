@@ -6,7 +6,7 @@ import {useBoardContext} from '@src/contexts/Board';
 import {Filter} from '@src/types';
 
 import Space from '@src/components/atoms/space';
-import Colors from '@src/components/atoms/colors';
+import {WHITE, INDIGO_BLUE} from '@src/components/atoms/colors';
 
 const {Text} = Typography;
 
@@ -24,7 +24,7 @@ function PreviewButton({iconType, label, count, filterValue}: PreviewProps) {
 
   const newFilterValue = {...defaultFilter, ...filterValue};
   const isSelected = Object.keys(newFilterValue).every(
-    key => newFilterValue[key] === filter[key],
+    (key) => newFilterValue[key] === filter[key],
   );
 
   const handleClick = () => {
@@ -36,7 +36,7 @@ function PreviewButton({iconType, label, count, filterValue}: PreviewProps) {
       <IconBackground isSelected={isSelected}>
         <Icon
           type={iconType}
-          style={{color: Colors.White, fontSize: '1.2rem'}}
+          style={{color: WHITE, fontSize: '1.2rem'}}
           theme="outlined"
         />
       </IconBackground>
@@ -73,10 +73,11 @@ const IconBackground = styled.div<{isSelected: boolean}>`
   width: 3.2em;
   height: 3.2em;
   border-radius: 9999px;
-  background-color: ${props => (props.isSelected ? Colors.Primary : 'grey')};
+  background-color: ${(props) =>
+    props.isSelected ? INDIGO_BLUE[900] : 'grey'};
   transition: 0.2s;
   ${Wrapper}:hover & {
-    background-color: ${Colors.Primary};
+    background-color: ${INDIGO_BLUE[900]};
   }
 `;
 
@@ -90,9 +91,9 @@ const DataWrapper = styled.div`
 `;
 
 const StyledText = styled(Text)<{isSelected: boolean}>`
-  ${props => props.isSelected && `color: ${Colors.Primary}`};
+  ${(props) => props.isSelected && `color: ${INDIGO_BLUE[900]}`};
   transition: 0.2s;
   ${Wrapper}:hover & {
-    color: ${Colors.Primary};
+    color: ${INDIGO_BLUE[900]};
   }
 `;

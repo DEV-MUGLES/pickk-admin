@@ -1,6 +1,6 @@
 import {Button} from 'antd';
 
-import Colors from '@src/components/atoms/colors';
+import {INDIGO_BLUE} from '@src/components/atoms/colors';
 import {useBoardContext} from '@src/contexts/Board';
 
 export default function TableReloadButton() {
@@ -11,7 +11,7 @@ export default function TableReloadButton() {
   return (
     <Button
       icon="reload"
-      style={{color: Colors.Primary, borderColor: Colors.Primary}}
+      style={{color: INDIGO_BLUE[900], borderColor: INDIGO_BLUE[900]}}
       loading={loading}
       onClick={reload}>
       새로 고침

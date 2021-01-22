@@ -12,7 +12,7 @@ import {
 import styled from 'styled-components';
 
 import Space from '@src/components/atoms/space';
-import Colors from '@src/components/atoms/colors';
+import {INDIGO_BLUE} from '@src/components/atoms/colors';
 import moment from 'moment';
 
 const {Text} = Typography;
@@ -43,11 +43,11 @@ export default function SubscriptionDiscountRow({
     });
   };
 
-  const handleSubscribeDiscountRateChange = e => {
+  const handleSubscribeDiscountRateChange = (e) => {
     handleChange({subscribeDiscountRate: e.target.value});
   };
 
-  const handleSubscribeDiscountPeriodChange = date => {
+  const handleSubscribeDiscountPeriodChange = (date) => {
     handleChange({
       subscribeDiscountStartPeriod: moment(date[0]).format('YYYY-MM-DD'),
       subscribeDiscountEndPeriod: moment(date[1]).format('YYYY-MM-DD'),
@@ -110,7 +110,7 @@ export default function SubscriptionDiscountRow({
         okText="예"
         cancelText="아니오"
         icon={
-          <Icon type="question-circle-o" style={{color: Colors.Primary}} />
+          <Icon type="question-circle-o" style={{color: INDIGO_BLUE[900]}} />
         }>
         <ResetButton size="small">초기화</ResetButton>
       </Popconfirm>
@@ -146,5 +146,5 @@ const DiscountPeriodPicker = styled(RangePicker)`
 `;
 
 const ResetButton = styled(Button)`
-  color: ${Colors.Primary};
+  color: ${INDIGO_BLUE[900]};
 `;
