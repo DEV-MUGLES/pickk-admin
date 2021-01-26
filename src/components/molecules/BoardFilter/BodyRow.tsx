@@ -3,7 +3,7 @@ import {Typography, Tooltip, Icon} from 'antd';
 import styled from 'styled-components';
 
 import Space from '@src/components/atoms/space';
-import Colors from '@src/components/atoms/colors';
+import {GREY} from '@src/components/atoms/colors';
 
 const {Text} = Typography;
 
@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid ${Colors.LightGrey};
+  border-bottom: 1px solid ${GREY[200]};
 `;
 
 const LabelWrapper = styled.div`
@@ -74,5 +74,5 @@ const StyledText = styled(Text)`
 `;
 
 const StyledIcon = styled(Icon)`
-  color: ${Colors.MiddleGrey};
+  color: ${GREY[500]};
 `;

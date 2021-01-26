@@ -1,8 +1,8 @@
-import React, {useState, useEffect, CSSProperties} from 'react';
+import React, {useState, CSSProperties} from 'react';
 import {Layout, Input, Icon, Checkbox, Button, Typography, message} from 'antd';
 import styled from 'styled-components';
 
-import Colors from '@src/components/atoms/colors';
+import {WHITE, GREY} from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
 import UserService from '@src/lib/services/User';
 
@@ -94,7 +94,7 @@ const LoginFormLayout = styled(Layout)`
   flex-direction: column;
   align-items: center;
 
-  background-color: ${Colors.White};
+  background-color: ${WHITE};
   padding: 50px;
 `;
 
@@ -110,9 +110,9 @@ const LoginButton = styled(Button)`
 `;
 
 const LoginFormFooter = styled(Footer)`
-  background-color: ${Colors.White};
+  background-color: ${WHITE};
   width: 100%;
   padding: 0;
-  border-top: 1px solid ${Colors.RegularGrey};
+  border-top: 1px solid ${GREY[400]};
   padding-top: 16px;
 `;

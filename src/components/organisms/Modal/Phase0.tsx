@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Img from '@src/components/atoms/img';
 import Space from '@src/components/atoms/space';
-import Colors from '@src/components/atoms/colors';
+import {GREY} from '@src/components/atoms/colors';
 import UserService from '@src/lib/services/User';
 import {User} from '@src/types/User';
 
@@ -37,8 +37,6 @@ export default function Phase0({
     );
     setPhase(1);
   };
-
-  console.log(influencerSearchResult);
 
   return (
     <Wrapper>
@@ -105,7 +103,7 @@ const SearchResultRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border: 1px solid ${Colors.RegularGrey};
+  border: 1px solid ${GREY[400]};
   border-radius: 4px;
   padding: 5px;
   width: 100%;
@@ -115,7 +113,7 @@ const SearchResultRow = styled.div`
 const Name = styled(Text)`
   width: 116px;
   margin-right: auto;
-  color: ${Colors.Black};
+  color: ${GREY[800]};
 `;
 
 const SubscriberNumber = styled(Text)`

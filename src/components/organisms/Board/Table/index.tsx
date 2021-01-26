@@ -5,7 +5,7 @@ import {Table, Divider} from 'antd';
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
 import ActionBar, {TableActionBarProps} from './ActionBar';
-import Colors from '@src/components/atoms/colors';
+import {WHITE} from '@src/components/atoms/colors';
 
 import {useBoardContext} from '@src/contexts/Board';
 
@@ -69,7 +69,7 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
 export default React.memo(BoardTable);
 
 const Wrapper = styled.div`
-  background-color: ${Colors.White};
+  background-color: ${WHITE};
   display: flex;
   align-itmes: flex-start;
   text-align: left;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Typography} from 'antd';
 
 import {TitleText} from '@src/components/organisms/Board/Filter/Header';
-import Colors from '@src/components/atoms/colors';
+import {WHITE} from '@src/components/atoms/colors';
 
 import {useSettlementAmountPreview} from '@src/hooks/Settlement';
 import {addCommaToNumber} from '@src/lib/NumberParser';
@@ -33,7 +33,7 @@ export default function SettlementAmountPreview() {
 }
 
 const Wrapper = styled.div`
-  background-color: ${Colors.White};
+  background-color: ${WHITE};
   display: flex;
   flex-direction: column;
   align-items: flex-start;

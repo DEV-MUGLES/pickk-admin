@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import PreviewButton from '@src/components/molecules/button/preview';
-import Colors from '@src/components/atoms/colors';
+import {WHITE} from '@src/components/atoms/colors';
 
 function Preview({data, usePreviewData}) {
   const {data: previewValue} = usePreviewData([]);
@@ -33,6 +33,6 @@ const PreviewWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   height: fit-content;
-  background-color: ${Colors.White};
+  background-color: ${WHITE};
   padding: 16px 6rem;
 `;

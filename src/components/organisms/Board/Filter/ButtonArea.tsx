@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import {useBoardContext} from '@src/contexts/Board';
 
-import Colors from '@src/components/atoms/colors';
+import {INDIGO_BLUE} from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
 
 export default function FilterButtonArea() {
@@ -35,7 +35,8 @@ const SubmitButton = styled(Button)`
   width: 100px;
 `;
 
-const ResetButton = styled(SubmitButton)`
-  color: ${Colors.Primary};
-  border-color: ${Colors.Primary};
+const ResetButton = styled(Button)`
+  width: 100px;
+  color: ${INDIGO_BLUE[900]};
+  border-color: ${INDIGO_BLUE[900]};
 `;

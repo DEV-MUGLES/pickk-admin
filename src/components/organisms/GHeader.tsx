@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import IconButton from '../atoms/button/icon';
 import LogoDefaultIcon from '../atoms/logo/default';
-import Colors from '../atoms/colors';
+import {WHITE} from '../atoms/colors';
 import Space from '../atoms/space';
 import UserService from '@src/lib/services/User';
 
@@ -30,7 +30,7 @@ export default function GHeader() {
         Icon={
           <LogoDefaultIcon
             style={{width: '40px', height: '24px'}}
-            fill={Colors.White}
+            fill={WHITE}
           />
         }
         type="only-content"
@@ -42,7 +42,7 @@ export default function GHeader() {
         size="small"
         href="/dashboard"
         style={{
-          color: Colors.White,
+          color: WHITE,
           fontSize: '24px',
         }}>
         스토어 어드민
@@ -53,13 +53,13 @@ export default function GHeader() {
             type="bell"
             style={{
               fontSize: 18,
-              color: Colors.White,
+              color: WHITE,
             }}
           />
         </Badge>
         <Space level={2} direction="ROW" />
         <Dropdown overlay={dropDownMenu} trigger={['click']}>
-          <a href="#" style={{color: Colors.White}}>
+          <a href="#" style={{color: WHITE}}>
             <Avatar shape="square" icon="user" size="small" />
             <Icon type="down" style={{marginLeft: 6}} />
           </a>

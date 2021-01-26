@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Modal, InputNumber, Button, message, Typography} from 'antd';
 
-import Colors from '@src/components/atoms/colors';
+import {GREY} from '@src/components/atoms/colors';
 import ItemService from '@src/lib/services/Item';
 import {useBoardContext} from '@src/contexts/Board';
 
@@ -28,7 +28,7 @@ export default function StockInitModal({
     setStocks(modalData.map(() => 5));
   }, [modalData]);
 
-  const handleStockInput = index => value => {
+  const handleStockInput = (index) => (value) => {
     setStocks([
       ...stocks.slice(0, index),
       value,
@@ -116,7 +116,7 @@ const SubmitArea = styled.div`
   align-items: center;
   width: 100%;
   height: fit-content;
-  border-top: 1px solid ${Colors.LightGrey};
+  border-top: 1px solid ${GREY[200]};
   padding-top: 16px;
 `;
 

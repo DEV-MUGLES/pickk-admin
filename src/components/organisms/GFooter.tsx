@@ -1,6 +1,5 @@
 import {Layout} from 'antd';
 import styled from 'styled-components';
-import Colors from '@src/components/atoms/colors';
 
 const {Footer} = Layout;
 

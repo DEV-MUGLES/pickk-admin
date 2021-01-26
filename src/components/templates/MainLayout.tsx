@@ -4,7 +4,6 @@ import {Layout} from 'antd';
 import SiderGNB from '../organisms/GNB';
 import GHeader from '../organisms/GHeader';
 import GFooter from '../organisms/GFooter';
-import Colors from '../atoms/colors';
 
 const {Content, Footer} = Layout;
 
