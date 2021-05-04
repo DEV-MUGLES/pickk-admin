@@ -1,5 +1,6 @@
 import {Layout, Menu} from 'antd';
 import styled from 'styled-components';
+import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {DollarOutlined, ShopOutlined, SkinOutlined} from '@ant-design/icons';
 
@@ -81,10 +82,12 @@ export default function GNB() {
           if (!item.title) {
             return (
               <Menu.Item key={item.link}>
-                <a href={item.link}>
-                  <Icon />
-                  <span className="nav-text">{item.text}</span>
-                </a>
+                <Link href={item.link}>
+                  <>
+                    <Icon />
+                    <span className="nav-text">{item.text}</span>
+                  </>
+                </Link>
               </Menu.Item>
             );
           } else {
@@ -99,9 +102,9 @@ export default function GNB() {
                 }>
                 {item.items.map((subItem) => (
                   <Menu.Item key={subItem.link}>
-                    <a href={subItem.link}>
+                    <Link href={subItem.link}>
                       <span className="nav-text">{subItem.text}</span>
-                    </a>
+                    </Link>
                   </Menu.Item>
                 ))}
               </SubMenu>
