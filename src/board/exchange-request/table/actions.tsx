@@ -1,6 +1,8 @@
-import {message, Modal, Icon} from 'antd';
+import {message, Modal} from 'antd';
 
 import ExchangeRequestService from '@src/lib/services/ExchangeRequest';
+import React from 'react';
+import {ExclamationCircleOutlined} from '@ant-design/icons';
 
 const {confirm} = Modal;
 
@@ -17,7 +19,7 @@ export const exchangeRequestActions = [
       try {
         confirm({
           title: '반품 변경 확인',
-          icon: <Icon type="ExclamationCircleOutlined" />,
+          icon: <ExclamationCircleOutlined />,
           content: '정말로 반품으로 변경하시겠습니까?.',
           okText: '예',
           okType: 'danger',

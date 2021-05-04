@@ -1,18 +1,23 @@
 {
   "presets": ["next/babel"],
   "plugins": [
+    ["styled-components", {"ssr": true}],
     [
-      "styled-components",
+      "@babel/plugin-proposal-decorators",
       {
-        "ssr": true,
-        "displayName": true,
-        "preprocess": true
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
       }
     ],
     [
       "module-resolver",
       {
-        "root": ["./"],
+        "root": ["."],
         "alias": {
           "@src": "./src"
         }

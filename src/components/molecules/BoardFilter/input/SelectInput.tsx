@@ -20,17 +20,17 @@ export default function SelectInput({name, select}: SelectInputProps) {
   // tslint:disable-next-line: no-any
   const handleChange = (data: any) => {
     const newData = {};
-    Object.keys(data).map(key => {
+    Object.keys(data).map((key) => {
       newData[name + '_' + key] = data[key];
     });
     handleFilterChange(newData);
   };
 
-  const handleChoicedSelectChange = value => {
+  const handleChoicedSelectChange = (value) => {
     handleChange({type: value});
   };
 
-  const handleInputQueryChange = e => {
+  const handleInputQueryChange = (e) => {
     handleChange({query: e.target.value});
   };
 
@@ -39,7 +39,7 @@ export default function SelectInput({name, select}: SelectInputProps) {
       <StyledSelect
         value={filter[`${name}_type`]}
         onChange={handleChoicedSelectChange}>
-        {select.map(item => (
+        {select.map((item) => (
           <Option key={item.name} value={item.value}>
             <Typography.Text>{item.name}</Typography.Text>
           </Option>

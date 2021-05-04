@@ -1,23 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Typography, Icon} from 'antd';
+import {Typography} from 'antd';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {Filter} from '@src/types';
 
 import Space from '@src/components/atoms/space';
 import {WHITE, INDIGO_BLUE} from '@src/components/atoms/colors';
+import {AntdIconProps} from '@ant-design/icons/lib/components/AntdIcon';
 
 const {Text} = Typography;
 
 export type PreviewProps = {
-  iconType: string;
+  icon: React.FunctionComponent<AntdIconProps>;
   label: string;
   count: number;
   filterValue: Filter;
 };
 
-function PreviewButton({iconType, label, count, filterValue}: PreviewProps) {
+function PreviewButton({icon: Icon, label, count, filterValue}: PreviewProps) {
   const {state, action} = useBoardContext();
   const {filter, defaultFilter} = state;
   const {applyPreview} = action;
@@ -34,11 +35,7 @@ function PreviewButton({iconType, label, count, filterValue}: PreviewProps) {
   return (
     <Wrapper onClick={handleClick}>
       <IconBackground isSelected={isSelected}>
-        <Icon
-          type={iconType}
-          style={{color: WHITE, fontSize: '1.2rem'}}
-          theme="outlined"
-        />
+        <Icon style={{color: WHITE, fontSize: '1.2rem'}} />
       </IconBackground>
       <Space level={1} direction="ROW" />
       <DataWrapper>

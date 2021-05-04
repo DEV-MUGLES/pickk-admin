@@ -5,9 +5,9 @@ export const addDashToPhoneNumber = (value: string | number) => {
   const result = [
     number.slice(0, 3),
     number.slice(3, secondIndex),
-    number.slice(secondIndex, number.length)
+    number.slice(secondIndex, number.length),
   ]
-    .filter(value => value != '')
+    .filter((value) => value != '')
     .join('-');
   return result;
 };

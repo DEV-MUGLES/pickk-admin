@@ -60,7 +60,7 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
           </>
         )}
         footer={footActions ? () => <Footer {...footerProps} /> : null}
-        pagination={{position: 'bottom', pageSize}}
+        pagination={{position: ['bottomRight'], pageSize}}
       />
     </Wrapper>
   );

@@ -1,5 +1,5 @@
-import Button from "../";
-import ButtonProps from "../button";
+import Button from '../';
+import ButtonProps from '../button';
 
 export interface IProps extends ButtonProps {
   Icon: React.ReactElement;

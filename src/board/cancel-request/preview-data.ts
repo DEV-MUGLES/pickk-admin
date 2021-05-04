@@ -1,23 +1,29 @@
+import {
+  CheckOutlined,
+  CloseOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
+
 export const canceldRequestPreviewData = [
   {
     label: '취소 요청',
-    iconType: 'unordered-list',
+    icon: UnorderedListOutlined,
     filterValue: {status: 'REQUESTED'},
   },
   {
     label: '취소 완료',
-    iconType: 'check',
+    icon: CheckOutlined,
     filterValue: {status: 'CONFIRMED'},
   },
   {
     label: '취소 실패',
-    iconType: 'close',
+    icon: CloseOutlined,
     filterValue: {status: 'CONFIRMED'},
     disabled: true,
   },
   {
     label: '취소 거부',
-    iconType: 'close',
+    icon: CloseOutlined,
     filterValue: {status: 'REJECTED'},
   },
 ];

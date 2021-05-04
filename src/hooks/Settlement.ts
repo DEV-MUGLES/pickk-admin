@@ -6,6 +6,6 @@ export const useSettlementCountPreview = useAxiosQuery<SettlementCountPreview>(
   SettlementService.getCountPreviewList,
 );
 
-export const useSettlementAmountPreview = useAxiosQuery<
-  SettlementAmountPreview
->(SettlementService.getAmountPreviewList);
+export const useSettlementAmountPreview = useAxiosQuery<SettlementAmountPreview>(
+  SettlementService.getAmountPreviewList,
+);

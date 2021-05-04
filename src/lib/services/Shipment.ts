@@ -4,7 +4,7 @@ import {ShipmentPreview} from '@src/types';
 const getPreviewList = (): Promise<ShipmentPreview> =>
   base(true)
     .get('/partner/shipments/preview/')
-    .then(res => res.data);
+    .then((res) => res.data);
 
 const ShipmentService = {
   getPreviewList,

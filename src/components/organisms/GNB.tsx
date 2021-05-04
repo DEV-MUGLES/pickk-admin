@@ -1,24 +1,20 @@
-import {Layout, Menu, Icon} from 'antd';
+import {Layout, Menu} from 'antd';
 import styled from 'styled-components';
 import {useRouter} from 'next/router';
+import {DollarOutlined, ShopOutlined, SkinOutlined} from '@ant-design/icons';
 
 const {Sider} = Layout;
 const {SubMenu} = Menu;
 
 const MENU_ITEMS = [
-  /*{
-    iconType: 'dashboard',
-    text: '대시보드',
-    link: '/dashboard',
-  },*/
   {
-    iconType: 'skin',
+    icon: SkinOutlined,
     text: '상품 관리',
     link: '/items',
   },
   {
     title: '판매 관리',
-    iconType: 'shop',
+    icon: ShopOutlined,
     items: [
       {
         text: '주문 조회',
@@ -49,7 +45,7 @@ const MENU_ITEMS = [
   },
   {
     title: '정산 관리',
-    iconType: 'dollar',
+    icon: DollarOutlined,
     items: [
       {
         text: '정산 내역',
@@ -81,11 +77,12 @@ export default function GNB() {
       />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[router.pathname]}>
         {MENU_ITEMS.map((item) => {
+          const {icon: Icon} = item;
           if (!item.title) {
             return (
               <Menu.Item key={item.link}>
                 <a href={item.link}>
-                  <Icon type={item.iconType} />
+                  <Icon />
                   <span className="nav-text">{item.text}</span>
                 </a>
               </Menu.Item>
@@ -96,7 +93,7 @@ export default function GNB() {
                 key={`sub_${item.title}`}
                 title={
                   <span>
-                    <Icon type={item.iconType} />
+                    <Icon />
                     <span>{item.title}</span>
                   </span>
                 }>

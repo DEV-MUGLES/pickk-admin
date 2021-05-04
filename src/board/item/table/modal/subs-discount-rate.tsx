@@ -46,7 +46,7 @@ export default function SubsDiscountRateModal({
               <Label strong>확인</Label>
             </InnerRow>
           </Row>
-          {modalData.map(item => {
+          {modalData.map((item) => {
             const {id, skuPrefix, name, subsDiscountRate} = item;
             return (
               <SubsDiscount

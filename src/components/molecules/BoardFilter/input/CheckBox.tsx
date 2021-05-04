@@ -12,7 +12,7 @@ export default function CheckBox({name}: CheckBoxProps) {
   const {filter} = state;
   const {handleFilterChange} = action;
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     handleFilterChange({[name]: e.target.checked});
   };
 

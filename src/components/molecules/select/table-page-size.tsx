@@ -16,8 +16,12 @@ export default function TablePageSizeSelect({
   setPageSize,
 }: TablePageSizeSelectProps) {
   return (
-    <StyledSelect value={pageSize} onChange={setPageSize}>
-      {PAGE_SIZES.map(size => (
+    <StyledSelect
+      value={pageSize}
+      onChange={(value) => {
+        setPageSize(Number(value));
+      }}>
+      {PAGE_SIZES.map((size) => (
         <Option key={size} value={size}>
           {size}개 씩
         </Option>

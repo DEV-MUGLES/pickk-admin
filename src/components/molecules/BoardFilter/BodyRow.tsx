@@ -1,9 +1,10 @@
 import React from 'react';
-import {Typography, Tooltip, Icon} from 'antd';
+import {Typography, Tooltip} from 'antd';
 import styled from 'styled-components';
 
 import Space from '@src/components/atoms/space';
 import {GREY} from '@src/components/atoms/colors';
+import {InfoCircleOutlined} from '@ant-design/icons';
 
 const {Text} = Typography;
 
@@ -30,7 +31,7 @@ export default function BoardFilterRow({
           <>
             <Space size={8} direction="ROW" />
             <Tooltip placement="right" title={guideText}>
-              <StyledIcon type="info-circle" />
+              <InfoCircleOutlined style={{color: GREY[500]}} />
             </Tooltip>
           </>
         )}
@@ -71,8 +72,4 @@ const InputWrapper = styled.div`
 
 const StyledText = styled(Text)`
   margin-bottom: 2px;
-`;
-
-const StyledIcon = styled(Icon)`
-  color: ${GREY[500]};
 `;

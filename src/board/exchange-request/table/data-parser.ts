@@ -4,7 +4,7 @@ import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
 import {ExchangeRequest} from '@src/types';
 
 export const parseTable = (table: ExchangeRequest[]) =>
-  table ? table.map(record => parseRecord(record)) : null;
+  table ? table.map((record) => parseRecord(record)) : null;
 
 export const parseRecord = (record: ExchangeRequest) => {
   const result = {
@@ -21,7 +21,7 @@ export const parseRecord = (record: ExchangeRequest) => {
       ? addDashToPhoneNumber(record.addressPhone)
       : null,
   };
-  Object.keys(result).forEach(key => {
+  Object.keys(result).forEach((key) => {
     if (!result[key] || result[key] === undefined) {
       result[key] = '';
     }

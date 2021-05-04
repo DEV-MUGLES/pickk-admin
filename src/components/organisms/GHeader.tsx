@@ -1,4 +1,4 @@
-import {Layout, Avatar, Badge, Dropdown, Menu, Icon} from 'antd';
+import {Layout, Avatar, Badge, Dropdown, Menu} from 'antd';
 import Button from '@src/components/atoms/button';
 import styled from 'styled-components';
 
@@ -7,6 +7,7 @@ import LogoDefaultIcon from '../atoms/logo/default';
 import {WHITE} from '../atoms/colors';
 import Space from '../atoms/space';
 import UserService from '@src/lib/services/User';
+import {BellOutlined, DownOutlined} from '@ant-design/icons';
 
 const {Header} = Layout;
 
@@ -49,8 +50,7 @@ export default function GHeader() {
       </Button>
       <Right>
         <Badge dot>
-          <Icon
-            type="bell"
+          <BellOutlined
             style={{
               fontSize: 18,
               color: WHITE,
@@ -61,7 +61,7 @@ export default function GHeader() {
         <Dropdown overlay={dropDownMenu} trigger={['click']}>
           <a href="#" style={{color: WHITE}}>
             <Avatar shape="square" icon="user" size="small" />
-            <Icon type="down" style={{marginLeft: 6}} />
+            <DownOutlined style={{marginLeft: 6}} />
           </a>
         </Dropdown>
       </Right>

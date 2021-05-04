@@ -13,7 +13,7 @@ export default function FilterBody({inputs}: BoardFilterBodyProps) {
   return (
     <InputsWrapper>
       {inputs &&
-        inputs.map(item => <BoardFilterRow key={item.labelText} {...item} />)}
+        inputs.map((item) => <BoardFilterRow key={item.labelText} {...item} />)}
     </InputsWrapper>
   );
 }

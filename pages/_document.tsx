@@ -2,7 +2,13 @@
 // Event handlers like onClick can't be added to this file
 
 // ./pages/_document.js
-import Document, {Head, Main, NextScript, DocumentContext} from 'next/document';
+import Document, {
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  Html,
+} from 'next/document';
 import {ServerStyleSheet} from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -33,7 +39,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html lang="ko">
+      <Html lang="ko">
         <Head>
           <link rel="stylesheet" href="/antd.min.css" />
           <link
@@ -41,14 +47,13 @@ export default class MyDocument extends Document {
             type="image/png"
             sizes="16x16"
             href="/images/favicon-16x16.png"></link>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

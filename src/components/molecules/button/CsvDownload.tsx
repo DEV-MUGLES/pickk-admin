@@ -3,7 +3,15 @@ import {CSVLink} from 'react-csv';
 
 import {getDateTimeStrings} from '@src/lib/DateParser';
 import {useBoardContext} from '@src/contexts/Board';
-import {ExcelDownloadButtonProps} from './ExcelDownload';
+
+export type ExcelDownloadButtonProps = {
+  title: string;
+  columns: Array<{
+    title: string;
+    key: string;
+  }>;
+  dataSource: Array<{}>;
+};
 
 export default function CsvDownloadButton({
   title,
@@ -19,7 +27,7 @@ export default function CsvDownloadButton({
     2,
   )}${month}${day}_${hours}${minutes}${seconds}`;
 
-  const headers = columns.map(item => {
+  const headers = columns.map((item) => {
     return {
       key: item.key,
       label: item.title,

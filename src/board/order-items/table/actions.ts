@@ -24,7 +24,7 @@ export const orderItemActions = [
             },
           ],
         });
-        await OrderItemService.refundRequest(ids[0], reason);
+        await OrderItemService.refundRequest(ids[0], reason as string);
         return Promise.resolve(true);
       } catch {
         return Promise.resolve(false);

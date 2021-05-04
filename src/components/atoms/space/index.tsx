@@ -15,8 +15,8 @@ export default function Space(props: IProps) {
 
   const _Space = styled.div`
     background-color: transparent;
-    width:${props.direction === 'COL' ? thickness : length};
-    height:${props.direction === 'ROW' ? thickness : length};
+    width: ${props.direction === 'COL' ? thickness : length};
+    height: ${props.direction === 'ROW' ? thickness : length};
   `;
   return <_Space className={props.className} />;
 }

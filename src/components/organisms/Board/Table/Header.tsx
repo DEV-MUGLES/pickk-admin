@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import {Typography} from 'antd';
 
 import TableReloadButton from '@src/components/molecules/button/TableReload';
-import CsvDownloadButton from '@src/components/molecules/button/CsvDownload';
-import ExcelDownloadButton, {
+import CsvDownloadButton, {
   ExcelDownloadButtonProps,
-} from '@src/components/molecules/button/ExcelDownload';
+} from '@src/components/molecules/button/CsvDownload';
+// import ExcelDownloadButton, {
+//   ExcelDownloadButtonProps,
+// } from '@src/components/molecules/button/ExcelDownload';
 import Space from '@src/components/atoms/space';
 import {isEqualObject} from '@src/lib/utils';
 
@@ -22,7 +24,7 @@ function TableHeader(props: TableHeaderProps) {
       </Typography.Text>
       <TableReloadButton />
       <Space direction="ROW" />
-      <ExcelDownloadButton {...props} />
+      {/* <ExcelDownloadButton {...props} /> */}
       <Space direction="ROW" size={4} />
       <CsvDownloadButton {...props} />
     </Wrapper>

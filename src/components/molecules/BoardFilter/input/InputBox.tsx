@@ -13,11 +13,11 @@ function InputBox({name}: InputBoxProps) {
   const {handleFilterChange, applyPreview} = action;
 
   // tslint:disable-next-line: no-any
-  const handleChange = e => {
+  const handleChange = (e) => {
     handleFilterChange({[name]: e.target.value});
   };
 
-  const handleEnterDown = e => {
+  const handleEnterDown = (e) => {
     if (e.key === 'Enter') {
       applyPreview({...filter, [name]: e.target.value});
     }

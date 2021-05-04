@@ -6,7 +6,6 @@ import {
   Button,
   Tooltip,
   Popconfirm,
-  Icon,
   message,
 } from 'antd';
 import styled from 'styled-components';
@@ -14,6 +13,7 @@ import styled from 'styled-components';
 import Space from '@src/components/atoms/space';
 import {INDIGO_BLUE} from '@src/components/atoms/colors';
 import moment from 'moment';
+import {QuestionCircleOutlined} from '@ant-design/icons';
 
 const {Text} = Typography;
 const {RangePicker} = DatePicker;
@@ -100,7 +100,7 @@ export default function SubscriptionDiscountRow({
         onConfirm={handleSubmit}
         okText="예"
         cancelText="아니오"
-        icon={<Icon type="question-circle-o" />}>
+        icon={<QuestionCircleOutlined />}>
         <Button size="small">변경</Button>
       </Popconfirm>
       <Space direction="ROW" />
@@ -109,9 +109,7 @@ export default function SubscriptionDiscountRow({
         onConfirm={handleReset}
         okText="예"
         cancelText="아니오"
-        icon={
-          <Icon type="question-circle-o" style={{color: INDIGO_BLUE[900]}} />
-        }>
+        icon={<QuestionCircleOutlined style={{color: INDIGO_BLUE[900]}} />}>
         <ResetButton size="small">초기화</ResetButton>
       </Popconfirm>
     </Wrapper>

@@ -1,13 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Input,
-  Typography,
-  DatePicker,
-  Button,
-  Popconfirm,
-  Icon,
-  message,
-} from 'antd';
+import {Input, Typography, DatePicker, Button, Popconfirm, message} from 'antd';
 import styled from 'styled-components';
 
 import {DiscountRowProps} from '@src/components/molecules/Row/Discount/Subscription';
@@ -15,6 +7,7 @@ import Space from '@src/components/atoms/space';
 import moment from 'moment';
 import {ItemDiscount} from '@src/types';
 import ItemService from '@src/lib/services/Item';
+import {QuestionCircleOutlined} from '@ant-design/icons';
 
 const {Text} = Typography;
 const {RangePicker} = DatePicker;
@@ -105,7 +98,7 @@ export default function InfluencerDiscountRow(
         onConfirm={handleSubmit}
         okText="예"
         cancelText="아니오"
-        icon={<Icon type="question-circle-o" />}>
+        icon={<QuestionCircleOutlined />}>
         <Button size="small">변경</Button>
       </Popconfirm>
       <Space direction="ROW" />
@@ -114,7 +107,7 @@ export default function InfluencerDiscountRow(
         onConfirm={handleDelete}
         okText="예"
         cancelText="아니오"
-        icon={<Icon type="question-circle-o" style={{color: '#f33'}} />}>
+        icon={<QuestionCircleOutlined style={{color: '#f33'}} />}>
         <DeleteButton size="small">삭제</DeleteButton>
       </Popconfirm>
     </Wrapper>

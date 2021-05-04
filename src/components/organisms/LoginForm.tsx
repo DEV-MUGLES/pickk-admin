@@ -1,10 +1,11 @@
 import React, {useState, CSSProperties} from 'react';
-import {Layout, Input, Icon, Checkbox, Button, Typography, message} from 'antd';
+import {Layout, Input, Checkbox, Button, Typography, message} from 'antd';
 import styled from 'styled-components';
 
 import {WHITE, GREY} from '@src/components/atoms/colors';
 import Space from '@src/components/atoms/space';
 import UserService from '@src/lib/services/User';
+import {LockOutlined, UserOutlined} from '@ant-design/icons';
 
 const {Title, Text} = Typography;
 const {Content, Footer} = Layout;
@@ -53,7 +54,7 @@ export default function LoginForm() {
           onChange={handleLoginFormChange}
           size="large"
           style={inputStyle}
-          prefix={<Icon type="user" style={inputPrefixStyle} />}
+          prefix={<UserOutlined style={inputPrefixStyle} />}
         />
         <Space level={1} />
         <Input.Password
@@ -64,7 +65,7 @@ export default function LoginForm() {
           onKeyDown={handlePasswordKeyDown}
           size="large"
           style={inputStyle}
-          prefix={<Icon type="lock" style={inputPrefixStyle} />}
+          prefix={<LockOutlined style={inputPrefixStyle} />}
         />
         <Space level={1} />
 

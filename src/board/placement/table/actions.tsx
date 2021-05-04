@@ -1,11 +1,12 @@
-import {Upload, Button, Modal, Icon, message} from 'antd';
+import React from 'react';
+import {Upload, Button, Modal, message} from 'antd';
+import {ExclamationCircleOutlined} from '@ant-design/icons';
 import styled from 'styled-components';
 import * as XLSX from 'xlsx';
 import CSVReader from 'react-csv-reader';
 
 import {TableActionType} from '@src/components/organisms/Board/Table/table';
 import OrderItemService from '@src/lib/services/OrderItem';
-import PlacementService from '@src/lib/services/Placement';
 
 const {confirm} = Modal;
 
@@ -37,7 +38,7 @@ export const placementActions: TableActionType[] = [
 
             confirm({
               title: '입력한 주문 개수를 확인해주세요.',
-              icon: <Icon type="ExclamationCircleOutlined" />,
+              icon: <ExclamationCircleOutlined />,
               content: (
                 <div>
                   {Object.keys(count).map((status) => (
@@ -105,7 +106,7 @@ export const placementActions: TableActionType[] = [
                 });
                 confirm({
                   title: '입력한 주문 개수를 확인해주세요.',
-                  icon: <Icon type="ExclamationCircleOutlined" />,
+                  icon: <ExclamationCircleOutlined />,
                   content: (
                     <div>
                       {Object.keys(count).map((status) => (

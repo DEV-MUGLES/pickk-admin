@@ -1,38 +1,47 @@
+import {
+  CarOutlined,
+  ImportOutlined,
+  LoadingOutlined,
+  ShoppingOutlined,
+  StopOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
+
 export const exchangeRequestPreviewData = [
   {
     label: '교환 요청',
-    iconType: 'unordered-list',
+    icon: UnorderedListOutlined,
     filterValue: {status: 'REQUESTED'},
   },
   {
     label: '교환 수거 중',
-    iconType: 'loading',
+    icon: LoadingOutlined,
     filterValue: {status: 'PICKING'},
   },
   {
     label: '교환 수거 완료',
-    iconType: 'import',
+    icon: ImportOutlined,
     filterValue: {status: 'PICKED'},
   },
   {
     label: '교환 배송 중',
-    iconType: 'car',
+    icon: CarOutlined,
     filterValue: {status: 'RESHIPPING'},
   },
   {
     label: '교환 배송 완료',
-    iconType: 'shopping',
+    icon: ShoppingOutlined,
     filterValue: {status: 'REDELIVERED'},
   },
   {
     label: '교환 취소',
-    iconType: 'stop',
+    icon: StopOutlined,
     filterValue: {status: 'CANCELLED'},
     disabled: true,
   },
   {
     label: '교환 거부',
-    iconType: 'close',
+    icon: 'close',
     filterValue: {status: 'REJECTED'},
     disabled: true,
   },

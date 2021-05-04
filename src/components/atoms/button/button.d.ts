@@ -1,17 +1,17 @@
-import { Button } from "antd";
+import {Button, ButtonProps as AntdButtonProps} from 'antd';
 
-import PropTypes from "prop-types";
+export type AntdButtonProps = AntdButtonProps;
 
-export type AntdButtonProps = PropTypes.InferProps<Button["props"]>;
-
-export default interface ButtonProps extends AntdButtonProps {
+export default interface ButtonProps
+  extends AntdButtonProps,
+    React.RefAttributes<HTMLElement> {
   type?:
-    | "default"
-    | "link"
-    | "ghost"
-    | "primary"
-    | "dashed"
-    | "danger"
-    | "only-content";
-  size?: "default" | "small" | "large" | "xlarge";
+    | 'default'
+    | 'link'
+    | 'ghost'
+    | 'primary'
+    | 'dashed'
+    | 'danger'
+    | 'only-content';
+  size?: 'default' | 'small' | 'large' | 'xlarge';
 }

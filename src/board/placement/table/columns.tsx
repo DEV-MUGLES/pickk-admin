@@ -25,7 +25,7 @@ export const placementColumns = [
     title: '배송추적',
     dataIndex: 'trackingViewUrl',
     key: 'trackingViewUrl',
-    render: value =>
+    render: (value) =>
       value ? (
         <a href={value} target="_blank">
           <Button size="small">배송추적</Button>

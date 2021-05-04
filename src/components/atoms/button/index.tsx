@@ -3,11 +3,9 @@ import ButtonProps, {AntdButtonProps} from './button';
 import styled, {css} from 'styled-components';
 
 export default function IconButton(props: ButtonProps) {
-  const antdProps: AntdButtonProps = props;
-
   return (
     <_Button
-      {...antdProps}
+      {...(props as AntdButtonProps)}
       onlyContent={props.type === 'only-content'}
       xlarge={props.size === 'xlarge'}>
       {props.children}

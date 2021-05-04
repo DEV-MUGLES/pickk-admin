@@ -17,13 +17,13 @@ export default function Selector({name, select}: SelectorProps) {
   const {filter} = state;
   const {handleFilterChange} = action;
 
-  const handleChange = value => {
+  const handleChange = (value) => {
     handleFilterChange({[name]: value});
   };
 
   return (
     <StyledSelect value={filter[name]} onChange={handleChange}>
-      {select.map(item => (
+      {select.map((item) => (
         <Option key={item.name} value={item.value}>
           <Text>{item.name}</Text>
         </Option>

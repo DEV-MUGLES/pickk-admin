@@ -1,5 +1,6 @@
-import {useState} from 'react';
-import {Typography, Button, Modal, Icon, message} from 'antd';
+import React, {useState} from 'react';
+import {Typography, Button, Modal, message} from 'antd';
+import {ExclamationCircleOutlined} from '@ant-design/icons';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
@@ -91,7 +92,7 @@ function ItemBoard({
   const handleOffClicked = async () => {
     confirm({
       title: '재고 관리 기능을 끄시겠습니까?',
-      icon: <Icon type="ExclamationCircleOutlined" />,
+      icon: <ExclamationCircleOutlined />,
       content: '다시 ON 하실 땐 모든 재고 수량을 다시 설정하셔야합니다.',
       okText: '예',
       okType: 'danger',
