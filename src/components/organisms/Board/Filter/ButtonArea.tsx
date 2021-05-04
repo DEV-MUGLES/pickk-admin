@@ -14,11 +14,14 @@ export default function FilterButtonArea() {
 
   return (
     <Wrapper>
-      <SubmitButton icon={SearchOutlined} type="primary" onClick={submitFilter}>
+      <SubmitButton
+        icon={<SearchOutlined />}
+        type="primary"
+        onClick={submitFilter}>
         조회
       </SubmitButton>
       <Space direction="ROW" />
-      <ResetButton icon={UndoOutlined} onClick={initFilter}>
+      <ResetButton icon={<UndoOutlined />} onClick={initFilter}>
         초기화
       </ResetButton>
     </Wrapper>

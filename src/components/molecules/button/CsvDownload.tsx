@@ -43,7 +43,7 @@ export default function CsvDownloadButton({
         filename={fileName}
         headers={headers}></CSVLink>
       <Button
-        icon={FileExcelOutlined}
+        icon={<FileExcelOutlined />}
         style={{color: 'green', borderColor: 'green'}}
         onClick={() => {
           let element: HTMLElement = document.getElementById(

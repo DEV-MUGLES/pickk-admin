@@ -26,7 +26,7 @@ export default function CardReloadButton({
       <Space direction="ROW" size={8} />
       <Button
         shape="circle"
-        icon={ReloadOutlined}
+        icon={<ReloadOutlined />}
         size="small"
         onClick={onClick}
       />

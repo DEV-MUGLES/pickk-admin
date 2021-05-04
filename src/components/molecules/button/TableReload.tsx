@@ -11,7 +11,7 @@ export default function TableReloadButton() {
 
   return (
     <Button
-      icon={ReloadOutlined}
+      icon={<ReloadOutlined />}
       style={{color: INDIGO_BLUE[900], borderColor: INDIGO_BLUE[900]}}
       loading={loading}
       onClick={reload}>

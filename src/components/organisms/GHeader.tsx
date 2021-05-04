@@ -7,7 +7,7 @@ import LogoDefaultIcon from '../atoms/logo/default';
 import {WHITE} from '../atoms/colors';
 import Space from '../atoms/space';
 import UserService from '@src/lib/services/User';
-import {BellOutlined, DownOutlined} from '@ant-design/icons';
+import {BellOutlined, DownOutlined, UserOutlined} from '@ant-design/icons';
 
 const {Header} = Layout;
 
@@ -60,7 +60,7 @@ export default function GHeader() {
         <Space level={2} direction="ROW" />
         <Dropdown overlay={dropDownMenu} trigger={['click']}>
           <a href="#" style={{color: WHITE}}>
-            <Avatar shape="square" icon="user" size="small" />
+            <Avatar shape="square" icon={<UserOutlined />} size="small" />
             <DownOutlined style={{marginLeft: 6}} />
           </a>
         </Dropdown>
