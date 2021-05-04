@@ -3,6 +3,7 @@ import {AppProps} from 'next/app';
 import Head from 'next/head';
 
 import {BackTop} from 'antd';
+import 'antd/dist/antd.css';
 
 function PickkAdminApp({Component, pageProps}: AppProps) {
   return (
