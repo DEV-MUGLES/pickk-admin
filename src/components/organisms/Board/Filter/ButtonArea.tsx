@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button} from 'antd';
+import {SearchOutlined, UndoOutlined} from '@ant-design/icons';
 import styled from 'styled-components';
 
 import {useBoardContext} from '@src/contexts/Board';
@@ -13,11 +14,11 @@ export default function FilterButtonArea() {
 
   return (
     <Wrapper>
-      <SubmitButton icon="search" type="primary" onClick={submitFilter}>
+      <SubmitButton icon={SearchOutlined} type="primary" onClick={submitFilter}>
         조회
       </SubmitButton>
       <Space direction="ROW" />
-      <ResetButton icon="undo" onClick={initFilter}>
+      <ResetButton icon={UndoOutlined} onClick={initFilter}>
         초기화
       </ResetButton>
     </Wrapper>

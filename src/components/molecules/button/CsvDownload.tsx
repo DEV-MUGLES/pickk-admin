@@ -1,5 +1,6 @@
 import {Button} from 'antd';
 import {CSVLink} from 'react-csv';
+import {FileExcelOutlined} from '@ant-design/icons';
 
 import {getDateTimeStrings} from '@src/lib/DateParser';
 import {useBoardContext} from '@src/contexts/Board';
@@ -42,7 +43,7 @@ export default function CsvDownloadButton({
         filename={fileName}
         headers={headers}></CSVLink>
       <Button
-        icon="file-excel"
+        icon={FileExcelOutlined}
         style={{color: 'green', borderColor: 'green'}}
         onClick={() => {
           let element: HTMLElement = document.getElementById(

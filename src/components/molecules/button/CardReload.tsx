@@ -1,6 +1,7 @@
 import React from 'react';
 import {Typography, Button} from 'antd';
 import styled from 'styled-components';
+import {ReloadOutlined} from '@ant-design/icons';
 
 import {getDateTimeStrings} from '@src/lib/DateParser';
 import Space from '@src/components/atoms/space';
@@ -23,7 +24,12 @@ export default function CardReloadButton({
         {hours}:{minutes}
       </Typography.Text>
       <Space direction="ROW" size={8} />
-      <Button shape="circle" icon="reload" size="small" onClick={onClick} />
+      <Button
+        shape="circle"
+        icon={ReloadOutlined}
+        size="small"
+        onClick={onClick}
+      />
     </Wrapper>
   );
 }
