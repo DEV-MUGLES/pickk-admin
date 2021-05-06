@@ -42,7 +42,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
-          <link rel="stylesheet" href="/antd.min.css" />
           <link
             rel="icon"
             type="image/png"

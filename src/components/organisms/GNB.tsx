@@ -103,7 +103,7 @@ export default function GNB() {
                 {item.items.map((subItem) => (
                   <Menu.Item key={subItem.link}>
                     <Link href={subItem.link}>
-                      <span className="nav-text">{subItem.text}</span>
+                      <a className="nav-text">{subItem.text}</a>
                     </Link>
                   </Menu.Item>
                 ))}
