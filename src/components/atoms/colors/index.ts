@@ -1,6 +1,12 @@
 export const BLACK = '#000';
 export const WHITE = '#FFF';
 
+export const PRIMARY0 = '#34EEF1';
+export const PRIMARY1 = '#29C7CA';
+export const PRIMARY2 = '#2BACB1';
+export const PRIMARY3 = '#1F9297';
+export const PRIMARY4 = '#137175';
+
 export const GREY = {
   100: '#FAFAFA',
   200: '#F5F5F5',
