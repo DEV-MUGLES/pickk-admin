@@ -1,36 +1,35 @@
-import {Layout, Avatar, Badge, Dropdown, Menu} from 'antd';
-import Button from '@src/components/atoms/button';
 import styled from 'styled-components';
+import {useRouter} from 'next/router';
+import {Layout, Avatar, Dropdown, Menu} from 'antd';
+import {DownOutlined, UserOutlined} from '@ant-design/icons';
 
 import IconButton from '../atoms/button/icon';
+import Button from '@src/components/atoms/button';
 import LogoDefaultIcon from '../atoms/logo/default';
 import {WHITE} from '../atoms/colors';
-import Space from '../atoms/space';
+
 import UserService from '@src/lib/services/User';
-import {BellOutlined, DownOutlined, UserOutlined} from '@ant-design/icons';
 
 const {Header} = Layout;
 
 export default function GHeader() {
+  const router = useRouter();
+
   const dropDownMenu = (
     <Menu style={{width: 90, fontWeight: 300}}>
       <Menu.Item key="0">내 정보</Menu.Item>
       <Menu.Item key="1" onClick={UserService.logout}>
         로그아웃
       </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="3">도움말</Menu.Item>
-      <Menu.Item key="4">설정</Menu.Item>
     </Menu>
   );
 
   return (
     <StyledHeader>
-      <Space level={2} direction="ROW" />
       <IconButton
         Icon={
           <LogoDefaultIcon
-            style={{width: '40px', height: '24px'}}
+            style={{width: '2.4rem', height: '1.4rem'}}
             fill={WHITE}
           />
         }
@@ -40,50 +39,33 @@ export default function GHeader() {
       />
       <Button
         type="only-content"
-        size="small"
-        href="/dashboard"
+        size="xlarge"
+        onClick={() => router.push('/dashboard')}
         style={{
           color: WHITE,
-          fontSize: '24px',
         }}>
         스토어 어드민
       </Button>
-      <Right>
-        <Badge dot>
-          <BellOutlined
-            style={{
-              fontSize: 18,
-              color: WHITE,
-            }}
-          />
-        </Badge>
-        <Space level={2} direction="ROW" />
-        <Dropdown overlay={dropDownMenu} trigger={['click']}>
-          <a href="#" style={{color: WHITE}}>
-            <Avatar shape="square" icon={<UserOutlined />} size="small" />
-            <DownOutlined style={{marginLeft: 6}} />
-          </a>
-        </Dropdown>
-      </Right>
+      <StyledDropdown overlay={dropDownMenu} trigger={['click']}>
+        <a href="#" style={{color: WHITE}}>
+          <Avatar shape="square" icon={<UserOutlined />} size="small" />
+          <DownOutlined style={{marginLeft: '0.6rem'}} />
+        </a>
+      </StyledDropdown>
     </StyledHeader>
   );
 }
 
 const StyledHeader = styled(Header)`
-  background-color: #1a1a1a;
-  padding: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  padding: 0 2rem;
 `;
 
-const Right = styled.div`
+const StyledDropdown = styled(Dropdown)`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: auto;
-  margin-right: 24px;
-  width: fit-content;
-  height: fit-content;
 `;
