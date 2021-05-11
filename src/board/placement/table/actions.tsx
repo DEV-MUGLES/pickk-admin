@@ -153,7 +153,7 @@ export const placementActions: TableActionType[] = [
           </div>
           <Button
             onClick={() => {
-              let element: HTMLElement = document.getElementById(
+              const element: HTMLElement = document.getElementById(
                 'react-csv-reader-input',
               ) as HTMLElement;
               element.click();
