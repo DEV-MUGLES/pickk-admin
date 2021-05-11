@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {getTimeString} from '@src/lib/DateParser';
 import {addCommaToNumber} from '@src/lib/NumberParser';
@@ -207,7 +207,7 @@ export const settlementColumns = [
     title: '정산예정일',
     dataIndex: 'expectedDate',
     key: 'expectedDate',
-    render: (value) => <div>{moment(value).format('YY/MM/DD')}</div>,
+    render: (value) => <div>{dayjs(value).format('YY/MM/DD')}</div>,
     sorter: (a, b) => stringSorter(b.expectedDate, a.expectedDate),
     width: 100,
     ellipsis: true,

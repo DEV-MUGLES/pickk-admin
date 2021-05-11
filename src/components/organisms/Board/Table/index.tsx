@@ -36,7 +36,7 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
         scroll={{x: true}}
         size="small"
         title={() => (
-          <>
+          <TitleWrapper>
             <Header
               {...{
                 title,
@@ -46,7 +46,7 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
             />
             {actions && (
               <>
-                <Divider style={{fontSize: 10}} />
+                <Divider style={{margin: '12px 0'}} />
                 <ActionBar
                   {...{
                     selectedRowKeys,
@@ -57,7 +57,7 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
                 />
               </>
             )}
-          </>
+          </TitleWrapper>
         )}
         footer={footActions ? () => <Footer {...footerProps} /> : null}
         pagination={{position: ['bottomRight'], pageSize}}
@@ -73,9 +73,12 @@ const Wrapper = styled.div`
   display: flex;
   align-itmes: flex-start;
   text-align: left;
-  width: calc(100vw - 232px);
 `;
 
 const DataTable = styled(Table)`
   width: 100%;
+`;
+
+const TitleWrapper = styled.div`
+  padding: 6px 16px;
 `;

@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import Preview from '@src/components/organisms/Board/preview';
 import Filter from '@src/components/organisms/Board/Filter';
 import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';

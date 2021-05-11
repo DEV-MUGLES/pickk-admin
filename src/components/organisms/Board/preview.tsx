@@ -4,7 +4,12 @@ import styled from 'styled-components';
 import PreviewButton from '@src/components/molecules/button/preview';
 import {WHITE} from '@src/components/atoms/colors';
 
-function Preview({data, usePreviewData}) {
+export type PreviewProps = {
+  data: any;
+  usePreviewData: any;
+};
+
+function Preview({data, usePreviewData}: PreviewProps) {
   const {data: previewValue} = usePreviewData([]);
 
   if (previewValue) {

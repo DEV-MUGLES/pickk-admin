@@ -3,14 +3,14 @@ import {
   EllipsisOutlined,
   ExclamationOutlined,
 } from '@ant-design/icons';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export const settlementCountPreviewData = [
   {
     label: '이번달 정산완료',
     icon: CheckOutlined,
     filterValue: {
-      expected: moment().format('YYYY-MM'),
+      expected: dayjs().format('YYYY-MM'),
       settleStatus: 'CONFIRMED',
     },
   },
@@ -18,7 +18,7 @@ export const settlementCountPreviewData = [
     label: '이번달 정산이슈',
     icon: ExclamationOutlined,
     filterValue: {
-      expected: moment().format('YYYY-MM'),
+      expected: dayjs().format('YYYY-MM'),
       settleStatus: 'ISSUED',
     },
   },

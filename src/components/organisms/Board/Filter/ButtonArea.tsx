@@ -29,18 +29,17 @@ export default function FilterButtonArea() {
 }
 
 const Wrapper = styled.div`
-  width: fit-content;
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
 
 const SubmitButton = styled(Button)`
-  width: 100px;
+  width: 6rem;
 `;
 
 const ResetButton = styled(Button)`
-  width: 100px;
+  width: 6rem;
   color: ${INDIGO_BLUE[900]};
   border-color: ${INDIGO_BLUE[900]};
 `;
