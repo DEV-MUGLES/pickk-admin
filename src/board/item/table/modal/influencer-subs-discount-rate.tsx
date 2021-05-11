@@ -1,15 +1,11 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import {Modal, Typography, Button, Tooltip, message} from 'antd';
+import {Modal, Typography, Button, Tooltip} from 'antd';
+import {QuestionCircleOutlined} from '@ant-design/icons';
 
-import InfluencerDiscountRow, {
-  InfluencerDiscountProps,
-} from '@src/components/molecules/Row/Discount/Influencer';
+import InfluencerDiscountRow from '@src/components/molecules/Row/Discount/Influencer';
 import Space from '@src/components/atoms/space';
 import InfluencerDiscountSetModal from '@src/components/organisms/Modal';
-import SubsDiscount from '@src/components/organisms/Board/Table/DiscountSection/subs-discount';
-
-import {Item} from '@src/types';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {useItemDiscountsList} from '@src/hooks/Item';
@@ -53,7 +49,7 @@ export default function SubsDiscountRateModal({
           <Tooltip
             placement="right"
             title="인플루언서별, 기간별로 할인율을 지정합니다.">
-            <GuideButton shape="circle" icon="question" />
+            <GuideButton />
           </Tooltip>
         </TitleRow>
         <Space level={1} />
@@ -91,9 +87,7 @@ const TitleRow = styled.div`
   align-items: flex-end;
 `;
 
-const GuideButton = styled(Button)`
+const GuideButton = styled(QuestionCircleOutlined)`
   width: 18px;
-  min-width: 18px;
   height: 18px;
-  font-size: 10px;
 `;
