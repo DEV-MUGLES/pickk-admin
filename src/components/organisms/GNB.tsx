@@ -79,14 +79,11 @@ export default function GNB() {
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[router.pathname]}>
         {MENU_ITEMS.map((item) => {
           const {icon: Icon} = item;
-          if (!item.title) {
+          if (!item.items) {
             return (
-              <Menu.Item key={item.link}>
+              <Menu.Item key={item.link} icon={<Icon />}>
                 <Link href={item.link}>
-                  <>
-                    <Icon />
-                    <span className="nav-text">{item.text}</span>
-                  </>
+                  <span className="nav-text">{item.text}</span>
                 </Link>
               </Menu.Item>
             );

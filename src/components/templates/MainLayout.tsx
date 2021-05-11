@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {Layout} from 'antd';
 
-import SiderGNB from '../organisms/GNB';
 import GHeader from '../organisms/GHeader';
+import SiderGNB from '../organisms/GNB';
 import GFooter from '../organisms/GFooter';
 
-const {Content, Footer} = Layout;
+const {Content} = Layout;
 
 type IProps = {
   children: React.ReactNode;
@@ -15,30 +15,21 @@ export default function MainLayout({children}: IProps) {
   return (
     <>
       <GHeader />
-      <Wrapper>
+      <StyledLayout>
         <SiderGNB />
-        <StyledLayout>
+        <Layout>
           <StyledContent>{children}</StyledContent>
           <GFooter />
-        </StyledLayout>
-      </Wrapper>
+        </Layout>
+      </StyledLayout>
     </>
   );
 }
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+const StyledLayout = styled(Layout)`
   min-height: calc(100vh - 64px);
 `;
 
 const StyledContent = styled(Content)`
-  margin: 24px 16px 0;
-  overflow: initial;
-  padding: 24;
-  text-align: center;
-`;
-
-const StyledLayout = styled(Layout)`
-  background-color: #eaedf0;
+  padding: 1.2rem;
 `;
