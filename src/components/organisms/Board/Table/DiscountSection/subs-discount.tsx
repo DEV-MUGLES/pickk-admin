@@ -1,6 +1,6 @@
 import React, {useState, useReducer} from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import {Button, InputNumber, Typography, message} from 'antd';
 
 import ItemService from '@src/lib/services/Item';
@@ -10,7 +10,7 @@ import {ItemDiscount} from '@src/types';
 import DateTimePicker from '@src/components/molecules/picker/date-time';
 
 const {Text} = Typography;
-const curTime = moment().format();
+const curTime = dayjs().format();
 
 export const initialDiscountState: ItemDiscount = {
   discountRate: 0,

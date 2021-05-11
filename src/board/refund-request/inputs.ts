@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import Selector from '@src/components/molecules/BoardFilter/input/Selector';
@@ -9,8 +9,8 @@ export const refundRequestInputs = [
     name: 'period',
     defaultValue: {
       type: 'all',
-      startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
-      endDate: moment().format('YYYY-MM-DD'),
+      startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
+      endDate: dayjs().format('YYYY-MM-DD'),
     },
     labelText: '조회기간',
     select: [

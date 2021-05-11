@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import {Select, Typography, Radio, DatePicker} from 'antd';
+import {Select, Typography, Radio} from 'antd';
 import styled from 'styled-components';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
+import DayjsDatePicker from './DayjsDatePicker';
 import Space from '@src/components/atoms/space';
 import {useBoardContext} from '@src/contexts/Board';
 
 const {Option} = Select;
-const {RangePicker} = DatePicker;
+const {RangePicker} = DayjsDatePicker;
 
 export type DatePickerProps = {
   name: string;
@@ -38,23 +39,23 @@ export default function Datepicker({name, select}: DatePickerProps) {
     const {value} = e.target;
     setChoicedQuickButton(value);
     let startDate;
-    const endDate = moment().format('YYYY-MM-DD');
+    const endDate = dayjs().format('YYYY-MM-DD');
 
     switch (value) {
       case 'today':
-        startDate = moment().format('YYYY-MM-DD');
+        startDate = dayjs().format('YYYY-MM-DD');
         break;
       case 'oneWeek':
-        startDate = moment().subtract(1, 'weeks').format('YYYY-MM-DD');
+        startDate = dayjs().subtract(1, 'week').format('YYYY-MM-DD');
         break;
       case 'oneMonth':
-        startDate = moment().subtract(1, 'months').format('YYYY-MM-DD');
+        startDate = dayjs().subtract(1, 'month').format('YYYY-MM-DD');
         break;
       case 'threeMonth':
-        startDate = moment().subtract(3, 'months').format('YYYY-MM-DD');
+        startDate = dayjs().subtract(3, 'month').format('YYYY-MM-DD');
         break;
       case 'sixMonth':
-        startDate = moment().subtract(6, 'months').format('YYYY-MM-DD');
+        startDate = dayjs().subtract(6, 'month').format('YYYY-MM-DD');
         break;
     }
 
@@ -62,8 +63,8 @@ export default function Datepicker({name, select}: DatePickerProps) {
   };
 
   const handleChoicedDateChange = (date) => {
-    const startDate = moment(date[0]).format('YYYY-MM-DD');
-    const endDate = moment(date[1]).format('YYYY-MM-DD');
+    const startDate = dayjs(date[0]).format('YYYY-MM-DD');
+    const endDate = dayjs(date[1]).format('YYYY-MM-DD');
     handleFilterChange({startDate, endDate});
   };
 
@@ -95,7 +96,7 @@ export default function Datepicker({name, select}: DatePickerProps) {
       <Space level={1} />
       <RangePicker
         name="choicedSelectValue"
-        value={[moment(filter[`startDate`]), moment(filter[`endDate`])]}
+        value={[dayjs(filter[`startDate`]), dayjs(filter[`endDate`])]}
         onChange={handleChoicedDateChange}
       />
     </Wrapper>

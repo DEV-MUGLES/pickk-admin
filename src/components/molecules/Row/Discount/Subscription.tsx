@@ -1,22 +1,15 @@
 import React, {useState} from 'react';
-import {
-  Input,
-  Typography,
-  DatePicker,
-  Button,
-  Tooltip,
-  Popconfirm,
-  message,
-} from 'antd';
+import {Input, Typography, Button, Tooltip, Popconfirm, message} from 'antd';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
+import DayjsDatePicker from '../../BoardFilter/input/DayjsDatePicker';
 import Space from '@src/components/atoms/space';
 import {INDIGO_BLUE} from '@src/components/atoms/colors';
-import moment from 'moment';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 
 const {Text} = Typography;
-const {RangePicker} = DatePicker;
+const {RangePicker} = DayjsDatePicker;
 
 export type DiscountRowProps = {
   subscribeDiscountRate: number;
@@ -49,8 +42,8 @@ export default function SubscriptionDiscountRow({
 
   const handleSubscribeDiscountPeriodChange = (date) => {
     handleChange({
-      subscribeDiscountStartPeriod: moment(date[0]).format('YYYY-MM-DD'),
-      subscribeDiscountEndPeriod: moment(date[1]).format('YYYY-MM-DD'),
+      subscribeDiscountStartPeriod: dayjs(date[0]).format('YYYY-MM-DD'),
+      subscribeDiscountEndPeriod: dayjs(date[1]).format('YYYY-MM-DD'),
     });
   };
 
@@ -89,8 +82,8 @@ export default function SubscriptionDiscountRow({
         name="choicedSelectValue"
         size="small"
         value={[
-          moment(subscribeDiscountData.subscribeDiscountStartPeriod),
-          moment(subscribeDiscountData.subscribeDiscountEndPeriod),
+          dayjs(subscribeDiscountData.subscribeDiscountStartPeriod),
+          dayjs(subscribeDiscountData.subscribeDiscountEndPeriod),
         ]}
         onChange={handleSubscribeDiscountPeriodChange}
       />

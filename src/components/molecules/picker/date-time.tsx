@@ -1,7 +1,7 @@
 import React from 'react';
-import moment, {Moment} from 'moment';
-import {DatePicker} from 'antd';
+import dayjs, {Dayjs} from 'dayjs';
 
+import DayjsDatePicker from '../BoardFilter/input/DayjsDatePicker';
 import {ItemDiscount} from '@src/types';
 
 export type DateTimePickerProps = {
@@ -18,23 +18,23 @@ export default function DateTimePicker({
   const defaultValue =
     type === 'startAt'
       ? dateTime.startAt
-        ? moment(dateTime.startAt)
+        ? dayjs(dateTime.startAt)
         : null
       : dateTime.endAt
-      ? moment(dateTime.endAt)
+      ? dayjs(dateTime.endAt)
       : null;
 
-  const handleDate = (date: Moment) => {
+  const handleDate = (date: Dayjs) => {
     onChange(type, date.format());
   };
 
-  const disabledDate = (current: Moment) =>
+  const disabledDate = (current: Dayjs) =>
     current.isBefore(
-      type === 'endAt' ? dateTime.startAt : moment().subtract(1, 'days'),
+      type === 'endAt' ? dateTime.startAt : dayjs().subtract(1, 'day'),
     );
 
-  const disabledTime = (date: Moment) => {
-    const startAt = moment(dateTime.startAt);
+  const disabledTime = (date: Dayjs) => {
+    const startAt = dayjs(dateTime.startAt);
 
     if (type !== 'endAt' || !startAt.isSame(date, 'day')) {
       return {
@@ -45,20 +45,20 @@ export default function DateTimePicker({
     }
 
     return {
-      disabledHours: () => [...Array(startAt.hours()).keys()],
+      disabledHours: () => [...Array(startAt.hour()).keys()],
       disabledMinutes: () =>
         startAt.isSame(date, 'hours')
-          ? [...Array(startAt.minutes()).keys()]
+          ? [...Array(startAt.minute()).keys()]
           : [],
       disabledSeconds: () =>
         startAt.isSame(date, 'hours') && startAt.isSame(date, 'minutes')
-          ? [...Array(startAt.seconds()).keys()]
+          ? [...Array(startAt.second()).keys()]
           : [],
     };
   };
 
   return (
-    <DatePicker
+    <DayjsDatePicker
       showTime
       defaultValue={defaultValue}
       onChange={handleDate}

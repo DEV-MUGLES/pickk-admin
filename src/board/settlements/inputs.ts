@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import Selector from '@src/components/molecules/BoardFilter/input/Selector';
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
@@ -13,7 +13,7 @@ export const settlementInputs = [
       ...range(-5, 2)
         .reverse()
         .map((diff) => {
-          const target = moment().add(diff, 'M');
+          const target = dayjs().add(diff, 'M');
           return {
             name: target.format('YYYY년 MM월'),
             value: target.format('YYYY-MM'),

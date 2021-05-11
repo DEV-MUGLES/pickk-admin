@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {Typography, Input, Button, DatePicker, message} from 'antd';
+import {Typography, Input, Button, message} from 'antd';
 import styled from 'styled-components';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
+import DayjsDatePicker from '@src/components/molecules/BoardFilter/input/DayjsDatePicker';
 import Img from '@src/components/atoms/img';
 import Space from '@src/components/atoms/space';
 import {GREY} from '@src/components/atoms/colors';
@@ -11,7 +12,7 @@ import {User} from '@src/types/User';
 import ItemService from '@src/lib/services/Item';
 
 const {Text} = Typography;
-const {RangePicker} = DatePicker;
+const {RangePicker} = DayjsDatePicker;
 
 export type Phase1Props = {
   itemPk: number;
@@ -37,11 +38,11 @@ export default function Phase1({
     setBody({...body, discountRate: Number(e.target.value)});
   };
 
-  const handleDiscountPeriodChange = (date: [moment.Moment, moment.Moment]) => {
+  const handleDiscountPeriodChange = (date: [dayjs.Dayjs, dayjs.Dayjs]) => {
     setBody({
       ...body,
-      startAt: moment(date[0]).format(),
-      endAt: moment(date[1]).format(),
+      startAt: dayjs(date[0]).format(),
+      endAt: dayjs(date[1]).format(),
     });
   };
 

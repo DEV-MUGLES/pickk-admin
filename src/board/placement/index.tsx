@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {message} from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import Preview from '../../components/organisms/Board/preview';
 import Filter from '@src/components/organisms/Board/Filter';
@@ -113,8 +113,8 @@ export default withBoardContext(
   {
     status: 'PAID',
     lookupDate: 'paid',
-    startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
-    endDate: moment().format('YYYY-MM-DD'),
+    startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
+    endDate: dayjs().format('YYYY-MM-DD'),
   },
   usePlacementTable,
   parseTable,

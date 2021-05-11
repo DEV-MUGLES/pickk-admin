@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import {message} from 'antd';
 
 import RefundConfirmModal from './table/modal/confirm';
@@ -155,8 +155,8 @@ export default withBoardContext(
   {
     status: null,
     lookupDate: 'paid',
-    startDate: moment().subtract(1, 'months').format('YYYY-MM-DD'),
-    endDate: moment().format('YYYY-MM-DD'),
+    startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
+    endDate: dayjs().format('YYYY-MM-DD'),
   },
   useRefundRequestTable,
   parseTable,

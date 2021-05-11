@@ -1,5 +1,5 @@
 import {addLeadingZeros} from './NumberParser';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export const getDateTimeNumbers = (input?: number) => {
   const date = new Date(input);
@@ -30,5 +30,5 @@ export const getTimeString = (input?: number | Date) => {
   if (!input) {
     return '-';
   }
-  return moment(input).format('YY/MM/DD hh:mm:ss');
+  return dayjs(input).format('YY/MM/DD hh:mm:ss');
 };

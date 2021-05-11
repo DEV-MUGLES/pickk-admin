@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
-import {Input, Typography, DatePicker, Button, Popconfirm, message} from 'antd';
+import {Input, Typography, Button, Popconfirm, message} from 'antd';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
+import DayjsDatePicker from '../../BoardFilter/input/DayjsDatePicker';
 import {DiscountRowProps} from '@src/components/molecules/Row/Discount/Subscription';
 import Space from '@src/components/atoms/space';
-import moment from 'moment';
 import {ItemDiscount} from '@src/types';
 import ItemService from '@src/lib/services/Item';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 
 const {Text} = Typography;
-const {RangePicker} = DatePicker;
+const {RangePicker} = DayjsDatePicker;
 
 export type InfluencerDiscountProps = {
   name: string;
@@ -33,8 +34,8 @@ export default function InfluencerDiscountRow(
   };
 
   const handleSubscribeDiscountPeriodChange = (date) => {
-    const startAt = moment(date[0]).format();
-    const endAt = moment(date[1]).format();
+    const startAt = dayjs(date[0]).format();
+    const endAt = dayjs(date[1]).format();
     setData({
       ...data,
       ...{startAt, endAt},
@@ -89,7 +90,7 @@ export default function InfluencerDiscountRow(
       <DiscountPeriodPicker
         name="choicedSelectValue"
         size="small"
-        value={[moment(data.startAt), moment(data.endAt)]}
+        value={[dayjs(data.startAt), dayjs(data.endAt)]}
         onChange={handleSubscribeDiscountPeriodChange}
       />
       <Space direction="ROW" level={4} />

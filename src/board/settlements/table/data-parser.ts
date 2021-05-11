@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {getTimeString} from '@src/lib/DateParser';
 import {Settlement} from '@src/types';
@@ -12,7 +12,7 @@ export const parseRecord = (record: Settlement) => {
     paidAt: getTimeString(record.paidAt),
     confirmedAt: getTimeString(record.confirmedAt),
     options: record.options.join('-'),
-    expectedDate: moment(record.expectedDate).format('YY/MM/DD'),
+    expectedDate: dayjs(record.expectedDate).format('YY/MM/DD'),
   };
   Object.keys(result).forEach((key) => {
     if (!result[key] || result[key] === undefined) {
