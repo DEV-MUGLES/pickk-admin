@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import {useRouter} from 'next/router';
-import {Layout, Avatar, Dropdown, Menu} from 'antd';
+import {Layout, Avatar, Dropdown, Menu, Typography} from 'antd';
 import {DownOutlined, UserOutlined} from '@ant-design/icons';
 
 import IconButton from '../atoms/button/icon';
-import Button from '@src/components/atoms/button';
 import LogoDefaultIcon from '../atoms/logo/default';
 import {WHITE} from '../atoms/colors';
 
 import UserService from '@src/lib/services/User';
 
+const {Title} = Typography;
 const {Header} = Layout;
 
 export default function GHeader() {
@@ -37,15 +37,9 @@ export default function GHeader() {
         size="small"
         href="https://pickk.one"
       />
-      <Button
-        type="only-content"
-        size="xlarge"
-        onClick={() => router.push('/dashboard')}
-        style={{
-          color: WHITE,
-        }}>
+      <StyleTitle onClick={() => router.push('/dashboard')}>
         스토어 어드민
-      </Button>
+      </StyleTitle>
       <StyledDropdown overlay={dropDownMenu} trigger={['click']}>
         <a href="#" style={{color: WHITE}}>
           <Avatar shape="square" icon={<UserOutlined />} size="small" />
@@ -60,8 +54,17 @@ const StyledHeader = styled(Header)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 1.2rem;
 `;
+
+const StyleTitle = styled(Title).attrs({
+  level: 3,
+  style: {
+    color: WHITE,
+    margin: 0,
+    marginLeft: '0.8rem',
+  },
+})``;
 
 const StyledDropdown = styled(Dropdown)`
   display: flex;
