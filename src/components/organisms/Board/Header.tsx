@@ -1,7 +1,6 @@
-import {PageHeader, Popover, Button, Typography} from 'antd';
+import {PageHeader, Popover, Typography} from 'antd';
+import {InfoCircleOutlined} from '@ant-design/icons';
 import styled from 'styled-components';
-
-import {WHITE} from '@src/components/atoms/colors';
 
 export type BoardHeaderProps = {
   title: string;
@@ -26,13 +25,14 @@ export default function BoardHeader({
     );
     return (
       <Popover placement="bottomLeft" content={content} trigger="click">
-        <Button icon="info-circle" />
+        <InfoCircleOutlined />
       </Popover>
     );
   };
 
   return (
-    <StyledPageHeader
+    <PageHeader
+      ghost={false}
       title={title}
       subTitle={subTitle}
       extra={helpTexts ? getHelpPopoverButton() : null}
@@ -40,13 +40,6 @@ export default function BoardHeader({
   );
 }
 
-const StyledPageHeader = styled(PageHeader)`
-  height: fit-content;
-  background-color: ${WHITE};
-`;
-
 const StyledUl = styled.ul`
-  padding: 0;
-  padding-left: 16px;
-  padding-top: 10px;
+  padding: 10px 0 0 16px;
 `;

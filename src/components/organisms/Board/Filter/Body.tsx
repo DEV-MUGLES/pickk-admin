@@ -20,6 +20,6 @@ export default function FilterBody({inputs}: BoardFilterBodyProps) {
 
 const InputsWrapper = styled.div`
   width: 100%;
-  padding: 0 35px;
-  margin: 10px 0;
+  padding: 0 3rem;
+  margin: 0.8rem 0;
 `;

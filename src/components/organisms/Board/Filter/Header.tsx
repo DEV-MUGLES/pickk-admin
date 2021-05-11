@@ -27,11 +27,11 @@ const Wrapper = styled.header`
 `;
 
 export const TitleText = styled(Typography.Text)`
-  padding-right: 12px;
+  padding-right: 0.8rem;
 `;
 
 const GuideText = styled(Typography.Text)`
-  margin: 5px 12px 5px 0;
+  margin: 0.25rem 0.8rem 0.25rem 0;
   color: rgba(0, 0, 0, 0.45);
   font-size: 14px;
 `;

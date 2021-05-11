@@ -12,16 +12,18 @@ import CsvDownloadButton, {
 import Space from '@src/components/atoms/space';
 import {isEqualObject} from '@src/lib/utils';
 
+const {Text} = Typography;
+
 export type TableHeaderProps = ExcelDownloadButtonProps;
 
 function TableHeader(props: TableHeaderProps) {
   return (
     <Wrapper>
-      <Typography.Text strong style={{marginRight: 'auto'}}>
+      <Text strong style={{marginRight: 'auto'}}>
         {`${props.title} 목록 (총 ${
           props.dataSource ? props.dataSource.length : '...'
         }개)`}
-      </Typography.Text>
+      </Text>
       <TableReloadButton />
       <Space direction="ROW" />
       {/* <ExcelDownloadButton {...props} /> */}
@@ -38,7 +40,5 @@ export default React.memo(TableHeader, (prev, next) =>
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 100%;
   align-items: center;
 `;
