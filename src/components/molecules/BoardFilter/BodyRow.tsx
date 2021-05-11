@@ -1,10 +1,10 @@
 import React from 'react';
 import {Typography, Tooltip} from 'antd';
 import styled from 'styled-components';
+import {InfoCircleOutlined} from '@ant-design/icons';
 
 import Space from '@src/components/atoms/space';
 import {GREY} from '@src/components/atoms/colors';
-import {InfoCircleOutlined} from '@ant-design/icons';
 
 const {Text} = Typography;
 
