@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useRouter} from 'next/router';
-import {Form, Input, Button, message} from 'antd';
+import {Form, Input, Button, message, Typography} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {useLoginByCode} from '@pickk/common';
 
 import {setCookie} from '@src/lib/utils';
 import LogoDefaultIcon from '@src/assets/icons/logo/default';
-import {P, Space} from '@src/components/atoms';
+import {Space} from '@src/components/atoms';
+
+const {Title: _Title} = Typography;
 
 export default function LoginSection() {
   const router = useRouter();
@@ -84,13 +86,13 @@ const LoginForm = styled(Form)`
   display: flex;
   flex-direction: column;
 
-  padding: 4.8rem;
+  padding: 4rem 4.8rem;
 `;
 
-const Title = styled(P).attrs({
+const Title = styled(_Title).attrs({
   level: 3,
-  fontWeight: 'bold',
-})`
-  margin-top: 0.8rem;
-  margin-bottom: auto;
-`;
+  style: {
+    marginTop: '0.8rem',
+    marginBottom: 'auto',
+  },
+})``;

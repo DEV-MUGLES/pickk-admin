@@ -1,30 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Typography} from 'antd';
 
 import LoginSection from '@src/components/organisms/sections/login';
-import {P} from '@src/components/atoms';
 import {GREY, WHITE} from '@src/components/atoms/colors';
 
 import media from '@src/styles/media';
+
+const {Text, Title} = Typography;
 
 export default function LoginPage() {
   return (
     <Wrapper>
       <Section>
         <WelcomeSection>
-          <P
-            level={8}
-            fontWeight="bold"
-            color={WHITE}
-            style={{marginTop: '1.2rem', marginBottom: '2rem'}}>
+          <Title level={2} style={{marginTop: '1.2rem', color: WHITE}}>
             반갑습니다 🙋‍♂️
-          </P>
-          <P level={1} fontWeight="regular" color={WHITE}>
+          </Title>
+          <Title level={4} style={{color: WHITE}}>
             핔 스토어 어드민에서
             <br />
             상품, 주문, 정산 등<br />
             모든 서비스를 이용하세요.
-          </P>
+          </Title>
         </WelcomeSection>
         <LoginSection />
       </Section>
@@ -59,7 +57,8 @@ const WelcomeSection = styled.section`
   display: flex;
   flex-direction: column;
 
-  padding: 2rem;
+  padding: 3.2rem;
+  padding-right: 6rem;
 
   background-color: ${GREY[800]};
 
@@ -68,8 +67,9 @@ const WelcomeSection = styled.section`
   `}
 `;
 
-const FooterText = styled(P).attrs({
-  color: GREY[600],
-})`
-  margin-top: 1.2rem;
-`;
+const FooterText = styled(Text).attrs({
+  style: {
+    color: GREY[600],
+    marginTop: '1.2rem',
+  },
+})``;
