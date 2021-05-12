@@ -172,7 +172,7 @@ function MyPageEditPage() {
           layout="horizontal"
           defaultValue={data?.meSeller}>
           {Object.keys(FORM_ITEMS).map((name) => (
-            <Form.Item name={name} {...FORM_ITEMS[name]}>
+            <Form.Item key={name} name={name} {...FORM_ITEMS[name]}>
               <Input />
             </Form.Item>
           ))}
