@@ -27,12 +27,20 @@ const FORM_ITEMS: {
 } = {
   businessName: {
     label: '회사명',
-    required: true,
+    rules: [
+      {
+        required: true,
+        message: '회사명을 입력해주세요.',
+      },
+    ],
   },
   businessCode: {
     label: '사업자등록번호',
-    required: true,
     rules: [
+      {
+        required: true,
+        message: '사업자등록번호를 입력해주세요.',
+      },
       {
         pattern: /\d{3}-\d{2}-\d{5}/g,
         message: '***-**-***** 형식에 맞춰 작성해주세요',
@@ -40,25 +48,48 @@ const FORM_ITEMS: {
     ],
   },
   mailOrderBusinessCode: {
-    label: '통신판매업 번호',
-    required: true,
+    label: '통신판매업번호',
+    rules: [
+      {
+        required: true,
+        message: '통신판매업번호를 입력해주세요.',
+      },
+    ],
   },
   representativeName: {
     label: '대표자명',
-    required: true,
+    rules: [
+      {
+        required: true,
+        message: '대표자명을 입력해주세요.',
+      },
+    ],
   },
   operationTimeMessage: {
     label: '고객센터 운영시간',
-    required: true,
+    rules: [
+      {
+        required: true,
+        message: '고객센터 운영시간을 입력해주세요.',
+      },
+    ],
   },
   phoneNumber: {
-    label: '고객센터 번호',
-    required: true,
+    label: '고객센터번호',
+    rules: [
+      {
+        required: true,
+        message: '고객센터번호를 입력해주세요.',
+      },
+    ],
   },
   email: {
     label: '이메일',
-    required: true,
     rules: [
+      {
+        required: true,
+        message: '이메일을 입력해주세요.',
+      },
       {
         pattern:
           /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/g,
