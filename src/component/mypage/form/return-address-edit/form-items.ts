@@ -29,6 +29,10 @@ export const FORM_ITEMS: {
         required: true,
         message: '우편번호를 입력해주세요.',
       },
+      {
+        pattern: /\d{5,6}/g,
+        message: '우편번호 형식(5-6자리 숫자)에 맞게 작성해주세요',
+      },
     ],
   },
 };
