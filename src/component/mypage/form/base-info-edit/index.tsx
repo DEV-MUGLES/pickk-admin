@@ -1,25 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {message} from 'antd';
-import {gql, useQuery} from '@apollo/client';
-import {BASE_SELLER_FRAG, useUpdateMeSeller} from '@pickk/common';
+import {useMeSeller, useUpdateMeSeller} from '@pickk/common';
 
 import BaseEditForm from '../base';
 
 import {FORM_ITEMS} from './form-items';
 
-const BASE_ME_SELLER_QUERY = gql`
-  ${BASE_SELLER_FRAG}
-  query MeSeller {
-    meSeller {
-      ...BaseSellerFrag
-    }
-  }
-`;
-
 function BaseInfoEditForm() {
-  const {data} = useQuery(BASE_ME_SELLER_QUERY);
+  const {data} = useMeSeller();
   const [updateMe] = useUpdateMeSeller();
-  const [defaultValue, setDefaultValue] = useState();
+  const [defaultValue, setDefaultValue] = useState({});
 
   useEffect(() => {
     setDefaultValue(data?.meSeller);
