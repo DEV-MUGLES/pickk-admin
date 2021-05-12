@@ -17,11 +17,11 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
       throw new Error('no token');
     }
 
-    await initializeApollo().query({
+    await initializeApollo(null, token).query({
       query: ME_SELLER_QUERY,
       context: {
         headers: {
-          Authorization: `Bearer ${token}`,
+          authorization: `Bearer ${token}`,
         },
       },
     });

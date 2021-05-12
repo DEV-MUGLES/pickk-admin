@@ -14,22 +14,23 @@ if (!process.env.NEW_API_URL) {
   throw new Error('env.NEW_API_URL not found!');
 }
 
-const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = getCookie('accessToken');
-  operation.setContext({
-    headers: {
-      Authorization: token ? `Bearer ${token}` : null,
-    },
+const getAuthMiddleware = (_token?: string) =>
+  new ApolloLink((operation, forward) => {
+    const token = _token ?? getCookie('accessToken');
+    operation.setContext({
+      headers: {
+        Authorization: token ? `Bearer ${token}` : null,
+      },
+    });
+
+    return forward(operation);
   });
 
-  return forward(operation);
-});
-
-function createApolloClient() {
+function createApolloClient(token?: string) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: from([
-      authMiddleware,
+      getAuthMiddleware(token),
       createUploadLink({
         uri: process.env.NEW_API_URL,
       }),
@@ -38,8 +39,8 @@ function createApolloClient() {
   });
 }
 
-export function initializeApollo(initialState = null) {
-  const _apolloClient = apolloClient ?? createApolloClient();
+export function initializeApollo(initialState = null, token?: string) {
+  const _apolloClient = apolloClient ?? createApolloClient(token);
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
