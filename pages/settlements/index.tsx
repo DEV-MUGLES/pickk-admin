@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MainLayout from '@src/components/templates/MainLayout';
-import SettlementBoard from '@src/board/settlements';
+import SettlementBoard from '@src/component/board/settlements';
 
 export default function Settlements() {
   return (

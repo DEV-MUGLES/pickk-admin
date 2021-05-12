@@ -8,7 +8,7 @@ import {
   ShippingPolicyEditForm,
   ClaimPolicyEditForm,
   ReturnAddressEditForm,
-} from '@src/board/mypage/form';
+} from '@src/component/mypage/form';
 import {Space} from '@src/components/atoms';
 import {WHITE} from '@src/components/atoms/colors';
 
