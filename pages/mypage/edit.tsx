@@ -14,7 +14,7 @@ import {WHITE} from '@src/components/atoms/colors';
 
 const {TabPane} = Tabs;
 
-const TAB_PANE_INFO: {tab: string; content: any}[] = [
+const TAB_PANE_INFO: {tab: string; content: React.ElementType}[] = [
   {tab: '기본정보', content: BaseInfoEditForm},
   {tab: '배송정책', content: ShippingPolicyEditForm},
   {tab: '교환/환불 정책', content: ClaimPolicyEditForm},
