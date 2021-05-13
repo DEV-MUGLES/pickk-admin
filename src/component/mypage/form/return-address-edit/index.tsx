@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react';
 import {message} from 'antd';
 import {useMeSeller, useUpdateMySellerReturnAddress} from '@pickk/common';
 
@@ -9,11 +8,6 @@ import {FORM_ITEMS} from './form-items';
 function ReturnAddressEditForm() {
   const {data} = useMeSeller();
   const [updateMe] = useUpdateMySellerReturnAddress();
-  const [defaultValue, setDefaultValue] = useState({});
-
-  useEffect(() => {
-    setDefaultValue(data?.meSeller?.returnAddress);
-  }, [data]);
 
   const handleSaveClick = (updateSellerReturnAddressInput) => {
     updateMe({
@@ -32,7 +26,7 @@ function ReturnAddressEditForm() {
     <BaseEditForm
       FORM_ITEMS={FORM_ITEMS}
       onSaveClick={handleSaveClick}
-      defaultValue={defaultValue}
+      defaultValue={data?.meSeller?.returnAddress}
     />
   );
 }

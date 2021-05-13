@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react';
 import {message} from 'antd';
 import {useMeSeller, useUpdateMySellerClaimPolicy} from '@pickk/common';
 
@@ -9,11 +8,6 @@ import {FORM_ITEMS} from './form-items';
 function ClaimPolicyEditForm() {
   const {data} = useMeSeller();
   const [updateMe] = useUpdateMySellerClaimPolicy();
-  const [defaultValue, setDefaultValue] = useState({});
-
-  useEffect(() => {
-    setDefaultValue(data?.meSeller?.claimPolicy);
-  }, [data]);
 
   const handleSaveClick = (updateSellerClaimPolicyInput) => {
     updateMe({
@@ -33,7 +27,7 @@ function ClaimPolicyEditForm() {
     <BaseEditForm
       FORM_ITEMS={FORM_ITEMS}
       onSaveClick={handleSaveClick}
-      defaultValue={defaultValue}
+      defaultValue={data?.meSeller?.claimPolicy}
     />
   );
 }

@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from 'react';
 import {message} from 'antd';
 import {useMeSeller, useUpdateMeSeller} from '@pickk/common';
 
@@ -9,11 +8,6 @@ import {FORM_ITEMS} from './form-items';
 function BaseInfoEditForm() {
   const {data} = useMeSeller();
   const [updateMe] = useUpdateMeSeller();
-  const [defaultValue, setDefaultValue] = useState({});
-
-  useEffect(() => {
-    setDefaultValue(data?.meSeller);
-  }, [data]);
 
   const handleSaveClick = (updateSellerInput) => {
     updateMe({
@@ -33,7 +27,7 @@ function BaseInfoEditForm() {
     <BaseEditForm
       FORM_ITEMS={FORM_ITEMS}
       onSaveClick={handleSaveClick}
-      defaultValue={defaultValue}
+      defaultValue={data?.meSeller}
     />
   );
 }
