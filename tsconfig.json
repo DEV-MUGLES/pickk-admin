@@ -31,8 +31,7 @@
     "**/*.spec.ts",
     "**/*.spec.tsx",
     "**/*.test.ts",
-    "**/*.test.tsx",
-    "server"
+    "**/*.test.tsx"
   ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_app.tsx"]
 }
