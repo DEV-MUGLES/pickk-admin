@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import CancelRequestBoard from '@src/board/cancel-request';
+import CancelRequestBoard from '@src/component/board/cancel-request';
 
 export default function CancelRequests() {
   return (

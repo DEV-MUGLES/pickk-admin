@@ -23,7 +23,7 @@ class RequestConfig {
 const base = (auth?: boolean) => {
   const requestConfig = new RequestConfig(process.env.API_HOST);
   if (auth) {
-    requestConfig.setToken(getCookie('authtoken'));
+    requestConfig.setToken(getCookie('accessToken'));
   }
   return axios.create(requestConfig);
 };

@@ -17,7 +17,9 @@ export default function GHeader() {
 
   const dropDownMenu = (
     <Menu style={{width: 90, fontWeight: 300}}>
-      <Menu.Item key="0">내 정보</Menu.Item>
+      <Menu.Item key="0" onClick={() => router.push('/mypage/edit')}>
+        내 정보
+      </Menu.Item>
       <Menu.Item key="1" onClick={UserService.logout}>
         로그아웃
       </Menu.Item>

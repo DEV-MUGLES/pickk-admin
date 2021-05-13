@@ -15,8 +15,8 @@ type IProps = {
   border?: boolean;
 };
 
-export default (props: IProps) => {
-  const Img = styled.img`
+const Img = (props: IProps) => {
+  const Image = styled.img`
     width: ${props.width || '100%'};
     border-radius: ${props.circle && '50%'};
     box-sizing: border-box;
@@ -31,5 +31,7 @@ export default (props: IProps) => {
     ${props.border && `border:0.01rem solid #f0f0f0`}
   `;
   const {className, src, onClick, style, children} = props;
-  return <Img {...{className, src, onClick, style}}>{children}</Img>;
+  return <Image {...{className, src, onClick, style}}>{children}</Image>;
 };
+
+export default Img;

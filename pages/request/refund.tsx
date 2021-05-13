@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/templates/MainLayout';
-import RefundRequestBoard from '@src/board/refund-request';
+import RefundRequestBoard from '@src/component/board/refund-request';
 
 export default function RefundRequests() {
   return (

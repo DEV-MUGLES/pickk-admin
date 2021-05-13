@@ -12,7 +12,7 @@ export const login = (email: string, password: string) =>
   base()
     .post('/partner/token/', {email, password})
     .then((res) => {
-      setCookie('authtoken', res.data.access);
+      setCookie('accessToken', res.data.access);
       setCookie('refreshtoken', res.data.refresh);
       Router.push('/items');
     })
@@ -25,7 +25,7 @@ export const login = (email: string, password: string) =>
     });
 
 export const logout = () => {
-  removeCookie('authtoken');
+  removeCookie('accessToken');
   removeCookie('refreshtoken');
   Router.push('/login');
 };
@@ -34,7 +34,7 @@ export const refresh = () => {
   base()
     .post('/partner/token/refresh/', {refresh: cookies.get('refreshtoken')})
     .then((res) => {
-      setCookie('authtoken', res.data.access);
+      setCookie('accessToken', res.data.access);
       setCookie('refreshtoken', res.data.refresh);
     });
 };
