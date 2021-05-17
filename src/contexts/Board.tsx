@@ -1,5 +1,6 @@
 import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
+import {QueryResult} from '@apollo/client';
 
 import Header, {BoardHeaderProps} from '../components/organisms/Board/Header';
 import {BoardTableProps} from '@src/components/organisms/Board/Table';
@@ -34,7 +35,7 @@ export const withBoardContext =
   (
     WrappedComponent: React.FunctionComponent<BoardProps>,
     defaultFilter: Filter,
-    useTable,
+    hook: {useTable: (prop?: any) => QueryResult; dataName: string},
     parseExcelData,
   ) =>
   (
@@ -45,7 +46,9 @@ export const withBoardContext =
     const [toRerender, setToRerender] = useState(0);
     const [filter, setFilter] = useState(defaultFilter);
     const [newFilter, setNewFilter] = useState(defaultFilter);
-    const {loading, data} = useTable([newFilter, toRerender]);
+    const {useTable, dataName} = hook;
+    const {loading, data} = useTable();
+    // const {loading, data} = useTable([newFilter, toRerender]);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const initFilter = () => {
@@ -87,7 +90,7 @@ export const withBoardContext =
         filter,
         newFilter,
         tableData: data
-          ? data.map((v) => {
+          ? data?.[dataName].map((v) => {
               return {...v, key: v.id};
             })
           : null,
