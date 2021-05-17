@@ -3,15 +3,36 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {DollarOutlined, ShopOutlined, SkinOutlined} from '@ant-design/icons';
+import React from 'react';
 
 const {Sider} = Layout;
 const {SubMenu} = Menu;
 
-const MENU_ITEMS = [
+export type MenuItemsType = {
+  title: string;
+  icon: React.ElementType;
+  text?: string;
+  link?: string;
+  items: {
+    text: string;
+    link: string;
+  }[];
+}[];
+
+const MENU_ITEMS: MenuItemsType = [
   {
+    title: '상품 관리',
     icon: SkinOutlined,
-    text: '상품 관리',
-    link: '/items',
+    items: [
+      {
+        text: '활성상품 관리',
+        link: '/sellable-items',
+      },
+      {
+        text: '상품 조회/수정',
+        link: '/items',
+      },
+    ],
   },
   {
     title: '판매 관리',
