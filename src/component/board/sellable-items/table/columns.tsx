@@ -92,7 +92,7 @@ export const sellableItemColumns = [
     width: 120,
   },
   {
-    title: '공홈 링크',
+    title: '공홈링크',
     dataIndex: 'urls',
     key: 'urls',
     render: (_, {urls}) => (

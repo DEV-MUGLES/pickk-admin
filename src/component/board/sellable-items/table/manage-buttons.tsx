@@ -24,4 +24,6 @@ const Wrapper = styled(Space).attrs({
   align-items: center;
 `;
 
-const StyledButton = styled(Button)``;
+const StyledButton = styled(Button).attrs({
+  size: 'small',
+})``;
