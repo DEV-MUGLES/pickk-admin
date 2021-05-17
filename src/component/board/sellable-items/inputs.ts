@@ -11,11 +11,6 @@ export const sellableItemInputs = [
     Component: InputBox,
   },
   {
-    name: 'isMdRecommended',
-    labelText: 'MD 추천',
-    Component: CheckBox,
-  },
-  {
     name: '',
     labelText: '카테고리',
     Component: CheckBox,
