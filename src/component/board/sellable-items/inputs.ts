@@ -1,0 +1,37 @@
+import dayjs from 'dayjs';
+
+import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
+import CheckBox from '@src/components/molecules/BoardFilter/input/CheckBox';
+import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+
+export const sellableItemInputs = [
+  {
+    name: 'name',
+    labelText: '상품명',
+    Component: InputBox,
+  },
+  {
+    name: 'isMdRecommended',
+    labelText: 'MD 추천',
+    Component: CheckBox,
+  },
+  {
+    name: '',
+    labelText: '카테고리',
+    Component: CheckBox,
+  },
+  {
+    name: 'period',
+    defaultValue: {
+      type: 'all',
+      startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
+      endDate: dayjs().format('YYYY-MM-DD'),
+    },
+    labelText: '조회기간',
+    select: [
+      {name: '활성등록일', value: ''},
+      {name: '상품생성일', value: ''},
+    ],
+    Component: Datepicker,
+  },
+];
