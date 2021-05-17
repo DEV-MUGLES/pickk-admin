@@ -1,7 +1,40 @@
+import {Button, Image} from 'antd';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
 
 export const itemColumns = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+    width: 40,
+  },
+  {
+    title: '상세보기',
+    dataIndex: 'itemManage',
+    key: 'itemManage',
+    width: 100,
+    render: (_, {id}) => <Button size="small">상세보기</Button>,
+  },
+  {
+    title: '대표이미지',
+    dataIndex: 'imageUrl',
+    key: 'imageUrl',
+    width: 200,
+    render: (text) => <Image src={text} />,
+  },
+  {
+    title: '카테고리',
+    dataIndex: 'category',
+    key: 'category',
+    width: 100,
+    render: (_, {majorCategory, minorCategory}) => (
+      <>
+        <p>{`${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`}</p>
+        <Button size="small">수정</Button>
+      </>
+    ),
+  },
   {
     title: '상품명',
     dataIndex: 'name',
@@ -29,14 +62,6 @@ export const itemColumns = [
     ellipsis: true,
   },
   {
-    title: 'SKU일련번호',
-    dataIndex: 'skuPrefix',
-    key: 'skuPrefix',
-    sorter: (a, b) => stringSorter(b.skuPrefix, a.skuPrefix),
-    width: 70,
-    ellipsis: true,
-  },
-  {
     title: '리뷰 수',
     dataIndex: 'reviewCount',
     key: 'reviewCount',
@@ -53,16 +78,13 @@ export const itemColumns = [
     ellipsis: true,
   },
   {
-    title: '제품링크',
-    dataIndex: 'purchaseUrl',
-    key: 'purchaseUrl',
-    sorter: (a, b) => stringSorter(a.purchaseUrl, b.purchaseUrl),
-    render: (value) => (
-      <a href={value} target="_blank">
-        {value}
-      </a>
+    title: '공홈링크',
+    dataIndex: 'urls',
+    key: 'urls',
+    render: (_, {urls}) => (
+      <Button type="link" href={urls.find((url) => url.isPrimary)?.url}>
+        상품보기
+      </Button>
     ),
-    width: 50,
-    ellipsis: true,
   },
 ];

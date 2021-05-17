@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import {Typography, Button, Modal, message} from 'antd';
+import {Typography, Modal, message} from 'antd';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
+import {useItems} from '@pickk/common';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
 import {withBoardContext, useBoardContext} from '@src/contexts/Board';
-import {useItemTable} from '@src/hooks/table/Item';
 
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
@@ -40,54 +40,8 @@ function ItemBoard({
   };
 
   const [discountModal, setDiscountModal] = useState(false);
-  const [
-    influencerSubsDiscountIndex,
-    setInfluencerSubsDiscountIndex,
-  ] = useState(null);
-
-  const newItemColumns = [
-    ...itemColumns.slice(0, 4),
-    {
-      title: '구독할인율(기본)',
-      dataIndex: 'subsDiscountRate',
-      key: 'subsDiscountRate',
-      sorter: (a, b) => b.subsDiscountRate - a.subsDiscountRate,
-      width: 70,
-      render: (value, record) => {
-        const {id} = record;
-        return (
-          <>
-            <Text>{value}% </Text>
-            <Button
-              size="small"
-              onClick={() => setInfluencerSubsDiscountIndex(id)}>
-              설정
-            </Button>
-          </>
-        );
-      },
-      ellipsis: true,
-    },
-    ...itemColumns.slice(4),
-    {
-      title: '재고관리',
-      dataIndex: 'isStockManaged',
-      key: 'isStockManaged',
-      sorter: (a, b) => a.isStockManaged > b.isStockManaged,
-      width: 60,
-      render: (value, record) => {
-        const {id} = record;
-        if (!value) {
-          return <Text type="secondary">OFF</Text>;
-        }
-        return (
-          <Button size="small" onClick={() => openModal(id)}>
-            재고관리
-          </Button>
-        );
-      },
-    },
-  ];
+  const [influencerSubsDiscountIndex, setInfluencerSubsDiscountIndex] =
+    useState(null);
 
   const handleOffClicked = async () => {
     confirm({
@@ -109,27 +63,6 @@ function ItemBoard({
     return Promise.resolve(false);
   };
 
-  const newItemActions = [
-    {
-      text: '재고관리 ON',
-      onClick: async () => {
-        setInitModalOpen(true);
-        return Promise.resolve(false);
-      },
-    },
-    {
-      text: '재고관리 OFF',
-      onClick: handleOffClicked,
-    },
-    {
-      text: '구독 할인 설정',
-      onClick: (ids: number[]) => {
-        setDiscountModal(true);
-        return Promise.resolve(false);
-      },
-    },
-  ];
-
   const modalData = tableData
     ? tableData.filter((data) => selectedRowKeys.includes(data.id))
     : null;
@@ -138,7 +71,7 @@ function ItemBoard({
     <>
       <Filter title={title} inputs={itemInputs} />
       <Space level={2} />
-      <Table title={title} columns={newItemColumns} actions={newItemActions} />
+      <Table title={title} columns={itemColumns} actions={itemActions} />
       <StockSetModal id={index} closeModal={closeModal} />
       <Space level={2} />
       <StockInitModal {...{modalData, isInitModalOpen, closeInitModal}} />
@@ -164,6 +97,6 @@ function ItemBoard({
 export default withBoardContext(
   ItemBoard,
   {name: null, isReviewed: null},
-  useItemTable,
+  {useTable: useItems, dataName: 'items'},
   (v) => v,
 );

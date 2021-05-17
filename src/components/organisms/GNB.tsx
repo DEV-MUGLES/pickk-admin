@@ -29,7 +29,7 @@ const MENU_ITEMS: MenuItemsType = [
         link: '/sellable-items',
       },
       {
-        text: '상품 조회/수정',
+        text: '전체상품 관리',
         link: '/items',
       },
     ],
