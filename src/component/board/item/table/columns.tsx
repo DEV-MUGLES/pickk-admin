@@ -1,4 +1,7 @@
 import {Button, Image} from 'antd';
+import dayjs from 'dayjs';
+
+import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
 
@@ -8,6 +11,8 @@ export const itemColumns = [
     dataIndex: 'id',
     key: 'id',
     width: 40,
+    sorter: (a, b) => b.id - a.id,
+    ellipsis: true,
   },
   {
     title: '상세보기',
@@ -15,13 +20,20 @@ export const itemColumns = [
     key: 'itemManage',
     width: 100,
     render: (_, {id}) => <Button size="small">상세보기</Button>,
+    ellipsis: true,
   },
   {
     title: '대표이미지',
     dataIndex: 'imageUrl',
     key: 'imageUrl',
-    width: 200,
-    render: (text) => <Image src={text} />,
+    width: 120,
+    render: (text) => (
+      <div style={{display: 'flex', flexDirection: 'column'}}>
+        <Image src={text} />
+        <Button size="small">수정</Button>
+      </div>
+    ),
+    ellipsis: true,
   },
   {
     title: '카테고리',
@@ -34,14 +46,14 @@ export const itemColumns = [
         <Button size="small">수정</Button>
       </>
     ),
+    ellipsis: true,
   },
   {
     title: '상품명',
     dataIndex: 'name',
     key: 'name',
     sorter: (a, b) => stringSorter(b.name, a.name),
-    width: 150,
-    ellipsis: true,
+    width: 200,
   },
   {
     title: '정가',
@@ -49,7 +61,7 @@ export const itemColumns = [
     key: 'originalPrice',
     render: (value) => <div>{addCommaToNumber(value)}원</div>,
     sorter: (a, b) => b.originalPrice - a.originalPrice,
-    width: 70,
+    width: 80,
     ellipsis: true,
   },
   {
@@ -58,33 +70,51 @@ export const itemColumns = [
     key: 'salePrice',
     render: (value) => <div>{addCommaToNumber(value)}원</div>,
     sorter: (a, b) => b.salePrice - a.salePrice,
-    width: 70,
+    width: 80,
     ellipsis: true,
   },
   {
-    title: '리뷰 수',
+    title: '리뷰수',
     dataIndex: 'reviewCount',
     key: 'reviewCount',
     sorter: (a, b) => b.reviewCount - a.reviewCount,
-    width: 50,
+    width: 60,
     ellipsis: true,
   },
   {
-    title: '구매 수',
+    title: '구매수',
     dataIndex: 'purchasedCount',
     key: 'purchasedCount',
     sorter: (a, b) => b.purchasedCount - a.purchasedCount,
-    width: 50,
+    width: 60,
     ellipsis: true,
+  },
+  {
+    title: '활성화 여부',
+    dataIndex: 'isSellable',
+    key: 'isSellable',
+    width: 60,
+    render: renderBooleanColumn,
   },
   {
     title: '공홈링크',
     dataIndex: 'urls',
     key: 'urls',
+    width: 60,
     render: (_, {urls}) => (
       <Button type="link" href={urls.find((url) => url.isPrimary)?.url}>
         상품보기
       </Button>
     ),
+    ellipsis: true,
+  },
+  {
+    title: '상품등록일',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    width: 80,
+    sorter: (a, b) => stringSorter(b.createdAt, a.createdAt),
+    render: (text) => <>{dayjs(text).format('YYYY-MM-DD')}</>,
+    ellipsis: true,
   },
 ];
