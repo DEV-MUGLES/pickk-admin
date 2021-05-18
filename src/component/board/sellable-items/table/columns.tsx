@@ -1,8 +1,11 @@
+import {ColumnsType} from 'antd/lib/table';
+
 import {Button, Image} from 'antd';
 import SellableItemManageButtons from './manage-buttons';
 import SellableItemStock from './stock';
+import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
 
-export const sellableItemColumns = [
+export const sellableItemColumns: ColumnsType = [
   {
     title: 'ID',
     dataIndex: 'id',
@@ -55,7 +58,7 @@ export const sellableItemColumns = [
     dataIndex: 'isInfiniteStock',
     key: 'isInfiniteStock',
     width: 100,
-    render: (text) => <>{text === true ? 'O' : 'X'}</>,
+    render: renderBooleanColumn,
   },
   {
     title: '보유재고 (?)',
@@ -90,6 +93,13 @@ export const sellableItemColumns = [
     dataIndex: '',
     key: '',
     width: 120,
+  },
+  {
+    title: 'MD 추천 여부',
+    dataIndex: 'isMdRecommended',
+    key: 'isMdRecommended',
+    width: 120,
+    render: renderBooleanColumn,
   },
   {
     title: '공홈링크',
