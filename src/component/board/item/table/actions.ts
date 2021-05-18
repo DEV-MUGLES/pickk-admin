@@ -1,18 +1,18 @@
 export const itemActions = [
   {
-    text: '활성화',
+    text: '상품 활성화',
     onClick: async () => {
       return Promise.resolve(false);
     },
   },
   {
-    text: '비활성화',
+    text: '상품 비활성화',
     onClick: async (ids: number[]) => {
       return Promise.resolve(false);
     },
   },
   {
-    text: '삭제',
+    text: '상품 삭제',
     onClick: async (ids: number[]) => {
       return Promise.resolve(false);
     },
