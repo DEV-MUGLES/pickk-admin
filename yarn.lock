@@ -435,10 +435,10 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
-"@pickk/common@^1.5.6":
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/@pickk/common/-/common-1.5.6.tgz#774ac5a354acd130e7e00f8f8b8b785a07da5467"
-  integrity sha512-6UREYWUJ+XGOOV6/jUoi60RVDpOt1NmDkqCQ8GrdFQF7QMl8p7uJDf5tWzIiBWgVVhg1jPA3Q6SBcnS2yKjHJQ==
+"@pickk/common@^1.5.8":
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/@pickk/common/-/common-1.5.8.tgz#7fdeb1fda0017e18880f29c21870f57821b7ead1"
+  integrity sha512-VF3OrZwttj21D0iBc5WAC/+rr/iZCP92STcUzKJkyMjZEhluEFQrncPCSYs6zunq+X8A9jMHeJu3S2H08znmLg==
   dependencies:
     "@apollo/client" "^3.3.13"
     graphql "^15.5.0"
