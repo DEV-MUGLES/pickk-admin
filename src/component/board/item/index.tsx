@@ -83,7 +83,6 @@ function ItemBoard({title}: BoardProps) {
           </>
         );
       },
-      ellipsis: true,
     },
     ...itemColumns.slice(1),
   ];

@@ -1,5 +1,7 @@
 import {Items_items_products} from '@pickk/common/dist/__generated__/Items';
-import {FIRE_RED} from '@src/components/atoms/colors';
+import {Badge, Typography} from 'antd';
+
+const {Text} = Typography;
 
 export type SellableItemStockProps = {
   products: Items_items_products[];
@@ -13,9 +15,13 @@ function SellableItemStock({
   isSoldout,
 }: SellableItemStockProps) {
   const allStocks = products.reduce((acc, {stock}) => (acc += stock), 0);
-  const backgroundColor = getColor(products, isInfiniteStock, isSoldout);
+  const badgeColor = getColor(products, isInfiniteStock, isSoldout);
 
-  return <p style={{backgroundColor, margin: 0}}>{allStocks}</p>;
+  return (
+    <Badge color={badgeColor} offset={[6, 0]}>
+      <Text>{allStocks}</Text>
+    </Badge>
+  );
 }
 
 export default SellableItemStock;
@@ -26,10 +32,10 @@ function getColor(
   isSoldout: boolean,
 ) {
   if (isInfiniteStock) {
-    return '';
+    return 'lime';
   }
   if (isSoldout) {
-    return FIRE_RED[500];
+    return 'volcano';
   }
 
   const soldoutProducts = products.filter(({stock}) => stock <= 0);
@@ -39,5 +45,5 @@ function getColor(
   if (products.length - soldoutProducts.length < 5) {
     return 'yellow';
   }
-  return 'white';
+  return 'lime';
 }

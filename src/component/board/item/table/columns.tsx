@@ -1,11 +1,12 @@
 import dayjs from 'dayjs';
 import {Button} from 'antd';
+import {ColumnsType} from 'antd/lib/table';
 
 import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
 
-export const itemColumns = [
+export const itemColumns: ColumnsType<any> = [
   {
     title: 'ID',
     dataIndex: 'id',
@@ -29,6 +30,7 @@ export const itemColumns = [
     sorter: (a, b) => b.originalPrice - a.originalPrice,
     width: 80,
     ellipsis: true,
+    align: 'center',
   },
   {
     title: '할인가',
@@ -38,6 +40,7 @@ export const itemColumns = [
     sorter: (a, b) => b.salePrice - a.salePrice,
     width: 80,
     ellipsis: true,
+    align: 'center',
   },
   {
     title: '리뷰수',
@@ -46,6 +49,7 @@ export const itemColumns = [
     sorter: (a, b) => b.reviewCount - a.reviewCount,
     width: 60,
     ellipsis: true,
+    align: 'center',
   },
   {
     title: '구매수',
@@ -54,6 +58,7 @@ export const itemColumns = [
     sorter: (a, b) => b.purchasedCount - a.purchasedCount,
     width: 60,
     ellipsis: true,
+    align: 'center',
   },
   {
     title: '활성화 여부',
@@ -61,6 +66,7 @@ export const itemColumns = [
     key: 'isSellable',
     width: 60,
     render: renderBooleanColumn,
+    align: 'center',
   },
   {
     title: '공홈링크',
@@ -73,6 +79,7 @@ export const itemColumns = [
       </Button>
     ),
     ellipsis: true,
+    align: 'center',
   },
   {
     title: '상품등록일',
