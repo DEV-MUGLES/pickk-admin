@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import CheckBox from '@src/components/molecules/BoardFilter/input/CheckBox';
+import ItemCategoryCascader from '@src/components/molecules/BoardFilter/input/ItemCategoryCascader';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 
 export const sellableItemInputs = [
@@ -11,9 +11,9 @@ export const sellableItemInputs = [
     Component: InputBox,
   },
   {
-    name: '',
+    name: 'category',
     labelText: '카테고리',
-    Component: CheckBox,
+    Component: ItemCategoryCascader,
   },
   {
     name: 'period',

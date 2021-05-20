@@ -34,18 +34,12 @@ export const withBoardContext =
     const [filter, setFilter] = useState(defaultFilter);
     const [newFilter, setNewFilter] = useState(defaultFilter);
     const {gql, dataName, filterName} = operation;
-    const result = useQuery(gql, {
+    const {data, loading, refetch} = useQuery(gql, {
       variables: {
         ...(filterName ? {[filterName]: defaultFilter} : {}),
       },
     });
-    const {data, loading, refetch} = result;
-
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
-    useEffect(() => {
-      console.log(result);
-    }, [result]);
 
     const initFilter = () => {
       setFilter(defaultFilter);
@@ -59,9 +53,11 @@ export const withBoardContext =
 
     const submitFilter = () => {
       const temp = {...filter};
-      if (!temp.isReviewed) {
-        delete temp.isReviewed;
-      }
+      Object.keys(temp).map((key) => {
+        if (temp[key] === null || temp[key] === undefined) {
+          delete temp[key];
+        }
+      });
       setNewFilter(temp);
       refetch(temp ? {[filterName]: temp} : {});
       setSelectedRowKeys([]);

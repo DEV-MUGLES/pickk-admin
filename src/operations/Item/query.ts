@@ -9,9 +9,11 @@ export const ITEMS_QUERY: OperationType = {
         id
         imageUrl
         majorCategory {
+          id
           name
         }
         minorCategory {
+          id
           name
         }
         name

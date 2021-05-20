@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import Selector from '@src/components/molecules/BoardFilter/input/Selector';
+import ItemCategoryCascader from '@src/components/molecules/BoardFilter/input/ItemCategoryCascader';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 
 export const itemInputs = [
@@ -14,7 +14,7 @@ export const itemInputs = [
     name: 'category',
     labelText: '카테고리',
     select: [{name: '전체', value: null}],
-    Component: Selector,
+    Component: ItemCategoryCascader,
   },
   {
     name: 'period',

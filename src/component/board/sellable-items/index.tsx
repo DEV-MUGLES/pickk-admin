@@ -8,7 +8,7 @@ import {BoardProps} from '../props';
 import {sellableItemColumns, sellableItemActions} from './table';
 import {sellableItemInputs} from './inputs';
 
-import {ITEMS_QUERY} from '@src/operations/Item/query';
+import {ITEMS_QUERY} from '@src/operations/item/query';
 
 function SellableItemsBoard({title}: BoardProps) {
   return (

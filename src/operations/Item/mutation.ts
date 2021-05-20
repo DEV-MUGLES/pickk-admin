@@ -13,3 +13,14 @@ export const BULK_UPDATE_ITEMS_MUTATION: OperationType = {
   `,
   dataName: 'bulkUpdateItems',
 };
+
+export const UPDATE_ITEM_MUTATION: OperationType = {
+  gql: gql`
+    mutation UpdateItem($itemId: Int!, $updateItemInput: UpdateItemInput!) {
+      updateItem(itemId: $itemId, updateItemInput: $updateItemInput) {
+        id
+      }
+    }
+  `,
+  dataName: 'updateItem',
+};
