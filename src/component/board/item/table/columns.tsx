@@ -1,5 +1,5 @@
-import {Button, Image} from 'antd';
 import dayjs from 'dayjs';
+import {Button} from 'antd';
 
 import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
 import {addCommaToNumber} from '@src/lib/NumberParser';
@@ -12,40 +12,6 @@ export const itemColumns = [
     key: 'id',
     width: 40,
     sorter: (a, b) => b.id - a.id,
-    ellipsis: true,
-  },
-  {
-    title: '상세보기',
-    dataIndex: 'itemManage',
-    key: 'itemManage',
-    width: 100,
-    render: (_, {id}) => <Button size="small">상세보기</Button>,
-    ellipsis: true,
-  },
-  {
-    title: '대표이미지',
-    dataIndex: 'imageUrl',
-    key: 'imageUrl',
-    width: 120,
-    render: (text) => (
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <Image src={text} />
-        <Button size="small">수정</Button>
-      </div>
-    ),
-    ellipsis: true,
-  },
-  {
-    title: '카테고리',
-    dataIndex: 'category',
-    key: 'category',
-    width: 100,
-    render: (_, {majorCategory, minorCategory}) => (
-      <>
-        <p>{`${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`}</p>
-        <Button size="small">수정</Button>
-      </>
-    ),
     ellipsis: true,
   },
   {
