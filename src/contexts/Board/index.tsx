@@ -1,33 +1,19 @@
-import {useState, useContext, createContext} from 'react';
+import {useState, useContext, createContext, useEffect} from 'react';
 import styled from 'styled-components';
-import {QueryResult} from '@apollo/client';
+import {useQuery} from '@apollo/client';
 
-import Header, {BoardHeaderProps} from '../components/organisms/Board/Header';
+import Header, {
+  BoardHeaderProps,
+} from '../../components/organisms/Board/Header';
 import {BoardTableProps} from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
 import {BoardProps} from '@src/component/board/props';
 import {Filter} from '@src/types/Board';
+import {IBoard} from './IBoard';
+import {OperationType} from '@src/operations/type';
 
-const BoardContext = createContext({
-  state: {
-    filter: null,
-    newFilter: null,
-    tableData: null,
-    loading: null,
-    defaultFilter: null,
-    selectedRowKeys: [],
-  },
-  action: {
-    handleFilterChange: null,
-    submitFilter: null,
-    initFilter: null,
-    reload: null,
-    applyPreview: null,
-    parseExcelData: null,
-    setSelectedRowKeys: null,
-  },
-});
+const BoardContext = createContext<IBoard>(undefined);
 
 export const useBoardContext = () => useContext(BoardContext);
 
@@ -35,7 +21,9 @@ export const withBoardContext =
   (
     WrappedComponent: React.FunctionComponent<BoardProps>,
     defaultFilter: Filter,
-    hook: {useTable: (prop?: any) => QueryResult; dataName: string},
+    operation: {
+      filterName?: string;
+    } & Pick<OperationType, 'gql' | 'dataName'>,
     parseExcelData,
   ) =>
   (
@@ -43,13 +31,21 @@ export const withBoardContext =
       BoardHeaderProps &
       Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>,
   ) => {
-    const [toRerender, setToRerender] = useState(0);
     const [filter, setFilter] = useState(defaultFilter);
     const [newFilter, setNewFilter] = useState(defaultFilter);
-    const {useTable, dataName} = hook;
-    const {loading, data} = useTable();
-    // const {loading, data} = useTable([newFilter, toRerender]);
+    const {gql, dataName, filterName} = operation;
+    const result = useQuery(gql, {
+      variables: {
+        ...(filterName ? {[filterName]: defaultFilter} : {}),
+      },
+    });
+    const {data, loading, refetch} = result;
+
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+    useEffect(() => {
+      console.log(result);
+    }, [result]);
 
     const initFilter = () => {
       setFilter(defaultFilter);
@@ -67,11 +63,12 @@ export const withBoardContext =
         delete temp.isReviewed;
       }
       setNewFilter(temp);
+      refetch(temp ? {[filterName]: temp} : {});
       setSelectedRowKeys([]);
     };
 
     const reload = () => {
-      setToRerender(toRerender + 1);
+      refetch();
       setSelectedRowKeys([]);
     };
 
@@ -85,14 +82,12 @@ export const withBoardContext =
       setSelectedRowKeys([]);
     };
 
-    const boardStore = {
+    const boardStore: IBoard = {
       state: {
         filter,
         newFilter,
         tableData: data
-          ? data?.[dataName].map((v) => {
-              return {...v, key: v.id};
-            })
+          ? data?.[dataName].map((v) => ({...v, key: v.id}))
           : null,
         loading,
         defaultFilter,
