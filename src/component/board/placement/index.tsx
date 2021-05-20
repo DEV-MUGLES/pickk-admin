@@ -7,7 +7,7 @@ import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
 import ShipModal from './table/modal/ship';
 import Space from '@src/components/atoms/space';
-import StockSetModal from '../item/table/modal/stock/set';
+import StockSetModal from './table/modal/stock';
 
 import {placementInputs} from './inputs';
 import {placementColumns, placementActions} from './table';
