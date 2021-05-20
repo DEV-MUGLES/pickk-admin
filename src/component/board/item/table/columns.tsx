@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {Button} from 'antd';
+import {Button, Image} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 
 import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
@@ -13,6 +13,39 @@ export const itemColumns: ColumnsType<any> = [
     key: 'id',
     width: 40,
     sorter: (a, b) => b.id - a.id,
+    ellipsis: true,
+    align: 'center',
+  },
+  {
+    title: '상세보기',
+    dataIndex: 'itemView',
+    key: 'itemView',
+    width: 40,
+    render: (_, {id, urls}) => (
+      <div>
+        <Button
+          size="small"
+          href={`https://pickk.one/item/${id}`}
+          target="_blank"
+          style={{marginBottom: '0.2rem'}}>
+          pickk 링크
+        </Button>
+        <Button
+          type="link"
+          href={urls.find((url) => url.isPrimary)?.url}
+          target="_blank">
+          공홈 링크
+        </Button>
+      </div>
+    ),
+    align: 'center',
+  },
+  {
+    title: '대표이미지',
+    dataIndex: 'imageUrl',
+    key: 'imageUrl',
+    width: 120,
+    render: (text) => <Image src={text} />,
     ellipsis: true,
   },
   {
@@ -66,19 +99,6 @@ export const itemColumns: ColumnsType<any> = [
     key: 'isSellable',
     width: 60,
     render: renderBooleanColumn,
-    align: 'center',
-  },
-  {
-    title: '공홈링크',
-    dataIndex: 'urls',
-    key: 'urls',
-    width: 60,
-    render: (_, {urls}) => (
-      <Button type="link" href={urls.find((url) => url.isPrimary)?.url}>
-        상품보기
-      </Button>
-    ),
-    ellipsis: true,
     align: 'center',
   },
   {

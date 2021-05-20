@@ -38,37 +38,17 @@ function ItemBoard({title}: BoardProps) {
   };
 
   const newItemColumns = [
-    ...itemColumns.slice(0, 1),
-    {
-      title: '상세보기',
-      dataIndex: 'itemManage',
-      key: 'itemManage',
-      width: 100,
-      render: (_, {id}) => <Button size="small">상세보기</Button>,
-      ellipsis: true,
-    },
-    {
-      title: '대표이미지',
-      dataIndex: 'imageUrl',
-      key: 'imageUrl',
-      width: 120,
-      render: (text) => (
-        <div style={{display: 'flex', flexDirection: 'column'}}>
-          <Image src={text} />
-          <Button size="small">수정</Button>
-        </div>
-      ),
-      ellipsis: true,
-    },
+    ...itemColumns.slice(0, 3),
     {
       title: '카테고리',
       dataIndex: 'category',
       key: 'category',
       width: 100,
+      align: 'center',
       render: (_, record) => {
         const {majorCategory, minorCategory} = record;
         return (
-          <>
+          <div>
             <Text>{`${majorCategory?.name ?? '-'}/${
               minorCategory?.name ?? '-'
             }`}</Text>
@@ -77,14 +57,15 @@ function ItemBoard({title}: BoardProps) {
               onClick={() => {
                 setSelectedData(record);
                 handleModalOpen('category')(true);
-              }}>
+              }}
+              style={{marginLeft: '0.6rem'}}>
               수정
             </Button>
-          </>
+          </div>
         );
       },
     },
-    ...itemColumns.slice(1),
+    ...itemColumns.slice(3),
   ];
 
   return (
