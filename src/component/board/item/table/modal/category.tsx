@@ -8,12 +8,15 @@ import {ITEM_CATEGORY_TREE_QUERY} from '@src/operations/item-category/query';
 import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
 
 export type CategoryModalProps = {
-  itemId: number;
   visible: boolean;
   onClose: any;
 };
 
-function CategoryModal({itemId, visible, onClose}: CategoryModalProps) {
+function CategoryModal({visible, onClose}: CategoryModalProps) {
+  const {
+    state: {selectedData},
+  } = useBoardContext();
+
   const {
     action: {reload},
   } = useBoardContext();
@@ -37,7 +40,7 @@ function CategoryModal({itemId, visible, onClose}: CategoryModalProps) {
   const handleOk = async () => {
     await update({
       variables: {
-        itemId,
+        itemId: selectedData.id,
         updateItemInput: {
           majorCategoryId: value[0],
           minorCategoryId: value[1],

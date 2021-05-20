@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {Button, Image} from 'antd';
+import {Button, Image, Typography} from 'antd';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 import CategoryModal from './table/modal/category';
 
-import {withBoardContext} from '@src/contexts/Board';
+import {useBoardContext, withBoardContext} from '@src/contexts/Board';
 import {BoardProps} from '../props';
 
 import {itemInputs} from './inputs';
@@ -14,10 +14,15 @@ import {itemColumns, itemActions} from './table';
 
 import {ITEMS_QUERY} from '@src/operations/item/query';
 
+const {Text} = Typography;
+
 type ItemBoardModalType = 'category' | 'image';
 
 function ItemBoard({title}: BoardProps) {
-  const [selectedItemId, setSelectedItemId] = useState<number>();
+  const {
+    action: {setSelectedData},
+  } = useBoardContext();
+
   const [modalVisible, setModalVisible] = useState<
     Record<ItemBoardModalType, boolean>
   >({
@@ -25,17 +30,10 @@ function ItemBoard({title}: BoardProps) {
     image: false,
   });
 
-  const handleOpenModal = (name: ItemBoardModalType) => () => {
+  const handleModalOpen = (name: ItemBoardModalType) => (open: boolean) => {
     setModalVisible({
       ...modalVisible,
-      [name]: true,
-    });
-  };
-
-  const handleCloseModal = (name: ItemBoardModalType) => () => {
-    setModalVisible({
-      ...modalVisible,
-      [name]: false,
+      [name]: open,
     });
   };
 
@@ -67,19 +65,24 @@ function ItemBoard({title}: BoardProps) {
       dataIndex: 'category',
       key: 'category',
       width: 100,
-      render: (_, {id, majorCategory, minorCategory}) => (
-        <>
-          <p>{`${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`}</p>
-          <Button
-            size="small"
-            onClick={() => {
-              setSelectedItemId(id);
-              handleOpenModal('category')();
-            }}>
-            수정
-          </Button>
-        </>
-      ),
+      render: (_, record) => {
+        const {majorCategory, minorCategory} = record;
+        return (
+          <>
+            <Text>{`${majorCategory?.name ?? '-'}/${
+              minorCategory?.name ?? '-'
+            }`}</Text>
+            <Button
+              size="small"
+              onClick={() => {
+                setSelectedData(record);
+                handleModalOpen('category')(true);
+              }}>
+              수정
+            </Button>
+          </>
+        );
+      },
       ellipsis: true,
     },
     ...itemColumns.slice(1),
@@ -91,9 +94,8 @@ function ItemBoard({title}: BoardProps) {
       <Space level={2} />
       <Table title={title} columns={newItemColumns} actions={itemActions} />
       <CategoryModal
-        itemId={selectedItemId}
         visible={modalVisible.category}
-        onClose={handleCloseModal('category')}
+        onClose={() => handleModalOpen('category')(false)}
       />
     </>
   );

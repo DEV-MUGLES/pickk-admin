@@ -39,6 +39,7 @@ export const withBoardContext =
         ...(filterName ? {[filterName]: defaultFilter} : {}),
       },
     });
+    const [selectedData, setSelectedData] = useState({});
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const initFilter = () => {
@@ -88,6 +89,7 @@ export const withBoardContext =
         loading,
         defaultFilter,
         selectedRowKeys,
+        selectedData,
       },
       action: {
         handleFilterChange,
@@ -97,6 +99,7 @@ export const withBoardContext =
         applyPreview,
         parseExcelData,
         setSelectedRowKeys,
+        setSelectedData,
       },
     };
 

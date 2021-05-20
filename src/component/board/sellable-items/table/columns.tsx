@@ -1,7 +1,6 @@
 import {ColumnsType} from 'antd/lib/table';
 
 import {Button, Image} from 'antd';
-import SellableItemManageButtons from './manage-buttons';
 import SellableItemStock from './stock';
 import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
 
@@ -11,13 +10,6 @@ export const sellableItemColumns: ColumnsType = [
     dataIndex: 'id',
     key: 'id',
     width: 40,
-  },
-  {
-    title: '상품 관리',
-    dataIndex: 'itemManage',
-    key: 'itemManage',
-    width: 100,
-    render: (_, {id}) => <SellableItemManageButtons id={id} />,
   },
   {
     title: '대표이미지',

@@ -9,6 +9,7 @@ export interface IBoard {
     loading: boolean;
     defaultFilter: Filter;
     selectedRowKeys: number[];
+    selectedData: any;
   };
   action: {
     handleFilterChange: (data: Filter) => void;
@@ -18,5 +19,6 @@ export interface IBoard {
     applyPreview: (data) => void;
     parseExcelData: any;
     setSelectedRowKeys: Dispatch<SetStateAction<number[]>>;
+    setSelectedData: Dispatch<SetStateAction<any>>;
   };
 }
