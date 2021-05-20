@@ -1,102 +1,34 @@
-import React, {useState} from 'react';
-import {Typography, Modal, message} from 'antd';
-import {ExclamationCircleOutlined} from '@ant-design/icons';
-import {useItems} from '@pickk/common';
+import React from 'react';
 
 import Filter from '@src/components/organisms/Board/Filter';
-import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
+import Table from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
-import {withBoardContext, useBoardContext} from '@src/contexts/Board';
+import {withBoardContext} from '@src/contexts/Board';
+import {BoardProps} from '../props';
 
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
-import {BoardProps} from '../props';
-import StockSetModal from './table/modal/stock/set';
-import ItemService from '@src/lib/services/Item';
-import StockInitModal from './table/modal/stock/init';
-import SubsDiscountRateModal from './table/modal/subs-discount-rate';
-import InfluencerSubsDiscountRateModal from './table/modal/influencer-subs-discount-rate';
 
-const {Text} = Typography;
-const {confirm} = Modal;
+import {ITEMS_QUERY} from '@src/operations/Item/query';
 
-function ItemBoard({
-  title,
-}: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
-  const {state, action} = useBoardContext();
-  const {tableData, selectedRowKeys} = state;
-  const {reload} = action;
-
-  const [index, setIndex] = useState(-1);
-  const openModal = setIndex;
-  const closeModal = () => {
-    setIndex(-1);
-  };
-
-  const [isInitModalOpen, setInitModalOpen] = useState(false);
-  const closeInitModal = () => {
-    setInitModalOpen(false);
-  };
-
-  const [discountModal, setDiscountModal] = useState(false);
-  const [influencerSubsDiscountIndex, setInfluencerSubsDiscountIndex] =
-    useState(null);
-
-  const handleOffClicked = async () => {
-    confirm({
-      title: '재고 관리 기능을 끄시겠습니까?',
-      icon: <ExclamationCircleOutlined />,
-      content: '다시 ON 하실 땐 모든 재고 수량을 다시 설정하셔야합니다.',
-      okText: '예',
-      okType: 'danger',
-      cancelText: '아니오',
-      async onOk() {
-        await ItemService.manageStockOff(selectedRowKeys);
-        message.success('완료되었습니다.');
-        reload();
-      },
-      onCancel() {
-        message.warning('취소되었습니다.');
-      },
-    });
-    return Promise.resolve(false);
-  };
-
-  const modalData = tableData
-    ? tableData.filter((data) => selectedRowKeys.includes(data.id))
-    : null;
-
+function ItemBoard({title}: BoardProps) {
   return (
     <>
       <Filter title={title} inputs={itemInputs} />
       <Space level={2} />
       <Table title={title} columns={itemColumns} actions={itemActions} />
-      <StockSetModal id={index} closeModal={closeModal} />
-      <Space level={2} />
-      <StockInitModal {...{modalData, isInitModalOpen, closeInitModal}} />
-      <SubsDiscountRateModal
-        visible={discountModal}
-        onClose={() => {
-          setDiscountModal(false);
-        }}
-        modalData={modalData}
-      />
-      {influencerSubsDiscountIndex && (
-        <InfluencerSubsDiscountRateModal
-          index={influencerSubsDiscountIndex}
-          onClose={() => {
-            setInfluencerSubsDiscountIndex(null);
-          }}
-        />
-      )}
     </>
   );
 }
 
 export default withBoardContext(
   ItemBoard,
-  {name: null, isReviewed: null},
-  {useTable: useItems, dataName: 'items'},
+  {},
+  {
+    gql: ITEMS_QUERY.gql,
+    dataName: ITEMS_QUERY.dataName,
+    filterName: 'itemFilter',
+  },
   (v) => v,
 );

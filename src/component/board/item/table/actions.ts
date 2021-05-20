@@ -1,12 +1,13 @@
 import {message, Modal} from 'antd';
 
-import {useBulkUpdateItems} from '@pickk/common';
+import {TableActionType} from '@src/components/organisms/Board/Table/table';
+import {BULK_UPDATE_ITEMS_MUTATION} from '@src/operations/Item/mutation';
 
 const {confirm} = Modal;
 
 const handleSetIsSellable =
   (isSellable: boolean) => async (ids: number[], mutate) => {
-    try {
+    return new Promise((resolve, reject) => {
       confirm({
         title: `상품 ${isSellable ? '' : '비'}활성화 확인`,
         content: `상품을 ${isSellable ? '' : '비'}활성화 하시겠습니까?`,
@@ -22,28 +23,26 @@ const handleSetIsSellable =
               ids,
             },
           });
+          resolve(true);
         },
         onCancel() {
           message.warning('취소되었습니다.');
+          reject();
         },
       });
-
-      return Promise.resolve(true);
-    } catch {
-      return Promise.resolve(false);
-    }
+    });
   };
 
-export const itemActions = [
+export const itemActions: TableActionType[] = [
   {
     text: '상품 활성화',
     onClick: handleSetIsSellable(true),
-    hook: useBulkUpdateItems,
+    operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: '상품 비활성화',
     onClick: handleSetIsSellable(false),
-    hook: useBulkUpdateItems,
+    operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: '상품 삭제',

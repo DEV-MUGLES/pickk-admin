@@ -1,18 +1,17 @@
 import dayjs from 'dayjs';
 
 import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import CheckBox from '@src/components/molecules/BoardFilter/input/CheckBox';
 import Selector from '@src/components/molecules/BoardFilter/input/Selector';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 
 export const itemInputs = [
   {
-    name: 'name',
+    name: 'search',
     labelText: '상품명',
     Component: InputBox,
   },
   {
-    name: 'isReviewed',
+    name: 'category',
     labelText: '카테고리',
     select: [{name: '전체', value: null}],
     Component: Selector,

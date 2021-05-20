@@ -1,12 +1,13 @@
 import {message, Modal} from 'antd';
 
-import {useBulkUpdateItems} from '@pickk/common';
+import {TableActionType} from '@src/components/organisms/Board/Table/table';
+import {BULK_UPDATE_ITEMS_MUTATION} from '@src/operations/Item/mutation';
 
 const {confirm} = Modal;
 
 const handleSetIsMdRecommended =
   (isMdRecommended: boolean) => async (ids: number[], mutate) => {
-    try {
+    return new Promise((resolve, reject) => {
       confirm({
         title: `MD 추천 ${isMdRecommended ? 'ON' : 'OFF'} 확인`,
         content: `MD 추천 상품${
@@ -24,33 +25,31 @@ const handleSetIsMdRecommended =
               ids,
             },
           });
+          resolve(true);
         },
         onCancel() {
           message.warning('취소되었습니다.');
+          reject();
         },
       });
-
-      return Promise.resolve(true);
-    } catch {
-      return Promise.resolve(false);
-    }
+    });
   };
 
-export const sellableItemActions = [
+export const sellableItemActions: TableActionType[] = [
   {
     text: 'MD추천 ON',
     onClick: handleSetIsMdRecommended(true),
-    hook: useBulkUpdateItems,
+    operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: 'MD추천 OFF',
     onClick: handleSetIsMdRecommended(false),
-    hook: useBulkUpdateItems,
+    operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: '상품 비활성화',
     onClick: async (ids: number[], mutate) => {
-      try {
+      return new Promise((resolve, reject) => {
         confirm({
           title: '상품 비활성화 확인',
           content: '상품을 비활성화 하시겠습니까?',
@@ -66,18 +65,16 @@ export const sellableItemActions = [
                 ids,
               },
             });
+            resolve(true);
           },
           onCancel() {
             message.warning('취소되었습니다.');
+            reject();
           },
         });
-
-        return Promise.resolve(true);
-      } catch {
-        return Promise.resolve(false);
-      }
+      });
     },
-    hook: useBulkUpdateItems,
+    operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: '상품 삭제',

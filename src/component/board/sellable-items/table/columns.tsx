@@ -74,25 +74,23 @@ export const sellableItemColumns: ColumnsType = [
     ),
   },
   {
-    // TODO
     title: '리뷰수',
-    dataIndex: '',
-    key: '',
+    dataIndex: 'reviewCount',
+    key: 'reviewCount',
     width: 80,
   },
   {
-    // TODO
     title: '구매수',
-    dataIndex: '',
-    key: '',
+    dataIndex: 'purchasedCount',
+    key: 'purchasedCount',
     width: 80,
   },
   {
-    // TODO
     title: '안내메세지',
-    dataIndex: '',
-    key: '',
+    dataIndex: 'notice',
+    key: 'notice',
     width: 120,
+    render: (_, {notice}) => <>{notice?.message}</>,
   },
   {
     title: 'MD 추천 여부',

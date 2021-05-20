@@ -1,7 +1,5 @@
-import {useItems} from '@pickk/common';
-
 import Filter from '@src/components/organisms/Board/Filter';
-import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
+import Table from '@src/components/organisms/Board/Table';
 import {Space} from '@src/components/atoms';
 
 import {withBoardContext} from '@src/contexts/Board';
@@ -10,9 +8,9 @@ import {BoardProps} from '../props';
 import {sellableItemColumns, sellableItemActions} from './table';
 import {sellableItemInputs} from './inputs';
 
-function SellableItemsBoard({
-  title,
-}: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
+import {ITEMS_QUERY} from '@src/operations/Item/query';
+
+function SellableItemsBoard({title}: BoardProps) {
   return (
     <>
       <Filter title={title} inputs={sellableItemInputs} />
@@ -28,10 +26,11 @@ function SellableItemsBoard({
 
 export default withBoardContext(
   SellableItemsBoard,
-  {},
+  {isSellable: true},
   {
-    useTable: useItems,
-    dataName: 'items',
+    gql: ITEMS_QUERY.gql,
+    dataName: ITEMS_QUERY.dataName,
+    filterName: 'itemFilter',
   },
   (v) => v,
 );

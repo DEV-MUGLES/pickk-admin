@@ -1,12 +1,14 @@
+import {OperationType} from '@src/operations/type';
+
 export type TableActionType = {
   icon?: string;
   text?: string;
   onClick?: (
-    number: number[],
+    ids: number[],
     mutate?: (
       options?: MutationFunctionOptions<TData, TVariables>,
     ) => Promise<FetchResult<TData>>,
-  ) => Promise<boolean>;
-  hook?: () => MutationTuple;
+  ) => Promise<unknown>;
+  operation?: OperationType;
   Component?: React.FunctionComponent<any>;
 };

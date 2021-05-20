@@ -5,7 +5,6 @@ import ActionButton from './action-button';
 import Space from '@src/components/atoms/space';
 import {TableActionType} from '../table';
 
-import {useBoardContext} from '@src/contexts/Board';
 import {isEqualArray} from '@src/lib/utils';
 import TablePageSizeSelect, {
   TablePageSizeSelectProps,
@@ -18,7 +17,6 @@ export type TableActionBarProps = {
 
 function TableActionBar(props: TableActionBarProps) {
   const {selectedRowKeys, actions} = props;
-  const {reload} = useBoardContext().action;
 
   return (
     <Wrapper>

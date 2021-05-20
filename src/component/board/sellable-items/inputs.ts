@@ -6,7 +6,7 @@ import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 
 export const sellableItemInputs = [
   {
-    name: 'name',
+    name: 'search',
     labelText: '상품명',
     Component: InputBox,
   },

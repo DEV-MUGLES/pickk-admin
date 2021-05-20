@@ -1,4 +1,5 @@
 import React from 'react';
+import {useMutation} from '@apollo/client';
 import {message, Button} from 'antd';
 
 import {TableActionType} from '../table';
@@ -11,8 +12,8 @@ export type ActionButtonProps = {
 
 function ActionButton({selectedRowKeys, action}: ActionButtonProps) {
   const {reload} = useBoardContext().action;
-  const {hook = () => [null, null]} = action;
-  const [mutate] = hook();
+  const gql = action.operation?.gql;
+  const [mutate] = gql ? useMutation(gql) : [null];
 
   return (
     <Button
