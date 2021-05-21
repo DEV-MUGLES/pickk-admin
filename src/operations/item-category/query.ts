@@ -2,21 +2,18 @@ import gql from 'graphql-tag';
 
 import {OperationType} from '../type';
 
-export const ITEM_CATEGORY_TREE_QUERY: OperationType = {
+export const ITEM_MAJOR_CATEGORIES_QUERY: OperationType = {
   gql: gql`
-    query ItemCategoryTree {
-      itemCategoryTree {
+    query ItemMajorCategories {
+      itemMajorCategories {
+        id
+        name
         children {
           id
           name
-          children {
-            id
-            name
-          }
         }
-        id
       }
     }
   `,
-  dataName: 'itemCategoryTree',
+  dataName: 'itemMajorCategories',
 };

@@ -4,7 +4,7 @@ import {Cascader, Modal} from 'antd';
 
 import {useBoardContext} from '@src/contexts/Board';
 
-import {ITEM_CATEGORY_TREE_QUERY} from '@src/operations/item-category/query';
+import {ITEM_MAJOR_CATEGORIES_QUERY} from '@src/operations/item-category/query';
 import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
 
 export type CategoryModalProps = {
@@ -22,10 +22,9 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
   } = useBoardContext();
 
   const [value, setValue] = useState([]);
-  const {data} = useQuery(ITEM_CATEGORY_TREE_QUERY.gql);
-  const categories =
-    data?.[ITEM_CATEGORY_TREE_QUERY.dataName][0]?.children ?? [];
-  const options = categories.map(({id, name, children}) => ({
+  const {data} = useQuery(ITEM_MAJOR_CATEGORIES_QUERY.gql);
+  const majorCategories = data?.[ITEM_MAJOR_CATEGORIES_QUERY.dataName] ?? [];
+  const options = majorCategories.map(({id, name, children}) => ({
     value: id,
     label: name,
     ...(children && {
@@ -38,12 +37,13 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
   const [update] = useMutation(UPDATE_ITEM_MUTATION.gql);
 
   const handleOk = async () => {
+    const [majorCategoryId, minorCategoryId] = value;
     await update({
       variables: {
         itemId: selectedData.id,
         updateItemInput: {
-          majorCategoryId: value[0],
-          minorCategoryId: value[1],
+          majorCategoryId,
+          minorCategoryId,
         },
       },
     });

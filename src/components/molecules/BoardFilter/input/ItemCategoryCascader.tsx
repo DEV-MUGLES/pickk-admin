@@ -3,21 +3,20 @@ import {Cascader} from 'antd';
 
 import {useBoardContext} from '@src/contexts/Board';
 
-import {ITEM_CATEGORY_TREE_QUERY} from '@src/operations/item-category/query';
+import {ITEM_MAJOR_CATEGORIES_QUERY} from '@src/operations/item-category/query';
 
 function ItemCategoryCascader() {
   const {state, action} = useBoardContext();
   const {filter} = state;
   const {handleFilterChange} = action;
-  const {data} = useQuery(ITEM_CATEGORY_TREE_QUERY.gql);
-  const categories =
-    data?.[ITEM_CATEGORY_TREE_QUERY.dataName][0]?.children ?? [];
-  const options = [{id: null, name: '전체'}, ...categories].map(
+  const {data} = useQuery(ITEM_MAJOR_CATEGORIES_QUERY.gql);
+  const majorCategories = data?.[ITEM_MAJOR_CATEGORIES_QUERY.dataName] ?? [];
+  const options = [{id: undefined, name: '전체'}, ...majorCategories].map(
     ({id, name, children}) => ({
       value: id,
       label: name,
       ...(children && {
-        children: [{id: null, name: '전체'}, ...children].map(
+        children: [{id: undefined, name: '전체'}, ...children].map(
           ({id: cid, name: cname}) => ({
             value: cid,
             label: cname,
@@ -27,19 +26,16 @@ function ItemCategoryCascader() {
     }),
   );
 
-  const handleChange = (value) => {
+  const handleChange = ([majorCategoryId, minorCategoryId]) => {
     handleFilterChange({
-      majorCategoryId: value[0],
-      minorCategoryId: value[1],
+      majorCategoryId,
+      minorCategoryId,
     });
   };
 
   return (
     <Cascader
-      value={[
-        filter['majorCategoryId'] ?? null,
-        filter['minorCategoryId'] ?? null,
-      ]}
+      value={[filter['majorCategoryId'], filter['minorCategoryId']]}
       options={options}
       onChange={handleChange}
     />
