@@ -1,11 +1,11 @@
 import React from 'react';
 
-export type RenderType = (
-  value: any,
-  record: any,
-  index: number,
+export type ColumnRendererType<ValueType = any> = (
+  value: ValueType,
+  record?: any,
+  index?: number,
 ) => React.ReactNode;
 
-export const renderBooleanColumn: RenderType = (text, _record, _index) => (
-  <>{text === true ? 'O' : 'X'}</>
+export const renderBooleanColumn: ColumnRendererType<boolean> = (value) => (
+  <>{value === true ? 'O' : 'X'}</>
 );
