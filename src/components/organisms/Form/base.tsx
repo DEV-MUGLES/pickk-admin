@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import styled from 'styled-components';
 import {
   Form,
   Input,
@@ -7,6 +8,7 @@ import {
   FormItemProps,
   InputNumber,
   Switch,
+  FormProps,
 } from 'antd';
 
 import {Space} from '@src/components/atoms';
@@ -15,18 +17,27 @@ const {confirm} = Modal;
 
 export type FormItemValueType = FormItemProps & {
   type?: 'string' | 'number' | 'boolen';
+  Component?: React.ElementType;
+};
+
+export type SubmitButtonType = {
+  text?: string;
+  align?: 'left' | 'right' | 'center';
 };
 
 export type BaseEditFormProps = {
   FORM_ITEMS: {[name: string]: FormItemValueType};
   onSaveClick: (value: any) => void;
   defaultValue: {[name: string]: any};
-};
+  submitButton?: SubmitButtonType;
+} & Omit<FormProps, 'form' | 'onFinish' | 'defaultValue'>;
 
 function BaseEditForm({
   FORM_ITEMS,
   onSaveClick,
   defaultValue,
+  submitButton,
+  ...formProps
 }: BaseEditFormProps) {
   const [form] = Form.useForm();
 
@@ -41,7 +52,14 @@ function BaseEditForm({
     });
   };
 
-  const renderInput = (type: 'string' | 'number' | 'boolen') => {
+  const renderInput = (
+    type: 'string' | 'number' | 'boolen',
+    Component: React.ElementType,
+  ) => {
+    if (Component) {
+      return <Component />;
+    }
+
     const BaseInput =
       {
         string: Input,
@@ -57,23 +75,34 @@ function BaseEditForm({
       onFinish={handleFinish}
       labelAlign="left"
       labelCol={{
-        span: 6,
+        span: 8,
       }}
       wrapperCol={{
         span: 8,
       }}
-      layout="horizontal">
+      layout="horizontal"
+      {...formProps}>
       {Object.keys(FORM_ITEMS).map((name) => (
         <Form.Item key={name} name={name} {...FORM_ITEMS[name]}>
-          {renderInput(FORM_ITEMS[name].type)}
+          {renderInput(FORM_ITEMS[name].type, FORM_ITEMS[name].Component)}
         </Form.Item>
       ))}
       <Space level={2} />
-      <Button htmlType="submit" type="primary">
-        저장
-      </Button>
+      <ButtonWrapper align={submitButton?.align ?? 'left'}>
+        <Button htmlType="submit" type="primary">
+          {submitButton?.text ?? '저장'}
+        </Button>
+      </ButtonWrapper>
     </Form>
   );
 }
 
 export default BaseEditForm;
+
+const ButtonWrapper = styled.div<{align: SubmitButtonType['align']}>`
+  display: flex;
+  ${({align}) =>
+    `justify-content: ${
+      {left: 'flex-start', center: 'center', right: 'flex-end'}[align]
+    };`}
+`;
