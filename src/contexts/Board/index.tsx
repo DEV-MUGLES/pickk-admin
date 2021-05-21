@@ -1,4 +1,4 @@
-import {useState, useContext, createContext, useEffect} from 'react';
+import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
 import {useQuery} from '@apollo/client';
 
@@ -8,9 +8,9 @@ import Header, {
 import {BoardTableProps} from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
-import {BoardProps} from '@src/component/board/props';
-import {Filter} from '@src/types/Board';
 import {IBoard} from './IBoard';
+import {BoardProps} from '@src/component/board/props';
+import {Filter} from '@src/types';
 import {OperationType} from '@src/operations/type';
 
 const BoardContext = createContext<IBoard>(undefined);
@@ -40,7 +40,7 @@ export const withBoardContext =
       },
     });
     const [selectedData, setSelectedData] = useState({});
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([]);
 
     const initFilter = () => {
       setFilter(defaultFilter);

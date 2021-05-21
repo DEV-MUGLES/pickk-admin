@@ -5,10 +5,8 @@ export type TableActionType = {
   text?: string;
   handleClick?: (
     ids: number[],
-    mutate?: (
-      options?: MutationFunctionOptions<TData, TVariables>,
-    ) => Promise<FetchResult<TData>>,
-  ) => Promise<unknown>;
+    mutate?: (options?: MutationFunctionOptions) => Promise<FetchResult>,
+  ) => Promise<boolean>;
   operation?: OperationType;
   Component?: React.FunctionComponent<any>;
 };

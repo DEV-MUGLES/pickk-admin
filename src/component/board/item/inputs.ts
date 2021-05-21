@@ -4,7 +4,9 @@ import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
 import ItemCategoryCascader from '@src/components/molecules/BoardFilter/input/ItemCategoryCascader';
 import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
 
-export const itemInputs = [
+import {BoardFilterRowProps} from '@src/components/molecules/BoardFilter/BodyRow';
+
+export const itemInputs: BoardFilterRowProps[] = [
   {
     name: 'search',
     labelText: '상품명',

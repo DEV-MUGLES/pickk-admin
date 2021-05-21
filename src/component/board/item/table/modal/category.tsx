@@ -6,6 +6,11 @@ import {useBoardContext} from '@src/contexts/Board';
 
 import {ITEM_MAJOR_CATEGORIES_QUERY} from '@src/operations/item-category/query';
 import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
+import {ItemMajorCategories} from '@src/operations/__generated__/ItemMajorCategories';
+import {
+  UpdateItem,
+  UpdateItemVariables,
+} from '@src/operations/__generated__/UpdateItem';
 
 export type CategoryModalProps = {
   visible: boolean;
@@ -22,8 +27,8 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
   } = useBoardContext();
 
   const [value, setValue] = useState([]);
-  const {data} = useQuery(ITEM_MAJOR_CATEGORIES_QUERY.gql);
-  const majorCategories = data?.[ITEM_MAJOR_CATEGORIES_QUERY.dataName] ?? [];
+  const {data} = useQuery<ItemMajorCategories>(ITEM_MAJOR_CATEGORIES_QUERY.gql);
+  const majorCategories = data.itemMajorCategories ?? [];
   const options = majorCategories.map(({id, name, children}) => ({
     value: id,
     label: name,
@@ -34,7 +39,9 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
       })),
     }),
   }));
-  const [update] = useMutation(UPDATE_ITEM_MUTATION.gql);
+  const [update] = useMutation<UpdateItem, UpdateItemVariables>(
+    UPDATE_ITEM_MUTATION.gql,
+  );
 
   const handleOk = async () => {
     const [majorCategoryId, minorCategoryId] = value;

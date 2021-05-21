@@ -1,13 +1,13 @@
-import {Items_items_products} from '@pickk/common/dist/__generated__/Items';
 import {Badge, Typography} from 'antd';
+
+import {Items_items} from '@src/operations/__generated__/Items';
 
 const {Text} = Typography;
 
-export type SellableItemStockProps = {
-  products: Items_items_products[];
-  isInfiniteStock: boolean;
-  isSoldout: boolean;
-};
+export type SellableItemStockProps = Pick<
+  Items_items,
+  'products' | 'isInfiniteStock' | 'isSoldout'
+>;
 
 function SellableItemStock({
   products,
@@ -27,9 +27,9 @@ function SellableItemStock({
 export default SellableItemStock;
 
 function getColor(
-  products: Items_items_products[],
-  isInfiniteStock: boolean,
-  isSoldout: boolean,
+  products: Items_items['products'],
+  isInfiniteStock: Items_items['isInfiniteStock'],
+  isSoldout: Items_items['isSoldout'],
 ) {
   if (isInfiniteStock) {
     return 'lime';

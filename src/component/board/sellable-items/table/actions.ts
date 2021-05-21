@@ -1,12 +1,13 @@
 import {message, Modal} from 'antd';
 
-import {TableActionType} from '@src/components/organisms/Board/Table/table';
 import {BULK_UPDATE_ITEMS_MUTATION} from '@src/operations/item/mutation';
+import {TableActionType} from '@src/components/organisms/Board/Table/table';
 
 const {confirm} = Modal;
 
 const handleSetIsMdRecommended =
-  (isMdRecommended: boolean) => async (ids: number[], mutate) => {
+  (isMdRecommended: boolean): TableActionType['handleClick'] =>
+  async (ids, mutate) => {
     return new Promise((resolve, reject) => {
       confirm({
         title: `MD 추천 ${isMdRecommended ? 'ON' : 'OFF'} 확인`,

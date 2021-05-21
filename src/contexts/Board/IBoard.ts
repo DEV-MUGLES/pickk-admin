@@ -1,5 +1,6 @@
-import {Filter} from '@src/types';
 import {Dispatch, SetStateAction} from 'react';
+
+import {Filter} from '@src/types';
 
 export interface IBoard {
   state: {

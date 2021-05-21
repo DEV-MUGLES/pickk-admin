@@ -6,7 +6,9 @@ import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render'
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
 
-export const itemColumns: ColumnsType<any> = [
+import {Items_items} from '@src/operations/__generated__/Items';
+
+export const itemColumns: ColumnsType<Items_items> = [
   {
     title: 'ID',
     dataIndex: 'id',

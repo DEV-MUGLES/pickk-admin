@@ -6,7 +6,8 @@ import {BULK_UPDATE_ITEMS_MUTATION} from '@src/operations/item/mutation';
 const {confirm} = Modal;
 
 const handleSetIsSellable =
-  (isSellable: boolean) => async (ids: number[], mutate) => {
+  (isSellable: boolean): TableActionType['handleClick'] =>
+  async (ids, mutate) => {
     return new Promise((resolve, reject) => {
       confirm({
         title: `상품 ${isSellable ? '' : '비'}활성화 확인`,
