@@ -50,7 +50,7 @@ function ItemBoard({title}: BoardProps) {
       render: (_, record) => {
         const {majorCategory, minorCategory} = record;
         return (
-          <div>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
             <Text>{`${majorCategory?.name ?? '-'}/${
               minorCategory?.name ?? '-'
             }`}</Text>
@@ -60,7 +60,7 @@ function ItemBoard({title}: BoardProps) {
                 setSelectedData(record);
                 handleModalOpen('category')(true);
               }}
-              style={{marginLeft: '0.6rem'}}>
+              style={{marginTop: '0.6rem'}}>
               수정
             </Button>
           </div>
