@@ -33,14 +33,4 @@ function CancelRequestBoard({
   );
 }
 
-export default withBoardContext(
-  CancelRequestBoard,
-  {
-    status: null,
-    lookupDate: 'paid',
-    startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-    endDate: dayjs().format('YYYY-MM-DD'),
-  },
-  useCancelRequestTable,
-  parseTable,
-);
+export default CancelRequestBoard;

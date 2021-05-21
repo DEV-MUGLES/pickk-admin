@@ -36,9 +36,8 @@ function RefundRequestBoard({
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const [isExchangeRequestModalOpen, setIsExchangeRequestModalOpen] = useState(
-    false,
-  );
+  const [isExchangeRequestModalOpen, setIsExchangeRequestModalOpen] =
+    useState(false);
   const closeExchangeRequestModal = () => {
     setIsExchangeRequestModalOpen(false);
   };
@@ -150,14 +149,4 @@ function RefundRequestBoard({
   );
 }
 
-export default withBoardContext(
-  RefundRequestBoard,
-  {
-    status: null,
-    lookupDate: 'paid',
-    startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-    endDate: dayjs().format('YYYY-MM-DD'),
-  },
-  useRefundRequestTable,
-  parseTable,
-);
+export default RefundRequestBoard;

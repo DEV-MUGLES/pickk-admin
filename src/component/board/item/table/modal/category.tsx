@@ -28,7 +28,7 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
 
   const [value, setValue] = useState([]);
   const {data} = useQuery<ItemMajorCategories>(ITEM_MAJOR_CATEGORIES_QUERY.gql);
-  const majorCategories = data.itemMajorCategories ?? [];
+  const majorCategories = data?.itemMajorCategories ?? [];
   const options = majorCategories.map(({id, name, children}) => ({
     value: id,
     label: name,

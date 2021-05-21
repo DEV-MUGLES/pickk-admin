@@ -108,14 +108,4 @@ function PlacementBoard({title}: BoardProps) {
   );
 }
 
-export default withBoardContext(
-  PlacementBoard,
-  {
-    status: 'PAID',
-    lookupDate: 'paid',
-    startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-    endDate: dayjs().format('YYYY-MM-DD'),
-  },
-  usePlacementTable,
-  parseTable,
-);
+export default PlacementBoard;
