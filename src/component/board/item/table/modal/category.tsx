@@ -5,7 +5,7 @@ import {Cascader, Modal} from 'antd';
 import {useBoardContext} from '@src/contexts/Board';
 
 import {ITEM_MAJOR_CATEGORIES_QUERY} from '@src/operations/item-category/query';
-import {UPDATE_ITEM_MUTATION} from '@src/operations/item-temp/mutation';
+import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
 import {ItemMajorCategories} from '@src/operations/__generated__/ItemMajorCategories';
 import {
   UpdateItem,

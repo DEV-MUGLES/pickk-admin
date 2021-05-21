@@ -12,7 +12,7 @@ import {BoardProps} from '../props';
 import {sellableItemColumns, sellableItemActions} from './table';
 import {sellableItemInputs} from './inputs';
 
-import {ITEMS_QUERY} from '@src/operations/item-temp/query';
+import {ITEMS_QUERY} from '@src/operations/item/query';
 import {Items_items} from '@src/operations/__generated__/Items';
 
 type SellableItemsModalType = 'price' | 'optionStock' | 'info';

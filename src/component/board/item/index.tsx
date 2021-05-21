@@ -13,7 +13,7 @@ import {BoardProps} from '../props';
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
 
-import {ITEMS_QUERY} from '@src/operations/item-temp/query';
+import {ITEMS_QUERY} from '@src/operations/item/query';
 import {Items_items} from '@src/operations/__generated__/Items';
 
 const {Text} = Typography;
