@@ -20,7 +20,7 @@ function TableFooter({selectedRowKeys, footActions}: TableFooterProps) {
             disabled={selectedRowKeys.length === 0}
             key={index}
             icon={item.icon}
-            onClick={() => item.onClick(selectedRowKeys)}>
+            onClick={() => item.handleClick(selectedRowKeys)}>
             {item.text}
           </Button>
           <Space direction="ROW" />

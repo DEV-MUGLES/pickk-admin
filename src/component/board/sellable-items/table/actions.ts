@@ -38,17 +38,17 @@ const handleSetIsMdRecommended =
 export const sellableItemActions: TableActionType[] = [
   {
     text: 'MD추천 ON',
-    onClick: handleSetIsMdRecommended(true),
+    handleClick: handleSetIsMdRecommended(true),
     operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: 'MD추천 OFF',
-    onClick: handleSetIsMdRecommended(false),
+    handleClick: handleSetIsMdRecommended(false),
     operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: '상품 비활성화',
-    onClick: async (ids: number[], mutate) => {
+    handleClick: async (ids: number[], mutate) => {
       return new Promise((resolve, reject) => {
         confirm({
           title: '상품 비활성화 확인',
@@ -78,13 +78,13 @@ export const sellableItemActions: TableActionType[] = [
   },
   {
     text: '상품 삭제',
-    onClick: async () => {
+    handleClick: async () => {
       return false;
     },
   },
   {
     text: '상품가격',
-    onClick: async () => {
+    handleClick: async () => {
       return false;
     },
   },

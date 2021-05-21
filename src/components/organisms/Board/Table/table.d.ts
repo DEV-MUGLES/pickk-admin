@@ -3,7 +3,7 @@ import {OperationType} from '@src/operations/type';
 export type TableActionType = {
   icon?: string;
   text?: string;
-  onClick?: (
+  handleClick?: (
     ids: number[],
     mutate?: (
       options?: MutationFunctionOptions<TData, TVariables>,

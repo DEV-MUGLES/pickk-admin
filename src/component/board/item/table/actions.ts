@@ -36,17 +36,17 @@ const handleSetIsSellable =
 export const itemActions: TableActionType[] = [
   {
     text: '상품 활성화',
-    onClick: handleSetIsSellable(true),
+    handleClick: handleSetIsSellable(true),
     operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: '상품 비활성화',
-    onClick: handleSetIsSellable(false),
+    handleClick: handleSetIsSellable(false),
     operation: BULK_UPDATE_ITEMS_MUTATION,
   },
   {
     text: '상품 삭제',
-    onClick: async (ids: number[]) => {
+    handleClick: async (ids: number[]) => {
       return Promise.resolve(false);
     },
   },

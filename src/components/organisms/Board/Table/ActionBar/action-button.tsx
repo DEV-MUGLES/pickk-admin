@@ -21,7 +21,7 @@ function ActionButton({selectedRowKeys, action}: ActionButtonProps) {
       icon={action.icon}
       onClick={async () => {
         try {
-          const result = await action.onClick(selectedRowKeys, mutate);
+          const result = await action.handleClick(selectedRowKeys, mutate);
           if (result) {
             reload();
           }

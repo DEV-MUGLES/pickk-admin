@@ -1,7 +1,6 @@
 import React from 'react';
 import {Upload, Button, Modal, message} from 'antd';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
-import styled from 'styled-components';
 import * as XLSX from 'xlsx';
 import CSVReader from 'react-csv-reader';
 
@@ -165,5 +164,3 @@ export const placementActions: TableActionType[] = [
     },
   },
 ];
-
-const Input = styled.input``;
