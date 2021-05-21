@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {useMutation, useQuery} from '@apollo/client';
-import {Cascader, Modal} from 'antd';
+import {useMutation} from '@apollo/client';
+import {Modal} from 'antd';
+
+import ItemCategoryCascader from '@src/components/molecules/cascader/item-category';
 
 import {useBoardContext} from '@src/contexts/Board';
 
-import {ITEM_MAJOR_CATEGORIES_QUERY} from '@src/operations/item-category/query';
 import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
-import {ItemMajorCategories} from '@src/operations/__generated__/ItemMajorCategories';
 import {
   UpdateItem,
   UpdateItemVariables,
@@ -20,25 +20,10 @@ export type CategoryModalProps = {
 function CategoryModal({visible, onClose}: CategoryModalProps) {
   const {
     state: {selectedData},
-  } = useBoardContext();
-
-  const {
     action: {reload},
   } = useBoardContext();
 
-  const [value, setValue] = useState([]);
-  const {data} = useQuery<ItemMajorCategories>(ITEM_MAJOR_CATEGORIES_QUERY.gql);
-  const majorCategories = data?.itemMajorCategories ?? [];
-  const options = majorCategories.map(({id, name, children}) => ({
-    value: id,
-    label: name,
-    ...(children && {
-      children: children.map(({id: cid, name: cname}) => ({
-        value: cid,
-        label: cname,
-      })),
-    }),
-  }));
+  const [value, setValue] = useState<[number, number]>();
   const [update] = useMutation<UpdateItem, UpdateItemVariables>(
     UPDATE_ITEM_MUTATION.gql,
   );
@@ -55,7 +40,6 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
       },
     });
     onClose();
-    setValue([]);
     reload();
   };
 
@@ -65,10 +49,16 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
       visible={visible}
       onCancel={() => {
         onClose();
-        setValue([]);
       }}
       onOk={handleOk}>
-      <Cascader options={options} onChange={setValue} value={value} />
+      <ItemCategoryCascader
+        defaultValue={[
+          selectedData?.majorCategory?.id,
+          selectedData?.minorCategory?.id,
+        ]}
+        value={value}
+        onChange={setValue}
+      />
     </Modal>
   );
 }
