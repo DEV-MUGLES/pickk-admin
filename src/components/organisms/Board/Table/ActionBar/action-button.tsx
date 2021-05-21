@@ -4,6 +4,7 @@ import {message, Button} from 'antd';
 
 import {TableActionType} from '../table';
 import {useBoardContext} from '@src/contexts/Board';
+import {PLACEHOLDER_MUTATION} from '@src/operations';
 
 export type ActionButtonProps = {
   selectedRowKeys: number[];
@@ -12,8 +13,8 @@ export type ActionButtonProps = {
 
 function ActionButton({selectedRowKeys, action}: ActionButtonProps) {
   const {reload} = useBoardContext().action;
-  const gql = action.operation?.gql;
-  const [mutate] = gql ? useMutation(gql) : [null];
+  const gql = (action.operation ?? PLACEHOLDER_MUTATION).gql;
+  const [mutate] = useMutation(gql);
 
   return (
     <Button
