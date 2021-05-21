@@ -33,12 +33,4 @@ function SettlementBoard({title}: BoardProps) {
   );
 }
 
-export default withBoardContext(
-  SettlementBoard,
-  {
-    expected: null,
-    settleStatus: null,
-  },
-  useSettlementTable,
-  parseTable,
-);
+export default SettlementBoard;

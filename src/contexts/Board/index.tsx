@@ -1,32 +1,19 @@
 import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
+import {useQuery} from '@apollo/client';
 
-import Header, {BoardHeaderProps} from '../components/organisms/Board/Header';
+import Header, {
+  BoardHeaderProps,
+} from '../../components/organisms/Board/Header';
 import {BoardTableProps} from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
+import {IBoard} from './IBoard';
 import {BoardProps} from '@src/component/board/props';
-import {Filter} from '@src/types/Board';
+import {Filter} from '@src/types';
+import {OperationType} from '@src/operations/type';
 
-const BoardContext = createContext({
-  state: {
-    filter: null,
-    newFilter: null,
-    tableData: null,
-    loading: null,
-    defaultFilter: null,
-    selectedRowKeys: [],
-  },
-  action: {
-    handleFilterChange: null,
-    submitFilter: null,
-    initFilter: null,
-    reload: null,
-    applyPreview: null,
-    parseExcelData: null,
-    setSelectedRowKeys: null,
-  },
-});
+const BoardContext = createContext<IBoard>(undefined);
 
 export const useBoardContext = () => useContext(BoardContext);
 
@@ -34,7 +21,9 @@ export const withBoardContext =
   (
     WrappedComponent: React.FunctionComponent<BoardProps>,
     defaultFilter: Filter,
-    useTable,
+    operation: {
+      filterName?: string;
+    } & Pick<OperationType, 'gql' | 'dataName'>,
     parseExcelData,
   ) =>
   (
@@ -42,11 +31,16 @@ export const withBoardContext =
       BoardHeaderProps &
       Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>,
   ) => {
-    const [toRerender, setToRerender] = useState(0);
     const [filter, setFilter] = useState(defaultFilter);
     const [newFilter, setNewFilter] = useState(defaultFilter);
-    const {loading, data} = useTable([newFilter, toRerender]);
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+    const {gql, dataName, filterName} = operation;
+    const {data, loading, refetch} = useQuery(gql, {
+      variables: {
+        ...(filterName ? {[filterName]: defaultFilter} : {}),
+      },
+    });
+    const [selectedData, setSelectedData] = useState({});
+    const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([]);
 
     const initFilter = () => {
       setFilter(defaultFilter);
@@ -60,15 +54,18 @@ export const withBoardContext =
 
     const submitFilter = () => {
       const temp = {...filter};
-      if (!temp.isReviewed) {
-        delete temp.isReviewed;
-      }
+      Object.keys(temp).map((key) => {
+        if (temp[key] === undefined) {
+          delete temp[key];
+        }
+      });
       setNewFilter(temp);
+      refetch(temp ? {[filterName]: temp} : {});
       setSelectedRowKeys([]);
     };
 
     const reload = () => {
-      setToRerender(toRerender + 1);
+      refetch();
       setSelectedRowKeys([]);
     };
 
@@ -82,18 +79,17 @@ export const withBoardContext =
       setSelectedRowKeys([]);
     };
 
-    const boardStore = {
+    const boardStore: IBoard = {
       state: {
         filter,
         newFilter,
         tableData: data
-          ? data.map((v) => {
-              return {...v, key: v.id};
-            })
+          ? data?.[dataName].map((v) => ({...v, key: v.id}))
           : null,
         loading,
         defaultFilter,
         selectedRowKeys,
+        selectedData,
       },
       action: {
         handleFilterChange,
@@ -103,6 +99,7 @@ export const withBoardContext =
         applyPreview,
         parseExcelData,
         setSelectedRowKeys,
+        setSelectedData,
       },
     };
 

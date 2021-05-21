@@ -91,12 +91,4 @@ function ExchangeRequestBoard({
   );
 }
 
-export default withBoardContext(
-  ExchangeRequestBoard,
-  {
-    status: null,
-    startDate: '2000-01-01',
-  },
-  useExchangeRequestTable,
-  parseTable,
-);
+export default ExchangeRequestBoard;

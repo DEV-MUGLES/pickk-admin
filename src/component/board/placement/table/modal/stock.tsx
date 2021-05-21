@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {Modal, InputNumber, message, Typography, Spin, Button} from 'antd';
+import {Modal, InputNumber, Button, message, Typography, Spin} from 'antd';
 
 import {useProductList} from '@src/hooks/table';
 import ProductService from '@src/lib/services/Product';
@@ -120,6 +120,7 @@ export default function StockSetModal({id, closeModal}: StockSetModalProps) {
       <Button
         style={{width: '100%'}}
         type="primary"
+        size="middle"
         shape="round"
         onClick={handleStockSubmit}>
         일괄 적용

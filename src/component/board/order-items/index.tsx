@@ -73,14 +73,4 @@ function OrderItemBoard({
   );
 }
 
-export default withBoardContext(
-  OrderItemBoard,
-  {
-    status: null,
-    lookupDate: 'paid',
-    startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-    endDate: dayjs().format('YYYY-MM-DD'),
-  },
-  useOrderItemTable,
-  parseTable,
-);
+export default OrderItemBoard;

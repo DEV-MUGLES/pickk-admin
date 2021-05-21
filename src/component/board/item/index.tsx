@@ -1,169 +1,95 @@
 import React, {useState} from 'react';
-import {Typography, Button, Modal, message} from 'antd';
-import {ExclamationCircleOutlined} from '@ant-design/icons';
+import {Button, Typography} from 'antd';
+import {ColumnsType} from 'antd/lib/table';
 
 import Filter from '@src/components/organisms/Board/Filter';
-import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
+import Table from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
+import CategoryModal from './table/modal/category';
 
-import {withBoardContext, useBoardContext} from '@src/contexts/Board';
-import {useItemTable} from '@src/hooks/table/Item';
+import {useBoardContext, withBoardContext} from '@src/contexts/Board';
+import {BoardProps} from '../props';
 
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
-import {BoardProps} from '../props';
-import StockSetModal from './table/modal/stock/set';
-import ItemService from '@src/lib/services/Item';
-import StockInitModal from './table/modal/stock/init';
-import SubsDiscountRateModal from './table/modal/subs-discount-rate';
-import InfluencerSubsDiscountRateModal from './table/modal/influencer-subs-discount-rate';
+
+import {ITEMS_QUERY} from '@src/operations/item/query';
+import {Items_items} from '@src/operations/__generated__/Items';
 
 const {Text} = Typography;
-const {confirm} = Modal;
 
-function ItemBoard({
-  title,
-}: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
-  const {state, action} = useBoardContext();
-  const {tableData, selectedRowKeys} = state;
-  const {reload} = action;
+type ItemBoardModalType = 'category' | 'image';
 
-  const [index, setIndex] = useState(-1);
-  const openModal = setIndex;
-  const closeModal = () => {
-    setIndex(-1);
+function ItemBoard({title}: BoardProps) {
+  const {
+    action: {setSelectedData},
+  } = useBoardContext();
+
+  const [modalVisible, setModalVisible] = useState<
+    Record<ItemBoardModalType, boolean>
+  >({
+    category: false,
+    image: false,
+  });
+
+  const handleModalOpen = (name: ItemBoardModalType) => (open: boolean) => {
+    setModalVisible({
+      ...modalVisible,
+      [name]: open,
+    });
   };
 
-  const [isInitModalOpen, setInitModalOpen] = useState(false);
-  const closeInitModal = () => {
-    setInitModalOpen(false);
-  };
-
-  const [discountModal, setDiscountModal] = useState(false);
-  const [
-    influencerSubsDiscountIndex,
-    setInfluencerSubsDiscountIndex,
-  ] = useState(null);
-
-  const newItemColumns = [
-    ...itemColumns.slice(0, 4),
+  const newItemColumns: ColumnsType<Items_items> = [
+    ...itemColumns.slice(0, 3),
     {
-      title: '구독할인율(기본)',
-      dataIndex: 'subsDiscountRate',
-      key: 'subsDiscountRate',
-      sorter: (a, b) => b.subsDiscountRate - a.subsDiscountRate,
-      width: 70,
-      render: (value, record) => {
-        const {id} = record;
+      title: '카테고리',
+      dataIndex: 'category',
+      key: 'category',
+      width: 100,
+      align: 'center',
+      render: (_, record) => {
+        const {majorCategory, minorCategory} = record;
         return (
-          <>
-            <Text>{value}% </Text>
+          <div>
+            <Text>{`${majorCategory?.name ?? '-'}/${
+              minorCategory?.name ?? '-'
+            }`}</Text>
             <Button
               size="small"
-              onClick={() => setInfluencerSubsDiscountIndex(id)}>
-              설정
+              onClick={() => {
+                setSelectedData(record);
+                handleModalOpen('category')(true);
+              }}
+              style={{marginLeft: '0.6rem'}}>
+              수정
             </Button>
-          </>
-        );
-      },
-      ellipsis: true,
-    },
-    ...itemColumns.slice(4),
-    {
-      title: '재고관리',
-      dataIndex: 'isStockManaged',
-      key: 'isStockManaged',
-      sorter: (a, b) => a.isStockManaged > b.isStockManaged,
-      width: 60,
-      render: (value, record) => {
-        const {id} = record;
-        if (!value) {
-          return <Text type="secondary">OFF</Text>;
-        }
-        return (
-          <Button size="small" onClick={() => openModal(id)}>
-            재고관리
-          </Button>
+          </div>
         );
       },
     },
+    ...itemColumns.slice(3),
   ];
-
-  const handleOffClicked = async () => {
-    confirm({
-      title: '재고 관리 기능을 끄시겠습니까?',
-      icon: <ExclamationCircleOutlined />,
-      content: '다시 ON 하실 땐 모든 재고 수량을 다시 설정하셔야합니다.',
-      okText: '예',
-      okType: 'danger',
-      cancelText: '아니오',
-      async onOk() {
-        await ItemService.manageStockOff(selectedRowKeys);
-        message.success('완료되었습니다.');
-        reload();
-      },
-      onCancel() {
-        message.warning('취소되었습니다.');
-      },
-    });
-    return Promise.resolve(false);
-  };
-
-  const newItemActions = [
-    {
-      text: '재고관리 ON',
-      onClick: async () => {
-        setInitModalOpen(true);
-        return Promise.resolve(false);
-      },
-    },
-    {
-      text: '재고관리 OFF',
-      onClick: handleOffClicked,
-    },
-    {
-      text: '구독 할인 설정',
-      onClick: (ids: number[]) => {
-        setDiscountModal(true);
-        return Promise.resolve(false);
-      },
-    },
-  ];
-
-  const modalData = tableData
-    ? tableData.filter((data) => selectedRowKeys.includes(data.id))
-    : null;
 
   return (
     <>
       <Filter title={title} inputs={itemInputs} />
       <Space level={2} />
-      <Table title={title} columns={newItemColumns} actions={newItemActions} />
-      <StockSetModal id={index} closeModal={closeModal} />
-      <Space level={2} />
-      <StockInitModal {...{modalData, isInitModalOpen, closeInitModal}} />
-      <SubsDiscountRateModal
-        visible={discountModal}
-        onClose={() => {
-          setDiscountModal(false);
-        }}
-        modalData={modalData}
+      <Table title={title} columns={newItemColumns} actions={itemActions} />
+      <CategoryModal
+        visible={modalVisible.category}
+        onClose={() => handleModalOpen('category')(false)}
       />
-      {influencerSubsDiscountIndex && (
-        <InfluencerSubsDiscountRateModal
-          index={influencerSubsDiscountIndex}
-          onClose={() => {
-            setInfluencerSubsDiscountIndex(null);
-          }}
-        />
-      )}
     </>
   );
 }
 
 export default withBoardContext(
   ItemBoard,
-  {name: null, isReviewed: null},
-  useItemTable,
+  {},
+  {
+    gql: ITEMS_QUERY.gql,
+    dataName: ITEMS_QUERY.dataName,
+    filterName: 'itemFilter',
+  },
   (v) => v,
 );

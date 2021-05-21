@@ -1,10 +1,12 @@
 import {useMemo} from 'react';
 import {ApolloClient, ApolloLink, from, InMemoryCache} from '@apollo/client';
 import {createUploadLink} from 'apollo-upload-client';
+import {onError} from '@apollo/client/link/error';
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
 
-import {getCookie} from './utils';
+import {getCookie} from '../utils';
+import {Mock} from './mock';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
@@ -26,16 +28,32 @@ const getAuthMiddleware = (_token?: string) =>
     return forward(operation);
   });
 
+const getErrorLink = () =>
+  onError(({graphQLErrors, networkError}) => {
+    if (graphQLErrors)
+      graphQLErrors.forEach(({message, locations, path, extensions}) => {
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+        );
+      });
+
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
+
 function createApolloClient(token?: string) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: from([
       getAuthMiddleware(token),
+      getErrorLink(),
       createUploadLink({
         uri: process.env.NEW_API_URL,
       }),
     ]),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: Mock.typePolicies,
+    }),
+    typeDefs: Mock.typeDefs,
   });
 }
 

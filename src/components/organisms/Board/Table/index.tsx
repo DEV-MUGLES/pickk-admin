@@ -23,7 +23,10 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
 
   const [pageSize, setPageSize] = useState(10);
 
-  const rowSelection = {selectedRowKeys, onChange: setSelectedRowKeys};
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: (keys) => setSelectedRowKeys(keys),
+  };
 
   const footerProps: TableFooterProps = {
     ...{selectedRowKeys, footActions},

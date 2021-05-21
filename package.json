@@ -8,12 +8,13 @@
     "tsc": "tsc --noEmit",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "apollo:codegen": "rm -rf src/operations/__generated__ && apollo schema:download && apollo client:codegen src/operations/__generated__ --localSchemaFile=schema.json,local-schema.graphql --target=typescript --outputFlat"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@apollo/client": "^3.3.16",
-    "@pickk/common": "^1.4.3",
+    "@pickk/common": "^1.5.8",
     "antd": "^4.15.4",
     "antd-prompt": "^0.4.0",
     "apollo-upload-client": "^14.1.3",

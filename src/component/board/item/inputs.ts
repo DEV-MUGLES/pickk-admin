@@ -1,16 +1,35 @@
-import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import CheckBox from '@src/components/molecules/BoardFilter/input/CheckBox';
+import dayjs from 'dayjs';
 
-export const itemInputs = [
+import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
+import ItemCategoryCascader from '@src/components/molecules/BoardFilter/input/ItemCategoryCascader';
+import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+
+import {BoardFilterRowProps} from '@src/components/molecules/BoardFilter/BodyRow';
+
+export const itemInputs: BoardFilterRowProps[] = [
   {
-    name: 'name',
+    name: 'search',
     labelText: '상품명',
     Component: InputBox,
   },
   {
-    name: 'isReviewed',
-    labelText: '리뷰 필터링',
-    guideText: '리뷰가 있는 상품만 필터링하여 볼 수 있는 기능입니다.',
-    Component: CheckBox,
+    name: 'category',
+    labelText: '카테고리',
+    select: [{name: '전체', value: null}],
+    Component: ItemCategoryCascader,
+  },
+  {
+    name: 'period',
+    defaultValue: {
+      type: 'all',
+      startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
+      endDate: dayjs().format('YYYY-MM-DD'),
+    },
+    labelText: '조회기간',
+    select: [
+      {name: '활성등록일', value: ''},
+      {name: '상품생성일', value: ''},
+    ],
+    Component: Datepicker,
   },
 ];
