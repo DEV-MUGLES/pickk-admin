@@ -55,7 +55,7 @@ export const withBoardContext =
     const submitFilter = () => {
       const temp = {...filter};
       Object.keys(temp).map((key) => {
-        if (temp[key] === null || temp[key] === undefined) {
+        if (temp[key] === undefined) {
           delete temp[key];
         }
       });
