@@ -38,11 +38,11 @@ function getColor(
     return 'volcano';
   }
 
-  const soldoutProducts = products.filter(({stock}) => stock <= 0);
-  if (soldoutProducts.length >= 1) {
+  const soldoutCount = products.filter(({stock}) => stock <= 0).length;
+  if (soldoutCount >= 1) {
     return 'orange';
   }
-  if (products.length - soldoutProducts.length < 5) {
+  if (products.length - soldoutCount < 5) {
     return 'yellow';
   }
   return 'lime';
