@@ -28,7 +28,11 @@ export const ITEMS_QUERY: OperationType = {
         reviewCount @client
         purchasedCount @client
         notice {
+          id
+          type
           message
+          startAt
+          endAt
         }
         isMdRecommended
         isSellable

@@ -24,3 +24,34 @@ export const UPDATE_ITEM_MUTATION: OperationType = {
   `,
   dataName: 'updateItem',
 };
+
+export const ADD_ITEM_NOTICE_MUTATION: OperationType = {
+  gql: gql`
+    mutation AddItemNotice(
+      $itemId: Int!
+      $addItemNoticeInput: AddItemNoticeInput!
+    ) {
+      addItemNotice(itemId: $itemId, addItemNoticeInput: $addItemNoticeInput) {
+        id
+      }
+    }
+  `,
+  dataName: 'addItemNotice',
+};
+
+export const UPDATE_ITEM_NOTICE_MUTATION: OperationType = {
+  gql: gql`
+    mutation UpdateItemNotice(
+      $itemId: Int!
+      $updateItemNoticeInput: UpdateItemNoticeInput!
+    ) {
+      updateItemNotice(
+        itemId: $itemId
+        updateItemNoticeInput: $updateItemNoticeInput
+      ) {
+        id
+      }
+    }
+  `,
+  dataName: 'updateItemNotice',
+};

@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { ItemFilter, PageInput } from "./globalTypes";
+import { ItemFilter, PageInput, ItemNoticeType } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: Items
@@ -28,7 +28,11 @@ export interface Items_items_products {
 
 export interface Items_items_notice {
   __typename: "ItemNotice";
+  id: number;
+  type: ItemNoticeType | null;
   message: string;
+  startAt: any | null;
+  endAt: any | null;
 }
 
 export interface Items_items_urls {
