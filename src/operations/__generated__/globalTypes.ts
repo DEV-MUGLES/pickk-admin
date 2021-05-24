@@ -15,12 +15,16 @@ export interface BulkUpdateItemInput {
 }
 
 export interface ItemFilter {
+  createdAtLte?: any | null;
+  createdAtMte?: any | null;
   isMdRecommended?: boolean | null;
   isPurchasable?: boolean | null;
   isSellable?: boolean | null;
   majorCategoryId?: number | null;
   minorCategoryId?: number | null;
   search?: string | null;
+  sellableAtLte?: any | null;
+  sellableAtMte?: any | null;
 }
 
 export interface PageInput {
@@ -36,6 +40,10 @@ export interface UpdateItemInput {
   majorCategoryId?: number | null;
   minorCategoryId?: number | null;
   name?: string | null;
+}
+
+export interface UploadMultipleImageInput {
+  files: any[];
 }
 
 //==============================================================
