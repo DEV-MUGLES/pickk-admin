@@ -5,6 +5,7 @@ import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
 import {Space} from '@src/components/atoms';
 import SellableItemManageButtons from './table/manage-buttons';
+import ItemInfoEditModal from './modal/info-edit';
 
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';
 
@@ -19,7 +20,7 @@ type SellableItemsModalType = 'price' | 'optionStock' | 'info';
 
 function SellableItemsBoard({title}: BoardProps) {
   const {
-    action: {setSelectedData},
+    action: {setSelectedRowId},
   } = useBoardContext();
 
   const [modalVisible, setModalVisible] = useState<
@@ -30,12 +31,13 @@ function SellableItemsBoard({title}: BoardProps) {
     info: false,
   });
 
-  const handleModalOpen = (name: SellableItemsModalType) => (open: boolean) => {
-    setModalVisible({
-      ...modalVisible,
-      [name]: open,
-    });
-  };
+  const handleModalOpen =
+    (name: SellableItemsModalType) => (open: boolean) => () => {
+      setModalVisible({
+        ...modalVisible,
+        [name]: open,
+      });
+    };
 
   const newSellableItemColumns: ColumnsType<Items_items> = [
     ...sellableItemColumns.slice(0, 1),
@@ -44,28 +46,28 @@ function SellableItemsBoard({title}: BoardProps) {
       dataIndex: 'itemManage',
       key: 'itemManage',
       width: 100,
-      render: (_, record) => (
+      render: (_, {id}) => (
         <SellableItemManageButtons
           buttons={[
             {
               label: '가격 관리',
               onClick: () => {
-                setSelectedData(record);
-                handleModalOpen('price')(true);
+                setSelectedRowId(id);
+                handleModalOpen('price')(true)();
               },
             },
             {
               label: '옵션/재고 관리',
               onClick: () => {
-                setSelectedData(record);
-                handleModalOpen('optionStock')(true);
+                setSelectedRowId(id);
+                handleModalOpen('optionStock')(true)();
               },
             },
             {
               label: '정보 수정',
               onClick: () => {
-                setSelectedData(record);
-                handleModalOpen('info')(true);
+                setSelectedRowId(id);
+                handleModalOpen('info')(true)();
               },
             },
           ]}
@@ -83,6 +85,10 @@ function SellableItemsBoard({title}: BoardProps) {
         title={title}
         columns={newSellableItemColumns}
         actions={sellableItemActions}
+      />
+      <ItemInfoEditModal
+        visible={modalVisible.info}
+        onClose={handleModalOpen('info')(false)}
       />
     </>
   );
