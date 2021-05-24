@@ -33,14 +33,18 @@ function ItemBaseInfoEditSection() {
   }, [selectedRowId]);
 
   const handleSaveClick = (value) => {
-    const {imageUrl, category, ...updateItemInput} = value;
+    const {
+      imageUrl: _i,
+      category: [majorCategoryId, minorCategoryId],
+      ...updateItemInput
+    } = value;
     updateItem({
       variables: {
         itemId: selectedItem.id,
         updateItemInput: {
           ...updateItemInput,
-          majorCategoryId: category[0],
-          minorCategoryId: category[1],
+          majorCategoryId,
+          minorCategoryId,
           imageUrl: imageUrl ?? selectedItem.imageUrl,
         },
       },
