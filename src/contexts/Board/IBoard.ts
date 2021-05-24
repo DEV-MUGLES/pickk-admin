@@ -10,6 +10,7 @@ export interface IBoard {
     loading: boolean;
     defaultFilter: Filter;
     selectedRowKeys: number[];
+    selectedRowId: number;
     selectedData: any;
   };
   action: {
@@ -20,6 +21,6 @@ export interface IBoard {
     applyPreview: (data) => void;
     parseExcelData: any;
     setSelectedRowKeys: Dispatch<SetStateAction<number[]>>;
-    setSelectedData: Dispatch<SetStateAction<any>>;
+    setSelectedRowId: Dispatch<SetStateAction<number>>;
   };
 }
