@@ -11,12 +11,14 @@ import {
   FormProps,
 } from 'antd';
 
+import DatePickerFormItem from './Items/date-picker';
 import {Space} from '@src/components/atoms';
 
 const {confirm} = Modal;
 
+export type BaseFormItemType = 'string' | 'number' | 'boolen' | 'date';
 export type FormItemValueType = FormItemProps & {
-  type?: 'string' | 'number' | 'boolen';
+  type?: BaseFormItemType;
   Component?: React.ElementType;
 };
 
@@ -65,7 +67,7 @@ function BaseEditForm({
   };
 
   const renderInput = (
-    type: 'string' | 'number' | 'boolen',
+    type: BaseFormItemType,
     Component: React.ElementType,
   ) => {
     if (Component) {
@@ -77,6 +79,7 @@ function BaseEditForm({
         string: Input,
         number: InputNumber,
         boolean: Switch,
+        date: DatePickerFormItem,
       }[type] || Input;
     return <BaseInput />;
   };
