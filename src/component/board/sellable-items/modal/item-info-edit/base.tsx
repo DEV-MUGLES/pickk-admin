@@ -108,7 +108,7 @@ function ItemBaseInfoEditSection() {
             ],
           }}
           wrapperCol={{}}
-          submitButton={{align: 'right'}}
+          buttonAlign="right"
         />
       </Col>
     </Wrapper>

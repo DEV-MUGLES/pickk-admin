@@ -20,23 +20,28 @@ export type FormItemValueType = FormItemProps & {
   Component?: React.ElementType;
 };
 
-export type SubmitButtonType = {
-  text?: string;
-  align?: 'left' | 'right' | 'center';
-};
+export type ButtonAlignType = 'left' | 'right' | 'center';
 
 export type BaseEditFormProps = {
   FORM_ITEMS: {[name: string]: FormItemValueType};
+  defaultValue?: {[name: string]: any};
   onSaveClick: (value: any) => void;
-  defaultValue: {[name: string]: any};
-  submitButton?: SubmitButtonType;
+  onDeleteClick?: () => void;
+  buttonAlign?: ButtonAlignType;
+  submitButtonText?: string;
+  deleteButtonText?: string;
+  hasDeleteButton?: boolean;
 } & Omit<FormProps, 'form' | 'onFinish' | 'defaultValue'>;
 
 function BaseEditForm({
   FORM_ITEMS,
-  onSaveClick,
   defaultValue,
-  submitButton,
+  onSaveClick,
+  onDeleteClick,
+  buttonAlign,
+  submitButtonText,
+  deleteButtonText,
+  hasDeleteButton = false,
   ...formProps
 }: BaseEditFormProps) {
   const [form] = Form.useForm();
@@ -44,6 +49,13 @@ function BaseEditForm({
   useEffect(() => {
     form.setFieldsValue(defaultValue);
   }, [defaultValue]);
+
+  const handleDelete = () => {
+    confirm({
+      title: `삭제하시겠습니까?`,
+      onOk: () => onDeleteClick(),
+    });
+  };
 
   const handleFinish = (value) => {
     confirm({
@@ -88,9 +100,12 @@ function BaseEditForm({
         </Form.Item>
       ))}
       <Space level={2} />
-      <ButtonWrapper align={submitButton?.align ?? 'left'}>
+      <ButtonWrapper align={buttonAlign ?? 'left'}>
+        {hasDeleteButton && (
+          <Button onClick={handleDelete}>{submitButtonText ?? '삭제'}</Button>
+        )}
         <Button htmlType="submit" type="primary">
-          {submitButton?.text ?? '저장'}
+          {submitButtonText ?? '저장'}
         </Button>
       </ButtonWrapper>
     </Form>
@@ -99,7 +114,7 @@ function BaseEditForm({
 
 export default BaseEditForm;
 
-const ButtonWrapper = styled.div<{align: SubmitButtonType['align']}>`
+const ButtonWrapper = styled.div<{align: ButtonAlignType}>`
   display: flex;
   ${({align}) =>
     `justify-content: ${
