@@ -22,7 +22,7 @@ type ItemBoardModalType = 'category' | 'image';
 
 function ItemBoard({title}: BoardProps) {
   const {
-    action: {setSelectedData},
+    action: {setSelectedRowId},
   } = useBoardContext();
 
   const [modalVisible, setModalVisible] = useState<
@@ -47,8 +47,7 @@ function ItemBoard({title}: BoardProps) {
       key: 'category',
       width: 100,
       align: 'center',
-      render: (_, record) => {
-        const {majorCategory, minorCategory} = record;
+      render: (_, {id, majorCategory, minorCategory}) => {
         return (
           <div style={{display: 'flex', flexDirection: 'column'}}>
             <Text>{`${majorCategory?.name ?? '-'}/${
@@ -57,7 +56,7 @@ function ItemBoard({title}: BoardProps) {
             <Button
               size="small"
               onClick={() => {
-                setSelectedData(record);
+                setSelectedRowId(id);
                 handleModalOpen('category')(true);
               }}
               style={{marginTop: '0.6rem'}}>

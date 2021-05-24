@@ -19,7 +19,7 @@ export type CategoryModalProps = {
 
 function CategoryModal({visible, onClose}: CategoryModalProps) {
   const {
-    state: {selectedData},
+    state: {selectedRowId, selectedData},
     action: {reload},
   } = useBoardContext();
 
@@ -32,7 +32,7 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
     const [majorCategoryId, minorCategoryId] = value;
     await update({
       variables: {
-        itemId: selectedData.id,
+        itemId: selectedRowId,
         updateItemInput: {
           majorCategoryId,
           minorCategoryId,
