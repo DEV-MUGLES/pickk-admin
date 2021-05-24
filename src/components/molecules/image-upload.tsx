@@ -66,7 +66,11 @@ function ImageUpload({imageUrl, setImageUrl, alt}: ImageUploadProps) {
       {...uploadProps}
       style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
       {imageUrl ? (
-        <img src={imageUrl} alt={alt ?? 'image url'} style={{width: '100%'}} />
+        <img
+          src={imageUrl}
+          alt={alt ?? 'image url'}
+          style={{width: '100%', height: '100%', objectFit: 'cover'}}
+        />
       ) : (
         uploadButton
       )}
