@@ -5,7 +5,7 @@ import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
 import {Space} from '@src/components/atoms';
 import SellableItemManageButtons from './table/manage-buttons';
-import ItemInfoEditModal from './modal/info-edit';
+import ItemInfoEditModal from './modal/item-info-edit';
 
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';
 
