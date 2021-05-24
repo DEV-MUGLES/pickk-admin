@@ -7,12 +7,19 @@ import ItemNoticeAddButton from './add';
 import ItemNoticeTypeSelect from './type-select';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {UPDATE_ITEM_NOTICE_MUTATION} from '@src/operations/item/mutation';
+import {
+  UPDATE_ITEM_NOTICE_MUTATION,
+  REMOVE_ITEM_NOTICE_MUTATION,
+} from '@src/operations/item/mutation';
 import {
   UpdateItemNotice,
   UpdateItemNoticeVariables,
 } from '@src/operations/__generated__/UpdateItemNotice';
 import {Items_items_notice} from '@src/operations/__generated__/Items';
+import {
+  RemoveItemNotice,
+  RemoveItemNoticeVariables,
+} from '@src/operations/__generated__/RemoveItemNotice';
 
 function ItemNoticeEditSection() {
   const {
@@ -24,6 +31,10 @@ function ItemNoticeEditSection() {
     UpdateItemNotice,
     UpdateItemNoticeVariables
   >(UPDATE_ITEM_NOTICE_MUTATION.gql);
+  const [removeItemNotice] = useMutation<
+    RemoveItemNotice,
+    RemoveItemNoticeVariables
+  >(REMOVE_ITEM_NOTICE_MUTATION.gql);
 
   const handleSaveClick = (value) => {
     updateItemNotice({
@@ -38,6 +49,21 @@ function ItemNoticeEditSection() {
       })
       .catch(() => {
         message.error('저장에 실패했습니다.');
+      });
+  };
+
+  const handleDeleteClick = () => {
+    removeItemNotice({
+      variables: {
+        itemId: selectedRowId,
+      },
+    })
+      .then(() => {
+        message.success('상품 안내메세지를 삭제했습니다.');
+        reload();
+      })
+      .catch(() => {
+        message.error('삭제에 실패했습니다.');
       });
   };
 
@@ -65,6 +91,8 @@ function ItemNoticeEditSection() {
             },
           }}
           onSaveClick={handleSaveClick}
+          onDeleteClick={handleDeleteClick}
+          hasDeleteButton={true}
           wrapperCol={{}}
           defaultValue={itemNotice}
           buttonAlign="right"

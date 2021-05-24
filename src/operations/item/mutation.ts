@@ -55,3 +55,14 @@ export const UPDATE_ITEM_NOTICE_MUTATION: OperationType = {
   `,
   dataName: 'updateItemNotice',
 };
+
+export const REMOVE_ITEM_NOTICE_MUTATION: OperationType = {
+  gql: gql`
+    mutation RemoveItemNotice($itemId: Int!) {
+      removeItemNotice(itemId: $itemId) {
+        id
+      }
+    }
+  `,
+  dataName: 'removeItemNotice',
+};

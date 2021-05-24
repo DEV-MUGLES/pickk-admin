@@ -105,7 +105,9 @@ function BaseEditForm({
       <Space level={2} />
       <ButtonWrapper align={buttonAlign ?? 'left'}>
         {hasDeleteButton && (
-          <Button onClick={handleDelete}>{submitButtonText ?? '삭제'}</Button>
+          <Button onClick={handleDelete} style={{marginRight: '0.4rem'}}>
+            {submitButtonText ?? '삭제'}
+          </Button>
         )}
         <Button htmlType="submit" type="primary">
           {submitButtonText ?? '저장'}
