@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { ItemFilter, PageInput, ItemNoticeType } from "./globalTypes";
+import { ItemFilter, PageInput, ItemPriceUnit, ItemNoticeType } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: Items
@@ -19,6 +19,26 @@ export interface Items_items_minorCategory {
   __typename: "ItemCategory";
   id: number;
   name: string;
+}
+
+export interface Items_items_prices {
+  __typename: "ItemPrice";
+  createdAt: any;
+  displayPrice: number | null;
+  endAt: any | null;
+  finalPrice: number;
+  id: number;
+  isActive: boolean;
+  isBase: boolean;
+  isCrawlUpdating: boolean;
+  itemId: number;
+  originalPrice: number;
+  pickkDiscountAmount: number | null;
+  pickkDiscountRate: number | null;
+  sellPrice: number;
+  startAt: any | null;
+  unit: ItemPriceUnit | null;
+  updatedAt: any;
 }
 
 export interface Items_items_products {
@@ -49,8 +69,9 @@ export interface Items_items {
   minorCategory: Items_items_minorCategory | null;
   name: string;
   originalPrice: number;
-  salePrice: number;
+  sellPrice: number;
   finalPrice: number;
+  prices: Items_items_prices[];
   products: Items_items_products[] | null;
   isInfiniteStock: boolean;
   isSoldout: boolean;

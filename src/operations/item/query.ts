@@ -1,9 +1,11 @@
 import {gql} from '@apollo/client';
-
 import {OperationType} from '../type';
+
+import {ITEM_PRICE_FRAG} from '../item-price/fragment';
 
 export const ITEMS_QUERY: OperationType = {
   gql: gql`
+    ${ITEM_PRICE_FRAG}
     query Items($itemFilter: ItemFilter, $pageInput: PageInput) {
       items(itemFilter: $itemFilter, pageInput: $pageInput) {
         id
@@ -18,8 +20,11 @@ export const ITEMS_QUERY: OperationType = {
         }
         name
         originalPrice
-        salePrice
+        sellPrice
         finalPrice
+        prices {
+          ...ItemPriceFrag
+        }
         products {
           stock
         }

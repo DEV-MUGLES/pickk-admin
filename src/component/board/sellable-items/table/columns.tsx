@@ -55,12 +55,12 @@ export const sellableItemColumns: ColumnsType<Items_items> = [
   },
   {
     title: '공급가',
-    dataIndex: 'finalPrice',
-    key: 'finalPrice',
+    dataIndex: 'sellPrice',
+    key: 'sellPrice',
     width: 120,
     align: 'center',
     render: (value) => <div>{addCommaToNumber(value)}원</div>,
-    sorter: (a, b) => b.salePrice - a.salePrice,
+    sorter: (a, b) => b.sellPrice - a.sellPrice,
   },
   {
     title: '무한재고여부',
