@@ -1,20 +1,12 @@
-import {Collapse, CollapseProps, Drawer, DrawerProps, Space} from 'antd';
-import CollapsePanel, {
-  CollapsePanelProps,
-} from 'antd/lib/collapse/CollapsePanel';
+import {Collapse, Drawer, DrawerProps, Space} from 'antd';
+import CollapsePanel from 'antd/lib/collapse/CollapsePanel';
 
 import ItemBaseInfoEditSection from './base';
 import ItemNoticeEditSection from './notice';
 
-export type ItemInfoEditModalProps = Pick<DrawerProps, 'visible' | 'onClose'>;
+import {CollapseType} from '..';
 
-type CollapseType = {
-  props?: CollapseProps;
-  panels: {
-    props: CollapsePanelProps;
-    Content: React.ElementType;
-  }[];
-};
+export type ItemInfoEditDrawerProps = Pick<DrawerProps, 'visible' | 'onClose'>;
 
 const MODAL_COLLAPSE: CollapseType[] = [
   {
@@ -58,7 +50,7 @@ const MODAL_COLLAPSE: CollapseType[] = [
   },
 ];
 
-function ItemInfoEditDrawer({visible, onClose}: ItemInfoEditModalProps) {
+function ItemInfoEditDrawer({visible, onClose}: ItemInfoEditDrawerProps) {
   return (
     <Drawer title="정보 수정" visible={visible} onClose={onClose} width={'50%'}>
       <Space direction="vertical" style={{width: '100%'}} size="small">
