@@ -39,6 +39,17 @@ export interface AddItemNoticeInput {
   type?: ItemNoticeType | null;
 }
 
+export interface AddItemPriceInput {
+  endAt?: any | null;
+  isActive?: boolean | null;
+  isCrawlUpdating: boolean;
+  originalPrice: number;
+  pickkDiscountAmount?: number | null;
+  pickkDiscountRate?: number | null;
+  sellPrice: number;
+  startAt?: any | null;
+}
+
 export interface BulkUpdateItemInput {
   isMdRecommended?: boolean | null;
   isSellable?: boolean | null;
@@ -78,6 +89,19 @@ export interface UpdateItemNoticeInput {
   message?: string | null;
   startAt?: any | null;
   type?: ItemNoticeType | null;
+}
+
+export interface UpdateItemPriceInput {
+  displayPrice?: number | null;
+  endAt?: any | null;
+  finalPrice: number;
+  isCrawlUpdating: boolean;
+  originalPrice: number;
+  pickkDiscountAmount?: number | null;
+  pickkDiscountRate?: number | null;
+  sellPrice: number;
+  startAt?: any | null;
+  unit?: ItemPriceUnit | null;
 }
 
 export interface UploadMultipleImageInput {

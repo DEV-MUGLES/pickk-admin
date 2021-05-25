@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client';
 import {OperationType} from '../type';
 
-import {ITEM_PRICE_FRAG} from '../item-price/fragment';
+import {ITEM_PRICE_FRAG} from './fragment';
 
 export const ITEMS_QUERY: OperationType = {
   gql: gql`
