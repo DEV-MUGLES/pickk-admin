@@ -10,9 +10,9 @@ function DatePickerFormItem({
 }) {
   return (
     <DayjsDatePicker
-      defaultValue={dayjs(defaultValue)}
+      defaultValue={value ? dayjs(defaultValue) : null}
       onChange={onChange}
-      value={dayjs(value)}
+      value={value ? dayjs(value) : null}
     />
   );
 }

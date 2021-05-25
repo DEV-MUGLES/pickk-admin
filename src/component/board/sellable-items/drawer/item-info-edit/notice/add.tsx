@@ -5,6 +5,7 @@ import {PlusOutlined} from '@ant-design/icons';
 
 import BaseEditForm from '@src/components/organisms/Form/base';
 import ItemNoticeTypeSelect from './type-select';
+import DayjsDatePicker from '@src/components/molecules/BoardFilter/input/DayjsDatePicker';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {ADD_ITEM_NOTICE_MUTATION} from '@src/operations/item/mutation';
@@ -12,6 +13,8 @@ import {
   AddItemNotice,
   AddItemNoticeVariables,
 } from '@src/operations/__generated__/AddItemNotice';
+
+const {RangePicker} = DayjsDatePicker;
 
 function ItemNoticeAddButton() {
   const {
@@ -29,11 +32,17 @@ function ItemNoticeAddButton() {
   };
 
   const handleSaveClick = (value) => {
+    const {
+      range: [startAt, endAt],
+      ...addItemNoticeInput
+    } = value;
     addItemNotice({
       variables: {
         itemId: selectedRowId,
         addItemNoticeInput: {
-          ...value,
+          ...addItemNoticeInput,
+          startAt,
+          endAt,
         },
       },
     })
@@ -70,13 +79,9 @@ function ItemNoticeAddButton() {
             message: {
               label: '메세지',
             },
-            startAt: {
-              label: '시작일',
-              type: 'date',
-            },
-            endAt: {
-              label: '종료일',
-              type: 'date',
+            range: {
+              label: '적용 기간',
+              Component: RangePicker,
             },
           }}
           onSaveClick={handleSaveClick}
