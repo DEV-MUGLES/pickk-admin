@@ -9,17 +9,20 @@ import {
   InputNumber,
   Switch,
   FormProps,
+  Typography,
 } from 'antd';
 
 import DatePickerFormItem from './Items/date-picker';
 import {Space} from '@src/components/atoms';
 
 const {confirm} = Modal;
+const {Text} = Typography;
 
 export type BaseFormItemType = 'string' | 'number' | 'boolen' | 'date';
 export type FormItemValueType = FormItemProps & {
   type?: BaseFormItemType;
   Component?: React.ElementType;
+  unit?: string;
 };
 
 export type ButtonAlignType = 'left' | 'right' | 'center';
@@ -52,17 +55,17 @@ function BaseEditForm({
     form.setFieldsValue(defaultValue);
   }, [defaultValue]);
 
-  const handleDelete = () => {
-    confirm({
-      title: `삭제하시겠습니까?`,
-      onOk: () => onDeleteClick(),
-    });
-  };
-
   const handleFinish = (value) => {
     confirm({
       title: `변경 내용을 저장하시겠습니까?`,
       onOk: () => onSaveClick(value),
+    });
+  };
+
+  const handleDelete = () => {
+    confirm({
+      title: `삭제하시겠습니까?`,
+      onOk: () => onDeleteClick(),
     });
   };
 
@@ -81,7 +84,22 @@ function BaseEditForm({
         boolean: Switch,
         date: DatePickerFormItem,
       }[type] || Input;
+
     return <BaseInput />;
+  };
+
+  const renderFormItem = (name: string) => {
+    const {type, Component, unit} = FORM_ITEMS[name];
+    return (
+      <Form.Item
+        key={name}
+        name={name}
+        style={{display: 'flex'}}
+        {...FORM_ITEMS[name]}>
+        {renderInput(type, Component)}
+        {unit?.length > 0 && <Unit>{unit}</Unit>}
+      </Form.Item>
+    );
   };
 
   return (
@@ -97,11 +115,7 @@ function BaseEditForm({
       }}
       layout="horizontal"
       {...formProps}>
-      {Object.keys(FORM_ITEMS).map((name) => (
-        <Form.Item key={name} name={name} {...FORM_ITEMS[name]}>
-          {renderInput(FORM_ITEMS[name].type, FORM_ITEMS[name].Component)}
-        </Form.Item>
-      ))}
+      {Object.keys(FORM_ITEMS).map((name) => renderFormItem(name))}
       <Space level={2} />
       <ButtonWrapper align={buttonAlign ?? 'left'}>
         {hasDeleteButton && (
@@ -125,4 +139,8 @@ const ButtonWrapper = styled.div<{align: ButtonAlignType}>`
     `justify-content: ${
       {left: 'flex-start', center: 'center', right: 'flex-end'}[align]
     };`}
+`;
+
+const Unit = styled(Text)`
+  margin-left: 0.4rem;
 `;
