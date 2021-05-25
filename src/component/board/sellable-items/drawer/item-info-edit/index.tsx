@@ -58,7 +58,7 @@ const MODAL_COLLAPSE: CollapseType[] = [
   },
 ];
 
-function ItemInfoEditModal({visible, onClose}: ItemInfoEditModalProps) {
+function ItemInfoEditDrawer({visible, onClose}: ItemInfoEditModalProps) {
   return (
     <Drawer title="정보 수정" visible={visible} onClose={onClose} width={'50%'}>
       <Space direction="vertical" style={{width: '100%'}} size="small">
@@ -76,4 +76,4 @@ function ItemInfoEditModal({visible, onClose}: ItemInfoEditModalProps) {
   );
 }
 
-export default ItemInfoEditModal;
+export default ItemInfoEditDrawer;
