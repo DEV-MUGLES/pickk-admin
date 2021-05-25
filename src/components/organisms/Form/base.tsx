@@ -22,7 +22,6 @@ export type BaseFormItemType = 'string' | 'number' | 'boolen' | 'date';
 export type FormItemValueType = FormItemProps & {
   type?: BaseFormItemType;
   Component?: React.ElementType;
-  unit?: string;
 };
 
 export type ButtonAlignType = 'left' | 'right' | 'center';
@@ -89,7 +88,7 @@ function BaseEditForm({
   };
 
   const renderFormItem = (name: string) => {
-    const {type, Component, unit} = FORM_ITEMS[name];
+    const {type, Component} = FORM_ITEMS[name];
     return (
       <Form.Item
         key={name}
@@ -97,7 +96,6 @@ function BaseEditForm({
         style={{display: 'flex'}}
         {...FORM_ITEMS[name]}>
         {renderInput(type, Component)}
-        {unit?.length > 0 && <Unit>{unit}</Unit>}
       </Form.Item>
     );
   };
