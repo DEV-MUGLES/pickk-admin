@@ -38,11 +38,11 @@ function PriceDisplayCard({
         </Text>
         <Text>
           <Label strong>시작일:</Label>{' '}
-          {startAt ? dayjs(startAt).format('YYYY/MM/DD') : '지정안함'}
+          {startAt ? dayjs(startAt).format('YYYY/MM/DD') : '-'}
         </Text>
         <Text>
           <Label strong>종료일:</Label>{' '}
-          {endAt ? dayjs(endAt).format('YYYY/MM/DD') : '지정안함'}
+          {endAt ? dayjs(endAt).format('YYYY/MM/DD') : '-'}
         </Text>
       </Space>
     </Card>
