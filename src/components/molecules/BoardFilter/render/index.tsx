@@ -7,5 +7,5 @@ export type ColumnRendererType<ValueType = any> = (
 ) => React.ReactNode;
 
 export const renderBooleanColumn: ColumnRendererType<boolean> = (value) => (
-  <>{value === true ? 'O' : 'X'}</>
+  <>{value === true ? '✅' : '❌'}</>
 );
