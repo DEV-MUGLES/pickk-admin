@@ -1,5 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 import {Card, CardProps, Space, Typography} from 'antd';
+import dayjs from 'dayjs';
 
 import {addCommaToNumber} from '@src/lib/NumberParser';
 
@@ -9,6 +11,8 @@ export type PriceDisplayCardProps = Pick<CardProps, 'title'> & {
   originalPrice: number;
   sellPrice: number;
   finalPrice: number;
+  startAt: Date;
+  endAt: Date;
 };
 
 function PriceDisplayCard({
@@ -16,6 +20,8 @@ function PriceDisplayCard({
   originalPrice,
   sellPrice,
   finalPrice,
+  startAt,
+  endAt,
 }: PriceDisplayCardProps) {
   return (
     <Card style={{flex: 1}}>
@@ -30,12 +36,20 @@ function PriceDisplayCard({
         <Text>
           <Label strong>판매가:</Label> {addCommaToNumber(finalPrice)} 원
         </Text>
+        <Text>
+          <Label strong>시작일:</Label>{' '}
+          {startAt ? dayjs(startAt).format('YYYY/MM/DD') : '지정안함'}
+        </Text>
+        <Text>
+          <Label strong>종료일:</Label>{' '}
+          {endAt ? dayjs(endAt).format('YYYY/MM/DD') : '지정안함'}
+        </Text>
       </Space>
     </Card>
   );
 }
 
-export default PriceDisplayCard;
+export default React.memo(PriceDisplayCard);
 
 const Label = styled(Text)`
   display: inline-block;

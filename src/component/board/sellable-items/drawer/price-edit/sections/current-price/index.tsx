@@ -1,4 +1,4 @@
-import {Space, Tag} from 'antd';
+import {Space, Spin, Tag} from 'antd';
 
 import PriceDisplayCard from './price-display-card';
 import InfoTooltip from '@src/components/atoms/info-tooltip';
@@ -13,15 +13,16 @@ function CurrentPriceInfoSection() {
   const selectedItem: Items_items = selectedData;
 
   if (!selectedData) {
-    return null;
+    return <Spin />;
   }
 
+  const activePrice = selectedItem.prices.find(({isActive}) => isActive);
   const basePrice = selectedItem.prices.find(({isBase}) => isBase);
 
   return (
     <Space size="middle">
       <PriceDisplayCard
-        {...selectedItem}
+        {...activePrice}
         title={<Tag color="volcano">활성 가격</Tag>}
       />
       <PriceDisplayCard
