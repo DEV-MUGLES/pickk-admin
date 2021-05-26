@@ -5,7 +5,6 @@ import {ColumnsType} from 'antd/lib/table';
 import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
-
 import {Items_items} from '@src/operations/__generated__/Items';
 
 export const itemColumns: ColumnsType<Items_items> = [
@@ -68,11 +67,11 @@ export const itemColumns: ColumnsType<Items_items> = [
     align: 'center',
   },
   {
-    title: '할인가',
-    dataIndex: 'salePrice',
-    key: 'salePrice',
+    title: '판매가',
+    dataIndex: 'sellPrice',
+    key: 'sellPrice',
     render: (value) => <div>{addCommaToNumber(value)}원</div>,
-    sorter: (a, b) => b.salePrice - a.salePrice,
+    sorter: (a, b) => b.sellPrice - a.sellPrice,
     width: 80,
     ellipsis: true,
     align: 'center',
