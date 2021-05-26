@@ -24,6 +24,7 @@ function PriceAddButton() {
   const [addItemPrice] = useMutation<AddItemPrice, AddItemPriceVariables>(
     ADD_ITEM_PRICE_MUTATION.gql,
   );
+  const defaultPrice = selectedData?.prices.find(({isBase}) => isBase);
 
   const handleAddButtonClick = () => {
     setVisible(true);
@@ -34,9 +35,24 @@ function PriceAddButton() {
   };
 
   const checkValidate = (addItemPriceInput): boolean => {
-    if (dayjs(addItemPriceInput.endAt).isBefore(addItemPriceInput.startAt)) {
+    if (
+      addItemPriceInput.endAt &&
+      dayjs(addItemPriceInput.endAt).isBefore(addItemPriceInput.startAt)
+    ) {
       message.error('종료일이 시작일보다 전일 수 없습니다.');
-      return;
+      return false;
+    }
+
+    const isDuplicatePeriod = selectedData?.prices.find(({startAt, endAt}) => {
+      const notHasEndDate = !addItemPriceInput.endAt && !endAt;
+      return (
+        dayjs(addItemPriceInput.startAt).isSame(startAt, 'day') &&
+        (dayjs(addItemPriceInput.endAt).isSame(endAt, 'day') || notHasEndDate)
+      );
+    });
+    if (isDuplicatePeriod) {
+      message.error('이미 동일한 기간을 갖는 가격이 존재합니다.');
+      return false;
     }
 
     return true;
@@ -76,7 +92,6 @@ function PriceAddButton() {
   };
 
   const checkPriceEmpty = (_, {price}) => {
-    console.log(price);
     if (parseInt(price.originalPrice) > 0 && parseInt(price.sellPrice) > 0) {
       return Promise.resolve();
     }
@@ -100,10 +115,7 @@ function PriceAddButton() {
               label: '가격 (단위: 원)',
               Component: SellPriceInput,
               inputProps: {
-                defaultPrice: {
-                  originalPrice: selectedData?.originalPrice,
-                  sellPrice: selectedData?.sellPrice,
-                },
+                defaultPrice,
               },
               rules: [
                 {required: true, message: '정가와 판매가를 모두 입력해주세요'},
