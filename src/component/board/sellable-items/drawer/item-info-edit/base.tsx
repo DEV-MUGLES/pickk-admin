@@ -61,7 +61,7 @@ function ItemBaseInfoEditSection() {
   return (
     <Wrapper>
       <Col>
-        <Image width={200} src={selectedItem.imageUrl} />
+        <Image width={200} src={selectedItem?.imageUrl} />
       </Col>
       <Col style={{marginLeft: '1.6rem', flex: 1}}>
         <BaseEditForm
@@ -76,7 +76,7 @@ function ItemBaseInfoEditSection() {
               ],
               Component: () => (
                 <ImageUpload
-                  imageUrl={imageUrl ?? selectedItem.imageUrl}
+                  imageUrl={imageUrl ?? selectedItem?.imageUrl}
                   setImageUrl={setImageUrl}
                   alt="대표 이미지"
                 />

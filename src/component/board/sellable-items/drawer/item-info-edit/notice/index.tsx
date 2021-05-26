@@ -26,7 +26,7 @@ function ItemNoticeEditSection() {
     state: {selectedRowId, selectedData},
     action: {reload},
   } = useBoardContext();
-  const itemNotice: Items_items_notice = selectedData.notice;
+  const itemNotice: Items_items_notice = selectedData?.notice;
   const [updateItemNotice] = useMutation<
     UpdateItemNotice,
     UpdateItemNoticeVariables
