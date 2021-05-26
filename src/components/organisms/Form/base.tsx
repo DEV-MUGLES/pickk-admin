@@ -18,10 +18,11 @@ import {Space} from '@src/components/atoms';
 const {confirm} = Modal;
 const {Text} = Typography;
 
-export type BaseFormItemType = 'string' | 'number' | 'boolen' | 'date';
+export type BaseFormItemType = 'string' | 'number' | 'boolean' | 'date';
 export type FormItemValueType = FormItemProps & {
   type?: BaseFormItemType;
   Component?: React.ElementType;
+  inputProps?: any;
 };
 
 export type ButtonAlignType = 'left' | 'right' | 'center';
@@ -57,7 +58,10 @@ function BaseEditForm({
   const handleFinish = (value) => {
     confirm({
       title: `변경 내용을 저장하시겠습니까?`,
-      onOk: () => onSaveClick(value),
+      onOk: () => {
+        onSaveClick(value);
+        form.resetFields();
+      },
     });
   };
 
@@ -71,9 +75,10 @@ function BaseEditForm({
   const renderInput = (
     type: BaseFormItemType,
     Component: React.ElementType,
+    inputProps: any = {},
   ) => {
     if (Component) {
-      return <Component />;
+      return <Component {...inputProps} />;
     }
 
     const BaseInput =
@@ -84,18 +89,18 @@ function BaseEditForm({
         date: DatePickerFormItem,
       }[type] || Input;
 
-    return <BaseInput />;
+    return <BaseInput {...inputProps} />;
   };
 
   const renderFormItem = (name: string) => {
-    const {type, Component} = FORM_ITEMS[name];
+    const {type, Component, inputProps} = FORM_ITEMS[name];
     return (
       <Form.Item
         key={name}
         name={name}
         style={{display: 'flex'}}
         {...FORM_ITEMS[name]}>
-        {renderInput(type, Component)}
+        {renderInput(type, Component, inputProps)}
       </Form.Item>
     );
   };
