@@ -143,7 +143,3 @@ const ButtonWrapper = styled.div<{align: ButtonAlignType}>`
       {left: 'flex-start', center: 'center', right: 'flex-end'}[align]
     };`}
 `;
-
-const Unit = styled(Text)`
-  margin-left: 0.4rem;
-`;

@@ -6,6 +6,7 @@ import Table from '@src/components/organisms/Board/Table';
 import {Space} from '@src/components/atoms';
 import SellableItemManageButtons from './table/manage-buttons';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
+import ItemPriceEditDrawer from './drawer/price-edit';
 
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';
 
@@ -85,6 +86,10 @@ function SellableItemsBoard({title}: BoardProps) {
         title={title}
         columns={newSellableItemColumns}
         actions={sellableItemActions}
+      />
+      <ItemPriceEditDrawer
+        visible={modalVisible.price}
+        onClose={handleModalOpen('price')(false)}
       />
       <ItemInfoEditDrawer
         visible={modalVisible.info}
