@@ -1,20 +1,15 @@
 import {useState} from 'react';
 import {useMutation} from '@apollo/client';
-import {Button, Space, Table, Tag, Tooltip, Modal, message} from 'antd';
-import dayjs from 'dayjs';
+import {Button, Space, Table, Tooltip, Modal} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 
 import PriceFormModal, {PriceFormModalType} from './modal';
-import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {addCommaToNumber} from '@src/lib/NumberParser';
-
 import {
   ACTIVATE_ITEM_PRICE_MUTATION,
   REMOVE_ITEM_PRICE_MUTATION,
 } from '@src/operations/item/mutation';
-
 import {
   ActivateItemPrice,
   ActivateItemPriceVariables,
@@ -23,6 +18,8 @@ import {
   RemoveItemPrice,
   RemoveItemPriceVariables,
 } from '@src/operations/__generated__/RemoveItemPrice';
+
+import {itemPricesColumns} from './columns';
 
 const {confirm} = Modal;
 
@@ -91,58 +88,7 @@ function ManagePriceSection() {
       <Table
         dataSource={selectedData?.prices}
         columns={[
-          {
-            title: 'ID',
-            dataIndex: 'id',
-            key: 'id',
-            width: 80,
-          },
-          {
-            title: '설정 여부',
-            dataIndex: 'isBase',
-            key: 'isBase',
-            width: 100,
-            render: (_, {isBase, isActive}) => (
-              <Space direction="vertical">
-                {isBase == true && <Tag color="blue">기본가격</Tag>}
-                {isActive == true && <Tag color="volcano">활성가격</Tag>}
-              </Space>
-            ),
-          },
-          {
-            title: '정가',
-            dataIndex: 'originalPrice',
-            key: 'originalPrice',
-            render: (value) => `${addCommaToNumber(value)} 원`,
-          },
-          {
-            title: '공급가',
-            dataIndex: 'sellPrice',
-            key: 'sellPrice',
-            render: (value) => `${addCommaToNumber(value)} 원`,
-          },
-          {
-            title: '판매가',
-            dataIndex: 'finalPrice',
-            key: 'finalPrice',
-            render: (value) => `${addCommaToNumber(value)} 원`,
-          },
-          {
-            title: '연동가 설정 여부',
-            dataIndex: 'isCrawlUpdating',
-            key: 'isCrawlUpdating',
-            width: 80,
-            render: renderBooleanColumn,
-          },
-          {
-            title: '기간',
-            dataIndex: 'range',
-            key: 'range',
-            render: (_, {startAt, endAt}) =>
-              `${startAt ? dayjs(startAt).format('YYYY/MM/DD') : ''} ~ ${
-                endAt ? dayjs(endAt).format('YYYY/MM/DD') : ''
-              }`,
-          },
+          ...itemPricesColumns,
           {
             title: '가격 설정',
             dataIndex: 'setting',
