@@ -113,3 +113,14 @@ export const REMOVE_ITEM_PRICE_MUTATION: OperationType = {
   `,
   dataName: 'removeItemPrice',
 };
+
+export const ACTIVATE_ITEM_PRICE_MUTATION: OperationType = {
+  gql: gql`
+    mutation ActivateItemPrice($itemId: Int!, $priceId: Int!) {
+      activateItemPrice(itemId: $itemId, priceId: $priceId) {
+        id
+      }
+    }
+  `,
+  dataName: 'activateItemPrice',
+};

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Checkbox, Input, Typography} from 'antd';
 
 import {GREY} from '@src/components/atoms/colors';
@@ -14,15 +14,41 @@ export type PriceType = {
 export type PriceInputProps = {
   value?: any;
   onChange?: (value) => void;
-  defaultPrice: PriceType;
+  basePrice: PriceType;
+  defaultValue?: {
+    originalPrice: number;
+    sellPrice: number;
+    isCrawlUpdating: boolean;
+  };
 };
 
-function PriceInput({value, onChange, defaultPrice}: PriceInputProps) {
-  const [price, setPrice] = useState<PriceType>({
+function PriceInput({
+  value,
+  onChange,
+  basePrice,
+  defaultValue = {
     originalPrice: 0,
     sellPrice: 0,
+    isCrawlUpdating: false,
+  },
+}: PriceInputProps) {
+  const [price, setPrice] = useState<PriceType>({
+    originalPrice: defaultValue.originalPrice,
+    sellPrice: defaultValue.sellPrice,
   });
-  const [isCrawlUpdating, setIsCrawlUpdating] = useState(false);
+  const [isCrawlUpdating, setIsCrawlUpdating] = useState(
+    defaultValue.isCrawlUpdating,
+  );
+
+  /**
+   * 초기 랜더링 시 antd에서 triggerChange를 호출하지 않아
+   * defaultValue가 있을 때 required 에러 메세지를 출력하는 문제 해결
+   *  */
+  useEffect(() => {
+    if (defaultValue.originalPrice !== 0) {
+      triggerChange({price, isCrawlUpdating});
+    }
+  }, []);
 
   const triggerChange = (changedValue) => {
     onChange?.({
@@ -59,7 +85,7 @@ function PriceInput({value, onChange, defaultPrice}: PriceInputProps) {
 
     triggerChange({
       isCrawlUpdating: checked,
-      price: checked ? defaultPrice : price,
+      price: checked ? basePrice : price,
     });
   };
 
@@ -69,7 +95,7 @@ function PriceInput({value, onChange, defaultPrice}: PriceInputProps) {
         <Label>정가 : </Label>
         <Input
           value={
-            isCrawlUpdating ? defaultPrice.originalPrice : price.originalPrice
+            isCrawlUpdating ? basePrice.originalPrice : price.originalPrice
           }
           onChange={handleInputNumberChange('originalPrice')}
           disabled={isCrawlUpdating}
@@ -80,7 +106,7 @@ function PriceInput({value, onChange, defaultPrice}: PriceInputProps) {
       <Row>
         <Label>판매가 : </Label>
         <Input
-          value={isCrawlUpdating ? defaultPrice.sellPrice : price.sellPrice}
+          value={isCrawlUpdating ? basePrice.sellPrice : price.sellPrice}
           onChange={handleInputNumberChange('sellPrice')}
           disabled={isCrawlUpdating}
           suffix="원"
