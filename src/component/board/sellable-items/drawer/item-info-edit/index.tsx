@@ -54,10 +54,10 @@ function ItemInfoEditDrawer({visible, onClose}: ItemInfoEditDrawerProps) {
   return (
     <Drawer title="정보 수정" visible={visible} onClose={onClose} width={'50%'}>
       <Space direction="vertical" style={{width: '100%'}} size="small">
-        {MODAL_COLLAPSE.map(({props, panels}) => (
-          <Collapse {...props}>
-            {panels.map(({props: pprops, Content}) => (
-              <CollapsePanel {...pprops}>
+        {MODAL_COLLAPSE.map(({props, panels}, index) => (
+          <Collapse key={index} {...props}>
+            {panels.map(({props: pprops, Content}, i) => (
+              <CollapsePanel key={i} {...pprops}>
                 <Content />
               </CollapsePanel>
             ))}

@@ -44,10 +44,10 @@ function ItemPriceEditDrawer({visible, onClose}: ItemPriceEditDrawerProps) {
   return (
     <Drawer title="가격관리" visible={visible} onClose={onClose} width={'60%'}>
       <Space direction="vertical" style={{width: '100%'}} size="small">
-        {MODAL_COLLAPSE.map(({props, panels}) => (
-          <Collapse {...props}>
-            {panels.map(({props: pprops, Content}) => (
-              <CollapsePanel {...pprops}>
+        {MODAL_COLLAPSE.map(({props, panels}, index) => (
+          <Collapse key={index} {...props}>
+            {panels.map(({props: pprops, Content}, i) => (
+              <CollapsePanel key={i} {...pprops}>
                 <Content />
               </CollapsePanel>
             ))}

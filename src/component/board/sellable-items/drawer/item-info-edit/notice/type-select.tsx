@@ -25,7 +25,9 @@ function ItemNoticeTypeSelect({
   return (
     <Select defaultValue={defaultValue} onChange={onChange} value={value}>
       {Object.keys(ItemNoticeType).map((key) => (
-        <Option value={key}>{ItemNoticeTypeAlias[key]}</Option>
+        <Option value={key} key={key}>
+          {ItemNoticeTypeAlias[key]}
+        </Option>
       ))}
     </Select>
   );
