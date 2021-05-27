@@ -46,12 +46,14 @@ function PriceFormModal({
     ADD_ITEM_PRICE_MUTATION.gql,
   );
 
-  const title = `가격 ${type === 'add' ? '추가' : '수정'}`;
-  const submitButtonText = type === 'add' ? '추가' : '저장';
-  const defaultValue =
+  const [title, submitButtonText, defaultValue] =
     type === 'add'
-      ? undefined
-      : selectedData?.prices.find(({id}) => selectedPriceId === id);
+      ? ['가격 추가', '추가', undefined]
+      : [
+          '가격 수정',
+          '저장',
+          selectedData?.prices.find(({id}) => selectedPriceId === id),
+        ];
   const basePrice = selectedData?.prices.find(({isBase}) => isBase);
 
   const checkValidate = (addItemPriceInput): boolean => {
@@ -139,9 +141,8 @@ function PriceFormModal({
       return;
     }
 
-    type === 'add'
-      ? handleAddItemPrice(itemPriceInput)
-      : handleUpdateItemPrice(itemPriceInput);
+    const onSave = type === 'add' ? handleAddItemPrice : handleUpdateItemPrice;
+    onSave(itemPriceInput);
   };
 
   const checkPriceEmpty = (_, {price}) => {
