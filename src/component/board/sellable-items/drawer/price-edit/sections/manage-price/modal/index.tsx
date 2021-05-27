@@ -46,13 +46,14 @@ function PriceFormModal({
     ADD_ITEM_PRICE_MUTATION.gql,
   );
 
-  const [title, submitButtonText, defaultValue] =
+  const [title, submitButtonText, defaultValue, showIsActive] =
     type === 'add'
-      ? ['가격 추가', '추가', undefined]
+      ? ['가격 추가', '추가', undefined, true]
       : [
           '가격 수정',
           '저장',
           selectedData?.prices.find(({id}) => selectedPriceId === id),
+          false,
         ];
   const basePrice = selectedData?.prices.find(({isBase}) => isBase);
 
@@ -145,12 +146,12 @@ function PriceFormModal({
     onSave(itemPriceInput);
   };
 
-  const checkPriceEmpty = (_, {price}) => {
+  const checkPriceEmpty = async (_, {price}) => {
     if (parseInt(price.originalPrice) > 0 && parseInt(price.sellPrice) > 0) {
-      return Promise.resolve();
+      return;
     }
 
-    return Promise.reject(new Error('정가와 판매가를 모두 입력해주세요'));
+    throw new Error('정가와 판매가를 모두 입력해주세요');
   };
 
   return (
@@ -180,11 +181,12 @@ function PriceFormModal({
             label: '종료일',
             type: 'date',
           },
-          isActive: {
-            label: '현재 가격으로 활성화하기',
-            type: 'boolean',
-            hidden: true,
-          },
+          ...(showIsActive && {
+            isActive: {
+              label: '현재 가격으로 활성화하기',
+              type: 'boolean',
+            },
+          }),
         }}
         defaultValue={defaultValue}
         onSaveClick={handleSaveButtonClick}
