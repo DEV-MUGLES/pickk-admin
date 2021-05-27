@@ -18,25 +18,15 @@ import {Items_items} from '@src/operations/__generated__/Items';
 
 const {Text} = Typography;
 
-type ItemBoardModalType = 'category' | 'image';
-
 function ItemBoard({title}: BoardProps) {
   const {
     action: {setSelectedRowId},
   } = useBoardContext();
 
-  const [modalVisible, setModalVisible] = useState<
-    Record<ItemBoardModalType, boolean>
-  >({
-    category: false,
-    image: false,
-  });
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-  const handleModalOpen = (name: ItemBoardModalType) => (open: boolean) => {
-    setModalVisible({
-      ...modalVisible,
-      [name]: open,
-    });
+  const handleModalOpen = (open: boolean) => {
+    setModalVisible(open);
   };
 
   const newItemColumns: ColumnsType<Items_items> = [
@@ -57,7 +47,7 @@ function ItemBoard({title}: BoardProps) {
               size="small"
               onClick={() => {
                 setSelectedRowId(id);
-                handleModalOpen('category')(true);
+                handleModalOpen(true);
               }}
               style={{marginTop: '0.6rem'}}>
               수정
@@ -75,8 +65,8 @@ function ItemBoard({title}: BoardProps) {
       <Space level={2} />
       <Table title={title} columns={newItemColumns} actions={itemActions} />
       <CategoryModal
-        visible={modalVisible.category}
-        onClose={() => handleModalOpen('category')(false)}
+        visible={modalVisible}
+        onClose={() => handleModalOpen(false)}
       />
     </>
   );
