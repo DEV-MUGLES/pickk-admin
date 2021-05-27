@@ -3,10 +3,10 @@ import {ColumnsType} from 'antd/lib/table';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
-import {Space} from '@src/components/atoms';
 import SellableItemManageButtons from './table/manage-buttons';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
+import {Space} from '@src/components/atoms';
 
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';
 
@@ -17,25 +17,25 @@ import {sellableItemInputs} from './inputs';
 import {ITEMS_QUERY} from '@src/operations/item/query';
 import {Items_items} from '@src/operations/__generated__/Items';
 
-type SellableItemsModalType = 'price' | 'optionStock' | 'info';
+type SellableItemsDrawerType = 'price' | 'optionStock' | 'info';
 
 function SellableItemsBoard({title}: BoardProps) {
   const {
     action: {setSelectedRowId},
   } = useBoardContext();
 
-  const [modalVisible, setModalVisible] = useState<
-    Record<SellableItemsModalType, boolean>
+  const [drawerVisible, setDrawerVisible] = useState<
+    Record<SellableItemsDrawerType, boolean>
   >({
     price: false,
     optionStock: false,
     info: false,
   });
 
-  const handleModalOpen =
-    (name: SellableItemsModalType) => (open: boolean) => () => {
-      setModalVisible({
-        ...modalVisible,
+  const handleDrawerOpen =
+    (name: SellableItemsDrawerType) => (open: boolean) => () => {
+      setDrawerVisible({
+        ...drawerVisible,
         [name]: open,
       });
     };
@@ -54,21 +54,21 @@ function SellableItemsBoard({title}: BoardProps) {
               label: '가격 관리',
               onClick: () => {
                 setSelectedRowId(id);
-                handleModalOpen('price')(true)();
+                handleDrawerOpen('price')(true)();
               },
             },
             {
               label: '옵션/재고 관리',
               onClick: () => {
                 setSelectedRowId(id);
-                handleModalOpen('optionStock')(true)();
+                handleDrawerOpen('optionStock')(true)();
               },
             },
             {
               label: '정보 수정',
               onClick: () => {
                 setSelectedRowId(id);
-                handleModalOpen('info')(true)();
+                handleDrawerOpen('info')(true)();
               },
             },
           ]}
@@ -88,12 +88,12 @@ function SellableItemsBoard({title}: BoardProps) {
         actions={sellableItemActions}
       />
       <ItemPriceEditDrawer
-        visible={modalVisible.price}
-        onClose={handleModalOpen('price')(false)}
+        visible={drawerVisible.price}
+        onClose={handleDrawerOpen('price')(false)}
       />
       <ItemInfoEditDrawer
-        visible={modalVisible.info}
-        onClose={handleModalOpen('info')(false)}
+        visible={drawerVisible.info}
+        onClose={handleDrawerOpen('info')(false)}
       />
     </>
   );
