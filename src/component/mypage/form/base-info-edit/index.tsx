@@ -1,7 +1,7 @@
 import {message} from 'antd';
 import {useMeSeller, useUpdateMeSeller} from '@pickk/common';
 
-import BaseEditForm from '../base';
+import BaseEditForm from '../../../../components/organisms/Form/base';
 
 import {FORM_ITEMS} from './form-items';
 

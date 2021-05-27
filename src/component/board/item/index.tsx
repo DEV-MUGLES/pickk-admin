@@ -18,25 +18,15 @@ import {Items_items} from '@src/operations/__generated__/Items';
 
 const {Text} = Typography;
 
-type ItemBoardModalType = 'category' | 'image';
-
 function ItemBoard({title}: BoardProps) {
   const {
-    action: {setSelectedData},
+    action: {setSelectedRowId},
   } = useBoardContext();
 
-  const [modalVisible, setModalVisible] = useState<
-    Record<ItemBoardModalType, boolean>
-  >({
-    category: false,
-    image: false,
-  });
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-  const handleModalOpen = (name: ItemBoardModalType) => (open: boolean) => {
-    setModalVisible({
-      ...modalVisible,
-      [name]: open,
-    });
+  const handleModalOpen = (open: boolean) => {
+    setModalVisible(open);
   };
 
   const newItemColumns: ColumnsType<Items_items> = [
@@ -47,20 +37,19 @@ function ItemBoard({title}: BoardProps) {
       key: 'category',
       width: 100,
       align: 'center',
-      render: (_, record) => {
-        const {majorCategory, minorCategory} = record;
+      render: (_, {id, majorCategory, minorCategory}) => {
         return (
-          <div>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
             <Text>{`${majorCategory?.name ?? '-'}/${
               minorCategory?.name ?? '-'
             }`}</Text>
             <Button
               size="small"
               onClick={() => {
-                setSelectedData(record);
-                handleModalOpen('category')(true);
+                setSelectedRowId(id);
+                handleModalOpen(true);
               }}
-              style={{marginLeft: '0.6rem'}}>
+              style={{marginTop: '0.6rem'}}>
               수정
             </Button>
           </div>
@@ -76,8 +65,8 @@ function ItemBoard({title}: BoardProps) {
       <Space level={2} />
       <Table title={title} columns={newItemColumns} actions={itemActions} />
       <CategoryModal
-        visible={modalVisible.category}
-        onClose={() => handleModalOpen('category')(false)}
+        visible={modalVisible}
+        onClose={() => handleModalOpen(false)}
       />
     </>
   );

@@ -1,5 +1,5 @@
 import {UpdateSellerClaimPolicyInput} from '@pickk/common';
-import {FormItemValueType} from '../base';
+import {FormItemValueType} from '../../../../components/organisms/Form/base';
 
 export const FORM_ITEMS: {
   [Property in keyof UpdateSellerClaimPolicyInput]: FormItemValueType;

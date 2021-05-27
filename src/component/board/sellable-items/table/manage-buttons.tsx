@@ -15,7 +15,8 @@ function SellableItemManageButtons({buttons}: SellableItemManageButtonsProps) {
         <Button
           size="small"
           onClick={onClick}
-          style={{marginBottom: index !== buttons.length ? '0.4rem' : 0}}>
+          style={{marginBottom: index !== buttons.length ? '0.4rem' : 0}}
+          key={index}>
           {label}
         </Button>
       ))}

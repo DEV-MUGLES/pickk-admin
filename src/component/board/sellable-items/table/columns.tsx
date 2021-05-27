@@ -1,12 +1,12 @@
 import {ColumnsType} from 'antd/lib/table';
-import {Button, Image, Typography, Tooltip, Badge} from 'antd';
-import {QuestionCircleOutlined} from '@ant-design/icons';
+import {Button, Image, Typography, Badge} from 'antd';
 
 import SellableItemStock from './stock';
+import InfoTooltip from '@src/components/atoms/info-tooltip';
 import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
+
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
-
 import {Items_items} from '@src/operations/__generated__/Items';
 
 const {Text} = Typography;
@@ -55,12 +55,12 @@ export const sellableItemColumns: ColumnsType<Items_items> = [
   },
   {
     title: '공급가',
-    dataIndex: 'finalPrice',
-    key: 'finalPrice',
+    dataIndex: 'sellPrice',
+    key: 'sellPrice',
     width: 120,
     align: 'center',
     render: (value) => <div>{addCommaToNumber(value)}원</div>,
-    sorter: (a, b) => b.salePrice - a.salePrice,
+    sorter: (a, b) => b.sellPrice - a.sellPrice,
   },
   {
     title: '무한재고여부',
@@ -140,7 +140,7 @@ export function ItemStockColumnTitle() {
   return (
     <Text>
       보유재고
-      <Tooltip
+      <InfoTooltip
         placement="right"
         title={
           <div
@@ -155,9 +155,9 @@ export function ItemStockColumnTitle() {
             <Badge color="volcano" text="재고 전체 품절" />
           </div>
         }
-        color="white">
-        <QuestionCircleOutlined style={{marginLeft: '0.2rem'}} />
-      </Tooltip>
+        color="white"
+        iconStyle={{marginLeft: '0.2rem'}}
+      />
     </Text>
   );
 }
