@@ -30,7 +30,6 @@ function OptionNameEditModal({
   };
 
   const handleOk = () => {
-    console.log(optionId, name);
     updateItemOption({
       variables: {
         id: optionId,

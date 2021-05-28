@@ -47,42 +47,40 @@ function OptionManageSection() {
 
   return (
     <>
-      <Wrapper>
-        <Tooltip title={warningMessage}>
-          <Button
-            onClick={handleModalOpen('createOption')(true)}
-            icon={buttonIcon}
-            style={{marginBottom: '0.8rem'}}>
-            {buttonText}
-          </Button>
-        </Tooltip>
-        <Table
-          columns={[
-            {
-              title: '옵션명',
-              dataIndex: 'name',
-              key: 'name',
-              render: (value, {id}) => (
-                <>
-                  {value}
-                  <Button
-                    size="small"
-                    style={{marginLeft: '0.8rem'}}
-                    onClick={() => {
-                      handleModalOpen('nameEdit')(true)();
-                      setOptionId(id);
-                    }}>
-                    수정
-                  </Button>
-                </>
-              ),
-            },
-            {title: '옵션값', dataIndex: 'values', key: 'values'},
-          ]}
-          dataSource={optionDataSource}
-          pagination={false}
-        />
-      </Wrapper>
+      <Tooltip title={warningMessage}>
+        <Button
+          onClick={handleModalOpen('createOption')(true)}
+          icon={buttonIcon}
+          style={{marginBottom: '0.8rem'}}>
+          {buttonText}
+        </Button>
+      </Tooltip>
+      <Table
+        columns={[
+          {
+            title: '옵션명',
+            dataIndex: 'name',
+            key: 'name',
+            render: (value, {id}) => (
+              <>
+                {value}
+                <Button
+                  size="small"
+                  style={{marginLeft: '0.8rem'}}
+                  onClick={() => {
+                    handleModalOpen('nameEdit')(true)();
+                    setOptionId(id);
+                  }}>
+                  수정
+                </Button>
+              </>
+            ),
+          },
+          {title: '옵션값', dataIndex: 'values', key: 'values'},
+        ]}
+        dataSource={optionDataSource}
+        pagination={false}
+      />
       {modalVisible.createOption && (
         <CreateOptionModal
           title={buttonText}
@@ -103,5 +101,3 @@ function OptionManageSection() {
 }
 
 export default OptionManageSection;
-
-const Wrapper = styled.div``;

@@ -52,8 +52,8 @@ function CreateOptionModal({
       name,
       values: values
         .split(',')
-        .filter((v) => v)
-        .map((v) => v.trim()),
+        .map((v) => v.trim())
+        .filter((v) => v),
     }));
 
     createItemOptionSet({
@@ -124,7 +124,7 @@ function CreateOptionModal({
               <Form.Item>
                 <Button
                   type="dashed"
-                  onClick={() => add()}
+                  onClick={add}
                   block
                   icon={<PlusOutlined />}>
                   옵션 추가
