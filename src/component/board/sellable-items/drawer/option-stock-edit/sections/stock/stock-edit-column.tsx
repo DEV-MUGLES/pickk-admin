@@ -24,19 +24,6 @@ function StockEditColumn({id, defaultValue}) {
     UPDATE_PRODUCT_MUTATION.gql,
   );
 
-  const [buttonType, buttonText]: [ButtonType, string] = isEditable
-    ? ['primary', '저장']
-    : ['default', '수정'];
-
-  const handleChange = ({target: {value}}) => {
-    const newStock = parseInt(value || '0', 10);
-    if (Number.isNaN(newStock)) {
-      return;
-    }
-
-    setStock(newStock);
-  };
-
   const handleEditClick = () => {
     setIsEditable(true);
   };
@@ -57,6 +44,23 @@ function StockEditColumn({id, defaultValue}) {
       .catch(() => {
         message.error('재고 수정에 실패했습니다.');
       });
+  };
+
+  const [handleSubmit, buttonType, buttonText]: [
+    () => void,
+    ButtonType,
+    string,
+  ] = isEditable
+    ? [handleSaveClick, 'primary', '저장']
+    : [handleEditClick, 'default', '수정'];
+
+  const handleChange = ({target: {value}}) => {
+    const newStock = parseInt(value || '0', 10);
+    if (Number.isNaN(newStock)) {
+      return;
+    }
+
+    setStock(newStock);
   };
 
   const handleCancle = () => {
@@ -81,10 +85,7 @@ function StockEditColumn({id, defaultValue}) {
     <>
       {StockInfo}
       <Space style={{display: 'flex', marginTop: '0.4rem'}}>
-        <Button
-          onClick={isEditable ? handleSaveClick : handleEditClick}
-          type={buttonType}
-          size="small">
+        <Button onClick={handleSubmit} type={buttonType} size="small">
           {buttonText}
         </Button>
         {isEditable && (
