@@ -14,8 +14,10 @@ const {Text} = Typography;
 
 function StockEditColumn({id, defaultValue}) {
   const {
+    state: {selectedData},
     action: {reload},
   } = useBoardContext();
+  const {isInfiniteStock} = selectedData;
   const [isEditable, setIsEditable] = useState(false);
   const [stock, setStock] = useState<number>(defaultValue);
   const [updateProduct] = useMutation<UpdateProduct, UpdateProductVariables>(
@@ -61,6 +63,10 @@ function StockEditColumn({id, defaultValue}) {
     setStock(defaultValue);
     setIsEditable(false);
   };
+
+  if (isInfiniteStock) {
+    return <>무한재고 ✅</>;
+  }
 
   const StockInfo = (
     <>
