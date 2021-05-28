@@ -55,6 +55,19 @@ export interface Items_items_notice {
   endAt: any | null;
 }
 
+export interface Items_items_options_values {
+  __typename: "ItemOptionValue";
+  id: number;
+  name: string;
+}
+
+export interface Items_items_options {
+  __typename: "ItemOption";
+  id: number;
+  name: string;
+  values: Items_items_options_values[];
+}
+
 export interface Items_items_urls {
   __typename: "ItemUrl";
   isPrimary: boolean;
@@ -81,6 +94,7 @@ export interface Items_items {
    * 상품 안내 메세지입니다. 파트너어드민에서 입력할 수 있습니다.
    */
   notice: Items_items_notice | null;
+  options: Items_items_options[] | null;
   isMdRecommended: boolean;
   isSellable: boolean;
   urls: Items_items_urls[];

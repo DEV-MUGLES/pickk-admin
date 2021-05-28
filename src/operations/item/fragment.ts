@@ -20,3 +20,21 @@ export const ITEM_PRICE_FRAG = gql`
     updatedAt
   }
 `;
+
+export const ITEM_OPTION_VALUE_FRAG = gql`
+  fragment ItemOptionValueFrag on ItemOptionValue {
+    id
+    name
+  }
+`;
+
+export const ITEM_OPTION_FARG = gql`
+  ${ITEM_OPTION_VALUE_FRAG}
+  fragment ItemOptionFrag on ItemOption {
+    id
+    name
+    values {
+      ...ItemOptionValueFrag
+    }
+  }
+`;

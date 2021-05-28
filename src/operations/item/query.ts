@@ -1,11 +1,12 @@
 import {gql} from '@apollo/client';
 import {OperationType} from '../type';
 
-import {ITEM_PRICE_FRAG} from './fragment';
+import {ITEM_OPTION_FARG, ITEM_PRICE_FRAG} from './fragment';
 
 export const ITEMS_QUERY: OperationType = {
   gql: gql`
     ${ITEM_PRICE_FRAG}
+    ${ITEM_OPTION_FARG}
     query Items($itemFilter: ItemFilter, $pageInput: PageInput) {
       items(itemFilter: $itemFilter, pageInput: $pageInput) {
         id
@@ -38,6 +39,9 @@ export const ITEMS_QUERY: OperationType = {
           message
           startAt
           endAt
+        }
+        options {
+          ...ItemOptionFrag
         }
         isMdRecommended
         isSellable

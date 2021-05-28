@@ -5,6 +5,7 @@ import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
 import SellableItemManageButtons from './table/manage-buttons';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
+import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
 import {Space} from '@src/components/atoms';
 
@@ -90,6 +91,10 @@ function SellableItemsBoard({title}: BoardProps) {
       <ItemPriceEditDrawer
         visible={drawerVisible.price}
         onClose={handleDrawerOpen('price')(false)}
+      />
+      <ItemOptionStockEditDrawer
+        visible={drawerVisible.optionStock}
+        onClose={handleDrawerOpen('optionStock')(false)}
       />
       <ItemInfoEditDrawer
         visible={drawerVisible.info}

@@ -57,7 +57,17 @@ export interface BulkUpdateItemInput {
   minorCategoryId?: number | null;
 }
 
+export interface CreateItemOptionInput {
+  name: string;
+  values: string[];
+}
+
+export interface CreateItemOptionSetInput {
+  options: CreateItemOptionInput[];
+}
+
 export interface ItemFilter {
+  brandId?: number | null;
   createdAtLte?: any | null;
   createdAtMte?: any | null;
   isMdRecommended?: boolean | null;
@@ -91,15 +101,18 @@ export interface UpdateItemNoticeInput {
   type?: ItemNoticeType | null;
 }
 
+export interface UpdateItemOptionInput {
+  name: string;
+}
+
 export interface UpdateItemPriceInput {
   displayPrice?: number | null;
   endAt?: any | null;
-  finalPrice: number;
-  isCrawlUpdating: boolean;
-  originalPrice: number;
+  isCrawlUpdating?: boolean | null;
+  originalPrice?: number | null;
   pickkDiscountAmount?: number | null;
   pickkDiscountRate?: number | null;
-  sellPrice: number;
+  sellPrice?: number | null;
   startAt?: any | null;
   unit?: ItemPriceUnit | null;
 }
