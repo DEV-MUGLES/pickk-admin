@@ -18,7 +18,7 @@ function OptionManageSection() {
     createOption: false,
     nameEdit: false,
   });
-  const [optionId, setOptionId] = useState<number>();
+  const [selectedOptionId, setSelectedOptionId] = useState<number>();
 
   const options: Items_items['options'] = selectedData.options;
   const optionDataSource = options?.map(({id, name, values}) => ({
@@ -68,7 +68,7 @@ function OptionManageSection() {
                   style={{marginLeft: '0.8rem'}}
                   onClick={() => {
                     handleModalOpen('nameEdit')(true)();
-                    setOptionId(id);
+                    setSelectedOptionId(id);
                   }}>
                   수정
                 </Button>
@@ -90,7 +90,7 @@ function OptionManageSection() {
       )}
       {modalVisible.nameEdit && (
         <OptionNameEditModal
-          optionId={optionId}
+          optionId={selectedOptionId}
           visible={modalVisible.nameEdit}
           onClose={handleModalOpen('nameEdit')(false)}
         />
