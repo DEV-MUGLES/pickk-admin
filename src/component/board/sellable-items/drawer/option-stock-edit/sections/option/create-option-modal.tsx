@@ -39,10 +39,7 @@ function CreateOptionModal({
   useEffect(() => {
     const defaultOption = selectedData.options?.map(({name, values}) => ({
       name,
-      values: values.reduce(
-        (acc, curr, i) => acc + (i === 0 ? '' : ',') + curr.name,
-        '',
-      ),
+      values: values.map(({name}) => name).join(', '),
     }));
 
     form.setFieldsValue({

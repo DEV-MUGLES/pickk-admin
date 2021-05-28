@@ -26,7 +26,7 @@ function OptionManageSection() {
     key: name,
     id,
     name,
-    values: values.map(({name: oname}, i) => (i == 0 ? '' : ',') + oname),
+    values: values.map(({name}) => name).join(', '),
   }));
 
   const hasOption = options?.length > 0;

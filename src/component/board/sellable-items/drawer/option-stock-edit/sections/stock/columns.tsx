@@ -12,10 +12,7 @@ export const stockColumns: ColumnsType<Items_items_products> = [
     dataIndex: 'product',
     key: 'product',
     render: (_, {itemOptionValues}) =>
-      itemOptionValues.reduce(
-        (acc, {name}, i) => acc + (i === 0 ? '' : ', ') + name,
-        '',
-      ),
+      itemOptionValues.map(({name}) => name).join(', '),
   },
   {
     title: '재고',
