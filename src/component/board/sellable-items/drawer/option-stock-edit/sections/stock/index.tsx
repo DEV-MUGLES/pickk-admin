@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {useMutation} from '@apollo/client';
 import {Button, message, Table, Modal} from 'antd';
 
@@ -10,14 +11,21 @@ import {
 } from '@src/operations/__generated__/UpdateItem';
 
 import {stockColumns} from './columns';
+import ShippingReservePolicyModal from './shipping-reserve-policy-modal';
 
 const {confirm} = Modal;
 
 function StockManageSection() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [updateItem] = useMutation<UpdateItem, UpdateItemVariables>(
+    UPDATE_ITEM_MUTATION.gql,
+  );
   const {
     state: {selectedRowId, selectedData},
     action: {reload},
   } = useBoardContext();
+  const products: Items_items['products'] = selectedData.products;
+
   const {isInfiniteStock} = selectedData;
   const [buttonText, newIsInfiniteStock, confirmText] = !isInfiniteStock
     ? ['전체 무한재고로 설정', true, '전체 상품을 무한재고로 설정하시겠습니까?']
@@ -26,12 +34,8 @@ function StockManageSection() {
         false,
         '전체 상품을 무한재고에서 해제하시겠습니까?',
       ];
-  const [updateItem] = useMutation<UpdateItem, UpdateItemVariables>(
-    UPDATE_ITEM_MUTATION.gql,
-  );
-  const products: Items_items['products'] = selectedData.products;
 
-  const handleClick = (value: boolean) => () => {
+  const handleInfiniteSettingButtonClick = (value: boolean) => () => {
     confirm({
       title: confirmText,
       onOk: () => {
@@ -52,14 +56,32 @@ function StockManageSection() {
     });
   };
 
+  const handleModalOpen = (isOpen: boolean) => () => {
+    setModalVisible(isOpen);
+  };
+
+  const newStockColumns = [
+    ...stockColumns,
+    {
+      title: '예약발송',
+      dataIndex: '',
+      key: '',
+      render: (_, {id}) => <Button size="small">예약발송</Button>,
+    },
+  ];
+
   return (
     <>
       <Button
         style={{marginBottom: '0.8rem'}}
-        onClick={handleClick(newIsInfiniteStock)}>
+        onClick={handleInfiniteSettingButtonClick(newIsInfiniteStock)}>
         {buttonText}
       </Button>
-      <Table columns={stockColumns} dataSource={products} />
+      <Table columns={newStockColumns} dataSource={products} />
+      <ShippingReservePolicyModal
+        visible={modalVisible}
+        onClose={handleModalOpen(false)}
+      />
     </>
   );
 }

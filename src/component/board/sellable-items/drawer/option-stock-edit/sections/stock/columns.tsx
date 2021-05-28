@@ -33,10 +33,4 @@ export const stockColumns: ColumnsType<Items_items_products> = [
     key: 'updatedAt',
     render: renderDateColumn,
   },
-  {
-    title: '예약발송',
-    dataIndex: '',
-    key: '',
-    render: () => <Button size="small">예약발송</Button>,
-  },
 ];
