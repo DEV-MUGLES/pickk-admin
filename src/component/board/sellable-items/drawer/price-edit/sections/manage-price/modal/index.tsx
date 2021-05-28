@@ -46,47 +46,6 @@ function PriceFormModal({
     ADD_ITEM_PRICE_MUTATION.gql,
   );
 
-  const [title, submitButtonText, defaultValue, showIsActive] =
-    type === 'add'
-      ? ['가격 추가', '추가', undefined, true]
-      : [
-          '가격 수정',
-          '저장',
-          selectedData?.prices.find(({id}) => selectedPriceId === id),
-          false,
-        ];
-  const basePrice = selectedData?.prices.find(({isBase}) => isBase);
-
-  const checkValidate = (addItemPriceInput): boolean => {
-    if (
-      addItemPriceInput.endAt &&
-      dayjs(addItemPriceInput.endAt).isBefore(addItemPriceInput.startAt)
-    ) {
-      message.error('종료일이 시작일보다 전일 수 없습니다.');
-      return false;
-    }
-
-    const isDuplicatePeriod = selectedData?.prices.find(
-      ({id, startAt, endAt}) => {
-        if (type === 'edit' && id === selectedPriceId) {
-          return false;
-        }
-
-        const notHasEndDate = !addItemPriceInput.endAt && !endAt;
-        return (
-          dayjs(addItemPriceInput.startAt).isSame(startAt, 'day') &&
-          (dayjs(addItemPriceInput.endAt).isSame(endAt, 'day') || notHasEndDate)
-        );
-      },
-    );
-    if (isDuplicatePeriod) {
-      message.error('이미 동일한 기간을 갖는 가격이 존재합니다.');
-      return false;
-    }
-
-    return true;
-  };
-
   const handleAddItemPrice = (itemPriceInput) => {
     addItemPrice({
       variables: {
@@ -125,6 +84,55 @@ function PriceFormModal({
     onClose();
   };
 
+  const [title, submitButtonText, defaultValue, showIsActive, handleSave]: [
+    string,
+    string,
+    any,
+    boolean,
+    (input: any) => void,
+  ] =
+    type === 'add'
+      ? ['가격 추가', '추가', undefined, true, handleAddItemPrice]
+      : [
+          '가격 수정',
+          '저장',
+          selectedData?.prices.find(({id}) => selectedPriceId === id),
+          false,
+          handleUpdateItemPrice,
+        ];
+
+  const basePrice = selectedData?.prices.find(({isBase}) => isBase);
+
+  const checkValidate = (addItemPriceInput): boolean => {
+    if (
+      addItemPriceInput.endAt &&
+      dayjs(addItemPriceInput.endAt).isBefore(addItemPriceInput.startAt)
+    ) {
+      message.error('종료일이 시작일보다 전일 수 없습니다.');
+      return false;
+    }
+
+    const isDuplicatePeriod = selectedData?.prices.find(
+      ({id, startAt, endAt}) => {
+        if (type === 'edit' && id === selectedPriceId) {
+          return false;
+        }
+
+        const notHasEndDate = !addItemPriceInput.endAt && !endAt;
+        return (
+          dayjs(addItemPriceInput.startAt).isSame(startAt, 'day') &&
+          (dayjs(addItemPriceInput.endAt).isSame(endAt, 'day') || notHasEndDate)
+        );
+      },
+    );
+    if (isDuplicatePeriod) {
+      message.error('이미 동일한 기간을 갖는 가격이 존재합니다.');
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSaveButtonClick = (value) => {
     const {price: _p, ..._itemPriceInput} = value;
     const {
@@ -142,8 +150,7 @@ function PriceFormModal({
       return;
     }
 
-    const onSave = type === 'add' ? handleAddItemPrice : handleUpdateItemPrice;
-    onSave(itemPriceInput);
+    handleSave(itemPriceInput);
   };
 
   const checkPriceEmpty = async (_, {price}) => {

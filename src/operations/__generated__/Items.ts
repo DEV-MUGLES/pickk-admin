@@ -41,9 +41,35 @@ export interface Items_items_prices {
   updatedAt: any;
 }
 
+export interface Items_items_products_itemOptionValues {
+  __typename: "ItemOptionValue";
+  id: number;
+  name: string;
+}
+
+export interface Items_items_products_shippingReservePolicy {
+  __typename: "ProductShippingReservePolicy";
+  createdAt: any;
+  /**
+   * 예약발송 예정일
+   */
+  estimatedShippingBegginDate: any;
+  id: number;
+  /**
+   * 예약설정된 재고. 예약발송일이 되면, 예약발송 상태는 자동으로 종료되며, 잔여 예약발송 재고는 일반 재고에 합산됩니다.
+   */
+  stock: number;
+  updatedAt: any;
+}
+
 export interface Items_items_products {
   __typename: "Product";
+  createdAt: any;
+  id: number;
+  itemOptionValues: Items_items_products_itemOptionValues[];
+  shippingReservePolicy: Items_items_products_shippingReservePolicy | null;
   stock: number;
+  updatedAt: any;
 }
 
 export interface Items_items_notice {
@@ -53,6 +79,19 @@ export interface Items_items_notice {
   message: string;
   startAt: any | null;
   endAt: any | null;
+}
+
+export interface Items_items_options_values {
+  __typename: "ItemOptionValue";
+  id: number;
+  name: string;
+}
+
+export interface Items_items_options {
+  __typename: "ItemOption";
+  id: number;
+  name: string;
+  values: Items_items_options_values[];
 }
 
 export interface Items_items_urls {
@@ -81,6 +120,7 @@ export interface Items_items {
    * 상품 안내 메세지입니다. 파트너어드민에서 입력할 수 있습니다.
    */
   notice: Items_items_notice | null;
+  options: Items_items_options[] | null;
   isMdRecommended: boolean;
   isSellable: boolean;
   urls: Items_items_urls[];

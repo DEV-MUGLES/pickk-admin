@@ -1,6 +1,7 @@
 import {gql} from '@apollo/client';
 
 import {OperationType} from '../type';
+import {ITEM_OPTION_FARG} from './fragment';
 
 export const BULK_UPDATE_ITEMS_MUTATION: OperationType = {
   gql: gql`
@@ -123,4 +124,58 @@ export const ACTIVATE_ITEM_PRICE_MUTATION: OperationType = {
     }
   `,
   dataName: 'activateItemPrice',
+};
+
+/**
+ * ITEM_OPTION MUTATIONS
+ */
+
+export const CREATE_ITEM_OPTION_SET_MUTATION: OperationType = {
+  gql: gql`
+    mutation CreateOptionSet(
+      $id: Int!
+      $createItemOptionSetInput: CreateItemOptionSetInput!
+    ) {
+      createItemOptionSet(
+        id: $id
+        createItemOptionSetInput: $createItemOptionSetInput
+      ) {
+        id
+      }
+    }
+  `,
+  dataName: 'createItemOptionSet',
+};
+
+export const UPDATE_ITEM_OPTION_MUTATION: OperationType = {
+  gql: gql`
+    ${ITEM_OPTION_FARG}
+    mutation UpdateItemOption(
+      $id: Int!
+      $updateItemOptionInput: UpdateItemOptionInput!
+    ) {
+      updateItemOption(id: $id, updateItemOptionInput: $updateItemOptionInput) {
+        ...ItemOptionFrag
+      }
+    }
+  `,
+  dataName: 'updateItemOption',
+};
+
+/**
+ * PRODUCT MUTATIONS
+ */
+
+export const UPDATE_PRODUCT_MUTATION: OperationType = {
+  gql: gql`
+    mutation UpdateProduct(
+      $id: Int!
+      $updateProductInput: UpdateProductInput!
+    ) {
+      updateProduct(id: $id, updateProductInput: $updateProductInput) {
+        id
+      }
+    }
+  `,
+  dataName: 'updateProduct',
 };
