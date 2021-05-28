@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {useMutation} from '@apollo/client';
 import {Button, Input, message, Space, Typography} from 'antd';
+import {ButtonType} from 'antd/lib/button';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {UPDATE_PRODUCT_MUTATION} from '@src/operations/item/mutation';
@@ -17,10 +18,13 @@ function StockEditColumn({id, defaultValue}) {
   } = useBoardContext();
   const [isEditable, setIsEditable] = useState(false);
   const [stock, setStock] = useState<number>(defaultValue);
-
   const [updateProduct] = useMutation<UpdateProduct, UpdateProductVariables>(
     UPDATE_PRODUCT_MUTATION.gql,
   );
+
+  const [buttonType, buttonText]: [ButtonType, string] = isEditable
+    ? ['primary', '저장']
+    : ['default', '수정'];
 
   const handleChange = ({target: {value}}) => {
     const newStock = parseInt(value || '0', 10);
@@ -58,19 +62,24 @@ function StockEditColumn({id, defaultValue}) {
     setIsEditable(false);
   };
 
+  const StockInfo = (
+    <>
+      {isEditable && (
+        <Input value={stock} onChange={handleChange} size="small" />
+      )}
+      {!isEditable && <Text>{stock} 개</Text>}
+    </>
+  );
+
   return (
     <>
-      {isEditable ? (
-        <Input value={stock} onChange={handleChange} size="small" />
-      ) : (
-        <Text>{stock} 개</Text>
-      )}
+      {StockInfo}
       <Space style={{display: 'flex', marginTop: '0.4rem'}}>
         <Button
           onClick={isEditable ? handleSaveClick : handleEditClick}
-          size="small"
-          type={isEditable ? 'primary' : 'default'}>
-          {isEditable ? '저장' : '수정'}
+          type={buttonType}
+          size="small">
+          {buttonText}
         </Button>
         {isEditable && (
           <Button onClick={handleCancle} size="small">
