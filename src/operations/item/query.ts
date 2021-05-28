@@ -1,11 +1,12 @@
 import {gql} from '@apollo/client';
 import {OperationType} from '../type';
 
-import {ITEM_OPTION_FARG, ITEM_PRICE_FRAG} from './fragment';
+import {ITEM_OPTION_FARG, ITEM_PRICE_FRAG, PRODUCT_FRAG} from './fragment';
 
 export const ITEMS_QUERY: OperationType = {
   gql: gql`
     ${ITEM_PRICE_FRAG}
+    ${PRODUCT_FRAG}
     ${ITEM_OPTION_FARG}
     query Items($itemFilter: ItemFilter, $pageInput: PageInput) {
       items(itemFilter: $itemFilter, pageInput: $pageInput) {
@@ -27,7 +28,7 @@ export const ITEMS_QUERY: OperationType = {
           ...ItemPriceFrag
         }
         products {
-          stock
+          ...ProductFrag
         }
         isInfiniteStock
         isSoldout

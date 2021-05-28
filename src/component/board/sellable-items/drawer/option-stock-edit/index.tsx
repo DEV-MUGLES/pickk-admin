@@ -2,7 +2,7 @@ import {Collapse, Drawer, DrawerProps, Space} from 'antd';
 import CollapsePanel from 'antd/lib/collapse/CollapsePanel';
 
 import OptionManageSection from './sections/option';
-import StockManageSection from './sections/stock-manage';
+import StockManageSection from './sections/stock';
 
 import {CollapseType} from '..';
 
@@ -51,7 +51,7 @@ function ItemOptionStockEditDrawer({
       title="옵션/재고 관리"
       visible={visible}
       onClose={onClose}
-      width={'50%'}>
+      width={'60%'}>
       <Space direction="vertical" style={{width: '100%'}} size="small">
         {MODAL_COLLAPSE.map(({props, panels}, index) => (
           <Collapse key={index} {...props}>

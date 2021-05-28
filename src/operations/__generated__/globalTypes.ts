@@ -89,6 +89,7 @@ export interface PageInput {
 export interface UpdateItemInput {
   description?: string | null;
   imageUrl?: string | null;
+  isInfiniteStock?: boolean | null;
   majorCategoryId?: number | null;
   minorCategoryId?: number | null;
   name?: string | null;
@@ -115,6 +116,10 @@ export interface UpdateItemPriceInput {
   sellPrice?: number | null;
   startAt?: any | null;
   unit?: ItemPriceUnit | null;
+}
+
+export interface UpdateProductInput {
+  stock: number;
 }
 
 export interface UploadMultipleImageInput {

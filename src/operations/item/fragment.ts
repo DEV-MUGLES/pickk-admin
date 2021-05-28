@@ -38,3 +38,30 @@ export const ITEM_OPTION_FARG = gql`
     }
   }
 `;
+
+export const PRODUCT_SHIPPING_RESERVE_POLICY_FRAG = gql`
+  fragment ProductShippingReservePolicyFrag on ProductShippingReservePolicy {
+    createdAt
+    estimatedShippingBegginDate
+    id
+    stock
+    updatedAt
+  }
+`;
+
+export const PRODUCT_FRAG = gql`
+  ${ITEM_OPTION_VALUE_FRAG}
+  ${PRODUCT_SHIPPING_RESERVE_POLICY_FRAG}
+  fragment ProductFrag on Product {
+    createdAt
+    id
+    itemOptionValues {
+      ...ItemOptionValueFrag
+    }
+    shippingReservePolicy {
+      ...ProductShippingReservePolicyFrag
+    }
+    stock
+    updatedAt
+  }
+`;

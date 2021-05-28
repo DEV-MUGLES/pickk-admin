@@ -41,9 +41,35 @@ export interface Items_items_prices {
   updatedAt: any;
 }
 
+export interface Items_items_products_itemOptionValues {
+  __typename: "ItemOptionValue";
+  id: number;
+  name: string;
+}
+
+export interface Items_items_products_shippingReservePolicy {
+  __typename: "ProductShippingReservePolicy";
+  createdAt: any;
+  /**
+   * 예약발송 예정일
+   */
+  estimatedShippingBegginDate: any;
+  id: number;
+  /**
+   * 예약설정된 재고. 예약발송일이 되면, 예약발송 상태는 자동으로 종료되며, 잔여 예약발송 재고는 일반 재고에 합산됩니다.
+   */
+  stock: number;
+  updatedAt: any;
+}
+
 export interface Items_items_products {
   __typename: "Product";
+  createdAt: any;
+  id: number;
+  itemOptionValues: Items_items_products_itemOptionValues[];
+  shippingReservePolicy: Items_items_products_shippingReservePolicy | null;
   stock: number;
+  updatedAt: any;
 }
 
 export interface Items_items_notice {

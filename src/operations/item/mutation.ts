@@ -161,3 +161,21 @@ export const UPDATE_ITEM_OPTION_MUTATION: OperationType = {
   `,
   dataName: 'updateItemOption',
 };
+
+/**
+ * PRODUCT MUTATIONS
+ */
+
+export const UPDATE_PRODUCT_MUTATION: OperationType = {
+  gql: gql`
+    mutation UpdateProduct(
+      $id: Int!
+      $updateProductInput: UpdateProductInput!
+    ) {
+      updateProduct(id: $id, updateProductInput: $updateProductInput) {
+        id
+      }
+    }
+  `,
+  dataName: 'updateProduct',
+};
