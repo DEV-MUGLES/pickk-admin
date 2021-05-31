@@ -34,15 +34,17 @@ function getColor(
   if (isInfiniteStock) {
     return 'lime';
   }
-  if (isSoldout) {
+  const soldoutCount = products.filter(({stock}) => stock <= 0).length;
+  if (isSoldout || soldoutCount === products.length) {
     return 'volcano';
   }
 
-  const soldoutCount = products.filter(({stock}) => stock <= 0).length;
   if (soldoutCount >= 1) {
     return 'orange';
   }
-  if (products.length - soldoutCount < 5) {
+
+  const lackProductCount = products.filter(({stock}) => stock < 5).length;
+  if (lackProductCount >= 1) {
     return 'yellow';
   }
   return 'lime';
