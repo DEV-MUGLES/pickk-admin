@@ -1,4 +1,4 @@
-import {UpdateSellerInput} from '@pickk/common';
+import {UpdateSellerInput} from '@src/operations/__generated__/globalTypes';
 import {FormItemValueType} from '../../../../components/organisms/Form/base';
 
 export const FORM_ITEMS: {
@@ -10,6 +10,15 @@ export const FORM_ITEMS: {
       {
         required: true,
         message: '회사명을 입력해주세요.',
+      },
+    ],
+  },
+  representativeName: {
+    label: '대표자명',
+    rules: [
+      {
+        required: true,
+        message: '대표자명을 입력해주세요.',
       },
     ],
   },
@@ -35,33 +44,6 @@ export const FORM_ITEMS: {
       },
     ],
   },
-  representativeName: {
-    label: '대표자명',
-    rules: [
-      {
-        required: true,
-        message: '대표자명을 입력해주세요.',
-      },
-    ],
-  },
-  operationTimeMessage: {
-    label: '고객센터 운영시간',
-    rules: [
-      {
-        required: true,
-        message: '고객센터 운영시간을 입력해주세요.',
-      },
-    ],
-  },
-  phoneNumber: {
-    label: '고객센터번호',
-    rules: [
-      {
-        required: true,
-        message: '고객센터번호를 입력해주세요.',
-      },
-    ],
-  },
   email: {
     label: '이메일',
     rules: [
@@ -76,7 +58,10 @@ export const FORM_ITEMS: {
       },
     ],
   },
-  kakaoTalkCode: {
-    label: '카카오톡 문의 id',
+  orderNotiPhoneNumber: {
+    label: '주문관련 알림카톡 발송번호',
+  },
+  csNotiPhoneNumber: {
+    label: '문의관련 알림카톡 발송번호 ',
   },
 };
