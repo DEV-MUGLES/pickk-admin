@@ -9,14 +9,14 @@ import {
   InputNumber,
   Switch,
   FormProps,
-  Typography,
 } from 'antd';
 
 import DatePickerFormItem from './Items/date-picker';
 import {Space} from '@src/components/atoms';
 
+import {useBaseEditForm} from '@src/hooks/form';
+
 const {confirm} = Modal;
-const {Text} = Typography;
 
 export type BaseFormItemType = 'string' | 'number' | 'boolean' | 'date';
 export type FormItemValueType = FormItemProps & {
@@ -49,11 +49,7 @@ function BaseEditForm({
   hasDeleteButton = false,
   ...formProps
 }: BaseEditFormProps) {
-  const [form] = Form.useForm();
-
-  useEffect(() => {
-    form.setFieldsValue(defaultValue);
-  }, [defaultValue]);
+  const form = useBaseEditForm(defaultValue);
 
   const handleFinish = (value) => {
     confirm({
