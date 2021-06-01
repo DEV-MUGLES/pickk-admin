@@ -1,7 +1,8 @@
+import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Col, Input, Select, Space, Typography} from 'antd';
-import {useEffect, useState} from 'react';
 
+import {BankNameKorAlias} from '@src/lib/alias';
 import {InicisBankCode} from '@src/operations/__generated__/globalTypes';
 
 const {Option} = Select;
@@ -57,7 +58,7 @@ function AccountInput({value, onChange}: AcccountInputProps) {
           onChange={handleSelectChange}>
           {Object.keys(InicisBankCode).map((key) => (
             <Option key={key} value={key}>
-              {key}
+              {BankNameKorAlias[key]}
             </Option>
           ))}
         </Select>
