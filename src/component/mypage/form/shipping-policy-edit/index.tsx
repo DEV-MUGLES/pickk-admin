@@ -21,10 +21,12 @@ const ME_SELLER_SHIPPING_POLICY_QUERY = gql`
 
 function ShippingPolicyEditForm() {
   const {data, refetch} = useQuery(ME_SELLER_SHIPPING_POLICY_QUERY);
-  const [updateMe] = useMutation(UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION);
+  const [updateShippingPolicy] = useMutation(
+    UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION,
+  );
 
   const handleSaveClick = (updateSellerShippingPolicyInput) => {
-    updateMe({
+    updateShippingPolicy({
       variables: {
         updateSellerShippingPolicyInput,
       },
@@ -34,7 +36,7 @@ function ShippingPolicyEditForm() {
         refetch();
       })
       .catch((error) => {
-        console.log(error);
+        message.error('저장에 실패했습니다');
       });
   };
 
