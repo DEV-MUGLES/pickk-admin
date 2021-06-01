@@ -90,3 +90,22 @@ const Label = styled(Tag).attrs({
   color: black;
   margin-bottom: 0.4rem;
 `;
+
+export const CheckAccountValidation = async (
+  _,
+  {bankCode, number, ownerName},
+) => {
+  if (!bankCode?.length) {
+    throw new Error('은행을 선택해주세요.');
+  }
+
+  if (!number?.length) {
+    throw new Error('계좌번호를 입력해주세요.');
+  }
+
+  if (!ownerName?.length) {
+    throw new Error('예금주를 입력해주세요.');
+  }
+
+  return;
+};
