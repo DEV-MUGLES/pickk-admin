@@ -8,6 +8,69 @@
 //==============================================================
 
 /**
+ * 교환/반품 배송비 지불 방식. (Trans:계좌입금, Enclose:택배상자 동봉)
+ */
+export enum ClaimFeePayMethod {
+  Enclose = "Enclose",
+  Trans = "Trans",
+}
+
+/**
+ * 은행 코드입니다. KG Inicis와 관련 없는 일반 계좌를 저장할 때도 사용됩니다.
+ */
+export enum InicisBankCode {
+  AbnAmro = "AbnAmro",
+  BcCard = "BcCard",
+  Boa = "Boa",
+  Busan = "Busan",
+  ChBank = "ChBank",
+  Chohung = "Chohung",
+  Citi = "Citi",
+  Commercial = "Commercial",
+  Cu = "Cu",
+  Daegu = "Daegu",
+  Deutsche = "Deutsche",
+  EPost = "EPost",
+  ExShinhan = "ExShinhan",
+  Hana = "Hana",
+  Hanil = "Hanil",
+  Hanmi = "Hanmi",
+  Housing = "Housing",
+  Hsbc = "Hsbc",
+  Ibk = "Ibk",
+  Jeju = "Jeju",
+  Jeonbuk = "Jeonbuk",
+  JpMorgan = "JpMorgan",
+  KBank = "KBank",
+  KakaoBank = "KakaoBank",
+  KakaoMoney = "KakaoMoney",
+  Kangwon = "Kangwon",
+  Kb = "Kb",
+  Kdb = "Kdb",
+  Keb = "Keb",
+  Kwangju = "Kwangju",
+  Kyongnam = "Kyongnam",
+  LPoint = "LPoint",
+  MitsubishiTokyo = "MitsubishiTokyo",
+  MutualSavings = "MutualSavings",
+  NaverPoint = "NaverPoint",
+  NhBank = "NhBank",
+  Nonghyup = "Nonghyup",
+  Payco = "Payco",
+  Peace = "Peace",
+  Sc = "Sc",
+  Seoul = "Seoul",
+  ShBank = "ShBank",
+  Shinan = "Shinan",
+  Shinhan = "Shinhan",
+  Shinsegae = "Shinsegae",
+  Sj = "Sj",
+  SsgMoney = "SsgMoney",
+  TossMoney = "TossMoney",
+  Woori = "Woori",
+}
+
+/**
  * 아이템 안내 분류입니다. 기본값은 General입니다.
  */
 export enum ItemNoticeType {
@@ -66,6 +129,86 @@ export interface CreateItemOptionSetInput {
   options: CreateItemOptionInput[];
 }
 
+export interface CreateSellerClaimAccountInput {
+  bankCode: InicisBankCode;
+  number: string;
+  ownerName: string;
+}
+
+export interface CreateSellerClaimPolicyInput {
+  accountInput?: CreateSellerClaimAccountInput | null;
+  fee: number;
+  feePayMethod: ClaimFeePayMethod;
+  phoneNumber: string;
+  picName: string;
+}
+
+export interface CreateSellerCrawlPolicyInput {
+  isInspectingNew: boolean;
+  isUpdatingItems: boolean;
+}
+
+export interface CreateSellerCrawlStrategyInput {
+  baseUrl: string;
+  codeRegex: string;
+  itemsSelector: string;
+  pageParam?: string | null;
+  pagination: boolean;
+  startPathNamesJoin: string;
+}
+
+export interface CreateSellerInput {
+  brandId: number;
+  businessCode: string;
+  businessName: string;
+  claimPolicyInput: CreateSellerClaimPolicyInput;
+  courierId: number;
+  crawlPolicyInput: CreateSellerCrawlPolicyInput;
+  crawlStrategyInput: CreateSellerCrawlStrategyInput;
+  csNotiPhoneNumber?: string | null;
+  email: string;
+  kakaoTalkCode?: string | null;
+  mailOrderBusinessCode: string;
+  operationTimeMessage: string;
+  orderNotiPhoneNumber?: string | null;
+  phoneNumber: string;
+  representativeName: string;
+  returnAddressInput: CreateSellerReturnAddressInput;
+  saleStrategyInput: FindSaleStrategyInput;
+  settlePolicyInput?: CreateSellerSettlePolicyInput | null;
+  shippingPolicyInput: CreateSellerShippingPolicyInput;
+  userId: number;
+}
+
+export interface CreateSellerReturnAddressInput {
+  baseAddress: string;
+  detailAddress: string;
+  postalCode: string;
+}
+
+export interface CreateSellerSettleAccountInput {
+  bankCode: InicisBankCode;
+  number: string;
+  ownerName: string;
+}
+
+export interface CreateSellerSettlePolicyInput {
+  accountInput?: CreateSellerSettleAccountInput | null;
+  email: string;
+  phoneNumber: string;
+  picName: string;
+}
+
+export interface CreateSellerShippingPolicyInput {
+  fee: number;
+  minimumAmountForFree: number;
+}
+
+export interface FindSaleStrategyInput {
+  canUseCoupon: boolean;
+  canUseMileage: boolean;
+}
+
 export interface ItemFilter {
   brandId?: number | null;
   createdAtLte?: any | null;
@@ -84,6 +227,12 @@ export interface PageInput {
   limit?: number | null;
   offset?: number | null;
   startId?: number | null;
+}
+
+export interface SellerFilter {
+  businessCode?: string | null;
+  kakaoTalkCodeIn?: string[] | null;
+  search?: string | null;
 }
 
 export interface UpdateItemInput {
@@ -120,6 +269,49 @@ export interface UpdateItemPriceInput {
 
 export interface UpdateProductInput {
   stock: number;
+}
+
+export interface UpdateSellerClaimAccountInput {
+  bankCode?: InicisBankCode | null;
+  number?: string | null;
+  ownerName?: string | null;
+}
+
+export interface UpdateSellerClaimPolicyInput {
+  accountInput?: UpdateSellerClaimAccountInput | null;
+  fee?: number | null;
+  feePayMethod?: ClaimFeePayMethod | null;
+  phoneNumber?: string | null;
+  picName?: string | null;
+}
+
+export interface UpdateSellerCrawlPolicyInput {
+  isInspectingNew?: boolean | null;
+  isUpdatingItems?: boolean | null;
+}
+
+export interface UpdateSellerInput {
+  businessCode?: string | null;
+  businessName?: string | null;
+  csNotiPhoneNumber?: string | null;
+  email?: string | null;
+  kakaoTalkCode?: string | null;
+  mailOrderBusinessCode?: string | null;
+  operationTimeMessage?: string | null;
+  orderNotiPhoneNumber?: string | null;
+  phoneNumber?: string | null;
+  representativeName?: string | null;
+}
+
+export interface UpdateSellerReturnAddressInput {
+  baseAddress?: string | null;
+  detailAddress?: string | null;
+  postalCode?: string | null;
+}
+
+export interface UpdateSellerShippingPolicyInput {
+  fee?: number | null;
+  minimumAmountForFree?: number | null;
 }
 
 export interface UploadMultipleImageInput {
