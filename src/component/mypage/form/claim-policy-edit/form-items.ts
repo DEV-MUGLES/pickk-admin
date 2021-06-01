@@ -1,34 +1,33 @@
-import {UpdateSellerClaimPolicyInput} from '@pickk/common';
-import {FormItemValueType} from '../../../../components/organisms/Form/base';
+import {FormItemValueType} from '@src/components/organisms/Form/base';
 
 export const FORM_ITEMS: {
-  [Property in keyof UpdateSellerClaimPolicyInput]: FormItemValueType;
+  [name: string]: FormItemValueType;
 } = {
   picName: {
-    label: '담당자명',
+    label: '담당자 이름',
     rules: [
       {
         required: true,
-        message: '담당자명을 입력해주세요.',
+        message: '담당자 이름을 입력해주세요.',
       },
     ],
   },
   phoneNumber: {
-    label: '연락처',
+    label: '딤당자 번호',
     rules: [
       {
         required: true,
-        message: '연락처를 입력해주세요.',
+        message: '담당자 번호를 입력해주세요.',
       },
     ],
   },
   fee: {
-    label: '편도 배송비',
+    label: '교환/반품 배송비',
     type: 'number',
     rules: [
       {
         required: true,
-        message: '편도 배송비를 입력해주세요.',
+        message: '교환/반품 배송비를 입력해주세요.',
       },
     ],
   },
