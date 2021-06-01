@@ -24,7 +24,7 @@ function ItemNoticeAddButton() {
 
   const [visible, setVisible] = useState(false);
   const [addItemNotice] = useMutation<AddItemNotice, AddItemNoticeVariables>(
-    ADD_ITEM_NOTICE_MUTATION.gql,
+    ADD_ITEM_NOTICE_MUTATION,
   );
 
   const handleAddItemNoticeButton = () => {

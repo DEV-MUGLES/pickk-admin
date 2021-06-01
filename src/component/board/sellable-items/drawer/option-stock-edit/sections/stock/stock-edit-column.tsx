@@ -21,7 +21,7 @@ function StockEditColumn({id, defaultValue}) {
   const [isEditable, setIsEditable] = useState(false);
   const [stock, setStock] = useState<number>(defaultValue);
   const [updateProduct] = useMutation<UpdateProduct, UpdateProductVariables>(
-    UPDATE_PRODUCT_MUTATION.gql,
+    UPDATE_PRODUCT_MUTATION,
   );
 
   const handleEditClick = () => {

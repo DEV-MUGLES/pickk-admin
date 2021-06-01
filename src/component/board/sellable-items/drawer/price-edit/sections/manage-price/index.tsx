@@ -35,11 +35,11 @@ function ManagePriceSection() {
   const [removeItemPrice] = useMutation<
     RemoveItemPrice,
     RemoveItemPriceVariables
-  >(REMOVE_ITEM_PRICE_MUTATION.gql);
+  >(REMOVE_ITEM_PRICE_MUTATION);
   const [activateItemPrice] = useMutation<
     ActivateItemPrice,
     ActivateItemPriceVariables
-  >(ACTIVATE_ITEM_PRICE_MUTATION.gql);
+  >(ACTIVATE_ITEM_PRICE_MUTATION);
 
   const handleOpenModal =
     (isOpen: boolean, type?: PriceFormModalType) => () => {

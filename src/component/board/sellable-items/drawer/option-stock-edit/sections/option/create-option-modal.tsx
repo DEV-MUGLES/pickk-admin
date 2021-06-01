@@ -34,7 +34,7 @@ function CreateOptionModal({
   const [createItemOptionSet] = useMutation<
     CreateOptionSet,
     CreateOptionSetVariables
-  >(CREATE_ITEM_OPTION_SET_MUTATION.gql);
+  >(CREATE_ITEM_OPTION_SET_MUTATION);
 
   useEffect(() => {
     const defaultOption = selectedData.options?.map(({name, values}) => ({

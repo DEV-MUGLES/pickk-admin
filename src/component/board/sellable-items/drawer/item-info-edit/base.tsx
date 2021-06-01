@@ -24,9 +24,8 @@ function ItemBaseInfoEditSection() {
   } = useBoardContext();
   const selectedItem: Items_items = selectedData;
   const [imageUrl, setImageUrl] = useState<string>();
-  const [updateItem] = useMutation<UpdateItem, UpdateItemVariables>(
-    UPDATE_ITEM_MUTATION.gql,
-  );
+  const [updateItem] =
+    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
 
   useEffect(() => {
     setImageUrl(null);

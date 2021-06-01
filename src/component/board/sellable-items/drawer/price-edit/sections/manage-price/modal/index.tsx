@@ -41,9 +41,9 @@ function PriceFormModal({
   const [updateItemPrice] = useMutation<
     UpdateItemPrice,
     UpdateItemPriceVariables
-  >(UPDATE_ITEM_PRICE_MUTATION.gql);
+  >(UPDATE_ITEM_PRICE_MUTATION);
   const [addItemPrice] = useMutation<AddItemPrice, AddItemPriceVariables>(
-    ADD_ITEM_PRICE_MUTATION.gql,
+    ADD_ITEM_PRICE_MUTATION,
   );
 
   const handleAddItemPrice = (itemPriceInput) => {

@@ -76,8 +76,8 @@ export default withBoardContext(
   ItemBoard,
   {},
   {
-    gql: ITEMS_QUERY.gql,
-    dataName: ITEMS_QUERY.dataName,
+    gql: ITEMS_QUERY,
+    dataName: 'items',
     filterName: 'itemFilter',
   },
   (v) => v,

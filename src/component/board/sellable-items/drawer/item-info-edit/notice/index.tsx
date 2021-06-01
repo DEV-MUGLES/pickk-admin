@@ -30,11 +30,11 @@ function ItemNoticeEditSection() {
   const [updateItemNotice] = useMutation<
     UpdateItemNotice,
     UpdateItemNoticeVariables
-  >(UPDATE_ITEM_NOTICE_MUTATION.gql);
+  >(UPDATE_ITEM_NOTICE_MUTATION);
   const [removeItemNotice] = useMutation<
     RemoveItemNotice,
     RemoveItemNoticeVariables
-  >(REMOVE_ITEM_NOTICE_MUTATION.gql);
+  >(REMOVE_ITEM_NOTICE_MUTATION);
 
   const handleSaveClick = (value) => {
     updateItemNotice({

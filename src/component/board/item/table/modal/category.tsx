@@ -24,9 +24,8 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
   } = useBoardContext();
 
   const [value, setValue] = useState<[number, number]>();
-  const [update] = useMutation<UpdateItem, UpdateItemVariables>(
-    UPDATE_ITEM_MUTATION.gql,
-  );
+  const [update] =
+    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
 
   const handleOk = async () => {
     const [majorCategoryId, minorCategoryId] = value;

@@ -23,7 +23,9 @@ export const withBoardContext =
     defaultFilter: Filter,
     operation: {
       filterName?: string;
-    } & Pick<OperationType, 'gql' | 'dataName'>,
+      gql: OperationType;
+      dataName: string;
+    },
     parseExcelData,
   ) =>
   (

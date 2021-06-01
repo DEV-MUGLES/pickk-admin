@@ -19,7 +19,7 @@ function ImageUpload({imageUrl, setImageUrl, alt}: ImageUploadProps) {
   const [upload, {loading}] = useMutation<
     UploadMultipleImages,
     UploadMultipleImagesVariables
-  >(UPLOAD_MULTIPLE_IMAGES_MUTATION.gql);
+  >(UPLOAD_MULTIPLE_IMAGES_MUTATION);
 
   const uploadProps: UploadProps = {
     name: 'file',

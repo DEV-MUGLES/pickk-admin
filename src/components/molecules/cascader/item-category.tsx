@@ -18,7 +18,7 @@ function ItemCategoryCascader({
   onChange,
   hasAll = false,
 }: ItemCategoryCascaderProps) {
-  const {data} = useQuery<ItemMajorCategories>(ITEM_MAJOR_CATEGORIES_QUERY.gql);
+  const {data} = useQuery<ItemMajorCategories>(ITEM_MAJOR_CATEGORIES_QUERY);
   const majorCategories = data?.itemMajorCategories ?? [];
   const options = (
     hasAll ? [{id: undefined, name: '전체', children: null}] : []
