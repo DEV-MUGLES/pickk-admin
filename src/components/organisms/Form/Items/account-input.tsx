@@ -15,7 +15,7 @@ export type AccountInputType = {
 
 export type AcccountInputProps = {
   value: AccountInputType;
-  onChange: (value: any) => null;
+  onChange: (value: any) => void;
 };
 
 function AccountInput({value, onChange}: AcccountInputProps) {
