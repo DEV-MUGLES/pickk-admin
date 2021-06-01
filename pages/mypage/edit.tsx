@@ -5,9 +5,10 @@ import {PageHeader, Tabs} from 'antd';
 import MainLayout from '@src/components/templates/MainLayout';
 import {
   BaseInfoEditForm,
+  ServiceCenterInfoEditForm,
   ShippingPolicyEditForm,
   ClaimPolicyEditForm,
-  ReturnAddressEditForm,
+  SettlePolicyEditForm,
 } from '@src/component/mypage/form';
 import {Space} from '@src/components/atoms';
 import {WHITE} from '@src/components/atoms/colors';
@@ -16,9 +17,10 @@ const {TabPane} = Tabs;
 
 const TAB_PANE_INFO: {tab: string; content: React.ElementType}[] = [
   {tab: '기본정보', content: BaseInfoEditForm},
-  {tab: '배송정책', content: ShippingPolicyEditForm},
-  {tab: '교환/환불 정책', content: ClaimPolicyEditForm},
-  {tab: '환불 주소', content: ReturnAddressEditForm},
+  {tab: '고객센터', content: ServiceCenterInfoEditForm},
+  {tab: '배송비 정보', content: ShippingPolicyEditForm},
+  {tab: '교환반품 정보', content: ClaimPolicyEditForm},
+  {tab: '정산정보', content: SettlePolicyEditForm},
 ];
 
 function MyPageEditPage() {

@@ -77,3 +77,15 @@ export const UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION = gql`
+  mutation UpdateMySellerSettlePolicy(
+    $updateSellerSettlePolicyInput: UpdateSellerSettlePolicyInput!
+  ) {
+    updateMySellerSettlePolicy(
+      updateSellerSettlePolicyInput: $updateSellerSettlePolicyInput
+    ) {
+      id
+    }
+  }
+`;

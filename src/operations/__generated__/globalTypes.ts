@@ -309,6 +309,19 @@ export interface UpdateSellerReturnAddressInput {
   postalCode?: string | null;
 }
 
+export interface UpdateSellerSettleAccountInput {
+  bankCode?: InicisBankCode | null;
+  number?: string | null;
+  ownerName?: string | null;
+}
+
+export interface UpdateSellerSettlePolicyInput {
+  accountInput?: UpdateSellerSettleAccountInput | null;
+  email?: string | null;
+  phoneNumber?: string | null;
+  picName?: string | null;
+}
+
 export interface UpdateSellerShippingPolicyInput {
   fee?: number | null;
   minimumAmountForFree?: number | null;
