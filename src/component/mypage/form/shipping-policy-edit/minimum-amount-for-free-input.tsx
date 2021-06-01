@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react';
-import {Input, Switch, Typography} from 'antd';
+import {Switch, Tag} from 'antd';
 import styled from 'styled-components';
-import InputNumber from '@src/components/organisms/Form/Items/input-number';
 
-const {Text} = Typography;
+import InputNumber from '@src/components/organisms/Form/Items/input-number';
 
 function MinimumAmountForFreeInput({value, onChange}) {
   const [number, setNumber] = useState<number>(0);
@@ -39,7 +38,7 @@ function MinimumAmountForFreeInput({value, onChange}) {
       <InputWrapper style={{marginTop: '0.8rem'}}>
         {!isFree && (
           <>
-            <Text>최소주문금액</Text>
+            <Label>최소주문금액</Label>
             <InputNumber value={number} onChange={handleNumberChange} />
           </>
         )}
@@ -53,4 +52,10 @@ export default MinimumAmountForFreeInput;
 const InputWrapper = styled.div`
   width: 100%;
   height: 4rem;
+`;
+
+const Label = styled(Tag).attrs({
+  color: 'orange',
+})`
+  margin-bottom: 0.4rem;
 `;

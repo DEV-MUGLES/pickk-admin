@@ -1,12 +1,11 @@
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {Col, Input, Select, Space, Typography} from 'antd';
+import {Col, Input, Select, Space, Tag} from 'antd';
 
 import {BankNameKorAlias} from '@src/lib/alias';
 import {InicisBankCode} from '@src/operations/__generated__/globalTypes';
 
 const {Option} = Select;
-const {Text} = Typography;
 
 export type AccountInputType = {
   bankCode: InicisBankCode;
@@ -85,6 +84,9 @@ function AccountInput({value, onChange}: AcccountInputProps) {
 
 export default AccountInput;
 
-const Label = styled(Text)`
-  width: 6rem;
+const Label = styled(Tag).attrs({
+  color: '#f2f4f5',
+})`
+  color: black;
+  margin-bottom: 0.4rem;
 `;

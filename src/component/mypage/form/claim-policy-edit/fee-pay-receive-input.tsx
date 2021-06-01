@@ -39,21 +39,18 @@ function FeePayReceiveInput({value, onChange}) {
 
   return (
     <>
-      <Select
-        value={feePayMethod}
-        onChange={handleFeePayMethodChange}
-        style={{marginBottom: '0.8rem'}}>
+      <Select value={feePayMethod} onChange={handleFeePayMethodChange}>
         <Option value={ClaimFeePayMethod.Enclose}>택배상자 동봉</Option>
         <Option value={ClaimFeePayMethod.Trans}>계좌입금</Option>
       </Select>
       {feePayMethod === ClaimFeePayMethod.Trans && (
-        <>
+        <div style={{marginTop: '0.8rem'}}>
           <Text>[ 교환배송비 수령 계좌번호 ]</Text>
           <AccountInput
             value={accountInput}
             onChange={handleAccountInputChange}
           />
-        </>
+        </div>
       )}
     </>
   );
