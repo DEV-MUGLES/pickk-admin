@@ -1,5 +1,7 @@
-import {UpdateSellerShippingPolicyInput} from '@pickk/common';
+import MinimumAmountForFreeInput from './minimum-amount-for-free-input';
+
 import {FormItemValueType} from '../../../../components/organisms/Form/base';
+import {UpdateSellerShippingPolicyInput} from '@src/operations/__generated__/globalTypes';
 
 export const FORM_ITEMS: {
   [Property in keyof UpdateSellerShippingPolicyInput]: FormItemValueType;
@@ -15,13 +17,13 @@ export const FORM_ITEMS: {
     type: 'number',
   },
   minimumAmountForFree: {
-    label: '무료배송 최소주문금액',
+    label: '무료배송',
+    Component: MinimumAmountForFreeInput,
     rules: [
       {
         required: true,
         message: '무료배송 최소주문금액을 입력해주세요.',
       },
     ],
-    type: 'number',
   },
 };

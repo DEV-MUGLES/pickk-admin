@@ -1,13 +1,27 @@
 import {message} from 'antd';
-import {useMeSeller, useUpdateMySellerShippingPolicy} from '@pickk/common';
+import {gql, useMutation, useQuery} from '@apollo/client';
 
 import BaseEditForm from '../../../../components/organisms/Form/base';
 
+import {SELLER_SHIPPING_POLICY_FRAG} from '@src/operations/sellers/fragment';
+import {UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION} from '@src/operations/sellers/mutation';
+
 import {FORM_ITEMS} from './form-items';
 
+const ME_SELLER_SHIPPING_POLICY_QUERY = gql`
+  ${SELLER_SHIPPING_POLICY_FRAG}
+  query MeSeller {
+    meSeller {
+      shippingPolicy {
+        ...SellerShippingPolicyFrag
+      }
+    }
+  }
+`;
+
 function ShippingPolicyEditForm() {
-  const {data} = useMeSeller();
-  const [updateMe] = useUpdateMySellerShippingPolicy();
+  const {data, refetch} = useQuery(ME_SELLER_SHIPPING_POLICY_QUERY);
+  const [updateMe] = useMutation(UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION);
 
   const handleSaveClick = (updateSellerShippingPolicyInput) => {
     updateMe({
@@ -17,6 +31,7 @@ function ShippingPolicyEditForm() {
     })
       .then(() => {
         message.success('저장되었습니다.');
+        refetch();
       })
       .catch((error) => {
         console.log(error);
