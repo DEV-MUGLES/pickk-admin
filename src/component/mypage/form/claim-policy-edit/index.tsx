@@ -6,6 +6,8 @@ import BaseEditForm, {
 } from '../../../../components/organisms/Form/base';
 import FeePayReceiveInput from './fee-pay-receive-input';
 
+import {isEqualObject} from '@src/lib/utils';
+import {useClaimPolicyForm} from './use-claim-policy-form';
 import {
   UPDATE_MY_SELLER_CLAIM_POLICY_MUTATION,
   UPDATE_MY_SELLER_RETURN_ADDRESS_MUTATION,
@@ -13,9 +15,6 @@ import {
 import {ClaimFeePayMethod} from '@src/operations/__generated__/globalTypes';
 
 import {FORM_ITEMS} from './form-items';
-import {isEqualObject} from '@src/lib/utils';
-
-import {useClaimPolicyForm} from './use-claim-policy-form';
 
 function ClaimPolicyEditForm() {
   const {defaultValue} = useClaimPolicyForm();

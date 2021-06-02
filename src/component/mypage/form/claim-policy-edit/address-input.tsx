@@ -1,48 +1,24 @@
+import {MeSeller_meSeller_returnAddress} from '@src/operations/__generated__/MeSeller';
 import {Input, Space} from 'antd';
 import {useEffect, useState} from 'react';
 
-export type AddressType = {
-  baseAddress: string;
-  detailAddress: string;
-  postalCode: string;
-};
+export type AddressType = Pick<
+  MeSeller_meSeller_returnAddress,
+  'baseAddress' | 'detailAddress' | 'postalCode'
+>;
 
 export type AddressInputProps = {
   value: AddressType;
-  onChange: (value: any) => void;
+  onChange: (value: AddressType) => void;
 };
 
 function AddressInput({value, onChange}: AddressInputProps) {
-  const [address, setAddress] = useState<AddressType>({
-    baseAddress: '',
-    detailAddress: '',
-    postalCode: '',
-  });
+  const handleChange = (e) => {
+    const {name, value: _value} = e.target;
 
-  useEffect(() => {
-    setAddress({
-      baseAddress: value?.baseAddress ?? '',
-      detailAddress: value?.detailAddress ?? '',
-      postalCode: value?.postalCode ?? '',
-    });
-  }, [value]);
-
-  const triggerChange = (changedValue) => {
     onChange?.({
-      ...address,
       ...value,
-      ...changedValue,
-    });
-  };
-
-  const handleChange = ({target: {value, name}}) => {
-    setAddress({
-      ...address,
-      [name]: value,
-    });
-
-    triggerChange({
-      [name]: value,
+      [name]: _value,
     });
   };
 
@@ -50,19 +26,19 @@ function AddressInput({value, onChange}: AddressInputProps) {
     <Space direction="vertical" style={{width: '100%'}}>
       <Input
         name="baseAddress"
-        value={address?.baseAddress}
+        value={value?.baseAddress || ''}
         placeholder="주소"
         onChange={handleChange}
       />
       <Input
         name="detailAddress"
-        value={address?.detailAddress}
+        value={value?.detailAddress || ''}
         placeholder="상세주소"
         onChange={handleChange}
       />
       <Input
         name="postalCode"
-        value={address?.postalCode}
+        value={value?.postalCode || ''}
         placeholder="우편번호"
         onChange={handleChange}
       />
