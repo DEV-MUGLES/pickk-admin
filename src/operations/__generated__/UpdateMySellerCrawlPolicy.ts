@@ -11,7 +11,11 @@ import { UpdateSellerCrawlPolicyInput } from "./globalTypes";
 
 export interface UpdateMySellerCrawlPolicy_updateMySellerCrawlPolicy {
   __typename: "SellerCrawlPolicy";
+  createdAt: any;
   id: number;
+  isInspectingNew: boolean;
+  isUpdatingItems: boolean;
+  updatedAt: any;
 }
 
 export interface UpdateMySellerCrawlPolicy {

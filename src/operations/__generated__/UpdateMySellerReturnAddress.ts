@@ -11,7 +11,12 @@ import { UpdateSellerReturnAddressInput } from "./globalTypes";
 
 export interface UpdateMySellerReturnAddress_updateMySellerReturnAddress {
   __typename: "SellerReturnAddress";
+  baseAddress: string;
+  createdAt: any;
+  detailAddress: string;
   id: number;
+  postalCode: string;
+  updatedAt: any;
 }
 
 export interface UpdateMySellerReturnAddress {

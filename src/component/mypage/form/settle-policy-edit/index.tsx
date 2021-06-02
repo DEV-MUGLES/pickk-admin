@@ -14,14 +14,14 @@ const ME_SELLER_SHIPPING_POLICY_QUERY = gql`
   query MeSeller {
     meSeller {
       settlePolicy {
-        ...SettlePolicyFrag
+        ...SellerSettlePolicyFrag
       }
     }
   }
 `;
 
 function SettlePolicyEditForm() {
-  const {data, refetch} = useQuery(ME_SELLER_SHIPPING_POLICY_QUERY);
+  const {data} = useQuery(ME_SELLER_SHIPPING_POLICY_QUERY);
   const [updateSettlePolicy] = useMutation(
     UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION,
   );
@@ -47,7 +47,6 @@ function SettlePolicyEditForm() {
     })
       .then(() => {
         message.success('저장되었습니다.');
-        refetch();
       })
       .catch((error) => {
         message.error('저장에 실패했습니다');

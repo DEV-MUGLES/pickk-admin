@@ -9,7 +9,7 @@ import {FORM_ITEMS} from './form-items';
 import {useShippingPolicyEdit} from './use-shipping-policy-form';
 
 function ShippingPolicyEditForm() {
-  const {defaultValue, refetch} = useShippingPolicyEdit();
+  const {defaultValue} = useShippingPolicyEdit();
   const [updateShippingPolicy] = useMutation(
     UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION,
   );
@@ -23,7 +23,6 @@ function ShippingPolicyEditForm() {
     })
       .then(() => {
         message.success('저장되었습니다.');
-        refetch();
       })
       .catch((error) => {
         message.error('저장에 실패했습니다');

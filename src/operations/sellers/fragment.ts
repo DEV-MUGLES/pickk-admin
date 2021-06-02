@@ -60,7 +60,7 @@ export const SALE_STRATEGY_FRAG = gql`
 
 export const SELLER_SETTLE_POLICY_FRAG = gql`
   ${SELLER_CLAIM_ACCOUNT_FRAG}
-  fragment SettlePolicyFrag on SellerSettlePolicy {
+  fragment SellerSettlePolicyFrag on SellerSettlePolicy {
     account {
       ...SellerClaimAccountFrag
     }
@@ -126,7 +126,7 @@ export const SELLER_FRAG = gql`
       ...SaleStrategyFrag
     }
     settlePolicy {
-      ...SettlePolicyFrag
+      ...SellerSettlePolicyFrag
     }
     shippingPolicy {
       ...SellerShippingPolicyFrag

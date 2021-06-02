@@ -12,6 +12,18 @@ import { UpdateSellerInput } from "./globalTypes";
 export interface UpdateMeSeller_updateMeSeller {
   __typename: "Seller";
   id: number;
+  businessCode: string;
+  businessName: string;
+  email: string;
+  kakaoTalkCode: string | null;
+  mailOrderBusinessCode: string;
+  operationTimeMessage: string;
+  phoneNumber: string;
+  representativeName: string;
+  createdAt: any;
+  updatedAt: any;
+  orderNotiPhoneNumber: string | null;
+  csNotiPhoneNumber: string | null;
 }
 
 export interface UpdateMeSeller {

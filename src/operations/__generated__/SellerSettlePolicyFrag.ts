@@ -6,10 +6,10 @@
 import { InicisBankCode } from "./globalTypes";
 
 // ====================================================
-// GraphQL fragment: SettlePolicyFrag
+// GraphQL fragment: SellerSettlePolicyFrag
 // ====================================================
 
-export interface SettlePolicyFrag_account {
+export interface SellerSettlePolicyFrag_account {
   __typename: "SellerClaimAccount";
   bankCode: InicisBankCode;
   createdAt: any;
@@ -22,9 +22,9 @@ export interface SettlePolicyFrag_account {
   updatedAt: any;
 }
 
-export interface SettlePolicyFrag {
+export interface SellerSettlePolicyFrag {
   __typename: "SellerSettlePolicy";
-  account: SettlePolicyFrag_account;
+  account: SellerSettlePolicyFrag_account;
   createdAt: any;
   /**
    * 세금계산서 수령이메일

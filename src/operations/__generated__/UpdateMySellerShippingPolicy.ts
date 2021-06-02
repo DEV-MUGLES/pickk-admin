@@ -11,7 +11,11 @@ import { UpdateSellerShippingPolicyInput } from "./globalTypes";
 
 export interface UpdateMySellerShippingPolicy_updateMySellerShippingPolicy {
   __typename: "SellerShippingPolicy";
+  createdAt: any;
+  fee: number;
   id: number;
+  minimumAmountForFree: number;
+  updatedAt: any;
 }
 
 export interface UpdateMySellerShippingPolicy {
