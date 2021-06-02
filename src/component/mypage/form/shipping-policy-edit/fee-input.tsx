@@ -17,7 +17,7 @@ export type ShippingFeeInputProps = {
 };
 
 function ShippingFeeInput({value, onChange}: ShippingFeeInputProps) {
-  const [isFree, setIsFree] = useState<boolean>();
+  const [isFree, setIsFree] = useState<boolean>(false);
 
   useEffect(() => {
     setIsFree(!value?.fee);
