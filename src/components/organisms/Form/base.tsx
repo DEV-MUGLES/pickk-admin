@@ -43,9 +43,9 @@ function BaseForm({
   defaultValue,
   onSaveClick,
   onDeleteClick,
-  buttonAlign,
-  submitButtonText,
-  deleteButtonText,
+  buttonAlign = 'left',
+  submitButtonText = '저장',
+  deleteButtonText = '삭제',
   hasDeleteButton = false,
   ...formProps
 }: BaseFormProps) {
@@ -116,14 +116,14 @@ function BaseForm({
       {...formProps}>
       {Object.keys(FORM_ITEMS).map((name) => renderFormItem(name))}
       <Space level={2} />
-      <ButtonWrapper align={buttonAlign ?? 'left'}>
+      <ButtonWrapper align={buttonAlign}>
         {hasDeleteButton && (
           <Button onClick={handleDelete} style={{marginRight: '0.4rem'}}>
-            {submitButtonText ?? '삭제'}
+            {deleteButtonText}
           </Button>
         )}
         <Button htmlType="submit" type="primary">
-          {submitButtonText ?? '저장'}
+          {submitButtonText}
         </Button>
       </ButtonWrapper>
     </Form>
