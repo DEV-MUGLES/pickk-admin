@@ -20,7 +20,7 @@ const ME_SELLER_SHIPPING_POLICY_QUERY = gql`
   }
 `;
 
-function SettlePolicyEditForm() {
+function SettlePolicyForm() {
   const {data} = useQuery(ME_SELLER_SHIPPING_POLICY_QUERY);
   const [updateSettlePolicy] = useMutation(
     UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION,
@@ -62,4 +62,4 @@ function SettlePolicyEditForm() {
   );
 }
 
-export default SettlePolicyEditForm;
+export default SettlePolicyForm;

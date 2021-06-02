@@ -8,7 +8,7 @@ import {UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION} from '@src/operations/sellers
 import {FORM_ITEMS} from './form-items';
 import {useShippingPolicyEdit} from './use-shipping-policy-form';
 
-function ShippingPolicyEditForm() {
+function ShippingPolicyForm() {
   const {defaultValue} = useShippingPolicyEdit();
   const [updateShippingPolicy] = useMutation(
     UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION,
@@ -38,4 +38,4 @@ function ShippingPolicyEditForm() {
   );
 }
 
-export default ShippingPolicyEditForm;
+export default ShippingPolicyForm;

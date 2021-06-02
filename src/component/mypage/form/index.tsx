@@ -1,5 +1,5 @@
-export {default as BaseInfoEditForm} from './base-info-edit';
-export {default as ServiceCenterInfoEditForm} from './service-center-info-edit';
-export {default as ShippingPolicyEditForm} from './shipping-policy-edit';
-export {default as ClaimPolicyEditForm} from './claim-policy-edit';
-export {default as SettlePolicyEditForm} from './settle-policy-edit';
+export {default as BaseInfoForm} from './base-info';
+export {default as ServiceCenterInfoForm} from './service-center-info';
+export {default as ShippingPolicyForm} from './shipping-policy';
+export {default as ClaimPolicyForm} from './claim-policy';
+export {default as SettlePolicyForm} from './settle-policy';

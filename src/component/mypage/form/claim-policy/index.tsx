@@ -16,7 +16,7 @@ import {ClaimFeePayMethod} from '@src/operations/__generated__/globalTypes';
 
 import {FORM_ITEMS} from './form-items';
 
-function ClaimPolicyEditForm() {
+function ClaimPolicyForm() {
   const {defaultValue} = useClaimPolicyForm();
 
   const [updateMySellerReturnAddress] = useMutation(
@@ -88,4 +88,4 @@ function ClaimPolicyEditForm() {
   );
 }
 
-export default ClaimPolicyEditForm;
+export default ClaimPolicyForm;
