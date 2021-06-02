@@ -6,10 +6,10 @@ import BaseForm from '../../../../components/organisms/Form/base';
 import {UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION} from '@src/operations/sellers/mutation';
 
 import {FORM_ITEMS} from './form-items';
-import {useShippingPolicyEdit} from './use-shipping-policy-form';
+import {useShippingPolicyForm} from './use-shipping-policy-form';
 
 function ShippingPolicyForm() {
-  const {defaultValue} = useShippingPolicyEdit();
+  const {defaultValue} = useShippingPolicyForm();
   const [updateShippingPolicy] = useMutation(
     UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION,
   );

@@ -14,7 +14,7 @@ const ME_SELLER_SHIPPING_POLICY_QUERY = gql`
   }
 `;
 
-export const useShippingPolicyEdit = () => {
+export const useShippingPolicyForm = () => {
   const {data} = useQuery<{
     meSeller: Pick<MeSeller_meSeller, 'shippingPolicy'>;
   }>(ME_SELLER_SHIPPING_POLICY_QUERY);
