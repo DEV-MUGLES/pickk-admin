@@ -33,20 +33,34 @@ export const useClaimPolicyForm = () => {
     meSeller: Pick<SellerFrag, 'returnAddress' | 'claimPolicy'>;
   }>(ME_SELLER_CLAIMPOLICY_QUERY);
 
+  const {
+    baseAddress = '',
+    detailAddress = '',
+    postalCode = '',
+  } = data?.meSeller?.returnAddress;
+
+  const {
+    bankCode = '',
+    number = '',
+    ownerName = '',
+  } = data?.meSeller?.claimPolicy?.account;
+
   const defaultValue = {
-    returnAddress: data?.meSeller?.returnAddress,
+    returnAddress: {
+      baseAddress,
+      detailAddress,
+      postalCode,
+    },
     ...data?.meSeller?.claimPolicy,
     feePayReceive: {
       feePayMethod: data?.meSeller?.claimPolicy?.feePayMethod,
-      accountInput: data?.meSeller?.claimPolicy?.account,
+      accountInput: {
+        bankCode,
+        number,
+        ownerName,
+      },
     },
   };
-
-  delete defaultValue.id;
-  delete defaultValue.returnAddress.id;
-  delete defaultValue.returnAddress.__typename;
-  delete defaultValue.feePayReceive.accountInput.id;
-  delete defaultValue.feePayReceive.accountInput.__typename;
 
   return {data, defaultValue};
 };

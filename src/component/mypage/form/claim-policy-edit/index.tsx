@@ -15,7 +15,7 @@ import {ClaimFeePayMethod} from '@src/operations/__generated__/globalTypes';
 import {FORM_ITEMS} from './form-items';
 import {isEqualObject} from '@src/lib/utils';
 
-import { useClaimPolicyForm } from './use-claim-policy-form';
+import {useClaimPolicyForm} from './use-claim-policy-form';
 
 function ClaimPolicyEditForm() {
   const {defaultValue} = useClaimPolicyForm();
@@ -34,7 +34,7 @@ function ClaimPolicyEditForm() {
 
     await updateMySellerReturnAddress({
       variables: {
-        updateSellerReturnAddressInput: returnAddress
+        updateSellerReturnAddressInput: returnAddress,
       },
     });
   };
