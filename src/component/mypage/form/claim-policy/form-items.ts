@@ -1,6 +1,6 @@
 import AddressInput, {AddressType} from './address-input';
 
-import {FormItemValueType} from '@src/components/organisms/Form/base';
+import {BaseFormProps} from '@src/components/organisms/Form/base';
 
 const checkAddressValidation = async (
   _,
@@ -21,12 +21,10 @@ const checkAddressValidation = async (
   return;
 };
 
-export const FORM_ITEMS: {
-  [name: string]: FormItemValueType;
-} = {
+export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
   returnAddress: {
     label: '반송주소',
-    Component: AddressInput,
+    CustomInput: AddressInput,
     rules: [
       {
         required: true,

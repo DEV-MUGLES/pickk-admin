@@ -74,14 +74,14 @@ function ItemNoticeAddButton() {
           FORM_ITEMS={{
             type: {
               label: '타입 수정',
-              Component: ItemNoticeTypeSelect,
+              CustomInput: ItemNoticeTypeSelect,
             },
             message: {
               label: '메세지',
             },
             range: {
               label: '적용 기간',
-              Component: RangePicker,
+              CustomInput: RangePicker,
             },
           }}
           onSaveClick={handleSaveClick}

@@ -1,13 +1,11 @@
 import ShippingFeeInput from './fee-input';
 
-import {FormItemValueType} from '../../../../components/organisms/Form/base';
+import {BaseFormProps} from '../../../../components/organisms/Form/base';
 
-export const FORM_ITEMS: {
-  [number: string]: FormItemValueType;
-} = {
+export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
   shippingPolicy: {
     label: '무료배송',
-    Component: ShippingFeeInput,
+    CustomInput: ShippingFeeInput,
     rules: [
       {
         required: true,

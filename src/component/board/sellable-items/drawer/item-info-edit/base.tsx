@@ -73,7 +73,7 @@ function ItemBaseInfoEditSection() {
                   message: '이미지가 비었습니다.',
                 },
               ],
-              Component: () => (
+              CustomInput: () => (
                 <ImageUpload
                   imageUrl={imageUrl ?? selectedItem?.imageUrl}
                   setImageUrl={setImageUrl}
@@ -89,7 +89,7 @@ function ItemBaseInfoEditSection() {
                   message: '상품명을 입력해주세요.',
                 },
               ],
-              Component: TextArea,
+              CustomInput: TextArea,
             },
             category: {
               label: '카테고리',
@@ -99,7 +99,7 @@ function ItemBaseInfoEditSection() {
                   message: '카테고리를 선택해주세요.',
                 },
               ],
-              Component: ItemCategoryCascader,
+              CustomInput: ItemCategoryCascader,
             },
           }}
           onSaveClick={handleSaveClick}

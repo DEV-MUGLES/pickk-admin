@@ -2,11 +2,9 @@ import AccountInput, {
   CheckAccountValidation,
 } from '@src/components/organisms/Form/Items/account-input';
 
-import {FormItemValueType} from '@src/components/organisms/Form/base';
+import {BaseFormProps} from '@src/components/organisms/Form/base';
 
-export const FORM_ITEMS: {
-  [name: string]: FormItemValueType;
-} = {
+export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
   picName: {
     label: '담당자 이름',
     rules: [{required: true, message: '담당자 이름을 입력해주세요'}],
@@ -21,7 +19,7 @@ export const FORM_ITEMS: {
   },
   accountInput: {
     label: '정산 계좌번호',
-    Component: AccountInput,
+    CustomInput: AccountInput,
     rules: [
       {required: true, message: '정산 계좌번호 입력해주세요'},
       {validator: CheckAccountValidation},

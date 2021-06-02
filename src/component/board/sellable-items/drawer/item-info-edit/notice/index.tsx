@@ -76,7 +76,7 @@ function ItemNoticeEditSection() {
           FORM_ITEMS={{
             type: {
               label: '타입 수정',
-              Component: ItemNoticeTypeSelect,
+              CustomInput: ItemNoticeTypeSelect,
             },
             message: {
               label: '메세지',

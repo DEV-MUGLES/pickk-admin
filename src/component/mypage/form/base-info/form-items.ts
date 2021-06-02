@@ -1,9 +1,6 @@
-import {UpdateSellerInput} from '@src/operations/__generated__/globalTypes';
-import {FormItemValueType} from '../../../../components/organisms/Form/base';
+import {BaseFormProps} from '../../../../components/organisms/Form/base';
 
-export const FORM_ITEMS: {
-  [Property in keyof UpdateSellerInput]: FormItemValueType;
-} = {
+export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
   businessName: {
     label: '회사명',
     rules: [

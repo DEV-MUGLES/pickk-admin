@@ -2,7 +2,7 @@ import {useMutation} from '@apollo/client';
 import {message} from 'antd';
 
 import BaseForm, {
-  FormItemValueType,
+  BaseFormProps,
 } from '../../../../components/organisms/Form/base';
 
 import FeePayReceiveInput, {
@@ -67,13 +67,11 @@ function ClaimPolicyForm() {
     }
   };
 
-  const newFormItems: {
-    [name: string]: FormItemValueType;
-  } = {
+  const newFormItems: BaseFormProps['FORM_ITEMS'] = {
     ...FORM_ITEMS,
     feePayReceive: {
       label: '교환배송비 수령방식',
-      Component: FeePayReceiveInput,
+      CustomInput: FeePayReceiveInput,
       rules: [
         {
           required: true,

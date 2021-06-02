@@ -167,7 +167,7 @@ function PriceFormModal({
         FORM_ITEMS={{
           price: {
             label: '가격 (단위: 원)',
-            Component: SellPriceInput,
+            CustomInput: SellPriceInput,
             inputProps: {
               basePrice,
               defaultValue: defaultValue,

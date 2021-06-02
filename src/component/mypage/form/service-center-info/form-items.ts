@@ -1,4 +1,6 @@
-export const FORM_ITEMS = {
+import {BaseFormProps} from '@src/components/organisms/Form/base';
+
+export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
   phoneNumber: {
     label: '고객센터 전화번호',
     rules: [

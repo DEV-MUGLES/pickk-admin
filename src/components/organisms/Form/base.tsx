@@ -21,15 +21,15 @@ const {confirm} = Modal;
 export type BaseFormItemType = 'string' | 'number' | 'boolean' | 'date';
 export type FormItemValueType = FormItemProps & {
   type?: BaseFormItemType;
-  Component?: React.ElementType;
+  CustomInput?: React.ElementType;
   inputProps?: any;
 };
 
 export type ButtonAlignType = 'left' | 'right' | 'center';
 
 export type BaseFormProps = {
-  FORM_ITEMS: {[name: string]: FormItemValueType};
-  defaultValue?: {[name: string]: any};
+  FORM_ITEMS: Record<string, FormItemValueType>;
+  defaultValue?: Record<string, any>;
   onSaveClick: (value: any) => void;
   onDeleteClick?: () => void;
   buttonAlign?: ButtonAlignType;
@@ -70,11 +70,11 @@ function BaseForm({
 
   const renderInput = (
     type: BaseFormItemType,
-    Component: React.ElementType,
+    CustomInput: React.ElementType,
     inputProps: any = {},
   ) => {
-    if (Component) {
-      return <Component {...inputProps} />;
+    if (CustomInput) {
+      return <CustomInput {...inputProps} />;
     }
 
     const BaseInput =
@@ -89,14 +89,14 @@ function BaseForm({
   };
 
   const renderFormItem = (name: string) => {
-    const {type, Component, inputProps} = FORM_ITEMS[name];
+    const {type, CustomInput, inputProps} = FORM_ITEMS[name];
     return (
       <Form.Item
         key={name}
         name={name}
         style={{display: 'flex'}}
         {...FORM_ITEMS[name]}>
-        {renderInput(type, Component, inputProps)}
+        {renderInput(type, CustomInput, inputProps)}
       </Form.Item>
     );
   };
