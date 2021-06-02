@@ -8,11 +8,11 @@ function InputNumber(props: InputNumberProps) {
   const onNumberChange = (e) => {
     const newValue = parseInt(e.target.value || '0');
 
-    if (Number.isNaN(newValue)) {
+    if (Number.isNaN(newValue) || !onChange) {
       return;
     }
 
-    onChange?.({
+    onChange({
       ...e,
       target: {...e.target, name: e.target.name, value: newValue},
     });
