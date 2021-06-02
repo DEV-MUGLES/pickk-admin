@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react';
 import {Select, Typography} from 'antd';
 
 import AccountInput, {

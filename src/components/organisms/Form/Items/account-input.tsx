@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Col, Input, Select, Space, Tag} from 'antd';
 
@@ -15,7 +14,7 @@ export type AccountInputType = {
 
 export type AcccountInputProps = {
   value: AccountInputType;
-  onChange: (value: any) => void;
+  onChange: (value: AccountInputType) => void;
 };
 
 function AccountInput({value, onChange}: AcccountInputProps) {
@@ -80,7 +79,7 @@ const Label = styled(Tag).attrs({
 
 export const CheckAccountValidation = async (
   _,
-  {bankCode, number, ownerName},
+  {bankCode, number, ownerName}: AccountInputType,
 ) => {
   if (!bankCode?.length) {
     throw new Error('은행을 선택해주세요.');

@@ -1,10 +1,10 @@
-import AddressInput from './address-input';
+import AddressInput, {AddressType} from './address-input';
 
 import {FormItemValueType} from '@src/components/organisms/Form/base';
 
 const checkAddressValidation = async (
   _,
-  {baseAddress, detailAddress, postalCode},
+  {baseAddress, detailAddress, postalCode}: AddressType,
 ) => {
   if (!baseAddress?.length) {
     throw new Error('주소를 입력해주세요.');

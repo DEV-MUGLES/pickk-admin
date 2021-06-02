@@ -4,8 +4,11 @@ import {message} from 'antd';
 import BaseForm, {
   FormItemValueType,
 } from '../../../../components/organisms/Form/base';
-import FeePayReceiveInput from './fee-pay-receive-input';
 
+import FeePayReceiveInput, {
+  FeePayReceiveValueType,
+} from './fee-pay-receive-input';
+import {AddressType} from './address-input';
 import {isEqualObject} from '@src/lib/utils';
 import {useClaimPolicyForm} from './use-claim-policy-form';
 import {
@@ -26,7 +29,7 @@ function ClaimPolicyForm() {
     UPDATE_MY_SELLER_CLAIM_POLICY_MUTATION,
   );
 
-  const handleSaveReturnAddress = async (returnAddress) => {
+  const handleSaveReturnAddress = async (returnAddress: AddressType) => {
     if (isEqualObject(defaultValue?.returnAddress, returnAddress)) {
       return;
     }
@@ -44,7 +47,8 @@ function ClaimPolicyForm() {
         formValues;
       await handleSaveReturnAddress(returnAddress);
 
-      const {feePayMethod, accountInput} = feePayReceive;
+      const {feePayMethod, accountInput} =
+        feePayReceive as FeePayReceiveValueType;
 
       await updateMySellerClaimPolicy({
         variables: {
