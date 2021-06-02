@@ -3,7 +3,7 @@ import {Modal, message} from 'antd';
 import dayjs from 'dayjs';
 
 import BaseForm from '@src/components/organisms/Form/base';
-import SellPriceInput from './sell-price-input';
+import SellPriceInput, {checkPriceEmpty} from './sell-price-input';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {
@@ -18,6 +18,7 @@ import {
   UpdateItemPrice,
   UpdateItemPriceVariables,
 } from '@src/operations/__generated__/UpdateItemPrice';
+import {Items_items_prices} from '@src/operations/__generated__/Items';
 
 export type PriceFormModalType = 'add' | 'edit';
 
@@ -38,6 +39,7 @@ function PriceFormModal({
     state: {selectedRowId, selectedData},
     action: {reload},
   } = useBoardContext();
+
   const [updateItemPrice] = useMutation<
     UpdateItemPrice,
     UpdateItemPriceVariables
@@ -84,6 +86,25 @@ function PriceFormModal({
     onClose();
   };
 
+  const getDefaultValue = () => {
+    const selectedPrice: Items_items_prices = selectedData?.prices.find(
+      ({id}) => selectedPriceId === id,
+    );
+
+    if (!selectedPrice) {
+      return;
+    }
+
+    return {
+      ...selectedPrice,
+      price: {
+        originalPrice: selectedPrice.originalPrice,
+        sellPrice: selectedPrice.sellPrice,
+        isCrawlUpdating: selectedPrice.isCrawlUpdating,
+      },
+    };
+  };
+
   const [title, submitButtonText, defaultValue, showIsActive, handleSave]: [
     string,
     string,
@@ -93,13 +114,7 @@ function PriceFormModal({
   ] =
     type === 'add'
       ? ['가격 추가', '추가', undefined, true, handleAddItemPrice]
-      : [
-          '가격 수정',
-          '저장',
-          selectedData?.prices.find(({id}) => selectedPriceId === id),
-          false,
-          handleUpdateItemPrice,
-        ];
+      : ['가격 수정', '저장', getDefaultValue(), false, handleUpdateItemPrice];
 
   const basePrice = selectedData?.prices.find(({isBase}) => isBase);
 
@@ -135,10 +150,7 @@ function PriceFormModal({
 
   const handleSaveButtonClick = (value) => {
     const {price: _p, ..._itemPriceInput} = value;
-    const {
-      price: {originalPrice, sellPrice},
-      isCrawlUpdating,
-    } = _p;
+    const {originalPrice, sellPrice, isCrawlUpdating} = _p;
     const itemPriceInput = {
       ..._itemPriceInput,
       originalPrice,
@@ -151,14 +163,6 @@ function PriceFormModal({
     }
 
     handleSave(itemPriceInput);
-  };
-
-  const checkPriceEmpty = async (_, {price}) => {
-    if (parseInt(price.originalPrice) > 0 && parseInt(price.sellPrice) > 0) {
-      return;
-    }
-
-    throw new Error('정가와 판매가를 모두 입력해주세요');
   };
 
   return (

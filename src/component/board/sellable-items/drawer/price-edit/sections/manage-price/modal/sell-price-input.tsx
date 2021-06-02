@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import {useEffect, useState} from 'react';
-import {Checkbox, Input, Typography} from 'antd';
+import {useEffect} from 'react';
+import {Checkbox, Typography} from 'antd';
 
+import InputNumber from '@src/components/organisms/Form/Items/input-number';
 import {GREY} from '@src/components/atoms/colors';
+import {CustomInputProps} from '@src/components/organisms/Form/base';
 
 const {Text} = Typography;
 
@@ -11,81 +13,41 @@ export type PriceType = {
   sellPrice: number;
 };
 
-export type PriceInputProps = {
-  value?: any;
-  onChange?: (value) => void;
+export type PriceInputValueType = PriceType & {isCrawlUpdating: boolean};
+export type PriceInputProps = CustomInputProps<PriceInputValueType> & {
   basePrice: PriceType;
-  defaultValue?: {
-    originalPrice: number;
-    sellPrice: number;
-    isCrawlUpdating: boolean;
-  };
 };
 
 function PriceInput({
-  value,
-  onChange,
-  basePrice,
-  defaultValue = {
+  value = {
     originalPrice: 0,
     sellPrice: 0,
     isCrawlUpdating: false,
   },
+  onChange,
+  basePrice,
 }: PriceInputProps) {
-  const [price, setPrice] = useState<PriceType>({
-    originalPrice: defaultValue.originalPrice,
-    sellPrice: defaultValue.sellPrice,
-  });
-  const [isCrawlUpdating, setIsCrawlUpdating] = useState(
-    defaultValue.isCrawlUpdating,
-  );
+  const {originalPrice, sellPrice, isCrawlUpdating} = value;
 
-  /**
-   * 초기 랜더링 시 antd에서 triggerChange를 호출하지 않아
-   * defaultValue가 있을 때 required 에러 메세지를 출력하는 문제 해결
-   *  */
   useEffect(() => {
-    if (defaultValue.originalPrice !== 0) {
-      triggerChange({price, isCrawlUpdating});
-    }
-  }, []);
+    console.log(value);
+  }, [value]);
 
-  const triggerChange = (changedValue) => {
+  const handleInputNumberChange = ({target: {name, value: _value}}) => {
     onChange?.({
-      price,
-      isCrawlUpdating,
       ...value,
-      ...changedValue,
+      [name]: _value,
     });
   };
 
-  const handleInputNumberChange =
-    (name) =>
-    ({target: {value}}) => {
-      const newNumber = parseInt(value || '0', 10);
-
-      if (Number.isNaN(value)) {
-        return;
-      }
-
-      const newPrice = {
-        ...price,
-        [name]: newNumber,
-      };
-
-      setPrice(newPrice);
-
-      triggerChange({
-        price: newPrice,
-      });
-    };
-
   const handleCheckboxChange = ({target: {checked}}) => {
-    setIsCrawlUpdating(checked);
-
-    triggerChange({
+    onChange?.({
+      ...value,
       isCrawlUpdating: checked,
-      price: checked ? basePrice : price,
+      ...(checked && {
+        originalPrice: basePrice.originalPrice,
+        sellPrice: basePrice.sellPrice,
+      }),
     });
   };
 
@@ -93,11 +55,10 @@ function PriceInput({
     <>
       <Row>
         <Label>정가 : </Label>
-        <Input
-          value={
-            isCrawlUpdating ? basePrice.originalPrice : price.originalPrice
-          }
-          onChange={handleInputNumberChange('originalPrice')}
+        <InputNumber
+          name="originalPrice"
+          value={isCrawlUpdating ? basePrice.originalPrice : originalPrice}
+          onChange={handleInputNumberChange}
           disabled={isCrawlUpdating}
           suffix="원"
           style={{marginBottom: '0.4rem'}}
@@ -105,9 +66,10 @@ function PriceInput({
       </Row>
       <Row>
         <Label>판매가 : </Label>
-        <Input
-          value={isCrawlUpdating ? basePrice.sellPrice : price.sellPrice}
-          onChange={handleInputNumberChange('sellPrice')}
+        <InputNumber
+          name="sellPrice"
+          value={isCrawlUpdating ? basePrice.sellPrice : sellPrice}
+          onChange={handleInputNumberChange}
           disabled={isCrawlUpdating}
           suffix="원"
         />
@@ -135,3 +97,14 @@ const Row = styled.div`
 const Label = styled(Text)`
   width: 6rem;
 `;
+
+export const checkPriceEmpty = async (
+  _,
+  {originalPrice, sellPrice}: PriceInputValueType,
+) => {
+  if (originalPrice > 0 && sellPrice > 0) {
+    return;
+  }
+
+  throw new Error('정가와 판매가를 모두 입력해주세요');
+};
