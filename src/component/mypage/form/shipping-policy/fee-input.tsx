@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import InputNumber from '@src/components/organisms/Form/Items/input-number';
 
+import {CustomInputProps} from '@src/components/organisms/Form/base';
 import {MeSeller_meSeller_shippingPolicy} from '@src/operations/__generated__/MeSeller';
 
 export type ShippingFeeInputValueType = Pick<
@@ -11,10 +12,7 @@ export type ShippingFeeInputValueType = Pick<
   'fee' | 'minimumAmountForFree'
 >;
 
-export type ShippingFeeInputProps = {
-  value: ShippingFeeInputValueType;
-  onChange: (value: ShippingFeeInputValueType) => void;
-};
+export type ShippingFeeInputProps = CustomInputProps<ShippingFeeInputValueType>;
 
 function ShippingFeeInput({value, onChange}: ShippingFeeInputProps) {
   const [isFree, setIsFree] = useState<boolean>(false);

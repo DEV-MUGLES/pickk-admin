@@ -13,7 +13,7 @@ const ItemNoticeTypeAlias: Record<ItemNoticeType, string> = {
 };
 
 export type ItemNoticeTypeSelectProps = Pick<
-  SelectProps<any>,
+  SelectProps<string>,
   'onChange' | 'defaultValue' | 'value'
 >;
 

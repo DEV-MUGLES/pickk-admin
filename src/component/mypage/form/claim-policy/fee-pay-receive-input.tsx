@@ -4,6 +4,7 @@ import AccountInput, {
   AccountInputType,
 } from '@src/components/organisms/Form/Items/account-input';
 import {ClaimFeePayMethod} from '@src/operations/__generated__/globalTypes';
+import {CustomInputProps} from '@src/components/organisms/Form/base';
 
 const {Option} = Select;
 const {Text} = Typography;
@@ -13,10 +14,7 @@ export type FeePayReceiveValueType = {
   accountInput: AccountInputType;
 };
 
-export type FeePayReceiveInputProps = {
-  value: FeePayReceiveValueType;
-  onChange: (value: FeePayReceiveValueType) => void;
-};
+export type FeePayReceiveInputProps = CustomInputProps<FeePayReceiveValueType>;
 
 function FeePayReceiveInput({value, onChange}: FeePayReceiveInputProps) {
   const isAccountInputVisible = value?.feePayMethod === ClaimFeePayMethod.Trans;

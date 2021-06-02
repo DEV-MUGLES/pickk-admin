@@ -3,6 +3,7 @@ import {Col, Input, Select, Space, Tag} from 'antd';
 
 import {BankNameKorAlias} from '@src/lib/alias';
 import {InicisBankCode} from '@src/operations/__generated__/globalTypes';
+import {CustomInputProps} from '../base';
 
 const {Option} = Select;
 
@@ -12,10 +13,7 @@ export type AccountInputType = {
   ownerName: string;
 };
 
-export type AcccountInputProps = {
-  value: AccountInputType;
-  onChange: (value: AccountInputType) => void;
-};
+export type AcccountInputProps = CustomInputProps<AccountInputType>;
 
 function AccountInput({value, onChange}: AcccountInputProps) {
   const triggerChange = (changedValue) => {

@@ -4,11 +4,10 @@ import {Cascader} from 'antd';
 
 import {ITEM_MAJOR_CATEGORIES_QUERY} from '@src/operations/item-category/query';
 import {ItemMajorCategories} from '@src/operations/__generated__/ItemMajorCategories';
+import {CustomInputProps} from '@src/components/organisms/Form/base';
 
-export type ItemCategoryCascaderProps = {
+export type ItemCategoryCascaderProps = CustomInputProps<[number, number]> & {
   defaultValue?: [number, number];
-  value: [number, number];
-  onChange: (value: [number, number]) => void;
   hasAll?: boolean;
 };
 

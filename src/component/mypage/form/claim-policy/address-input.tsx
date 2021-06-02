@@ -1,16 +1,14 @@
-import {MeSeller_meSeller_returnAddress} from '@src/operations/__generated__/MeSeller';
 import {Input, Space} from 'antd';
-import {useEffect, useState} from 'react';
+
+import {CustomInputProps} from '@src/components/organisms/Form/base';
+import {MeSeller_meSeller_returnAddress} from '@src/operations/__generated__/MeSeller';
 
 export type AddressType = Pick<
   MeSeller_meSeller_returnAddress,
   'baseAddress' | 'detailAddress' | 'postalCode'
 >;
 
-export type AddressInputProps = {
-  value: AddressType;
-  onChange: (value: AddressType) => void;
-};
+export type AddressInputProps = CustomInputProps<AddressType>;
 
 function AddressInput({value, onChange}: AddressInputProps) {
   const handleChange = (e) => {
