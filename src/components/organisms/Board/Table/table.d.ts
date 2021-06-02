@@ -1,4 +1,4 @@
-import {OperationType} from '@src/operations/type';
+import {DocumentNode} from 'graphql';
 
 export type TableActionType = {
   icon?: string;
@@ -7,6 +7,6 @@ export type TableActionType = {
     ids: number[],
     mutate?: (options?: MutationFunctionOptions) => Promise<FetchResult>,
   ) => Promise<boolean>;
-  operation?: OperationType;
+  operation?: DocumentNode;
   Component?: React.FunctionComponent<any>;
 };
