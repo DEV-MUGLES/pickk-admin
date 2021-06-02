@@ -1,31 +1,21 @@
 import {message} from 'antd';
-import {gql, useMutation, useQuery} from '@apollo/client';
+import {useMutation} from '@apollo/client';
 
 import BaseEditForm from '../../../../components/organisms/Form/base';
 
-import {SELLER_SHIPPING_POLICY_FRAG} from '@src/operations/sellers/fragment';
 import {UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION} from '@src/operations/sellers/mutation';
 
 import {FORM_ITEMS} from './form-items';
-
-const ME_SELLER_SHIPPING_POLICY_QUERY = gql`
-  ${SELLER_SHIPPING_POLICY_FRAG}
-  query MeSeller {
-    meSeller {
-      shippingPolicy {
-        ...SellerShippingPolicyFrag
-      }
-    }
-  }
-`;
+import {useShippingPolicyEdit} from './use-shipping-policy-form';
 
 function ShippingPolicyEditForm() {
-  const {data, refetch} = useQuery(ME_SELLER_SHIPPING_POLICY_QUERY);
+  const {defaultValue, refetch} = useShippingPolicyEdit();
   const [updateShippingPolicy] = useMutation(
     UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION,
   );
 
-  const handleSaveClick = (updateSellerShippingPolicyInput) => {
+  const handleSaveClick = (formInput) => {
+    const {shippingPolicy: updateSellerShippingPolicyInput} = formInput;
     updateShippingPolicy({
       variables: {
         updateSellerShippingPolicyInput,
@@ -44,7 +34,7 @@ function ShippingPolicyEditForm() {
     <BaseEditForm
       FORM_ITEMS={FORM_ITEMS}
       onSaveClick={handleSaveClick}
-      defaultValue={data?.meSeller?.shippingPolicy}
+      defaultValue={defaultValue}
     />
   );
 }

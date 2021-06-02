@@ -1,24 +1,13 @@
-import MinimumAmountForFreeInput from './minimum-amount-for-free-input';
+import ShippingFeeInput from './fee-input';
 
 import {FormItemValueType} from '../../../../components/organisms/Form/base';
-import {UpdateSellerShippingPolicyInput} from '@src/operations/__generated__/globalTypes';
 
 export const FORM_ITEMS: {
-  [Property in keyof UpdateSellerShippingPolicyInput]: FormItemValueType;
+  [number: string]: FormItemValueType;
 } = {
-  fee: {
-    label: '기본 배송비',
-    rules: [
-      {
-        required: true,
-        message: '기본 배송비를 입력해주세요.',
-      },
-    ],
-    type: 'number',
-  },
-  minimumAmountForFree: {
+  shippingPolicy: {
     label: '무료배송',
-    Component: MinimumAmountForFreeInput,
+    Component: ShippingFeeInput,
     rules: [
       {
         required: true,
