@@ -1,17 +1,19 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   Form,
-  Input,
+  FormProps,
+  FormItemProps,
   Button,
   Modal,
-  FormItemProps,
-  InputNumber,
+  Input,
   Switch,
-  FormProps,
+  InputProps,
+  SwitchProps,
 } from 'antd';
 
-import DatePickerFormItem from './Items/date-picker';
+import InputNumber, {InputNumberProps} from './Items/input-number';
+import DatePickerFormItem, {DatePickerFormItemProps} from './Items/date-picker';
 import {Space} from '@src/components/atoms';
 
 import {useBaseForm} from '@src/hooks/form';
@@ -19,18 +21,42 @@ import {useBaseForm} from '@src/hooks/form';
 const {confirm} = Modal;
 
 export type BaseFormItemType = 'string' | 'number' | 'boolean' | 'date';
-export type FormItemValueType = FormItemProps & {
-  type?: BaseFormItemType;
-  CustomInput?: React.ElementType;
-  inputProps?: any;
+
+export type CustomInputProps<T = unknown> = {
+  value: T;
+  onChange: (value: T) => void;
 };
+
+export type InputComponentType =
+  | {
+      type?: 'string';
+      inputProps?: InputProps;
+    }
+  | {
+      type: 'number';
+      inputProps?: InputNumberProps;
+    }
+  | {
+      type: 'boolean';
+      inputProps?: SwitchProps;
+    }
+  | {
+      type: 'date';
+      inputProps?: DatePickerFormItemProps;
+    }
+  | {
+      CustomInput: React.ElementType;
+      inputProps?: CustomInputProps & any;
+    };
+
+export type BaseFormItemValueProps = FormItemProps & InputComponentType;
 
 export type ButtonAlignType = 'left' | 'right' | 'center';
 
 export type BaseFormProps = {
-  FORM_ITEMS: Record<string, FormItemValueType>;
+  FORM_ITEMS: Record<string, BaseFormItemValueProps>;
   defaultValue?: Record<string, any>;
-  onSaveClick: (value: any) => void;
+  onSaveClick: (value: Record<string, any>) => void;
   onDeleteClick?: () => void;
   buttonAlign?: ButtonAlignType;
   submitButtonText?: string;
@@ -64,41 +90,39 @@ function BaseForm({
   const handleDelete = () => {
     confirm({
       title: `삭제하시겠습니까?`,
-      onOk: () => onDeleteClick(),
+      onOk: onDeleteClick,
     });
   };
 
-  const renderInput = (
-    type: BaseFormItemType,
-    CustomInput: React.ElementType,
-    inputProps: any = {},
-  ) => {
-    if (CustomInput) {
-      return <CustomInput {...inputProps} />;
+  const renderInput = (props: InputComponentType) => {
+    if ('CustomInput' in props) {
+      return <props.CustomInput {...props.inputProps} />;
     }
 
-    const BaseInput =
-      {
-        string: Input,
-        number: InputNumber,
-        boolean: Switch,
-        date: DatePickerFormItem,
-      }[type] || Input;
+    const BaseInput: React.ElementType = {
+      string: Input,
+      number: InputNumber,
+      boolean: Switch,
+      date: DatePickerFormItem,
+    }[props.type || 'string'];
 
-    return <BaseInput {...inputProps} />;
+    return <BaseInput {...props.inputProps} />;
   };
 
-  const renderFormItem = (name: string) => {
-    const {type, CustomInput, inputProps} = FORM_ITEMS[name];
-    return (
-      <Form.Item
-        key={name}
-        name={name}
-        style={{display: 'flex'}}
-        {...FORM_ITEMS[name]}>
-        {renderInput(type, CustomInput, inputProps)}
-      </Form.Item>
-    );
+  const renderFormItems = () => {
+    const FormItems = Object.keys(FORM_ITEMS).map((name) => {
+      const formItemValue = FORM_ITEMS[name];
+      return (
+        <Form.Item
+          key={name}
+          name={name}
+          style={{display: 'flex'}}
+          {...(formItemValue as FormItemProps)}>
+          {renderInput(formItemValue as InputComponentType)}
+        </Form.Item>
+      );
+    });
+    return FormItems;
   };
 
   return (
@@ -114,7 +138,7 @@ function BaseForm({
       }}
       layout="horizontal"
       {...formProps}>
-      {Object.keys(FORM_ITEMS).map((name) => renderFormItem(name))}
+      {renderFormItems()}
       <Space level={2} />
       <ButtonWrapper align={buttonAlign}>
         {hasDeleteButton && (
