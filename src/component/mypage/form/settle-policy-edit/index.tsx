@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import {useQuery, useMutation} from '@apollo/client';
 import {message} from 'antd';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 
 import {SELLER_SETTLE_POLICY_FRAG} from '@src/operations/sellers/fragment';
 import {UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION} from '@src/operations/sellers/mutation';
@@ -54,7 +54,7 @@ function SettlePolicyEditForm() {
   };
 
   return (
-    <BaseEditForm
+    <BaseForm
       FORM_ITEMS={FORM_ITEMS}
       onSaveClick={handleSaveClick}
       defaultValue={defaultValue}

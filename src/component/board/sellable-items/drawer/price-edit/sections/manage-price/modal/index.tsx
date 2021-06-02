@@ -2,7 +2,7 @@ import {useMutation} from '@apollo/client';
 import {Modal, message} from 'antd';
 import dayjs from 'dayjs';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 import SellPriceInput from './sell-price-input';
 
 import {useBoardContext} from '@src/contexts/Board';
@@ -163,7 +163,7 @@ function PriceFormModal({
 
   return (
     <Modal visible={visible} title={title} onCancel={onClose} footer={false}>
-      <BaseEditForm
+      <BaseForm
         FORM_ITEMS={{
           price: {
             label: '가격 (단위: 원)',

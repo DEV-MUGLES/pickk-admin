@@ -14,7 +14,7 @@ import {
 import DatePickerFormItem from './Items/date-picker';
 import {Space} from '@src/components/atoms';
 
-import {useBaseEditForm} from '@src/hooks/form';
+import {useBaseForm} from '@src/hooks/form';
 
 const {confirm} = Modal;
 
@@ -27,7 +27,7 @@ export type FormItemValueType = FormItemProps & {
 
 export type ButtonAlignType = 'left' | 'right' | 'center';
 
-export type BaseEditFormProps = {
+export type BaseFormProps = {
   FORM_ITEMS: {[name: string]: FormItemValueType};
   defaultValue?: {[name: string]: any};
   onSaveClick: (value: any) => void;
@@ -38,7 +38,7 @@ export type BaseEditFormProps = {
   hasDeleteButton?: boolean;
 } & Omit<FormProps, 'form' | 'onFinish' | 'defaultValue'>;
 
-function BaseEditForm({
+function BaseForm({
   FORM_ITEMS,
   defaultValue,
   onSaveClick,
@@ -48,8 +48,8 @@ function BaseEditForm({
   deleteButtonText,
   hasDeleteButton = false,
   ...formProps
-}: BaseEditFormProps) {
-  const form = useBaseEditForm(defaultValue);
+}: BaseFormProps) {
+  const form = useBaseForm(defaultValue);
 
   const handleFinish = (value) => {
     confirm({
@@ -130,7 +130,7 @@ function BaseEditForm({
   );
 }
 
-export default BaseEditForm;
+export default BaseForm;
 
 const ButtonWrapper = styled.div<{align: ButtonAlignType}>`
   display: flex;

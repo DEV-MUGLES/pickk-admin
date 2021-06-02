@@ -1,7 +1,7 @@
 import {message} from 'antd';
 import {useMutation} from '@apollo/client';
 
-import BaseEditForm from '../../../../components/organisms/Form/base';
+import BaseForm from '../../../../components/organisms/Form/base';
 
 import {UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION} from '@src/operations/sellers/mutation';
 
@@ -30,7 +30,7 @@ function ShippingPolicyEditForm() {
   };
 
   return (
-    <BaseEditForm
+    <BaseForm
       FORM_ITEMS={FORM_ITEMS}
       onSaveClick={handleSaveClick}
       defaultValue={defaultValue}

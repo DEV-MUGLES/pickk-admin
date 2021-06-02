@@ -1,7 +1,7 @@
 import {useMutation} from '@apollo/client';
 import {message} from 'antd';
 
-import BaseEditForm, {
+import BaseForm, {
   FormItemValueType,
 } from '../../../../components/organisms/Form/base';
 import FeePayReceiveInput from './fee-pay-receive-input';
@@ -80,7 +80,7 @@ function ClaimPolicyEditForm() {
   };
 
   return (
-    <BaseEditForm
+    <BaseForm
       FORM_ITEMS={newFormItems}
       onSaveClick={handleSaveClick}
       defaultValue={defaultValue}

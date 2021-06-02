@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {useMutation} from '@apollo/client';
 import {message} from 'antd';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 import ItemNoticeAddButton from './add';
 import ItemNoticeTypeSelect from './type-select';
 
@@ -72,7 +72,7 @@ function ItemNoticeEditSection() {
       {!itemNotice ? (
         <ItemNoticeAddButton />
       ) : (
-        <BaseEditForm
+        <BaseForm
           FORM_ITEMS={{
             type: {
               label: '타입 수정',

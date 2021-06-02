@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useMutation} from '@apollo/client';
 import {Image, Input, message} from 'antd';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 import ImageUpload from '@src/components/molecules/image-upload';
 import ItemCategoryCascader from '@src/components/molecules/cascader/item-category';
 
@@ -63,7 +63,7 @@ function ItemBaseInfoEditSection() {
         <Image width={200} src={selectedItem?.imageUrl} />
       </Col>
       <Col style={{marginLeft: '1.6rem', flex: 1}}>
-        <BaseEditForm
+        <BaseForm
           FORM_ITEMS={{
             imageUrl: {
               label: '대표 이미지 수정',

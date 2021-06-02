@@ -3,7 +3,7 @@ import {useMutation} from '@apollo/client';
 import {Modal, Button, ModalProps, message} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 import ItemNoticeTypeSelect from './type-select';
 import DayjsDatePicker from '@src/components/molecules/BoardFilter/input/DayjsDatePicker';
 
@@ -70,7 +70,7 @@ function ItemNoticeAddButton() {
         안내메세지 추가
       </Button>
       <Modal visible={visible} {...modalProps}>
-        <BaseEditForm
+        <BaseForm
           FORM_ITEMS={{
             type: {
               label: '타입 수정',

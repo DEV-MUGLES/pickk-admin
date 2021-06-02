@@ -1,7 +1,7 @@
 import {message} from 'antd';
 import {useMutation, useQuery} from '@apollo/client';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 
 import {UPDATE_ME_SELLER_MUTATION} from '@src/operations/sellers/mutation';
 import {ME_SELLER_QUERY} from '@src/operations/sellers/query';
@@ -27,7 +27,7 @@ function ServiceCenterInfoEditForm() {
   };
 
   return (
-    <BaseEditForm
+    <BaseForm
       FORM_ITEMS={FORM_ITEMS}
       onSaveClick={handleSaveClick}
       defaultValue={data?.meSeller}
