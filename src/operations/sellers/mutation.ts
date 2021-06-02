@@ -1,6 +1,7 @@
 import {gql} from '@apollo/client';
 import {
   BASE_SELLER_FRAG,
+  SELLER_CLAIM_POLICY_FRAG,
   SELLER_CRAWL_POLICY_FRAG,
   SELLER_RETURN_ADDRESS_FRAG,
   SELLER_SETTLE_POLICY_FRAG,
@@ -40,7 +41,7 @@ export const UPDATE_SELLER_SALE_STRATEGY = gql`
 `;
 
 export const UPDATE_MY_SELLER_CLAIM_POLICY_MUTATION = gql`
-  ${SELLER_CRAWL_POLICY_FRAG}
+  ${SELLER_CLAIM_POLICY_FRAG}
   mutation UpdateMySellerClaimPolicy(
     $updateSellerClaimPolicyInput: UpdateSellerClaimPolicyInput!
   ) {

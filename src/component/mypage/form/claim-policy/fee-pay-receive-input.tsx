@@ -9,45 +9,44 @@ import {ClaimFeePayMethod} from '@src/operations/__generated__/globalTypes';
 const {Option} = Select;
 const {Text} = Typography;
 
-function FeePayReceiveInput({value, onChange}) {
-  const [feePayMethod, setFeePayMethod] = useState<ClaimFeePayMethod>();
-  const [accountInput, setAccountInput] = useState<AccountInputType>();
+export type FeePayReceiveValueType = {
+  feePayMethod: ClaimFeePayMethod;
+  accountInput: AccountInputType;
+};
 
-  useEffect(() => {
-    setFeePayMethod(value?.feePayMethod);
-    setAccountInput(value?.accountInput);
-  }, [value]);
+export type FeePayReceiveInputProps = {
+  value: FeePayReceiveValueType;
+  onChange: (value: FeePayReceiveValueType) => void;
+};
 
-  const triggerChange = (changedValue) => {
+function FeePayReceiveInput({value, onChange}: FeePayReceiveInputProps) {
+  const isAccountInputVisible = value?.feePayMethod === ClaimFeePayMethod.Trans;
+
+  const handleFeePayMethodChange = (feePayMethod: ClaimFeePayMethod) => {
     onChange?.({
-      feePayMethod,
-      accountInput,
       ...value,
-      ...changedValue,
+      feePayMethod,
     });
   };
 
-  const handleFeePayMethodChange = (selectedValue: ClaimFeePayMethod) => {
-    setFeePayMethod(selectedValue);
-    triggerChange({feePayMethod: selectedValue});
-  };
-
-  const handleAccountInputChange = (input: any) => {
-    setAccountInput(input);
-    triggerChange({accountInput: input});
+  const handleAccountInputChange = (accountInput: AccountInputType) => {
+    onChange?.({
+      ...value,
+      accountInput,
+    });
   };
 
   return (
     <>
-      <Select value={feePayMethod} onChange={handleFeePayMethodChange}>
+      <Select value={value?.feePayMethod} onChange={handleFeePayMethodChange}>
         <Option value={ClaimFeePayMethod.Enclose}>택배상자 동봉</Option>
         <Option value={ClaimFeePayMethod.Trans}>계좌입금</Option>
       </Select>
-      {feePayMethod === ClaimFeePayMethod.Trans && (
+      {isAccountInputVisible && (
         <div style={{marginTop: '0.8rem'}}>
           <Text>[ 교환배송비 수령 계좌번호 ]</Text>
           <AccountInput
-            value={accountInput}
+            value={value?.accountInput}
             onChange={handleAccountInputChange}
           />
         </div>

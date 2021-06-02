@@ -19,31 +19,18 @@ export type AcccountInputProps = {
 };
 
 function AccountInput({value, onChange}: AcccountInputProps) {
-  const [inputs, setInputs] = useState<AccountInputType>(value);
-
-  useEffect(() => {
-    setInputs({
-      bankCode: value?.bankCode,
-      number: value?.number ?? '',
-      ownerName: value?.ownerName ?? '',
-    });
-  }, [value]);
-
   const triggerChange = (changedValue) => {
     onChange?.({
-      ...inputs,
       ...value,
       ...changedValue,
     });
   };
 
   const handleSelectChange = (value) => {
-    setInputs({...inputs, bankCode: value});
     triggerChange({bankCode: value});
   };
 
   const handleInputChange = ({target: {name, value}}) => {
-    setInputs({...inputs, [name]: value});
     triggerChange({[name]: value});
   };
 
@@ -52,7 +39,7 @@ function AccountInput({value, onChange}: AcccountInputProps) {
       <Col>
         <Label>계좌번호</Label>
         <Select
-          value={inputs?.bankCode}
+          value={value?.bankCode}
           placeholder="은행"
           onChange={handleSelectChange}>
           {Object.keys(InicisBankCode).map((key) => (
@@ -62,7 +49,7 @@ function AccountInput({value, onChange}: AcccountInputProps) {
           ))}
         </Select>
         <Input
-          value={inputs?.number}
+          value={value?.number ?? ''}
           name="number"
           placeholder="계좌번호"
           onChange={handleInputChange}
@@ -72,7 +59,7 @@ function AccountInput({value, onChange}: AcccountInputProps) {
       <Col>
         <Label>예금주</Label>
         <Input
-          value={inputs?.ownerName}
+          value={value?.ownerName ?? ''}
           name="ownerName"
           placeholder="예금주"
           onChange={handleInputChange}
