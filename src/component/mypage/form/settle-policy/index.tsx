@@ -1,42 +1,25 @@
-import gql from 'graphql-tag';
-import {useQuery, useMutation} from '@apollo/client';
+import {useMutation} from '@apollo/client';
 import {message} from 'antd';
 
 import BaseForm from '@src/components/organisms/Form/base';
 
-import {SELLER_SETTLE_POLICY_FRAG} from '@src/operations/sellers/fragment';
 import {UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION} from '@src/operations/sellers/mutation';
 
 import {FORM_ITEMS} from './form-items';
-
-const ME_SELLER_SHIPPING_POLICY_QUERY = gql`
-  ${SELLER_SETTLE_POLICY_FRAG}
-  query MeSeller {
-    meSeller {
-      settlePolicy {
-        ...SellerSettlePolicyFrag
-      }
-    }
-  }
-`;
+import {useShippingPolicyForm} from './use-settle-policy-form';
 
 function SettlePolicyForm() {
-  const {data} = useQuery(ME_SELLER_SHIPPING_POLICY_QUERY);
+  const {defaultValue} = useShippingPolicyForm();
   const [updateSettlePolicy] = useMutation(
     UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION,
   );
-  const defaultValue = {
-    ...data?.meSeller?.settlePolicy,
-    accountInput: data?.meSeller?.settlePolicy?.account,
-  };
 
-  const handleSaveClick = (updateSellerSettlePolicyInput) => {
-    const {bankCode, number, ownerName} =
-      updateSellerSettlePolicyInput.accountInput;
+  const handleSaveClick = (formInput) => {
+    const {bankCode, number, ownerName} = formInput.accountInput;
     updateSettlePolicy({
       variables: {
         updateSellerSettlePolicyInput: {
-          ...updateSellerSettlePolicyInput,
+          ...formInput,
           accountInput: {
             bankCode,
             number,
@@ -48,7 +31,7 @@ function SettlePolicyForm() {
       .then(() => {
         message.success('저장되었습니다.');
       })
-      .catch((error) => {
+      .catch(() => {
         message.error('저장에 실패했습니다');
       });
   };
