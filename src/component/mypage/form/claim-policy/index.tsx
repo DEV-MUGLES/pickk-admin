@@ -85,7 +85,7 @@ function ClaimPolicyForm() {
     <BaseForm
       FORM_ITEMS={newFormItems}
       onSaveClick={handleSaveClick}
-      defaultValue={defaultValue}
+      defaultValue={{...defaultValue}}
     />
   );
 }

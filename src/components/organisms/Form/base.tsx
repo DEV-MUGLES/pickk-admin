@@ -46,7 +46,7 @@ export type InputComponentType =
     }
   | {
       CustomInput: React.ElementType;
-      inputProps?: CustomInputProps & any;
+      inputProps?: Record<string, unknown>;
     };
 
 export type BaseFormItemValueProps = FormItemProps & InputComponentType;
@@ -55,8 +55,8 @@ export type ButtonAlignType = 'left' | 'right' | 'center';
 
 export type BaseFormProps = {
   FORM_ITEMS: Record<string, BaseFormItemValueProps>;
-  defaultValue?: Record<string, any>;
-  onSaveClick: (value: Record<string, any>) => void;
+  defaultValue?: Record<string, unknown>;
+  onSaveClick: (value: unknown) => void;
   onDeleteClick?: () => void;
   buttonAlign?: ButtonAlignType;
   submitButtonText?: string;

@@ -94,7 +94,7 @@ function ItemNoticeEditSection() {
           onDeleteClick={handleDeleteClick}
           hasDeleteButton={true}
           wrapperCol={{}}
-          defaultValue={itemNotice}
+          defaultValue={{...itemNotice}}
           buttonAlign="right"
           style={{width: '100%'}}
         />

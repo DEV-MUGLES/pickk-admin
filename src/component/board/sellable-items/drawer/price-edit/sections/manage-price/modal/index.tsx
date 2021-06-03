@@ -3,7 +3,10 @@ import {Modal, message} from 'antd';
 import dayjs from 'dayjs';
 
 import BaseForm from '@src/components/organisms/Form/base';
-import SellPriceInput, {checkPriceEmpty} from './sell-price-input';
+import SellPriceInput, {
+  checkPriceEmpty,
+  PriceInputValueType,
+} from './sell-price-input';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {
@@ -28,6 +31,9 @@ export type PriceFormModalProps = {
   onClose: () => void;
   selectedPriceId: number;
 };
+export type PriceFormValue = Items_items_prices & {
+  price: PriceInputValueType;
+};
 
 function PriceFormModal({
   type,
@@ -48,7 +54,7 @@ function PriceFormModal({
     ADD_ITEM_PRICE_MUTATION,
   );
 
-  const handleAddItemPrice = (itemPriceInput) => {
+  const handleAddItemPrice = (itemPriceInput: Items_items_prices) => {
     addItemPrice({
       variables: {
         itemId: selectedRowId,
@@ -65,7 +71,7 @@ function PriceFormModal({
       });
   };
 
-  const handleUpdateItemPrice = (_itemPriceInput) => {
+  const handleUpdateItemPrice = (_itemPriceInput: Items_items_prices) => {
     const {isActive, ...itemPriceInput} = _itemPriceInput;
     updateItemPrice({
       variables: {
@@ -83,10 +89,9 @@ function PriceFormModal({
       .catch(() => {
         message.error('가격 수정을 실패했습니다.');
       });
-    onClose();
   };
 
-  const getDefaultValue = () => {
+  const getDefaultValue = (): PriceFormValue => {
     const selectedPrice: Items_items_prices = selectedData?.prices.find(
       ({id}) => selectedPriceId === id,
     );
@@ -108,9 +113,9 @@ function PriceFormModal({
   const [title, submitButtonText, defaultValue, showIsActive, handleSave]: [
     string,
     string,
-    any,
+    PriceFormValue,
     boolean,
-    (input: any) => void,
+    (input: Items_items_prices) => void,
   ] =
     type === 'add'
       ? ['가격 추가', '추가', undefined, true, handleAddItemPrice]
@@ -118,7 +123,7 @@ function PriceFormModal({
 
   const basePrice = selectedData?.prices.find(({isBase}) => isBase);
 
-  const checkValidate = (addItemPriceInput): boolean => {
+  const checkValidate = (addItemPriceInput: Items_items_prices): boolean => {
     if (
       addItemPriceInput.endAt &&
       dayjs(addItemPriceInput.endAt).isBefore(addItemPriceInput.startAt)
@@ -148,7 +153,7 @@ function PriceFormModal({
     return true;
   };
 
-  const handleSaveButtonClick = (value) => {
+  const handleSaveButtonClick = (value: PriceFormValue) => {
     const {price: _p, ..._itemPriceInput} = value;
     const {originalPrice, sellPrice, isCrawlUpdating} = _p;
     const itemPriceInput = {
@@ -174,7 +179,7 @@ function PriceFormModal({
             CustomInput: SellPriceInput,
             inputProps: {
               basePrice,
-              defaultValue: defaultValue,
+              defaultValue,
             },
             rules: [
               {required: true, message: '정가와 판매가를 모두 입력해주세요'},
@@ -199,7 +204,7 @@ function PriceFormModal({
             },
           }),
         }}
-        defaultValue={defaultValue}
+        defaultValue={{...defaultValue}}
         onSaveClick={handleSaveButtonClick}
         buttonAlign="center"
         submitButtonText={submitButtonText}
