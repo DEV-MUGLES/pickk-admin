@@ -29,10 +29,6 @@ function PriceInput({
 }: PriceInputProps) {
   const {originalPrice, sellPrice, isCrawlUpdating} = value;
 
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
-
   const handleInputNumberChange = ({target: {name, value: _value}}) => {
     onChange?.({
       ...value,
