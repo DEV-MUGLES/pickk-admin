@@ -15,10 +15,7 @@ const ItemNoticeTypeAlias: Record<ItemNoticeType, string> = {
 
 export type ItemNoticeTypeSelectProps = CustomInputProps<string>;
 
-function ItemNoticeTypeSelect({
-  value,
-  onChange = (value: string) => null,
-}: ItemNoticeTypeSelectProps) {
+function ItemNoticeTypeSelect({value, onChange}: ItemNoticeTypeSelectProps) {
   return (
     <Select onChange={onChange} value={value}>
       {Object.keys(ItemNoticeType).map((key) => (

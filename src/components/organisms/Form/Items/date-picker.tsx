@@ -3,23 +3,13 @@ import dayjs, {Dayjs} from 'dayjs';
 
 import DayjsDatePicker from '../../../molecules/BoardFilter/input/DayjsDatePicker';
 
-export type DatePickerFormItemProps = {
-  defaultValue: Dayjs;
-  onChange: (value: Dayjs) => void;
-  value: Dayjs;
-};
+import {CustomInputProps} from '../base';
 
-function DatePickerFormItem({
-  defaultValue,
-  onChange = (value: Dayjs) => null,
-  value,
-}: DatePickerFormItemProps) {
+export type DatePickerFormItemProps = CustomInputProps<Dayjs>;
+
+function DatePickerFormItem({onChange, value}: DatePickerFormItemProps) {
   return (
-    <DayjsDatePicker
-      defaultValue={value ? dayjs(defaultValue) : null}
-      onChange={onChange}
-      value={value ? dayjs(value) : null}
-    />
+    <DayjsDatePicker onChange={onChange} value={value ? dayjs(value) : null} />
   );
 }
 
