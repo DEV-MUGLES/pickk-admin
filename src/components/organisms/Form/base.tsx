@@ -110,19 +110,15 @@ function BaseForm({
   };
 
   const renderFormItems = () => {
-    const FormItems = Object.keys(FORM_ITEMS).map((name) => {
-      const formItemValue = FORM_ITEMS[name];
-      return (
-        <Form.Item
-          key={name}
-          name={name}
-          style={{display: 'flex'}}
-          {...(formItemValue as FormItemProps)}>
-          {renderInput(formItemValue as InputComponentType)}
-        </Form.Item>
-      );
-    });
-    return FormItems;
+    return Object.entries(FORM_ITEMS).map(([key, value]) => (
+      <Form.Item
+        key={key}
+        name={key}
+        style={{display: 'flex'}}
+        {...(value as FormItemProps)}>
+        {renderInput(value as InputComponentType)}
+      </Form.Item>
+    ));
   };
 
   return (
