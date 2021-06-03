@@ -154,13 +154,10 @@ function PriceFormModal({
   };
 
   const handleSaveButtonClick = (value: PriceFormValue) => {
-    const {price: _p, ..._itemPriceInput} = value;
-    const {originalPrice, sellPrice, isCrawlUpdating} = _p;
+    const {price, ..._itemPriceInput} = value;
     const itemPriceInput = {
       ..._itemPriceInput,
-      originalPrice,
-      sellPrice,
-      isCrawlUpdating,
+      ...price,
     };
 
     if (!checkValidate(itemPriceInput)) {
