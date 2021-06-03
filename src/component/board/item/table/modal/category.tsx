@@ -23,7 +23,10 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
     action: {reload},
   } = useBoardContext();
 
-  const [value, setValue] = useState<[number, number]>();
+  const [value, setValue] = useState<[number, number]>([
+    selectedData?.majorCategory?.id,
+    selectedData?.minorCategory?.id,
+  ]);
   const [update] =
     useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
 
@@ -50,14 +53,7 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
         onClose();
       }}
       onOk={handleOk}>
-      <ItemCategoryCascader
-        defaultValue={[
-          selectedData?.majorCategory?.id,
-          selectedData?.minorCategory?.id,
-        ]}
-        value={value}
-        onChange={setValue}
-      />
+      <ItemCategoryCascader value={value} onChange={setValue} />
     </Modal>
   );
 }

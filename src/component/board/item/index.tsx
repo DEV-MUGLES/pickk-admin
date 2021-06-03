@@ -64,10 +64,12 @@ function ItemBoard({title}: BoardProps) {
       <Filter title={title} inputs={itemInputs} />
       <Space level={2} />
       <Table title={title} columns={newItemColumns} actions={itemActions} />
-      <CategoryModal
-        visible={modalVisible}
-        onClose={() => handleModalOpen(false)}
-      />
+      {modalVisible && (
+        <CategoryModal
+          visible={modalVisible}
+          onClose={() => handleModalOpen(false)}
+        />
+      )}
     </>
   );
 }

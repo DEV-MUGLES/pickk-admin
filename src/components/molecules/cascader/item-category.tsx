@@ -7,12 +7,10 @@ import {ItemMajorCategories} from '@src/operations/__generated__/ItemMajorCatego
 import {CustomInputProps} from '@src/components/organisms/Form/base';
 
 export type ItemCategoryCascaderProps = CustomInputProps<[number, number]> & {
-  defaultValue?: [number, number];
   hasAll?: boolean;
 };
 
 function ItemCategoryCascader({
-  defaultValue,
   value,
   onChange,
   hasAll = false,
@@ -39,13 +37,7 @@ function ItemCategoryCascader({
       }),
     }));
 
-  return (
-    <Cascader
-      value={value ?? defaultValue}
-      options={options}
-      onChange={onChange}
-    />
-  );
+  return <Cascader value={value} options={options} onChange={onChange} />;
 }
 
 export default ItemCategoryCascader;
