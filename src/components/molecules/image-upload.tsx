@@ -15,11 +15,15 @@ export type ImageUploadProps = {
   alt?: string;
 };
 
-function ImageUpload({imageUrl, setImageUrl, alt}: ImageUploadProps) {
+function ImageUpload({
+  imageUrl,
+  setImageUrl,
+  alt = 'image url',
+}: ImageUploadProps) {
   const [upload, {loading}] = useMutation<
     UploadMultipleImages,
     UploadMultipleImagesVariables
-  >(UPLOAD_MULTIPLE_IMAGES_MUTATION.gql);
+  >(UPLOAD_MULTIPLE_IMAGES_MUTATION);
 
   const uploadProps: UploadProps = {
     name: 'file',
@@ -68,7 +72,7 @@ function ImageUpload({imageUrl, setImageUrl, alt}: ImageUploadProps) {
       {imageUrl ? (
         <img
           src={imageUrl}
-          alt={alt ?? 'image url'}
+          alt={alt}
           style={{width: '100%', height: '100%', objectFit: 'cover'}}
         />
       ) : (

@@ -1,6 +1,7 @@
-import {Select, SelectProps} from 'antd';
+import {Select} from 'antd';
 
 import {ItemNoticeType} from '@src/operations/__generated__/globalTypes';
+import {CustomInputProps} from '@src/components/organisms/Form/base';
 
 const {Option} = Select;
 
@@ -12,18 +13,11 @@ const ItemNoticeTypeAlias: Record<ItemNoticeType, string> = {
   PreorderDelivery: '예약배송',
 };
 
-export type ItemNoticeTypeSelectProps = Pick<
-  SelectProps<any>,
-  'onChange' | 'defaultValue' | 'value'
->;
+export type ItemNoticeTypeSelectProps = CustomInputProps<string>;
 
-function ItemNoticeTypeSelect({
-  defaultValue,
-  value,
-  onChange = (value: string) => null,
-}: ItemNoticeTypeSelectProps) {
+function ItemNoticeTypeSelect({value, onChange}: ItemNoticeTypeSelectProps) {
   return (
-    <Select defaultValue={defaultValue} onChange={onChange} value={value}>
+    <Select onChange={onChange} value={value}>
       {Object.keys(ItemNoticeType).map((key) => (
         <Option value={key} key={key}>
           {ItemNoticeTypeAlias[key]}

@@ -3,7 +3,7 @@ import {useMutation} from '@apollo/client';
 import {Modal, Button, ModalProps, message} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 import ItemNoticeTypeSelect from './type-select';
 import DayjsDatePicker from '@src/components/molecules/BoardFilter/input/DayjsDatePicker';
 
@@ -24,7 +24,7 @@ function ItemNoticeAddButton() {
 
   const [visible, setVisible] = useState(false);
   const [addItemNotice] = useMutation<AddItemNotice, AddItemNoticeVariables>(
-    ADD_ITEM_NOTICE_MUTATION.gql,
+    ADD_ITEM_NOTICE_MUTATION,
   );
 
   const handleAddItemNoticeButton = () => {
@@ -70,18 +70,18 @@ function ItemNoticeAddButton() {
         안내메세지 추가
       </Button>
       <Modal visible={visible} {...modalProps}>
-        <BaseEditForm
+        <BaseForm
           FORM_ITEMS={{
             type: {
               label: '타입 수정',
-              Component: ItemNoticeTypeSelect,
+              CustomInput: ItemNoticeTypeSelect,
             },
             message: {
               label: '메세지',
             },
             range: {
               label: '적용 기간',
-              Component: RangePicker,
+              CustomInput: RangePicker,
             },
           }}
           onSaveClick={handleSaveClick}

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {useMutation} from '@apollo/client';
 import {message} from 'antd';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 import ItemNoticeAddButton from './add';
 import ItemNoticeTypeSelect from './type-select';
 
@@ -30,11 +30,11 @@ function ItemNoticeEditSection() {
   const [updateItemNotice] = useMutation<
     UpdateItemNotice,
     UpdateItemNoticeVariables
-  >(UPDATE_ITEM_NOTICE_MUTATION.gql);
+  >(UPDATE_ITEM_NOTICE_MUTATION);
   const [removeItemNotice] = useMutation<
     RemoveItemNotice,
     RemoveItemNoticeVariables
-  >(REMOVE_ITEM_NOTICE_MUTATION.gql);
+  >(REMOVE_ITEM_NOTICE_MUTATION);
 
   const handleSaveClick = (value) => {
     updateItemNotice({
@@ -72,11 +72,11 @@ function ItemNoticeEditSection() {
       {!itemNotice ? (
         <ItemNoticeAddButton />
       ) : (
-        <BaseEditForm
+        <BaseForm
           FORM_ITEMS={{
             type: {
               label: '타입 수정',
-              Component: ItemNoticeTypeSelect,
+              CustomInput: ItemNoticeTypeSelect,
             },
             message: {
               label: '메세지',
@@ -94,7 +94,7 @@ function ItemNoticeEditSection() {
           onDeleteClick={handleDeleteClick}
           hasDeleteButton={true}
           wrapperCol={{}}
-          defaultValue={itemNotice}
+          defaultValue={{...itemNotice}}
           buttonAlign="right"
           style={{width: '100%'}}
         />

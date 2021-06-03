@@ -1,0 +1,47 @@
+import {useMutation} from '@apollo/client';
+import {message} from 'antd';
+
+import BaseForm from '@src/components/organisms/Form/base';
+
+import {useSettlePolicyForm} from './use-settle-policy-form';
+import {UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION} from '@src/operations/sellers/mutation';
+
+import {FORM_ITEMS} from './form-items';
+
+function SettlePolicyForm() {
+  const {defaultValue} = useSettlePolicyForm();
+  const [updateSettlePolicy] = useMutation(
+    UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION,
+  );
+
+  const handleSaveClick = async (formInput) => {
+    try {
+      const {bankCode, number, ownerName} = formInput.accountInput;
+      await updateSettlePolicy({
+        variables: {
+          updateSellerSettlePolicyInput: {
+            ...formInput,
+            accountInput: {
+              bankCode,
+              number,
+              ownerName,
+            },
+          },
+        },
+      });
+      message.success('저장되었습니다.');
+    } catch (error) {
+      message.error('저장에 실패했습니다');
+    }
+  };
+
+  return (
+    <BaseForm
+      FORM_ITEMS={FORM_ITEMS}
+      onSaveClick={handleSaveClick}
+      defaultValue={defaultValue}
+    />
+  );
+}
+
+export default SettlePolicyForm;

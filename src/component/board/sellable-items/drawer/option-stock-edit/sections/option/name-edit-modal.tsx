@@ -23,7 +23,7 @@ function OptionNameEditModal({
   const [updateItemOption] = useMutation<
     UpdateItemOption,
     UpdateItemOptionVariables
-  >(UPDATE_ITEM_OPTION_MUTATION.gql);
+  >(UPDATE_ITEM_OPTION_MUTATION);
 
   const handleChange = ({target: {value}}) => {
     setName(value);

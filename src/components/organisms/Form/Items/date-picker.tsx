@@ -1,19 +1,15 @@
 import React from 'react';
-import dayjs from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs';
 
 import DayjsDatePicker from '../../../molecules/BoardFilter/input/DayjsDatePicker';
 
-function DatePickerFormItem({
-  defaultValue,
-  onChange = (value: any) => null,
-  value,
-}) {
+import {CustomInputProps} from '../base';
+
+export type DatePickerFormItemProps = CustomInputProps<Dayjs>;
+
+function DatePickerFormItem({onChange, value}: DatePickerFormItemProps) {
   return (
-    <DayjsDatePicker
-      defaultValue={value ? dayjs(defaultValue) : null}
-      onChange={onChange}
-      value={value ? dayjs(value) : null}
-    />
+    <DayjsDatePicker onChange={onChange} value={value ? dayjs(value) : null} />
   );
 }
 

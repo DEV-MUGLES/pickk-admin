@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useMutation} from '@apollo/client';
 import {Image, Input, message} from 'antd';
 
-import BaseEditForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/organisms/Form/base';
 import ImageUpload from '@src/components/molecules/image-upload';
 import ItemCategoryCascader from '@src/components/molecules/cascader/item-category';
 
@@ -24,9 +24,8 @@ function ItemBaseInfoEditSection() {
   } = useBoardContext();
   const selectedItem: Items_items = selectedData;
   const [imageUrl, setImageUrl] = useState<string>();
-  const [updateItem] = useMutation<UpdateItem, UpdateItemVariables>(
-    UPDATE_ITEM_MUTATION.gql,
-  );
+  const [updateItem] =
+    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
 
   useEffect(() => {
     setImageUrl(null);
@@ -64,7 +63,7 @@ function ItemBaseInfoEditSection() {
         <Image width={200} src={selectedItem?.imageUrl} />
       </Col>
       <Col style={{marginLeft: '1.6rem', flex: 1}}>
-        <BaseEditForm
+        <BaseForm
           FORM_ITEMS={{
             imageUrl: {
               label: '대표 이미지 수정',
@@ -74,7 +73,7 @@ function ItemBaseInfoEditSection() {
                   message: '이미지가 비었습니다.',
                 },
               ],
-              Component: () => (
+              CustomInput: () => (
                 <ImageUpload
                   imageUrl={imageUrl ?? selectedItem?.imageUrl}
                   setImageUrl={setImageUrl}
@@ -90,7 +89,7 @@ function ItemBaseInfoEditSection() {
                   message: '상품명을 입력해주세요.',
                 },
               ],
-              Component: TextArea,
+              CustomInput: TextArea,
             },
             category: {
               label: '카테고리',
@@ -100,7 +99,7 @@ function ItemBaseInfoEditSection() {
                   message: '카테고리를 선택해주세요.',
                 },
               ],
-              Component: ItemCategoryCascader,
+              CustomInput: ItemCategoryCascader,
             },
           }}
           onSaveClick={handleSaveClick}

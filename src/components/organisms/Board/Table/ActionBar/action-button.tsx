@@ -13,7 +13,7 @@ export type ActionButtonProps = {
 
 function ActionButton({selectedRowKeys, action}: ActionButtonProps) {
   const {reload} = useBoardContext().action;
-  const gql = (action.operation ?? PLACEHOLDER_MUTATION).gql;
+  const gql = action.operation ?? PLACEHOLDER_MUTATION;
   const [mutate] = useMutation(gql);
 
   return (

@@ -1,36 +1,62 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   Form,
-  Input,
+  FormProps,
+  FormItemProps,
   Button,
   Modal,
-  FormItemProps,
-  InputNumber,
+  Input,
   Switch,
-  FormProps,
-  Typography,
+  InputProps,
+  SwitchProps,
 } from 'antd';
 
-import DatePickerFormItem from './Items/date-picker';
+import InputNumber, {InputNumberProps} from './Items/input-number';
+import DatePickerFormItem, {DatePickerFormItemProps} from './Items/date-picker';
 import {Space} from '@src/components/atoms';
 
+import {useBaseForm} from '@src/hooks/form';
+
 const {confirm} = Modal;
-const {Text} = Typography;
 
 export type BaseFormItemType = 'string' | 'number' | 'boolean' | 'date';
-export type FormItemValueType = FormItemProps & {
-  type?: BaseFormItemType;
-  Component?: React.ElementType;
-  inputProps?: any;
+
+export type CustomInputProps<T = unknown> = {
+  value: T;
+  onChange: (value: T) => void;
 };
+
+export type InputComponentType =
+  | {
+      type?: 'string';
+      inputProps?: InputProps;
+    }
+  | {
+      type: 'number';
+      inputProps?: InputNumberProps;
+    }
+  | {
+      type: 'boolean';
+      inputProps?: SwitchProps;
+    }
+  | {
+      type: 'date';
+      inputProps?: DatePickerFormItemProps;
+    }
+  | {
+      CustomInput: React.ElementType;
+      inputProps?: Record<string, unknown>;
+    };
+
+export type BaseFormItemValueProps = FormItemProps & InputComponentType;
 
 export type ButtonAlignType = 'left' | 'right' | 'center';
 
-export type BaseEditFormProps = {
-  FORM_ITEMS: {[name: string]: FormItemValueType};
-  defaultValue?: {[name: string]: any};
-  onSaveClick: (value: any) => void;
+export type BaseFormProps = {
+  FORM_ITEMS: Record<string, BaseFormItemValueProps>;
+  defaultValue?: Record<string, unknown>;
+  onSaveClick: (value: unknown) => void;
   onDeleteClick?: () => void;
   buttonAlign?: ButtonAlignType;
   submitButtonText?: string;
@@ -38,22 +64,18 @@ export type BaseEditFormProps = {
   hasDeleteButton?: boolean;
 } & Omit<FormProps, 'form' | 'onFinish' | 'defaultValue'>;
 
-function BaseEditForm({
+function BaseForm({
   FORM_ITEMS,
   defaultValue,
   onSaveClick,
   onDeleteClick,
-  buttonAlign,
-  submitButtonText,
-  deleteButtonText,
+  buttonAlign = 'left',
+  submitButtonText = '저장',
+  deleteButtonText = '삭제',
   hasDeleteButton = false,
   ...formProps
-}: BaseEditFormProps) {
-  const [form] = Form.useForm();
-
-  useEffect(() => {
-    form.setFieldsValue(defaultValue);
-  }, [defaultValue]);
+}: BaseFormProps) {
+  const form = useBaseForm(defaultValue);
 
   const handleFinish = (value) => {
     confirm({
@@ -68,41 +90,35 @@ function BaseEditForm({
   const handleDelete = () => {
     confirm({
       title: `삭제하시겠습니까?`,
-      onOk: () => onDeleteClick(),
+      onOk: onDeleteClick,
     });
   };
 
-  const renderInput = (
-    type: BaseFormItemType,
-    Component: React.ElementType,
-    inputProps: any = {},
-  ) => {
-    if (Component) {
-      return <Component {...inputProps} />;
+  const renderInput = (props: InputComponentType) => {
+    if ('CustomInput' in props) {
+      return <props.CustomInput {...props.inputProps} />;
     }
 
-    const BaseInput =
-      {
-        string: Input,
-        number: InputNumber,
-        boolean: Switch,
-        date: DatePickerFormItem,
-      }[type] || Input;
+    const BaseInput: React.ElementType = {
+      string: Input,
+      number: InputNumber,
+      boolean: Switch,
+      date: DatePickerFormItem,
+    }[props.type || 'string'];
 
-    return <BaseInput {...inputProps} />;
+    return <BaseInput {...props.inputProps} />;
   };
 
-  const renderFormItem = (name: string) => {
-    const {type, Component, inputProps} = FORM_ITEMS[name];
-    return (
+  const renderFormItems = () => {
+    return Object.entries(FORM_ITEMS).map(([key, value]) => (
       <Form.Item
-        key={name}
-        name={name}
+        key={key}
+        name={key}
         style={{display: 'flex'}}
-        {...FORM_ITEMS[name]}>
-        {renderInput(type, Component, inputProps)}
+        {...(value as FormItemProps)}>
+        {renderInput(value as InputComponentType)}
       </Form.Item>
-    );
+    ));
   };
 
   return (
@@ -118,23 +134,23 @@ function BaseEditForm({
       }}
       layout="horizontal"
       {...formProps}>
-      {Object.keys(FORM_ITEMS).map((name) => renderFormItem(name))}
+      {renderFormItems()}
       <Space level={2} />
-      <ButtonWrapper align={buttonAlign ?? 'left'}>
+      <ButtonWrapper align={buttonAlign}>
         {hasDeleteButton && (
           <Button onClick={handleDelete} style={{marginRight: '0.4rem'}}>
-            {submitButtonText ?? '삭제'}
+            {deleteButtonText}
           </Button>
         )}
         <Button htmlType="submit" type="primary">
-          {submitButtonText ?? '저장'}
+          {submitButtonText}
         </Button>
       </ButtonWrapper>
     </Form>
   );
 }
 
-export default BaseEditForm;
+export default BaseForm;
 
 const ButtonWrapper = styled.div<{align: ButtonAlignType}>`
   display: flex;

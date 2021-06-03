@@ -64,10 +64,12 @@ function ItemBoard({title}: BoardProps) {
       <Filter title={title} inputs={itemInputs} />
       <Space level={2} />
       <Table title={title} columns={newItemColumns} actions={itemActions} />
-      <CategoryModal
-        visible={modalVisible}
-        onClose={() => handleModalOpen(false)}
-      />
+      {modalVisible && (
+        <CategoryModal
+          visible={modalVisible}
+          onClose={() => handleModalOpen(false)}
+        />
+      )}
     </>
   );
 }
@@ -76,8 +78,8 @@ export default withBoardContext(
   ItemBoard,
   {},
   {
-    gql: ITEMS_QUERY.gql,
-    dataName: ITEMS_QUERY.dataName,
+    gql: ITEMS_QUERY,
+    dataName: 'items',
     filterName: 'itemFilter',
   },
   (v) => v,

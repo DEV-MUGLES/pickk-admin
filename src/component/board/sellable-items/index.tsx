@@ -108,8 +108,8 @@ export default withBoardContext(
   SellableItemsBoard,
   {isSellable: true},
   {
-    gql: ITEMS_QUERY.gql,
-    dataName: ITEMS_QUERY.dataName,
+    gql: ITEMS_QUERY,
+    dataName: 'items',
     filterName: 'itemFilter',
   },
   (v) => v,

@@ -17,9 +17,8 @@ const {confirm} = Modal;
 
 function StockManageSection() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [updateItem] = useMutation<UpdateItem, UpdateItemVariables>(
-    UPDATE_ITEM_MUTATION.gql,
-  );
+  const [updateItem] =
+    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
   const {
     state: {selectedRowId, selectedData},
     action: {reload},
