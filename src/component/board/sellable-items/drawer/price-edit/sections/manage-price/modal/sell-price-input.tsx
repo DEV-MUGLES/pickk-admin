@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import {useEffect} from 'react';
+import {ChangeEvent} from 'react';
 import {Checkbox, Typography} from 'antd';
 
 import InputNumber from '@src/components/organisms/Form/Items/input-number';
 import {GREY} from '@src/components/atoms/colors';
 import {CustomInputProps} from '@src/components/organisms/Form/base';
+import {CheckboxChangeEvent} from 'antd/lib/checkbox';
 
 const {Text} = Typography;
 
@@ -29,14 +30,16 @@ function PriceInput({
 }: PriceInputProps) {
   const {originalPrice, sellPrice, isCrawlUpdating} = value;
 
-  const handleInputNumberChange = ({target: {name, value: _value}}) => {
+  const handleInputNumberChange = ({
+    target: {name, value: _value},
+  }: ChangeEvent<HTMLInputElement>) => {
     onChange?.({
       ...value,
-      [name]: _value,
+      [name]: parseInt(_value),
     });
   };
 
-  const handleCheckboxChange = ({target: {checked}}) => {
+  const handleCheckboxChange = ({target: {checked}}: CheckboxChangeEvent) => {
     onChange?.({
       ...value,
       isCrawlUpdating: checked,
