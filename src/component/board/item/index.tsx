@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Typography} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
-import {
-  formatTableAOA,
-  ColumnsType as ExcelColumnsType,
-} from '@pickk/react-excel';
+import {formatTable, ExcelColumnsType} from '@pickk/react-excel';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
@@ -102,6 +99,6 @@ export default withBoardContext(
       },
       ...excelColumns.slice(4),
     ];
-    return formatTableAOA(tableData, newExcelColumns);
+    return formatTable(tableData, newExcelColumns);
   },
 );
