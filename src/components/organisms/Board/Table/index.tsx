@@ -35,7 +35,7 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
   return (
     <Wrapper>
       <DataTable
-        {...{columns, dataSource: tableData, rowSelection, loading}}
+        {...{columns, dataSource: tableData as object[], rowSelection, loading}}
         scroll={{x: true}}
         size="small"
         title={() => (
@@ -43,7 +43,6 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
             <Header
               {...{
                 title,
-                columns,
                 dataSource: tableData,
               }}
             />

@@ -1,4 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
+import {ExcelDownloadButtonProps} from '@pickk/react-excel';
 
 import {Filter} from '@src/types';
 
@@ -6,12 +7,12 @@ export interface IBoard {
   state: {
     filter: Filter;
     newFilter: Filter;
-    tableData: any;
+    tableData: Array<unknown>;
     loading: boolean;
     defaultFilter: Filter;
     selectedRowKeys: number[];
     selectedRowId: number;
-    selectedData: any;
+    selectedData: Array<unknown>;
   };
   action: {
     handleFilterChange: (data: Filter) => void;
@@ -19,7 +20,7 @@ export interface IBoard {
     initFilter: () => void;
     reload: () => void;
     applyPreview: (data) => void;
-    parseExcelData: any;
+    parseExcelData: (data: unknown[]) => ExcelDownloadButtonProps['data'];
     setSelectedRowKeys: Dispatch<SetStateAction<number[]>>;
     setSelectedRowId: Dispatch<SetStateAction<number>>;
   };
