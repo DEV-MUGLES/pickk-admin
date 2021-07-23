@@ -444,12 +444,10 @@
     graphql "^15.5.0"
     react "^17.0.1"
 
-"@pickk/react-excel@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@pickk/react-excel/-/react-excel-0.0.5.tgz#a131ec320cc7d9e8f89dd028567e9e509297922e"
-  integrity sha512-ge31li21f1c2mbUYZ0erD1/iur0IiCUfhjwHtH6BYrFc4MlZ1X/o93nn2cOdRmyugkgFv2Hu3cMwEPpznnaRVg==
-  dependencies:
-    xlsx "^0.17.0"
+"@pickk/react-excel@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@pickk/react-excel/-/react-excel-0.0.8.tgz#dd44f2f61eb54c95c447b70866d56f13960f81d7"
+  integrity sha512-NFoixGDtWbZc3mUI9W3z1W/cIosv/PLt+E9nC4MhnK+q9KUpA7zbagqdgI1vYbDVzxUJ8zTh9AaB1dI0tx9zOQ==
 
 "@types/apollo-upload-client@^14.1.0":
   version "14.1.0"
