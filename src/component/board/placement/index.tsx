@@ -20,7 +20,7 @@ import {OrderStatus} from '@src/types';
 
 import {usePlacementTable} from '@src/hooks/table/Placement';
 import {usePlacementPreview} from '@src/hooks';
-import {withBoardContext, useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/contexts/Board';
 
 function PlacementBoard({title}: BoardProps) {
   const {tableData, selectedRowKeys} = useBoardContext().state;

@@ -13,7 +13,6 @@ import {parseTable} from './table/data-parser';
 import {useSettlementTable} from '@src/hooks/table/Settlement';
 import {useSettlementCountPreview} from '@src/hooks/Settlement';
 
-import {withBoardContext} from '@src/contexts/Board';
 import SettlementAmountPreview from './amount-preview';
 
 function SettlementBoard({title}: BoardProps) {

@@ -9,7 +9,7 @@ import Filter from '@src/components/organisms/Board/Filter';
 import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
-import {withBoardContext, useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/contexts/Board';
 
 import {refundRequestInputs} from './inputs';
 import {refundRequestPreviewData} from './preview-data';

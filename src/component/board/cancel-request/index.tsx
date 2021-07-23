@@ -5,8 +5,6 @@ import Filter from '@src/components/organisms/Board/Filter';
 import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
 import Space from '@src/components/atoms/space';
 
-import {withBoardContext} from '@src/contexts/Board';
-
 import {cancelRequestInputs} from './inputs';
 import {canceldRequestPreviewData} from './preview-data';
 import {cancelRequestColumns, parseTable} from './table';
