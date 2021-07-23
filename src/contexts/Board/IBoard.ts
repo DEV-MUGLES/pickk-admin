@@ -20,7 +20,7 @@ export interface IBoard {
     initFilter: () => void;
     reload: () => void;
     applyPreview: (data) => void;
-    parseExcelData: (data: unknown[]) => ExcelDownloadButtonProps['data'];
+    parseExcelData: (tableData: unknown[]) => ExcelDownloadButtonProps['data'];
     setSelectedRowKeys: Dispatch<SetStateAction<number[]>>;
     setSelectedRowId: Dispatch<SetStateAction<number>>;
   };

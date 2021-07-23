@@ -1,5 +1,9 @@
 import {useState} from 'react';
 import {ColumnsType} from 'antd/lib/table';
+import {
+  formatTableAOA,
+  ColumnsType as ExcelColumnsType,
+} from '@pickk/react-excel';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
@@ -112,5 +116,39 @@ export default withBoardContext(
     dataName: 'items',
     filterName: 'itemFilter',
   },
-  (v) => v,
+  (tableData) => {
+    const excelColumns = sellableItemColumns.map((column) => ({
+      label: column.title.toString(),
+      propName: column.key.toString(),
+    }));
+    const newExcelColumns: ExcelColumnsType<Items_items> = [
+      ...excelColumns.slice(0, 2),
+      {
+        label: '카테고리',
+        propName: 'category',
+        mapValue: ({majorCategory, minorCategory}) =>
+          `${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`,
+      },
+      ...excelColumns.slice(3, 7),
+      {
+        label: '보유재고',
+        propName: 'stock',
+        mapValue: ({products}) =>
+          products.reduce((acc, {stock}) => (acc += stock), 0),
+      },
+      ...excelColumns.slice(8, 10),
+      {
+        label: '안내메시지',
+        propName: 'notice',
+        mapValue: ({notice}) => notice?.message,
+      },
+      ...excelColumns.slice(11, 12),
+      {
+        label: '공홈링크',
+        propName: 'link',
+        mapValue: ({urls}) => urls.find((url) => url.isPrimary)?.url,
+      },
+    ];
+    return formatTableAOA(tableData, newExcelColumns);
+  },
 );
