@@ -7,12 +7,12 @@ export interface IBoard {
   state: {
     filter: Filter;
     newFilter: Filter;
-    tableData: Array<unknown>;
+    tableData: any[];
     loading: boolean;
     defaultFilter: Filter;
     selectedRowKeys: number[];
     selectedRowId: number;
-    selectedData: Array<unknown>;
+    selectedData: any;
   };
   action: {
     handleFilterChange: (data: Filter) => void;

@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import {Button, Typography} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
+import {
+  formatTableAOA,
+  ColumnsType as ExcelColumnsType,
+} from '@pickk/react-excel';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
@@ -82,5 +86,22 @@ export default withBoardContext(
     dataName: 'items',
     filterName: 'itemFilter',
   },
-  (v) => v,
+  (tableData) => {
+    const excelColumns = itemColumns.map((column) => ({
+      label: column.title.toString(),
+      propName: column.key.toString(),
+    }));
+    const newExcelColumns: ExcelColumnsType<Items_items> = [
+      ...excelColumns.slice(0, 1),
+      ...excelColumns.slice(2, 3),
+      {
+        label: '카테고리',
+        propName: 'category',
+        mapValue: ({majorCategory, minorCategory}) =>
+          `${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`,
+      },
+      ...excelColumns.slice(4),
+    ];
+    return formatTableAOA(tableData, newExcelColumns);
+  },
 );

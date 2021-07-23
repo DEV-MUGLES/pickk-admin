@@ -84,9 +84,7 @@ export const withBoardContext =
       state: {
         filter,
         newFilter,
-        tableData: data
-          ? data?.[dataName].map((v) => ({...v, key: v.id}))
-          : null,
+        tableData: data ? data?.[dataName].map((v) => ({...v, key: v.id})) : [],
         loading,
         defaultFilter,
         selectedRowKeys,
