@@ -24,7 +24,7 @@ function CurrentPriceInfoSection() {
   const {
     originalPrice = 0,
     sellPrice = 0,
-    pickkDiscountAmount = 0,
+    finalPrice = 0,
     isBase,
   } = activePrice;
   const priceInfoMessage = isBase
@@ -45,7 +45,7 @@ function CurrentPriceInfoSection() {
           </Text>
           <Text>
             <Label strong>핔할인적용가 : </Label>
-            {addCommaToNumber(pickkDiscountAmount || 0)} 원
+            {addCommaToNumber(finalPrice)} 원
           </Text>
         </Space>
       </Card>

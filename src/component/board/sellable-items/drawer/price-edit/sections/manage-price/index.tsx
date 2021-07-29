@@ -1,15 +1,14 @@
 import {useState} from 'react';
-import {useMutation} from '@apollo/client';
-import {Button, Space, Table, Tooltip, Modal} from 'antd';
+import {Button, Space, Table, Modal} from 'antd';
+import {ColumnsType} from 'antd/lib/table';
 import {PlusOutlined} from '@ant-design/icons';
+import {Item} from '@pickk/common';
 
 import PriceFormModal, {PriceFormModalType} from './modal';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {
-  ACTIVATE_ITEM_PRICE_MUTATION,
-  REMOVE_ITEM_PRICE_MUTATION,
-} from '@src/operations/item/mutation';
+import {useRemoveItemPrice} from '@src/hooks/apis';
+import {compareDate, isBeforeDate} from '@src/lib/date';
 
 import {itemPricesColumns} from './columns';
 
@@ -23,9 +22,16 @@ function ManagePriceSection() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState<PriceFormModalType>();
   const [selectedPriceId, setSelectedPriceId] = useState<number>();
+  const [removeItemPrice] = useRemoveItemPrice();
 
-  const [removeItemPrice] = useMutation(REMOVE_ITEM_PRICE_MUTATION);
-  const [activateItemPrice] = useMutation(ACTIVATE_ITEM_PRICE_MUTATION);
+  const filteredPrices: Item['prices'] = selectedData?.prices
+    ?.filter(({isBase, endAt}) => !isBase && isBeforeDate(new Date(), endAt))
+    .sort((a, b) => compareDate(a.startAt, b.startAt));
+
+  const [isTableVisible, addButtonText]: [boolean, string] =
+    filteredPrices?.length > 0
+      ? [true, '가격 수동설정']
+      : [false, '가격 예약설정'];
 
   const handleOpenModal =
     (isOpen: boolean, type?: PriceFormModalType) => () => {
@@ -52,60 +58,33 @@ function ManagePriceSection() {
     });
   };
 
-  const handleAcitvateClick = (priceId: number) => () => {
-    confirm({
-      title: '선택한 가격으로 활성화하시겠습니까?',
-      onOk() {
-        activateItemPrice({
-          variables: {
-            itemId: selectedRowId,
-            priceId,
-          },
-        }).then(reload);
-      },
-    });
-  };
+  const newItemPricesColumns: ColumnsType = [
+    ...itemPricesColumns,
+    {
+      title: '가격 설정',
+      dataIndex: 'setting',
+      key: 'setting',
+      render: (_, {id}) => (
+        <Space>
+          <Button size="small" onClick={handleEditClick(id)}>
+            수정
+          </Button>
+          <Button size="small" onClick={handleDeleteClick(id)} danger>
+            삭제
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <>
+      {isTableVisible && (
+        <Table dataSource={filteredPrices} columns={newItemPricesColumns} />
+      )}
       <Button icon={<PlusOutlined />} onClick={handleOpenModal(true, 'add')}>
-        가격 추가
+        {addButtonText}
       </Button>
-      <Table
-        dataSource={selectedData?.prices}
-        columns={[
-          ...itemPricesColumns,
-          {
-            title: '가격 설정',
-            dataIndex: 'setting',
-            key: 'setting',
-            fixed: 'right',
-            width: 200,
-            render: (_, {id, isBase}) => (
-              <Space>
-                <Button size="small" onClick={handleEditClick(id)}>
-                  수정
-                </Button>
-                {!isBase && (
-                  <Button size="small" onClick={handleDeleteClick(id)}>
-                    삭제
-                  </Button>
-                )}
-                <Tooltip title="활성 가격으로 설정합니다.">
-                  <Button
-                    type="primary"
-                    size="small"
-                    onClick={handleAcitvateClick(id)}>
-                    활성화
-                  </Button>
-                </Tooltip>
-              </Space>
-            ),
-          },
-        ]}
-        style={{marginTop: '0.8rem'}}
-        scroll={{x: 1000}}
-      />
       {modalVisible && (
         <PriceFormModal
           type={modalType}

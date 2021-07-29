@@ -31,7 +31,7 @@ const MODAL_COLLAPSE: CollapseType[] = [
     panels: [
       {
         props: {
-          header: '활성 가격 설정',
+          header: '가격 수동 설정',
           key: '1',
         },
         Content: ManagePriceSection,

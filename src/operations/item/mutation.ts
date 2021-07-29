@@ -57,44 +57,6 @@ export const REMOVE_ITEM_NOTICE_MUTATION = gql`
 `;
 
 /**
- * ITEM_PRICE MUTATIONS
- */
-
-export const ADD_ITEM_PRICE_MUTATION = gql`
-  mutation AddItemPrice($itemId: Int!, $addItemPriceInput: AddItemPriceInput!) {
-    addItemPrice(itemId: $itemId, addItemPriceInput: $addItemPriceInput) {
-      id
-    }
-  }
-`;
-
-export const UPDATE_ITEM_PRICE_MUTATION = gql`
-  mutation UpdateItemPrice(
-    $id: Int!
-    $updateItemPriceInput: UpdateItemPriceInput!
-  ) {
-    updateItemPrice(id: $id, updateItemPriceInput: $updateItemPriceInput) {
-      id
-    }
-  }
-`;
-
-export const REMOVE_ITEM_PRICE_MUTATION = gql`
-  mutation RemoveItemPrice($itemId: Int!, $priceId: Int!) {
-    removeItemPrice(itemId: $itemId, priceId: $priceId) {
-      id
-    }
-  }
-`;
-export const ACTIVATE_ITEM_PRICE_MUTATION = gql`
-  mutation ActivateItemPrice($itemId: Int!, $priceId: Int!) {
-    activateItemPrice(itemId: $itemId, priceId: $priceId) {
-      id
-    }
-  }
-`;
-
-/**
  * ITEM_OPTION MUTATIONS
  */
 

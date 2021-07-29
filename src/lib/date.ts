@@ -1,5 +1,8 @@
 import {addLeadingZeros} from './NumberParser';
 import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+
+dayjs.extend(isBetween);
 
 export const getDateTimeNumbers = (input?: number) => {
   const date = new Date(input);
@@ -32,3 +35,24 @@ export const getTimeString = (input?: number | Date) => {
   }
   return dayjs(input).format('YY/MM/DD hh:mm:ss');
 };
+
+export const isSameDate = (a: dayjs.ConfigType, b: dayjs.ConfigType) =>
+  dayjs(a).isSame(dayjs(b), 'd');
+export const isBeforeDate = (a: dayjs.ConfigType, b: dayjs.ConfigType) =>
+  dayjs(a).isBefore(dayjs(b), 'd');
+
+export const compareDate = (a: dayjs.ConfigType, b: dayjs.ConfigType) => {
+  if (isSameDate(a, b)) {
+    return 0;
+  } else if (isBeforeDate(a, b)) {
+    return -1;
+  } else {
+    return 1;
+  }
+};
+
+export const isDateIncluded = (
+  date: dayjs.ConfigType,
+  from: dayjs.ConfigType,
+  to: dayjs.ConfigType,
+) => dayjs(date).isBetween(dayjs(from), dayjs(to), 'd', '[]');
