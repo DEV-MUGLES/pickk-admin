@@ -1,9 +1,8 @@
 import React from 'react';
-import {useQuery} from '@apollo/client';
 import {Cascader} from 'antd';
 
-import {ITEM_MAJOR_CATEGORIES_QUERY} from '@src/operations/item-category/query';
 import {CustomInputProps} from '@src/components/organisms/Form/base';
+import {useItemMajorCategories} from '@src/hooks/apis';
 
 export type ItemCategoryCascaderProps = CustomInputProps<[number, number]> & {
   hasAll?: boolean;
@@ -14,7 +13,7 @@ function ItemCategoryCascader({
   onChange,
   hasAll = false,
 }: ItemCategoryCascaderProps) {
-  const {data} = useQuery(ITEM_MAJOR_CATEGORIES_QUERY);
+  const {data} = useItemMajorCategories();
   const majorCategories = data?.itemMajorCategories ?? [];
   const options = (
     hasAll ? [{id: undefined, name: '전체', children: null}] : []

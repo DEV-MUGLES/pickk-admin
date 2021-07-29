@@ -3,7 +3,6 @@ import {GetServerSideProps} from 'next';
 
 import {initializeApollo} from '@src/lib/apollo';
 import {getCookie} from '@src/lib/utils';
-import {ME_SELLER_QUERY} from '@src/operations/sellers/query';
 
 export default function HomePage() {
   return <div>You can't see this page</div>;
@@ -17,14 +16,17 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
       throw new Error('no token');
     }
 
-    await initializeApollo(null, token).query({
-      query: ME_SELLER_QUERY,
-      context: {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      },
-    });
+    await initializeApollo(null, token);
+    // @TODO: Figure out for what reason this is needed
+    // .query({
+    //   query: ME_SELLER_QUERY,
+    //   context: {
+    //     headers: {
+    //       authorization: `Bearer ${token}`,
+    //     },
+    //   },
+    // });
+
     return {
       redirect: {
         destination: '/dashboard',

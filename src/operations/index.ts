@@ -7,9 +7,3 @@ export const PLACEHOLDER_MUTATION = gql`
     }
   }
 `;
-
-export const UPLOAD_MULTIPLE_IMAGES_MUTATION = gql`
-  mutation UploadMultipleImages($uploadImageInput: UploadMultipleImageInput!) {
-    uploadMultipleImages(uploadImageInput: $uploadImageInput)
-  }
-`;
