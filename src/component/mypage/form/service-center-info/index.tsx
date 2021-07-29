@@ -1,16 +1,17 @@
 import {message} from 'antd';
-import {useMutation, useQuery} from '@apollo/client';
 
 import BaseForm from '@src/components/organisms/Form/base';
 
-import {UPDATE_ME_SELLER_MUTATION} from '@src/operations/sellers/mutation';
-import {ME_SELLER_QUERY} from '@src/operations/sellers/query';
+import {
+  useMeSellerServiceCenterInfo,
+  useUpdateMeSellerServiceCenterInfo,
+} from '@src/hooks/apis/seller';
 
 import {FORM_ITEMS} from './form-items';
 
 function ServiceCenterInfoForm() {
-  const {data} = useQuery(ME_SELLER_QUERY);
-  const [updateMe] = useMutation(UPDATE_ME_SELLER_MUTATION);
+  const {data} = useMeSellerServiceCenterInfo();
+  const [updateMe] = useUpdateMeSellerServiceCenterInfo();
 
   const handleSaveClick = (updateSellerInput) => {
     updateMe({

@@ -6,7 +6,7 @@ export type InputNumberProps = InputProps;
 function InputNumber(props: InputNumberProps) {
   const {value, onChange} = props;
 
-  const onNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onNumberChange = (e) => {
     const newValue = parseInt(e.target.value || '0');
 
     if (Number.isNaN(newValue) || !onChange) {
@@ -18,7 +18,7 @@ function InputNumber(props: InputNumberProps) {
       target: {
         ...e.target,
         name: e.target.name,
-        value: newValue.toString(),
+        value: newValue,
       },
     });
   };

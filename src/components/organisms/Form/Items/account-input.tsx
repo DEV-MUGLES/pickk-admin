@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import {Col, Input, Select, Space, Tag} from 'antd';
+import {BankCode} from '@pickk/common';
 
 import {BankNameKorAlias} from '@src/lib/alias';
-import {InicisBankCode} from '@src/operations/__generated__/globalTypes';
 import {CustomInputProps} from '../base';
 
 const {Option} = Select;
 
 export type AccountInputType = {
-  bankCode: InicisBankCode;
+  bankCode: BankCode;
   number: string;
   ownerName: string;
 };
@@ -39,7 +39,7 @@ function AccountInput({value, onChange}: AcccountInputProps) {
           value={value?.bankCode}
           placeholder="은행"
           onChange={handleSelectChange}>
-          {Object.keys(InicisBankCode).map((key) => (
+          {Object.keys(BankCode).map((key) => (
             <Option key={key} value={key}>
               {BankNameKorAlias[key]}
             </Option>

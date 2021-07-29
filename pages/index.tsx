@@ -1,9 +1,9 @@
 import React from 'react';
 import {GetServerSideProps} from 'next';
-import {ME_SELLER_QUERY} from '@pickk/common';
 
 import {initializeApollo} from '@src/lib/apollo';
 import {getCookie} from '@src/lib/utils';
+import {ME_SELLER_QUERY} from '@src/operations/sellers/query';
 
 export default function HomePage() {
   return <div>You can't see this page</div>;
@@ -25,7 +25,6 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
         },
       },
     });
-
     return {
       redirect: {
         destination: '/dashboard',

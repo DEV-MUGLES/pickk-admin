@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react';
 import {Switch, Tag} from 'antd';
 import styled from 'styled-components';
+import {SellerShippingPolicy} from '@pickk/common';
 
 import InputNumber from '@src/components/organisms/Form/Items/input-number';
 
 import {CustomInputProps} from '@src/components/organisms/Form/base';
-import {MeSeller_meSeller_shippingPolicy} from '@src/operations/__generated__/MeSeller';
 
 export type ShippingFeeInputValueType = Pick<
-  MeSeller_meSeller_shippingPolicy,
+  SellerShippingPolicy,
   'fee' | 'minimumAmountForFree'
 >;
 
@@ -36,7 +36,7 @@ function ShippingFeeInput({value, onChange}: ShippingFeeInputProps) {
     const {value: _value, name} = e.target;
     onChange?.({
       ...value,
-      [name]: _value,
+      [name]: parseInt(_value),
     });
   };
 
