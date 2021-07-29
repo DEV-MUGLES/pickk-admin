@@ -2,6 +2,7 @@ import {Modal, message} from 'antd';
 import {AddItemPriceInput, Item} from '@pickk/common';
 
 import BaseForm from '@src/components/organisms/Form/base';
+import StartAtInput from './start-at-input';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {useAddItemPrice, useUpdateItemPrice} from '@src/hooks/apis/item';
@@ -43,6 +44,7 @@ function PriceFormModal({
         addItemPriceInput: {
           ...addItemPriceInput,
           isCrawlUpdating: false,
+          isActive: isSameDate(addItemPriceInput.startAt, new Date()),
         },
       },
     })
@@ -141,12 +143,18 @@ function PriceFormModal({
       <BaseForm
         FORM_ITEMS={{
           ...FORM_ITEMS,
-          ...(type === 'add' && {
-            isActive: {
-              label: '현재 가격으로 활성화하기',
-              type: 'boolean',
+          startAt: {
+            label: '시작일',
+            CustomInput: StartAtInput,
+            inputProps: {
+              hideCheckbox: type === 'edit',
             },
-          }),
+            rules: [{required: true, message: '시작일을 입력해주세요'}],
+          },
+          endAt: {
+            label: '종료일',
+            type: 'date',
+          },
         }}
         defaultValue={{...defaultValue}}
         onSaveClick={handleSaveButtonClick}

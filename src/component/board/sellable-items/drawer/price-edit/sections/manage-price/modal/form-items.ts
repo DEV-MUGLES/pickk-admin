@@ -11,13 +11,4 @@ export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
     type: 'number',
     rules: [{required: true, message: '공급가를 입력해주세요'}],
   },
-  startAt: {
-    label: '시작일',
-    type: 'date',
-    rules: [{required: true, message: '시작일을 입력해주세요'}],
-  },
-  endAt: {
-    label: '종료일',
-    type: 'date',
-  },
 };
