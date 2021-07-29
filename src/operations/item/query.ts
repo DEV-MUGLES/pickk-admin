@@ -30,8 +30,6 @@ export const ITEMS_QUERY = gql`
       }
       isInfiniteStock
       isSoldout
-      reviewCount @client
-      purchasedCount @client
       notice {
         id
         type
