@@ -17,7 +17,7 @@ const MODAL_COLLAPSE: CollapseType[] = [
     panels: [
       {
         props: {
-          header: '현재 설정 가격',
+          header: '적용 중인 가격',
           key: '1',
         },
         Content: CurrentPriceInfoSection,
