@@ -9,10 +9,6 @@ import DayjsDatePicker from '@src/components/molecules/BoardFilter/input/DayjsDa
 
 import {useBoardContext} from '@src/contexts/Board';
 import {ADD_ITEM_NOTICE_MUTATION} from '@src/operations/item/mutation';
-import {
-  AddItemNotice,
-  AddItemNoticeVariables,
-} from '@src/operations/__generated__/AddItemNotice';
 
 const {RangePicker} = DayjsDatePicker;
 
@@ -23,9 +19,7 @@ function ItemNoticeAddButton() {
   } = useBoardContext();
 
   const [visible, setVisible] = useState(false);
-  const [addItemNotice] = useMutation<AddItemNotice, AddItemNoticeVariables>(
-    ADD_ITEM_NOTICE_MUTATION,
-  );
+  const [addItemNotice] = useMutation(ADD_ITEM_NOTICE_MUTATION);
 
   const handleAddItemNoticeButton = () => {
     setVisible(true);

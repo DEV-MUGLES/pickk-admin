@@ -2,18 +2,14 @@ import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {useMutation} from '@apollo/client';
 import {Image, Input, message} from 'antd';
+import {Item} from '@pickk/common';
 
 import BaseForm from '@src/components/organisms/Form/base';
 import ImageUpload from '@src/components/molecules/image-upload';
 import ItemCategoryCascader from '@src/components/molecules/cascader/item-category';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {Items_items} from '@src/operations/__generated__/Items';
 import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
-import {
-  UpdateItem,
-  UpdateItemVariables,
-} from '@src/operations/__generated__/UpdateItem';
 
 const {TextArea} = Input;
 
@@ -22,10 +18,9 @@ function ItemBaseInfoEditSection() {
     state: {selectedRowId, selectedData},
     action: {reload},
   } = useBoardContext();
-  const selectedItem: Items_items = selectedData;
+  const selectedItem: Item = selectedData;
   const [imageUrl, setImageUrl] = useState<string>();
-  const [updateItem] =
-    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
+  const [updateItem] = useMutation(UPDATE_ITEM_MUTATION);
 
   useEffect(() => {
     setImageUrl(null);

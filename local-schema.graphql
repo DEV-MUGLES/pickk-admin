@@ -1,4 +1,0 @@
-extend type Item {
-  reviewCount: Int
-  purchasedCount: Int
-}

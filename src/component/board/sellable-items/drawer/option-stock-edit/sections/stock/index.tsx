@@ -1,14 +1,10 @@
 import {useState} from 'react';
 import {useMutation} from '@apollo/client';
 import {Button, message, Table, Modal} from 'antd';
+import {Item} from '@pickk/common';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {Items_items} from '@src/operations/__generated__/Items';
 import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
-import {
-  UpdateItem,
-  UpdateItemVariables,
-} from '@src/operations/__generated__/UpdateItem';
 
 import {stockColumns} from './columns';
 import ShippingReservePolicyModal from './shipping-reserve-policy-modal';
@@ -17,13 +13,12 @@ const {confirm} = Modal;
 
 function StockManageSection() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [updateItem] =
-    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
+  const [updateItem] = useMutation(UPDATE_ITEM_MUTATION);
   const {
     state: {selectedRowId, selectedData},
     action: {reload},
   } = useBoardContext();
-  const products: Items_items['products'] = selectedData.products;
+  const products: Item['products'] = selectedData.products;
 
   const {isInfiniteStock} = selectedData;
   const [buttonText, newIsInfiniteStock, confirmText] = !isInfiniteStock

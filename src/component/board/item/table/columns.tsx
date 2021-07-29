@@ -1,13 +1,13 @@
 import dayjs from 'dayjs';
 import {Button, Image} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
+import {Item} from '@pickk/common';
 
 import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
-import {Items_items} from '@src/operations/__generated__/Items';
 
-export const itemColumns: ColumnsType<Items_items> = [
+export const itemColumns: ColumnsType<Item> = [
   {
     title: 'ID',
     dataIndex: 'id',
@@ -76,24 +76,25 @@ export const itemColumns: ColumnsType<Items_items> = [
     ellipsis: true,
     align: 'center',
   },
-  {
-    title: '리뷰수',
-    dataIndex: 'reviewCount',
-    key: 'reviewCount',
-    sorter: (a, b) => b.reviewCount - a.reviewCount,
-    width: 60,
-    ellipsis: true,
-    align: 'center',
-  },
-  {
-    title: '구매수',
-    dataIndex: 'purchasedCount',
-    key: 'purchasedCount',
-    sorter: (a, b) => b.purchasedCount - a.purchasedCount,
-    width: 60,
-    ellipsis: true,
-    align: 'center',
-  },
+  // @TODO: uncomment when we the field is ready
+  // {
+  //   title: '리뷰수',
+  //   dataIndex: 'reviewCount',
+  //   key: 'reviewCount',
+  //   sorter: (a, b) => b.reviewCount - a.reviewCount,
+  //   width: 60,
+  //   ellipsis: true,
+  //   align: 'center',
+  // },
+  // {
+  //   title: '구매수',
+  //   dataIndex: 'purchasedCount',
+  //   key: 'purchasedCount',
+  //   sorter: (a, b) => b.purchasedCount - a.purchasedCount,
+  //   width: 60,
+  //   ellipsis: true,
+  //   align: 'center',
+  // },
   {
     title: '활성화 여부',
     dataIndex: 'isSellable',

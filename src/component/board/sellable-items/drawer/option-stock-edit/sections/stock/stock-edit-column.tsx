@@ -5,10 +5,6 @@ import {ButtonType} from 'antd/lib/button';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {UPDATE_PRODUCT_MUTATION} from '@src/operations/item/mutation';
-import {
-  UpdateProduct,
-  UpdateProductVariables,
-} from '@src/operations/__generated__/UpdateProduct';
 
 const {Text} = Typography;
 
@@ -20,9 +16,7 @@ function StockEditColumn({id, defaultValue}) {
   const {isInfiniteStock} = selectedData;
   const [isEditable, setIsEditable] = useState(false);
   const [stock, setStock] = useState<number>(defaultValue);
-  const [updateProduct] = useMutation<UpdateProduct, UpdateProductVariables>(
-    UPDATE_PRODUCT_MUTATION,
-  );
+  const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
 
   const handleEditClick = () => {
     setIsEditable(true);

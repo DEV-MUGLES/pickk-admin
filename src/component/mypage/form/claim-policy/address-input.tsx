@@ -1,10 +1,10 @@
 import {Input, Space} from 'antd';
+import {SellerReturnAddress} from '@pickk/common';
 
 import {CustomInputProps} from '@src/components/organisms/Form/base';
-import {MeSeller_meSeller_returnAddress} from '@src/operations/__generated__/MeSeller';
 
 export type AddressType = Pick<
-  MeSeller_meSeller_returnAddress,
+  SellerReturnAddress,
   'baseAddress' | 'detailAddress' | 'postalCode'
 >;
 

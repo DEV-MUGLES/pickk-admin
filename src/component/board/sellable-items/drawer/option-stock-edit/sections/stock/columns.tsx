@@ -1,12 +1,10 @@
-import {Button} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
+import {Product} from '@pickk/common';
 
 import StockEditColumn from './stock-edit-column';
 import {renderDateColumn} from '@src/components/molecules/BoardFilter/render';
 
-import {Items_items_products} from '@src/operations/__generated__/Items';
-
-export const stockColumns: ColumnsType<Items_items_products> = [
+export const stockColumns: ColumnsType<Product> = [
   {
     title: '프로덕트',
     dataIndex: 'product',

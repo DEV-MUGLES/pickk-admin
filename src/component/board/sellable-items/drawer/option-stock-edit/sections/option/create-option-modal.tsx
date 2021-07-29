@@ -7,10 +7,6 @@ import {Alert, Button, Form, Input, message, Modal, Space} from 'antd';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {CREATE_ITEM_OPTION_SET_MUTATION} from '@src/operations/item/mutation';
-import {
-  CreateOptionSet,
-  CreateOptionSetVariables,
-} from '@src/operations/__generated__/CreateOptionSet';
 
 export type CreateOptionModalProps = {
   title: string;
@@ -31,10 +27,7 @@ function CreateOptionModal({
   } = useBoardContext();
   const [form] = useForm();
 
-  const [createItemOptionSet] = useMutation<
-    CreateOptionSet,
-    CreateOptionSetVariables
-  >(CREATE_ITEM_OPTION_SET_MUTATION);
+  const [createItemOptionSet] = useMutation(CREATE_ITEM_OPTION_SET_MUTATION);
 
   useEffect(() => {
     const defaultOption = selectedData.options?.map(({name, values}) => ({

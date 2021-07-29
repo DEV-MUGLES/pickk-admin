@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Typography} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
+import {Item} from '@pickk/common';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
@@ -14,7 +15,6 @@ import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
 
 import {ITEMS_QUERY} from '@src/operations/item/query';
-import {Items_items} from '@src/operations/__generated__/Items';
 
 const {Text} = Typography;
 
@@ -29,7 +29,7 @@ function ItemBoard({title}: BoardProps) {
     setModalVisible(open);
   };
 
-  const newItemColumns: ColumnsType<Items_items> = [
+  const newItemColumns: ColumnsType<Item> = [
     ...itemColumns.slice(0, 3),
     {
       title: '카테고리',

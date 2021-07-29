@@ -7,10 +7,6 @@ import ItemCategoryCascader from '@src/components/molecules/cascader/item-catego
 import {useBoardContext} from '@src/contexts/Board';
 
 import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
-import {
-  UpdateItem,
-  UpdateItemVariables,
-} from '@src/operations/__generated__/UpdateItem';
 
 export type CategoryModalProps = {
   visible: boolean;
@@ -27,8 +23,7 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
     selectedData?.majorCategory?.id,
     selectedData?.minorCategory?.id,
   ]);
-  const [update] =
-    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
+  const [update] = useMutation(UPDATE_ITEM_MUTATION);
 
   const handleOk = async () => {
     const [majorCategoryId, minorCategoryId] = value;

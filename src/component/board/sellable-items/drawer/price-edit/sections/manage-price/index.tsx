@@ -10,14 +10,6 @@ import {
   ACTIVATE_ITEM_PRICE_MUTATION,
   REMOVE_ITEM_PRICE_MUTATION,
 } from '@src/operations/item/mutation';
-import {
-  ActivateItemPrice,
-  ActivateItemPriceVariables,
-} from '@src/operations/__generated__/ActivateItemPrice';
-import {
-  RemoveItemPrice,
-  RemoveItemPriceVariables,
-} from '@src/operations/__generated__/RemoveItemPrice';
 
 import {itemPricesColumns} from './columns';
 
@@ -32,14 +24,8 @@ function ManagePriceSection() {
   const [modalType, setModalType] = useState<PriceFormModalType>();
   const [selectedPriceId, setSelectedPriceId] = useState<number>();
 
-  const [removeItemPrice] = useMutation<
-    RemoveItemPrice,
-    RemoveItemPriceVariables
-  >(REMOVE_ITEM_PRICE_MUTATION);
-  const [activateItemPrice] = useMutation<
-    ActivateItemPrice,
-    ActivateItemPriceVariables
-  >(ACTIVATE_ITEM_PRICE_MUTATION);
+  const [removeItemPrice] = useMutation(REMOVE_ITEM_PRICE_MUTATION);
+  const [activateItemPrice] = useMutation(ACTIVATE_ITEM_PRICE_MUTATION);
 
   const handleOpenModal =
     (isOpen: boolean, type?: PriceFormModalType) => () => {

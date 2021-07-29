@@ -1,6 +1,12 @@
 import {useMutation} from '@apollo/client';
 import {Modal, message} from 'antd';
 import dayjs from 'dayjs';
+import {
+  ItemPrice,
+  Mutation,
+  MutationAddItemPriceArgs,
+  MutationUpdateItemPriceArgs,
+} from '@pickk/common';
 
 import BaseForm from '@src/components/organisms/Form/base';
 import SellPriceInput, {
@@ -13,15 +19,6 @@ import {
   ADD_ITEM_PRICE_MUTATION,
   UPDATE_ITEM_PRICE_MUTATION,
 } from '@src/operations/item/mutation';
-import {
-  AddItemPrice,
-  AddItemPriceVariables,
-} from '@src/operations/__generated__/AddItemPrice';
-import {
-  UpdateItemPrice,
-  UpdateItemPriceVariables,
-} from '@src/operations/__generated__/UpdateItemPrice';
-import {Items_items_prices} from '@src/operations/__generated__/Items';
 
 export type PriceFormModalType = 'add' | 'edit';
 
@@ -31,7 +28,7 @@ export type PriceFormModalProps = {
   onClose: () => void;
   selectedPriceId: number;
 };
-export type PriceFormValue = Items_items_prices & {
+export type PriceFormValue = ItemPrice & {
   price: PriceInputValueType;
 };
 
@@ -47,14 +44,15 @@ function PriceFormModal({
   } = useBoardContext();
 
   const [updateItemPrice] = useMutation<
-    UpdateItemPrice,
-    UpdateItemPriceVariables
+    Pick<Mutation, 'updateItemPrice'>,
+    MutationUpdateItemPriceArgs
   >(UPDATE_ITEM_PRICE_MUTATION);
-  const [addItemPrice] = useMutation<AddItemPrice, AddItemPriceVariables>(
-    ADD_ITEM_PRICE_MUTATION,
-  );
+  const [addItemPrice] = useMutation<
+    Pick<Mutation, 'addItemPrice'>,
+    MutationAddItemPriceArgs
+  >(ADD_ITEM_PRICE_MUTATION);
 
-  const handleAddItemPrice = (itemPriceInput: Items_items_prices) => {
+  const handleAddItemPrice = (itemPriceInput: ItemPrice) => {
     addItemPrice({
       variables: {
         itemId: selectedRowId,
@@ -71,7 +69,7 @@ function PriceFormModal({
       });
   };
 
-  const handleUpdateItemPrice = (_itemPriceInput: Items_items_prices) => {
+  const handleUpdateItemPrice = (_itemPriceInput: ItemPrice) => {
     const {isActive, ...itemPriceInput} = _itemPriceInput;
     updateItemPrice({
       variables: {
@@ -92,7 +90,7 @@ function PriceFormModal({
   };
 
   const getDefaultValue = (): PriceFormValue => {
-    const selectedPrice: Items_items_prices = selectedData?.prices.find(
+    const selectedPrice: ItemPrice = selectedData?.prices.find(
       ({id}) => selectedPriceId === id,
     );
 
@@ -115,7 +113,7 @@ function PriceFormModal({
     string,
     PriceFormValue,
     boolean,
-    (input: Items_items_prices) => void,
+    (input: ItemPrice) => void,
   ] =
     type === 'add'
       ? ['가격 추가', '추가', undefined, true, handleAddItemPrice]
@@ -123,7 +121,7 @@ function PriceFormModal({
 
   const basePrice = selectedData?.prices.find(({isBase}) => isBase);
 
-  const checkValidate = (addItemPriceInput: Items_items_prices): boolean => {
+  const checkValidate = (addItemPriceInput: ItemPrice): boolean => {
     if (
       addItemPriceInput.endAt &&
       dayjs(addItemPriceInput.endAt).isBefore(addItemPriceInput.startAt)

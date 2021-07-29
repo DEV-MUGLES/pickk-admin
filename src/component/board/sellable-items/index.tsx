@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {ColumnsType} from 'antd/lib/table';
+import {Item} from '@pickk/common';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
@@ -16,7 +17,6 @@ import {sellableItemColumns, sellableItemActions} from './table';
 import {sellableItemInputs} from './inputs';
 
 import {ITEMS_QUERY} from '@src/operations/item/query';
-import {Items_items} from '@src/operations/__generated__/Items';
 
 type SellableItemsDrawerType = 'price' | 'optionStock' | 'info';
 
@@ -41,7 +41,7 @@ function SellableItemsBoard({title}: BoardProps) {
       });
     };
 
-  const newSellableItemColumns: ColumnsType<Items_items> = [
+  const newSellableItemColumns: ColumnsType<Item> = [
     ...sellableItemColumns.slice(0, 1),
     {
       title: '상품 관리',

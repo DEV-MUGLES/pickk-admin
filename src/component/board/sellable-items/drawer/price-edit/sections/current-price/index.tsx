@@ -1,16 +1,16 @@
 import {Space, Spin, Tag} from 'antd';
+import {Item} from '@pickk/common';
 
 import PriceDisplayCard from './price-display-card';
 import InfoTooltip from '@src/components/atoms/info-tooltip';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {Items_items} from '@src/operations/__generated__/Items';
 
 function CurrentPriceInfoSection() {
   const {
     state: {selectedData},
   } = useBoardContext();
-  const selectedItem: Items_items = selectedData;
+  const selectedItem: Item = selectedData;
 
   if (!selectedData) {
     return <Spin />;

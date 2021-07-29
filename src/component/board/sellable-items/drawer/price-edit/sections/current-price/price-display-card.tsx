@@ -2,18 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import {Card, CardProps, Space, Typography} from 'antd';
 import dayjs from 'dayjs';
+import {ItemPrice} from '@pickk/common';
 
 import {addCommaToNumber} from '@src/lib/NumberParser';
 
 const {Text} = Typography;
 
-export type PriceDisplayCardProps = Pick<CardProps, 'title'> & {
-  originalPrice: number;
-  sellPrice: number;
-  finalPrice: number;
-  startAt: Date;
-  endAt: Date;
-};
+export type PriceDisplayCardProps = Pick<CardProps, 'title'> &
+  Pick<
+    ItemPrice,
+    'originalPrice' | 'sellPrice' | 'finalPrice' | 'startAt' | 'endAt'
+  >;
 
 function PriceDisplayCard({
   title,

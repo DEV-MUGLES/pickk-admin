@@ -8,8 +8,7 @@
     "tsc": "tsc --noEmit",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "apollo:codegen": "rm -rf src/operations/__generated__ && apollo schema:download && apollo client:codegen src/operations/__generated__ --localSchemaFile=schema.json,local-schema.graphql --target=typescript --outputFlat"
+    "start": "next start"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
