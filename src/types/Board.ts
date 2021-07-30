@@ -7,4 +7,4 @@ export type DataFetchConfig = {
   defaultFilter?: Filter;
 };
 
-export type Filter = Record<string, unknown>;
+export type Filter = Record<string, any>;
