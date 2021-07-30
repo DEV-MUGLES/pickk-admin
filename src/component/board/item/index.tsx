@@ -10,11 +10,10 @@ import CategoryModal from './table/modal/category';
 
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';
 import {BoardProps} from '../props';
+import {useItems} from '@src/hooks/apis';
 
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
-
-import {ITEMS_QUERY} from '@src/operations/item/query';
 
 const {Text} = Typography;
 
@@ -76,9 +75,8 @@ function ItemBoard({title}: BoardProps) {
 
 export default withBoardContext(
   ItemBoard,
-  {},
   {
-    gql: ITEMS_QUERY,
+    useBoardData: useItems,
     dataName: 'items',
     filterName: 'itemFilter',
   },

@@ -10,13 +10,12 @@ import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
 import {Space} from '@src/components/atoms';
 
-import {useBoardContext, withBoardContext} from '@src/contexts/Board';
-
 import {BoardProps} from '../props';
+import {useBoardContext, withBoardContext} from '@src/contexts/Board';
+import {useItems} from '@src/hooks/apis';
+
 import {sellableItemColumns, sellableItemActions} from './table';
 import {sellableItemInputs} from './inputs';
-
-import {ITEMS_QUERY} from '@src/operations/item/query';
 
 type SellableItemsDrawerType = 'price' | 'optionStock' | 'info';
 
@@ -106,11 +105,11 @@ function SellableItemsBoard({title}: BoardProps) {
 
 export default withBoardContext(
   SellableItemsBoard,
-  {isSellable: true},
   {
-    gql: ITEMS_QUERY,
+    useBoardData: useItems,
     dataName: 'items',
     filterName: 'itemFilter',
+    defaultFilter: {isSellable: true},
   },
   (v) => v,
 );
