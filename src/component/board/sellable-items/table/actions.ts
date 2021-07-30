@@ -1,14 +1,14 @@
 import {message, Modal} from 'antd';
 
-import {BULK_UPDATE_ITEMS_MUTATION} from '@src/operations/item/mutation';
 import {TableActionType} from '@src/components/organisms/Board/Table/table';
+import {useBulkUpdateItems} from '@src/hooks/apis';
 
 const {confirm} = Modal;
 
 const handleSetIsMdRecommended =
   (isMdRecommended: boolean): TableActionType['handleClick'] =>
   async (ids, mutate) => {
-    return new Promise((resolve, reject) => {
+    try {
       confirm({
         title: `MD 추천 ${isMdRecommended ? 'ON' : 'OFF'} 확인`,
         content: `MD 추천 상품${
@@ -26,31 +26,29 @@ const handleSetIsMdRecommended =
               ids,
             },
           });
-          resolve(true);
         },
         onCancel() {
           message.warning('취소되었습니다.');
-          reject();
         },
       });
-    });
+    } catch {}
   };
 
 export const sellableItemActions: TableActionType[] = [
   {
     text: 'MD추천 ON',
     handleClick: handleSetIsMdRecommended(true),
-    operation: BULK_UPDATE_ITEMS_MUTATION,
+    useMutation: useBulkUpdateItems,
   },
   {
     text: 'MD추천 OFF',
     handleClick: handleSetIsMdRecommended(false),
-    operation: BULK_UPDATE_ITEMS_MUTATION,
+    useMutation: useBulkUpdateItems,
   },
   {
     text: '상품 비활성화',
     handleClick: async (ids: number[], mutate) => {
-      return new Promise((resolve, reject) => {
+      try {
         confirm({
           title: '상품 비활성화 확인',
           content: '상품을 비활성화 하시겠습니까?',
@@ -66,27 +64,21 @@ export const sellableItemActions: TableActionType[] = [
                 ids,
               },
             });
-            resolve(true);
           },
           onCancel() {
             message.warning('취소되었습니다.');
-            reject();
           },
         });
-      });
+      } catch {}
     },
-    operation: BULK_UPDATE_ITEMS_MUTATION,
+    useMutation: useBulkUpdateItems,
   },
   {
     text: '상품 삭제',
-    handleClick: async () => {
-      return false;
-    },
+    handleClick: async () => null,
   },
   {
     text: '상품가격',
-    handleClick: async () => {
-      return false;
-    },
+    handleClick: async () => null,
   },
 ];

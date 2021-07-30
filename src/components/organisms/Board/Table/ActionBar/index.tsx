@@ -20,12 +20,15 @@ function TableActionBar(props: TableActionBarProps) {
 
   return (
     <Wrapper>
-      {actions.map((item, index) => (
+      {actions.map((tableAction, index) => (
         <React.Fragment key={'action_' + index}>
-          {item.Component ? (
-            <item.Component />
+          {tableAction.Component ? (
+            <tableAction.Component />
           ) : (
-            <ActionButton selectedRowKeys={selectedRowKeys} action={item} />
+            <ActionButton
+              selectedRowKeys={selectedRowKeys}
+              tableAction={tableAction}
+            />
           )}
           <Space direction="ROW" />
         </React.Fragment>

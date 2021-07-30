@@ -1,5 +1,10 @@
 import {ApolloCache, gql, useMutation} from '@apollo/client';
-import {MutationUpdateItemArgs, UpdateItemInput} from '@pickk/common';
+import {
+  Mutation,
+  MutationBulkUpdateItemsArgs,
+  MutationUpdateItemArgs,
+  UpdateItemInput,
+} from '@pickk/common';
 
 export const useUpdateItem = () => {
   const [updateItem] = useMutation<unknown, MutationUpdateItemArgs>(gql`
@@ -43,3 +48,16 @@ export const useUpdateItem = () => {
 
   return {updateItem, updateCategoryCache};
 };
+
+export const useBulkUpdateItems = () =>
+  useMutation<
+    Pick<Mutation, 'bulkUpdateItems'>,
+    MutationBulkUpdateItemsArgs
+  >(gql`
+    mutation BulkUpdateItems(
+      $bulkUpdateItemInput: BulkUpdateItemInput!
+      $ids: [Int!]!
+    ) {
+      bulkUpdateItems(bulkUpdateItemInput: $bulkUpdateItemInput, ids: $ids)
+    }
+  `);
