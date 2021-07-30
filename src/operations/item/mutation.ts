@@ -11,14 +11,6 @@ export const BULK_UPDATE_ITEMS_MUTATION = gql`
   }
 `;
 
-export const UPDATE_ITEM_MUTATION = gql`
-  mutation UpdateItem($itemId: Int!, $updateItemInput: UpdateItemInput!) {
-    updateItem(itemId: $itemId, updateItemInput: $updateItemInput) {
-      id
-    }
-  }
-`;
-
 /**
  * ITEM_NOTICE MUTATIONS
  */
