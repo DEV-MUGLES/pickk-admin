@@ -3,9 +3,6 @@ import {gql} from '@apollo/client';
 import {ITEM_OPTION_FARG, ITEM_PRICE_FRAG, PRODUCT_FRAG} from './fragment';
 
 export const ITEMS_QUERY = gql`
-  ${ITEM_PRICE_FRAG}
-  ${PRODUCT_FRAG}
-  ${ITEM_OPTION_FARG}
   query Items($itemFilter: ItemFilter, $pageInput: PageInput) {
     items(itemFilter: $itemFilter, pageInput: $pageInput) {
       id
@@ -49,4 +46,7 @@ export const ITEMS_QUERY = gql`
       createdAt
     }
   }
+  ${ITEM_PRICE_FRAG}
+  ${PRODUCT_FRAG}
+  ${ITEM_OPTION_FARG}
 `;
