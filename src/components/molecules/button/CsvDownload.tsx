@@ -39,7 +39,7 @@ export default function CsvDownloadButton({
     <>
       <CSVLink
         id="csv-download"
-        data={dataSource ? parseExcelData(dataSource) : []}
+        data={dataSource ? (parseExcelData(dataSource) as any) : []}
         filename={fileName}
         headers={headers}></CSVLink>
       <Button
