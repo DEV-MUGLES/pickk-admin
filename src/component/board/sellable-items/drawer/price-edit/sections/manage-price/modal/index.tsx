@@ -34,24 +34,26 @@ function PriceFormModal({
     ({isBase, endAt}) => !isBase && isBeforeDate(new Date(), endAt),
   );
 
-  const [addItemPrice] = useAddItemPrice();
+  const {addItemPrice, updateCache} = useAddItemPrice();
   const [updateItemPrice] = useUpdateItemPrice();
 
-  const handleAddItemPrice = (addItemPriceInput: PriceFormValueType) => {
+  const handleAddItemPrice = (_addItemPriceInput: PriceFormValueType) => {
+    const addItemPriceInput = {
+      ..._addItemPriceInput,
+      isCrawlUpdating: false,
+      isActive: isSameDate(_addItemPriceInput.startAt, new Date()),
+    };
+
     addItemPrice({
       variables: {
         itemId: selectedRowId,
-        addItemPriceInput: {
-          ...addItemPriceInput,
-          isCrawlUpdating: false,
-          isActive: isSameDate(addItemPriceInput.startAt, new Date()),
-        },
+        addItemPriceInput,
       },
+      update: updateCache(selectedRowId),
     })
       .then(() => {
         message.success('새로운 가격을 추가했습니다.');
         onClose();
-        reload();
       })
       .catch(() => {
         message.error('가격 추가를 실패했습니다.');
@@ -68,8 +70,8 @@ function PriceFormModal({
     })
       .then(() => {
         message.success('가격을 수정했습니다.');
-        onClose();
         reload();
+        onClose();
       })
       .catch(() => {
         message.error('가격 수정을 실패했습니다.');
