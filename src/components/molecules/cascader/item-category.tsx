@@ -35,7 +35,11 @@ function ItemCategoryCascader({
       }),
     }));
 
-  return <Cascader value={value} options={options} onChange={onChange} />;
+  const handleChange = (value) => {
+    onChange([value[0], value[1] || null]);
+  };
+
+  return <Cascader value={value} options={options} onChange={handleChange} />;
 }
 
 export default ItemCategoryCascader;
