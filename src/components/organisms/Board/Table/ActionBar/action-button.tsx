@@ -4,12 +4,15 @@ import {message, Button} from 'antd';
 import {TableActionType} from '../table';
 import {useBoardContext} from '@src/contexts/Board';
 
-export type ActionButtonProps = {
+export type TableActionButtonProps = {
   selectedRowKeys: number[];
   tableAction?: TableActionType;
 };
 
-function ActionButton({selectedRowKeys, tableAction}: ActionButtonProps) {
+function TableActionButton({
+  selectedRowKeys,
+  tableAction,
+}: TableActionButtonProps) {
   const {reload} = useBoardContext().action;
   const {icon, text, useTableAction = () => [], handleClick} = tableAction;
   const [mutate] = useTableAction();
@@ -33,4 +36,4 @@ function ActionButton({selectedRowKeys, tableAction}: ActionButtonProps) {
   );
 }
 
-export default ActionButton;
+export default TableActionButton;

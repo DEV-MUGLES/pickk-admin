@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ActionButton from './action-button';
+import TableActionButton from './action-button';
 import Space from '@src/components/atoms/space';
 import {TableActionType} from '../table';
 
@@ -12,20 +12,20 @@ import TablePageSizeSelect, {
 
 export type TableActionBarProps = {
   selectedRowKeys: number[];
-  actions?: TableActionType[];
+  tableActions?: TableActionType[];
 } & TablePageSizeSelectProps;
 
 function TableActionBar(props: TableActionBarProps) {
-  const {selectedRowKeys, actions} = props;
+  const {selectedRowKeys, tableActions} = props;
 
   return (
     <Wrapper>
-      {actions.map((tableAction, index) => (
+      {tableActions.map((tableAction, index) => (
         <React.Fragment key={'action_' + index}>
           {tableAction.Component ? (
             <tableAction.Component />
           ) : (
-            <ActionButton
+            <TableActionButton
               selectedRowKeys={selectedRowKeys}
               tableAction={tableAction}
             />

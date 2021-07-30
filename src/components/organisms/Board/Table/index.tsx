@@ -4,7 +4,7 @@ import {Table, Divider} from 'antd';
 
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
-import ActionBar, {TableActionBarProps} from './ActionBar';
+import TableActionBar, {TableActionBarProps} from './ActionBar';
 import {WHITE} from '@src/components/atoms/colors';
 
 import {useBoardContext} from '@src/contexts/Board';
@@ -13,8 +13,8 @@ export type BoardTableProps = {
   title: string;
   // tslint:disable-next-line: no-any
   columns: any;
-} & Pick<TableActionBarProps, 'actions'> &
-  Pick<TableFooterProps, 'footActions'>;
+  actions?: TableActionBarProps['tableActions'];
+} & Pick<TableFooterProps, 'footActions'>;
 
 function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
   const {state, action} = useBoardContext();
@@ -50,10 +50,10 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
             {actions && (
               <>
                 <Divider style={{margin: '12px 0'}} />
-                <ActionBar
+                <TableActionBar
                   {...{
                     selectedRowKeys,
-                    actions,
+                    tableActions: actions,
                     pageSize,
                     setPageSize,
                   }}
