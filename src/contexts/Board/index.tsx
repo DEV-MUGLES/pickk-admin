@@ -1,6 +1,5 @@
 import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
-import {DocumentNode, useQuery} from '@apollo/client';
 
 import Header, {
   BoardHeaderProps,
@@ -10,7 +9,7 @@ import Space from '@src/components/atoms/space';
 
 import {IBoard} from './IBoard';
 import {BoardProps} from '@src/component/board/props';
-import {Filter} from '@src/types';
+import {DataFetchConfig, Filter} from '@src/types';
 
 const BoardContext = createContext<IBoard>(undefined);
 
@@ -19,27 +18,23 @@ export const useBoardContext = () => useContext(BoardContext);
 export const withBoardContext =
   (
     WrappedComponent: React.FunctionComponent<BoardProps>,
-    defaultFilter: Filter,
-    operation: {
-      filterName?: string;
-      gql: DocumentNode;
-      dataName: string;
-    },
-    parseExcelData,
+    {useBoardData, dataName, filterName, defaultFilter = {}}: DataFetchConfig,
+    parseExcelData: (data: unknown) => unknown,
   ) =>
   (
     props: BoardProps &
       BoardHeaderProps &
       Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>,
   ) => {
-    const [filter, setFilter] = useState(defaultFilter);
-    const [newFilter, setNewFilter] = useState(defaultFilter);
-    const {gql, dataName, filterName} = operation;
-    const {data, loading, refetch} = useQuery(gql, {
+    const {data, loading, refetch} = useBoardData({
       variables: {
         ...(filterName ? {[filterName]: defaultFilter} : {}),
       },
     });
+
+    const [filter, setFilter] = useState(defaultFilter);
+    const [newFilter, setNewFilter] = useState(defaultFilter);
+
     const [selectedRowId, setSelectedRowId] = useState<number>();
     const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([]);
 
