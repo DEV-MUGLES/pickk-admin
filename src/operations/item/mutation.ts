@@ -12,43 +12,6 @@ export const BULK_UPDATE_ITEMS_MUTATION = gql`
 `;
 
 /**
- * ITEM_NOTICE MUTATIONS
- */
-
-export const ADD_ITEM_NOTICE_MUTATION = gql`
-  mutation AddItemNotice(
-    $itemId: Int!
-    $addItemNoticeInput: AddItemNoticeInput!
-  ) {
-    addItemNotice(itemId: $itemId, addItemNoticeInput: $addItemNoticeInput) {
-      id
-    }
-  }
-`;
-
-export const UPDATE_ITEM_NOTICE_MUTATION = gql`
-  mutation UpdateItemNotice(
-    $itemId: Int!
-    $updateItemNoticeInput: UpdateItemNoticeInput!
-  ) {
-    updateItemNotice(
-      itemId: $itemId
-      updateItemNoticeInput: $updateItemNoticeInput
-    ) {
-      id
-    }
-  }
-`;
-
-export const REMOVE_ITEM_NOTICE_MUTATION = gql`
-  mutation RemoveItemNotice($itemId: Int!) {
-    removeItemNotice(itemId: $itemId) {
-      id
-    }
-  }
-`;
-
-/**
  * ITEM_OPTION MUTATIONS
  */
 

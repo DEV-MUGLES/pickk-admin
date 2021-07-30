@@ -8,3 +8,4 @@ export * from './seller-settle-policy';
 export * from './item';
 export * from './item-price';
 export * from './item-category';
+export * from './item-notice';

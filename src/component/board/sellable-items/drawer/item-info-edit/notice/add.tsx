@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {useMutation} from '@apollo/client';
 import {Modal, Button, ModalProps, message} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 
@@ -8,18 +7,17 @@ import ItemNoticeTypeSelect from './type-select';
 import DayjsDatePicker from '@src/components/molecules/BoardFilter/input/DayjsDatePicker';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {ADD_ITEM_NOTICE_MUTATION} from '@src/operations/item/mutation';
+import {useAddItemNotice} from '@src/hooks/apis';
 
 const {RangePicker} = DayjsDatePicker;
 
 function ItemNoticeAddButton() {
   const {
     state: {selectedRowId},
-    action: {reload},
   } = useBoardContext();
 
   const [visible, setVisible] = useState(false);
-  const [addItemNotice] = useMutation(ADD_ITEM_NOTICE_MUTATION);
+  const {addItemNotice, updateCache} = useAddItemNotice();
 
   const handleAddItemNoticeButton = () => {
     setVisible(true);
@@ -39,11 +37,11 @@ function ItemNoticeAddButton() {
           endAt,
         },
       },
+      update: updateCache(selectedRowId),
     })
       .then(() => {
         message.success('상품 안내메시지가 추가되었습니다.');
         setVisible(false);
-        reload();
       })
       .catch(() => {
         message.error('상품 안내메시지 추가를 실패했습니다.');
