@@ -19,7 +19,7 @@ export interface IBoard {
     initFilter: () => void;
     reload: () => void;
     applyPreview: (data) => void;
-    parseExcelData: any;
+    parseExcelData: (data: unknown) => unknown;
     setSelectedRowKeys: Dispatch<SetStateAction<number[]>>;
     setSelectedRowId: Dispatch<SetStateAction<number>>;
   };

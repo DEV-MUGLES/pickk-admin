@@ -13,7 +13,11 @@ export const isEqualSizeObject = (a, b): boolean => {
   return Object.keys(a).length === Object.keys(b).length;
 };
 
-export const isEqualArray = (a: any[], b: any[], compare?): boolean => {
+export const isEqualArray = <T = unknown>(
+  a: T[],
+  b: T[],
+  compare?,
+): boolean => {
   if (!a && !b) return true;
   if (!a || !b) return false;
   if (a.length !== b.length) {

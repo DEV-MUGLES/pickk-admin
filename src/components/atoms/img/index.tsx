@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type IProps = {
+type IProps = React.PropsWithChildren<{
   src: string;
   width?: string | number;
   height?: string | number;
@@ -9,11 +9,9 @@ type IProps = {
   className?: string;
   style?: React.CSSProperties;
   onClick?: () => void;
-  // tslint:disable-next-line: no-any
-  children?: any;
   over?: boolean;
   border?: boolean;
-};
+}>;
 
 const Img = (props: IProps) => {
   const Image = styled.img`
