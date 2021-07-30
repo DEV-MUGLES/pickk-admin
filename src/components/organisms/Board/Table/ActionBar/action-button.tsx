@@ -11,8 +11,8 @@ export type ActionButtonProps = {
 
 function ActionButton({selectedRowKeys, tableAction}: ActionButtonProps) {
   const {reload} = useBoardContext().action;
-  const {icon, text, useMutation = () => [], handleClick} = tableAction;
-  const [mutate] = useMutation();
+  const {icon, text, useTableAction = () => [], handleClick} = tableAction;
+  const [mutate] = useTableAction();
 
   const handleActionButtonClick = async () => {
     try {

@@ -37,12 +37,12 @@ export const itemActions: TableActionType[] = [
   {
     text: '상품 활성화',
     handleClick: handleSetIsSellable(true),
-    useMutation: useBulkUpdateItems,
+    useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 비활성화',
     handleClick: handleSetIsSellable(false),
-    useMutation: useBulkUpdateItems,
+    useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 삭제',

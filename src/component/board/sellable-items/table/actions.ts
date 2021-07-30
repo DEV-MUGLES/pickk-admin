@@ -38,12 +38,12 @@ export const sellableItemActions: TableActionType[] = [
   {
     text: 'MD추천 ON',
     handleClick: handleSetIsMdRecommended(true),
-    useMutation: useBulkUpdateItems,
+    useTableAction: useBulkUpdateItems,
   },
   {
     text: 'MD추천 OFF',
     handleClick: handleSetIsMdRecommended(false),
-    useMutation: useBulkUpdateItems,
+    useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 비활성화',
@@ -71,7 +71,7 @@ export const sellableItemActions: TableActionType[] = [
         });
       } catch {}
     },
-    useMutation: useBulkUpdateItems,
+    useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 삭제',
