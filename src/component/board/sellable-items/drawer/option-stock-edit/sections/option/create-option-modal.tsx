@@ -1,12 +1,11 @@
 import {useEffect} from 'react';
 import styled from 'styled-components';
-import {useMutation} from '@apollo/client';
 import {useForm} from 'antd/lib/form/Form';
 import {MinusCircleOutlined, PlusOutlined} from '@ant-design/icons';
 import {Alert, Button, Form, Input, message, Modal, Space} from 'antd';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {CREATE_ITEM_OPTION_SET_MUTATION} from '@src/operations/item/mutation';
+import {useCreateItemOptionSet} from '@src/hooks/apis';
 
 export type CreateOptionModalProps = {
   title: string;
@@ -23,11 +22,10 @@ function CreateOptionModal({
 }: CreateOptionModalProps) {
   const {
     state: {selectedRowId, selectedData},
-    action: {reload},
   } = useBoardContext();
   const [form] = useForm();
 
-  const [createItemOptionSet] = useMutation(CREATE_ITEM_OPTION_SET_MUTATION);
+  const [createItemOptionSet] = useCreateItemOptionSet();
 
   useEffect(() => {
     const defaultOption = selectedData.options?.map(({name, values}) => ({
@@ -41,24 +39,25 @@ function CreateOptionModal({
   }, []);
 
   const handleFinish = (value) => {
-    const options = value.options?.map(({name, values}) => ({
-      name,
-      values: values
-        .split(',')
-        .map((v) => v.trim())
-        .filter((v) => v),
-    }));
+    const createItemOptionSetInput = {
+      options: value.options?.map(({name, values}) => ({
+        name,
+        values: values
+          .split(',')
+          .map((v) => v.trim())
+          .filter((v) => v),
+      })),
+    };
 
     createItemOptionSet({
       variables: {
         id: selectedRowId,
-        createItemOptionSetInput: {options},
+        createItemOptionSetInput,
       },
     })
       .then(() => {
         message.success('저장되었습니다.');
         onClose();
-        reload();
       })
       .catch(() => message.error('저장에 실패했습니다.'));
   };

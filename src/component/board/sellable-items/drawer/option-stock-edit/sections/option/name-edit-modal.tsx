@@ -1,8 +1,7 @@
 import {useState} from 'react';
-import {useMutation} from '@apollo/client';
 import {Input, message, Modal} from 'antd';
 
-import {UPDATE_ITEM_OPTION_MUTATION} from '@src/operations/item/mutation';
+import {useUpdateItemOption} from '@src/hooks/apis';
 
 export type OptionNameEditModalProps = {
   optionId: number;
@@ -16,7 +15,7 @@ function OptionNameEditModal({
   onClose,
 }: OptionNameEditModalProps) {
   const [name, setName] = useState<string>();
-  const [updateItemOption] = useMutation(UPDATE_ITEM_OPTION_MUTATION);
+  const [updateItemOption] = useUpdateItemOption();
 
   const handleChange = ({target: {value}}) => {
     setName(value);
