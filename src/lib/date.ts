@@ -33,7 +33,7 @@ export const getTimeString = (input?: number | Date) => {
   if (!input) {
     return '-';
   }
-  return dayjs(input).format('YY/MM/DD hh:mm:ss');
+  return dayjs(input).format('YYYY-MM-DD HH:mm:ss');
 };
 
 export const isSameDate = (a: dayjs.ConfigType, b: dayjs.ConfigType) =>
@@ -56,3 +56,13 @@ export const isDateIncluded = (
   from: dayjs.ConfigType,
   to: dayjs.ConfigType,
 ) => dayjs(date).isBetween(dayjs(from), dayjs(to), 'd', '[]');
+
+// set Date time to 00:00:00
+export const setStartOfDay = (date: dayjs.ConfigType) => {
+  return dayjs(date).startOf('day');
+};
+
+// set Date time to 23:59:59
+export const setEndOfDay = (date: dayjs.ConfigType) => {
+  return dayjs(date).endOf('day');
+};

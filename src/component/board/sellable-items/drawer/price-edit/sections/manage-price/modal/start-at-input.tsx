@@ -11,22 +11,23 @@ export type StartAtInputProps = CustomInputProps<Dayjs> & {
 };
 
 function StartAtInput({value, onChange, hideCheckbox}: StartAtInputProps) {
-  const handleChange = (date) => {
+  const handleDateChange = (date) => {
     onChange?.(date);
   };
 
   const handleCheckboxChange = (e) => {
     if (e.target.checked) {
-      onChange?.(dayjs());
+      handleDateChange(dayjs());
     }
   };
 
   return (
     <Wrapper>
       <DatePickerFormItem
-        onChange={handleChange}
+        onChange={handleDateChange}
         value={value}
         style={{marginRight: 'auto'}}
+        isStartOfDay
       />
       {!hideCheckbox && (
         <Checkbox onChange={handleCheckboxChange}>

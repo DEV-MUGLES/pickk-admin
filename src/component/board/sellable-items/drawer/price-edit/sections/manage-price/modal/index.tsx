@@ -156,6 +156,9 @@ function PriceFormModal({
           endAt: {
             label: '종료일',
             type: 'date',
+            inputProps: {
+              isEndOfDay: true,
+            },
           },
         }}
         defaultValue={{...defaultValue}}
