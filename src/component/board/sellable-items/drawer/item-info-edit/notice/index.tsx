@@ -1,40 +1,21 @@
 import styled from 'styled-components';
-import {useMutation} from '@apollo/client';
 import {message} from 'antd';
+import {ItemNotice} from '@pickk/common';
 
 import BaseForm from '@src/components/organisms/Form/base';
 import ItemNoticeAddButton from './add';
 import ItemNoticeTypeSelect from './type-select';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {
-  UPDATE_ITEM_NOTICE_MUTATION,
-  REMOVE_ITEM_NOTICE_MUTATION,
-} from '@src/operations/item/mutation';
-import {
-  UpdateItemNotice,
-  UpdateItemNoticeVariables,
-} from '@src/operations/__generated__/UpdateItemNotice';
-import {Items_items_notice} from '@src/operations/__generated__/Items';
-import {
-  RemoveItemNotice,
-  RemoveItemNoticeVariables,
-} from '@src/operations/__generated__/RemoveItemNotice';
+import {useUpdateItemNotice, useRemoveItemNotice} from '@src/hooks/apis';
 
 function ItemNoticeEditSection() {
   const {
     state: {selectedRowId, selectedData},
-    action: {reload},
   } = useBoardContext();
-  const itemNotice: Items_items_notice = selectedData?.notice;
-  const [updateItemNotice] = useMutation<
-    UpdateItemNotice,
-    UpdateItemNoticeVariables
-  >(UPDATE_ITEM_NOTICE_MUTATION);
-  const [removeItemNotice] = useMutation<
-    RemoveItemNotice,
-    RemoveItemNoticeVariables
-  >(REMOVE_ITEM_NOTICE_MUTATION);
+  const itemNotice: ItemNotice = selectedData?.notice;
+  const [updateItemNotice] = useUpdateItemNotice();
+  const [removeItemNotice] = useRemoveItemNotice();
 
   const handleSaveClick = (value) => {
     updateItemNotice({
@@ -45,7 +26,6 @@ function ItemNoticeEditSection() {
     })
       .then(() => {
         message.success('상품 안내메세지를 수정했습니다.');
-        reload();
       })
       .catch(() => {
         message.error('저장에 실패했습니다.');
@@ -60,7 +40,6 @@ function ItemNoticeEditSection() {
     })
       .then(() => {
         message.success('상품 안내메세지를 삭제했습니다.');
-        reload();
       })
       .catch(() => {
         message.error('삭제에 실패했습니다.');

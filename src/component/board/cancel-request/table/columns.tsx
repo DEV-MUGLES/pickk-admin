@@ -1,4 +1,4 @@
-import {getTimeString} from '@src/lib/DateParser';
+import {getTimeString} from '@src/lib/date';
 import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
 import {stringSorter} from '@src/lib/sorter';
 

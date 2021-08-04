@@ -12,8 +12,7 @@ export type BoardFilterRowProps = {
   guideText?: string;
   // tslint:disable-next-line: no-any
   Component: React.ComponentType<any>;
-  // tslint:disable-next-line: no-any
-  [propertyName: string]: any;
+  [propertyName: string]: unknown;
 };
 
 export default function BoardFilterRow({

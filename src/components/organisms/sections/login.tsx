@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import {useRouter} from 'next/router';
 import {Form, Input, Button, message, Typography} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
-import {useLoginByCode} from '@pickk/common';
 
 import {setCookie} from '@src/lib/utils';
 import LogoDefaultIcon from '@src/assets/icons/logo/default';
 import {Space} from '@src/components/atoms';
+import {useLoginByCode} from '@src/hooks/apis';
 
 const {Title: _Title} = Typography;
 

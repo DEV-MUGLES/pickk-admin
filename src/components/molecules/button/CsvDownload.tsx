@@ -2,7 +2,7 @@ import {Button} from 'antd';
 import {CSVLink} from 'react-csv';
 import {FileExcelOutlined} from '@ant-design/icons';
 
-import {getDateTimeStrings} from '@src/lib/DateParser';
+import {getDateTimeStrings} from '@src/lib/date';
 import {useBoardContext} from '@src/contexts/Board';
 
 export type ExcelDownloadButtonProps = {
@@ -39,7 +39,7 @@ export default function CsvDownloadButton({
     <>
       <CSVLink
         id="csv-download"
-        data={dataSource ? parseExcelData(dataSource) : []}
+        data={dataSource ? (parseExcelData(dataSource) as any) : []}
         filename={fileName}
         headers={headers}></CSVLink>
       <Button

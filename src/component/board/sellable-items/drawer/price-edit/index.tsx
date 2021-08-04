@@ -17,7 +17,7 @@ const MODAL_COLLAPSE: CollapseType[] = [
     panels: [
       {
         props: {
-          header: '현재 설정 가격',
+          header: '적용 중인 가격',
           key: '1',
         },
         Content: CurrentPriceInfoSection,
@@ -31,7 +31,7 @@ const MODAL_COLLAPSE: CollapseType[] = [
     panels: [
       {
         props: {
-          header: '활성 가격 설정',
+          header: '가격 수동 설정',
           key: '1',
         },
         Content: ManagePriceSection,

@@ -1,12 +1,12 @@
 import {useState} from 'react';
 import {Button, Table, Tooltip} from 'antd';
 import {PlusOutlined, EditOutlined} from '@ant-design/icons';
+import {Item} from '@pickk/common';
 
 import CreateOptionModal from './create-option-modal';
 import OptionNameEditModal from './name-edit-modal';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {Items_items} from '@src/operations/__generated__/Items';
 
 export type ModalType = 'createOption' | 'nameEdit';
 
@@ -20,7 +20,7 @@ function OptionManageSection() {
   });
   const [selectedOptionId, setSelectedOptionId] = useState<number>();
 
-  const options: Items_items['options'] = selectedData.options;
+  const options: Item['options'] = selectedData.options;
   const optionDataSource = options?.map(({id, name, values}) => ({
     key: name,
     id,

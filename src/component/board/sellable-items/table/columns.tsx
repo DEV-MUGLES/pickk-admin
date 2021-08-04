@@ -1,5 +1,6 @@
 import {ColumnsType} from 'antd/lib/table';
 import {Button, Image, Typography, Badge} from 'antd';
+import {Item} from '@pickk/common';
 
 import SellableItemStock from './stock';
 import InfoTooltip from '@src/components/atoms/info-tooltip';
@@ -7,11 +8,10 @@ import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render'
 
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
-import {Items_items} from '@src/operations/__generated__/Items';
 
 const {Text} = Typography;
 
-export const sellableItemColumns: ColumnsType<Items_items> = [
+export const sellableItemColumns: ColumnsType<Item> = [
   {
     title: 'ID',
     dataIndex: 'id',
@@ -85,22 +85,23 @@ export const sellableItemColumns: ColumnsType<Items_items> = [
     ),
     ellipsis: true,
   },
-  {
-    title: '리뷰수',
-    dataIndex: 'reviewCount',
-    key: 'reviewCount',
-    width: 80,
-    align: 'center',
-    sorter: (a, b) => b.reviewCount - a.reviewCount,
-  },
-  {
-    title: '구매수',
-    dataIndex: 'purchasedCount',
-    key: 'purchasedCount',
-    width: 80,
-    align: 'center',
-    sorter: (a, b) => b.purchasedCount - a.purchasedCount,
-  },
+  // @TODO: uncomment when the field is ready
+  // {
+  //   title: '리뷰수',
+  //   dataIndex: 'reviewCount',
+  //   key: 'reviewCount',
+  //   width: 80,
+  //   align: 'center',
+  //   sorter: (a, b) => b.reviewCount - a.reviewCount,
+  // },
+  // {
+  //   title: '구매수',
+  //   dataIndex: 'purchasedCount',
+  //   key: 'purchasedCount',
+  //   width: 80,
+  //   align: 'center',
+  //   sorter: (a, b) => b.purchasedCount - a.purchasedCount,
+  // },
   {
     title: '안내메세지',
     dataIndex: 'notice',

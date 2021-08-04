@@ -1,9 +1,9 @@
 import {Select, Typography} from 'antd';
+import {ClaimFeePayMethod} from '@pickk/common';
 
 import AccountInput, {
   AccountInputType,
 } from '@src/components/organisms/Form/Items/account-input';
-import {ClaimFeePayMethod} from '@src/operations/__generated__/globalTypes';
 import {CustomInputProps} from '@src/components/organisms/Form/base';
 
 const {Option} = Select;

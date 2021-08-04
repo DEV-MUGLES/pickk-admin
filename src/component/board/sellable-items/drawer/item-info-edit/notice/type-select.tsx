@@ -1,6 +1,6 @@
 import {Select} from 'antd';
+import {ItemNoticeType} from '@pickk/common';
 
-import {ItemNoticeType} from '@src/operations/__generated__/globalTypes';
 import {CustomInputProps} from '@src/components/organisms/Form/base';
 
 const {Option} = Select;

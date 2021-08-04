@@ -42,7 +42,7 @@ export type InputComponentType =
     }
   | {
       type: 'date';
-      inputProps?: DatePickerFormItemProps;
+      inputProps?: Omit<DatePickerFormItemProps, 'value' | 'onChange'>;
     }
   | {
       CustomInput: React.ElementType;

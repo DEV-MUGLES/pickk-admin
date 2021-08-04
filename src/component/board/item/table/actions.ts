@@ -1,17 +1,18 @@
 import {message, Modal} from 'antd';
 
 import {TableActionType} from '@src/components/organisms/Board/Table/table';
-import {BULK_UPDATE_ITEMS_MUTATION} from '@src/operations/item/mutation';
+import {useBulkUpdateItems} from '@src/hooks/apis';
 
 const {confirm} = Modal;
 
 const handleSetIsSellable =
   (isSellable: boolean): TableActionType['handleClick'] =>
   async (ids, mutate) => {
-    return new Promise((resolve, reject) => {
+    const isSellableText = isSellable ? '활성화' : '비활성화';
+    try {
       confirm({
-        title: `상품 ${isSellable ? '' : '비'}활성화 확인`,
-        content: `상품을 ${isSellable ? '' : '비'}활성화 하시겠습니까?`,
+        title: `상품 ${isSellableText} 확인`,
+        content: `상품을 ${isSellableText} 하시겠습니까?`,
         okText: '예',
         okType: 'danger',
         cancelText: '아니오',
@@ -24,31 +25,27 @@ const handleSetIsSellable =
               ids,
             },
           });
-          resolve(true);
         },
         onCancel() {
           message.warning('취소되었습니다.');
-          reject();
         },
       });
-    });
+    } catch {}
   };
 
 export const itemActions: TableActionType[] = [
   {
     text: '상품 활성화',
     handleClick: handleSetIsSellable(true),
-    operation: BULK_UPDATE_ITEMS_MUTATION,
+    useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 비활성화',
     handleClick: handleSetIsSellable(false),
-    operation: BULK_UPDATE_ITEMS_MUTATION,
+    useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 삭제',
-    handleClick: async (ids: number[]) => {
-      return Promise.resolve(false);
-    },
+    handleClick: async (ids: number[]) => null,
   },
 ];

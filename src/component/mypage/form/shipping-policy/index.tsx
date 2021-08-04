@@ -1,25 +1,22 @@
 import {message} from 'antd';
-import {useMutation} from '@apollo/client';
 
 import BaseForm from '../../../../components/organisms/Form/base';
 
 import {useShippingPolicyForm} from './use-shipping-policy-form';
-import {UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION} from '@src/operations/sellers/mutation';
+import {useUpdateMySellerShippingPolicy} from '@src/hooks/apis';
 
 import {FORM_ITEMS} from './form-items';
 
 function ShippingPolicyForm() {
   const {defaultValue} = useShippingPolicyForm();
-  const [updateShippingPolicy] = useMutation(
-    UPDATE_MY_SELLER_SHIPPING_POLICY_MUTATION,
-  );
+  const [updateShippingPolicy] = useUpdateMySellerShippingPolicy();
 
   const handleSaveClick = async (formInput) => {
     try {
-      const {shippingPolicy: updateSellerShippingPolicyInput} = formInput;
+      const {shippingPolicy} = formInput;
       updateShippingPolicy({
         variables: {
-          updateSellerShippingPolicyInput,
+          updateSellerShippingPolicyInput: shippingPolicy,
         },
       });
       message.success('저장되었습니다.');

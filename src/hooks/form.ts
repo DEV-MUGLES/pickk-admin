@@ -1,7 +1,9 @@
 import {Form, FormInstance} from 'antd';
 import {useEffect} from 'react';
 
-export const useBaseForm = (defaultValue: any): FormInstance => {
+export const useBaseForm = (
+  defaultValue: Record<string, unknown>,
+): FormInstance => {
   const [form] = Form.useForm();
 
   useEffect(() => {

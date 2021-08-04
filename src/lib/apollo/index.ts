@@ -7,6 +7,7 @@ import isEqual from 'lodash/isEqual';
 
 import {getCookie} from '../utils';
 import {Mock} from './mock';
+import {handleUnauthorizedError} from './error-handler';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
@@ -31,10 +32,13 @@ const getAuthMiddleware = (_token?: string) =>
 const getErrorLink = () =>
   onError(({graphQLErrors, networkError}) => {
     if (graphQLErrors)
-      graphQLErrors.forEach(({message, locations, path, extensions}) => {
+      graphQLErrors.forEach(({message, locations, path}) => {
         console.log(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
         );
+        if (message === 'Unauthorized') {
+          handleUnauthorizedError();
+        }
       });
 
     if (networkError) console.log(`[Network error]: ${networkError}`);

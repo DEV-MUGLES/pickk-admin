@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {ColumnsType} from 'antd/lib/table';
+import {Item} from '@pickk/common';
 
 import Filter from '@src/components/organisms/Board/Filter';
 import Table from '@src/components/organisms/Board/Table';
@@ -9,14 +10,12 @@ import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
 import {Space} from '@src/components/atoms';
 
-import {useBoardContext, withBoardContext} from '@src/contexts/Board';
-
 import {BoardProps} from '../props';
+import {useBoardContext, withBoardContext} from '@src/contexts/Board';
+import {useItems} from '@src/hooks/apis';
+
 import {sellableItemColumns, sellableItemActions} from './table';
 import {sellableItemInputs} from './inputs';
-
-import {ITEMS_QUERY} from '@src/operations/item/query';
-import {Items_items} from '@src/operations/__generated__/Items';
 
 type SellableItemsDrawerType = 'price' | 'optionStock' | 'info';
 
@@ -41,7 +40,7 @@ function SellableItemsBoard({title}: BoardProps) {
       });
     };
 
-  const newSellableItemColumns: ColumnsType<Items_items> = [
+  const newSellableItemColumns: ColumnsType<Item> = [
     ...sellableItemColumns.slice(0, 1),
     {
       title: '상품 관리',
@@ -106,11 +105,11 @@ function SellableItemsBoard({title}: BoardProps) {
 
 export default withBoardContext(
   SellableItemsBoard,
-  {isSellable: true},
   {
-    gql: ITEMS_QUERY,
+    useBoardData: useItems,
     dataName: 'items',
     filterName: 'itemFilter',
+    defaultFilter: {isSellable: true},
   },
   (v) => v,
 );

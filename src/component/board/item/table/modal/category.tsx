@@ -1,48 +1,38 @@
 import React, {useState} from 'react';
-import {useMutation} from '@apollo/client';
 import {Modal} from 'antd';
 
 import ItemCategoryCascader from '@src/components/molecules/cascader/item-category';
 
 import {useBoardContext} from '@src/contexts/Board';
-
-import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
-import {
-  UpdateItem,
-  UpdateItemVariables,
-} from '@src/operations/__generated__/UpdateItem';
+import {useUpdateItem} from '@src/hooks/apis';
 
 export type CategoryModalProps = {
   visible: boolean;
-  onClose: any;
+  onClose: () => void;
 };
 
 function CategoryModal({visible, onClose}: CategoryModalProps) {
   const {
     state: {selectedRowId, selectedData},
-    action: {reload},
   } = useBoardContext();
 
   const [value, setValue] = useState<[number, number]>([
     selectedData?.majorCategory?.id,
     selectedData?.minorCategory?.id,
   ]);
-  const [update] =
-    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
+  const {updateItem, updateCategoryCache} = useUpdateItem();
 
   const handleOk = async () => {
     const [majorCategoryId, minorCategoryId] = value;
-    await update({
+    const updateItemInput = {majorCategoryId, minorCategoryId};
+    await updateItem({
       variables: {
         itemId: selectedRowId,
-        updateItemInput: {
-          majorCategoryId,
-          minorCategoryId,
-        },
+        updateItemInput,
       },
+      update: updateCategoryCache(selectedRowId, updateItemInput),
     });
     onClose();
-    reload();
   };
 
   return (

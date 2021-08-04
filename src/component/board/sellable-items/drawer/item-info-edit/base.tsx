@@ -1,31 +1,24 @@
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {useMutation} from '@apollo/client';
 import {Image, Input, message} from 'antd';
+import {Item} from '@pickk/common';
 
 import BaseForm from '@src/components/organisms/Form/base';
 import ImageUpload from '@src/components/molecules/image-upload';
 import ItemCategoryCascader from '@src/components/molecules/cascader/item-category';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {Items_items} from '@src/operations/__generated__/Items';
-import {UPDATE_ITEM_MUTATION} from '@src/operations/item/mutation';
-import {
-  UpdateItem,
-  UpdateItemVariables,
-} from '@src/operations/__generated__/UpdateItem';
+import {useUpdateItem} from '@src/hooks/apis';
 
 const {TextArea} = Input;
 
 function ItemBaseInfoEditSection() {
   const {
     state: {selectedRowId, selectedData},
-    action: {reload},
   } = useBoardContext();
-  const selectedItem: Items_items = selectedData;
+  const selectedItem: Item = selectedData;
   const [imageUrl, setImageUrl] = useState<string>();
-  const [updateItem] =
-    useMutation<UpdateItem, UpdateItemVariables>(UPDATE_ITEM_MUTATION);
+  const {updateItem, updateCategoryCache} = useUpdateItem();
 
   useEffect(() => {
     setImageUrl(null);
@@ -35,22 +28,25 @@ function ItemBaseInfoEditSection() {
     const {
       imageUrl: _i,
       category: [majorCategoryId, minorCategoryId],
-      ...updateItemInput
+      ..._updateItemInput
     } = value;
+    const itemId = selectedItem.id;
+    const updateItemInput = {
+      ..._updateItemInput,
+      majorCategoryId,
+      minorCategoryId,
+      imageUrl: imageUrl ?? selectedItem.imageUrl,
+    };
+
     updateItem({
       variables: {
-        itemId: selectedItem.id,
-        updateItemInput: {
-          ...updateItemInput,
-          majorCategoryId,
-          minorCategoryId,
-          imageUrl: imageUrl ?? selectedItem.imageUrl,
-        },
+        itemId,
+        updateItemInput,
       },
+      update: updateCategoryCache(itemId, updateItemInput),
     })
       .then(() => {
         message.success('아이템 정보를 수정했습니다!');
-        reload();
       })
       .catch(() => {
         message.success('저장에 실패했습니다.');

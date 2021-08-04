@@ -27,7 +27,6 @@ export default function Phase1({
   itemPk,
   setPhase,
   selectedInfluencerData,
-  handleDiscountDataChange,
   closeModal,
 }: Phase1Props) {
   const [body, setBody] = useState(

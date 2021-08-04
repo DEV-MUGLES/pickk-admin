@@ -1,33 +1,27 @@
-import {useMutation} from '@apollo/client';
 import {message} from 'antd';
+import {ClaimFeePayMethod} from '@pickk/common';
 
 import BaseForm, {
   BaseFormProps,
 } from '../../../../components/organisms/Form/base';
-
 import FeePayReceiveInput, {
   FeePayReceiveValueType,
 } from './fee-pay-receive-input';
+
 import {AddressType} from './address-input';
-import {isEqualObject} from '@src/lib/utils';
 import {useClaimPolicyForm} from './use-claim-policy-form';
 import {
-  UPDATE_MY_SELLER_CLAIM_POLICY_MUTATION,
-  UPDATE_MY_SELLER_RETURN_ADDRESS_MUTATION,
-} from '@src/operations/sellers/mutation';
-import {ClaimFeePayMethod} from '@src/operations/__generated__/globalTypes';
+  useUpdateMySellerReturnAddress,
+  useUpdateMySellerClaimPolicy,
+} from '@src/hooks/apis';
+import {isEqualObject} from '@src/lib/utils';
 
 import {FORM_ITEMS} from './form-items';
 
 function ClaimPolicyForm() {
   const {defaultValue} = useClaimPolicyForm();
-
-  const [updateMySellerReturnAddress] = useMutation(
-    UPDATE_MY_SELLER_RETURN_ADDRESS_MUTATION,
-  );
-  const [updateMySellerClaimPolicy] = useMutation(
-    UPDATE_MY_SELLER_CLAIM_POLICY_MUTATION,
-  );
+  const [updateMySellerReturnAddress] = useUpdateMySellerReturnAddress();
+  const [updateMySellerClaimPolicy] = useUpdateMySellerClaimPolicy();
 
   const handleSaveReturnAddress = async (returnAddress: AddressType) => {
     if (isEqualObject(defaultValue?.returnAddress, returnAddress)) {

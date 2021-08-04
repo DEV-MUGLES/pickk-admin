@@ -1,4 +1,4 @@
-import {DocumentNode} from 'graphql';
+import {MutationTuple} from '@apollo/client';
 
 export type TableActionType = {
   icon?: string;
@@ -6,7 +6,7 @@ export type TableActionType = {
   handleClick?: (
     ids: number[],
     mutate?: (options?: MutationFunctionOptions) => Promise<FetchResult>,
-  ) => Promise<boolean>;
-  operation?: DocumentNode;
-  Component?: React.FunctionComponent<any>;
+  ) => Promise<void>;
+  useTableAction?: () => MutationTuple;
+  Component?: React.FunctionComponent<unknown>;
 };

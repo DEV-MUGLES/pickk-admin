@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import {getTimeString} from '@src/lib/DateParser';
+import {getTimeString} from '@src/lib/date';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
 

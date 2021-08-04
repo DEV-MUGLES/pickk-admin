@@ -1,18 +1,15 @@
-import {useMutation} from '@apollo/client';
 import {message} from 'antd';
 
 import BaseForm from '@src/components/organisms/Form/base';
 
 import {useSettlePolicyForm} from './use-settle-policy-form';
-import {UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION} from '@src/operations/sellers/mutation';
+import {useUpdateMySellerSettlePolicy} from '@src/hooks/apis';
 
 import {FORM_ITEMS} from './form-items';
 
 function SettlePolicyForm() {
   const {defaultValue} = useSettlePolicyForm();
-  const [updateSettlePolicy] = useMutation(
-    UPDATEE_MY_SELLER_SETTLE_POLICY_MUTATION,
-  );
+  const [updateSettlePolicy] = useUpdateMySellerSettlePolicy();
 
   const handleSaveClick = async (formInput) => {
     try {

@@ -1,65 +1,38 @@
-import {gql, useQuery} from '@apollo/client';
+import {
+  SellerReturnAddress,
+  SellerClaimAccount,
+  SellerClaimPolicy,
+  BankCode,
+  ClaimFeePayMethod,
+} from '@pickk/common';
 
-import {ClaimFeePayMethod} from '@src/operations/__generated__/globalTypes';
-import {SellerClaimAccountFrag} from '@src/operations/__generated__/SellerClaimAccountFrag';
-import {SellerClaimPolicyFrag} from '@src/operations/__generated__/SellerClaimPolicyFrag';
-import {SellerFrag} from '@src/operations/__generated__/SellerFrag';
-import {SellerReturnAddressFrag} from '@src/operations/__generated__/SellerReturnAddressFrag';
-
-const ME_SELLER_CLAIMPOLICY_QUERY = gql`
-  query MeSeller {
-    meSeller {
-      id
-      returnAddress {
-        baseAddress
-        detailAddress
-        postalCode
-      }
-      claimPolicy {
-        picName
-        phoneNumber
-        fee
-        feePayMethod
-        account {
-          bankCode
-          number
-          ownerName
-        }
-      }
-    }
-  }
-`;
+import {useMeSellerClaimPolicy} from '@src/hooks/apis';
 
 export type ClaimPolicyFormDefaultValue = {
   returnAddress: Pick<
-    SellerReturnAddressFrag,
+    SellerReturnAddress,
     'baseAddress' | 'detailAddress' | 'postalCode'
   >;
   feePayReceive: {
     feePayMethod: ClaimFeePayMethod;
-    accountInput: Pick<
-      SellerClaimAccountFrag,
-      'bankCode' | 'number' | 'ownerName'
-    >;
+    accountInput: Pick<SellerClaimAccount, 'bankCode' | 'number' | 'ownerName'>;
   };
-} & SellerClaimPolicyFrag;
+} & SellerClaimPolicy;
 
 export const useClaimPolicyForm = () => {
-  const {data} = useQuery<{
-    meSeller: Pick<SellerFrag, 'returnAddress' | 'claimPolicy'>;
-  }>(ME_SELLER_CLAIMPOLICY_QUERY);
+  const {data} = useMeSellerClaimPolicy();
 
   const {
     baseAddress = '',
     detailAddress = '',
     postalCode = '',
-  } = data?.meSeller?.returnAddress;
+  } = data?.meSeller?.returnAddress || {};
 
   const {
-    bankCode,
+    bankCode = BankCode.AbnAmro,
     number = '',
     ownerName = '',
-  } = data?.meSeller?.claimPolicy?.account;
+  } = data?.meSeller?.claimPolicy?.account || {};
 
   const defaultValue: ClaimPolicyFormDefaultValue = {
     returnAddress: {

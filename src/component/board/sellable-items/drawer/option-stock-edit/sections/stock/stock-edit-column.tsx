@@ -1,28 +1,20 @@
 import {useState} from 'react';
-import {useMutation} from '@apollo/client';
 import {Button, Input, message, Space, Typography} from 'antd';
 import {ButtonType} from 'antd/lib/button';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {UPDATE_PRODUCT_MUTATION} from '@src/operations/item/mutation';
-import {
-  UpdateProduct,
-  UpdateProductVariables,
-} from '@src/operations/__generated__/UpdateProduct';
+import {useUpdateProduct} from '@src/hooks/apis';
 
 const {Text} = Typography;
 
 function StockEditColumn({id, defaultValue}) {
   const {
     state: {selectedData},
-    action: {reload},
   } = useBoardContext();
   const {isInfiniteStock} = selectedData;
   const [isEditable, setIsEditable] = useState(false);
   const [stock, setStock] = useState<number>(defaultValue);
-  const [updateProduct] = useMutation<UpdateProduct, UpdateProductVariables>(
-    UPDATE_PRODUCT_MUTATION,
-  );
+  const [updateProduct] = useUpdateProduct();
 
   const handleEditClick = () => {
     setIsEditable(true);
@@ -39,7 +31,6 @@ function StockEditColumn({id, defaultValue}) {
     })
       .then(() => {
         setIsEditable(false);
-        reload();
       })
       .catch(() => {
         message.error('재고 수정에 실패했습니다.');

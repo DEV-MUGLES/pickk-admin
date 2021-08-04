@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import {getTimeString} from '@src/lib/DateParser';
+import {getTimeString} from '@src/lib/date';
 import {Settlement} from '@src/types';
 
 export const parseTable = (table: Settlement[]) =>

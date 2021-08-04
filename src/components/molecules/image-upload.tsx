@@ -1,13 +1,8 @@
 import React from 'react';
-import {useMutation} from '@apollo/client';
 import {Upload, message, UploadProps} from 'antd';
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 
-import {
-  UploadMultipleImages,
-  UploadMultipleImagesVariables,
-} from '@src/operations/__generated__/UploadMultipleImages';
-import {UPLOAD_MULTIPLE_IMAGES_MUTATION} from '@src/operations';
+import {useUploadMultipleImages} from '@src/hooks/apis';
 
 export type ImageUploadProps = {
   imageUrl: string;
@@ -20,10 +15,7 @@ function ImageUpload({
   setImageUrl,
   alt = 'image url',
 }: ImageUploadProps) {
-  const [upload, {loading}] = useMutation<
-    UploadMultipleImages,
-    UploadMultipleImagesVariables
-  >(UPLOAD_MULTIPLE_IMAGES_MUTATION);
+  const [upload, {loading}] = useUploadMultipleImages();
 
   const uploadProps: UploadProps = {
     name: 'file',
