@@ -1,3 +1,5 @@
+// @TODO : object 관련 코드 다른 모듈로 분리
+
 export const isEqualObject = (a, b): boolean => {
   if (!a && !b) return true;
   if (!a || !b) return false;
@@ -39,3 +41,5 @@ const Util = {
 export default Util;
 
 export * from './Cookies';
+export * from './NumberParser';
+export * from './alias';

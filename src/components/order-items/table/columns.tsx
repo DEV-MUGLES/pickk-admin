@@ -1,6 +1,8 @@
 import {getTimeString} from '@src/common/helpers/date';
 import {addDashToPhoneNumber} from '@src/common/helpers/PhoneNumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';
+import {getOrderItemStatusDisplayName} from '@src/common/helpers';
+
 export const orderItemColumns = [
   {
     title: '상품별 주문 번호',
@@ -31,6 +33,7 @@ export const orderItemColumns = [
     title: '주문상태',
     dataIndex: 'status',
     key: 'status',
+    render: (value) => <div>{getOrderItemStatusDisplayName(value)}</div>,
     sorter: (a, b) => stringSorter(b.status, a.status),
     width: 90,
     ellipsis: true,
