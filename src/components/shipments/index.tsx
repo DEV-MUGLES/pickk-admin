@@ -15,8 +15,6 @@ import {shipmentPreviewData} from './preview-data';
 import {usePlacementTable} from '@src/common/hooks/table/Placement';
 import {useShipmentPreview} from '@src/common/hooks/Shipment';
 
-import {withBoardContext} from '@src/common/contexts/Board';
-
 function PlacementBoard({title}: BoardProps) {
   return (
     <>

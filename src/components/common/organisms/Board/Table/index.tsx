@@ -79,6 +79,7 @@ const Wrapper = styled.div`
   display: flex;
   align-itmes: flex-start;
   text-align: left;
+  margin-bottom: 1.4rem;
 `;
 
 const DataTable = styled(Table)`

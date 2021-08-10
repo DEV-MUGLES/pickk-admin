@@ -1,8 +1,14 @@
 import dayjs from 'dayjs';
+import {OrderItemClaimStatus, OrderItemStatus} from '@pickk/common';
 
 import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
 import Selector from '@src/components/common/molecules/BoardFilter/input/Selector';
 import Datepicker from '@src/components/common/molecules/BoardFilter/input/DatePicker';
+
+import {
+  getOrderItemClaimStatusDisplayName,
+  getOrderItemStatusDisplayName,
+} from '@src/common/helpers/alias';
 
 export const orderItemInputs = [
   {
@@ -14,34 +20,37 @@ export const orderItemInputs = [
     },
     labelText: '조회기간',
     select: [
-      {name: '결제일', value: 'paid'},
-      {name: '발주확인일', value: 'placed'},
-      {name: '발송처리일', value: 'shipped'},
-      {name: '배송완료일', value: 'delivered'},
+      {name: '결제일', value: 'paidAtBetween'},
+      {name: '발주확인일', value: 'shipReadyAtBetween'},
+      {name: '발송처리일', value: 'shippingAtBetween'},
+      {name: '배송완료일', value: 'shippedAtBetween'},
     ],
     Component: Datepicker,
   },
   {
     name: 'status',
     labelText: '주문상태',
-    select: [
-      {name: '전체', value: null},
-      {name: '결제 완료', value: 'PAID'},
-      {name: '발송 준비', value: 'PLACED'},
-      {name: '발송 완료', value: 'SHIPPING'},
-      {name: '배송 완료', value: 'DELIVERED'},
-      {name: '취소 요청', value: 'CANCEL_REQUESTED'},
-      {name: '취소 완료', value: 'CANCELLED'},
-      {name: '교환 요청', value: 'EXCHANGE_REQUESTED'},
-      {name: '교환 완료', value: 'EXCHANGED'},
-      {name: '반품 요청', value: 'REFUND_REQUESTED'},
-      {name: '반품 완료', value: 'REFUNDED'},
-      {name: '구매 확정', value: 'CONFIRMED'},
-    ],
+    select: [{name: '전체', value: null}].concat(
+      Object.values(OrderItemStatus).map((value) => ({
+        name: getOrderItemStatusDisplayName(value),
+        value,
+      })),
+    ),
     Component: Selector,
   },
   {
-    name: 'keyword',
+    name: 'claimStatus',
+    labelText: '클레임 상태',
+    select: [{name: '전체', value: null}].concat(
+      Object.values(OrderItemClaimStatus).map((value) => ({
+        name: getOrderItemClaimStatusDisplayName(value),
+        value,
+      })),
+    ),
+    Component: Selector,
+  },
+  {
+    name: 'search',
     labelText: '상세조건',
     Component: InputBox,
     guideText:

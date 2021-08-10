@@ -5,7 +5,7 @@ import Table, {
 } from '@src/components/common/organisms/Board/Table';
 import Space from '@src/components/common/atoms/space';
 
-import {withBoardContext, useBoardContext} from '@src/common/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 import {exchangeRequestInputs} from './inputs';
 import {exchangeRequestPreviewData} from './preview-data';

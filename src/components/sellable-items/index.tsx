@@ -2,24 +2,23 @@ import {useState} from 'react';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
+import Header from '@src/components/common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
 import SellableItemManageButtons from './table/manage-buttons';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
 import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
-import {Space} from '@src/components/common/atoms';
 
+import {useBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
-import {useBoardContext, withBoardContext} from '@src/common/contexts/Board';
-import {useItems} from '@src/common/hooks/apis';
 
 import {sellableItemColumns, sellableItemActions} from './table';
 import {sellableItemInputs} from './inputs';
 
 type SellableItemsDrawerType = 'price' | 'optionStock' | 'info';
 
-function SellableItemsBoard({title}: BoardProps) {
+function SellableItemsBoard(props: BoardProps) {
   const {
     action: {setSelectedRowId},
   } = useBoardContext();
@@ -80,10 +79,10 @@ function SellableItemsBoard({title}: BoardProps) {
 
   return (
     <>
-      <Filter title={title} inputs={sellableItemInputs} />
-      <Space level={2} />
+      <Header {...props} />
+      <Filter {...props} inputs={sellableItemInputs} />
       <Table
-        title={title}
+        {...props}
         columns={newSellableItemColumns}
         actions={sellableItemActions}
       />
@@ -103,13 +102,4 @@ function SellableItemsBoard({title}: BoardProps) {
   );
 }
 
-export default withBoardContext(
-  SellableItemsBoard,
-  {
-    useBoardData: useItems,
-    dataName: 'items',
-    filterName: 'itemFilter',
-    defaultFilter: {isSellable: true},
-  },
-  (v) => v,
-);
+export default SellableItemsBoard;

@@ -2,7 +2,7 @@ import {QueryResult} from '@apollo/client';
 
 export type DataFetchConfig = {
   useBoardData: (options?) => QueryResult;
-  dataName: string;
+  operationName: string;
   filterName: string;
   defaultFilter?: Filter;
 };

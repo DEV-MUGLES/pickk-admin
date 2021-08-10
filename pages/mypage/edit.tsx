@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {PageHeader, Tabs} from 'antd';
 
-import MainLayout from '@src/components/common/templates/MainLayout';
 import {
   BaseInfoForm,
   ServiceCenterInfoForm,
@@ -25,7 +24,7 @@ const TAB_PANE_INFO: {tab: string; content: React.ElementType}[] = [
 
 function MyPageEditPage() {
   return (
-    <MainLayout>
+    <>
       <PageHeader
         ghost={false}
         onBack={() => window.history.back()}
@@ -42,7 +41,7 @@ function MyPageEditPage() {
           ))}
         </Tabs>
       </Wrapper>
-    </MainLayout>
+    </>
   );
 }
 

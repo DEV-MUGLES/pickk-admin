@@ -931,10 +931,10 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
-"@pickk/common@^1.7.8":
-  version "1.7.8"
-  resolved "https://registry.yarnpkg.com/@pickk/common/-/common-1.7.8.tgz#5bce0fcecebe41e2009415b44077ab4f2b389a3c"
-  integrity sha512-zhKBlNk12UyAXj09J6uJMaWIIpT6BudgDAf5ENK72cb0blwwiVqRnE7YKV+Jy+/bR+5IoF5rEUfa2/R6BxUulw==
+"@pickk/common@^1.7.9":
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/@pickk/common/-/common-1.7.9.tgz#49a998d02140dd71846432f310c866e2e0fe62ba"
+  integrity sha512-+MtlOJao1uJ1ShN/Nhg6bcT6QLWTFmA0xQrnWWMsqFFRV80nIIqSOsUQHGnEjfW7Caf6O+eDTm+w4RKrTrNEjw==
   dependencies:
     cross-env "5.0.5"
 
