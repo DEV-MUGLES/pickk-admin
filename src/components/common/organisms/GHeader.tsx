@@ -4,7 +4,7 @@ import {Layout, Avatar, Dropdown, Menu, Typography} from 'antd';
 import {DownOutlined, UserOutlined} from '@ant-design/icons';
 
 import IconButton from '../atoms/button/icon';
-import LogoDefaultIcon from '../atoms/logo/default';
+import LogoDefaultIcon from '../icons/logo/_default';
 import {WHITE} from '../atoms/colors';
 
 import UserService from '@src/lib/services/User';

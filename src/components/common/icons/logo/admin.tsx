@@ -1,4 +1,4 @@
-import IconProps from '../icon/icon';
+import {IconProps} from '../icons';
 
 export default function LogoAdminIcon({style, fill}: IconProps) {
   return (
