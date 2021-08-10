@@ -14,7 +14,7 @@ import {
   UpdateItemInput,
 } from '@pickk/common';
 
-import {ITEMS_QUERY} from '@src/common/gqls/item/query';
+import {ITEMS_QUERY} from '@src/common/graphql/item/query';
 
 export const useItems = (options?: QueryHookOptions) =>
   useQuery<Pick<Query, 'items'>, QueryItemsArgs>(ITEMS_QUERY, options);
