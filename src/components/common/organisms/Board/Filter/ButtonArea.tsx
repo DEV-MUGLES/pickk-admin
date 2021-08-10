@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
-import {INDIGO_BLUE} from '@src/components/common/atoms/colors';
+import {INDIGO_BLUE} from '@src/common/constants/colors';
 import Space from '@src/components/common/atoms/space';
 
 export default function FilterButtonArea() {

@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import DayjsDatePicker from '@src/components/common/molecules/BoardFilter/input/DayjsDatePicker';
 import Img from '@src/components/common/atoms/img';
 import Space from '@src/components/common/atoms/space';
-import {GREY} from '@src/components/common/atoms/colors';
+import {GREY} from '@src/common/constants/colors';
 
 import {User} from '@src/types/User';
 import ItemService from '@src/lib/services/Item';

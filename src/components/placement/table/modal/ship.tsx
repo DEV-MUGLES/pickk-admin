@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Modal, Input, Button, Typography} from 'antd';
 
-import {GREY} from '@src/components/common/atoms/colors';
+import {GREY} from '@src/common/constants/colors';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {Placement} from '@src/types';
 import OrderItemService from '@src/lib/services/OrderItem';

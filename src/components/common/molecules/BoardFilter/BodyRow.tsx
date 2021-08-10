@@ -3,7 +3,7 @@ import {Typography} from 'antd';
 import styled from 'styled-components';
 
 import InfoTooltip from '@src/components/common/atoms/info-tooltip';
-import {GREY} from '@src/components/common/atoms/colors';
+import {GREY} from '@src/common/constants/colors';
 
 const {Text} = Typography;
 

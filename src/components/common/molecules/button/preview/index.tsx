@@ -6,7 +6,7 @@ import {useBoardContext} from '@src/common/contexts/Board';
 import {Filter} from '@src/types';
 
 import Space from '@src/components/common/atoms/space';
-import {WHITE, INDIGO_BLUE} from '@src/components/common/atoms/colors';
+import {WHITE, INDIGO_BLUE} from '@src/common/constants/colors';
 import {AntdIconProps} from '@ant-design/icons/lib/components/AntdIcon';
 
 const {Text} = Typography;

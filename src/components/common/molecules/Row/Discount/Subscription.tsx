@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import DayjsDatePicker from '../../BoardFilter/input/DayjsDatePicker';
 import Space from '@src/components/common/atoms/space';
-import {INDIGO_BLUE} from '@src/components/common/atoms/colors';
+import {INDIGO_BLUE} from '@src/common/constants/colors';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 
 const {Text} = Typography;

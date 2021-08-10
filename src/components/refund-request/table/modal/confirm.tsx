@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Modal, Button, Typography} from 'antd';
 
-import {GREY} from '@src/components/common/atoms/colors';
+import {GREY} from '@src/common/constants/colors';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {RefundRequest} from '@src/types';
 import RefundRequestService from '@src/lib/services/RefundRequest';

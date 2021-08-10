@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {GREY} from '@src/components/common/atoms/colors';
+import {GREY} from '@src/common/constants/colors';
 
 import {IconProps} from '../icons';
 

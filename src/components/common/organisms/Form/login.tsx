@@ -2,7 +2,7 @@ import React, {useState, CSSProperties} from 'react';
 import {Layout, Input, Checkbox, Button, Typography, message} from 'antd';
 import styled from 'styled-components';
 
-import {WHITE, GREY} from '@src/components/common/atoms/colors';
+import {WHITE, GREY} from '@src/common/constants/colors';
 import Space from '@src/components/common/atoms/space';
 import UserService from '@src/lib/services/User';
 import {LockOutlined, UserOutlined} from '@ant-design/icons';

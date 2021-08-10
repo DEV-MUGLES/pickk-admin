@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import FilterHeader, {BoardFilterHeaderProps} from './Header';
 import FilterBody, {BoardFilterBodyProps} from './Body';
 import FilterButtonArea from './ButtonArea';
-import {WHITE} from '@src/components/common/atoms/colors';
+import {WHITE} from '@src/common/constants/colors';
 
 export type BoardFilterProps = BoardFilterHeaderProps & BoardFilterBodyProps;
 

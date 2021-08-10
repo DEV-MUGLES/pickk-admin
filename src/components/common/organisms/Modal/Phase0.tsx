@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Img from '@src/components/common/atoms/img';
 import Space from '@src/components/common/atoms/space';
-import {GREY} from '@src/components/common/atoms/colors';
+import {GREY} from '@src/common/constants/colors';
 import UserService from '@src/lib/services/User';
 import {User} from '@src/types/User';
 

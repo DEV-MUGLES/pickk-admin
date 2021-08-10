@@ -1,7 +1,7 @@
 import {Tooltip, TooltipProps} from 'antd';
 import {InfoCircleOutlined} from '@ant-design/icons';
 
-import {GREY} from '@src/components/common/atoms/colors';
+import {GREY} from '@src/common/constants/colors';
 
 export type InfoTooltipProps = TooltipProps & {
   iconStyle?: React.CSSProperties;

@@ -5,7 +5,7 @@ import {DownOutlined, UserOutlined} from '@ant-design/icons';
 
 import IconButton from '../atoms/button/icon';
 import LogoDefaultIcon from '../icons/logo/_default';
-import {WHITE} from '../atoms/colors';
+import {WHITE} from '../../../common/constants/colors';
 
 import UserService from '@src/lib/services/User';
 

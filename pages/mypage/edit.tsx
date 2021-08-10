@@ -11,7 +11,7 @@ import {
   SettlePolicyForm,
 } from '@src/components/mypage/form';
 import {Space} from '@src/components/common/atoms';
-import {WHITE} from '@src/components/common/atoms/colors';
+import {WHITE} from '@src/common/constants/colors';
 
 const {TabPane} = Tabs;
 

@@ -6,7 +6,7 @@ import {ColumnsType} from 'antd/lib/table';
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
 import TableActionBar, {TableActionBarProps} from './ActionBar';
-import {WHITE} from '@src/components/common/atoms/colors';
+import {WHITE} from '@src/common/constants/colors';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 

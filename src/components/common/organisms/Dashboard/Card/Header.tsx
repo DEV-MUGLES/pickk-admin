@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import CardReloadButton, {
   CardReloadButtonProps,
 } from '@src/components/common/molecules/button/CardReload';
-import {GREY} from '@src/components/common/atoms/colors';
+import {GREY} from '@src/common/constants/colors';
 
 export type DashboardCardHeaderProps = {
   title: string;

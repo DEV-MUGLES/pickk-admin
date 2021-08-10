@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Typography} from 'antd';
 
 import {TitleText} from '@src/components/common/organisms/Board/Filter/Header';
-import {WHITE} from '@src/components/common/atoms/colors';
+import {WHITE} from '@src/common/constants/colors';
 
 import {useSettlementAmountPreview} from '@src/common/hooks/Settlement';
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';

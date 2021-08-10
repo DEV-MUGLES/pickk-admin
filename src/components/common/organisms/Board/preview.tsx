@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import PreviewButton from '@src/components/common/molecules/button/preview';
-import {WHITE} from '@src/components/common/atoms/colors';
+import {WHITE} from '@src/common/constants/colors';
 
 export type PreviewProps = {
   data: any;
