@@ -7,7 +7,7 @@ import ItemNoticeTypeSelect from './type-select';
 import DayjsDatePicker from '@src/components/common/molecules/BoardFilter/input/DayjsDatePicker';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {useAddItemNotice} from '@src/hooks/apis';
+import {useAddItemNotice} from '@src/common/hooks/apis';
 
 const {RangePicker} = DayjsDatePicker;
 

@@ -1,5 +1,5 @@
 import MainLayout from '@src/components/common/templates/MainLayout';
-import SellableItemsBoard from '@src/component/board/sellable-items';
+import SellableItemsBoard from '@src/components/sellable-items';
 
 function SellableItems() {
   return (

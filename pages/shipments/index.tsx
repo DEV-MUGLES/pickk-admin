@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/common/templates/MainLayout';
-import ShipmentBoard from '@src/component/board/shipments';
+import ShipmentBoard from '@src/components/shipments';
 
 export default function OrderItems() {
   return (

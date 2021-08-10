@@ -3,7 +3,7 @@ import {Button, message, Table, Modal} from 'antd';
 import {Item} from '@pickk/common';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {useUpdateItem} from '@src/hooks/apis';
+import {useUpdateItem} from '@src/common/hooks/apis';
 
 import {stockColumns} from './columns';
 import ShippingReservePolicyModal from './shipping-reserve-policy-modal';

@@ -2,7 +2,7 @@ import React from 'react';
 import {Upload, message, UploadProps} from 'antd';
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 
-import {useUploadMultipleImages} from '@src/hooks/apis';
+import {useUploadMultipleImages} from '@src/common/hooks/apis';
 
 export type ImageUploadProps = {
   imageUrl: string;

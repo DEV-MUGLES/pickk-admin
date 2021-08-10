@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Modal, InputNumber, Button, message, Typography, Spin} from 'antd';
 
-import {useProductList} from '@src/hooks/table';
+import {useProductList} from '@src/common/hooks/table';
 import ProductService from '@src/lib/services/Product';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import Space from '@src/components/common/atoms/space';

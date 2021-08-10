@@ -2,7 +2,7 @@ import React from 'react';
 import {Cascader} from 'antd';
 
 import {CustomInputProps} from '@src/components/common/organisms/Form/base';
-import {useItemMajorCategories} from '@src/hooks/apis';
+import {useItemMajorCategories} from '@src/common/hooks/apis';
 
 export type ItemCategoryCascaderProps = CustomInputProps<[number, number]> & {
   hasAll?: boolean;

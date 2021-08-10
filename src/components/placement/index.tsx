@@ -18,8 +18,8 @@ import {parseTable} from '../order-items/table/data-parser';
 import PlacementService from '@src/lib/services/Placement';
 import {OrderStatus} from '@src/types';
 
-import {usePlacementTable} from '@src/hooks/table/Placement';
-import {usePlacementPreview} from '@src/hooks';
+import {usePlacementTable} from '@src/common/hooks/table/Placement';
+import {usePlacementPreview} from '@src/common/hooks';
 import {withBoardContext, useBoardContext} from '@src/contexts/Board';
 
 function PlacementBoard({title}: BoardProps) {

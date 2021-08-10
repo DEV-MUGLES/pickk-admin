@@ -7,7 +7,7 @@ import ItemNoticeAddButton from './add';
 import ItemNoticeTypeSelect from './type-select';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {useUpdateItemNotice, useRemoveItemNotice} from '@src/hooks/apis';
+import {useUpdateItemNotice, useRemoveItemNotice} from '@src/common/hooks/apis';
 
 function ItemNoticeEditSection() {
   const {

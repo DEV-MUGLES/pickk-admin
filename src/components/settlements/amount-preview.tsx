@@ -5,7 +5,7 @@ import {Typography} from 'antd';
 import {TitleText} from '@src/components/common/organisms/Board/Filter/Header';
 import {WHITE} from '@src/components/common/atoms/colors';
 
-import {useSettlementAmountPreview} from '@src/hooks/Settlement';
+import {useSettlementAmountPreview} from '@src/common/hooks/Settlement';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import Space from '@src/components/common/atoms/space';
 

@@ -7,7 +7,7 @@ import Space from '@src/components/common/atoms/space';
 import {useBoardContext} from '@src/contexts/Board';
 import OrderItemService from '@src/lib/services/OrderItem';
 import RefundRequestService from '@src/lib/services/RefundRequest';
-import {useItemOptions} from '@src/hooks/Item';
+import {useItemOptions} from '@src/common/hooks/Item';
 import {ItemOption} from '@src/types';
 import {isEqualArray} from '@src/lib/utils';
 

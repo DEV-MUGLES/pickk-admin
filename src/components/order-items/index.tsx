@@ -10,7 +10,7 @@ import Table, {
 import Space from '@src/components/common/atoms/space';
 
 import {withBoardContext, useBoardContext} from '@src/contexts/Board';
-import {useOrderItemTable} from '@src/hooks/table/OrderItem';
+import {useOrderItemTable} from '@src/common/hooks/table/OrderItem';
 
 import {orderItemInputs} from './inputs';
 import {orderItemActions, orderItemColumns} from './table';

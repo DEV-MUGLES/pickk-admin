@@ -1,7 +1,7 @@
 import {message, Modal} from 'antd';
 
 import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
-import {useBulkUpdateItems} from '@src/hooks/apis';
+import {useBulkUpdateItems} from '@src/common/hooks/apis';
 
 const {confirm} = Modal;
 

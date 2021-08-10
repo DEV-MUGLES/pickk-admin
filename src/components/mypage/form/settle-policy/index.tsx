@@ -3,7 +3,7 @@ import {message} from 'antd';
 import BaseForm from '@src/components/common/organisms/Form/base';
 
 import {useSettlePolicyForm} from './use-settle-policy-form';
-import {useUpdateMySellerSettlePolicy} from '@src/hooks/apis';
+import {useUpdateMySellerSettlePolicy} from '@src/common/hooks/apis';
 
 import {FORM_ITEMS} from './form-items';
 

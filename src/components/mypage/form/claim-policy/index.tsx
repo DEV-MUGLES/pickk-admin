@@ -11,7 +11,7 @@ import {useClaimPolicyForm} from './use-claim-policy-form';
 import {
   useUpdateMySellerReturnAddress,
   useUpdateMySellerClaimPolicy,
-} from '@src/hooks/apis';
+} from '@src/common/hooks/apis';
 import {isEqualObject} from '@src/lib/utils';
 
 import {FORM_ITEMS} from './form-items';

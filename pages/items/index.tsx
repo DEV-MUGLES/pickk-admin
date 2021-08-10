@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/common/templates/MainLayout';
-import ItemBoard from '@src/component/board/item';
+import ItemBoard from '@src/components/item';
 
 export default function Items() {
   return (

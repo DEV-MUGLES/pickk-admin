@@ -16,7 +16,7 @@ import InputNumber, {InputNumberProps} from './Items/input-number';
 import DatePickerFormItem, {DatePickerFormItemProps} from './Items/date-picker';
 import {Space} from '@src/components/common/atoms';
 
-import {useBaseForm} from '@src/hooks/form';
+import {useBaseForm} from '@src/common/hooks/form';
 
 const {confirm} = Modal;
 

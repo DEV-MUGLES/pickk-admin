@@ -10,8 +10,8 @@ import {BoardProps} from '../props';
 
 import {parseTable} from './table/data-parser';
 
-import {useSettlementTable} from '@src/hooks/table/Settlement';
-import {useSettlementCountPreview} from '@src/hooks/Settlement';
+import {useSettlementTable} from '@src/common/hooks/table/Settlement';
+import {useSettlementCountPreview} from '@src/common/hooks/Settlement';
 
 import {withBoardContext} from '@src/contexts/Board';
 import SettlementAmountPreview from './amount-preview';

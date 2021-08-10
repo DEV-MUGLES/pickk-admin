@@ -12,7 +12,7 @@ import {Space} from '@src/components/common/atoms';
 
 import {BoardProps} from '../props';
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';
-import {useItems} from '@src/hooks/apis';
+import {useItems} from '@src/common/hooks/apis';
 
 import {sellableItemColumns, sellableItemActions} from './table';
 import {sellableItemInputs} from './inputs';

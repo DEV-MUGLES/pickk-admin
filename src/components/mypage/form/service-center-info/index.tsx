@@ -5,7 +5,7 @@ import BaseForm from '@src/components/common/organisms/Form/base';
 import {
   useMeSellerServiceCenterInfo,
   useUpdateMeSellerServiceCenterInfo,
-} from '@src/hooks/apis/seller';
+} from '@src/common/hooks/apis/seller';
 
 import {FORM_ITEMS} from './form-items';
 

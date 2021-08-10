@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Input, message, Modal} from 'antd';
 
-import {useUpdateItemOption} from '@src/hooks/apis';
+import {useUpdateItemOption} from '@src/common/hooks/apis';
 
 export type OptionNameEditModalProps = {
   optionId: number;

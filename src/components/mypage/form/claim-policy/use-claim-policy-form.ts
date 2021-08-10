@@ -6,7 +6,7 @@ import {
   ClaimFeePayMethod,
 } from '@pickk/common';
 
-import {useMeSellerClaimPolicy} from '@src/hooks/apis';
+import {useMeSellerClaimPolicy} from '@src/common/hooks/apis';
 
 export type ClaimPolicyFormDefaultValue = {
   returnAddress: Pick<

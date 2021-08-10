@@ -16,8 +16,8 @@ import {
 } from './table';
 import {BoardProps} from '../props';
 
-import {useExchangeRequestPreview} from '@src/hooks/ClaimRequest';
-import {useExchangeRequestTable} from '@src/hooks/table/ClaimRequest';
+import {useExchangeRequestPreview} from '@src/common/hooks/ClaimRequest';
+import {useExchangeRequestTable} from '@src/common/hooks/table/ClaimRequest';
 import {message} from 'antd';
 import ExchangeRequestService from '@src/lib/services/ExchangeRequest';
 import {PickingStatus, ExchangeStatus} from '@src/types';

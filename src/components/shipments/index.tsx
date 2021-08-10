@@ -12,8 +12,8 @@ import Preview from '@src/components/common/organisms/Board/preview';
 import {parseTable} from '../order-items/table/data-parser';
 import {shipmentPreviewData} from './preview-data';
 
-import {usePlacementTable} from '@src/hooks/table/Placement';
-import {useShipmentPreview} from '@src/hooks/Shipment';
+import {usePlacementTable} from '@src/common/hooks/table/Placement';
+import {useShipmentPreview} from '@src/common/hooks/Shipment';
 
 import {withBoardContext} from '@src/contexts/Board';
 

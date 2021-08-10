@@ -7,7 +7,7 @@ import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {setCookie} from '@src/lib/utils';
 import LogoDefaultIcon from '@src/components/common/icons/logo/default';
 import {Space} from '@src/components/common/atoms';
-import {useLoginByCode} from '@src/hooks/apis';
+import {useLoginByCode} from '@src/common/hooks/apis';
 
 const {Title: _Title} = Typography;
 

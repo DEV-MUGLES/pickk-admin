@@ -3,7 +3,7 @@ import {Button, Input, message, Space, Typography} from 'antd';
 import {ButtonType} from 'antd/lib/button';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {useUpdateProduct} from '@src/hooks/apis';
+import {useUpdateProduct} from '@src/common/hooks/apis';
 
 const {Text} = Typography;
 

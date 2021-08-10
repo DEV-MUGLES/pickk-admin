@@ -1,4 +1,4 @@
-import {useMeSellerShippingPolicy} from '@src/hooks/apis';
+import {useMeSellerShippingPolicy} from '@src/common/hooks/apis';
 
 export const useShippingPolicyForm = () => {
   const {data} = useMeSellerShippingPolicy();

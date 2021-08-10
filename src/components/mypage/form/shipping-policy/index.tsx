@@ -3,7 +3,7 @@ import {message} from 'antd';
 import BaseForm from '../../../common/organisms/Form/base';
 
 import {useShippingPolicyForm} from './use-shipping-policy-form';
-import {useUpdateMySellerShippingPolicy} from '@src/hooks/apis';
+import {useUpdateMySellerShippingPolicy} from '@src/common/hooks/apis';
 
 import {FORM_ITEMS} from './form-items';
 

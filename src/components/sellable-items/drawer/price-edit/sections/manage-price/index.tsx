@@ -7,7 +7,7 @@ import {Item} from '@pickk/common';
 import PriceFormModal, {PriceFormModalType} from './modal';
 
 import {useBoardContext} from '@src/contexts/Board';
-import {useRemoveItemPrice} from '@src/hooks/apis';
+import {useRemoveItemPrice} from '@src/common/hooks/apis';
 import {compareDate, isBeforeDate} from '@src/lib/date';
 
 import {itemPricesColumns} from './columns';

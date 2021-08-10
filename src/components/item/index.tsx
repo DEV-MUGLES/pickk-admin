@@ -10,7 +10,7 @@ import CategoryModal from './table/modal/category';
 
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';
 import {BoardProps} from '../props';
-import {useItems} from '@src/hooks/apis';
+import {useItems} from '@src/common/hooks/apis';
 
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';

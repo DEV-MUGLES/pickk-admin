@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import {Button, InputNumber, Typography, message} from 'antd';
 
 import ItemService from '@src/lib/services/Item';
-import {useDiscountList} from '@src/hooks/table';
+import {useDiscountList} from '@src/common/hooks/table';
 import {ItemDiscount} from '@src/types';
 
 import DateTimePicker from '@src/components/common/molecules/picker/date-time';

@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '@src/components/common/templates/MainLayout';
-import PlacementBoard from '@src/component/board/placement';
+import PlacementBoard from '@src/components/placement';
 
 export default function Placements() {
   return (

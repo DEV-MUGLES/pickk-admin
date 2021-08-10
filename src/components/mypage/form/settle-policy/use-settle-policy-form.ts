@@ -1,4 +1,4 @@
-import {useMeSellerSettlePolicy} from '@src/hooks/apis';
+import {useMeSellerSettlePolicy} from '@src/common/hooks/apis';
 
 export const useSettlePolicyForm = () => {
   const {data} = useMeSellerSettlePolicy();

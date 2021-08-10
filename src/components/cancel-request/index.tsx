@@ -14,8 +14,8 @@ import {canceldRequestPreviewData} from './preview-data';
 import {cancelRequestColumns, parseTable} from './table';
 import {BoardProps} from '../props';
 
-import {useCancelRequestPreview} from '@src/hooks/ClaimRequest';
-import {useCancelRequestTable} from '@src/hooks/table/ClaimRequest';
+import {useCancelRequestPreview} from '@src/common/hooks/ClaimRequest';
+import {useCancelRequestTable} from '@src/common/hooks/table/ClaimRequest';
 
 function CancelRequestBoard({
   title,

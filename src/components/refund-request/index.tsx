@@ -18,8 +18,8 @@ import {refundRequestPreviewData} from './preview-data';
 import {refundRequestColumns, refundRequestActions, parseTable} from './table';
 import {BoardProps} from '../props';
 
-import {useRefundRequestPreview} from '@src/hooks/ClaimRequest';
-import {useRefundRequestTable} from '@src/hooks/table/ClaimRequest';
+import {useRefundRequestPreview} from '@src/common/hooks/ClaimRequest';
+import {useRefundRequestTable} from '@src/common/hooks/table/ClaimRequest';
 import RefundRequestService from '@src/lib/services/RefundRequest';
 import {PickingStatus, RefundStatus} from '@src/types';
 
