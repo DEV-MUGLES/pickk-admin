@@ -3,7 +3,7 @@ import {Space, Card, Spin, Typography} from 'antd';
 import {Item} from '@pickk/common';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {addCommaToNumber} from '@src/lib/NumberParser';
+import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 
 const {Text} = Typography;
 

@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 
 import Selector from '@src/components/common/molecules/BoardFilter/input/Selector';
 import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
-import {range} from '@src/lib/utils';
+import {range} from '@src/common/helpers';
 
 export const settlementInputs = [
   {

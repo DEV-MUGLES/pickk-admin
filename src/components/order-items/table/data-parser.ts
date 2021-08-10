@@ -1,5 +1,5 @@
-import {getTimeString} from '@src/lib/date';
-import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
+import {getTimeString} from '@src/common/helpers/date';
+import {addDashToPhoneNumber} from '@src/common/helpers/PhoneNumberParser';
 
 import {Placement} from '@src/types';
 

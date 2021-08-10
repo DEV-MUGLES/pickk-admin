@@ -2,7 +2,7 @@ import {Button} from 'antd';
 import {CSVLink} from 'react-csv';
 import {FileExcelOutlined} from '@ant-design/icons';
 
-import {getDateTimeStrings} from '@src/lib/date';
+import {getDateTimeStrings} from '@src/common/helpers/date';
 import {useBoardContext} from '@src/common/contexts/Board';
 
 export type ExcelDownloadButtonProps = {

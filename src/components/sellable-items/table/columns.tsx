@@ -6,8 +6,8 @@ import SellableItemStock from './stock';
 import InfoTooltip from '@src/components/common/atoms/info-tooltip';
 import {renderBooleanColumn} from '@src/components/common/molecules/BoardFilter/render';
 
-import {addCommaToNumber} from '@src/lib/NumberParser';
-import {stringSorter} from '@src/lib/sorter';
+import {addCommaToNumber} from '@src/common/helpers/NumberParser';
+import {stringSorter} from '@src/common/helpers/sorter';
 
 const {Text} = Typography;
 

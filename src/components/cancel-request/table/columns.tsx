@@ -1,6 +1,6 @@
-import {getTimeString} from '@src/lib/date';
-import {addDashToPhoneNumber} from '@src/lib/PhoneNumberParser';
-import {stringSorter} from '@src/lib/sorter';
+import {getTimeString} from '@src/common/helpers/date';
+import {addDashToPhoneNumber} from '@src/common/helpers/PhoneNumberParser';
+import {stringSorter} from '@src/common/helpers/sorter';
 
 export const cancelRequestColumns = [
   {

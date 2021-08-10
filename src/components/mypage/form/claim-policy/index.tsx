@@ -12,7 +12,7 @@ import {
   useUpdateMySellerReturnAddress,
   useUpdateMySellerClaimPolicy,
 } from '@src/common/hooks/apis';
-import {isEqualObject} from '@src/lib/utils';
+import {isEqualObject} from '@src/common/helpers';
 
 import {FORM_ITEMS} from './form-items';
 

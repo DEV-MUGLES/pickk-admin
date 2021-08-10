@@ -4,7 +4,7 @@ import {Button} from 'antd';
 
 import {TableActionType} from './table';
 import Space from '@src/components/common/atoms/space';
-import {isEqualArray} from '@src/lib/utils';
+import {isEqualArray} from '@src/common/helpers';
 
 export type TableFooterProps = {
   selectedRowKeys: number[];

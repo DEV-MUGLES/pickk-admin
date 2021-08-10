@@ -4,7 +4,7 @@ import {Modal, InputNumber, Button, message, Typography, Spin} from 'antd';
 
 import {useProductList} from '@src/common/hooks/table';
 import ProductService from '@src/lib/services/Product';
-import {addCommaToNumber} from '@src/lib/NumberParser';
+import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 import Space from '@src/components/common/atoms/space';
 
 const {Text} = Typography;

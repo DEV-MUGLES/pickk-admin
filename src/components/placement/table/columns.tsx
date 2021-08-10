@@ -1,7 +1,7 @@
 import {Button} from 'antd';
 
 import {orderItemColumns} from '@src/components/order-items/table';
-import {stringSorter} from '@src/lib/sorter';
+import {stringSorter} from '@src/common/helpers/sorter';
 
 export const placementColumns = [
   ...orderItemColumns.slice(0, orderItemColumns.length - 3),

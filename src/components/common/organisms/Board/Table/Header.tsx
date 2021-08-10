@@ -10,7 +10,7 @@ import CsvDownloadButton, {
 //   ExcelDownloadButtonProps,
 // } from '@src/components/common/molecules/button/ExcelDownload';
 import Space from '@src/components/common/atoms/space';
-import {isEqualObject} from '@src/lib/utils';
+import {isEqualObject} from '@src/common/helpers';
 
 const {Text} = Typography;
 

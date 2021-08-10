@@ -9,7 +9,7 @@ import OrderItemService from '@src/lib/services/OrderItem';
 import RefundRequestService from '@src/lib/services/RefundRequest';
 import {useItemOptions} from '@src/common/hooks/Item';
 import {ItemOption} from '@src/types';
-import {isEqualArray} from '@src/lib/utils';
+import {isEqualArray} from '@src/common/helpers';
 
 const {Text} = Typography;
 const {Option} = Select;

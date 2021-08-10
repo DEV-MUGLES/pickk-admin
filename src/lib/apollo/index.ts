@@ -5,7 +5,7 @@ import {onError} from '@apollo/client/link/error';
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
 
-import {getCookie} from '../utils';
+import {getCookie} from '../../common/helpers';
 import {Mock} from './mock';
 import {handleUnauthorizedError} from './error-handler';
 

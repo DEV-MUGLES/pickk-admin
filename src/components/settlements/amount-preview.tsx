@@ -6,7 +6,7 @@ import {TitleText} from '@src/components/common/organisms/Board/Filter/Header';
 import {WHITE} from '@src/components/common/atoms/colors';
 
 import {useSettlementAmountPreview} from '@src/common/hooks/Settlement';
-import {addCommaToNumber} from '@src/lib/NumberParser';
+import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 import Space from '@src/components/common/atoms/space';
 
 const {Text} = Typography;

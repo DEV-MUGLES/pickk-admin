@@ -3,7 +3,7 @@ import Router from 'next/router';
 import {Cookies} from 'react-cookie';
 
 import base from '@src/lib/services/Api';
-import {setCookie, removeCookie} from '@src/lib/utils/Cookies';
+import {setCookie, removeCookie} from '@src/common/helpers/Cookies';
 import {User} from '@src/types/User';
 
 const cookies = new Cookies();

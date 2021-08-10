@@ -5,7 +5,7 @@ import TableActionButton from './action-button';
 import Space from '@src/components/common/atoms/space';
 import {TableActionType} from '../table';
 
-import {isEqualArray} from '@src/lib/utils';
+import {isEqualArray} from '@src/common/helpers';
 import TablePageSizeSelect, {
   TablePageSizeSelectProps,
 } from '@src/components/common/molecules/select/table-page-size';

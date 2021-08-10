@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 
-import {getTimeString} from '@src/lib/date';
-import {addCommaToNumber} from '@src/lib/NumberParser';
-import {stringSorter} from '@src/lib/sorter';
+import {getTimeString} from '@src/common/helpers/date';
+import {addCommaToNumber} from '@src/common/helpers/NumberParser';
+import {stringSorter} from '@src/common/helpers/sorter';
 
 export const settlementColumns = [
   {

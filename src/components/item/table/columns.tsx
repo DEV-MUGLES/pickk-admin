@@ -4,8 +4,8 @@ import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
 import {renderBooleanColumn} from '@src/components/common/molecules/BoardFilter/render';
-import {addCommaToNumber} from '@src/lib/NumberParser';
-import {stringSorter} from '@src/lib/sorter';
+import {addCommaToNumber} from '@src/common/helpers/NumberParser';
+import {stringSorter} from '@src/common/helpers/sorter';
 
 export const itemColumns: ColumnsType<Item> = [
   {

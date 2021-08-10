@@ -2,8 +2,8 @@ import {Tag} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {ItemPrice} from '@pickk/common';
 
-import {addCommaToNumber} from '@src/lib/NumberParser';
-import {getTimeString} from '@src/lib/date';
+import {addCommaToNumber} from '@src/common/helpers/NumberParser';
+import {getTimeString} from '@src/common/helpers/date';
 
 export const itemPricesColumns: ColumnsType<ItemPrice> = [
   {

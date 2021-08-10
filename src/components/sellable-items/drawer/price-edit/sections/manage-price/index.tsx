@@ -8,7 +8,7 @@ import PriceFormModal, {PriceFormModalType} from './modal';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {useRemoveItemPrice} from '@src/common/hooks/apis';
-import {compareDate, isBeforeDate} from '@src/lib/date';
+import {compareDate, isBeforeDate} from '@src/common/helpers/date';
 
 import {itemPricesColumns} from './columns';
 

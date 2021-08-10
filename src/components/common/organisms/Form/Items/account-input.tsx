@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {Col, Input, Select, Space, Tag} from 'antd';
 import {BankCode} from '@pickk/common';
 
-import {BankNameKorAlias} from '@src/lib/alias';
+import {BankNameKorAlias} from '@src/common/helpers/alias';
 import {CustomInputProps} from '../base';
 
 const {Option} = Select;

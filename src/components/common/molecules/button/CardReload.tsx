@@ -3,7 +3,7 @@ import {Typography, Button} from 'antd';
 import styled from 'styled-components';
 import {ReloadOutlined} from '@ant-design/icons';
 
-import {getDateTimeStrings} from '@src/lib/date';
+import {getDateTimeStrings} from '@src/common/helpers/date';
 import Space from '@src/components/common/atoms/space';
 
 export type CardReloadButtonProps = {

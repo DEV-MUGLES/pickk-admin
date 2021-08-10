@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {getCookie} from '../utils/Cookies';
+import {getCookie} from '../../common/helpers/Cookies';
 
 class RequestConfig {
   public baseURL: string;
