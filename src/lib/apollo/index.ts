@@ -13,7 +13,9 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient: ApolloClient<unknown>;
 
-if (!process.env.NEW_API_URL) {
+const API_URL = process.env.NEW_API_URL;
+
+if (!API_URL) {
   throw new Error('env.NEW_API_URL not found!');
 }
 
@@ -30,14 +32,14 @@ const getAuthMiddleware = (_token?: string) =>
   });
 
 const getErrorLink = () =>
-  onError(({graphQLErrors, networkError}) => {
+  onError(({graphQLErrors, networkError, operation, forward}) => {
     if (graphQLErrors)
-      graphQLErrors.forEach(({message, locations, path}) => {
+      graphQLErrors.forEach(({message, locations, path, extensions}) => {
         console.log(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
         );
-        if (message === 'Unauthorized') {
-          handleUnauthorizedError();
+        if (extensions.code === 'UNAUTHENTICATED') {
+          return handleUnauthorizedError(apolloClient, {operation, forward});
         }
       });
 
@@ -51,7 +53,8 @@ function createApolloClient(token?: string) {
       getAuthMiddleware(token),
       getErrorLink(),
       createUploadLink({
-        uri: process.env.NEW_API_URL,
+        uri: API_URL,
+        // credentials: 'include' // @TODO
       }),
     ]),
     cache: new InMemoryCache({
