@@ -5,7 +5,7 @@ import {Typography} from 'antd';
 import LoginSection from '@src/components/common/organisms/sections/login';
 import {GREY, WHITE} from '@src/components/common/atoms/colors';
 
-import media from '@src/styles/media';
+import media from '@src/common/styles/media';
 
 const {Text, Title} = Typography;
 
