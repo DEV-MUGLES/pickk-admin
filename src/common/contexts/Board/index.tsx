@@ -1,7 +1,9 @@
 import {useState, useContext, createContext, ReactNode} from 'react';
 import styled from 'styled-components';
 
+import {removeDashFromNumber} from '@src/common/helpers/PhoneNumberParser';
 import {DataFetchConfig, Filter} from '@src/types';
+
 import {IBoard} from './IBoard';
 
 const BoardContext = createContext<IBoard>(undefined);
@@ -48,6 +50,32 @@ export default function BoardStoreProvider({
     setFilter({...filter, ...data});
   };
 
+  const preprocessSubmittedFilter = (value: Filter) => {
+    let result = {};
+
+    // 조회 기간 필터를 형식에 맞게 변경한다.
+    const hasDatePeriod =
+      value['lookupDate'] && value['startDate'] && value['endDate'];
+    result = {
+      ...value,
+      ...(hasDatePeriod && {
+        [value['lookupDate']]: [value['startDate'], value['endDate']],
+      }),
+    };
+
+    delete result['lookupDate'];
+    delete result['startDate'];
+    delete result['endDate'];
+
+    // 검색어가 숫자와 '-'의 조합인 경우 '-' 를 제거한다. (휴대폰 번호)
+    result = {
+      ...result,
+      ...(result['search'] && {search: removeDashFromNumber(result['search'])}),
+    };
+
+    return result;
+  };
+
   const submitFilter = () => {
     const temp = {...filter};
     Object.keys(temp).map((key) => {
@@ -56,7 +84,7 @@ export default function BoardStoreProvider({
       }
     });
     setNewFilter(temp);
-    refetch(temp ? {[filterName]: temp} : {});
+    refetch(temp ? {[filterName]: preprocessSubmittedFilter(temp)} : {});
     setSelectedRowKeys([]);
   };
 
