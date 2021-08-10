@@ -7,7 +7,7 @@ import 'antd/dist/antd.css';
 
 import {ApolloProvider} from '@apollo/client';
 import {useApollo} from '@src/lib/apollo';
-import {getCookie} from '@src/lib/utils';
+import {getCookie} from '@src/common/helpers';
 
 function PickkAdminApp({Component, pageProps}: AppProps) {
   const apolloClient = useApollo(pageProps);

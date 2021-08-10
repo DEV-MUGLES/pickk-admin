@@ -2,7 +2,7 @@ import React from 'react';
 import {GetServerSideProps} from 'next';
 
 import {initializeApollo} from '@src/lib/apollo';
-import {getCookie} from '@src/lib/utils';
+import {getCookie} from '@src/common/helpers';
 
 export default function HomePage() {
   return <div>You can't see this page</div>;
