@@ -9,7 +9,7 @@ import {
   ShippingPolicyForm,
   ClaimPolicyForm,
   SettlePolicyForm,
-} from '@src/components/mypage/form';
+} from '@src/components/mypage-edit/form';
 import {Space} from '@src/components/common/atoms';
 import {WHITE} from '@src/common/constants/colors';
 
