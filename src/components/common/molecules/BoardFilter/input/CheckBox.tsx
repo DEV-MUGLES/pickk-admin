@@ -1,7 +1,7 @@
 import React from 'react';
 import {Checkbox} from 'antd';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 export type CheckBoxProps = {
   name: string;

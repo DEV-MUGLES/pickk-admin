@@ -11,7 +11,7 @@ import Table, {
 } from '@src/components/common/organisms/Board/Table';
 import Space from '@src/components/common/atoms/space';
 
-import {withBoardContext, useBoardContext} from '@src/contexts/Board';
+import {withBoardContext, useBoardContext} from '@src/common/contexts/Board';
 
 import {refundRequestInputs} from './inputs';
 import {refundRequestPreviewData} from './preview-data';

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Typography} from 'antd';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import {Filter} from '@src/types';
 
 import Space from '@src/components/common/atoms/space';

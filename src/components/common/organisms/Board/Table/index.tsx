@@ -8,7 +8,7 @@ import Footer, {TableFooterProps} from './Footer';
 import TableActionBar, {TableActionBarProps} from './ActionBar';
 import {WHITE} from '@src/components/common/atoms/colors';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 export type BoardTableProps = {
   title: string;

@@ -6,7 +6,7 @@ import {Item} from '@pickk/common';
 import CreateOptionModal from './create-option-modal';
 import OptionNameEditModal from './name-edit-modal';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 export type ModalType = 'createOption' | 'nameEdit';
 

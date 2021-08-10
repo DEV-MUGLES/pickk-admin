@@ -1,7 +1,7 @@
 import {Button} from 'antd';
 
 import {INDIGO_BLUE} from '@src/components/common/atoms/colors';
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import {ReloadOutlined} from '@ant-design/icons';
 
 export default function TableReloadButton() {

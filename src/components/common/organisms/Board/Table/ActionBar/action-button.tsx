@@ -2,7 +2,7 @@ import React from 'react';
 import {message, Button} from 'antd';
 
 import {TableActionType} from '../table';
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 export type TableActionButtonProps = {
   selectedRowKeys: number[];

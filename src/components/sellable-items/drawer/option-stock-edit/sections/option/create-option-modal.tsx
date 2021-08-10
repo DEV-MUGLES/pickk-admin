@@ -4,7 +4,7 @@ import {useForm} from 'antd/lib/form/Form';
 import {MinusCircleOutlined, PlusOutlined} from '@ant-design/icons';
 import {Alert, Button, Form, Input, message, Modal, Space} from 'antd';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import {useCreateItemOptionSet} from '@src/common/hooks/apis';
 
 export type CreateOptionModalProps = {

@@ -3,7 +3,7 @@ import {CSVLink} from 'react-csv';
 import {FileExcelOutlined} from '@ant-design/icons';
 
 import {getDateTimeStrings} from '@src/lib/date';
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 export type ExcelDownloadButtonProps = {
   title: string;

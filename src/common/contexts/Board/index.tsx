@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Header, {
   BoardHeaderProps,
-} from '../../components/common/organisms/Board/Header';
+} from '../../../components/common/organisms/Board/Header';
 import {BoardTableProps} from '@src/components/common/organisms/Board/Table';
 import Space from '@src/components/common/atoms/space';
 

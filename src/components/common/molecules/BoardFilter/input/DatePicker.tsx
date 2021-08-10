@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import DayjsDatePicker from './DayjsDatePicker';
 import Space from '@src/components/common/atoms/space';
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 const {Option} = Select;
 const {RangePicker} = DayjsDatePicker;

@@ -7,7 +7,7 @@ import Table, {
 } from '@src/components/common/organisms/Board/Table';
 import Space from '@src/components/common/atoms/space';
 
-import {withBoardContext} from '@src/contexts/Board';
+import {withBoardContext} from '@src/common/contexts/Board';
 
 import {cancelRequestInputs} from './inputs';
 import {canceldRequestPreviewData} from './preview-data';

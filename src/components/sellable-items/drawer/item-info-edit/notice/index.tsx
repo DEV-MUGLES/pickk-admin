@@ -6,7 +6,7 @@ import BaseForm from '@src/components/common/organisms/Form/base';
 import ItemNoticeAddButton from './add';
 import ItemNoticeTypeSelect from './type-select';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import {useUpdateItemNotice, useRemoveItemNotice} from '@src/common/hooks/apis';
 
 function ItemNoticeEditSection() {

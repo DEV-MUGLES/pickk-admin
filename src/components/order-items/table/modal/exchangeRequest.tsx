@@ -4,7 +4,7 @@ import {Modal, Input, Typography, Select, message} from 'antd';
 
 import Space from '@src/components/common/atoms/space';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import OrderItemService from '@src/lib/services/OrderItem';
 import RefundRequestService from '@src/lib/services/RefundRequest';
 import {useItemOptions} from '@src/common/hooks/Item';

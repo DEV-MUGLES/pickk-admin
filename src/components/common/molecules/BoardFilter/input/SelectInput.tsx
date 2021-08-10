@@ -2,7 +2,7 @@ import React from 'react';
 import {Select, Typography, Input} from 'antd';
 import styled from 'styled-components';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import Space from '@src/components/common/atoms/space';
 
 const {Option} = Select;

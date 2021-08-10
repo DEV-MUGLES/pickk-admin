@@ -4,7 +4,7 @@ import {AddItemPriceInput, Item} from '@pickk/common';
 import BaseForm from '@src/components/common/organisms/Form/base';
 import StartAtInput from './start-at-input';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import {useAddItemPrice, useUpdateItemPrice} from '@src/common/hooks/apis';
 import {isBeforeDate, isDateIncluded, isSameDate} from '@src/lib/date';
 

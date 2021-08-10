@@ -2,7 +2,7 @@ import React from 'react';
 import {Select, Typography} from 'antd';
 import styled from 'styled-components';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 const {Text} = Typography;
 const {Option} = Select;

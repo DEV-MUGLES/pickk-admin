@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {Button, message, Table, Modal} from 'antd';
 import {Item} from '@pickk/common';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import {useUpdateItem} from '@src/common/hooks/apis';
 
 import {stockColumns} from './columns';

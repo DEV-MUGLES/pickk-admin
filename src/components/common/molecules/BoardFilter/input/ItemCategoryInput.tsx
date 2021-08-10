@@ -1,6 +1,6 @@
 import ItemCategoryCascader from '../../cascader/item-category';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 function ItemCategoryInput() {
   const {state, action} = useBoardContext();

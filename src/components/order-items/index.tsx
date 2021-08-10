@@ -9,7 +9,7 @@ import Table, {
 } from '@src/components/common/organisms/Board/Table';
 import Space from '@src/components/common/atoms/space';
 
-import {withBoardContext, useBoardContext} from '@src/contexts/Board';
+import {withBoardContext, useBoardContext} from '@src/common/contexts/Board';
 import {useOrderItemTable} from '@src/common/hooks/table/OrderItem';
 
 import {orderItemInputs} from './inputs';

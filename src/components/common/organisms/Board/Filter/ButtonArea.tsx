@@ -3,7 +3,7 @@ import {Button} from 'antd';
 import {SearchOutlined, UndoOutlined} from '@ant-design/icons';
 import styled from 'styled-components';
 
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 import {INDIGO_BLUE} from '@src/components/common/atoms/colors';
 import Space from '@src/components/common/atoms/space';

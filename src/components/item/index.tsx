@@ -8,7 +8,7 @@ import Table from '@src/components/common/organisms/Board/Table';
 import Space from '@src/components/common/atoms/space';
 import CategoryModal from './table/modal/category';
 
-import {useBoardContext, withBoardContext} from '@src/contexts/Board';
+import {useBoardContext, withBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
 import {useItems} from '@src/common/hooks/apis';
 

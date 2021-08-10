@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input} from 'antd';
 import styled from 'styled-components';
-import {useBoardContext} from '@src/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 export type InputBoxProps = {
   name: string;

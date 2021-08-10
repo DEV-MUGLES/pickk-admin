@@ -11,7 +11,7 @@ import ItemPriceEditDrawer from './drawer/price-edit';
 import {Space} from '@src/components/common/atoms';
 
 import {BoardProps} from '../props';
-import {useBoardContext, withBoardContext} from '@src/contexts/Board';
+import {useBoardContext, withBoardContext} from '@src/common/contexts/Board';
 import {useItems} from '@src/common/hooks/apis';
 
 import {sellableItemColumns, sellableItemActions} from './table';
