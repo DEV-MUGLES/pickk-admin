@@ -10,14 +10,14 @@ import {Space} from '@src/components/common/atoms';
 
 import {setCookie} from '@src/common/helpers';
 
-import {useLoginByCode} from './hooks';
+import {useLoginSellerByCode} from './hooks';
 
 const {Title} = Typography;
 
 export default function LoginSection() {
   const router = useRouter();
 
-  const login = useLoginByCode();
+  const login = useLoginSellerByCode();
 
   const handleFinish = async (
     loginByCodeInput: Pick<LoginByCodeInput, 'code' | 'password'>,
@@ -35,8 +35,8 @@ export default function LoginSection() {
         return;
       }
 
-      setCookie('accessToken', data.loginByCode.access);
-      setCookie('refreshToken', data.loginByCode.refresh);
+      setCookie('accessToken', data.loginSellerByCode.access);
+      setCookie('refreshToken', data.loginSellerByCode.refresh);
 
       message.info('로그인 성공');
       router.push('/dashboard');

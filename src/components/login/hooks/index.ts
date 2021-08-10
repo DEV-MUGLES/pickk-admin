@@ -1,1 +1,1 @@
-export * from './useLoginByCode';
+export * from './useLoginSellerByCode';
