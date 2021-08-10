@@ -1,7 +1,7 @@
 import {gql, useMutation} from '@apollo/client';
 import {Mutation, MutationUpdateMySellerClaimPolicyArgs} from '@pickk/common';
 
-import {SELLER_CLAIM_POLICY_FRAGMENT} from './seller';
+import {SELLER_CLAIM_POLICY_FRAGMENT} from './useClaimPolicyForm';
 
 export const useUpdateMySellerClaimPolicy = () =>
   useMutation<

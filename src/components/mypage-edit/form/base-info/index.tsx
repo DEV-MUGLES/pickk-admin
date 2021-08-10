@@ -2,10 +2,7 @@ import {message} from 'antd';
 
 import BaseForm from '../../../common/organisms/Form/base';
 
-import {
-  useMeSellerBaseInfo,
-  useUpdateMeSellerBaseInfo,
-} from '@src/common/hooks/apis/seller';
+import {useMeSellerBaseInfo, useUpdateMeSellerBaseInfo} from './hooks';
 
 import {FORM_ITEMS} from './form-items';
 

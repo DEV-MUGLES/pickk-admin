@@ -6,13 +6,14 @@ import FeePayReceiveInput, {
   FeePayReceiveValueType,
 } from './fee-pay-receive-input';
 
-import {AddressType} from './address-input';
-import {useClaimPolicyForm} from './use-claim-policy-form';
-import {
-  useUpdateMySellerReturnAddress,
-  useUpdateMySellerClaimPolicy,
-} from '@src/common/hooks/apis';
 import {isEqualObject} from '@src/common/helpers';
+
+import {
+  useClaimPolicyForm,
+  useUpdateMySellerClaimPolicy,
+  useUpdateMySellerReturnAddress,
+} from './hooks';
+import {AddressType} from './address-input';
 
 import {FORM_ITEMS} from './form-items';
 

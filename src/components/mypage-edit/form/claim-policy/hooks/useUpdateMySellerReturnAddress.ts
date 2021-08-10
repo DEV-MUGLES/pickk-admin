@@ -1,7 +1,7 @@
 import {gql, useMutation} from '@apollo/client';
 import {Mutation, MutationUpdateMySellerReturnAddressArgs} from '@pickk/common';
 
-import {SELLER_RETURN_ADDRESS_FRAGMENT} from './seller';
+import {SELLER_RETURN_ADDRESS_FRAGMENT} from './useClaimPolicyForm';
 
 export const useUpdateMySellerReturnAddress = () =>
   useMutation<

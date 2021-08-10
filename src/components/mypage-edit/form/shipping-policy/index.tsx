@@ -2,8 +2,7 @@ import {message} from 'antd';
 
 import BaseForm from '../../../common/organisms/Form/base';
 
-import {useShippingPolicyForm} from './use-shipping-policy-form';
-import {useUpdateMySellerShippingPolicy} from '@src/common/hooks/apis';
+import {useShippingPolicyForm, useUpdateMySellerShippingPolicy} from './hooks';
 
 import {FORM_ITEMS} from './form-items';
 
