@@ -36,6 +36,7 @@ export default function BoardHeader({
       title={title}
       subTitle={subTitle}
       extra={helpTexts ? getHelpPopoverButton() : null}
+      style={{marginBottom: '1.4rem'}}
     />
   );
 }

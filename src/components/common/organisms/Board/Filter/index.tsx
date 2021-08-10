@@ -30,4 +30,5 @@ export const FilterWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 16px 24px;
+  margin-bottom: 1.4rem;
 `;
