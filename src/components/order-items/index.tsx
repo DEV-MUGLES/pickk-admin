@@ -1,25 +1,18 @@
 import {useState} from 'react';
 import {message} from 'antd';
-import dayjs from 'dayjs';
 
 import ExchangeRequestModal from './table/modal/exchangeRequest';
-import Filter from '@src/components/common/organisms/Board/Filter';
-import Table, {
-  BoardTableProps,
-} from '@src/components/common/organisms/Board/Table';
-import Space from '@src/components/common/atoms/space';
+import Header from '../common/organisms/Board/Header';
+import Filter from '../common/organisms/Board/Filter';
+import Table, {BoardTableProps} from '../common/organisms/Board/Table';
 
-import {withBoardContext, useBoardContext} from '@src/common/contexts/Board';
-import {useOrderItemTable} from '@src/common/hooks/table/OrderItem';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 import {orderItemInputs} from './inputs';
 import {orderItemActions, orderItemColumns} from './table';
 import {BoardProps} from '../props';
-import {parseTable} from './table/data-parser';
 
-function OrderItemBoard({
-  title,
-}: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
+function OrderItemBoard(props: BoardProps) {
   const {state} = useBoardContext();
   const {tableData} = state;
 
@@ -56,14 +49,13 @@ function OrderItemBoard({
 
   return (
     <>
-      <Filter title={title} inputs={orderItemInputs} />
-      <Space level={2} />
+      <Header {...props} />
+      <Filter {...props} inputs={orderItemInputs} />
       <Table
-        title={title}
+        {...props}
         columns={orderItemColumns}
         actions={newOrderItemActions}
       />
-      <Space level={2} />
       {isModalOpen && (
         <ExchangeRequestModal
           {...exchangeRequestIds}
