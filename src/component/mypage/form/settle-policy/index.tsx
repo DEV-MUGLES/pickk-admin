@@ -1,6 +1,6 @@
 import {message} from 'antd';
 
-import BaseForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/common/organisms/Form/base';
 
 import {useSettlePolicyForm} from './use-settle-policy-form';
 import {useUpdateMySellerSettlePolicy} from '@src/hooks/apis';

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Modal, Input, Typography, Select, message} from 'antd';
 
-import Space from '@src/components/atoms/space';
+import Space from '@src/components/common/atoms/space';
 
 import {useBoardContext} from '@src/contexts/Board';
 import OrderItemService from '@src/lib/services/OrderItem';

@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import {Typography} from 'antd';
 
-import {TitleText} from '@src/components/organisms/Board/Filter/Header';
-import {WHITE} from '@src/components/atoms/colors';
+import {TitleText} from '@src/components/common/organisms/Board/Filter/Header';
+import {WHITE} from '@src/components/common/atoms/colors';
 
 import {useSettlementAmountPreview} from '@src/hooks/Settlement';
 import {addCommaToNumber} from '@src/lib/NumberParser';
-import Space from '@src/components/atoms/space';
+import Space from '@src/components/common/atoms/space';
 
 const {Text} = Typography;
 

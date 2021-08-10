@@ -1,8 +1,8 @@
 import AccountInput, {
   CheckAccountValidation,
-} from '@src/components/organisms/Form/Items/account-input';
+} from '@src/components/common/organisms/Form/Items/account-input';
 
-import {BaseFormProps} from '@src/components/organisms/Form/base';
+import {BaseFormProps} from '@src/components/common/organisms/Form/base';
 
 export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
   picName: {

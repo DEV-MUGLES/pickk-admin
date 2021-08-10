@@ -1,7 +1,7 @@
 import {Select} from 'antd';
 import {ItemNoticeType} from '@pickk/common';
 
-import {CustomInputProps} from '@src/components/organisms/Form/base';
+import {CustomInputProps} from '@src/components/common/organisms/Form/base';
 
 const {Option} = Select;
 

@@ -3,8 +3,8 @@ import {Button, Image, Typography, Badge} from 'antd';
 import {Item} from '@pickk/common';
 
 import SellableItemStock from './stock';
-import InfoTooltip from '@src/components/atoms/info-tooltip';
-import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
+import InfoTooltip from '@src/components/common/atoms/info-tooltip';
+import {renderBooleanColumn} from '@src/components/common/molecules/BoardFilter/render';
 
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';

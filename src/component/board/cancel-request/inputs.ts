@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 
-import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import Selector from '@src/components/molecules/BoardFilter/input/Selector';
-import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
+import Selector from '@src/components/common/molecules/BoardFilter/input/Selector';
+import Datepicker from '@src/components/common/molecules/BoardFilter/input/DatePicker';
 
 export const cancelRequestInputs = [
   {

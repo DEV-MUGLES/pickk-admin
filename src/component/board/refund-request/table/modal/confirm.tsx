@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import {Modal, Button, Typography} from 'antd';
 
-import {GREY} from '@src/components/atoms/colors';
+import {GREY} from '@src/components/common/atoms/colors';
 import {useBoardContext} from '@src/contexts/Board';
 import {RefundRequest} from '@src/types';
 import RefundRequestService from '@src/lib/services/RefundRequest';
-import Space from '@src/components/atoms/space';
+import Space from '@src/components/common/atoms/space';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 
 const {Text} = Typography;

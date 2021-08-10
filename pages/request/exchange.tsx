@@ -1,5 +1,5 @@
 import React from 'react';
-import MainLayout from '@src/components/templates/MainLayout';
+import MainLayout from '@src/components/common/templates/MainLayout';
 import ExchangeRequestBoard from '@src/component/board/exchange-request';
 
 export default function ExchangeRequests() {

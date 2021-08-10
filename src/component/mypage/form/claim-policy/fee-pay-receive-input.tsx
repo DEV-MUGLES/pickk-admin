@@ -3,8 +3,8 @@ import {ClaimFeePayMethod} from '@pickk/common';
 
 import AccountInput, {
   AccountInputType,
-} from '@src/components/organisms/Form/Items/account-input';
-import {CustomInputProps} from '@src/components/organisms/Form/base';
+} from '@src/components/common/organisms/Form/Items/account-input';
+import {CustomInputProps} from '@src/components/common/organisms/Form/base';
 
 const {Option} = Select;
 const {Text} = Typography;

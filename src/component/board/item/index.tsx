@@ -3,9 +3,9 @@ import {Button, Typography} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
-import Filter from '@src/components/organisms/Board/Filter';
-import Table from '@src/components/organisms/Board/Table';
-import Space from '@src/components/atoms/space';
+import Filter from '@src/components/common/organisms/Board/Filter';
+import Table from '@src/components/common/organisms/Board/Table';
+import Space from '@src/components/common/atoms/space';
 import CategoryModal from './table/modal/category';
 
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';

@@ -1,6 +1,6 @@
 import {message} from 'antd';
 
-import BaseForm from '../../../../components/organisms/Form/base';
+import BaseForm from '../../../../components/common/organisms/Form/base';
 
 import {useShippingPolicyForm} from './use-shipping-policy-form';
 import {useUpdateMySellerShippingPolicy} from '@src/hooks/apis';

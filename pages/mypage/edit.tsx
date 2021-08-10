@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {PageHeader, Tabs} from 'antd';
 
-import MainLayout from '@src/components/templates/MainLayout';
+import MainLayout from '@src/components/common/templates/MainLayout';
 import {
   BaseInfoForm,
   ServiceCenterInfoForm,
@@ -10,8 +10,8 @@ import {
   ClaimPolicyForm,
   SettlePolicyForm,
 } from '@src/component/mypage/form';
-import {Space} from '@src/components/atoms';
-import {WHITE} from '@src/components/atoms/colors';
+import {Space} from '@src/components/common/atoms';
+import {WHITE} from '@src/components/common/atoms/colors';
 
 const {TabPane} = Tabs;
 

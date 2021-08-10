@@ -3,9 +3,9 @@ import {Switch, Tag} from 'antd';
 import styled from 'styled-components';
 import {SellerShippingPolicy} from '@pickk/common';
 
-import InputNumber from '@src/components/organisms/Form/Items/input-number';
+import InputNumber from '@src/components/common/organisms/Form/Items/input-number';
 
-import {CustomInputProps} from '@src/components/organisms/Form/base';
+import {CustomInputProps} from '@src/components/common/organisms/Form/base';
 
 export type ShippingFeeInputValueType = Pick<
   SellerShippingPolicy,

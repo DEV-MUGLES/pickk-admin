@@ -1,5 +1,5 @@
 import React from 'react';
-import MainLayout from '@src/components/templates/MainLayout';
+import MainLayout from '@src/components/common/templates/MainLayout';
 import ItemBoard from '@src/component/board/item';
 
 export default function Items() {

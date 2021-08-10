@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {Modal, Button, ModalProps, message} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 
-import BaseForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/common/organisms/Form/base';
 import ItemNoticeTypeSelect from './type-select';
-import DayjsDatePicker from '@src/components/molecules/BoardFilter/input/DayjsDatePicker';
+import DayjsDatePicker from '@src/components/common/molecules/BoardFilter/input/DayjsDatePicker';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {useAddItemNotice} from '@src/hooks/apis';

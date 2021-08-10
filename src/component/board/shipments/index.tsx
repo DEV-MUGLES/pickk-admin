@@ -1,14 +1,14 @@
 import dayjs from 'dayjs';
 
-import Filter from '@src/components/organisms/Board/Filter';
-import Table from '@src/components/organisms/Board/Table';
-import Space from '@src/components/atoms/space';
+import Filter from '@src/components/common/organisms/Board/Filter';
+import Table from '@src/components/common/organisms/Board/Table';
+import Space from '@src/components/common/atoms/space';
 
 import {orderItemInputs} from '../order-items/inputs';
 import {placementColumns} from '../placement/table';
 import {BoardProps} from '../props';
 
-import Preview from '@src/components/organisms/Board/preview';
+import Preview from '@src/components/common/organisms/Board/preview';
 import {parseTable} from '../order-items/table/data-parser';
 import {shipmentPreviewData} from './preview-data';
 

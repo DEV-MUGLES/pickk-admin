@@ -3,7 +3,7 @@ import {Button, Image} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
-import {renderBooleanColumn} from '@src/components/molecules/BoardFilter/render';
+import {renderBooleanColumn} from '@src/components/common/molecules/BoardFilter/render';
 import {addCommaToNumber} from '@src/lib/NumberParser';
 import {stringSorter} from '@src/lib/sorter';
 

@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import {Checkbox} from 'antd';
 import dayjs, {Dayjs} from 'dayjs';
 
-import DatePickerFormItem from '@src/components/organisms/Form/Items/date-picker';
+import DatePickerFormItem from '@src/components/common/organisms/Form/Items/date-picker';
 
-import {CustomInputProps} from '@src/components/organisms/Form/base';
+import {CustomInputProps} from '@src/components/common/organisms/Form/base';
 
 export type StartAtInputProps = CustomInputProps<Dayjs> & {
   hideCheckbox: boolean;

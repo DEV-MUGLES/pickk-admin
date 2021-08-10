@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import {Image, Input, message} from 'antd';
 import {Item} from '@pickk/common';
 
-import BaseForm from '@src/components/organisms/Form/base';
-import ImageUpload from '@src/components/molecules/image-upload';
-import ItemCategoryCascader from '@src/components/molecules/cascader/item-category';
+import BaseForm from '@src/components/common/organisms/Form/base';
+import ImageUpload from '@src/components/common/molecules/image-upload';
+import ItemCategoryCascader from '@src/components/common/molecules/cascader/item-category';
 
 import {useBoardContext} from '@src/contexts/Board';
 import {useUpdateItem} from '@src/hooks/apis';

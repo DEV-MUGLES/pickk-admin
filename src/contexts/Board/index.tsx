@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import Header, {
   BoardHeaderProps,
-} from '../../components/organisms/Board/Header';
-import {BoardTableProps} from '@src/components/organisms/Board/Table';
-import Space from '@src/components/atoms/space';
+} from '../../components/common/organisms/Board/Header';
+import {BoardTableProps} from '@src/components/common/organisms/Board/Table';
+import Space from '@src/components/common/atoms/space';
 
 import {IBoard} from './IBoard';
 import {BoardProps} from '@src/component/board/props';

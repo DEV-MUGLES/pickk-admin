@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 
-import InputBox from '@src/components/molecules/BoardFilter/input/InputBox';
-import ItemCategoryInput from '@src/components/molecules/BoardFilter/input/ItemCategoryInput';
-import Datepicker from '@src/components/molecules/BoardFilter/input/DatePicker';
+import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
+import ItemCategoryInput from '@src/components/common/molecules/BoardFilter/input/ItemCategoryInput';
+import Datepicker from '@src/components/common/molecules/BoardFilter/input/DatePicker';
 
-import {BoardFilterRowProps} from '@src/components/molecules/BoardFilter/BodyRow';
+import {BoardFilterRowProps} from '@src/components/common/molecules/BoardFilter/BodyRow';
 
 export const itemInputs: BoardFilterRowProps[] = [
   {

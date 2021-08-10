@@ -4,7 +4,7 @@ import {ExclamationCircleOutlined} from '@ant-design/icons';
 import * as XLSX from 'xlsx';
 import CSVReader from 'react-csv-reader';
 
-import {TableActionType} from '@src/components/organisms/Board/Table/table';
+import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
 import OrderItemService from '@src/lib/services/OrderItem';
 
 const {confirm} = Modal;

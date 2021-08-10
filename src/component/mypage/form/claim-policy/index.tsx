@@ -3,7 +3,7 @@ import {ClaimFeePayMethod} from '@pickk/common';
 
 import BaseForm, {
   BaseFormProps,
-} from '../../../../components/organisms/Form/base';
+} from '../../../../components/common/organisms/Form/base';
 import FeePayReceiveInput, {
   FeePayReceiveValueType,
 } from './fee-pay-receive-input';

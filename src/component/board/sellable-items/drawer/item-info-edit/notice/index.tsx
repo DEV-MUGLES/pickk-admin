@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {message} from 'antd';
 import {ItemNotice} from '@pickk/common';
 
-import BaseForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/common/organisms/Form/base';
 import ItemNoticeAddButton from './add';
 import ItemNoticeTypeSelect from './type-select';
 

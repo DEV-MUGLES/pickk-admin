@@ -1,7 +1,7 @@
 import {Input, Space} from 'antd';
 import {SellerReturnAddress} from '@pickk/common';
 
-import {CustomInputProps} from '@src/components/organisms/Form/base';
+import {CustomInputProps} from '@src/components/common/organisms/Form/base';
 
 export type AddressType = Pick<
   SellerReturnAddress,

@@ -2,13 +2,13 @@ import {useState} from 'react';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
-import Filter from '@src/components/organisms/Board/Filter';
-import Table from '@src/components/organisms/Board/Table';
+import Filter from '@src/components/common/organisms/Board/Filter';
+import Table from '@src/components/common/organisms/Board/Table';
 import SellableItemManageButtons from './table/manage-buttons';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
 import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
-import {Space} from '@src/components/atoms';
+import {Space} from '@src/components/common/atoms';
 
 import {BoardProps} from '../props';
 import {useBoardContext, withBoardContext} from '@src/contexts/Board';

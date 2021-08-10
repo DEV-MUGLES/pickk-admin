@@ -1,7 +1,7 @@
 import {Modal, message} from 'antd';
 import {AddItemPriceInput, Item} from '@pickk/common';
 
-import BaseForm from '@src/components/organisms/Form/base';
+import BaseForm from '@src/components/common/organisms/Form/base';
 import StartAtInput from './start-at-input';
 
 import {useBoardContext} from '@src/contexts/Board';

@@ -1,7 +1,9 @@
-import Preview from '@src/components/organisms/Board/preview';
-import Filter from '@src/components/organisms/Board/Filter';
-import Table, {BoardTableProps} from '@src/components/organisms/Board/Table';
-import Space from '@src/components/atoms/space';
+import Preview from '@src/components/common/organisms/Board/preview';
+import Filter from '@src/components/common/organisms/Board/Filter';
+import Table, {
+  BoardTableProps,
+} from '@src/components/common/organisms/Board/Table';
+import Space from '@src/components/common/atoms/space';
 
 import {withBoardContext, useBoardContext} from '@src/contexts/Board';
 

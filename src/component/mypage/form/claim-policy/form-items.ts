@@ -1,6 +1,6 @@
 import AddressInput, {AddressType} from './address-input';
 
-import {BaseFormProps} from '@src/components/organisms/Form/base';
+import {BaseFormProps} from '@src/components/common/organisms/Form/base';
 
 const checkAddressValidation = async (
   _,

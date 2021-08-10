@@ -1,6 +1,6 @@
 import {orderItemInputs} from '../order-items/inputs';
 
-import Selector from '@src/components/molecules/BoardFilter/input/Selector';
+import Selector from '@src/components/common/molecules/BoardFilter/input/Selector';
 
 export const placementInputs = [
   orderItemInputs[0],
