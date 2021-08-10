@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {message} from 'antd';
 import dayjs from 'dayjs';
 
-import Preview from '../../../components/common/organisms/Board/preview';
+import Preview from '@src/components/common/organisms/Board/preview';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
 import ShipModal from './table/modal/ship';
