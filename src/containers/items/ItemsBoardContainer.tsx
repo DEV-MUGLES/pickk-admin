@@ -4,7 +4,7 @@ import ItemBoard from '@src/components/item';
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {useItems} from '@src/common/hooks/apis';
 
-export default function Items() {
+function ItemsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
@@ -19,3 +19,5 @@ export default function Items() {
     </BoardStoreProvider>
   );
 }
+
+export default ItemsBoardContainer;

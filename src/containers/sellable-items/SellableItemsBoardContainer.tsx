@@ -3,7 +3,7 @@ import SellableItemsBoard from '@src/components/sellable-items';
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {useItems} from '@src/common/hooks/apis';
 
-function SellableItems() {
+function SellableItemsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
@@ -19,4 +19,4 @@ function SellableItems() {
   );
 }
 
-export default SellableItems;
+export default SellableItemsBoardContainer;
