@@ -4,7 +4,7 @@ import {message} from 'antd';
 import ExchangeRequestModal from './table/modal/exchangeRequest';
 import Header from '../common/organisms/Board/Header';
 import Filter from '../common/organisms/Board/Filter';
-import Table, {BoardTableProps} from '../common/organisms/Board/Table';
+import Table from '../common/organisms/Board/Table';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
