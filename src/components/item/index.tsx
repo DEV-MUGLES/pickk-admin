@@ -3,21 +3,20 @@ import {Button, Typography} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
+import Header from '@src/components/common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
-import Space from '@src/components/common/atoms/space';
 import CategoryModal from './table/modal/category';
 
-import {useBoardContext, withBoardContext} from '@src/common/contexts/Board';
+import {useBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
-import {useItems} from '@src/common/hooks/apis';
 
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
 
 const {Text} = Typography;
 
-function ItemBoard({title}: BoardProps) {
+function ItemBoard(props: BoardProps) {
   const {
     action: {setSelectedRowId},
   } = useBoardContext();
@@ -60,9 +59,9 @@ function ItemBoard({title}: BoardProps) {
 
   return (
     <>
-      <Filter title={title} inputs={itemInputs} />
-      <Space level={2} />
-      <Table title={title} columns={newItemColumns} actions={itemActions} />
+      <Header {...props} />
+      <Filter {...props} inputs={itemInputs} />
+      <Table {...props} columns={newItemColumns} actions={itemActions} />
       {modalVisible && (
         <CategoryModal
           visible={modalVisible}
@@ -73,12 +72,4 @@ function ItemBoard({title}: BoardProps) {
   );
 }
 
-export default withBoardContext(
-  ItemBoard,
-  {
-    useBoardData: useItems,
-    dataName: 'items',
-    filterName: 'itemFilter',
-  },
-  (v) => v,
-);
+export default ItemBoard;
