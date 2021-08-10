@@ -8,7 +8,7 @@ import {BoardTableProps} from '@src/components/common/organisms/Board/Table';
 import Space from '@src/components/common/atoms/space';
 
 import {IBoard} from './IBoard';
-import {BoardProps} from '@src/component/board/props';
+import {BoardProps} from '@src/components/props';
 import {DataFetchConfig, Filter} from '@src/types';
 
 const BoardContext = createContext<IBoard>(undefined);

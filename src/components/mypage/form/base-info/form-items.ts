@@ -1,4 +1,4 @@
-import {BaseFormProps} from '../../../../components/common/organisms/Form/base';
+import {BaseFormProps} from '../../../common/organisms/Form/base';
 
 export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
   businessName: {

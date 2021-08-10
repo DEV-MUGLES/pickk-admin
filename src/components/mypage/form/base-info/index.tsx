@@ -1,6 +1,6 @@
 import {message} from 'antd';
 
-import BaseForm from '../../../../components/common/organisms/Form/base';
+import BaseForm from '../../../common/organisms/Form/base';
 
 import {
   useMeSellerBaseInfo,

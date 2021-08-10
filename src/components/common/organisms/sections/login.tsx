@@ -5,7 +5,7 @@ import {Form, Input, Button, message, Typography} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 
 import {setCookie} from '@src/lib/utils';
-import LogoDefaultIcon from '@src/assets/icons/logo/default';
+import LogoDefaultIcon from '@src/components/common/icons/logo/default';
 import {Space} from '@src/components/common/atoms';
 import {useLoginByCode} from '@src/hooks/apis';
 

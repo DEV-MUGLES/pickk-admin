@@ -1,9 +1,7 @@
 import {message} from 'antd';
 import {ClaimFeePayMethod} from '@pickk/common';
 
-import BaseForm, {
-  BaseFormProps,
-} from '../../../../components/common/organisms/Form/base';
+import BaseForm, {BaseFormProps} from '../../../common/organisms/Form/base';
 import FeePayReceiveInput, {
   FeePayReceiveValueType,
 } from './fee-pay-receive-input';
