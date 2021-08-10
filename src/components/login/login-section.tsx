@@ -3,26 +3,30 @@ import styled from 'styled-components';
 import {useRouter} from 'next/router';
 import {Form, Input, Button, message, Typography} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
+import {LoginByCodeInput, UserRole} from '@pickk/common';
 
-import {setCookie} from '@src/common/helpers';
 import LogoDefaultIcon from '@src/components/common/icons/logo/default';
 import {Space} from '@src/components/common/atoms';
-import {useLoginByCode} from '@src/common/hooks/apis';
 
-const {Title: _Title} = Typography;
+import {setCookie} from '@src/common/helpers';
+
+import {useLoginByCode} from './hooks';
+
+const {Title} = Typography;
 
 export default function LoginSection() {
   const router = useRouter();
 
   const login = useLoginByCode();
 
-  const handleFinish = async (value) => {
-    const {code, password} = value;
+  const handleFinish = async (
+    loginByCodeInput: Pick<LoginByCodeInput, 'code' | 'password'>,
+  ) => {
     try {
       const {data, error} = await login({
         loginByCodeInput: {
-          code,
-          password,
+          ...loginByCodeInput,
+          minRole: UserRole.Seller,
         },
       });
 
@@ -42,9 +46,9 @@ export default function LoginSection() {
   };
 
   return (
-    <LoginForm layout="vertical" onFinish={handleFinish}>
+    <StyledForm layout="vertical" onFinish={handleFinish}>
       <LogoDefaultIcon />
-      <Title>슈퍼어드민</Title>
+      <StyledTitle>슈퍼어드민</StyledTitle>
       <Space level={3} />
       <Form.Item
         label="아이디"
@@ -77,11 +81,11 @@ export default function LoginSection() {
           Login
         </Button>
       </Form.Item>
-    </LoginForm>
+    </StyledForm>
   );
 }
 
-const LoginForm = styled(Form)`
+const StyledForm = styled(Form)`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -89,7 +93,7 @@ const LoginForm = styled(Form)`
   padding: 4rem 4.8rem;
 `;
 
-const Title = styled(_Title).attrs({
+const StyledTitle = styled(Title).attrs({
   level: 3,
   style: {
     marginTop: '0.8rem',
