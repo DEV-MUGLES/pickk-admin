@@ -1,5 +1,12 @@
 import {gql} from '@apollo/client';
-import {Order, OrderBuyer, OrderItem, OrderReceiver} from '@pickk/common';
+import {
+  Courier,
+  Order,
+  OrderBuyer,
+  OrderItem,
+  OrderReceiver,
+  Shipment,
+} from '@pickk/common';
 
 export type BaseOrderItem = Pick<
   OrderItem,
@@ -10,8 +17,6 @@ export type BaseOrderItem = Pick<
   | 'shippingAt'
   | 'paidAt'
   | 'claimStatus'
-  | 'courierId'
-  | 'trackCode'
   | 'itemId'
   | 'itemName'
   | 'productVariantName'
@@ -19,6 +24,9 @@ export type BaseOrderItem = Pick<
   | 'itemFinalPrice'
   | 'recommenderNickname'
 > & {
+  shipment: Pick<Shipment, 'trackCode' | 'courierId'> & {
+    courier: Pick<Courier, 'id' | 'name'>;
+  };
   order: Pick<Order, 'id'> & {
     buyer: Pick<OrderBuyer, 'id' | 'name' | 'phoneNumber' | 'email'>;
     receiver: Pick<
@@ -40,15 +48,23 @@ export const BASE_ORDER_ITEM_FRAGMENT = gql`
     orderMerchantUid
     status
     shippingAt
-
     paidAt
     claimStatus
-    courierId
-    trackCode
     itemId
     itemName
     productVariantName
     quantity
+    itemFinalPrice
+    recommenderNickname
+
+    shipment {
+      courierId
+      courier {
+        id
+        name
+      }
+      trackCode
+    }
 
     order {
       id
@@ -67,9 +83,6 @@ export const BASE_ORDER_ITEM_FRAGMENT = gql`
         detailAddress
       }
     }
-
-    itemFinalPrice
-    recommenderNickname
   }
 `;
 
@@ -78,6 +91,6 @@ export const GET_ORDER_ITEMS = gql`
     meSellerOrderItems {
       ...BaseOrderItemFragment
     }
-    ${BASE_ORDER_ITEM_FRAGMENT}
   }
+  ${BASE_ORDER_ITEM_FRAGMENT}
 `;
