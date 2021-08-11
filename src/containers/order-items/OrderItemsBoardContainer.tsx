@@ -1,8 +1,11 @@
 import {useQuery} from '@apollo/client';
-import BoardStoreProvider from '@src/common/contexts/Board';
+
 import OrderItemBoard from '@src/components/order-items';
 
+import BoardStoreProvider from '@src/common/contexts/Board';
 import {GET_ORDER_ITEMS} from '@src/common/graphql/order-item.graphql';
+
+import {orderItemsRecordMapper} from './record-mapper';
 
 function OrderItemsBoardContainer() {
   return (
@@ -11,6 +14,7 @@ function OrderItemsBoardContainer() {
         useBoardData: () => useQuery(GET_ORDER_ITEMS),
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
+        mapRecord: orderItemsRecordMapper,
       }}>
       <OrderItemBoard
         title="주문 조회"

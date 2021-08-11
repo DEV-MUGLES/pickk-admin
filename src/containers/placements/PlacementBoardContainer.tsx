@@ -5,6 +5,8 @@ import PlacementBoard from '@src/components/placement';
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {GET_ORDER_ITEMS} from '@src/common/graphql/order-item.graphql';
 
+import {placementsRecordMapper} from './record-mapper';
+
 function PlacementBoardContainer() {
   return (
     <BoardStoreProvider
@@ -12,6 +14,7 @@ function PlacementBoardContainer() {
         useBoardData: () => useQuery(GET_ORDER_ITEMS),
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
+        mapRecord: placementsRecordMapper,
       }}>
       <PlacementBoard
         title="발주/발송 관리"
