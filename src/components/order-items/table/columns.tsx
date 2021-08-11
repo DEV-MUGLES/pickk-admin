@@ -5,7 +5,7 @@ import {getOrderItemStatusDisplayName} from '@src/common/helpers';
 
 export const orderItemColumns = [
   {
-    title: '상품별 주문 번호',
+    title: '상품주문번호',
     dataIndex: 'merchantUid',
     key: 'merchantUid',
     sorter: (a, b) => b.merchantUid - a.merchantUid,
@@ -13,7 +13,7 @@ export const orderItemColumns = [
     ellipsis: true,
   },
   {
-    title: '주문 묶음별 번호',
+    title: '주문번호',
     dataIndex: 'orderMerchantUid',
     key: 'orderMerchantUid',
     sorter: (a, b) => b.orderMerchantUid - a.orderMerchantUid,
@@ -50,12 +50,17 @@ export const orderItemColumns = [
     title: '상품명',
     dataIndex: 'itemName',
     key: 'itemName',
+    render: (value, record) => (
+      <a href={`https://pickk.one/item/${record.itemId}`} target="_blank">
+        {getOrderItemStatusDisplayName(value)}
+      </a>
+    ),
     sorter: (a, b) => stringSorter(b.itemName, a.itemName),
     width: 200,
     ellipsis: true,
   },
   {
-    title: '옵션명',
+    title: '옵션',
     dataIndex: 'productVariantName',
     key: 'productVariantName',
     sorter: (a, b) => stringSorter(b.productVariantName, a.productVariantName),
@@ -71,39 +76,26 @@ export const orderItemColumns = [
     ellipsis: true,
   },
   {
-    title: '수취인명',
-    dataIndex: 'order.receiver.name',
-    key: 'order.receiver.name',
-    width: 75,
-    ellipsis: true,
-  },
-  {
-    title: '수취인 연락처',
-    dataIndex: 'order.receiver.phoneNumber',
-    key: 'order.receiver.phoneNumber',
-    render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
-    width: 75,
-    ellipsis: true,
-  },
-  {
     title: '구매자명',
-    dataIndex: 'order.buyer.name',
-    key: 'order.buyer.name',
+    dataIndex: 'orderBuyerName',
+    key: 'orderBuyerName',
+    sorter: (a, b) => stringSorter(b.orderBuyerName, a.orderBuyerName),
     width: 75,
     ellipsis: true,
   },
   {
     title: '구매자 연락처',
-    dataIndex: 'order.buyer.phoneNumber',
-    key: 'order.buyer.phoneNumber',
+    dataIndex: 'orderBuyerPhoneNumber',
+    key: 'orderBuyerPhoneNumber',
     render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
     width: 75,
     ellipsis: true,
   },
   {
-    title: '구매자 이메일',
-    dataIndex: 'order.buyer.email',
-    key: 'order.buyer.email',
+    title: '수취인명',
+    dataIndex: 'orderReceiverName',
+    key: 'orderReceiverName',
+    sorter: (a, b) => stringSorter(b.orderReceiverName, a.orderReceiverName),
     width: 75,
     ellipsis: true,
   },

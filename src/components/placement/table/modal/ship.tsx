@@ -5,7 +5,8 @@ import {Modal, Input, Button, Typography} from 'antd';
 import {GREY} from '@src/common/constants/colors';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {Placement} from '@src/types';
-import OrderItemService from '@src/lib/services/OrderItem';
+
+import {useShipMeSellerOrderItem} from '../../hooks';
 
 const {Text} = Typography;
 
@@ -24,15 +25,17 @@ export default function ShipModal({
   const {reload} = action;
   const [shipments, setShipments] = useState(null);
 
+  const {shipMeSellerOrderItems} = useShipMeSellerOrderItem();
+
   useEffect(() => {
     if (!modalData) return;
     setShipments(
       modalData.map((record) => {
-        const {merchantUid, courier, trackingCode} = record;
+        const {merchantUid, courierId, trackCode} = record;
         return {
           merchantUid,
-          courier,
-          trackingCode,
+          courierId,
+          trackCode,
         };
       }),
     );
@@ -50,8 +53,11 @@ export default function ShipModal({
   };
 
   const handleSubmit = async () => {
-    console.log(shipments);
-    await OrderItemService.ship(shipments);
+    const shipOrderItemInput = {
+      courierId: shipments.courierId,
+      trackCode: shipments.trackCode,
+    };
+    shipMeSellerOrderItems(shipments.merchantUid, shipOrderItemInput);
     closeModal();
     reload();
   };
@@ -82,16 +88,14 @@ export default function ShipModal({
                 <BuyerName>{buyerName}</BuyerName>
                 <StyledInput
                   size="small"
-                  name="courier"
-                  value={shipments[index] ? shipments[index].courier : null}
+                  name="courierId"
+                  value={shipments[index] ? shipments[index].courierId : null}
                   onChange={handleShipmentsChange(index)}
                 />
                 <StyledInput
                   size="small"
-                  name="trackingCode"
-                  value={
-                    shipments[index] ? shipments[index].trackingCode : null
-                  }
+                  name="trackCode"
+                  value={shipments[index] ? shipments[index].trackCode : null}
                   onChange={handleShipmentsChange(index)}
                 />
               </Row>

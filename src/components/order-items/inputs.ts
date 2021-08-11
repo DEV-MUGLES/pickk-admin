@@ -1,16 +1,16 @@
 import dayjs from 'dayjs';
-import {OrderItemClaimStatus, OrderItemStatus} from '@pickk/common';
 
 import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
-import Selector from '@src/components/common/molecules/BoardFilter/input/Selector';
 import Datepicker from '@src/components/common/molecules/BoardFilter/input/DatePicker';
 
-import {
-  getOrderItemClaimStatusDisplayName,
-  getOrderItemStatusDisplayName,
-} from '@src/common/helpers/alias';
-
 export const orderItemInputs = [
+  {
+    name: 'search',
+    labelText: '상세조건',
+    Component: InputBox,
+    guideText:
+      '수취인명/구매자명/구매자자연락처/상품명/상품주문번호를 검색할 수 있습니다.',
+  },
   {
     name: 'period',
     defaultValue: {
@@ -26,34 +26,5 @@ export const orderItemInputs = [
       {name: '배송완료일', value: 'shippedAtBetween'},
     ],
     Component: Datepicker,
-  },
-  {
-    name: 'status',
-    labelText: '주문상태',
-    select: [{name: '전체', value: null}].concat(
-      Object.values(OrderItemStatus).map((value) => ({
-        name: getOrderItemStatusDisplayName(value),
-        value,
-      })),
-    ),
-    Component: Selector,
-  },
-  {
-    name: 'claimStatus',
-    labelText: '클레임 상태',
-    select: [{name: '전체', value: null}].concat(
-      Object.values(OrderItemClaimStatus).map((value) => ({
-        name: getOrderItemClaimStatusDisplayName(value),
-        value,
-      })),
-    ),
-    Component: Selector,
-  },
-  {
-    name: 'search',
-    labelText: '상세조건',
-    Component: InputBox,
-    guideText:
-      '수취인명/구매자명/구매자자연락처/구매자이메일/주문번호/상품별주문번호/상품번호/송장번호를 검색할 수 있습니다.',
   },
 ];

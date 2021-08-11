@@ -1,20 +1,14 @@
-import {useState, useContext, createContext, ReactNode} from 'react';
+import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
 
 import {removeDashFromNumber} from '@src/common/helpers/PhoneNumberParser';
-import {DataFetchConfig, Filter} from '@src/types';
 
 import {IBoard} from './IBoard';
+import {BoardStoreProviderProps, Filter} from './types';
 
 const BoardContext = createContext<IBoard>(undefined);
 
 export const useBoardContext = () => useContext(BoardContext);
-
-export type BoardStoreProviderProps = {
-  children: ReactNode;
-  dataFetchConfig: DataFetchConfig;
-  parseExcelData?: (data: unknown) => unknown;
-};
 
 export default function BoardStoreProvider({
   children,
@@ -26,6 +20,7 @@ export default function BoardStoreProvider({
     operationName,
     filterName,
     defaultFilter = {},
+    mapRecord = (record) => record,
   } = dataFetchConfig;
 
   const {data, loading, refetch} = useBoardData({
@@ -108,7 +103,9 @@ export default function BoardStoreProvider({
       filter,
       newFilter,
       tableData: data
-        ? data?.[operationName].map((v) => ({...v, key: v.id}))
+        ? data?.[operationName]
+            .map((v) => mapRecord(v))
+            .map((v) => ({...v, key: v.id}))
         : null,
       loading,
       defaultFilter,
