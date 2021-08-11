@@ -9,8 +9,8 @@ export const placementColumns = [
   orderItemColumns[2], // 주문일시
   {
     title: '택배사',
-    dataIndex: 'courierId',
-    key: 'courierId',
+    dataIndex: 'courierName',
+    key: 'courierName',
     sorter: (a, b) => stringSorter(b.courierId, a.courierId),
     width: 90,
     ellipsis: true,
@@ -23,6 +23,7 @@ export const placementColumns = [
     width: 120,
     ellipsis: true,
   },
+  // @TODO
   {
     title: '배송추적',
     dataIndex: 'trackingViewUrl',
@@ -39,55 +40,54 @@ export const placementColumns = [
   ...orderItemColumns.slice(5, 10), // 상품명, 옵션, 수량, 구매자명, 구매자 연락처
   {
     title: '구매자 이메일',
-    dataIndex: 'orderBuyerEmail',
-    key: 'orderBuyerEmail',
-    sorter: (a, b) => stringSorter(b.orderBuyerEmail, a.orderBuyerEmail),
+    dataIndex: 'buyerEmail',
+    key: 'buyerEmail',
+    sorter: (a, b) => stringSorter(b.buyerEmail, a.buyerEmail),
     width: 100,
     ellipsis: true,
   },
   ...orderItemColumns.slice(10),
   {
     title: '수취인 연락처',
-    dataIndex: 'orderReceiverPhoneNumber',
-    key: 'orderReceiverPhoneNumber',
+    dataIndex: 'receiverPhoneNumber',
+    key: 'receiverPhoneNumber',
     sorter: (a, b) =>
-      stringSorter(b.orderReceiverPhoneNumber, a.orderReceiverPhoneNumber),
+      stringSorter(b.receiverPhoneNumber, a.receiverPhoneNumber),
     width: 100,
     ellipsis: true,
   },
   {
     title: '우편번호',
-    dataIndex: 'orderReceiverPostalCode',
-    key: 'orderReceiverPostalCode',
-    sorter: (a, b) =>
-      stringSorter(b.orderReceiverPostalCode, a.orderReceiverPostalCode),
+    dataIndex: 'receiverPostalCode',
+    key: 'receiverPostalCode',
+    sorter: (a, b) => stringSorter(b.receiverPostalCode, a.receiverPostalCode),
     width: 100,
     ellipsis: true,
   },
   {
     title: '배송지 주소',
-    dataIndex: 'orderReceiverBaseAddress',
-    key: 'orderReceiverBaseAddress',
+    dataIndex: 'receiverBaseAddress',
+    key: 'receiverBaseAddress',
     sorter: (a, b) =>
-      stringSorter(b.orderReceiverBaseAddress, a.orderReceiverBaseAddress),
+      stringSorter(b.receiverBaseAddress, a.receiverBaseAddress),
     width: 100,
     ellipsis: true,
   },
   {
     title: '배송지 상세주소',
-    dataIndex: 'orderReceiverDetailAddress',
-    key: 'orderReceiverDetailAddress',
+    dataIndex: 'receiverDetailAddress',
+    key: 'receiverDetailAddress',
     sorter: (a, b) =>
-      stringSorter(b.orderReceiverDetailAddress, a.orderReceiverDetailAddress),
+      stringSorter(b.receiverDetailAddress, a.receiverDetailAddress),
     width: 100,
     ellipsis: true,
   },
   {
     title: '배송지 주소 (통합)',
-    dataIndex: 'orderReceiverFullAddress',
-    key: 'orderReceiverFullAddress',
+    dataIndex: 'receiverFullAddress',
+    key: 'receiverFullAddress',
     sorter: (a, b) =>
-      stringSorter(b.orderReceiverFullAddress, a.orderReceiverFullAddress),
+      stringSorter(b.receiverFullAddress, a.receiverFullAddress),
     width: 120,
     ellipsis: true,
   },

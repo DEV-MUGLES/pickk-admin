@@ -3,14 +3,18 @@ import {BaseOrderItem} from '@src/common/graphql';
 import {orderItemsRecordMapper} from '../order-items/record-mapper';
 
 export const placementsRecordMapper = (record: BaseOrderItem) => {
-  const {buyer, receiver} = record.order;
+  const {order, shipment} = record;
+  const {buyer, receiver} = order;
   return {
     ...orderItemsRecordMapper(record),
-    orderBuyerEmail: buyer.email,
-    orderReceiverPhoneNumber: receiver.phoneNumber,
-    orderReceiverPostalCode: receiver.postalCode,
-    orderReceiverBaseAddress: receiver.baseAddress,
-    orderReceiverDetailAddress: receiver.detailAddress,
-    orderReceiverFullAddress: receiver.baseAddress + receiver.detailAddress,
+    courierId: shipment.courierId,
+    courierName: shipment.courier.name,
+    trackCode: shipment.trackCode,
+    buyerEmail: buyer.email,
+    receiverPhoneNumber: receiver.phoneNumber,
+    receiverPostalCode: receiver.postalCode,
+    receiverBaseAddress: receiver.baseAddress,
+    receiverDetailAddress: receiver.detailAddress,
+    receiverFullAddress: receiver.baseAddress + receiver.detailAddress,
   };
 };
