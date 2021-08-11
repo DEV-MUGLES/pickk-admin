@@ -1,12 +1,12 @@
 import {useState} from 'react';
 import {message} from 'antd';
-import dayjs from 'dayjs';
+import {OrderStatus} from '@pickk/common';
 
 import Preview from '@src/components/common/organisms/Board/preview';
+import Header from '../common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
 import ShipModal from './table/modal/ship';
-import Space from '@src/components/common/atoms/space';
 import StockSetModal from './table/modal/stock';
 
 import {placementInputs} from './inputs';
@@ -15,16 +15,22 @@ import {BoardProps} from '../props';
 import {placementPreviewData} from './preview-data';
 import {parseTable} from '../order-items/table/data-parser';
 
-import PlacementService from '@src/lib/services/Placement';
-import {OrderStatus} from '@src/types';
-
-import {usePlacementTable} from '@src/common/hooks/table/Placement';
 import {usePlacementPreview} from '@src/common/hooks';
 import {useBoardContext} from '@src/common/contexts/Board';
 
-function PlacementBoard({title}: BoardProps) {
+import {
+  useBulkShipReadyMeSellerOrderItems,
+  useCancelMeSellerOrderItem,
+} from './hooks';
+
+function PlacementBoard(props: BoardProps) {
   const {tableData, selectedRowKeys} = useBoardContext().state;
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {bulkShipReadyMeSellerOrderItems} =
+    useBulkShipReadyMeSellerOrderItems();
+  const {cancelMeSellerOrderItem} = useCancelMeSellerOrderItem();
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -54,7 +60,11 @@ function PlacementBoard({title}: BoardProps) {
           );
           return Promise.resolve(false);
         }
-        await PlacementService.place(ids);
+
+        const merchantUids = ids.map(
+          (id) => tableData.find((record) => record.id === id).merchantUids,
+        );
+        await bulkShipReadyMeSellerOrderItems(merchantUids);
         return Promise.resolve(true);
       },
     },
@@ -62,23 +72,34 @@ function PlacementBoard({title}: BoardProps) {
       text: '발송처리',
       onClick: async (ids: number[]) => {
         setIsModalOpen(true);
-        return Promise.resolve(false);
+        return Promise.resolve(true);
       },
     },
     ...placementActions,
     {
       text: '주문 취소',
-      onClick: async (nums: number[]) => {
-        if (nums.length !== 1) {
+      onClick: async (ids: number[]) => {
+        if (ids.length !== 1) {
           message.warning(
             '주문 일괄 취소는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
           );
           return Promise.resolve(false);
         }
         try {
-          await PlacementService.cancel(nums[0]);
+          const selectedId = ids[0];
+          const selectedData = tableData.find(
+            (record) => record.id === selectedId,
+          );
+          const {merchantUid, amount, checksum, reason} = selectedData;
+          await cancelMeSellerOrderItem(merchantUid, {
+            amount,
+            checksum,
+            reason,
+          });
           if (confirm('취소된 제품의 재고를 다시 설정하시겠습니까?')) {
-            setIndex(tableData.find((record) => record.id === nums[0]).itemId);
+            setIndex(
+              tableData.find((record) => record.id === selectedId).itemId,
+            );
           }
           return Promise.resolve(true);
         } catch {
@@ -86,19 +107,24 @@ function PlacementBoard({title}: BoardProps) {
         }
       },
     },
+    {
+      text: '발송지연안내',
+      onClick: async (ids: number[]) => {
+        return Promise.resolve(true);
+      },
+    },
   ];
 
   return (
     <>
+      <Header {...props} />
       <Preview
         data={placementPreviewData}
         usePreviewData={usePlacementPreview}
       />
-      <Space level={2} />
-      <Filter title={title} inputs={placementInputs} />
-      <Space level={2} />
+      <Filter {...props} inputs={placementInputs} />
       <Table
-        title={title}
+        {...props}
         columns={placementColumns}
         actions={newPlacementActions}
       />

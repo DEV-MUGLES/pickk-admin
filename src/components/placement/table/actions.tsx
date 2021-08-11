@@ -5,82 +5,88 @@ import * as XLSX from 'xlsx';
 import CSVReader from 'react-csv-reader';
 
 import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
-import OrderItemService from '@src/lib/services/OrderItem';
+
+import {useBulkShipMeSellerOrderItems} from '../hooks';
 
 const {confirm} = Modal;
 
 export const placementActions: TableActionType[] = [
   {
-    Component: () => (
-      <Upload
-        showUploadList={false}
-        beforeUpload={(file) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const data = e.target.result;
-            const readedData = XLSX.read(data, {type: 'binary'});
-            const wsname = readedData.SheetNames[0];
-            const ws = readedData.Sheets[wsname];
+    Component: () => {
+      const {bulkShipMeSellerOrderItems} = useBulkShipMeSellerOrderItems();
 
-            /* Convert array to json*/
-            const dataParse = XLSX.utils.sheet_to_json(ws, {header: 1});
+      return (
+        <Upload
+          showUploadList={false}
+          beforeUpload={(file) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const data = e.target.result;
+              const readedData = XLSX.read(data, {type: 'binary'});
+              const wsname = readedData.SheetNames[0];
+              const ws = readedData.Sheets[wsname];
 
-            const count = {};
-            dataParse.slice(1).forEach((record) => {
-              const status = record[3];
-              if (status === undefined) {
-                return;
-              }
-              count[status] =
-                count[status] !== undefined ? count[status] + 1 : 1;
-            });
+              /* Convert array to json*/
+              const dataParse = XLSX.utils.sheet_to_json(ws, {header: 1});
 
-            confirm({
-              title: '입력한 주문 개수를 확인해주세요.',
-              icon: <ExclamationCircleOutlined />,
-              content: (
-                <div>
-                  {Object.keys(count).map((status) => (
-                    <p key={status}>{`${status} : ${count[status]}개`}</p>
-                  ))}
-                </div>
-              ),
-              onOk() {
-                try {
-                  const result = dataParse
-                    .slice(1)
-                    .map((record) => {
-                      return {
-                        merchantUid: record[1] !== undefined ? record[1] : '',
-                        courier: record[21] !== undefined ? record[21] : '',
-                        trackingCode:
-                          record[22] !== undefined ? record[22] : '',
-                      };
-                    })
-                    .filter((record) =>
-                      Object.values(record).every((value) => value !== ''),
-                    );
-                  OrderItemService.ship(result);
-                } catch {
-                  message.error(
-                    '비정상적인 엑셀 파일입니다. (주문번호가 변조됐을 수 있습니다.)',
-                  );
+              const count = {};
+              dataParse.slice(1).forEach((record) => {
+                const status = record[3];
+                if (status === undefined) {
+                  return;
                 }
-              },
-              onCancel() {
-                message.warning('엑셀일괄발송이 취소되었습니다.');
-              },
-            });
-          };
-          reader.readAsBinaryString(file);
-          return false;
-        }}>
-        <Button>엑셀일괄발송</Button>
-      </Upload>
-    ),
+                count[status] =
+                  count[status] !== undefined ? count[status] + 1 : 1;
+              });
+
+              confirm({
+                title: '입력한 주문 개수를 확인해주세요.',
+                icon: <ExclamationCircleOutlined />,
+                content: (
+                  <div>
+                    {Object.keys(count).map((status) => (
+                      <p key={status}>{`${status} : ${count[status]}개`}</p>
+                    ))}
+                  </div>
+                ),
+                onOk() {
+                  try {
+                    const result = dataParse
+                      .slice(1)
+                      .map((record) => {
+                        return {
+                          merchantUid: record[1] !== undefined ? record[1] : '',
+                          courierId: record[21] !== undefined ? record[21] : '',
+                          trackCode: record[22] !== undefined ? record[22] : '',
+                        };
+                      })
+                      .filter((record) =>
+                        Object.values(record).every((value) => value !== ''),
+                      );
+                    bulkShipMeSellerOrderItems(result);
+                  } catch {
+                    message.error(
+                      '비정상적인 엑셀 파일입니다. (주문번호가 변조됐을 수 있습니다.)',
+                    );
+                  }
+                },
+                onCancel() {
+                  message.warning('엑셀일괄발송이 취소되었습니다.');
+                },
+              });
+            };
+            reader.readAsBinaryString(file);
+            return false;
+          }}>
+          <Button>엑셀일괄발송</Button>
+        </Upload>
+      );
+    },
   },
   {
     Component: () => {
+      const {bulkShipMeSellerOrderItems} = useBulkShipMeSellerOrderItems();
+
       const paparseOptions = {
         header: true,
         dynamicTyping: true,
@@ -133,7 +139,7 @@ export const placementActions: TableActionType[] = [
                         .filter((record) =>
                           Object.values(record).every((value) => value !== ''),
                         );
-                      OrderItemService.ship(result);
+                      bulkShipMeSellerOrderItems(result);
                     } catch {
                       message.error(
                         '비정상적인 CSV 파일입니다. (주문번호가 변조됐을 수 있습니다.)',
