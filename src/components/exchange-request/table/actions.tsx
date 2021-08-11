@@ -14,7 +14,7 @@ export const exchangeRequestActions = [
         message.warning(
           '일괄 변경은 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
         );
-        return Promise.resolve(false);
+        return;
       }
       try {
         confirm({
@@ -31,10 +31,7 @@ export const exchangeRequestActions = [
             message.warning('취소되었습니다.');
           },
         });
-        return Promise.resolve(true);
-      } catch {
-        return Promise.resolve(false);
-      }
+      } catch {}
     },
   },
 ];

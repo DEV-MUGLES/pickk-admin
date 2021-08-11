@@ -7,10 +7,11 @@ import Filter from '../common/organisms/Board/Filter';
 import Table from '../common/organisms/Board/Table';
 
 import {useBoardContext} from '@src/common/contexts/Board';
+import {BoardProps} from '../props';
+import {TableActionType} from '../common/organisms/Board/Table/table';
 
 import {orderItemInputs} from './inputs';
 import {orderItemActions, orderItemColumns} from './table';
-import {BoardProps} from '../props';
 
 function OrderItemBoard(props: BoardProps) {
   const {state} = useBoardContext();
@@ -25,7 +26,7 @@ function OrderItemBoard(props: BoardProps) {
     setIsModalOpen(false);
   };
 
-  const newOrderItemActions = [
+  const newOrderItemActions: TableActionType[] = [
     ...orderItemActions,
     {
       text: '교환으로 변경',
@@ -34,7 +35,7 @@ function OrderItemBoard(props: BoardProps) {
           message.warning(
             `교환으로 변경 일괄 처리는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.`,
           );
-          return Promise.resolve(false);
+          return;
         }
         const record = tableData.find((row) => row.id === ids[0]);
         setExchangeRequestIds({
@@ -42,7 +43,6 @@ function OrderItemBoard(props: BoardProps) {
           itemId: record.itemId,
         });
         setIsModalOpen(true);
-        return Promise.resolve(false);
       },
     },
   ];

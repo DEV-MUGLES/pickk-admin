@@ -3,7 +3,7 @@ import {MutationTuple} from '@apollo/client';
 export type TableActionType = {
   icon?: string;
   text?: string;
-  handleClick?: (
+  onClick?: (
     ids: number[],
     mutate?: (options?: MutationFunctionOptions) => Promise<FetchResult>,
   ) => Promise<void>;

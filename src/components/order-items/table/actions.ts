@@ -11,7 +11,7 @@ export const orderItemActions = [
         message.warning(
           '일괄 변경은 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
         );
-        return Promise.resolve(false);
+        return;
       }
       try {
         const reason = await prompt({
@@ -25,10 +25,7 @@ export const orderItemActions = [
           ],
         });
         await OrderItemService.refundRequest(ids[0], reason as string);
-        return Promise.resolve(true);
-      } catch {
-        return Promise.resolve(false);
-      }
+      } catch {}
     },
   },
 ];

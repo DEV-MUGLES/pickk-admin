@@ -9,15 +9,15 @@ import Table from '@src/components/common/organisms/Board/Table';
 import ShipModal from './table/modal/ship';
 import StockSetModal from './table/modal/stock';
 
-import {placementInputs} from './inputs';
-import {placementColumns, placementActions} from './table';
-import {BoardProps} from '../props';
-import {placementPreviewData} from './preview-data';
-import {parseTable} from '../order-items/table/data-parser';
-
 import {usePlacementPreview} from '@src/common/hooks';
 import {useBoardContext} from '@src/common/contexts/Board';
+import {TableActionType} from '../common/organisms/Board/Table/table';
+import {BoardProps} from '../props';
+import {parseTable} from '../order-items/table/data-parser';
 
+import {placementInputs} from './inputs';
+import {placementColumns, placementActions} from './table';
+import {placementPreviewData} from './preview-data';
 import {
   useBulkShipReadyMeSellerOrderItems,
   useCancelMeSellerOrderItem,
@@ -44,7 +44,7 @@ function PlacementBoard(props: BoardProps) {
     ? tableData.filter((data) => selectedRowKeys.includes(data.id))
     : null;
 
-  const newPlacementActions = [
+  const newPlacementActions: TableActionType[] = [
     {
       text: '발주확인',
       onClick: async (ids: number[]) => {
@@ -58,21 +58,19 @@ function PlacementBoard(props: BoardProps) {
           message.warning(
             "주문상태가 '결제 완료'인 주문만 발주확인할 수 있습니다.",
           );
-          return Promise.resolve(false);
+          return;
         }
 
         const merchantUids = ids.map(
           (id) => tableData.find((record) => record.id === id).merchantUids,
         );
         await bulkShipReadyMeSellerOrderItems(merchantUids);
-        return Promise.resolve(true);
       },
     },
     {
       text: '발송처리',
       onClick: async (ids: number[]) => {
         setIsModalOpen(true);
-        return Promise.resolve(true);
       },
     },
     ...placementActions,
@@ -83,7 +81,7 @@ function PlacementBoard(props: BoardProps) {
           message.warning(
             '주문 일괄 취소는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
           );
-          return Promise.resolve(false);
+          return;
         }
         try {
           const selectedId = ids[0];
@@ -101,16 +99,13 @@ function PlacementBoard(props: BoardProps) {
               tableData.find((record) => record.id === selectedId).itemId,
             );
           }
-          return Promise.resolve(true);
-        } catch {
-          return Promise.resolve(false);
-        }
+        } catch {}
       },
     },
     {
       text: '발송지연안내',
       onClick: async (ids: number[]) => {
-        return Promise.resolve(true);
+        return;
       },
     },
   ];

@@ -6,7 +6,7 @@ import {useBulkUpdateItems} from '@src/common/hooks/apis';
 const {confirm} = Modal;
 
 const handleSetIsSellable =
-  (isSellable: boolean): TableActionType['handleClick'] =>
+  (isSellable: boolean): TableActionType['onClick'] =>
   async (ids, mutate) => {
     const isSellableText = isSellable ? '활성화' : '비활성화';
     try {
@@ -36,16 +36,16 @@ const handleSetIsSellable =
 export const itemActions: TableActionType[] = [
   {
     text: '상품 활성화',
-    handleClick: handleSetIsSellable(true),
+    onClick: handleSetIsSellable(true),
     useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 비활성화',
-    handleClick: handleSetIsSellable(false),
+    onClick: handleSetIsSellable(false),
     useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 삭제',
-    handleClick: async (ids: number[]) => null,
+    onClick: async (ids: number[]) => null,
   },
 ];

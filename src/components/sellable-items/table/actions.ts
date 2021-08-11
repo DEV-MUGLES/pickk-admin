@@ -6,7 +6,7 @@ import {useBulkUpdateItems} from '@src/common/hooks/apis';
 const {confirm} = Modal;
 
 const handleSetIsMdRecommended =
-  (isMdRecommended: boolean): TableActionType['handleClick'] =>
+  (isMdRecommended: boolean): TableActionType['onClick'] =>
   async (ids, mutate) => {
     try {
       confirm({
@@ -37,17 +37,17 @@ const handleSetIsMdRecommended =
 export const sellableItemActions: TableActionType[] = [
   {
     text: 'MD추천 ON',
-    handleClick: handleSetIsMdRecommended(true),
+    onClick: handleSetIsMdRecommended(true),
     useTableAction: useBulkUpdateItems,
   },
   {
     text: 'MD추천 OFF',
-    handleClick: handleSetIsMdRecommended(false),
+    onClick: handleSetIsMdRecommended(false),
     useTableAction: useBulkUpdateItems,
   },
   {
     text: '상품 비활성화',
-    handleClick: async (ids: number[], mutate) => {
+    onClick: async (ids: number[], mutate) => {
       try {
         confirm({
           title: '상품 비활성화 확인',
@@ -75,10 +75,10 @@ export const sellableItemActions: TableActionType[] = [
   },
   {
     text: '상품 삭제',
-    handleClick: async () => null,
+    onClick: async () => null,
   },
   {
     text: '상품가격',
-    handleClick: async () => null,
+    onClick: async () => null,
   },
 ];
