@@ -1,37 +1,75 @@
 import {gql} from '@apollo/client';
+import {Order, OrderBuyer, OrderItem, OrderReceiver} from '@pickk/common';
+
+export type BaseOrderItem = Pick<
+  OrderItem,
+  | 'id'
+  | 'merchantUid'
+  | 'orderMerchantUid'
+  | 'status'
+  | 'shippingAt'
+  | 'paidAt'
+  | 'claimStatus'
+  | 'courierId'
+  | 'trackCode'
+  | 'itemId'
+  | 'itemName'
+  | 'productVariantName'
+  | 'quantity'
+  | 'itemFinalPrice'
+  | 'recommenderNickname'
+> & {
+  order: Pick<Order, 'id'> & {
+    buyer: Pick<OrderBuyer, 'id' | 'name' | 'phoneNumber' | 'email'>;
+    receiver: Pick<
+      OrderReceiver,
+      | 'id'
+      | 'name'
+      | 'phoneNumber'
+      | 'postalCode'
+      | 'baseAddress'
+      | 'detailAddress'
+    >;
+  };
+};
 
 export const BASE_ORDER_ITEM_FRAGMENT = gql`
   fragment BaseOrderItemFragment on OrderItem {
     id
     merchantUid
     orderMerchantUid
-    paidAt
     status
+    shippingAt
+
+    paidAt
     claimStatus
+    courierId
+    trackCode
+    itemId
     itemName
     productVariantName
     quantity
+
     order {
       id
-      receiver {
-        id
-        name
-        phoneNumber
-        baseAddress
-        detailAddress
-      }
       buyer {
         id
         name
         phoneNumber
         email
       }
+      receiver {
+        id
+        name
+        phoneNumber
+        postalCode
+        baseAddress
+        detailAddress
+      }
     }
-    courier {
-      id
-      name
-    }
-    trackCode
+
+    itemFinalPrice
+    recommenderNickname
   }
 `;
 
