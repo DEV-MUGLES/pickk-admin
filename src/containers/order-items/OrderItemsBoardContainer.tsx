@@ -1,13 +1,14 @@
+import {useQuery} from '@apollo/client';
 import BoardStoreProvider from '@src/common/contexts/Board';
 import OrderItemBoard from '@src/components/order-items';
 
-import {useMeSellerOrderItems} from './hooks';
+import {GET_ORDER_ITEMS} from '@src/common/graphql/order-item.graphql';
 
 function OrderItemsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: useMeSellerOrderItems,
+        useBoardData: () => useQuery(GET_ORDER_ITEMS),
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
       }}>
