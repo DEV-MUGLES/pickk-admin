@@ -4,20 +4,27 @@ import {orderItemColumns} from '@src/components/order-items/table';
 import {stringSorter} from '@src/common/helpers/sorter';
 
 export const placementColumns = [
-  ...orderItemColumns.slice(0, orderItemColumns.length - 3),
+  ...orderItemColumns,
   {
     title: '택배사',
-    dataIndex: 'courier',
-    key: 'courier',
-    sorter: (a, b) => stringSorter(b.courier, a.courier),
+    dataIndex: 'courierId',
+    key: 'courierId',
+    sorter: (a, b) => stringSorter(b.courierId, a.courierId),
     width: 90,
     ellipsis: true,
   },
   {
     title: '송장번호',
-    dataIndex: 'trackingCode',
-    key: 'trackingCode',
-    sorter: (a, b) => b.trackingCode - a.trackingCode,
+    dataIndex: 'trackCode',
+    key: 'trackCode',
+    sorter: (a, b) => b.trackCode - a.trackCode,
+    width: 120,
+    ellipsis: true,
+  },
+  {
+    title: '배송지',
+    dataIndex: '',
+    key: '',
     width: 120,
     ellipsis: true,
   },
@@ -34,8 +41,11 @@ export const placementColumns = [
     sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
     width: 90,
   },
-  ...orderItemColumns.slice(
-    orderItemColumns.length - 3,
-    orderItemColumns.length,
-  ),
+  {
+    title: '우편번호',
+    dataIndex: '',
+    key: '',
+    width: 120,
+    ellipsis: true,
+  },
 ];
