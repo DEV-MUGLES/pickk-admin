@@ -23,6 +23,7 @@ import ExchangeRequestService from '@src/lib/services/ExchangeRequest';
 import {PickingStatus, ExchangeStatus} from '@src/types';
 import {useState} from 'react';
 import ShipModal from '../placement/table/modal/ship';
+import {TableActionType} from '../common/organisms/Board/Table/table';
 
 function ExchangeRequestBoard({
   title,
@@ -38,7 +39,7 @@ function ExchangeRequestBoard({
     ? tableData.filter((data) => selectedRowKeys.includes(data.id))
     : null;
 
-  const newExchangeActions = [
+  const newExchangeActions: TableActionType[] = [
     {
       text: '수거완료',
       onClick: async (ids: number[]) => {
@@ -52,14 +53,13 @@ function ExchangeRequestBoard({
           })
         ) {
           message.warning('수거중인 요청만 완료처리할 수 있습니다.');
-          return Promise.resolve(false);
+          return;
         }
+
         try {
           await ExchangeRequestService.pick(ids);
-          return Promise.resolve(true);
         } catch (err) {
           message.error('실패했습니다. - ' + err);
-          return Promise.resolve(false);
         }
       },
     },
@@ -67,7 +67,6 @@ function ExchangeRequestBoard({
       text: '재발송처리',
       onClick: async (ids: number[]) => {
         setIsModalOpen(true);
-        return Promise.resolve(false);
       },
     },
     ...exchangeRequestActions,

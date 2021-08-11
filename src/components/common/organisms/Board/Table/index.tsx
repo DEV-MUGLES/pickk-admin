@@ -21,7 +21,7 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
   const {tableData, loading, selectedRowKeys} = state;
   const {setSelectedRowKeys} = action;
 
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(20);
 
   const rowSelection = {
     selectedRowKeys,

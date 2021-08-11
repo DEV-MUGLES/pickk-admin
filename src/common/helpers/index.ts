@@ -40,6 +40,9 @@ const Util = {
 
 export default Util;
 
-export * from './Cookies';
-export * from './NumberParser';
 export * from './alias';
+export * from './Cookies';
+export * from './date';
+export * from './NumberParser';
+export * from './PhoneNumberParser';
+export * from './sorter';
