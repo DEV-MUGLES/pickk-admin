@@ -9,7 +9,7 @@ export type TablePageSizeSelectProps = {
   setPageSize: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const PAGE_SIZES = [10, 50, 100];
+const PAGE_SIZES = [20, 50, 100];
 
 export default function TablePageSizeSelect({
   pageSize,
