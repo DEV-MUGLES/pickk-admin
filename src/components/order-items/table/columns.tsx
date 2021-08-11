@@ -5,7 +5,7 @@ import {getOrderItemStatusDisplayName} from '@src/common/helpers';
 
 export const orderItemColumns = [
   {
-    title: '상품주문번호',
+    title: '주문상품번호',
     dataIndex: 'merchantUid',
     key: 'merchantUid',
     sorter: (a, b) => b.merchantUid - a.merchantUid,

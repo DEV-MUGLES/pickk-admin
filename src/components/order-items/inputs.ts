@@ -6,7 +6,7 @@ import Datepicker from '@src/components/common/molecules/BoardFilter/input/DateP
 export const orderItemInputs = [
   {
     name: 'search',
-    labelText: '상세조건',
+    labelText: '검색창',
     Component: InputBox,
     guideText:
       '수취인명/구매자명/구매자자연락처/상품명/상품주문번호를 검색할 수 있습니다.',

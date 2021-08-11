@@ -16,5 +16,6 @@ export const placementsRecordMapper = (record: BaseOrderItem) => {
     receiverBaseAddress: receiver.baseAddress,
     receiverDetailAddress: receiver.detailAddress,
     receiverFullAddress: receiver.baseAddress + receiver.detailAddress,
+    receiverMessage: receiver.message,
   };
 };

@@ -4,7 +4,7 @@ import {orderItemColumns} from '@src/components/order-items/table';
 import {stringSorter} from '@src/common/helpers/sorter';
 
 export const placementColumns = [
-  ...orderItemColumns.slice(0, 2), // 상품주문번호, 주문번호
+  ...orderItemColumns.slice(0, 2), // 주문상품번호, 주문번호
   orderItemColumns[3], // 주문상태
   orderItemColumns[2], // 주문일시
   {
@@ -91,7 +91,14 @@ export const placementColumns = [
     width: 120,
     ellipsis: true,
   },
-  // @ TODO 배송메세지
+  {
+    title: '배송메세지',
+    dataIndex: 'receiverMessage',
+    key: 'receiverMessage',
+    sorter: (a, b) => stringSorter(b.receiverMessage, a.receiverMessage),
+    width: 120,
+    ellipsis: true,
+  },
   {
     title: '판매가격',
     dataIndex: 'itemFinalPrice',

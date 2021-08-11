@@ -6,6 +6,7 @@ import {
   OrderItem,
   OrderReceiver,
   Shipment,
+  RefundRequest,
 } from '@pickk/common';
 
 export type BaseOrderItem = Pick<
@@ -37,6 +38,7 @@ export type BaseOrderItem = Pick<
       | 'postalCode'
       | 'baseAddress'
       | 'detailAddress'
+      | 'message'
     >;
   };
 };
@@ -81,6 +83,7 @@ export const BASE_ORDER_ITEM_FRAGMENT = gql`
         postalCode
         baseAddress
         detailAddress
+        message
       }
     }
   }
