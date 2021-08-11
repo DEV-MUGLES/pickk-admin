@@ -50,6 +50,11 @@ export const orderItemColumns = [
     title: '상품명',
     dataIndex: 'itemName',
     key: 'itemName',
+    render: (value, record) => (
+      <a href={`https://pickk.one/item/${record.itemId}`} target="_blank">
+        {getOrderItemStatusDisplayName(value)}
+      </a>
+    ),
     sorter: (a, b) => stringSorter(b.itemName, a.itemName),
     width: 200,
     ellipsis: true,
