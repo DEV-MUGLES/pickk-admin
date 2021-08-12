@@ -25,7 +25,7 @@ import {useState} from 'react';
 import ShipModal from '../placement/table/modal/ship';
 import {TableActionType} from '../common/organisms/Board/Table/table';
 
-function ExchangeRequestBoard({
+function ExchangeRequestsBoard({
   title,
 }: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
   const {state} = useBoardContext();
@@ -92,4 +92,4 @@ function ExchangeRequestBoard({
   );
 }
 
-export default ExchangeRequestBoard;
+export default ExchangeRequestsBoard;
