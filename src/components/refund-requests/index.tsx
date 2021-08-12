@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {message} from 'antd';
+import {RefundRequestStatus} from '@pickk/common';
 
 import RefundConfirmModal from './table/modal/confirm';
 import ExchangeRequestModal from '../order-items/table/modal/exchangeRequest';
@@ -15,14 +16,16 @@ import {refundRequestPreviewData} from './preview-data';
 import {refundRequestColumns, refundRequestActions} from './table';
 import {BoardProps} from '../props';
 
+import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
 import {useRefundRequestPreview} from '@src/common/hooks/ClaimRequest';
-import {useRefundRequestTable} from '@src/common/hooks/table/ClaimRequest';
-import RefundRequestService from '@src/lib/services/RefundRequest';
-import {PickingStatus, RefundStatus} from '@src/types';
+
+import {useBulkPickMeSellerRefundRequests} from './hooks';
 
 function RefundRequestsBoard({title, subTitle}: BoardProps) {
   const {state} = useBoardContext();
   const {tableData} = state;
+
+  const {bulkPickMeSellerRefundRequests} = useBulkPickMeSellerRefundRequests();
 
   const [exchangeRequestIds, setExchangeRequestIds] = useState({
     id: -1,
@@ -39,29 +42,21 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
     setIsExchangeRequestModalOpen(false);
   };
 
-  const newRefundActions = [
+  const newRefundActions: TableActionType[] = [
     {
       text: '수거완료',
       onClick: async (ids: number[]) => {
         if (
           !ids.every((id) => {
             const record = tableData.find((row) => row.id === id);
-            return (
-              record.refundStatus === PickingStatus.Picking ||
-              record.refundStatus === RefundStatus.RefundRequested
-            );
+            return record.status === RefundRequestStatus.Picked;
           })
         ) {
           message.warning('수거중인 요청만 완료처리할 수 있습니다.');
-          return Promise.resolve(false);
+          return;
         }
-        try {
-          await RefundRequestService.pick(ids);
-          return Promise.resolve(true);
-        } catch (err) {
-          message.error('실패했습니다. - ' + err);
-          return Promise.resolve(false);
-        }
+
+        await bulkPickMeSellerRefundRequests(ids);
       },
     },
     {
@@ -71,21 +66,22 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
           message.warning(
             `반품 일괄 처리는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.`,
           );
-          return Promise.resolve(false);
+          return;
         }
+
         if (
           !ids.every(
             (id) =>
-              tableData.find((record) => record.id === id).refundStatus ===
-              PickingStatus.Picked,
+              tableData.find((record) => record.id === id).status ===
+              RefundRequestStatus.Picked,
           )
         ) {
           message.warning('수거 완료된 요청만 반품 완료처리할 수 있습니다.');
-          return Promise.resolve(false);
+          return;
         }
+
         setSelectedRecord(tableData.find((record) => record.id === ids[0]));
         setIsModalOpen(true);
-        return Promise.resolve(false);
       },
     },
     ...refundRequestActions,
@@ -96,21 +92,22 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
           message.warning(
             `교환으로 변경 일괄 처리는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.`,
           );
-          return Promise.resolve(false);
+          return;
         }
+
         const record = tableData.find((row) => row.id === ids[0]);
         if (record.items.length !== 1) {
           message.warning(
             `여러개의 아이템에 대한 주문건을 교환으로 변경할 수 없습니다.`,
           );
-          return Promise.resolve(false);
+          return;
         }
+
         setExchangeRequestIds({
           id: ids[0],
           itemId: record.items[0].id,
         });
         setIsExchangeRequestModalOpen(true);
-        return Promise.resolve(false);
       },
     },
   ];
