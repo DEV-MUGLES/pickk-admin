@@ -1,12 +1,14 @@
+import {ColumnsType} from 'antd/lib/table';
+
+import {BaseRefundRequest} from '@src/common/graphql';
 import {
   getTimeString,
   addDashToPhoneNumber,
   stringSorter,
   addCommaToNumber,
 } from '@src/common/helpers';
-import {BaseRefundRequest} from '@src/common/graphql';
 
-export const refundRequestColumns = [
+export const refundRequestColumns: ColumnsType<any> = [
   {
     title: '주문번호',
     dataIndex: 'orderMerchantUid',
@@ -29,6 +31,7 @@ export const refundRequestColumns = [
     key: 'requestedAt',
     render: (value) => getTimeString(value),
     sorter: (a, b) => stringSorter(b.requestedAt, a.requestedAt),
+    defaultSortOrder: 'ascend',
     width: 100,
     ellipsis: true,
   },
@@ -68,7 +71,7 @@ export const refundRequestColumns = [
     title: '반품사유',
     dataIndex: 'reason',
     key: 'reason',
-    record: (value, record: BaseRefundRequest) =>
+    render: (value, record: BaseRefundRequest) =>
       `[${record.faultOf}] ${value}`,
     sorter: (a, b) => stringSorter(b.reason, a.reason),
     width: 100,
