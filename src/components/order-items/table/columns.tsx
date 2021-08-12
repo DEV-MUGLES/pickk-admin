@@ -1,9 +1,11 @@
+import {ColumnsType} from 'antd/lib/table';
+
 import {getTimeString} from '@src/common/helpers/date';
 import {addDashToPhoneNumber} from '@src/common/helpers/PhoneNumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';
 import {getOrderItemStatusDisplayName} from '@src/common/helpers';
 
-export const orderItemColumns = [
+export const orderItemColumns: ColumnsType<any> = [
   {
     title: '주문상품번호',
     dataIndex: 'merchantUid',
@@ -26,6 +28,7 @@ export const orderItemColumns = [
     key: 'paidAt',
     render: (value) => <div>{getTimeString(value)}</div>,
     sorter: (a, b) => stringSorter(b.paidAt, a.paidAt),
+    defaultSortOrder: 'ascend',
     width: 100,
     ellipsis: true,
   },
