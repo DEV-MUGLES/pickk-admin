@@ -49,6 +49,7 @@ function ExchangeRequestsBoard(props: BoardProps) {
         }
 
         try {
+          // @TODO
           await ExchangeRequestService.pick(ids);
         } catch (err) {
           message.error('실패했습니다. - ' + err);
@@ -56,8 +57,8 @@ function ExchangeRequestsBoard(props: BoardProps) {
       },
     },
     {
-      text: '재발송처리',
-      onClick: async (ids: number[]) => {
+      text: '교환품재발송',
+      onClick: async (_: number[]) => {
         setIsModalOpen(true);
       },
     },
@@ -77,7 +78,7 @@ function ExchangeRequestsBoard(props: BoardProps) {
         columns={exchangeRequestColumns}
         actions={newExchangeActions}
       />
-      <ShipModal {...{modalData, isModalOpen, closeModal}} />
+      <ShipModal {...{modalData, isModalOpen, closeModal}} isReship />
     </>
   );
 }

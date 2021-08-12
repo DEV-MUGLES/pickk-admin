@@ -4,35 +4,52 @@ import {Modal, Input, Button, Typography} from 'antd';
 
 import {GREY} from '@src/common/constants/colors';
 import {useBoardContext} from '@src/common/contexts/Board';
-import {Placement} from '@src/types';
 
 import {useShipMeSellerOrderItem} from '../../hooks';
+import {useReshipMeSellerOrderItem} from '@src/components/refund-requests/hooks';
 
 const {Text} = Typography;
 
-export type ShipModalProps = {
-  modalData: Placement[];
-  isModalOpen: boolean;
-  closeModal: () => void;
+export type ModalDataType = {
+  id: number; // 교환요청 고유번호 (isReship일떄만 사용)
+  merchantUid: string;
+  itemName: string;
+  itemId: string;
+  courierId: string;
+  trackCode: string;
+  buyerName: string;
+  trackingViewUrl: string;
 };
 
+export type ShipModalProps = {
+  modalData: ModalDataType[];
+  isModalOpen: boolean;
+  closeModal: () => void;
+  isReship?: boolean;
+};
+
+// @TODO : refactor
 export default function ShipModal({
   modalData,
   isModalOpen,
   closeModal,
+  isReship,
 }: ShipModalProps) {
   const {action} = useBoardContext();
   const {reload} = action;
   const [shipments, setShipments] = useState(null);
 
+  const title = !isReship ? '발송 처리' : '재발송 처리';
   const {shipMeSellerOrderItems} = useShipMeSellerOrderItem();
+  const {reshipMeSellerExchangeRequest} = useReshipMeSellerOrderItem();
 
   useEffect(() => {
     if (!modalData) return;
     setShipments(
       modalData.map((record) => {
-        const {merchantUid, courierId, trackCode} = record;
+        const {id, merchantUid, courierId, trackCode} = record;
         return {
+          id,
           merchantUid,
           courierId,
           trackCode,
@@ -57,7 +74,11 @@ export default function ShipModal({
       courierId: shipments.courierId,
       trackCode: shipments.trackCode,
     };
-    shipMeSellerOrderItems(shipments.merchantUid, shipOrderItemInput);
+
+    isReship
+      ? reshipMeSellerExchangeRequest(shipments.id, shipOrderItemInput)
+      : shipMeSellerOrderItems(shipments.merchantUid, shipOrderItemInput);
+
     closeModal();
     reload();
   };
@@ -66,13 +87,16 @@ export default function ShipModal({
     console.log(modalData, shipments);
     return (
       <Modal
-        title="발송 처리"
+        title={title}
         visible={isModalOpen}
         onCancel={closeModal}
         footer={null}
         width="fit-content">
         <OptionsWrapper>
           <Row style={{width: 'fit-content'}}>
+            {isReship && (
+              <ExchangeRequestId strong>교환고유번호</ExchangeRequestId>
+            )}
             <MerchantUid strong>상품주문번호</MerchantUid>
             <ItemName strong>상품명</ItemName>
             <BuyerName strong>구매자명</BuyerName>
@@ -83,6 +107,7 @@ export default function ShipModal({
             const {id, merchantUid, itemName, buyerName} = placement;
             return (
               <Row key={id} style={{width: 'fit-content'}}>
+                {isReship && <ExchangeRequestId strong>{id}</ExchangeRequestId>}
                 <MerchantUid>{merchantUid}</MerchantUid>
                 <ItemName>{itemName}</ItemName>
                 <BuyerName>{buyerName}</BuyerName>
@@ -140,6 +165,10 @@ const SubmitArea = styled.div`
   height: fit-content;
   border-top: 1px solid ${GREY[200]};
   padding-top: 16px;
+`;
+
+const ExchangeRequestId = styled(Text)`
+  width: 300px;
 `;
 
 const MerchantUid = styled(Text)`
