@@ -34,7 +34,7 @@ export const handleUnauthorizedError = async (
     });
     forward(operation);
   } catch (error) {
-    alert('세션 연결이 끊어졌습니다. 다시 로그인하십시오.');
-    window.location.href = '/login';
+    // alert('세션 연결이 끊어졌습니다. 다시 로그인하십시오.');
+    // window.location.href = '/login';
   }
 };
