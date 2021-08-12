@@ -117,7 +117,7 @@ export type BaseRefundRequest = Pick<
 };
 
 export const BASE_REFUND_REQUEST_FRAGMENT = gql`
-  fragment BaseRefundRequestFragment on OrderItem {
+  fragment BaseRefundRequestFragment on RefundRequest {
     id
     orderMerchantUid
     status
