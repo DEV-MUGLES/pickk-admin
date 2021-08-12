@@ -1,9 +1,10 @@
+import {message} from 'antd';
+import {useState} from 'react';
+
+import Header from '@src/components/common/organisms/Board/Header';
 import Preview from '@src/components/common/organisms/Board/preview';
 import Filter from '@src/components/common/organisms/Board/Filter';
-import Table, {
-  BoardTableProps,
-} from '@src/components/common/organisms/Board/Table';
-import Space from '@src/components/common/atoms/space';
+import Table from '@src/components/common/organisms/Board/Table';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
@@ -13,17 +14,12 @@ import {exchangeRequestColumns, exchangeRequestActions} from './table';
 import {BoardProps} from '../props';
 
 import {useExchangeRequestPreview} from '@src/common/hooks/ClaimRequest';
-import {useExchangeRequestTable} from '@src/common/hooks/table/ClaimRequest';
-import {message} from 'antd';
 import ExchangeRequestService from '@src/lib/services/ExchangeRequest';
 import {PickingStatus, ExchangeStatus} from '@src/types';
-import {useState} from 'react';
 import ShipModal from '../placement/table/modal/ship';
 import {TableActionType} from '../common/organisms/Board/Table/table';
 
-function ExchangeRequestsBoard({
-  title,
-}: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
+function ExchangeRequestsBoard(props: BoardProps) {
   const {state} = useBoardContext();
   const {tableData, selectedRowKeys} = state;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,19 +66,17 @@ function ExchangeRequestsBoard({
 
   return (
     <>
+      <Header {...props} />
       <Preview
         data={exchangeRequestPreviewData}
         usePreviewData={useExchangeRequestPreview}
       />
-      <Space level={2} />
-      <Filter title={title} inputs={exchangeRequestInputs} />
-      <Space level={2} />
+      <Filter {...props} inputs={exchangeRequestInputs} />
       <Table
-        title={title}
+        {...props}
         columns={exchangeRequestColumns}
         actions={newExchangeActions}
       />
-      <Space level={2} />
       <ShipModal {...{modalData, isModalOpen, closeModal}} />
     </>
   );
