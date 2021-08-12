@@ -1,6 +1,6 @@
 import {BaseOrderItem} from '@src/common/graphql';
 
-import {orderItemsRecordMapper} from '../order-items/record-mapper';
+import {orderItemsRecordMapper} from '../../order-items/table/record-mapper';
 
 export const placementsRecordMapper = (record: BaseOrderItem) => {
   const {order, shipment} = record;

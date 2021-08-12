@@ -4,8 +4,7 @@ import PlacementBoard from '@src/components/placement';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {GET_ORDER_ITEMS} from '@src/common/graphql/order-item.graphql';
-
-import {placementsRecordMapper} from './record-mapper';
+import {placementsRecordMapper} from '@src/components/placement/table';
 
 function PlacementBoardContainer() {
   return (

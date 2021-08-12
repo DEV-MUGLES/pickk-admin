@@ -4,6 +4,7 @@ import RefundRequestsBoard from '@src/components/refund-requests';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {GET_REFUND_REQUESTS} from '@src/common/graphql';
+import {refundRequestRecordMapper} from '@src/components/refund-requests/table';
 
 function RefundRequestsBoardContainer() {
   return (
@@ -12,6 +13,7 @@ function RefundRequestsBoardContainer() {
         useBoardData: () => useQuery(GET_REFUND_REQUESTS),
         operationName: 'meSellerRefundRequests',
         filterName: 'refundRequestFilter',
+        mapRecord: refundRequestRecordMapper,
       }}>
       <RefundRequestsBoard
         title="반품 관리"
