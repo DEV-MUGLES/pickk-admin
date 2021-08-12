@@ -5,7 +5,7 @@ import {getOrderItemStatusDisplayName} from '@src/common/helpers';
 
 export const orderItemColumns = [
   {
-    title: '상품주문번호',
+    title: '주문상품번호',
     dataIndex: 'merchantUid',
     key: 'merchantUid',
     sorter: (a, b) => b.merchantUid - a.merchantUid,
@@ -77,25 +77,25 @@ export const orderItemColumns = [
   },
   {
     title: '구매자명',
-    dataIndex: 'orderBuyerName',
-    key: 'orderBuyerName',
-    sorter: (a, b) => stringSorter(b.orderBuyerName, a.orderBuyerName),
+    dataIndex: 'buyerName',
+    key: 'buyerName',
+    sorter: (a, b) => stringSorter(b.buyerName, a.buyerName),
     width: 75,
     ellipsis: true,
   },
   {
     title: '구매자 연락처',
-    dataIndex: 'orderBuyerPhoneNumber',
-    key: 'orderBuyerPhoneNumber',
+    dataIndex: 'buyerPhoneNumber',
+    key: 'buyerPhoneNumber',
     render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
     width: 75,
     ellipsis: true,
   },
   {
     title: '수취인명',
-    dataIndex: 'orderReceiverName',
-    key: 'orderReceiverName',
-    sorter: (a, b) => stringSorter(b.orderReceiverName, a.orderReceiverName),
+    dataIndex: 'receiverName',
+    key: 'receiverName',
+    sorter: (a, b) => stringSorter(b.receiverName, a.receiverName),
     width: 75,
     ellipsis: true,
   },

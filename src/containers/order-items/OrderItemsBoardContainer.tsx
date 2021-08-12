@@ -4,8 +4,7 @@ import OrderItemBoard from '@src/components/order-items';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {GET_ORDER_ITEMS} from '@src/common/graphql/order-item.graphql';
-
-import {orderItemsRecordMapper} from './record-mapper';
+import {orderItemsRecordMapper} from '@src/components/order-items/table';
 
 function OrderItemsBoardContainer() {
   return (
