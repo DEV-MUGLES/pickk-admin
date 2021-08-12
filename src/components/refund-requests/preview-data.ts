@@ -1,24 +1,25 @@
 import {CheckOutlined, ShoppingOutlined} from '@ant-design/icons';
+import {RefundRequestStatus} from '@pickk/common';
 
-export const refundRequestPreviewData = [
+import {PreviewDataType} from '../common/organisms/Board/preview';
+
+export const refundRequestPreviewData: PreviewDataType[] = [
   {
     label: '반품 요청',
+    name: 'requested',
     icon: ShoppingOutlined,
-    filterValue: {status: 'REQUESTED'},
+    filterValue: {status: RefundRequestStatus.Requested},
   },
   {
-    label: '반품 수거 중',
+    label: '반품 수거완료',
+    name: 'picked',
     icon: CheckOutlined,
-    filterValue: {status: 'PICKING'},
-  },
-  {
-    label: '반품 수거 완료',
-    icon: CheckOutlined,
-    filterValue: {status: 'PICKED'},
+    filterValue: {status: RefundRequestStatus.Picked},
   },
   {
     label: '반품 완료',
+    name: 'confirmed',
     icon: ShoppingOutlined,
-    filterValue: {status: 'CONFIRMED'},
+    filterValue: {status: RefundRequestStatus.Confirmed},
   },
 ];

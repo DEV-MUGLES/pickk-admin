@@ -15,11 +15,12 @@ import {refundRequestInputs} from './inputs';
 import {refundRequestPreviewData} from './preview-data';
 import {refundRequestColumns, refundRequestActions} from './table';
 import {BoardProps} from '../props';
-
 import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
-import {useRefundRequestPreview} from '@src/common/hooks/ClaimRequest';
 
-import {useBulkPickMeSellerRefundRequests} from './hooks';
+import {
+  useBulkPickMeSellerRefundRequests,
+  useMeSellerRefundRequestsCount,
+} from './hooks';
 
 function RefundRequestsBoard({title, subTitle}: BoardProps) {
   const {state} = useBoardContext();
@@ -116,7 +117,7 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
       <Header title={title} subTitle={subTitle} />
       <Preview
         data={refundRequestPreviewData}
-        usePreviewData={useRefundRequestPreview}
+        usePreviewData={useMeSellerRefundRequestsCount}
       />
       <Filter title={title} inputs={refundRequestInputs} />
       <Table
