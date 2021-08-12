@@ -5,6 +5,7 @@ import {
   ShoppingOutlined,
   StopOutlined,
   UnorderedListOutlined,
+  CloseOutlined,
 } from '@ant-design/icons';
 
 export const exchangeRequestPreviewData = [
@@ -41,7 +42,7 @@ export const exchangeRequestPreviewData = [
   },
   {
     label: '교환 거부',
-    icon: 'close',
+    icon: CloseOutlined,
     filterValue: {status: 'REJECTED'},
     disabled: true,
   },

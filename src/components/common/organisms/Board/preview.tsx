@@ -9,7 +9,7 @@ import {Filter} from '@src/common/contexts/Board/types';
 
 export type PreviewDataType = {
   label: string;
-  name: string;
+  name?: string; // @TODO : 모두 새로운 프리뷰 적용 후 not optional로 변경
   icon: React.FunctionComponent<AntdIconProps>;
   filterValue: Filter;
   disabled?: boolean;
