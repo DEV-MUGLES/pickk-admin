@@ -2,21 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import {Typography} from 'antd';
 
-import {useBoardContext} from '@src/common/contexts/Board';
-import {Filter} from '@src/types';
-
-import Space from '@src/components/common/atoms/space';
 import {WHITE, INDIGO_BLUE} from '@src/common/constants/colors';
-import {AntdIconProps} from '@ant-design/icons/lib/components/AntdIcon';
+
+import {useBoardContext} from '@src/common/contexts/Board';
+import {PreviewDataType} from '@src/components/common/organisms/Board/preview';
 
 const {Text} = Typography;
 
-export type PreviewProps = {
-  icon: React.FunctionComponent<AntdIconProps>;
-  label: string;
-  count: number;
-  filterValue: Filter;
-};
+export type PreviewProps = Pick<
+  PreviewDataType,
+  'label' | 'icon' | 'filterValue'
+> & {count: number};
 
 function PreviewButton({icon: Icon, label, count, filterValue}: PreviewProps) {
   const {state, action} = useBoardContext();
@@ -37,7 +33,6 @@ function PreviewButton({icon: Icon, label, count, filterValue}: PreviewProps) {
       <IconBackground isSelected={isSelected}>
         <Icon style={{color: WHITE, fontSize: '1.2rem'}} />
       </IconBackground>
-      <Space level={1} direction="ROW" />
       <DataWrapper>
         <StyledText isSelected={isSelected}>{label}</StyledText>
         <StyledText isSelected={isSelected}>
@@ -85,6 +80,7 @@ const DataWrapper = styled.div`
   height: 100%;
   justify-content: space-around;
   align-items: flex-start;
+  margin-left: 1.2rem;
 `;
 
 const StyledText = styled(Text)<{isSelected: boolean}>`

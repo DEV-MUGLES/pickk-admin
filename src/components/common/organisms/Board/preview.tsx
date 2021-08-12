@@ -1,29 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
+import {AntdIconProps} from '@ant-design/icons/lib/components/AntdIcon';
 
 import PreviewButton from '@src/components/common/molecules/button/preview';
 import {WHITE} from '@src/common/constants/colors';
 
+import {Filter} from '@src/common/contexts/Board/types';
+
+export type PreviewDataType = {
+  label: string;
+  name: string;
+  icon: React.FunctionComponent<AntdIconProps>;
+  filterValue: Filter;
+  disabled?: boolean;
+};
+
 export type PreviewProps = {
-  data: any;
+  data: PreviewDataType[];
   usePreviewData: any;
 };
 
 function Preview({data, usePreviewData}: PreviewProps) {
-  const {data: previewValue} = usePreviewData([]);
+  const {data: previewCounts} = usePreviewData([]);
 
-  if (previewValue) {
+  if (previewCounts) {
     return (
       <PreviewWrapper>
-        {Object.values(previewValue)
-          .map((value, index) => (
+        {data
+          .filter((value) => !value.disabled)
+          .map((value) => (
             <PreviewButton
-              key={data[index].label}
-              {...data[index]}
-              count={value}
+              key={value.label}
+              {...value}
+              count={previewCounts[value.name]}
             />
-          ))
-          .filter((_, i) => !data[i].disabled)}
+          ))}
       </PreviewWrapper>
     );
   }
@@ -40,4 +51,5 @@ const PreviewWrapper = styled.div`
   height: fit-content;
   background-color: ${WHITE};
   padding: 16px 6rem;
+  margin-bottom: 1.4rem;
 `;
