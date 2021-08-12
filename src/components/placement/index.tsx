@@ -13,7 +13,6 @@ import {usePlacementPreview} from '@src/common/hooks';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {TableActionType} from '../common/organisms/Board/Table/table';
 import {BoardProps} from '../props';
-import {parseTable} from '../order-items/table/data-parser';
 
 import {placementInputs} from './inputs';
 import {placementColumns, placementActions} from './table';

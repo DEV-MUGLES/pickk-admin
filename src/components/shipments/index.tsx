@@ -8,7 +8,6 @@ import {shipmentsColumns} from './table/columns';
 import {BoardProps} from '../props';
 import {TableActionType} from '../common/organisms/Board/Table/table';
 
-import {parseTable} from '../order-items/table/data-parser';
 import {shipmentPreviewData} from './preview-data';
 
 import {useShipmentPreview} from '@src/common/hooks/Shipment';
