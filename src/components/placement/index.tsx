@@ -68,7 +68,7 @@ function PlacementBoard(props: BoardProps) {
     },
     {
       text: '발송처리',
-      onClick: async (ids: number[]) => {
+      onClick: async (_: number[]) => {
         setIsModalOpen(true);
       },
     },
