@@ -4,7 +4,7 @@ import {Item} from '@pickk/common';
 
 import SellableItemStock from './stock';
 import InfoTooltip from '@src/components/common/atoms/info-tooltip';
-import {renderBooleanColumn} from '@src/components/common/molecules/BoardFilter/render';
+import {renderBooleanColumn} from '@src/common/helpers/ColumnRenderer';
 
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';

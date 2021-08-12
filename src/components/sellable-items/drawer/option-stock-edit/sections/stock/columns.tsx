@@ -2,7 +2,7 @@ import {ColumnsType} from 'antd/lib/table';
 import {Product} from '@pickk/common';
 
 import StockEditColumn from './stock-edit-column';
-import {renderDateColumn} from '@src/components/common/molecules/BoardFilter/render';
+import {renderDateColumn} from '@src/common/helpers/ColumnRenderer';
 
 export const stockColumns: ColumnsType<Product> = [
   {
