@@ -49,7 +49,7 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
         if (
           !ids.every((id) => {
             const record = tableData.find((row) => row.id === id);
-            return record.status === RefundRequestStatus.Picked;
+            return record.status === RefundRequestStatus.Requested;
           })
         ) {
           message.warning('수거중인 요청만 완료처리할 수 있습니다.');
