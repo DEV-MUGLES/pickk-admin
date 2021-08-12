@@ -9,11 +9,7 @@ import {useBoardContext} from '@src/common/contexts/Board';
 
 import {exchangeRequestInputs} from './inputs';
 import {exchangeRequestPreviewData} from './preview-data';
-import {
-  exchangeRequestColumns,
-  exchangeRequestActions,
-  parseTable,
-} from './table';
+import {exchangeRequestColumns, exchangeRequestActions} from './table';
 import {BoardProps} from '../props';
 
 import {useExchangeRequestPreview} from '@src/common/hooks/ClaimRequest';

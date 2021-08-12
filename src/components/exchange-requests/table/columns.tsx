@@ -1,23 +1,68 @@
-import {getTimeString} from '@src/common/helpers/date';
+import {ColumnsType} from 'antd/lib/table';
+
+import {BaseExchangeRequest} from '@src/common/graphql';
+import {addCommaToNumber, getTimeString} from '@src/common/helpers';
 import {addDashToPhoneNumber} from '@src/common/helpers/PhoneNumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';
-import {Button} from 'antd';
 
-export const exchangeRequestColumns = [
+// @TODO : any -> 타입 추가
+export const exchangeRequestColumns: ColumnsType<any> = [
+  {
+    title: '주문상품번호',
+    dataIndex: 'merchantUid',
+    key: 'merchantUid',
+    sorter: (a, b) => stringSorter(b.merchantUid, a.merchantUid),
+    width: 100,
+    ellipsis: true,
+  },
   {
     title: '주문번호',
     dataIndex: 'orderMerchantUid',
     key: 'orderMerchantUid',
     sorter: (a, b) => stringSorter(b.orderMerchantUid, a.orderMerchantUid),
-    width: 120,
+    width: 100,
     ellipsis: true,
   },
   {
-    title: '상품주문번호',
-    dataIndex: 'merchantUid',
-    key: 'merchantUid',
-    sorter: (a, b) => stringSorter(b.merchantUid, a.merchantUid),
-    width: 120,
+    title: '교환처리상태',
+    dataIndex: 'status',
+    key: 'status',
+    sorter: (a, b) => stringSorter(b.status, a.status),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '교환요청일시',
+    dataIndex: 'requestedAt',
+    key: 'requestedAt',
+    render: (value) => getTimeString(value),
+    sorter: (a, b) => stringSorter(b.requestedAt, a.requestedAt),
+    defaultSortOrder: 'ascend',
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '상품명',
+    dataIndex: 'itemName',
+    key: 'itemName',
+    sorter: (a, b) => stringSorter(b.itemName, a.itemName),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '옵션',
+    dataIndex: 'productVariantName',
+    key: 'productVariantName',
+    sorter: (a, b) => stringSorter(b.productVariantName, a.productVariantName),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '수량',
+    dataIndex: 'quantity',
+    key: 'quantity',
+    sorter: (a, b) => stringSorter(b.quantity, a.quantity),
+    width: 100,
     ellipsis: true,
   },
   {
@@ -29,191 +74,110 @@ export const exchangeRequestColumns = [
     ellipsis: true,
   },
   {
-    title: '주문상태',
-    dataIndex: 'orderStatus',
-    key: 'orderStatus',
-    sorter: (a, b) => stringSorter(b.orderStatus, a.orderStatus),
-    width: 110,
-    ellipsis: true,
-  },
-  {
-    title: '교환 처리상태',
-    dataIndex: 'exchangeStatus',
-    key: 'exchangeStatus',
-    sorter: (a, b) => stringSorter(b.exchangeStatus, a.exchangeStatus),
-    width: 110,
-    ellipsis: true,
-  },
-  {
-    title: '결제일',
-    dataIndex: 'paidAt',
-    key: 'paidAt',
-    render: (value) => <div>{getTimeString(value)}</div>,
-    sorter: (a, b) => stringSorter(b.paidAt, a.paidAt),
-    width: 140,
-    ellipsis: true,
-  },
-  {
-    title: '교환요청일',
-    dataIndex: 'requestedAt',
-    key: 'requestedAt',
-    render: (value) => <div>{getTimeString(value)}</div>,
-    sorter: (a, b) => stringSorter(b.requestedAt, a.requestedAt),
-    width: 140,
-    ellipsis: true,
-  },
-  {
-    title: '교환완료일',
-    dataIndex: 'confirmedAt',
-    key: 'confirmedAt',
-    render: (value) => <div>{getTimeString(value)}</div>,
-
-    sorter: (a, b) => stringSorter(b.confirmedAt, a.confirmedAt),
-    width: 140,
+    title: '구매자 연락처',
+    dataIndex: 'buyerPhoneNumber',
+    key: 'buyerPhoneNumber',
+    render: (value) => addDashToPhoneNumber(value),
+    sorter: (a, b) => stringSorter(b.buyerPhoneNumber, a.buyerPhoneNumber),
+    width: 100,
     ellipsis: true,
   },
   {
     title: '교환사유',
     dataIndex: 'reason',
     key: 'reason',
-    sorter: (a, b) => stringSorter(b.reason, a.reason),
-    width: 200,
-    ellipsis: true,
-  },
-  {
-    title: '반품 택배사',
-    dataIndex: 'exchangeCourier',
-    key: 'exchangeCourier',
-    sorter: (a, b) => stringSorter(b.exchangeCourier, a.exchangeCourier),
-    width: 90,
-    ellipsis: true,
-  },
-  {
-    title: '반품 송장번호',
-    dataIndex: 'exchangeTrackingCode',
-    key: 'exchangeTrackingCode',
-    sorter: (a, b) => b.exchangeTrackingCode - a.exchangeTrackingCode,
-    width: 120,
-    ellipsis: true,
-  },
-  {
-    title: '반품\n배송추적',
-    dataIndex: 'exchangeTrackingViewUrl',
-    key: 'exchangeTrackingViewUrl',
-    render: (value) =>
-      value ? (
-        <a href={value} target="_blank">
-          <Button size="small">배송추적</Button>
-        </a>
-      ) : null,
-    sorter: (a, b) => b.exchangeTrackingViewUrl - a.exchangeTrackingViewUrl,
-    width: 90,
-  },
-  {
-    title: '재배송 택배사',
-    dataIndex: 'reshipCourier',
-    key: 'reshipCourier',
-    sorter: (a, b) => stringSorter(b.reshipCourier, a.reshipCourier),
-    width: 90,
-    ellipsis: true,
-  },
-  {
-    title: '재배송 송장번호',
-    dataIndex: 'reshipTrackingCode',
-    key: 'reshipTrackingCode',
-    sorter: (a, b) => b.reshipTrackingCode - a.reshipTrackingCode,
-    width: 120,
-    ellipsis: true,
-  },
-  {
-    title: '재배송\n배송추적',
-    dataIndex: 'reshipTrackingViewUrl',
-    key: 'reshipTrackingViewUrl',
-    render: (value) =>
-      value ? (
-        <a href={value} target="_blank">
-          <Button size="small">배송추적</Button>
-        </a>
-      ) : null,
-    sorter: (a, b) => b.reshipTrackingViewUrl - a.reshipTrackingViewUrl,
-    width: 90,
-  },
-  {
-    title: '상품명',
-    dataIndex: 'itemName',
-    key: 'itemName',
-    render: (value) => value,
-    sorter: (a, b) => stringSorter(b.itemName, a.itemName),
-    width: 200,
-    ellipsis: true,
-  },
-  {
-    title: '옵션',
-    dataIndex: 'options',
-    key: 'options',
-    render: (value) => value.join('/'),
-    sorter: (a, b) => stringSorter(b.options.join('/'), a.options.join('/')),
+    render: (value, record: BaseExchangeRequest) =>
+      `[${record.faultOf}] ${value}`,
     width: 100,
-    ellipsis: true,
-  },
-  {
-    title: '상품일련번호',
-    dataIndex: 'productSku',
-    key: 'productSku',
-    sorter: (a, b) => stringSorter(b.productSku, a.productSku),
-    width: 120,
-    ellipsis: true,
-  },
-  {
-    title: '교환옵션',
-    dataIndex: 'exchangeOptions',
-    key: 'exchangeOptions',
-    render: (value) => value.join('/'),
-    sorter: (a, b) =>
-      stringSorter(b.exchangeOptions.join('/'), a.exchangeOptions.join('/')),
-    width: 100,
-    ellipsis: true,
-  },
-  {
-    title: '교환상품일련번호',
-    dataIndex: 'exchangeProductSku',
-    key: 'exchangeProductSku',
-    sorter: (a, b) => stringSorter(b.exchangeProductSku, a.exchangeProductSku),
-    width: 120,
-    ellipsis: true,
-  },
-  {
-    title: '수량',
-    dataIndex: 'quantity',
-    key: 'quantity',
-    sorter: (a, b) => b.quantity - a.quantity,
-    width: 75,
-    ellipsis: true,
-  },
-  {
-    title: '구매자 연락처',
-    dataIndex: 'buyerPhone',
-    key: 'buyerPhone',
-    render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
-    sorter: (a, b) => stringSorter(b.buyerPhone, a.buyerPhone),
-    width: 125,
     ellipsis: true,
   },
   {
     title: '수취인명',
-    dataIndex: 'addressName',
-    key: 'addressName',
-    sorter: (a, b) => stringSorter(b.addressName, a.addressName),
-    width: 75,
+    dataIndex: 'receiverName',
+    key: 'receiverName',
+    sorter: (a, b) => stringSorter(b.receiverName, a.receiverName),
+    width: 100,
     ellipsis: true,
   },
   {
     title: '수취인 연락처',
-    dataIndex: 'addressPhone',
-    key: 'addressPhone',
-    render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
-    sorter: (a, b) => stringSorter(b.addressPhone, a.addressPhone),
-    width: 125,
+    dataIndex: 'receiverPhoneNumber',
+    key: 'receiverPhoneNumber',
+    render: (value) => addDashToPhoneNumber(value),
+    sorter: (a, b) =>
+      stringSorter(b.receiverPhoneNumber, a.receiverPhoneNumber),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '재배송 택배사',
+    dataIndex: 'reshipmentCourierName',
+    key: 'reshipmentCourierName',
+    sorter: (a, b) =>
+      stringSorter(b.reshipmentCourierName, a.reshipmentCourierName),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '재배송 송장번호',
+    dataIndex: 'reshipmentTrackCode',
+    key: 'reshipmentTrackCode',
+    sorter: (a, b) =>
+      stringSorter(b.reshipmentTrackCode, a.reshipmentTrackCode),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '우편번호',
+    dataIndex: 'receiverPostalCode',
+    key: 'receiverPostalCode',
+    sorter: (a, b) => stringSorter(b.receiverPostalCode, a.receiverPostalCode),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '배송지 주소',
+    dataIndex: 'receiverBaseAddress',
+    key: 'receiverBaseAddress',
+    sorter: (a, b) =>
+      stringSorter(b.receiverBaseAddress, a.receiverBaseAddress),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '배송지 상세주소',
+    dataIndex: 'receiverDetailAddress',
+    key: 'receiverDetailAddress',
+    sorter: (a, b) =>
+      stringSorter(b.receiverDetailAddress, a.receiverDetailAddress),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '배송지 주소 (통합)',
+    dataIndex: 'receiverFullAddress',
+    key: 'receiverFullAddress',
+    sorter: (a, b) =>
+      stringSorter(b.receiverFullAddress, a.receiverFullAddress),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '판매가격',
+    dataIndex: 'itemFinalPrice',
+    key: 'itemFinalPrice',
+    render: (value) => `${addCommaToNumber(value)} 원`,
+    sorter: (a, b) => stringSorter(b.itemFinalPrice, a.itemFinalPrice),
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: '리뷰어',
+    dataIndex: 'recommenderNickname',
+    key: 'recommenderNickname',
+    sorter: (a, b) =>
+      stringSorter(b.recommenderNickname, a.recommenderNickname),
+    width: 100,
     ellipsis: true,
   },
 ];
