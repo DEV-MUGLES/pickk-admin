@@ -5,7 +5,6 @@ import {
   ShipOrderItemInput,
 } from '@pickk/common';
 
-import {BASE_ORDER_ITEM_FRAGMENT} from '@src/common/graphql';
 import {message} from 'antd';
 
 // 발송처리
@@ -22,10 +21,9 @@ export const useShipMeSellerOrderItem = () => {
         merchantUid: $merchantUid
         shipOrderItemInput: $shipOrderItemInput
       ) {
-        ...BaseOrderItemFragment
+        id
       }
     }
-    ${BASE_ORDER_ITEM_FRAGMENT}
   `);
 
   const shipMeSellerOrderItems = async (
