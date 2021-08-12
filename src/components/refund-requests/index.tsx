@@ -1,21 +1,18 @@
 import {useState} from 'react';
-import dayjs from 'dayjs';
 import {message} from 'antd';
 
 import RefundConfirmModal from './table/modal/confirm';
 import ExchangeRequestModal from '../order-items/table/modal/exchangeRequest';
 import Preview from '@src/components/common/organisms/Board/preview';
+import Header from '@src/components/common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
-import Table, {
-  BoardTableProps,
-} from '@src/components/common/organisms/Board/Table';
-import Space from '@src/components/common/atoms/space';
+import Table from '@src/components/common/organisms/Board/Table';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
 import {refundRequestInputs} from './inputs';
 import {refundRequestPreviewData} from './preview-data';
-import {refundRequestColumns, refundRequestActions, parseTable} from './table';
+import {refundRequestColumns, refundRequestActions} from './table';
 import {BoardProps} from '../props';
 
 import {useRefundRequestPreview} from '@src/common/hooks/ClaimRequest';
@@ -23,9 +20,7 @@ import {useRefundRequestTable} from '@src/common/hooks/table/ClaimRequest';
 import RefundRequestService from '@src/lib/services/RefundRequest';
 import {PickingStatus, RefundStatus} from '@src/types';
 
-function RefundRequestBoard({
-  title,
-}: BoardProps & Omit<BoardTableProps, 'columns' | 'actions' | 'footActions'>) {
+function RefundRequestsBoard({title, subTitle}: BoardProps) {
   const {state} = useBoardContext();
   const {tableData} = state;
 
@@ -121,19 +116,17 @@ function RefundRequestBoard({
   ];
   return (
     <>
+      <Header title={title} subTitle={subTitle} />
       <Preview
         data={refundRequestPreviewData}
         usePreviewData={useRefundRequestPreview}
       />
-      <Space level={2} />
       <Filter title={title} inputs={refundRequestInputs} />
-      <Space level={2} />
       <Table
         title={title}
         columns={refundRequestColumns}
         actions={newRefundActions}
       />
-      <Space level={2} />
       <RefundConfirmModal
         record={selectedRecord}
         isModalOpen={isModalOpen}
@@ -151,4 +144,4 @@ function RefundRequestBoard({
   );
 }
 
-export default RefundRequestBoard;
+export default RefundRequestsBoard;
