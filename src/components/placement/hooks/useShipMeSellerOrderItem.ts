@@ -42,7 +42,7 @@ export const useShipMeSellerOrderItem = () => {
 
       message.success('적용되었습니다.');
     } catch (error) {
-      message.success(`실패했습니다. - ${error}`);
+      message.error(`실패했습니다. - ${error}`);
     }
   };
 
