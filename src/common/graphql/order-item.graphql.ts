@@ -89,8 +89,14 @@ export const BASE_ORDER_ITEM_FRAGMENT = gql`
 `;
 
 export const GET_ORDER_ITEMS = gql`
-  query MeSellerOrderItems {
-    meSellerOrderItems {
+  query MeSellerOrderItems(
+    $orderItemFilter: OrderItemFilter
+    $pageInput: PageInput
+  ) {
+    meSellerOrderItems(
+      orderItemFilter: $orderItemFilter
+      pageInput: $pageInput
+    ) {
       ...BaseOrderItemFragment
     }
   }
