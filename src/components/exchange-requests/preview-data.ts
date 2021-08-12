@@ -1,49 +1,44 @@
 import {
   CarOutlined,
   ImportOutlined,
-  LoadingOutlined,
   ShoppingOutlined,
-  StopOutlined,
   UnorderedListOutlined,
-  CloseOutlined,
+  ClockCircleOutlined,
 } from '@ant-design/icons';
+import {ExchangeRequestStatus} from '@pickk/common';
 
-export const exchangeRequestPreviewData = [
+import {PreviewDataType} from '../common/organisms/Board/preview';
+
+export const exchangeRequestPreviewData: PreviewDataType[] = [
   {
     label: '교환 요청',
+    name: 'requested',
     icon: UnorderedListOutlined,
-    filterValue: {status: 'REQUESTED'},
-  },
-  {
-    label: '교환 수거 중',
-    icon: LoadingOutlined,
-    filterValue: {status: 'PICKING'},
+    filterValue: {status: ExchangeRequestStatus.Requested},
   },
   {
     label: '교환 수거 완료',
+    name: 'picked',
     icon: ImportOutlined,
-    filterValue: {status: 'PICKED'},
+    filterValue: {status: ExchangeRequestStatus.Picked},
   },
   {
     label: '교환 배송 중',
+    name: 'reshipping',
     icon: CarOutlined,
-    filterValue: {status: 'RESHIPPING'},
+    filterValue: {status: ExchangeRequestStatus.Reshipping},
   },
   {
     label: '교환 배송 완료',
+    name: 'reshipped',
     icon: ShoppingOutlined,
-    filterValue: {status: 'REDELIVERED'},
+    filterValue: {status: ExchangeRequestStatus.Reshipped},
   },
+  // @TODO
   {
-    label: '교환 취소',
-    icon: StopOutlined,
-    filterValue: {status: 'CANCELLED'},
-    disabled: true,
-  },
-  {
-    label: '교환 거부',
-    icon: CloseOutlined,
-    filterValue: {status: 'REJECTED'},
-    disabled: true,
+    label: '교환 처리 지연',
+    name: '',
+    icon: ClockCircleOutlined,
+    filterValue: {},
   },
 ];

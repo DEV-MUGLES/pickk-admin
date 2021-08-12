@@ -5,19 +5,19 @@ import Header from '@src/components/common/organisms/Board/Header';
 import Preview from '@src/components/common/organisms/Board/preview';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
+import ShipModal from '../placement/table/modal/ship';
 
 import {useBoardContext} from '@src/common/contexts/Board';
+import ExchangeRequestService from '@src/lib/services/ExchangeRequest';
+import {PickingStatus, ExchangeStatus} from '@src/types';
+import {TableActionType} from '../common/organisms/Board/Table/table';
+import {BoardProps} from '../props';
+
+import {useMeSellerExchangeRequestsCount} from './hooks';
 
 import {exchangeRequestInputs} from './inputs';
 import {exchangeRequestPreviewData} from './preview-data';
 import {exchangeRequestColumns, exchangeRequestActions} from './table';
-import {BoardProps} from '../props';
-
-import {useExchangeRequestPreview} from '@src/common/hooks/ClaimRequest';
-import ExchangeRequestService from '@src/lib/services/ExchangeRequest';
-import {PickingStatus, ExchangeStatus} from '@src/types';
-import ShipModal from '../placement/table/modal/ship';
-import {TableActionType} from '../common/organisms/Board/Table/table';
 
 function ExchangeRequestsBoard(props: BoardProps) {
   const {state} = useBoardContext();
@@ -69,7 +69,7 @@ function ExchangeRequestsBoard(props: BoardProps) {
       <Header {...props} />
       <Preview
         data={exchangeRequestPreviewData}
-        usePreviewData={useExchangeRequestPreview}
+        usePreviewData={useMeSellerExchangeRequestsCount}
       />
       <Filter {...props} inputs={exchangeRequestInputs} />
       <Table
