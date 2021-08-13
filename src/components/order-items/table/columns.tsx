@@ -1,9 +1,12 @@
 import {ColumnsType} from 'antd/lib/table';
 
-import {getTimeString} from '@src/common/helpers/date';
-import {addDashToPhoneNumber} from '@src/common/helpers/PhoneNumberParser';
-import {stringSorter} from '@src/common/helpers/sorter';
-import {getOrderItemStatusDisplayName} from '@src/common/helpers';
+import {
+  getTimeString,
+  addDashToPhoneNumber,
+  stringSorter,
+  getOrderItemClaimStatusDisplayName,
+  getOrderItemStatusDisplayName,
+} from '@src/common/helpers';
 
 export const orderItemColumns: ColumnsType<any> = [
   {
@@ -45,6 +48,7 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '클레임 상태',
     dataIndex: 'claimStatus',
     key: 'claimStatus',
+    render: (value) => <div>{getOrderItemClaimStatusDisplayName(value)}</div>,
     sorter: (a, b) => stringSorter(b.claimStatus, a.claimStatus),
     width: 140,
     ellipsis: true,
