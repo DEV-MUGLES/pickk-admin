@@ -35,8 +35,6 @@ export default function ShipModal({
   isModalOpen,
   closeModal,
 }: ShipModalProps) {
-  const {id, merchantUid, itemName, buyerName} = modalData;
-
   const {action} = useBoardContext();
   const {reload} = action;
 
@@ -84,23 +82,25 @@ export default function ShipModal({
             <Courier strong>택배사</Courier>
             <TrackingCode strong>송장번호</TrackingCode>
           </Row>
-          <Row key={id} style={{width: 'fit-content'}}>
-            <MerchantUid>{merchantUid}</MerchantUid>
-            <ItemName>{itemName}</ItemName>
-            <BuyerName>{buyerName}</BuyerName>
-            <StyledInput
-              size="small"
-              name="courierId"
-              value={shipment.courierId ?? null}
-              onChange={handleShipmentsChange}
-            />
-            <StyledInput
-              size="small"
-              name="trackCode"
-              value={shipment.trackCode ?? null}
-              onChange={handleShipmentsChange}
-            />
-          </Row>
+          {modalData && (
+            <Row key={modalData.id} style={{width: 'fit-content'}}>
+              <MerchantUid>{modalData.merchantUid}</MerchantUid>
+              <ItemName>{modalData.itemName}</ItemName>
+              <BuyerName>{modalData.buyerName}</BuyerName>
+              <StyledInput
+                size="small"
+                name="courierId"
+                value={shipment.courierId ?? null}
+                onChange={handleShipmentsChange}
+              />
+              <StyledInput
+                size="small"
+                name="trackCode"
+                value={shipment.trackCode ?? null}
+                onChange={handleShipmentsChange}
+              />
+            </Row>
+          )}
         </OptionsWrapper>
         <SubmitArea>
           <Button type="primary" onClick={handleSubmit}>
