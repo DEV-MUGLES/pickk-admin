@@ -23,7 +23,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     title: '대표이미지',
     dataIndex: 'imageUrl',
     key: 'imageUrl',
-    width: 200,
+    width: 120,
     render: (text) => <Image src={text} />,
     ellipsis: true,
     align: 'center',
