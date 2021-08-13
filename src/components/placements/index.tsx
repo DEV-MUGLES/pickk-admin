@@ -19,7 +19,7 @@ import {placementPreviewData} from './preview-data';
 import {
   useBulkShipReadyMeSellerOrderItems,
   useCancelMeSellerOrderItem,
-  useMeSellerOrderItemsCount,
+  usePlacementPreview,
 } from './hooks';
 
 function PlacementBoard(props: BoardProps) {
@@ -114,7 +114,7 @@ function PlacementBoard(props: BoardProps) {
       <Header {...props} />
       <Preview
         data={placementPreviewData}
-        usePreviewData={useMeSellerOrderItemsCount}
+        usePreviewData={usePlacementPreview}
       />
       <Filter {...props} inputs={placementInputs} />
       <Table

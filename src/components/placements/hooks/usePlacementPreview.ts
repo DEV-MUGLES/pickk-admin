@@ -1,9 +1,22 @@
 import {gql, useQuery} from '@apollo/client';
-import {Query, QueryMeSellerOrderItemsCountArgs} from '@pickk/common';
+import {
+  OrderItemsCountOutput,
+  QueryMeSellerOrderItemsCountArgs,
+} from '@pickk/common';
 
-export const useMeSellerOrderItemsCount = () => {
+export const usePlacementPreview = () => {
   const {data} = useQuery<
-    Pick<Query, 'meSellerOrderItemsCount'>,
+    {
+      meSellerOrderItemsCount: Pick<
+        OrderItemsCountOutput,
+        | 'id'
+        | 'paid'
+        | 'ship_ready'
+        | 'process_delayed_paid'
+        | 'process_delayed_ship_ready'
+        | 'lastUpdatedAt'
+      >;
+    },
     QueryMeSellerOrderItemsCountArgs
   >(gql`
     query MeSellerOrderItemsCount($forceUpdate: Boolean) {
