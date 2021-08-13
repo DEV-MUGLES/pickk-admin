@@ -12,13 +12,13 @@ export const placementPreviewData: PreviewDataType[] = [
     label: '신규주문',
     name: 'paid',
     icon: ShoppingOutlined,
-    filterValue: {status: OrderItemStatus.Paid},
+    filterValue: {status: OrderItemStatus.Paid, isProcessDelaying: null},
   },
   {
     label: '발송준비',
     name: 'ship_ready',
     icon: CheckOutlined,
-    filterValue: {status: OrderItemStatus.ShipReady},
+    filterValue: {status: OrderItemStatus.ShipReady, isProcessDelaying: null},
   },
   {
     label: '신규주문 지연',
