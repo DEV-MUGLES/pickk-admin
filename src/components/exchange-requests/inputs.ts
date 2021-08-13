@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
 import Datepicker from '@src/components/common/molecules/BoardFilter/input/DatePicker';
 
@@ -15,7 +13,6 @@ export const exchangeRequestInputs = [
     name: 'period',
     labelText: '조회기간',
     select: [
-      // @TODO : orderItem.paidAtBetween 필터적용
       {name: '결제일', value: 'orderItem.paidAtBetween'},
       {name: '교환요청일', value: 'requestedAtBetween'},
     ],
