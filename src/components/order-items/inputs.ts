@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
 import Datepicker from '@src/components/common/molecules/BoardFilter/input/DatePicker';
 
@@ -13,11 +11,6 @@ export const orderItemInputs = [
   },
   {
     name: 'period',
-    defaultValue: {
-      type: 'all',
-      startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-      endDate: dayjs().format('YYYY-MM-DD'),
-    },
     labelText: '조회기간',
     select: [
       {name: '결제일', value: 'paidAtBetween'},
@@ -25,6 +18,7 @@ export const orderItemInputs = [
       {name: '발송처리일', value: 'shippingAtBetween'},
       {name: '배송완료일', value: 'shippedAtBetween'},
     ],
+    defaultQuickButtonValue: 'oneWeek',
     Component: Datepicker,
   },
 ];
