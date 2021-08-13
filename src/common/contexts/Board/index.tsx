@@ -1,7 +1,10 @@
 import {useState, useContext, createContext} from 'react';
 import styled from 'styled-components';
 
-import {removeDashFromNumber} from '@src/common/helpers/PhoneNumberParser';
+import {
+  removeDashFromNumber,
+  parseRecordWithDeepKey,
+} from '@src/common/helpers';
 
 import {IBoard} from './IBoard';
 import {BoardStoreProviderProps, Filter} from './types';
@@ -54,7 +57,10 @@ export default function BoardStoreProvider({
     result = {
       ...value,
       ...(hasDatePeriod && {
-        [value['lookupDate']]: [value['startDate'], value['endDate']],
+        ...parseRecordWithDeepKey(value['lookupDate'], [
+          value['startDate'],
+          value['endDate'],
+        ]),
       }),
     };
 

@@ -67,12 +67,12 @@ function ExchangeRequestsBoard(props: BoardProps) {
   ];
 
   const getModalData = (): ShipModalDataType => {
-    if (!tableData) {
-      return null;
-    }
-    const selectedData = tableData.find(
+    const selectedData = tableData?.find(
       (data) => selectedRowKeys[0] === data.id,
     );
+    if (!selectedData) {
+      return null;
+    }
     return {
       ...selectedData,
       courierId: selectedData.reshipmentCourierId,
