@@ -38,12 +38,10 @@ function Preview({data, usePreviewData}: PreviewProps) {
       <Wrapper>
         <PreviewHeader>
           <TitleText>미니 대시보드</TitleText>
-          <div>
-            <LastUpdateAtText>
-              {getTimeString(previewData['lastUpdatedAt'])}
-            </LastUpdateAtText>
-            <StyledReloadOutlined onClick={reload} />
-          </div>
+          <LastUpdateAtText>
+            마지막 업데이트: {getTimeString(previewData['lastUpdatedAt'])}
+          </LastUpdateAtText>
+          <StyledReloadOutlined onClick={reload} />
         </PreviewHeader>
         <PreviewBody>
           {data
@@ -75,21 +73,22 @@ const Wrapper = styled.div`
 const PreviewHeader = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+
   padding: 1rem 24px 0.4rem 24px;
-  justify-content: space-between;
 `;
 
 const TitleText = styled(Text).attrs({
   strong: true,
-})``;
+})`
+  margin-right: auto;
+`;
 
 const LastUpdateAtText = styled(Text).attrs({type: 'secondary'})`
-  margin-right: 0.8rem;
+  margin-right: 0.6rem;
 `;
 
 const StyledReloadOutlined = styled(ReloadOutlined)`
-  width: 1rem;
-  height: 1rem;
   color: gray;
 
   &:hover {
