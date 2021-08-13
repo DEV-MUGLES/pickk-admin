@@ -1,22 +1,31 @@
 import {CheckOutlined, ShoppingOutlined} from '@ant-design/icons';
+import {OrderItemStatus} from '@pickk/common';
 
-export const placementPreviewData = [
+import {PreviewDataType} from '../common/organisms/Board/preview';
+
+export const placementPreviewData: PreviewDataType[] = [
   {
-    label: '발송 전 취소 요청',
+    label: '신규주문',
+    name: 'paid',
     icon: ShoppingOutlined,
-    filterValue: {sumin: 1},
-    disabled: true,
+    filterValue: {status: OrderItemStatus.Paid},
   },
   {
-    label: '발송 전 배송지 변경',
+    label: '발송준비',
+    name: 'ship_ready',
     icon: CheckOutlined,
-    filterValue: {sumin: 2},
-    disabled: true,
+    filterValue: {status: OrderItemStatus.ShipReady},
   },
-  {label: '신규 주문', icon: ShoppingOutlined, filterValue: {status: 'PAID'}},
   {
-    label: '발주 확인 완료',
+    label: '신규주문 지연',
+    name: 'process_delayed_paid',
+    icon: ShoppingOutlined,
+    filterValue: {status: OrderItemStatus.Paid, isProcessDelaying: true},
+  },
+  {
+    label: '발송준비 지연',
+    name: 'process_delayed_ship_ready',
     icon: CheckOutlined,
-    filterValue: {status: 'PLACED'},
+    filterValue: {status: OrderItemStatus.ShipReady, isProcessDelaying: true},
   },
 ];

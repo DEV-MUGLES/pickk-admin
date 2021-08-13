@@ -9,7 +9,6 @@ import Table from '@src/components/common/organisms/Board/Table';
 import ShipModal from './table/modal/ship';
 import StockSetModal from './table/modal/stock';
 
-import {usePlacementPreview} from '@src/common/hooks';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {TableActionType} from '../common/organisms/Board/Table/table';
 import {BoardProps} from '../props';
@@ -20,6 +19,7 @@ import {placementPreviewData} from './preview-data';
 import {
   useBulkShipReadyMeSellerOrderItems,
   useCancelMeSellerOrderItem,
+  useMeSellerOrderItemsCount,
 } from './hooks';
 
 function PlacementBoard(props: BoardProps) {
@@ -114,7 +114,7 @@ function PlacementBoard(props: BoardProps) {
       <Header {...props} />
       <Preview
         data={placementPreviewData}
-        usePreviewData={usePlacementPreview}
+        usePreviewData={useMeSellerOrderItemsCount}
       />
       <Filter {...props} inputs={placementInputs} />
       <Table
