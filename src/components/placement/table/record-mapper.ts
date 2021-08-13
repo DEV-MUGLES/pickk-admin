@@ -9,6 +9,7 @@ export const placementsRecordMapper = (record: BaseOrderItem) => {
     ...orderItemsRecordMapper(record),
     courierId: shipment.courierId,
     courierName: shipment.courier.name,
+    courierCode: shipment.courier.code,
     trackCode: shipment.trackCode,
     buyerEmail: buyer.email,
     receiverPhoneNumber: receiver.phoneNumber,
