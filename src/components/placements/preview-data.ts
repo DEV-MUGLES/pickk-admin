@@ -1,4 +1,8 @@
-import {CheckOutlined, ShoppingOutlined} from '@ant-design/icons';
+import {
+  CheckOutlined,
+  ShoppingOutlined,
+  ClockCircleOutlined,
+} from '@ant-design/icons';
 import {OrderItemStatus} from '@pickk/common';
 
 import {PreviewDataType} from '../common/organisms/Board/preview';
@@ -19,13 +23,13 @@ export const placementPreviewData: PreviewDataType[] = [
   {
     label: '신규주문 지연',
     name: 'process_delayed_paid',
-    icon: ShoppingOutlined,
+    icon: ClockCircleOutlined,
     filterValue: {status: OrderItemStatus.Paid, isProcessDelaying: true},
   },
   {
     label: '발송준비 지연',
     name: 'process_delayed_ship_ready',
-    icon: CheckOutlined,
+    icon: ClockCircleOutlined,
     filterValue: {status: OrderItemStatus.ShipReady, isProcessDelaying: true},
   },
 ];
