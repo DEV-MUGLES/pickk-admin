@@ -18,10 +18,10 @@ import SettlementAmountPreview from './amount-preview';
 function SettlementBoard({title}: BoardProps) {
   return (
     <>
-      <Preview
+      {/* <Preview
         data={settlementCountPreviewData}
         usePreviewData={useSettlementCountPreview}
-      />
+      /> */}
       <Space level={2} />
       <Filter title={title} inputs={settlementInputs} />
       <Space level={2} />

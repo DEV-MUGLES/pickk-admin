@@ -15,10 +15,10 @@ function CancelRequestsBoard(props: BoardProps) {
   return (
     <>
       <Header {...props} />
-      <Preview
+      {/* <Preview
         data={canceldRequestPreviewData}
         usePreviewData={useCancelRequestPreview}
-      />
+      /> */}
       <Filter {...props} inputs={orderItemInputs} />
       <Table {...props} columns={orderItemColumns} />
     </>
