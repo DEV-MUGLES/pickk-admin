@@ -1,10 +1,10 @@
 import {useQuery} from '@apollo/client';
 
-import PlacementBoard from '@src/components/placement';
+import PlacementBoard from '@src/components/placements';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {GET_ORDER_ITEMS} from '@src/common/graphql/order-item.graphql';
-import {placementsRecordMapper} from '@src/components/placement/table';
+import {placementsRecordMapper} from '@src/components/placements/table';
 
 function PlacementBoardContainer() {
   return (

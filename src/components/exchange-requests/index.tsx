@@ -6,7 +6,7 @@ import Header from '@src/components/common/organisms/Board/Header';
 import Preview from '@src/components/common/organisms/Board/preview';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
-import ShipModal from '../placement/table/modal/ship';
+import ShipModal from '../placements/table/modal/ship';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {TableActionType} from '../common/organisms/Board/Table/table';
