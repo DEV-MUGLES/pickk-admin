@@ -1,14 +1,23 @@
-import {CarOutlined, CheckOutlined} from '@ant-design/icons';
+import {CarOutlined, CheckOutlined, SmileOutlined} from '@ant-design/icons';
+import {OrderItemStatus} from '@pickk/common';
 
 export const shipmentPreviewData = [
   {
-    label: '배송 중',
+    label: '배송중',
+    name: 'shipping',
     icon: CarOutlined,
-    filterValue: {status: 'SHIPPING'},
+    filterValue: {status: OrderItemStatus.Shipping},
   },
   {
-    label: '배송 완료',
+    label: '배송완료',
+    name: 'shipped',
     icon: CheckOutlined,
-    filterValue: {status: 'DELIVERED'},
+    filterValue: {status: OrderItemStatus.Shipped},
+  },
+  {
+    label: '구매확정',
+    name: 'confirmed',
+    icon: SmileOutlined,
+    filterValue: {isConfirmed: true},
   },
 ];
