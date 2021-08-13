@@ -1,4 +1,8 @@
-import {CheckOutlined, ShoppingOutlined} from '@ant-design/icons';
+import {
+  ShoppingOutlined,
+  CheckOutlined,
+  ClockCircleOutlined,
+} from '@ant-design/icons';
 import {RefundRequestStatus} from '@pickk/common';
 
 import {PreviewDataType} from '../common/organisms/Board/preview';
@@ -19,7 +23,16 @@ export const refundRequestPreviewData: PreviewDataType[] = [
   {
     label: '반품 완료',
     name: 'confirmed',
-    icon: ShoppingOutlined,
+    icon: CheckOutlined,
     filterValue: {status: RefundRequestStatus.Confirmed},
+  },
+  {
+    label: '반품처리지연',
+    name: 'process_delayed',
+    icon: ClockCircleOutlined,
+    filterValue: {
+      statusIn: [RefundRequestStatus.Picked, RefundRequestStatus.Requested],
+      isProcessDelaying: true,
+    },
   },
 ];

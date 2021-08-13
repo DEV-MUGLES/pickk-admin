@@ -15,6 +15,7 @@ export const useExchangeRequestPreview = (): PreviewDataResult => {
         picked
         reshipping
         reshipped
+        process_delayed
         lastUpdatedAt
       }
     }

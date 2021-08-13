@@ -16,6 +16,7 @@ export const useRefundRequestPreview = (): PreviewDataResult => {
         picked
         rejected
         requested
+        process_delayed
       }
     }
   `);
