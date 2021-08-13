@@ -8,9 +8,9 @@ import {shipmentsColumns} from './table/columns';
 import {BoardProps} from '../props';
 import {TableActionType} from '../common/organisms/Board/Table/table';
 
-import {shipmentPreviewData} from './preview-data';
+import {useShipmentPreview} from './hooks';
 
-import {useShipmentPreview} from '@src/common/hooks/Shipment';
+import {shipmentPreviewData} from './preview-data';
 
 function ShipmentBoard(props: BoardProps) {
   const placementActions: TableActionType[] = [

@@ -1,2 +1,2 @@
 export * from './useBulkPickMeSellerExchangeRequests';
-export * from './useMeSellerExchangeRequestsCount';
+export * from './useExchangeRequestPreview';

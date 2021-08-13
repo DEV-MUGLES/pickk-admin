@@ -1,8 +1,10 @@
 import {gql, useQuery} from '@apollo/client';
 import {Query, QueryMeSellerExchangeRequestsCountArgs} from '@pickk/common';
 
-export const useMeSellerExchangeRequestsCount = () => {
-  const {data} = useQuery<
+import {PreviewDataResult} from '@src/components/common/organisms/Board/preview';
+
+export const useExchangeRequestPreview = (): PreviewDataResult => {
+  const {data, refetch} = useQuery<
     Pick<Query, 'meSellerExchangeRequestsCount'>,
     QueryMeSellerExchangeRequestsCountArgs
   >(gql`
@@ -13,9 +15,14 @@ export const useMeSellerExchangeRequestsCount = () => {
         picked
         reshipping
         reshipped
+        process_delayed
+        lastUpdatedAt
       }
     }
   `);
 
-  return {data: data?.meSellerExchangeRequestsCount ?? {}};
+  return {
+    data: data?.meSellerExchangeRequestsCount ?? {},
+    reload: () => refetch({forceUpdate: true}),
+  };
 };

@@ -34,11 +34,13 @@ export const exchangeRequestPreviewData: PreviewDataType[] = [
     icon: ShoppingOutlined,
     filterValue: {status: ExchangeRequestStatus.Reshipped},
   },
-  // @TODO
   {
     label: '교환 처리 지연',
-    name: '',
+    name: 'process_delayed',
     icon: ClockCircleOutlined,
-    filterValue: {},
+    filterValue: {
+      statusIn: [ExchangeRequestStatus.Picked, ExchangeRequestStatus.Requested],
+      isProcessDelaying: true,
+    },
   },
 ];
