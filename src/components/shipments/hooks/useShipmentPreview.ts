@@ -6,7 +6,6 @@ import {
 
 import {PreviewDataResult} from '@src/components/common/organisms/Board/preview';
 
-// @TODO : confirmed 필드 추가
 export const useShipmentPreview = (): PreviewDataResult => {
   const {data, refetch} = useQuery<
     {
@@ -22,7 +21,7 @@ export const useShipmentPreview = (): PreviewDataResult => {
         id
         shipping
         shipped
-
+        confirmed
         lastUpdatedAt
       }
     }
