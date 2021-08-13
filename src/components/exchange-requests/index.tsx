@@ -14,7 +14,7 @@ import {BoardProps} from '../props';
 
 import {
   useBulkPickMeSellerExchangeRequests,
-  useMeSellerExchangeRequestsCount,
+  useExchangeRequestPreview,
 } from './hooks';
 
 import {exchangeRequestPreviewData} from './preview-data';
@@ -66,7 +66,7 @@ function ExchangeRequestsBoard(props: BoardProps) {
       <Header {...props} />
       <Preview
         data={exchangeRequestPreviewData}
-        usePreviewData={useMeSellerExchangeRequestsCount}
+        usePreviewData={useExchangeRequestPreview}
       />
       <Filter {...props} inputs={exchangeRequestInputs} />
       <Table

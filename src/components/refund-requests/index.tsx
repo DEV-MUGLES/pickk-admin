@@ -19,7 +19,7 @@ import {TableActionType} from '@src/components/common/organisms/Board/Table/tabl
 
 import {
   useBulkPickMeSellerRefundRequests,
-  useMeSellerRefundRequestsCount,
+  useRefundRequestPreview,
 } from './hooks';
 
 function RefundRequestsBoard({title, subTitle}: BoardProps) {
@@ -117,7 +117,7 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
       <Header title={title} subTitle={subTitle} />
       <Preview
         data={refundRequestPreviewData}
-        usePreviewData={useMeSellerRefundRequestsCount}
+        usePreviewData={useRefundRequestPreview}
       />
       <Filter title={title} inputs={refundRequestInputs} />
       <Table

@@ -4,8 +4,10 @@ import {
   QueryMeSellerOrderItemsCountArgs,
 } from '@pickk/common';
 
-export const usePlacementPreview = () => {
-  const {data} = useQuery<
+import {PreviewDataResult} from '@src/components/common/organisms/Board/preview';
+
+export const usePlacementPreview = (): PreviewDataResult => {
+  const {data, refetch} = useQuery<
     {
       meSellerOrderItemsCount: Pick<
         OrderItemsCountOutput,
@@ -30,5 +32,9 @@ export const usePlacementPreview = () => {
       }
     }
   `);
-  return {data: data?.meSellerOrderItemsCount ?? {}};
+
+  return {
+    data: data?.meSellerOrderItemsCount ?? {},
+    reload: () => refetch({forceUpdate: true}),
+  };
 };

@@ -1,3 +1,3 @@
 export * from './useBulkPickMeSellerRefundRequests';
-export * from './useMeSellerRefundRequestsCount';
+export * from './useRefundRequestPreview';
 export * from './useReshipMeSellerOrderItem';

@@ -4,9 +4,11 @@ import {
   QueryMeSellerOrderItemsCountArgs,
 } from '@pickk/common';
 
+import {PreviewDataResult} from '@src/components/common/organisms/Board/preview';
+
 // @TODO : confirmed 필드 추가
-export const useShipmentPreview = () => {
-  const {data} = useQuery<
+export const useShipmentPreview = (): PreviewDataResult => {
+  const {data, refetch} = useQuery<
     {
       meSellerOrderItemsCount: Pick<
         OrderItemsCountOutput,
@@ -26,5 +28,8 @@ export const useShipmentPreview = () => {
     }
   `);
 
-  return {data: data?.meSellerOrderItemsCount ?? {}};
+  return {
+    data: data?.meSellerOrderItemsCount ?? {},
+    reload: () => refetch({forceUpdate: true}),
+  };
 };
