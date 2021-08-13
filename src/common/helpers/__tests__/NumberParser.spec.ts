@@ -2,8 +2,8 @@ import {removeDashFromNumber} from '../PhoneNumberParser';
 
 describe('PhoneNumberParser', () => {
   it('removeDashFromNumber', () => {
-    expect(removeDashFromNumber('')).toBe('');
-    expect(removeDashFromNumber(null)).toBe(null);
+    expect(removeDashFromNumber('')).toBe(undefined);
+    expect(removeDashFromNumber(null)).toBe(undefined);
     expect(removeDashFromNumber('ab-1s234-')).toBe('ab-1s234-');
     expect(removeDashFromNumber('ab1s234')).toBe('ab1s234');
 
