@@ -25,7 +25,7 @@ export type BaseOrderItem = Pick<
   | 'recommenderNickname'
 > & {
   shipment: Pick<Shipment, 'trackCode' | 'courierId'> & {
-    courier: Pick<Courier, 'id' | 'name'>;
+    courier: Pick<Courier, 'id' | 'name' | 'code'>;
   };
   order: Pick<Order, 'id'> & {
     buyer: Pick<OrderBuyer, 'id' | 'name' | 'phoneNumber' | 'email'>;
@@ -63,6 +63,7 @@ export const BASE_ORDER_ITEM_FRAGMENT = gql`
       courier {
         id
         name
+        code
       }
       trackCode
     }

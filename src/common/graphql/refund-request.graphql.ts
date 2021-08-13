@@ -1,5 +1,12 @@
 import {gql} from '@apollo/client';
-import {Order, OrderBuyer, OrderItem, RefundRequest} from '@pickk/common';
+import {
+  Courier,
+  Order,
+  OrderBuyer,
+  OrderItem,
+  RefundRequest,
+  Shipment,
+} from '@pickk/common';
 
 export type BaseRefundRequest = Pick<
   RefundRequest,
@@ -16,6 +23,9 @@ export type BaseRefundRequest = Pick<
   >;
   order: Pick<Order, 'id'> & {
     buyer: Pick<OrderBuyer, 'id' | 'name' | 'phoneNumber'>;
+  };
+  shipment: Pick<Shipment, 'id' | 'trackCode'> & {
+    courier: Pick<Courier, 'id' | 'code'>;
   };
 };
 
@@ -41,6 +51,14 @@ export const BASE_REFUND_REQUEST_FRAGMENT = gql`
         id
         name
         phoneNumber
+      }
+    }
+    shipment {
+      id
+      trackCode
+      courier {
+        id
+        code
       }
     }
   }

@@ -1,5 +1,7 @@
 import {ColumnsType} from 'antd/lib/table';
 
+import TrackingViewLink from '@src/components/common/molecules/tracking-view-link';
+
 import {BaseRefundRequest} from '@src/common/graphql';
 import {
   getTimeString,
@@ -77,11 +79,17 @@ export const refundRequestColumns: ColumnsType<any> = [
     width: 100,
     ellipsis: true,
   },
-  // @TODO
   {
     title: '수거배송추적',
-    dataIndex: '',
-    key: '',
+    dataIndex: 'trackingViewUrl',
+    key: 'trackingViewUrl',
+    render: (_, record) => (
+      <TrackingViewLink
+        label="수거배송추적"
+        courierCode={record.courierCode}
+        trackCode={record.trackCode}
+      />
+    ),
     sorter: (a, b) => stringSorter(b._, a._),
     width: 100,
     ellipsis: true,

@@ -1,9 +1,12 @@
-import {Button} from 'antd';
+import {ColumnsType} from 'antd/lib/table';
+
+import TrackingViewLink from '@src/components/common/molecules/tracking-view-link';
+
+import {stringSorter} from '@src/common/helpers';
 
 import {orderItemColumns} from '@src/components/order-items/table';
-import {stringSorter} from '@src/common/helpers/sorter';
 
-export const placementColumns = [
+export const placementColumns: ColumnsType<any> = [
   ...orderItemColumns.slice(0, 2), // 주문상품번호, 주문번호
   orderItemColumns[3], // 주문상태
   orderItemColumns[2], // 주문일시
@@ -23,17 +26,16 @@ export const placementColumns = [
     width: 120,
     ellipsis: true,
   },
-  // @TODO
   {
     title: '배송추적',
     dataIndex: 'trackingViewUrl',
     key: 'trackingViewUrl',
-    render: (value) =>
-      value ? (
-        <a href={value} target="_blank">
-          <Button size="small">배송추적</Button>
-        </a>
-      ) : null,
+    render: (_, record) => (
+      <TrackingViewLink
+        courierCode={record.courierCode}
+        trackCode={record.trackCode}
+      />
+    ),
     sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
     width: 90,
   },

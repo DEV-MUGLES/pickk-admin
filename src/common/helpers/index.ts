@@ -46,3 +46,4 @@ export * from './date';
 export * from './NumberParser';
 export * from './PhoneNumberParser';
 export * from './sorter';
+export * from './Url';
