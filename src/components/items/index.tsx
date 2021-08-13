@@ -16,7 +16,7 @@ import {itemColumns, itemActions} from './table';
 
 const {Text} = Typography;
 
-function ItemBoard(props: BoardProps) {
+function ItemsBoard(props: BoardProps) {
   const {
     action: {setSelectedRowId},
   } = useBoardContext();
@@ -72,4 +72,4 @@ function ItemBoard(props: BoardProps) {
   );
 }
 
-export default ItemBoard;
+export default ItemsBoard;
