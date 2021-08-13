@@ -19,16 +19,12 @@ export const sellableItemInputs: BoardFilterRowProps[] = [
   },
   {
     name: 'period',
-    defaultValue: {
-      type: 'all',
-      startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-      endDate: dayjs().format('YYYY-MM-DD'),
-    },
     labelText: '조회기간',
     select: [
       {name: '활성등록일', value: ''},
       {name: '상품생성일', value: ''},
     ],
+    defaultQuickButtonValue: 'oneMonth',
     Component: Datepicker,
   },
 ];

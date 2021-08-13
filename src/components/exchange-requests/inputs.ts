@@ -13,17 +13,13 @@ export const exchangeRequestInputs = [
   },
   {
     name: 'period',
-    defaultValue: {
-      type: 'all',
-      startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-      endDate: dayjs().format('YYYY-MM-DD'),
-    },
     labelText: '조회기간',
     select: [
       // @TODO : orderItem.paidAtBetween 필터적용
       {name: '결제일', value: 'orderItem.paidAtBetween'},
       {name: '교환요청일', value: 'requestedAtBetween'},
     ],
+    defaultQuickButtonValue: 'oneMonth',
     Component: Datepicker,
   },
 ];

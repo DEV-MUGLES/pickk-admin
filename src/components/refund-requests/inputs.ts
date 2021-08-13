@@ -13,17 +13,13 @@ export const refundRequestInputs = [
   },
   {
     name: 'period',
-    defaultValue: {
-      type: 'all',
-      startDate: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
-      endDate: dayjs().format('YYYY-MM-DD'),
-    },
     labelText: '조회기간',
     select: [
       // @TODO : order.paidAtBetween 이런경우 필터적용 어떻게 해야하나??
       {name: '결제일', value: 'order.paidAtBetween'},
       {name: '반품요청일', value: 'requestedAtBetween'},
     ],
+    defaultQuickButtonValue: 'oneMonth',
     Component: Datepicker,
   },
 ];
