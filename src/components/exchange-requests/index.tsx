@@ -6,15 +6,16 @@ import Header from '@src/components/common/organisms/Board/Header';
 import Preview from '@src/components/common/organisms/Board/preview';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
-import ShipModal from '../placements/table/modal/ship';
+import ShipModal, {ShipModalDataType} from '../placements/table/modal/ship';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {TableActionType} from '../common/organisms/Board/Table/table';
 import {BoardProps} from '../props';
 
 import {
-  useBulkPickMeSellerExchangeRequests,
   useExchangeRequestPreview,
+  useBulkPickMeSellerExchangeRequests,
+  useReshipMeSellerOrderItem,
 } from './hooks';
 
 import {exchangeRequestPreviewData} from './preview-data';
@@ -28,12 +29,10 @@ function ExchangeRequestsBoard(props: BoardProps) {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const modalData = tableData
-    ? tableData.filter((data) => selectedRowKeys.includes(data.id))
-    : null;
 
   const {bulkPickMeSellerExchangeRequests} =
     useBulkPickMeSellerExchangeRequests();
+  const {reshipMeSellerExchangeRequest} = useReshipMeSellerOrderItem();
 
   const newExchangeActions: TableActionType[] = [
     {
@@ -54,12 +53,32 @@ function ExchangeRequestsBoard(props: BoardProps) {
     },
     {
       text: '교환품재발송',
-      onClick: async (_: number[]) => {
+      onClick: async (ids: number[]) => {
+        if (ids.length !== 1) {
+          message.warning(
+            '일괄 재발송처리는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
+          );
+          return;
+        }
         setIsModalOpen(true);
       },
     },
     ...exchangeRequestActions,
   ];
+
+  const getModalData = (): ShipModalDataType => {
+    if (!tableData) {
+      return null;
+    }
+    const selectedData = tableData.find(
+      (data) => selectedRowKeys[0] === data.id,
+    );
+    return {
+      ...selectedData,
+      courierId: selectedData.reshipmentCourierId,
+      trackCode: selectedData.reshipmentTrackCode,
+    };
+  };
 
   return (
     <>
@@ -74,7 +93,21 @@ function ExchangeRequestsBoard(props: BoardProps) {
         columns={exchangeRequestColumns}
         actions={newExchangeActions}
       />
-      <ShipModal {...{modalData, isModalOpen, closeModal}} isReship />
+      <ShipModal
+        title="재발송처리"
+        {...{
+          modalData: getModalData(),
+          onSubmit: (shipment) => {
+            reshipMeSellerExchangeRequest(
+              parseInt(shipment.id),
+              shipment.courierId,
+              shipment.trackCode,
+            );
+          },
+          isModalOpen,
+          closeModal,
+        }}
+      />
     </>
   );
 }

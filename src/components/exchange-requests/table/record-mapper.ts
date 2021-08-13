@@ -14,6 +14,7 @@ export const exchangeRequestRecordMapper = (record: BaseExchangeRequest) => {
     buyerPhoneNumber: buyer.phoneNumber,
     receiverName: receiver.name,
     receiverPhoneNumber: receiver.phoneNumber,
+    reshipmentCourierId: reshipment.courierId,
     reshipmentCourierName: reshipment.courier.name,
     reshipmentTrackCode: reshipment.trackCode,
     receiverPostalCode: receiver.postalCode,

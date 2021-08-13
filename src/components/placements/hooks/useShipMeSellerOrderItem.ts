@@ -28,13 +28,17 @@ export const useShipMeSellerOrderItem = () => {
 
   const shipMeSellerOrderItems = async (
     merchantUid: string,
-    shipOrderItemInput: ShipOrderItemInput,
+    courierId: ShipOrderItemInput['courierId'],
+    trackCode: ShipOrderItemInput['trackCode'],
   ) => {
     try {
       await _shipMeSellerOrderItems({
         variables: {
           merchantUid,
-          shipOrderItemInput,
+          shipOrderItemInput: {
+            courierId,
+            trackCode,
+          },
         },
       });
 

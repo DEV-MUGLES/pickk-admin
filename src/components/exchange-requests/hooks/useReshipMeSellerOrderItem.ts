@@ -27,13 +27,17 @@ export const useReshipMeSellerOrderItem = () => {
 
   const reshipMeSellerExchangeRequest = async (
     id: number,
-    reshipExchangeRequestInput: ReshipExchangeRequestInput,
+    courierId: ReshipExchangeRequestInput['courierId'],
+    trackCode: ReshipExchangeRequestInput['trackCode'],
   ) => {
     try {
       await _reshipMeSellerExchangeRequest({
         variables: {
           id,
-          reshipExchangeRequestInput,
+          reshipExchangeRequestInput: {
+            courierId,
+            trackCode,
+          },
         },
       });
 

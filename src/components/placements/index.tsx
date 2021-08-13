@@ -17,9 +17,10 @@ import {placementInputs} from './inputs';
 import {placementColumns, placementActions} from './table';
 import {placementPreviewData} from './preview-data';
 import {
-  useBulkShipReadyMeSellerOrderItems,
-  useCancelMeSellerOrderItem,
   usePlacementPreview,
+  useBulkShipReadyMeSellerOrderItems,
+  useShipMeSellerOrderItem,
+  useCancelMeSellerOrderItem,
 } from './hooks';
 
 function PlacementBoard(props: BoardProps) {
@@ -28,6 +29,7 @@ function PlacementBoard(props: BoardProps) {
 
   const {bulkShipReadyMeSellerOrderItems} =
     useBulkShipReadyMeSellerOrderItems();
+  const {shipMeSellerOrderItems} = useShipMeSellerOrderItem();
   const {cancelMeSellerOrderItem} = useCancelMeSellerOrderItem();
 
   const closeModal = () => {
@@ -38,10 +40,6 @@ function PlacementBoard(props: BoardProps) {
     setIndex(-1);
   };
   const [index, setIndex] = useState(-1);
-
-  const modalData = tableData
-    ? tableData.filter((data) => selectedRowKeys.includes(data.id))
-    : null;
 
   const newPlacementActions: TableActionType[] = [
     {
@@ -68,7 +66,13 @@ function PlacementBoard(props: BoardProps) {
     },
     {
       text: '발송처리',
-      onClick: async (_: number[]) => {
+      onClick: async (ids: number[]) => {
+        if (ids.length !== 1) {
+          message.warning(
+            '일괄 발송처리는 엑셀로 지원합니다.\n1개의 주문건만 선택해주세요.',
+          );
+          return;
+        }
         setIsModalOpen(true);
       },
     },
@@ -123,7 +127,21 @@ function PlacementBoard(props: BoardProps) {
         actions={newPlacementActions}
       />
       <StockSetModal id={index} closeModal={closeStockModal} />
-      <ShipModal {...{modalData, isModalOpen, closeModal}} />
+      <ShipModal
+        {...{
+          modalData:
+            tableData?.find((data) => selectedRowKeys[0] === data.id) ?? null,
+          onSubmit: (shipment) => {
+            shipMeSellerOrderItems(
+              shipment.merchantUid,
+              shipment.courierId,
+              shipment.trackCode,
+            );
+          },
+          isModalOpen,
+          closeModal,
+        }}
+      />
     </>
   );
 }

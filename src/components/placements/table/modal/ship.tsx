@@ -3,88 +3,72 @@ import styled from 'styled-components';
 import {Modal, Input, Button, Typography} from 'antd';
 
 import {GREY} from '@src/common/constants/colors';
-import {useBoardContext} from '@src/common/contexts/Board';
 
-import {useShipMeSellerOrderItem} from '../../hooks';
-import {useReshipMeSellerOrderItem} from '@src/components/refund-requests/hooks';
+import {useBoardContext} from '@src/common/contexts/Board';
+import {Shipment} from '@pickk/common';
 
 const {Text} = Typography;
 
-export type ModalDataType = {
-  id: number; // 교환요청 고유번호 (isReship일떄만 사용)
+export type ShipModalDataType = {
+  id: string;
   merchantUid: string;
   itemName: string;
-  itemId: string;
-  courierId: string;
-  trackCode: string;
   buyerName: string;
-  trackingViewUrl: string;
-};
+} & Pick<Shipment, 'courierId' | 'trackCode'>;
 
+export type ShipmentType = Pick<
+  ShipModalDataType,
+  'id' | 'merchantUid' | 'courierId' | 'trackCode'
+>;
 export type ShipModalProps = {
-  modalData: ModalDataType[];
+  title?: string;
+  modalData: ShipModalDataType;
+  onSubmit: (shipment: ShipmentType) => void;
   isModalOpen: boolean;
   closeModal: () => void;
-  isReship?: boolean;
 };
 
-// @TODO : refactor
 export default function ShipModal({
+  title = '발송 처리',
   modalData,
+  onSubmit,
   isModalOpen,
   closeModal,
-  isReship,
 }: ShipModalProps) {
+  const {id, merchantUid, itemName, buyerName} = modalData;
+
   const {action} = useBoardContext();
   const {reload} = action;
-  const [shipments, setShipments] = useState(null);
 
-  const title = !isReship ? '발송 처리' : '재발송 처리';
-  const {shipMeSellerOrderItems} = useShipMeSellerOrderItem();
-  const {reshipMeSellerExchangeRequest} = useReshipMeSellerOrderItem();
+  const [shipment, setShipment] = useState<ShipmentType>(null);
 
   useEffect(() => {
     if (!modalData) return;
-    setShipments(
-      modalData.map((record) => {
-        const {id, merchantUid, courierId, trackCode} = record;
-        return {
-          id,
-          merchantUid,
-          courierId,
-          trackCode,
-        };
-      }),
-    );
+
+    const {id, merchantUid, courierId, trackCode} = modalData;
+    setShipment({
+      id,
+      merchantUid,
+      courierId,
+      trackCode,
+    });
   }, [modalData]);
 
-  const handleShipmentsChange = (index) => async (e) => {
-    setShipments([
-      ...shipments.slice(0, index),
-      {
-        ...shipments[index],
-        [e.target.name]: e.target.value,
-      },
-      ...shipments.slice(index + 1, shipments.length),
-    ]);
+  const handleShipmentsChange = async (e) => {
+    setShipment({
+      ...shipment,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async () => {
-    const shipOrderItemInput = {
-      courierId: shipments.courierId,
-      trackCode: shipments.trackCode,
-    };
-
-    isReship
-      ? reshipMeSellerExchangeRequest(shipments.id, shipOrderItemInput)
-      : shipMeSellerOrderItems(shipments.merchantUid, shipOrderItemInput);
+    onSubmit(shipment);
 
     closeModal();
     reload();
   };
 
-  if (modalData && shipments && shipments.length !== 0) {
-    console.log(modalData, shipments);
+  if (modalData && shipment) {
     return (
       <Modal
         title={title}
@@ -94,38 +78,29 @@ export default function ShipModal({
         width="fit-content">
         <OptionsWrapper>
           <Row style={{width: 'fit-content'}}>
-            {isReship && (
-              <ExchangeRequestId strong>교환고유번호</ExchangeRequestId>
-            )}
             <MerchantUid strong>상품주문번호</MerchantUid>
             <ItemName strong>상품명</ItemName>
             <BuyerName strong>구매자명</BuyerName>
             <Courier strong>택배사</Courier>
             <TrackingCode strong>송장번호</TrackingCode>
           </Row>
-          {modalData.map((placement, index) => {
-            const {id, merchantUid, itemName, buyerName} = placement;
-            return (
-              <Row key={id} style={{width: 'fit-content'}}>
-                {isReship && <ExchangeRequestId strong>{id}</ExchangeRequestId>}
-                <MerchantUid>{merchantUid}</MerchantUid>
-                <ItemName>{itemName}</ItemName>
-                <BuyerName>{buyerName}</BuyerName>
-                <StyledInput
-                  size="small"
-                  name="courierId"
-                  value={shipments[index] ? shipments[index].courierId : null}
-                  onChange={handleShipmentsChange(index)}
-                />
-                <StyledInput
-                  size="small"
-                  name="trackCode"
-                  value={shipments[index] ? shipments[index].trackCode : null}
-                  onChange={handleShipmentsChange(index)}
-                />
-              </Row>
-            );
-          })}
+          <Row key={id} style={{width: 'fit-content'}}>
+            <MerchantUid>{merchantUid}</MerchantUid>
+            <ItemName>{itemName}</ItemName>
+            <BuyerName>{buyerName}</BuyerName>
+            <StyledInput
+              size="small"
+              name="courierId"
+              value={shipment.courierId ?? null}
+              onChange={handleShipmentsChange}
+            />
+            <StyledInput
+              size="small"
+              name="trackCode"
+              value={shipment.trackCode ?? null}
+              onChange={handleShipmentsChange}
+            />
+          </Row>
         </OptionsWrapper>
         <SubmitArea>
           <Button type="primary" onClick={handleSubmit}>
@@ -165,10 +140,6 @@ const SubmitArea = styled.div`
   height: fit-content;
   border-top: 1px solid ${GREY[200]};
   padding-top: 16px;
-`;
-
-const ExchangeRequestId = styled(Text)`
-  width: 300px;
 `;
 
 const MerchantUid = styled(Text)`
