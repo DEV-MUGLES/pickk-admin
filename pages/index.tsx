@@ -17,15 +17,6 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
     }
 
     await initializeApollo(null, token);
-    // @TODO: Figure out for what reason this is needed
-    // .query({
-    //   query: ME_SELLER_QUERY,
-    //   context: {
-    //     headers: {
-    //       authorization: `Bearer ${token}`,
-    //     },
-    //   },
-    // });
 
     return {
       redirect: {

@@ -14,7 +14,7 @@ const {Text} = Typography;
 
 export type PreviewDataType = {
   label: string;
-  name?: string; // @TODO : 모두 새로운 프리뷰 적용 후 not optional로 변경
+  name: string;
   icon: React.FunctionComponent<AntdIconProps>;
   filterValue: Filter;
   disabled?: boolean;

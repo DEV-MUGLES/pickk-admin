@@ -5,7 +5,6 @@ import {addCommaToNumber, getTimeString} from '@src/common/helpers';
 import {addDashToPhoneNumber} from '@src/common/helpers/PhoneNumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';
 
-// @TODO : any -> 타입 추가
 export const exchangeRequestColumns: ColumnsType<any> = [
   {
     title: '주문상품번호',
