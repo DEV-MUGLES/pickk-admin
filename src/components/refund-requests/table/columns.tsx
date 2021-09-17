@@ -46,7 +46,7 @@ export const refundRequestColumns: ColumnsType<any> = [
         (currItem) =>
           `${currItem.itemName} (${currItem.productVariantName} x ${currItem.quantity})`,
       );
-      return orderItemsInfos.map((infoStr) => <p>{infoStr}</p>);
+      return orderItemsInfos.map((infoStr) => <p key={infoStr}>{infoStr}</p>);
     },
     sorter: (a, b) => stringSorter(b.orderItems, a.orderItems),
     width: 100,

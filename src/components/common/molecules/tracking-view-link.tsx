@@ -14,7 +14,7 @@ function TrackingViewLink({
   trackCode,
 }: TrackingViewLinkProps) {
   return (
-    <a href={getTrackingViewUrl(courierCode, trackCode)} target="_blank">
+    <a href={getTrackingViewUrl(courierCode, trackCode)} target="_blank" rel="noreferrer">
       <Button size="small">{label}</Button>
     </a>
   );

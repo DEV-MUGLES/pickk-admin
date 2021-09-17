@@ -58,7 +58,7 @@ export const orderItemColumns: ColumnsType<any> = [
     dataIndex: 'itemName',
     key: 'itemName',
     render: (value, record) => (
-      <a href={`https://pickk.one/item/${record.itemId}`} target="_blank">
+      <a href={`https://pickk.one/item/${record.itemId}`} target="_blank" rel="noreferrer">
         {getOrderItemStatusDisplayName(value)}
       </a>
     ),

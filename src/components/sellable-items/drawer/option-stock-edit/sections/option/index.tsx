@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, Fragment} from 'react';
 import {Button, Table, Tooltip} from 'antd';
 import {PlusOutlined, EditOutlined} from '@ant-design/icons';
 import {Item} from '@pickk/common';
@@ -29,13 +29,13 @@ function OptionManageSection() {
   }));
 
   const hasOption = options?.length > 0;
-  const [buttonText, buttonIcon, warningMessage] = hasOption
+  const [buttonText, ButtonIcon, warningMessage] = hasOption
     ? [
         '옵션 수정',
-        <EditOutlined />,
+        EditOutlined,
         '옵션 수정시 기존 재고값이 모두 초기화 됩니다.',
       ]
-    : ['옵션 추가', <PlusOutlined />, undefined];
+    : ['옵션 추가', PlusOutlined , undefined];
 
   const handleModalOpen = (type: ModalType) => (isOpen: boolean) => () => {
     setModalVisible({
@@ -49,7 +49,7 @@ function OptionManageSection() {
       <Tooltip title={warningMessage}>
         <Button
           onClick={handleModalOpen('createOption')(true)}
-          icon={buttonIcon}
+          icon={<ButtonIcon/>}
           style={{marginBottom: '0.8rem'}}>
           {buttonText}
         </Button>
@@ -61,7 +61,7 @@ function OptionManageSection() {
             dataIndex: 'name',
             key: 'name',
             render: (value, {id}) => (
-              <>
+              <Fragment key={id}>
                 {value}
                 <Button
                   size="small"
@@ -72,7 +72,7 @@ function OptionManageSection() {
                   }}>
                   수정
                 </Button>
-              </>
+              </Fragment>
             ),
           },
           {title: '옵션값', dataIndex: 'values', key: 'values'},

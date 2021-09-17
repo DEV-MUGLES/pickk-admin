@@ -5,7 +5,7 @@ import {initializeApollo} from '@src/lib/apollo';
 import {getCookie} from '@src/common/helpers';
 
 export default function HomePage() {
-  return <div>You can't see this page</div>;
+  return <div>암온더 넥스트 레블</div>;
 }
 
 export const getServerSideProps: GetServerSideProps = async ({req}) => {
