@@ -47,7 +47,8 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
           return;
         }
 
-        await bulkPickMeSellerRefundRequests(ids);
+        // @TODO merchantUids 넘겨주기
+        await bulkPickMeSellerRefundRequests([]);
       },
     },
     {

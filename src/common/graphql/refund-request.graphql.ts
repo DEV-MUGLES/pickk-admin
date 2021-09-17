@@ -10,7 +10,6 @@ import {
 
 export type BaseRefundRequest = Pick<
   RefundRequest,
-  | 'id'
   | 'orderMerchantUid'
   | 'requestedAt'
   | 'reason'
@@ -31,7 +30,6 @@ export type BaseRefundRequest = Pick<
 
 export const BASE_REFUND_REQUEST_FRAGMENT = gql`
   fragment BaseRefundRequestFragment on RefundRequest {
-    id
     orderMerchantUid
     status
     requestedAt

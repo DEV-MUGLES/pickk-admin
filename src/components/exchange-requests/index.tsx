@@ -48,7 +48,8 @@ function ExchangeRequestsBoard(props: BoardProps) {
           return;
         }
 
-        await bulkPickMeSellerExchangeRequests(ids);
+        // @TODO merchantUids 넘기기
+        await bulkPickMeSellerExchangeRequests([]);
       },
     },
     {
@@ -98,8 +99,9 @@ function ExchangeRequestsBoard(props: BoardProps) {
         {...{
           modalData: getModalData(),
           onSubmit: (shipment) => {
+            // @TODO merchantUid 로 변경
             reshipMeSellerExchangeRequest(
-              parseInt(shipment.id),
+              shipment.id,
               shipment.courierId,
               shipment.trackCode,
             );

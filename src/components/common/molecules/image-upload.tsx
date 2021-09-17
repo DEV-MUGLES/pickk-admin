@@ -2,8 +2,6 @@ import React from 'react';
 import {Upload, message, UploadProps} from 'antd';
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 
-import {useUploadMultipleImages} from '@src/common/hooks/apis';
-
 export type ImageUploadProps = {
   imageUrl: string;
   setImageUrl: (imageUrl: string) => void;
@@ -15,7 +13,10 @@ function ImageUpload({
   setImageUrl,
   alt = 'image url',
 }: ImageUploadProps) {
-  const [upload, {loading}] = useUploadMultipleImages();
+  // @TODO replace to new image upload logic
+  // const [upload, {loading}] = useUploadMultipleImages();
+  const upload = (any) => null;
+  const loading = false;
 
   const uploadProps: UploadProps = {
     name: 'file',

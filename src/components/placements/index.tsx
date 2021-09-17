@@ -91,12 +91,8 @@ function PlacementBoard(props: BoardProps) {
           const selectedData = tableData.find(
             (record) => record.id === selectedId,
           );
-          const {merchantUid, amount, checksum, reason} = selectedData;
-          await cancelMeSellerOrderItem(merchantUid, {
-            amount,
-            checksum,
-            reason,
-          });
+          const {merchantUid} = selectedData;
+          await cancelMeSellerOrderItem(merchantUid);
           if (confirm('취소된 제품의 재고를 다시 설정하시겠습니까?')) {
             setIndex(
               tableData.find((record) => record.id === selectedId).itemId,

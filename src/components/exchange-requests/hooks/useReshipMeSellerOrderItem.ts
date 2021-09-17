@@ -13,27 +13,27 @@ export const useReshipMeSellerOrderItem = () => {
     MutationReshipMeSellerExchangeRequestArgs
   >(gql`
     mutation ReshipMeSellerExchangeRequest(
-      $id: Int!
+      $merchantUid: String!
       $reshipExchangeRequestInput: ReshipExchangeRequestInput
     ) {
       reshipMeSellerExchangeRequest(
-        id: $id
+        merchantUid: $merchantUid
         reshipExchangeRequestInput: $reshipExchangeRequestInput
       ) {
-        id
+        merchantUid
       }
     }
   `);
 
   const reshipMeSellerExchangeRequest = async (
-    id: number,
+    merchantUid: string,
     courierId: ReshipExchangeRequestInput['courierId'],
     trackCode: ReshipExchangeRequestInput['trackCode'],
   ) => {
     try {
       await _reshipMeSellerExchangeRequest({
         variables: {
-          id,
+          merchantUid,
           reshipExchangeRequestInput: {
             courierId,
             trackCode,

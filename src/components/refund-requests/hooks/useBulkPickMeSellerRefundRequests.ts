@@ -11,16 +11,16 @@ export const useBulkPickMeSellerRefundRequests = () => {
     Pick<Mutation, 'bulkPickMeSellerRefundRequests'>,
     MutationBulkPickMeSellerRefundRequestsArgs
   >(gql`
-    mutation BulkPickMeSellerRefundRequests($ids: [Int!]!) {
-      bulkPickMeSellerRefundRequests(ids: $ids)
+    mutation BulkPickMeSellerRefundRequests($merchantUids: [String!]!) {
+      bulkPickMeSellerRefundRequests(merchantUids: $merchantUids)
     }
   `);
 
-  const bulkPickMeSellerRefundRequests = async (ids: number[]) => {
+  const bulkPickMeSellerRefundRequests = async (merchantUids: string[]) => {
     try {
       await _bulkPickMeSellerRefundRequests({
         variables: {
-          ids,
+          merchantUids,
         },
       });
       message.error('수거 완료되었습니다.');

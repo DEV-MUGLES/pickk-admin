@@ -10,16 +10,16 @@ export const useBulkPickMeSellerExchangeRequests = () => {
     Pick<Mutation, 'bulkPickMeSellerExchangeRequests'>,
     MutationBulkPickMeSellerExchangeRequestsArgs
   >(gql`
-    mutation BulkPickMeSellerExchangeRequests($id: [Int!]!) {
-      bulkPickMeSellerExchangeRequests(id: $id)
+    mutation BulkPickMeSellerExchangeRequests($merchantUids: [String!]!) {
+      bulkPickMeSellerExchangeRequests(merchantUids: $merchantUids)
     }
   `);
 
-  const bulkPickMeSellerExchangeRequests = async (ids: number[]) => {
+  const bulkPickMeSellerExchangeRequests = async (merchantUids: string[]) => {
     try {
       await _bulkPickMeSellerExchangeRequests({
         variables: {
-          ids,
+          merchantUids,
         },
       });
       message.success('수거 완료되었습니다.');
