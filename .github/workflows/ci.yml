@@ -34,6 +34,3 @@ jobs:
 
       - name: Type Check
         run: yarn type-check
-
-      - name: Unit Test
-        run: yarn jest
