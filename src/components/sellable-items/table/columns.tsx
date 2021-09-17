@@ -103,13 +103,6 @@ export const sellableItemColumns: ColumnsType<Item> = [
   //   sorter: (a, b) => b.purchasedCount - a.purchasedCount,
   // },
   {
-    title: '안내메세지',
-    dataIndex: 'notice',
-    key: 'notice',
-    width: 120,
-    render: (_, {notice}) => <>{notice?.message}</>,
-  },
-  {
     title: 'MD 추천 여부',
     dataIndex: 'isMdRecommended',
     key: 'isMdRecommended',
