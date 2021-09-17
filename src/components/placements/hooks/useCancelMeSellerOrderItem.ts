@@ -1,9 +1,5 @@
 import {gql, useMutation} from '@apollo/client';
-import {
-  CancelMeSellerOrderItemInput,
-  Mutation,
-  MutationCancelMeSellerOrderItemArgs,
-} from '@pickk/common';
+import {Mutation, MutationCancelMeSellerOrderItemArgs} from '@pickk/common';
 import {message} from 'antd';
 
 // 주문 취소
@@ -12,28 +8,18 @@ export const useCancelMeSellerOrderItem = () => {
     Pick<Mutation, 'cancelMeSellerOrderItem'>,
     MutationCancelMeSellerOrderItemArgs
   >(gql`
-    mutation CancelMeSellerOrderItem(
-      $merchantUid: String!
-      $cancelMeSellerOrderItemInput: CancelMeSellerOrderItemInput!
-    ) {
-      cancelMeSellerOrderItem(
-        merchantUid: $merchantUid
-        cancelMeSellerOrderItemInput: $cancelMeSellerOrderItemInput
-      ) {
-        id
+    mutation CancelMeSellerOrderItem($merchantUid: String!) {
+      cancelMeSellerOrderItem(merchantUid: $merchantUid) {
+        merchantUid
       }
     }
   `);
 
-  const cancelMeSellerOrderItem = async (
-    merchantUid: string,
-    cancelMeSellerOrderItemInput: CancelMeSellerOrderItemInput,
-  ) => {
+  const cancelMeSellerOrderItem = async (merchantUid: string) => {
     try {
       await _cancelMeSellerOrderItem({
         variables: {
           merchantUid,
-          cancelMeSellerOrderItemInput,
         },
       });
 

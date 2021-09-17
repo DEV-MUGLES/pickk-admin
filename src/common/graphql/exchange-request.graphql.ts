@@ -11,12 +11,7 @@ import {
 
 export type BaseExchangeRequest = Pick<
   ExchangeRequest,
-  | 'id'
-  | 'orderItemMerchantUid'
-  | 'status'
-  | 'requestedAt'
-  | 'faultOf'
-  | 'reason'
+  'orderItemMerchantUid' | 'status' | 'requestedAt' | 'faultOf' | 'reason'
 > & {
   orderItem: Pick<
     OrderItem,
@@ -55,7 +50,6 @@ export const GET_EXCHANGE_REQUEST = gql`
       exchangeRequestFilter: $exchangeRequestFilter
       pageInput: $pageInput
     ) {
-      id
       orderItemMerchantUid
       status
       requestedAt

@@ -17,7 +17,7 @@ const {Title} = Typography;
 export default function LoginSection() {
   const router = useRouter();
 
-  const login = useLoginSellerByCode();
+  const {callQuery: login} = useLoginSellerByCode();
 
   const handleFinish = async (
     loginByCodeInput: Pick<LoginByCodeInput, 'code' | 'password'>,
