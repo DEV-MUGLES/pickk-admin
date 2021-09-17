@@ -124,16 +124,10 @@ export const placementActions: TableActionType[] = [
                       const result = dataCsv
                         .map((record) => {
                           return {
-                            merchantUid: record['상품주문번호']
-                              ? record['상품주문번호'].toString()
-                              : '',
-                            courier:
-                              record['택배사'] !== undefined
-                                ? record['택배사']
-                                : '',
-                            trackingCode: record['송장번호']
-                              ? record['송장번호'].toString()
-                              : '',
+                            merchantUid:
+                              record['상품주문번호']?.toString() ?? '',
+                            courierId: record['택배사'] ?? '',
+                            trackCode: record['송장번호']?.toString() ?? '',
                           };
                         })
                         .filter((record) =>
