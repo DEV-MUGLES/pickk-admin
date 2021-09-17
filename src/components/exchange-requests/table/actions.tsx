@@ -1,6 +1,5 @@
 import {message, Modal} from 'antd';
 
-import ExchangeRequestService from '@src/lib/services/ExchangeRequest';
 import React from 'react';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
 
@@ -25,7 +24,7 @@ export const exchangeRequestActions = [
           okType: 'danger',
           cancelText: '아니오',
           async onOk() {
-            await ExchangeRequestService.switchToRefundRequest(ids[0]);
+            // await ExchangeRequestService.switchToRefundRequest(ids[0]);
           },
           onCancel() {
             message.warning('취소되었습니다.');

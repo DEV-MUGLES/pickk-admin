@@ -6,8 +6,6 @@ import Table from '@src/components/common/organisms/Board/Table';
 import {canceldRequestPreviewData} from './preview-data';
 import {BoardProps} from '../props';
 
-import {useCancelRequestPreview} from '@src/common/hooks/ClaimRequest';
-
 import {orderItemInputs} from '../order-items/inputs';
 import {orderItemColumns} from '../order-items/table';
 

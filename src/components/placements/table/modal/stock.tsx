@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Modal, InputNumber, Button, message, Typography, Spin} from 'antd';
 
-import {useProductList} from '@src/common/hooks/table';
-import ProductService from '@src/lib/services/Product';
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 import Space from '@src/components/common/atoms/space';
 
@@ -16,7 +14,7 @@ export type StockSetModalProps = {
 
 export default function StockSetModal({id, closeModal}: StockSetModalProps) {
   const [stocks, setStocks] = useState([]);
-  const {data: products, loading} = useProductList([id]);
+  const {data: products, loading} = {data: [], loading: false}; // useProductList([id]);
   const [isSubmitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -54,7 +52,7 @@ export default function StockSetModal({id, closeModal}: StockSetModalProps) {
 
     setSubmitting(true);
     try {
-      await ProductService.setStock(stockData);
+      // await ProductService.setStock(stockData);
       message.success(`수량이 일괄 적용되었습니다.`);
     } catch (err) {
       message.error('err');
