@@ -91,13 +91,6 @@ export const ITEMS_QUERY = gql`
       }
       isInfiniteStock
       isSoldout
-      notice {
-        id
-        type
-        message
-        startAt
-        endAt
-      }
       options {
         ...ItemOptionFrag
       }

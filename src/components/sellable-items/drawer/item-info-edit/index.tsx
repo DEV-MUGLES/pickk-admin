@@ -2,7 +2,6 @@ import {Collapse, Drawer, DrawerProps, Space} from 'antd';
 import CollapsePanel from 'antd/lib/collapse/CollapsePanel';
 
 import ItemBaseInfoEditSection from './base';
-import ItemNoticeEditSection from './notice';
 
 import {CollapseType} from '..';
 
@@ -20,20 +19,6 @@ const MODAL_COLLAPSE: CollapseType[] = [
           key: '1',
         },
         Content: ItemBaseInfoEditSection,
-      },
-    ],
-  },
-  {
-    props: {
-      defaultActiveKey: ['1'],
-    },
-    panels: [
-      {
-        props: {
-          header: '상품 안내메세지 수정',
-          key: '1',
-        },
-        Content: ItemNoticeEditSection,
       },
     ],
   },
