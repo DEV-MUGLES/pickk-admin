@@ -10,7 +10,6 @@ import Document, {
   Html,
 } from 'next/document';
 import {ServerStyleSheet} from 'styled-components';
-import cookies from 'next-cookies';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -27,7 +26,6 @@ export default class MyDocument extends Document {
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
-        cookies: cookies(ctx),
         styles: (
           <>
             {initialProps.styles}

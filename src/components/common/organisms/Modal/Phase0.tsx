@@ -52,7 +52,7 @@ export default function Phase0({
           <Text>검색 결과가 없습니다.</Text>
         )}
         {influencerSearchResult?.map((user) => (
-          <SearchResultRow>
+          <SearchResultRow key={user.id}>
             <Space direction="ROW" />
             <Img
               src={user.profileImageUrl}

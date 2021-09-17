@@ -36,7 +36,7 @@ export default function DashboardCardBody({
       <Icon style={{fontSize: '40px', width: 'fit-content'}} />
       <InfoWrapper>
         {data.map((item) => (
-          <InfoRow>
+          <InfoRow key={item.label}>
             <Text>{item.label}</Text>
             <FieldValueWrapper>
               <FieldValue strong>{fieldValues[item.field]}</FieldValue>
