@@ -1,12 +1,5 @@
 import {gql, useQuery} from '@apollo/client';
-import {
-  SellerReturnAddress,
-  SellerClaimAccount,
-  SellerClaimPolicy,
-  BankCode,
-  ClaimFeePayMethod,
-  Query,
-} from '@pickk/common';
+import {SellerReturnAddress, SellerClaimPolicy, Query} from '@pickk/common';
 
 import {SELLER_CLAIM_ACCOUNT_FRAGMENT} from '@src/common/graphql';
 
@@ -54,10 +47,6 @@ export type ClaimPolicyFormDefaultValue = {
     SellerReturnAddress,
     'baseAddress' | 'detailAddress' | 'postalCode'
   >;
-  feePayReceive: {
-    feePayMethod: ClaimFeePayMethod;
-    accountInput: Pick<SellerClaimAccount, 'bankCode' | 'number' | 'ownerName'>;
-  };
 } & SellerClaimPolicy;
 
 export const useClaimPolicyForm = () => {
@@ -69,12 +58,6 @@ export const useClaimPolicyForm = () => {
     postalCode = '',
   } = data?.meSeller?.returnAddress || {};
 
-  const {
-    bankCode = BankCode.AbnAmro,
-    number = '',
-    ownerName = '',
-  } = data?.meSeller?.claimPolicy?.account || {};
-
   const defaultValue: ClaimPolicyFormDefaultValue = {
     returnAddress: {
       baseAddress,
@@ -82,14 +65,6 @@ export const useClaimPolicyForm = () => {
       postalCode,
     },
     ...data?.meSeller?.claimPolicy,
-    feePayReceive: {
-      feePayMethod: data?.meSeller?.claimPolicy?.feePayMethod,
-      accountInput: {
-        bankCode,
-        number,
-        ownerName,
-      },
-    },
   };
 
   return {data, defaultValue};
