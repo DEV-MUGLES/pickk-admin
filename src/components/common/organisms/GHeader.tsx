@@ -7,8 +7,6 @@ import IconButton from '../atoms/button/icon';
 import LogoDefaultIcon from '../icons/logo/_default';
 import {WHITE} from '../../../common/constants/colors';
 
-import UserService from '@src/lib/services/User';
-
 const {Title} = Typography;
 const {Header} = Layout;
 
@@ -19,9 +17,6 @@ export default function GHeader() {
     <Menu style={{width: 90, fontWeight: 300}}>
       <Menu.Item key="0" onClick={() => router.push('/mypage/edit')}>
         내 정보
-      </Menu.Item>
-      <Menu.Item key="1" onClick={UserService.logout}>
-        로그아웃
       </Menu.Item>
     </Menu>
   );

@@ -5,7 +5,6 @@ import {Modal, Button, Typography} from 'antd';
 import {GREY} from '@src/common/constants/colors';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {RefundRequest} from '@src/types';
-import RefundRequestService from '@src/lib/services/RefundRequest';
 import Space from '@src/components/common/atoms/space';
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 
@@ -25,7 +24,7 @@ export default function RefundConfirmModal({
   const {reload} = useBoardContext().action;
 
   const handleSubmit = (shippingFee?: 'FULL' | 'HALF') => async () => {
-    await RefundRequestService.confirm(record.id, shippingFee);
+    // await RefundRequestService.confirm(record.id, shippingFee);
     closeModal();
     reload();
   };

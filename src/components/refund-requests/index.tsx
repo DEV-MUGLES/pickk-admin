@@ -3,7 +3,6 @@ import {message} from 'antd';
 import {RefundRequestStatus} from '@pickk/common';
 
 import RefundConfirmModal from './table/modal/confirm';
-import ExchangeRequestModal from '../order-items/table/modal/exchangeRequest';
 import Preview from '@src/components/common/organisms/Board/preview';
 import Header from '@src/components/common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
@@ -13,7 +12,7 @@ import {useBoardContext} from '@src/common/contexts/Board';
 
 import {refundRequestInputs} from './inputs';
 import {refundRequestPreviewData} from './preview-data';
-import {refundRequestColumns, refundRequestActions} from './table';
+import {refundRequestColumns} from './table';
 import {BoardProps} from '../props';
 import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
 
@@ -28,19 +27,10 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
 
   const {bulkPickMeSellerRefundRequests} = useBulkPickMeSellerRefundRequests();
 
-  const [exchangeRequestIds, setExchangeRequestIds] = useState({
-    id: -1,
-    itemId: -1,
-  });
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-  const [isExchangeRequestModalOpen, setIsExchangeRequestModalOpen] =
-    useState(false);
-  const closeExchangeRequestModal = () => {
-    setIsExchangeRequestModalOpen(false);
   };
 
   const newRefundActions: TableActionType[] = [
@@ -85,32 +75,6 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
         setIsModalOpen(true);
       },
     },
-    ...refundRequestActions,
-    {
-      text: '교환으로 변경',
-      onClick: async (ids: number[]) => {
-        if (ids.length !== 1) {
-          message.warning(
-            `교환으로 변경 일괄 처리는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.`,
-          );
-          return;
-        }
-
-        const record = tableData.find((row) => row.id === ids[0]);
-        if (record.items.length !== 1) {
-          message.warning(
-            `여러개의 아이템에 대한 주문건을 교환으로 변경할 수 없습니다.`,
-          );
-          return;
-        }
-
-        setExchangeRequestIds({
-          id: ids[0],
-          itemId: record.items[0].id,
-        });
-        setIsExchangeRequestModalOpen(true);
-      },
-    },
   ];
   return (
     <>
@@ -129,14 +93,6 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
         record={selectedRecord}
         isModalOpen={isModalOpen}
         closeModal={closeModal}
-      />
-      <ExchangeRequestModal
-        {...exchangeRequestIds}
-        {...{
-          isModalOpen: isExchangeRequestModalOpen,
-          closeModal: closeExchangeRequestModal,
-        }}
-        claimed={true}
       />
     </>
   );
