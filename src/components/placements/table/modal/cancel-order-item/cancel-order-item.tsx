@@ -34,17 +34,17 @@ export default function CancelOrderItemModal({
     action: {reload},
   } = useBoardContext();
 
-  const [restore, setRestore] = useState(false);
+  const [restock, setRestock] = useState(false);
 
   const {cancelMeSellerOrderItem} = useCancelMeSellerOrderItem();
 
   const handleCheckboxChange = (e: CheckboxChangeEvent) => {
-    setRestore(e.target.checked);
+    setRestock(e.target.checked);
   };
 
   const handleSubmit = async () => {
     try {
-      await cancelMeSellerOrderItem(merchantUid, restore);
+      await cancelMeSellerOrderItem(merchantUid, restock);
 
       message.success(`취소 완료되었습니다.`);
       reload();
@@ -64,7 +64,7 @@ export default function CancelOrderItemModal({
       <StyledRow>
         <Text>취소된 재고를 복구하시겠습니까?</Text>
         <Checkbox
-          value={restore}
+          value={restock}
           onChange={handleCheckboxChange}
           style={{color: GREY[500]}}>
           (재고 복구를 원하시면 체크해주세요)
