@@ -43,7 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/plugin-proposal-private-methods", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.14.5"],
             ["@babel/plugin-proposal-private-property-in-object", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.15.4"],
             ["@babel/runtime", "npm:7.15.4"],
-            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.3"],
+            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.4"],
             ["@pickk/eslint-plugin", "npm:0.0.8"],
             ["@types/apollo-upload-client", "npm:14.1.0"],
             ["@types/js-cookie", "npm:2.2.6"],
@@ -1310,17 +1310,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@pickk/common", [
-        ["npm:1.9.3", {
-          "packageLocation": "./.yarn/cache/@pickk-common-npm-1.9.3-6582c898f2-c78d9707a9.zip/node_modules/@pickk/common/",
+        ["npm:1.9.4", {
+          "packageLocation": "./.yarn/cache/@pickk-common-npm-1.9.4-52c5f1d455-3ca638356d.zip/node_modules/@pickk/common/",
           "packageDependencies": [
-            ["@pickk/common", "npm:1.9.3"]
+            ["@pickk/common", "npm:1.9.4"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.3", {
-          "packageLocation": "./.yarn/__virtual__/@pickk-common-virtual-3e573012d0/0/cache/@pickk-common-npm-1.9.3-6582c898f2-c78d9707a9.zip/node_modules/@pickk/common/",
+        ["virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.4", {
+          "packageLocation": "./.yarn/__virtual__/@pickk-common-virtual-445d220395/0/cache/@pickk-common-npm-1.9.4-52c5f1d455-3ca638356d.zip/node_modules/@pickk/common/",
           "packageDependencies": [
-            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.3"],
+            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.4"],
             ["@apollo/client", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:3.3.16"],
             ["@types/apollo__client", null],
             ["@types/graphql", null],
@@ -6404,7 +6404,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/plugin-proposal-private-methods", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.14.5"],
             ["@babel/plugin-proposal-private-property-in-object", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.15.4"],
             ["@babel/runtime", "npm:7.15.4"],
-            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.3"],
+            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.4"],
             ["@pickk/eslint-plugin", "npm:0.0.8"],
             ["@types/apollo-upload-client", "npm:14.1.0"],
             ["@types/js-cookie", "npm:2.2.6"],

@@ -6,8 +6,9 @@ import Preview from '@src/components/common/organisms/Board/preview';
 import Header from '../common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
+
 import ShipModal from './table/modal/ship';
-import StockSetModal from './table/modal/stock';
+import CancelOrderItemModal from './table/modal/cancel-order-item';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {TableActionType} from '../common/organisms/Board/Table/table';
@@ -20,26 +21,26 @@ import {
   usePlacementPreview,
   useBulkShipReadyMeSellerOrderItems,
   useShipMeSellerOrderItem,
-  useCancelMeSellerOrderItem,
 } from './hooks';
+
+export type PlacementModalType = 'ship' | 'cancelOrderItem';
 
 function PlacementBoard(props: BoardProps) {
   const {tableData, selectedRowKeys} = useBoardContext().state;
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<
+    Record<PlacementModalType, boolean>
+  >({
+    ship: false,
+    cancelOrderItem: false,
+  });
 
   const {bulkShipReadyMeSellerOrderItems} =
     useBulkShipReadyMeSellerOrderItems();
   const {shipMeSellerOrderItems} = useShipMeSellerOrderItem();
-  const {cancelMeSellerOrderItem} = useCancelMeSellerOrderItem();
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const toggleOpenModal = (type: PlacementModalType, input: boolean) => () => {
+    setIsModalOpen({...isModalOpen, [type]: input});
   };
-
-  const closeStockModal = () => {
-    setIndex(-1);
-  };
-  const [index, setIndex] = useState(-1);
 
   const newPlacementActions: TableActionType[] = [
     {
@@ -73,7 +74,7 @@ function PlacementBoard(props: BoardProps) {
           );
           return;
         }
-        setIsModalOpen(true);
+        toggleOpenModal('ship', true)();
         /** selectedRowKeys가 초기화 되기 때문에 reload를 하면 안된다. */
         return {reloading: false};
       },
@@ -88,19 +89,22 @@ function PlacementBoard(props: BoardProps) {
           );
           return;
         }
-        try {
-          const selectedId = ids[0];
-          const selectedData = tableData.find(
-            (record) => record.id === selectedId,
+
+        const isPaidOrderItem = ids.every(
+          (id) =>
+            tableData.find((record) => record.id === id).status ===
+            OrderStatus.Paid,
+        );
+        if (!isPaidOrderItem) {
+          message.warning(
+            "주문상태가 '결제 완료'인 주문만 취소확인할 수 있습니다.",
           );
-          const {merchantUid} = selectedData;
-          await cancelMeSellerOrderItem(merchantUid);
-          if (confirm('취소된 제품의 재고를 다시 설정하시겠습니까?')) {
-            setIndex(
-              tableData.find((record) => record.id === selectedId).itemId,
-            );
-          }
-        } catch {}
+          return;
+        }
+
+        toggleOpenModal('cancelOrderItem', true)();
+
+        return {reloading: false};
       },
     },
     {
@@ -125,21 +129,27 @@ function PlacementBoard(props: BoardProps) {
         columns={placementColumns}
         actions={newPlacementActions}
       />
-      <StockSetModal id={index} closeModal={closeStockModal} />
       <ShipModal
-        {...{
-          modalData:
-            tableData?.find((data) => selectedRowKeys[0] === data.id) ?? null,
-          onSubmit: (shipment) => {
-            shipMeSellerOrderItems(
-              shipment.merchantUid,
-              shipment.courierId,
-              shipment.trackCode,
-            );
-          },
-          isModalOpen,
-          closeModal,
+        isModalOpen={isModalOpen.ship}
+        closeModal={toggleOpenModal('ship', false)}
+        modalData={
+          tableData?.find((record) => record.id === selectedRowKeys[0]) ?? null
+        }
+        onSubmit={(shipment) => {
+          shipMeSellerOrderItems(
+            shipment.merchantUid,
+            shipment.courierId,
+            shipment.trackCode,
+          );
         }}
+      />
+      <CancelOrderItemModal
+        isModalOpen={isModalOpen.cancelOrderItem}
+        closeModal={toggleOpenModal('cancelOrderItem', false)}
+        merchantUid={
+          tableData?.find((record) => record.id === selectedRowKeys[0])
+            ?.merchantUid
+        }
       />
     </>
   );
