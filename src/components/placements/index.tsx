@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {message} from 'antd';
 import {OrderStatus} from '@pickk/common';
 
@@ -74,6 +74,8 @@ function PlacementBoard(props: BoardProps) {
           return;
         }
         setIsModalOpen(true);
+        /** selectedRowKeys가 초기화 되기 때문에 reload를 하면 안된다. */
+        return {reloading: false};
       },
     },
     ...placementActions,
@@ -102,6 +104,7 @@ function PlacementBoard(props: BoardProps) {
       },
     },
     {
+      // @TODO 발송지연 안내 액션 추가
       text: '발송지연안내',
       onClick: async (ids: number[]) => {
         return;
