@@ -4,13 +4,13 @@ import {OrderItemStatus} from '@pickk/common';
 export const shipmentPreviewData = [
   {
     label: '배송중',
-    name: 'shipping',
+    name: 'Shipping',
     icon: CarOutlined,
     filterValue: {status: OrderItemStatus.Shipping},
   },
   {
     label: '배송완료',
-    name: 'shipped',
+    name: 'Shipped',
     icon: CheckOutlined,
     filterValue: {status: OrderItemStatus.Shipped},
   },
