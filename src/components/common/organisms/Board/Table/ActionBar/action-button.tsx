@@ -19,8 +19,10 @@ function TableActionButton({
 
   const handleActionButtonClick = async () => {
     try {
-      await onClick(selectedRowKeys, mutate);
-      reload();
+      const result = await onClick(selectedRowKeys, mutate);
+      if (!result || result.reloading) {
+        reload();
+      }
     } catch (err) {
       message.error('실패! - ' + err);
     }

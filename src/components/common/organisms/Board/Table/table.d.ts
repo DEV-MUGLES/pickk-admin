@@ -6,7 +6,7 @@ export type TableActionType = {
   onClick?: (
     ids: number[],
     mutate?: (options?: MutationFunctionOptions) => Promise<FetchResult>,
-  ) => Promise<void>;
+  ) => Promise<{reloading?: boolean} | void>;
   useTableAction?: () => MutationTuple;
   Component?: React.FunctionComponent<unknown>;
 };
