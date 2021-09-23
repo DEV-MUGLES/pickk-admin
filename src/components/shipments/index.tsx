@@ -13,11 +13,7 @@ import {useShipmentPreview} from './hooks';
 import {shipmentPreviewData} from './preview-data';
 
 function ShipmentBoard(props: BoardProps) {
-  const placementActions: TableActionType[] = [
-    {text: '송장수정'},
-    {text: '직접반품'},
-    {text: '직접교환'},
-  ];
+  const placementActions: TableActionType[] = [{text: '송장수정'}];
 
   return (
     <>
