@@ -12,8 +12,8 @@ export const usePlacementPreview = (): PreviewDataResult => {
       meSellerOrderItemsCount: Pick<
         OrderItemsCountOutput,
         | 'id'
-        | 'paid'
-        | 'ship_ready'
+        | 'Paid'
+        | 'ShipReady'
         | 'process_delayed_paid'
         | 'process_delayed_ship_ready'
         | 'lastUpdatedAt'
