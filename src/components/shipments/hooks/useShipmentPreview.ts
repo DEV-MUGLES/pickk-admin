@@ -11,7 +11,7 @@ export const useShipmentPreview = (): PreviewDataResult => {
     {
       meSellerOrderItemsCount: Pick<
         OrderItemsCountOutput,
-        'id' | 'shipping' | 'shipped' | 'lastUpdatedAt'
+        'id' | 'Shipping' | 'Shipped' | 'lastUpdatedAt'
       >;
     },
     QueryMeSellerOrderItemsCountArgs

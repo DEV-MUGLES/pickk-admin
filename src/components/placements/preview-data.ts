@@ -10,13 +10,13 @@ import {PreviewDataType} from '../common/organisms/Board/preview';
 export const placementPreviewData: PreviewDataType[] = [
   {
     label: '신규주문',
-    name: 'paid',
+    name: 'Paid',
     icon: ShoppingOutlined,
     filterValue: {status: OrderItemStatus.Paid, isProcessDelaying: null},
   },
   {
     label: '발송준비',
-    name: 'ship_ready',
+    name: 'ShipReady',
     icon: CheckOutlined,
     filterValue: {status: OrderItemStatus.ShipReady, isProcessDelaying: null},
   },
