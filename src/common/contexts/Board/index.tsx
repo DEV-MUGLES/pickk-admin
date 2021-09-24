@@ -112,7 +112,7 @@ export default function BoardStoreProvider({
         ? data?.[operationName]
             .map((v) => mapRecord(v))
             .map((v) => ({...v, key: v.id}))
-        : null,
+        : [],
       loading,
       defaultFilter,
       selectedRowKeys,
