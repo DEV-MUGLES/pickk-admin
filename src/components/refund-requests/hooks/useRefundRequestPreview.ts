@@ -11,11 +11,11 @@ export const useRefundRequestPreview = (): PreviewDataResult => {
     query MeSellerRefundRequestsCount($forceUpdate: Boolean) {
       meSellerRefundRequestsCount(forceUpdate: $forceUpdate) {
         id
-        confirmed
+        Confirmed
         lastUpdatedAt
-        picked
-        rejected
-        requested
+        Picked
+        Rejected
+        Requested
         process_delayed
       }
     }
