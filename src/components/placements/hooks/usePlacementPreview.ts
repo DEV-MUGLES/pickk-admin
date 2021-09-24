@@ -24,8 +24,8 @@ export const usePlacementPreview = (): PreviewDataResult => {
     query MeSellerOrderItemsCount($forceUpdate: Boolean) {
       meSellerOrderItemsCount(forceUpdate: $forceUpdate) {
         id
-        paid
-        ship_ready
+        Paid
+        ShipReady
         process_delayed_paid
         process_delayed_ship_ready
         lastUpdatedAt

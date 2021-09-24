@@ -10,19 +10,19 @@ import {PreviewDataType} from '../common/organisms/Board/preview';
 export const refundRequestPreviewData: PreviewDataType[] = [
   {
     label: '반품 요청',
-    name: 'requested',
+    name: 'Requested',
     icon: ShoppingOutlined,
     filterValue: {status: RefundRequestStatus.Requested},
   },
   {
     label: '반품 수거완료',
-    name: 'picked',
+    name: 'Picked',
     icon: CheckOutlined,
     filterValue: {status: RefundRequestStatus.Picked},
   },
   {
     label: '반품 완료',
-    name: 'confirmed',
+    name: 'Confirmed',
     icon: CheckOutlined,
     filterValue: {status: RefundRequestStatus.Confirmed},
   },

@@ -12,6 +12,14 @@ import {
 
 export const refundRequestColumns: ColumnsType<any> = [
   {
+    title: '주문상품번호',
+    dataIndex: 'merchantUid',
+    key: 'merchantUid',
+    sorter: (a, b) => stringSorter(b.orderMerchantUid, a.orderMerchantUid),
+    width: 100,
+    ellipsis: true,
+  },
+  {
     title: '주문번호',
     dataIndex: 'orderMerchantUid',
     key: 'orderMerchantUid',

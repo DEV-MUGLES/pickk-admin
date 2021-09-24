@@ -19,8 +19,8 @@ export const useShipmentPreview = (): PreviewDataResult => {
     query MeSellerOrderItemsCount($forceUpdate: Boolean) {
       meSellerOrderItemsCount(forceUpdate: $forceUpdate) {
         id
-        shipping
-        shipped
+        Shipping
+        Shipped
         confirmed
         lastUpdatedAt
       }

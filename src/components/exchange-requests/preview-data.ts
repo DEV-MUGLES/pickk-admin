@@ -12,25 +12,25 @@ import {PreviewDataType} from '../common/organisms/Board/preview';
 export const exchangeRequestPreviewData: PreviewDataType[] = [
   {
     label: '교환 요청',
-    name: 'requested',
+    name: 'Requested',
     icon: UnorderedListOutlined,
     filterValue: {status: ExchangeRequestStatus.Requested},
   },
   {
     label: '교환 수거 완료',
-    name: 'picked',
+    name: 'Picked',
     icon: ImportOutlined,
     filterValue: {status: ExchangeRequestStatus.Picked},
   },
   {
     label: '교환 배송 중',
-    name: 'reshipping',
+    name: 'Reshipping',
     icon: CarOutlined,
     filterValue: {status: ExchangeRequestStatus.Reshipping},
   },
   {
     label: '교환 배송 완료',
-    name: 'reshipped',
+    name: 'Reshipped',
     icon: ShoppingOutlined,
     filterValue: {status: ExchangeRequestStatus.Reshipped},
   },

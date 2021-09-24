@@ -11,10 +11,10 @@ export const useExchangeRequestPreview = (): PreviewDataResult => {
     query MeSellerExchangeRequestsCount($forceUpdate: Boolean) {
       meSellerExchangeRequestsCount(forceUpdate: $forceUpdate) {
         id
-        requested
-        picked
-        reshipping
-        reshipped
+        Requested
+        Picked
+        Reshipping
+        Reshipped
         process_delayed
         lastUpdatedAt
       }

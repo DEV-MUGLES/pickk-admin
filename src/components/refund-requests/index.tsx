@@ -47,8 +47,10 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
           return;
         }
 
-        // @TODO merchantUids 넘겨주기
-        await bulkPickMeSellerRefundRequests([]);
+        const merchantUids = ids.map(
+          (id) => tableData.find((record) => record.id === id).merchantUids,
+        );
+        await bulkPickMeSellerRefundRequests(merchantUids);
       },
     },
     {
