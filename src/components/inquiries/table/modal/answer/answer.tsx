@@ -82,7 +82,7 @@ export default function InquiryAnswerModal(props: InquiryAnswerModalProps) {
       {answerCount > 0 && (
         <Alert
           showIcon
-          message={`기존 답변에 추가적인 답변으로 등록됩니다. (기존 답변 개수: ${answerCount})`}
+          message={`기존 답변에 추가적인 답변으로 등록됩니다. (이미 존재하는 답변 개수: ${answerCount})`}
           type="warning"
           style={{marginBottom: '1.6rem'}}
         />
