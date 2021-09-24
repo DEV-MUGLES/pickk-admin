@@ -25,6 +25,7 @@ export const ITEM_OPTION_VALUE_FRAG = gql`
   fragment ItemOptionValueFrag on ItemOptionValue {
     id
     name
+    priceVariant
   }
 `;
 

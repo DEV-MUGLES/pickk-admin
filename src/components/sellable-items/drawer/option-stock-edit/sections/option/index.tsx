@@ -3,16 +3,15 @@ import {Button, Table, Tooltip} from 'antd';
 import {PlusOutlined, EditOutlined} from '@ant-design/icons';
 import {Item} from '@pickk/common';
 
-import CreateOptionModal from './create-option-modal';
-import OptionNameEditModal from './name-edit-modal';
-
 import {useBoardContext} from '@src/common/contexts/Board';
+
+import {CreateOptionModal, OptionNameEditModal} from './modal';
 
 export type ModalType = 'createOption' | 'nameEdit';
 
 function OptionManageSection() {
   const {
-    state: {selectedData},
+    state: {selectedRowId, selectedData},
   } = useBoardContext();
   const [modalVisible, setModalVisible] = useState<Record<ModalType, boolean>>({
     createOption: false,
@@ -35,7 +34,7 @@ function OptionManageSection() {
         EditOutlined,
         '옵션 수정시 기존 재고값이 모두 초기화 됩니다.',
       ]
-    : ['옵션 추가', PlusOutlined , undefined];
+    : ['옵션 추가', PlusOutlined, undefined];
 
   const handleModalOpen = (type: ModalType) => (isOpen: boolean) => () => {
     setModalVisible({
@@ -49,7 +48,7 @@ function OptionManageSection() {
       <Tooltip title={warningMessage}>
         <Button
           onClick={handleModalOpen('createOption')(true)}
-          icon={<ButtonIcon/>}
+          icon={<ButtonIcon />}
           style={{marginBottom: '0.8rem'}}>
           {buttonText}
         </Button>
@@ -86,6 +85,14 @@ function OptionManageSection() {
           visible={modalVisible.createOption}
           onClose={handleModalOpen('createOption')(false)}
           warningMessage={warningMessage}
+          itemId={selectedRowId}
+          defaultOption={selectedData?.options?.map(({name, values}) => ({
+            name,
+            values: values.map(({name, priceVariant = 0}) => ({
+              name,
+              priceVariant,
+            })),
+          }))}
         />
       )}
       {modalVisible.nameEdit && (
