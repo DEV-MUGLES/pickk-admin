@@ -5,9 +5,9 @@ export const refundRequestRecordMapper = (record: BaseRefundRequest) => {
   const {buyer} = order;
   return {
     ...record,
-    buyerName: buyer.name,
-    buyerPhoneNumber: buyer.phoneNumber,
-    courierCode: shipment.courier.code,
-    trackCode: shipment.trackCode,
+    buyerName: buyer?.name,
+    buyerPhoneNumber: buyer?.phoneNumber,
+    courierCode: shipment?.courier.code,
+    trackCode: shipment?.trackCode,
   };
 };
