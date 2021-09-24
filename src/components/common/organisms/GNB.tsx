@@ -2,7 +2,12 @@ import {Layout, Menu} from 'antd';
 import styled from 'styled-components';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {DollarOutlined, ShopOutlined, SkinOutlined} from '@ant-design/icons';
+import {
+  DollarOutlined,
+  ShopOutlined,
+  SkinOutlined,
+  CommentOutlined,
+} from '@ant-design/icons';
 import React from 'react';
 
 const {Sider} = Layout;
@@ -81,6 +86,16 @@ const MENU_ITEMS: MenuItemsType = [
       //   text: '세금계산서 조회',
       //   link: '/tax',
       // }
+    ],
+  },
+  {
+    title: '문의 관리',
+    icon: CommentOutlined,
+    items: [
+      {
+        text: '문의 조회',
+        link: '/inquiries',
+      },
     ],
   },
 ];
