@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 type IProps = React.PropsWithChildren<{
   src: string;
+  alt?: string;
   width?: string | number;
   height?: string | number;
   circle?: boolean;
@@ -28,8 +29,8 @@ const Img = (props: IProps) => {
       : `height: ${props.height || '100%'};`}
     ${props.border && `border:0.01rem solid #f0f0f0`}
   `;
-  const {className, src, onClick, style, children} = props;
-  return <Image {...{className, src, onClick, style}}>{children}</Image>;
+  const {className, src, alt, onClick, style, children} = props;
+  return <Image {...{className, src, alt, onClick, style}}>{children}</Image>;
 };
 
 export default Img;
