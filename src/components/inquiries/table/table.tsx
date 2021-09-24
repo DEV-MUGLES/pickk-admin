@@ -1,15 +1,15 @@
+import {useState} from 'react';
 import {Button, Space} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 
 import {BoardTable} from '@src/components/common/organisms';
 
 import {InquiryDataType} from '@src/containers/inquiries/hooks';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 import {InquiryAnswerModal} from './modal';
 
 import {inquiriesColumns} from './columns';
-import {useState} from 'react';
-import {useBoardContext} from '@src/common/contexts/Board';
 
 export type InquiriesTableProps = {
   title: string;
