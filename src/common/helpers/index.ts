@@ -3,6 +3,7 @@ export const range = (start: number, end: number) =>
 
 export * from './alias';
 export * from './Array';
+export * from './ColumnRenderer';
 export * from './Cookies';
 export * from './date';
 export * from './NumberParser';
