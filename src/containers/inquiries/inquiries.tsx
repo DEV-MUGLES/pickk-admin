@@ -1,5 +1,5 @@
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {InquiriesTable} from '@src/components/inquiries';
+import {InquiriesFilter, InquiriesTable} from '@src/components/inquiries';
 
 import {useInquiries} from './hooks';
 
@@ -18,6 +18,7 @@ export default function InquiriesBoardContainer(
         operationName: 'meSellerInquiries',
         filterName: 'filter',
       }}>
+      <InquiriesFilter {...props} />
       <InquiriesTable {...props} />
     </BoardStoreProvider>
   );
