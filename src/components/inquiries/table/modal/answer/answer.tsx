@@ -5,6 +5,8 @@ import {InquiryAnswer} from '@pickk/common';
 
 import {useMe} from '@src/common/hooks/apis';
 
+import AnswerList from './answer-list';
+
 import {useAnswerInquiry} from './hooks';
 
 const {Text} = Typography;
@@ -101,6 +103,7 @@ export default function InquiryAnswerModal(props: InquiryAnswerModalProps) {
       <StyledAlert
         message={`기존 답변에 추가적인 답변으로 등록됩니다. (이미 등록된 답변 개수: ${answers.length})`}
       />
+      <AnswerList answers={answers} />
     </Modal>
   );
 }

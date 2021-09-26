@@ -25,6 +25,7 @@ const GET_INQUIRIES = gql`
         id
         content
         displayAuthor
+        createdAt
       }
     }
   }
