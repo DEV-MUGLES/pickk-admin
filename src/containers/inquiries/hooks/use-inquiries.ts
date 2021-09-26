@@ -2,8 +2,8 @@ import {gql, useQuery} from '@apollo/client';
 import {Inquiry, Item, User, InquiryAnswer} from '@pickk/common';
 
 const GET_INQUIRIES = gql`
-  query meSellerInquiries {
-    meSellerInquiries {
+  query meSellerInquiries($filter: InquiryFilter) {
+    meSellerInquiries(filter: $filter) {
       id
       title
       content
