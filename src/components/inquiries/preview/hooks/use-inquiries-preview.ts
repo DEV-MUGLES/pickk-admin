@@ -7,6 +7,7 @@ const GET_ME_SELLER_INQUIRIES_COUNT = gql`
       id
       delayed
       not_answered
+      lastUpdatedAt
     }
   }
 `;
