@@ -16,7 +16,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@apollo/client": "^3.3.16",
-    "@pickk/common": "^1.9.4",
+    "@pickk/common": "^1.9.5",
     "antd": "^4.15.4",
     "antd-prompt": "^0.4.0",
     "apollo-upload-client": "^14.1.3",
