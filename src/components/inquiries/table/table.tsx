@@ -5,7 +5,6 @@ import {ColumnsType} from 'antd/lib/table';
 import {BoardTable} from '@src/components/common/organisms';
 
 import {InquiryDataType} from '@src/containers/inquiries/hooks';
-import {useBoardContext} from '@src/common/contexts/Board';
 
 import {InquiryAnswerModal} from './modal';
 
@@ -16,19 +15,15 @@ export type InquiriesTableProps = {
 };
 
 export default function InquiriesTable({title}: InquiriesTableProps) {
-  const {
-    state: {tableData},
-  } = useBoardContext();
-
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedId, setSelectedId] = useState(-1);
+  const [selectedRecord, setSelectedRecord] = useState<InquiryDataType>(null);
 
   const handleModalClose = () => {
     setIsModalVisible(false);
   };
 
-  const handleAnswerClick = (id: number) => () => {
-    setSelectedId(id);
+  const handleAnswerClick = (record: InquiryDataType) => () => {
+    setSelectedRecord(record);
     setIsModalVisible(true);
   };
 
@@ -38,10 +33,10 @@ export default function InquiriesTable({title}: InquiriesTableProps) {
       title: '',
       dataIndex: 'answer',
       key: 'answer',
-      render: (_, {id}) => (
+      render: (_, record) => (
         <Space direction="vertical">
-          <Button onClick={handleAnswerClick(id)}>답변달기</Button>
-          <Button href={`/inquiries/${id}`} target="_blank">
+          <Button onClick={handleAnswerClick(record)}>답변달기</Button>
+          <Button href={`/inquiries/${record.id}`} target="_blank">
             상세보기
           </Button>
         </Space>
@@ -55,14 +50,14 @@ export default function InquiriesTable({title}: InquiriesTableProps) {
   return (
     <>
       <BoardTable title={title} columns={newInquiriesColumns} />
-      <InquiryAnswerModal
-        visible={isModalVisible}
-        onClose={handleModalClose}
-        inquiryId={selectedId}
-        answerCount={
-          tableData?.find((record) => record.id === selectedId)?.answers?.length
-        }
-      />
+      {!!selectedRecord && (
+        <InquiryAnswerModal
+          visible={isModalVisible}
+          onClose={handleModalClose}
+          inquiryId={selectedRecord.id}
+          answers={selectedRecord.answers}
+        />
+      )}
     </>
   );
 }
