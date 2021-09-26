@@ -1,5 +1,7 @@
 import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
 
+import {TripleSwitch} from '@src/components/common/molecules/BoardFilter/input';
+
 import {BoardFilterRowProps} from '@src/components/common/molecules/BoardFilter/BodyRow';
 
 export const inquiryFilterInputs: BoardFilterRowProps[] = [
@@ -8,5 +10,11 @@ export const inquiryFilterInputs: BoardFilterRowProps[] = [
     labelText: '주문상품번호',
     Component: InputBox,
   },
-  // @TODO 답변여부(전체, 미답변, 답변완료) 필터 추가
+  {
+    name: 'isAnswered',
+    labelText: '답변여부',
+    Component: TripleSwitch,
+    trueText: '답변완료',
+    falseText: '미답변',
+  },
 ];
