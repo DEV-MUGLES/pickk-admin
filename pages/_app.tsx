@@ -4,12 +4,18 @@ import Head from 'next/head';
 import {useRouter} from 'next/router';
 import {ApolloProvider, gql} from '@apollo/client';
 import {BackTop} from 'antd';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/ko';
 import 'antd/dist/antd.css';
 import {UserRole} from '@pickk/common';
 
 import MainLayout from '@src/components/common/templates/MainLayout';
 
 import {createApolloClient, useApolloClient} from '@src/providers/apollo';
+
+dayjs.extend(relativeTime);
+dayjs.locale('ko');
 
 function PickkAdminApp({Component, pageProps}: AppProps) {
   const apolloClient = useApolloClient(pageProps);
