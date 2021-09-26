@@ -8,12 +8,13 @@ export const inquiriesPreviewData: PreviewDataType[] = [
     label: '미답변 문의',
     name: 'not_answered',
     icon: CommentOutlined,
-    filterValue: {status: ''}, // @TODO
+    filterValue: {isAnswered: false},
   },
-  {
-    label: '장기 미답변 문의',
-    name: 'delayed',
-    icon: ClockCircleOutlined,
-    filterValue: {status: ''}, // @TODO
-  },
+  // @TODO : delayed 필터 적용
+  // {
+  //   label: '장기 미답변 문의',
+  //   name: 'delayed',
+  //   icon: ClockCircleOutlined,
+  //   filterValue: {isAnswered: false},
+  // },
 ];
