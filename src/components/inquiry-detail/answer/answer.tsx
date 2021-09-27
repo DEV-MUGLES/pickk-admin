@@ -6,8 +6,13 @@ import {Inquiry} from '@pickk/common';
 import {GREY} from '@src/common/constants/colors';
 
 import InquiryAnswerCard from './card';
+import InquiryAnswerUpdateModal from './update-modal';
 
-import {useInquiryAnswers, useAnswerInquiry} from './hooks';
+import {
+  useInquiryAnswers,
+  useAnswerInquiry,
+  InquiryAnswerDataType,
+} from './hooks';
 
 const {Text, Title} = Typography;
 const {TextArea} = Input;
@@ -64,12 +69,20 @@ export default function InquiryDetailAnswerSection(
   const [content, setContent] = useState('');
   const [displayAuthor, setDisplayAuthor] = useState('');
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] =
+    useState<InquiryAnswerDataType>(null);
+
   const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   };
 
   const handleDisplayAuthorChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDisplayAuthor(e.target.value);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
   };
 
   const handleAnswerButtonClick = async () => {
@@ -86,6 +99,12 @@ export default function InquiryDetailAnswerSection(
     }
   };
 
+  const handleUpdateInquiryAnswer =
+    (answer: InquiryAnswerDataType) => async () => {
+      setSelectedAnswer(answer);
+      setIsModalVisible(true);
+    };
+
   const renderAnswers = () => {
     if (!answers?.length) {
       return <Text>등록된 답변이 없습니다</Text>;
@@ -94,29 +113,41 @@ export default function InquiryDetailAnswerSection(
     return answers.map((answer, index) => (
       <>
         {index !== 0 && <Divider style={{margin: '0.8rem 0'}} />}
-        <InquiryAnswerCard {...answer} />
+        <InquiryAnswerCard
+          {...answer}
+          onUpdateClick={handleUpdateInquiryAnswer(answer)}
+        />
       </>
     ));
   };
 
   return (
-    <StyledWrapper>
-      <Title level={5}>문의 답변 ({answers.length} 개)</Title>
-      <StyledAnswersWrapper>{renderAnswers()}</StyledAnswersWrapper>
-      <SyledRow>
-        <TextArea value={content} onChange={handleContentChange} />
-        <AnswerButton
-          disabled={!content || !displayAuthor}
-          onClick={handleAnswerButtonClick}
+    <>
+      <StyledWrapper>
+        <Title level={5}>문의 답변 ({answers.length} 개)</Title>
+        <StyledAnswersWrapper>{renderAnswers()}</StyledAnswersWrapper>
+        <SyledRow>
+          <TextArea value={content} onChange={handleContentChange} />
+          <AnswerButton
+            disabled={!content || !displayAuthor}
+            onClick={handleAnswerButtonClick}
+          />
+        </SyledRow>
+        <SyledRow style={{marginTop: '0.4rem'}}>
+          <Text>작성자: </Text>
+          <StyledInput
+            value={displayAuthor}
+            onChange={handleDisplayAuthorChange}
+          />
+        </SyledRow>
+      </StyledWrapper>
+      {isModalVisible && (
+        <InquiryAnswerUpdateModal
+          visible={isModalVisible}
+          onClose={handleModalClose}
+          answer={selectedAnswer}
         />
-      </SyledRow>
-      <SyledRow style={{marginTop: '0.4rem'}}>
-        <Text>작성자: </Text>
-        <StyledInput
-          value={displayAuthor}
-          onChange={handleDisplayAuthorChange}
-        />
-      </SyledRow>
-    </StyledWrapper>
+      )}
+    </>
   );
 }

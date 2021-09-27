@@ -32,11 +32,12 @@ const getCreatedAtText = (createdAt: Date) => {
 type InquiryAnswerCardProps = Pick<
   InquiryAnswer,
   'id' | 'content' | 'displayAuthor' | 'createdAt'
->;
+> & {
+  onUpdateClick: () => void;
+};
 
-// @TODO 답변 수정하기
 export default function InquiryAnswerCard(props: InquiryAnswerCardProps) {
-  const {id, content, createdAt, displayAuthor} = props;
+  const {id, content, createdAt, displayAuthor, onUpdateClick} = props;
 
   return (
     <StyledWrapper key={id}>
@@ -45,7 +46,7 @@ export default function InquiryAnswerCard(props: InquiryAnswerCardProps) {
         <Text>
           {getCreatedAtText(createdAt)} {displayAuthor}
         </Text>
-        <Button>수정</Button>
+        <Button onClick={onUpdateClick}>수정</Button>
       </SyledRow>
     </StyledWrapper>
   );
