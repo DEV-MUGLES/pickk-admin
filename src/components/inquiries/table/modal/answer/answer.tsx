@@ -4,10 +4,9 @@ import {Modal, Alert, Input, Typography, message} from 'antd';
 import {InquiryAnswer} from '@pickk/common';
 
 import {useMe} from '@src/common/hooks/apis';
+import {useAnswerInquiry} from '@src/components/inquiry-detail/answer/hooks';
 
 import AnswerList from './answer-list';
-
-import {useAnswerInquiry} from './hooks';
 
 const {Text} = Typography;
 const {TextArea} = Input;
