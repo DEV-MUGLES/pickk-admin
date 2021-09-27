@@ -1,9 +1,9 @@
 import {gql, useQuery} from '@apollo/client';
-import {InquiryAnswer, QueryRootInquiryArgs} from '@pickk/common';
+import {InquiryAnswer, QueryMeSellerInquiryArgs} from '@pickk/common';
 
 const GET_INQUIRY_ANSWERS = gql`
-  query rootInquiry($id: Int!) {
-    rootInquiry(id: $id) {
+  query meSellerInquiry($id: Int!) {
+    meSellerInquiry(id: $id) {
       id
       answers {
         id
@@ -24,17 +24,17 @@ type InquiryAnswerDataType = Pick<
 export const useInquiryAnswers = (id: number) => {
   const {data, refetch} = useQuery<
     {
-      rootInquiry: {
+      meSellerInquiry: {
         id: number;
         answers: InquiryAnswerDataType[];
       };
     },
-    QueryRootInquiryArgs
+    QueryMeSellerInquiryArgs
   >(GET_INQUIRY_ANSWERS, {
     variables: {
       id,
     },
   });
 
-  return {data: data?.rootInquiry.answers, refetch};
+  return {data: data?.meSellerInquiry.answers, refetch};
 };

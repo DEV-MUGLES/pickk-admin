@@ -4,12 +4,12 @@ import {
   Item,
   User,
   OrderItem,
-  QueryRootInquiryArgs,
+  QueryMeSellerInquiryArgs,
 } from '@pickk/common';
 
-const GET_ROOT_INQUIRY = gql`
-  query rootInquiry($id: Int!) {
-    rootInquiry(id: $id) {
+const GET_ME_SELLER_INQUIRY = gql`
+  query meSellerInquiry($id: Int!) {
+    meSellerInquiry(id: $id) {
       id
       sellerId
       type
@@ -71,13 +71,13 @@ type InquiryDetailDataType = Pick<
 
 export const useInquiry = (id: number) => {
   const {data, loading} = useQuery<
-    {rootInquiry: InquiryDetailDataType},
-    QueryRootInquiryArgs
-  >(GET_ROOT_INQUIRY, {
+    {meSellerInquiry: InquiryDetailDataType},
+    QueryMeSellerInquiryArgs
+  >(GET_ME_SELLER_INQUIRY, {
     variables: {
       id,
     },
   });
 
-  return {data: data?.rootInquiry, loading};
+  return {data: data?.meSellerInquiry, loading};
 };
