@@ -13,7 +13,6 @@ const ANSWER_INQUIRY = gql`
         content
         displayAuthor
         createdAt
-        updatedAt
       }
     }
   }

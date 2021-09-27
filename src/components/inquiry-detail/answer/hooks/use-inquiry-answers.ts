@@ -10,15 +10,14 @@ const GET_INQUIRY_ANSWERS = gql`
         content
         displayAuthor
         createdAt
-        updatedAt
       }
     }
   }
 `;
 
-type InquiryAnswerDataType = Pick<
+export type InquiryAnswerDataType = Pick<
   InquiryAnswer,
-  'id' | 'content' | 'displayAuthor' | 'createdAt' | 'updatedAt'
+  'id' | 'content' | 'displayAuthor' | 'createdAt'
 >;
 
 export const useInquiryAnswers = (id: number) => {

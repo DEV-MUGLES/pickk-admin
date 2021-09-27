@@ -13,7 +13,7 @@ const UPDATE_ME_SELLER_INQUIRY_ANSWER = gql`
       id
       content
       displayAuthor
-      updatedAt
+      createdAt
     }
   }
 `;
