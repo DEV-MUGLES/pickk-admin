@@ -6,7 +6,10 @@ const UPDATE_ME_SELLER_INQUIRY_ANSWER = gql`
     $id: Int!
     $updateInquiryAnswerInput: UpdateInquiryAnswerInput!
   ) {
-    updateMeSellerInquiryAnswer(id:$id, updateInquiryAnswerInput:$updateInquiryAnswerInput:) {
+    updateMeSellerInquiryAnswer(
+      id: $id
+      updateInquiryAnswerInput: $updateInquiryAnswerInput
+    ) {
       id
       content
       displayAuthor
