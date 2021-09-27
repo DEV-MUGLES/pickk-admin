@@ -19,6 +19,10 @@ export default function LoginSection() {
 
   const {loginSellerByCode} = useLoginSellerByCode();
 
+  const redirect = () => {
+    router.push(router.query?.to?.toString() ?? '/');
+  };
+
   const handleFinish = async ({
     code,
     password,
@@ -30,7 +34,7 @@ export default function LoginSection() {
       setCookie('refreshToken', data.loginSellerByCode.refresh);
 
       message.info('로그인 성공');
-      router.push('/dashboard');
+      redirect();
     } catch (error) {
       message.warning('로그인에 실패했습니다' + error);
     }
