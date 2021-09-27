@@ -43,8 +43,6 @@ export default function InquiryDetailContainer({
     return <StyledSection>문의가 없습니다.</StyledSection>;
   }
 
-  // @TODO 해당 셀러의 브랜드에 대한 문의인지 확인
-
   const {item, orderItemMerchantUid, orderItem} = data;
 
   return (
