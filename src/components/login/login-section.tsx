@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useRouter} from 'next/router';
 import {Form, Input, Button, message, Typography} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
-import {LoginByCodeInput, UserRole} from '@pickk/common';
+import {LoginByCodeInput} from '@pickk/common';
 
 import LogoDefaultIcon from '@src/components/common/icons/logo/default';
 import {Space} from '@src/components/common/atoms';
@@ -17,29 +17,24 @@ const {Title} = Typography;
 export default function LoginSection() {
   const router = useRouter();
 
-  const {callQuery: login} = useLoginSellerByCode();
+  const {loginSellerByCode} = useLoginSellerByCode();
 
-  const handleFinish = async (
-    loginByCodeInput: Pick<LoginByCodeInput, 'code' | 'password'>,
-  ) => {
+  const redirect = () => {
+    router.push(router.query?.to?.toString() ?? '/');
+  };
+
+  const handleFinish = async ({
+    code,
+    password,
+  }: Pick<LoginByCodeInput, 'code' | 'password'>) => {
     try {
-      const {data, error} = await login({
-        loginByCodeInput: {
-          ...loginByCodeInput,
-          minRole: UserRole.Seller,
-        },
-      });
-
-      if (!data || error) {
-        message.warning('로그인에 실패했습니다' + error);
-        return;
-      }
+      const {data} = await loginSellerByCode(code, password);
 
       setCookie('accessToken', data.loginSellerByCode.access);
       setCookie('refreshToken', data.loginSellerByCode.refresh);
 
       message.info('로그인 성공');
-      router.push('/dashboard');
+      redirect();
     } catch (error) {
       message.warning('로그인에 실패했습니다' + error);
     }
