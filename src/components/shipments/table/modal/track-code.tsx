@@ -1,15 +1,14 @@
 import {ChangeEvent, useState} from 'react';
 import styled from 'styled-components';
-import {Modal, Input, Typography} from 'antd';
+import {Modal, Input, Typography, message} from 'antd';
 import {useUpdateOrderItemTrackCode} from './hooks';
 import {useBoardContext} from '@src/common/contexts/Board';
 
 const {Text} = Typography;
 
-const StyledRow = styled.div`
+const StyledColumn = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
 `;
 
 export type TrackCodeUpdateModalProps = {
@@ -38,10 +37,21 @@ export default function TrackCodeUpdateModal({
   };
 
   const handleSubmit = () => {
-    updateOrderItemTrackCode(merchantUid, trackCode);
-    setTrackCode('');
+    if (trackCode.length !== 10 && trackCode.length !== 12) {
+      message.warning('운송장 번호는 10자리 혹은 12자리입니다.');
+      return;
+    }
 
-    reload();
+    try {
+      updateOrderItemTrackCode(merchantUid, trackCode);
+      setTrackCode('');
+
+      message.success('송장정보를 수정했습니다.');
+      reload();
+      onClose();
+    } catch (err) {
+      message.error('실패했습니다. err - ' + err);
+    }
   };
 
   return (
@@ -50,10 +60,12 @@ export default function TrackCodeUpdateModal({
       visible={visible}
       onCancel={onClose}
       onOk={handleSubmit}>
-      <StyledRow>
-        <Text style={{width: '10rem'}}>송장번호: </Text>
+      <StyledColumn>
+        <Text style={{marginBottom: '0.4rem'}}>
+          송장번호 (10자리 또는 12자리):
+        </Text>
         <Input value={trackCode} onChange={handleChange} type="number" />
-      </StyledRow>
+      </StyledColumn>
     </Modal>
   );
 }
