@@ -4,7 +4,7 @@ export type TableActionType = {
   icon?: string;
   text?: string;
   onClick?: (
-    ids: number[],
+    ids: number[] | string[],
     mutate?: (options?: MutationFunctionOptions) => Promise<FetchResult>,
   ) => Promise<{reloading?: boolean} | void>;
   useTableAction?: () => MutationTuple;

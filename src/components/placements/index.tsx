@@ -45,9 +45,9 @@ function PlacementBoard(props: BoardProps) {
   const newPlacementActions: TableActionType[] = [
     {
       text: '발주확인',
-      onClick: async (ids: number[]) => {
+      onClick: async (merchantUids: string[]) => {
         if (
-          !ids.every(
+          !merchantUids.every(
             (id) =>
               tableData.find((record) => record.id === id).status ===
               OrderStatus.Paid,
@@ -59,9 +59,6 @@ function PlacementBoard(props: BoardProps) {
           return;
         }
 
-        const merchantUids = ids.map(
-          (id) => tableData.find((record) => record.id === id).merchantUids,
-        );
         await bulkShipReadyMeSellerOrderItems(merchantUids);
       },
     },
