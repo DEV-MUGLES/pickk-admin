@@ -53,12 +53,13 @@ function StockManageSection() {
 
   const newStockColumns = [
     ...stockColumns,
-    {
-      title: '예약발송',
-      dataIndex: '',
-      key: '',
-      render: (_, {id}) => <Button size="small">예약발송</Button>,
-    },
+    // @TODO 추후 구현
+    // {
+    //   title: '예약발송',
+    //   dataIndex: '',
+    //   key: '',
+    //   render: (_, {id}) => <Button size="small">예약발송</Button>,
+    // },
   ];
 
   return (
@@ -68,7 +69,10 @@ function StockManageSection() {
         onClick={handleInfiniteSettingButtonClick(newIsInfiniteStock)}>
         {buttonText}
       </Button>
-      <Table columns={newStockColumns} dataSource={products} />
+      <Table
+        columns={newStockColumns}
+        dataSource={products.filter(({isDeleted}) => !isDeleted)}
+      />
       <ShippingReservePolicyModal
         visible={modalVisible}
         onClose={handleModalOpen(false)}
