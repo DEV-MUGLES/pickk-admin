@@ -129,7 +129,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     dataIndex: 'sellableAt',
     key: 'sellableAt',
     sorter: (a, b) => stringSorter(b.createdAt, a.createdAt),
-    render: (value) => (value ? renderDateColumn(value) : '-'),
+    render: renderDateColumn,
     width: 120,
   },
 ];

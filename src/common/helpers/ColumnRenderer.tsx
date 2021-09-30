@@ -11,6 +11,6 @@ export const renderBooleanColumn: ColumnRendererType<boolean> = (value) => (
   <>{value === true ? '✅' : '❌'}</>
 );
 
-export const renderDateColumn: ColumnRendererType<string> = (value) => (
-  <>{dayjs(value).format('YYYY/MM/DD')}</>
-);
+export const renderDateColumn: ColumnRendererType<string> = (value) => {
+  return !value ? '-' : dayjs(value).format('YYYY/MM/DD hh:mm');
+};
