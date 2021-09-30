@@ -2,7 +2,7 @@ import React from 'react';
 import {Cascader} from 'antd';
 
 import {CustomInputProps} from '@src/components/common/organisms/Form/base';
-import {useItemMajorCategories} from '@src/common/hooks/apis';
+import {useItemCategoryTree} from '@src/common/hooks/apis';
 
 export type ItemCategoryCascaderProps = CustomInputProps<[number, number]> & {
   hasAll?: boolean;
@@ -13,8 +13,8 @@ function ItemCategoryCascader({
   onChange,
   hasAll = false,
 }: ItemCategoryCascaderProps) {
-  const {data} = useItemMajorCategories();
-  const majorCategories = data?.itemMajorCategories ?? [];
+  const {data} = useItemCategoryTree();
+  const majorCategories = data?.itemCategoryTree ?? [];
   const options = (
     hasAll ? [{id: undefined, name: '전체', children: null}] : []
   )
