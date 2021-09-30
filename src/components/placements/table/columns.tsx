@@ -14,7 +14,7 @@ export const placementColumns: ColumnsType<any> = [
     title: '택배사',
     dataIndex: 'courierName',
     key: 'courierName',
-    sorter: (a, b) => stringSorter(b.courierId, a.courierId),
+    sorter: (a, b) => stringSorter(b.courierName, a.courierName),
     width: 90,
     ellipsis: true,
   },
