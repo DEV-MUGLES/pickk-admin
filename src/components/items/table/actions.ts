@@ -34,8 +34,9 @@ export const itemActions: TableActionType[] = [
     onClick: handleSetIsSellable(false),
     useTableAction: useBulkUpdateItems,
   },
-  {
-    text: '상품 삭제',
-    onClick: async (ids: number[]) => null,
-  },
+  // @TODO 추후 구현
+  // {
+  //   text: '상품 삭제',
+  //   onClick: async (ids: number[]) => null,
+  // },
 ];

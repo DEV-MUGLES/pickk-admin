@@ -59,10 +59,11 @@ export const sellableItemActions: TableActionType[] = [
     },
     useTableAction: useBulkUpdateItems,
   },
-  {
-    text: '상품 삭제',
-    onClick: async () => null,
-  },
+  // @TODO 추후 구현
+  // {
+  //   text: '상품 삭제',
+  //   onClick: async () => null,
+  // },
   {
     text: '상품가격',
     onClick: async () => null,
