@@ -28,7 +28,7 @@ export type BaseExchangeRequest = Pick<
       receiver: Pick<
         OrderReceiver,
         | 'id'
-        | 'name'
+        | 'receiverName'
         | 'phoneNumber'
         | 'postalCode'
         | 'baseAddress'
@@ -72,7 +72,7 @@ export const GET_EXCHANGE_REQUEST = gql`
           }
           receiver {
             id
-            name
+            receiverName
             phoneNumber
             postalCode
             baseAddress

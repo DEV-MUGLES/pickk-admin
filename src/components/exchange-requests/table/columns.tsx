@@ -92,9 +92,10 @@ export const exchangeRequestColumns: ColumnsType<any> = [
   },
   {
     title: '수취인명',
-    dataIndex: 'receiverName',
-    key: 'receiverName',
-    sorter: (a, b) => stringSorter(b.receiverName, a.receiverName),
+    dataIndex: 'receiverReceiverName',
+    key: 'receiverReceiverName',
+    sorter: (a, b) =>
+      stringSorter(b.receiverReceiverName, a.receiverReceiverName),
     width: 100,
     ellipsis: true,
   },

@@ -32,7 +32,7 @@ export type BaseOrderItem = Pick<
     receiver: Pick<
       OrderReceiver,
       | 'id'
-      | 'name'
+      | 'receiverName'
       | 'phoneNumber'
       | 'postalCode'
       | 'baseAddress'
@@ -78,7 +78,7 @@ export const BASE_ORDER_ITEM_FRAGMENT = gql`
       }
       receiver {
         id
-        name
+        receiverName
         phoneNumber
         postalCode
         baseAddress
