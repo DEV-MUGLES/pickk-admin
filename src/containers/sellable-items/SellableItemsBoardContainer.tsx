@@ -10,6 +10,7 @@ function SellableItemsBoardContainer() {
         useBoardData: useMeSellerItems,
         operationName: 'meSellerItems',
         filterName: 'itemFilter',
+        filterRecord: (v) => !!v.isSellable,
       }}>
       <SellableItemsBoard
         title="활성상품 관리"
