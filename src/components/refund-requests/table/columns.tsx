@@ -8,6 +8,7 @@ import {
   addDashToPhoneNumber,
   stringSorter,
   addCommaToNumber,
+  getRefundRequestStatusStatusDisplayName,
 } from '@src/common/helpers';
 
 export const refundRequestColumns: ColumnsType<any> = [
@@ -32,6 +33,7 @@ export const refundRequestColumns: ColumnsType<any> = [
     dataIndex: 'status',
     key: 'status',
     sorter: (a, b) => stringSorter(b.status, a.status),
+    render: (value) => getRefundRequestStatusStatusDisplayName(value),
     width: 100,
     ellipsis: true,
   },
