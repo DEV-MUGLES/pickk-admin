@@ -24,7 +24,7 @@ function ItemBaseInfoEditSection() {
     setImageUrl(null);
   }, [selectedRowId]);
 
-  const handleSaveClick = (value) => {
+  const handleSaveClick = async (value) => {
     const {
       imageUrl: _i,
       category: [majorCategoryId, minorCategoryId],
@@ -35,22 +35,21 @@ function ItemBaseInfoEditSection() {
       ..._updateItemInput,
       majorCategoryId,
       minorCategoryId,
-      imageUrl: imageUrl ?? selectedItem.imageUrl,
+      imageUrl: imageUrl?.[0] ?? selectedItem.imageUrl,
     };
 
-    updateItem({
-      variables: {
-        itemId,
-        updateItemInput,
-      },
-      update: updateCategoryCache(itemId, updateItemInput),
-    })
-      .then(() => {
-        message.success('아이템 정보를 수정했습니다!');
-      })
-      .catch(() => {
-        message.success('저장에 실패했습니다.');
+    try {
+      await updateItem({
+        variables: {
+          itemId,
+          updateItemInput,
+        },
+        update: updateCategoryCache(itemId, updateItemInput),
       });
+      message.success('아이템 정보를 수정했습니다!');
+    } catch (error) {
+      message.error('저장에 실패했습니다. err - ' + error);
+    }
   };
 
   return (
