@@ -113,6 +113,20 @@ function PlacementBoard(props: BoardProps) {
     // },
   ];
 
+  const handleShipModalSubmit = async (shipment) => {
+    try {
+      await shipMeSellerOrderItems(
+        shipment.merchantUid,
+        shipment.courierId,
+        shipment.trackCode,
+      );
+
+      message.success('적용되었습니다.');
+    } catch (error) {
+      message.error(`실패했습니다. - ${error}`);
+    }
+  };
+
   return (
     <>
       <Header {...props} />
@@ -132,13 +146,7 @@ function PlacementBoard(props: BoardProps) {
         modalData={
           tableData?.find((record) => record.id === selectedRowKeys[0]) ?? null
         }
-        onSubmit={(shipment) => {
-          shipMeSellerOrderItems(
-            shipment.merchantUid,
-            shipment.courierId,
-            shipment.trackCode,
-          );
-        }}
+        onSubmit={handleShipModalSubmit}
       />
       <CancelOrderItemModal
         isModalOpen={isModalOpen.cancelOrderItem}
