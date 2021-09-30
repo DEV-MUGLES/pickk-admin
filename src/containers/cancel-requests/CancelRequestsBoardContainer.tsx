@@ -9,16 +9,14 @@ function CancelRequestsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: () =>
-          useQuery(GET_ORDER_ITEMS, {
-            variables: {
-              orderItemFilter: {
-                claimStatus: OrderItemClaimStatus.Cancelled,
-              },
-            },
-          }),
+        useBoardData: () => useQuery(GET_ORDER_ITEMS),
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
+        filterRecord: (v) =>
+          [
+            OrderItemClaimStatus.Cancelled,
+            OrderItemClaimStatus.CancelRequested,
+          ].includes(v.claimStatus),
       }}>
       <CancelRequestsBoard
         title="취소 조회"

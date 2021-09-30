@@ -1,4 +1,5 @@
 import {useQuery} from '@apollo/client';
+import {OrderItemStatus} from '@pickk/common';
 
 import ShipmentBoard from '@src/components/shipments';
 
@@ -12,6 +13,12 @@ function ShipmentsBoardContainer() {
         useBoardData: () => useQuery(GET_ORDER_ITEMS),
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
+        filterRecord: (v) =>
+          ([OrderItemStatus.Shipping, OrderItemStatus.Shipped].includes(
+            v.status,
+          ) ||
+            v.isConfirmed === true) &&
+          v.claimStatus == null,
       }}>
       <ShipmentBoard
         title="배송현황 관리"

@@ -57,7 +57,7 @@ export const BASE_ORDER_ITEM_FRAGMENT = gql`
     quantity
     itemFinalPrice
     recommenderNickname
-
+    isConfirmed
     shipment {
       courierId
       courier {
