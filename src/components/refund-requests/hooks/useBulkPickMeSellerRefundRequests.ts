@@ -1,5 +1,4 @@
 import {gql, useMutation} from '@apollo/client';
-import {message} from 'antd';
 import {
   Mutation,
   MutationBulkPickMeSellerRefundRequestsArgs,
@@ -17,16 +16,11 @@ export const useBulkPickMeSellerRefundRequests = () => {
   `);
 
   const bulkPickMeSellerRefundRequests = async (merchantUids: string[]) => {
-    try {
-      await _bulkPickMeSellerRefundRequests({
-        variables: {
-          merchantUids,
-        },
-      });
-      message.error('수거 완료되었습니다.');
-    } catch (error) {
-      message.error(`실패했습니다. - ${error}`);
-    }
+    await _bulkPickMeSellerRefundRequests({
+      variables: {
+        merchantUids,
+      },
+    });
   };
 
   return {bulkPickMeSellerRefundRequests};

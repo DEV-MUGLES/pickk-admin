@@ -36,9 +36,9 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
   const newRefundActions: TableActionType[] = [
     {
       text: '수거완료',
-      onClick: async (ids: number[]) => {
+      onClick: async (merchantUids: string[]) => {
         if (
-          !ids.every((id) => {
+          !merchantUids.every((id) => {
             const record = tableData.find((row) => row.id === id);
             return record.status === RefundRequestStatus.Requested;
           })
@@ -47,10 +47,13 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
           return;
         }
 
-        const merchantUids = ids.map(
-          (id) => tableData.find((record) => record.id === id).merchantUids,
-        );
-        await bulkPickMeSellerRefundRequests(merchantUids);
+        try {
+          await bulkPickMeSellerRefundRequests(merchantUids);
+
+          message.success('수거 완료되었습니다.');
+        } catch (error) {
+          message.error(`실패했습니다. - ${error}`);
+        }
       },
     },
     {
