@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import DayjsDatePicker from '../DayjsDatePicker';
 
 import {useBoardContext} from '@src/common/contexts/Board';
+import {setEndOfDay, setStartOfDay} from '@src/common/helpers/date';
 
 import {
   DatePickerProps,
@@ -37,8 +38,8 @@ export default function DatePicker({
     const {value} = e.target;
     setChoicedQuickButton(value);
     handleFilterChange({
-      startDate: quickBtnValue2StartDate(value),
-      endDate: dayjs().format('YYYY-MM-DD'),
+      startDate: setStartOfDay(quickBtnValue2StartDate(value)).toDate(),
+      endDate: setEndOfDay(dayjs()).toDate(),
     });
   };
 
@@ -50,8 +51,8 @@ export default function DatePicker({
     const startDate = date?.[0] ?? defaultValue.startDate;
     const endDate = date?.[1];
     handleFilterChange({
-      startDate: dayjs(startDate).format('YYYY-MM-DD'),
-      endDate: dayjs(endDate).format('YYYY-MM-DD'),
+      startDate: setStartOfDay(dayjs(startDate)).toDate(),
+      endDate: setEndOfDay(dayjs(endDate)).toDate(),
     });
   };
 

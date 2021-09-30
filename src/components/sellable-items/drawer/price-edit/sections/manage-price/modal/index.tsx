@@ -38,7 +38,7 @@ function PriceFormModal({
     ({isBase, endAt}) => !isBase && isBeforeDate(new Date(), endAt),
   );
 
-  const {addItemPrice, updateCache} = useAddItemPrice();
+  const {addItemPrice} = useAddItemPrice();
   const [updateItemPrice] = useUpdateItemPrice();
 
   const handleAddItemPrice = (_addItemPriceInput: PriceFormValueType) => {
@@ -53,14 +53,13 @@ function PriceFormModal({
         itemId: selectedRowId,
         addItemPriceInput,
       },
-      update: updateCache(selectedRowId),
     })
       .then(() => {
         message.success('새로운 가격을 추가했습니다.');
         onClose();
       })
-      .catch(() => {
-        message.error('가격 추가를 실패했습니다.');
+      .catch((err) => {
+        message.error('가격 추가를 실패했습니다. err - ' + err);
       });
   };
 
@@ -141,11 +140,26 @@ function PriceFormModal({
       return;
     }
 
+    const {pickkDiscountRate} = value;
+    if (
+      pickkDiscountRate == null ||
+      pickkDiscountRate < 0 ||
+      pickkDiscountRate > 100
+    ) {
+      message.error('쿠폰 적용률 범위는 0~100입니다.');
+      return;
+    }
+
     handleSave(value);
   };
 
   return (
-    <Modal visible={visible} title={title} onCancel={onClose} footer={false}>
+    <Modal
+      visible={visible}
+      title={title}
+      onCancel={onClose}
+      footer={false}
+      width="80%">
       <BaseForm
         FORM_ITEMS={{
           ...FORM_ITEMS,

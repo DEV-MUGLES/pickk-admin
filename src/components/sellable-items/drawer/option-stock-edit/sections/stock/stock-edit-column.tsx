@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Button, Input, message, Space, Typography} from 'antd';
 import {ButtonType} from 'antd/lib/button';
 
@@ -15,6 +15,11 @@ function StockEditColumn({id, defaultValue}) {
   const [isEditable, setIsEditable] = useState(false);
   const [stock, setStock] = useState<number>(defaultValue);
   const [updateProduct] = useUpdateProduct();
+
+  useEffect(() => {
+    setStock(defaultValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValue]);
 
   const handleEditClick = () => {
     setIsEditable(true);

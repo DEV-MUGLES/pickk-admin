@@ -8,6 +8,9 @@ export type DataFetchConfig = {
   filterName: string;
   defaultFilter?: Filter;
   mapRecord?: (record) => Record<string, unknown>;
+
+  // @TODO refactor
+  filterRecord?: (record) => boolean;
 };
 
 export type BoardStoreProviderProps = {

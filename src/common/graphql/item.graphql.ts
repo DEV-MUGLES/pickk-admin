@@ -64,12 +64,14 @@ export const PRODUCT_FRAG = gql`
     }
     stock
     updatedAt
+    priceVariant
+    isDeleted
   }
 `;
 
-export const ITEMS_QUERY = gql`
-  query Items($itemFilter: ItemFilter, $pageInput: PageInput) {
-    items(itemFilter: $itemFilter, pageInput: $pageInput) {
+export const ME_SELLER_ITEMS_QUERY = gql`
+  query meSellerItems($itemFilter: ItemFilter, $pageInput: PageInput) {
+    meSellerItems(itemFilter: $itemFilter, pageInput: $pageInput) {
       id
       imageUrl
       majorCategory {
@@ -102,6 +104,7 @@ export const ITEMS_QUERY = gql`
         url
       }
       createdAt
+      sellableAt
     }
   }
   ${ITEM_PRICE_FRAG}

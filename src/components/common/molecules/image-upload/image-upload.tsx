@@ -1,6 +1,8 @@
 import React from 'react';
 import {Upload, message, UploadProps} from 'antd';
-import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
+import {PlusOutlined} from '@ant-design/icons';
+
+import {useUploadImages} from './hooks';
 
 export type ImageUploadProps = {
   imageUrl: string;
@@ -8,15 +10,12 @@ export type ImageUploadProps = {
   alt?: string;
 };
 
-function ImageUpload({
+export default function ImageUpload({
   imageUrl,
   setImageUrl,
   alt = 'image url',
 }: ImageUploadProps) {
-  // @TODO replace to new image upload logic
-  // const [upload, {loading}] = useUploadMultipleImages();
-  const upload = (any) => null;
-  const loading = false;
+  const {uploadImages} = useUploadImages();
 
   const uploadProps: UploadProps = {
     name: 'file',
@@ -24,28 +23,25 @@ function ImageUpload({
     showUploadList: false,
     customRequest: async (options) => {
       const {file, onError, onSuccess} = options;
-      await upload({
-        variables: {
-          uploadImageInput: {
-            files: [file],
-          },
-        },
-      })
-        .then(({data}) => {
-          onSuccess(data?.uploadMultipleImages[0], null);
-        })
-        .catch((error) => {
-          onError(error);
-        });
+
+      try {
+        const urls = await uploadImages([file as File]);
+        onSuccess(urls, null);
+      } catch (error) {
+        onError(error);
+      }
     },
     onChange(info) {
-      if (info.file.status !== 'uploading') {
-        setImageUrl(info.file.response);
+      const {
+        file: {status, name, response},
+      } = info;
+      if (status !== 'uploading') {
+        setImageUrl(response);
       }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} 이미지 업로드에 성공했습니다!`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} 이미지 업로드를 실패했습니다.`);
+      if (status === 'done') {
+        message.success(`${name} 이미지 업로드에 성공했습니다!`);
+      } else if (status === 'error') {
+        message.error(`${name} 이미지 업로드를 실패했습니다.`);
       }
     },
     maxCount: 1,
@@ -53,7 +49,7 @@ function ImageUpload({
 
   const uploadButton = (
     <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <PlusOutlined />
       <div style={{marginTop: 8}}>Upload</div>
     </div>
   );
@@ -74,4 +70,3 @@ function ImageUpload({
     </Upload>
   );
 }
-export default ImageUpload;

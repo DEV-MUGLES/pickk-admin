@@ -40,11 +40,11 @@ function CurrentPriceInfoSection() {
             {addCommaToNumber(originalPrice)} 원
           </Text>
           <Text>
-            <Label strong>공급가 : </Label>
+            <Label strong>판매가 : </Label>
             {addCommaToNumber(sellPrice)} 원
           </Text>
           <Text>
-            <Label strong>핔할인적용가 : </Label>
+            <Label strong>쿠폰적용가 : </Label>
             {addCommaToNumber(finalPrice)} 원
           </Text>
         </Space>

@@ -24,6 +24,7 @@ export default function BoardStoreProvider({
     filterName,
     defaultFilter = {},
     mapRecord = (record) => record,
+    filterRecord = (record) => true,
   } = dataFetchConfig;
 
   const {data, loading, refetch} = useBoardData({
@@ -110,6 +111,7 @@ export default function BoardStoreProvider({
       newFilter,
       tableData: data
         ? data?.[operationName]
+            .filter((v) => filterRecord(v))
             .map((v) => mapRecord(v))
             .map((v) => ({...v, key: v.id}))
         : [],
