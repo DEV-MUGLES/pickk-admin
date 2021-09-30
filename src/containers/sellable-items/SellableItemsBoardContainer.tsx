@@ -1,14 +1,14 @@
 import SellableItemsBoard from '@src/components/sellable-items';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {useItems} from '@src/common/hooks/apis';
+import {useMeSellerItems} from '@src/common/hooks/apis';
 
 function SellableItemsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: useItems,
-        operationName: 'items',
+        useBoardData: useMeSellerItems,
+        operationName: 'meSellerItems',
         filterName: 'itemFilter',
       }}>
       <SellableItemsBoard

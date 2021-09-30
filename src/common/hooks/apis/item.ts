@@ -10,14 +10,17 @@ import {
   MutationBulkUpdateItemsArgs,
   MutationUpdateItemArgs,
   Query,
-  QueryItemsArgs,
+  QueryMeSellerItemsArgs,
   UpdateItemInput,
 } from '@pickk/common';
 
-import {ITEMS_QUERY} from '@src/common/graphql';
+import {ME_SELLER_ITEMS_QUERY} from '@src/common/graphql';
 
-export const useItems = (options?: QueryHookOptions) =>
-  useQuery<Pick<Query, 'items'>, QueryItemsArgs>(ITEMS_QUERY, options);
+export const useMeSellerItems = (options?: QueryHookOptions) =>
+  useQuery<Pick<Query, 'meSellerItems'>, QueryMeSellerItemsArgs>(
+    ME_SELLER_ITEMS_QUERY,
+    options,
+  );
 
 export const useUpdateItem = () => {
   const [updateItem] = useMutation<unknown, MutationUpdateItemArgs>(gql`

@@ -69,9 +69,9 @@ export const PRODUCT_FRAG = gql`
   }
 `;
 
-export const ITEMS_QUERY = gql`
-  query Items($itemFilter: ItemFilter, $pageInput: PageInput) {
-    items(itemFilter: $itemFilter, pageInput: $pageInput) {
+export const ME_SELLER_ITEMS_QUERY = gql`
+  query meSellerItems($itemFilter: ItemFilter, $pageInput: PageInput) {
+    meSellerItems(itemFilter: $itemFilter, pageInput: $pageInput) {
       id
       imageUrl
       majorCategory {
