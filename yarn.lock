@@ -938,16 +938,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pickk/common@npm:^1.9.6":
-  version: 1.9.6
-  resolution: "@pickk/common@npm:1.9.6"
+"@pickk/common@npm:^1.9.7":
+  version: 1.9.7
+  resolution: "@pickk/common@npm:1.9.7"
   dependencies:
     cross-env: 5.0.5
   peerDependencies:
     "@apollo/client": ^3.3.20
     graphql: ^15.5.0
     react: ^17.0.1
-  checksum: 287d8c50397b60ca0457cfc3a4ac0db53a899b4230466db486cbf3337b41a55aba669e0b61f5644244a74e17486157820343b365ac7107756594543a5725f2a6
+  checksum: 00252a9f640b56ec952f4e0b7b50aced6277164912dc33966cb6e6c7297ec4a66fe3a2f697a6b33b7232514ccd7d53558fc9372960be009cd60f8047b21afa0a
   languageName: node
   linkType: hard
 
@@ -5194,7 +5194,7 @@ fsevents@~2.3.1:
     "@babel/plugin-proposal-private-methods": ^7.14.5
     "@babel/plugin-proposal-private-property-in-object": ^7.15.4
     "@babel/runtime": ^7.15.4
-    "@pickk/common": ^1.9.6
+    "@pickk/common": ^1.9.7
     "@pickk/eslint-plugin": ^0.0.8
     "@types/apollo-upload-client": ^14.1.0
     "@types/js-cookie": ^2.2.6
