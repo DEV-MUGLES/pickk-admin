@@ -6,8 +6,7 @@ export const orderItemInputs = [
     name: 'search',
     labelText: '검색창',
     Component: InputBox,
-    guideText:
-      '수취인명/구매자명/구매자자연락처/상품명/상품주문번호를 검색할 수 있습니다.',
+    guideText: '주문번호/주문상품번호/아이템명으로 검색할 수 있습니다.',
   },
   {
     name: 'period',
