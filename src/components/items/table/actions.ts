@@ -1,3 +1,5 @@
+import {message} from 'antd';
+
 import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
 import {useBulkUpdateItems} from '@src/common/hooks/apis';
 
@@ -16,7 +18,9 @@ const handleSetIsSellable =
           },
         });
       }
-    } catch {}
+    } catch (err) {
+      message.error('실패했습니다. err - ' + err);
+    }
   };
 
 export const itemActions: TableActionType[] = [
