@@ -107,13 +107,13 @@ function PlacementBoard(props: BoardProps) {
         return {reloading: false};
       },
     },
-    {
-      // @TODO 발송지연 안내 액션 추가
-      text: '발송지연안내',
-      onClick: async (ids: number[]) => {
-        return;
-      },
-    },
+    // @TODO 추후 구현
+    // {
+    // text: '발송지연안내',
+    // onClick: async (ids: number[]) => {
+    //   return;
+    // },
+    // },
   ];
 
   return (
