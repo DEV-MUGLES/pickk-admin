@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 import InputBox from '@src/components/common/molecules/BoardFilter/input/InputBox';
 import ItemCategoryInput from '@src/components/common/molecules/BoardFilter/input/ItemCategoryInput';
 import Datepicker from '@src/components/common/molecules/BoardFilter/input/DatePicker';
@@ -21,8 +19,8 @@ export const sellableItemInputs: BoardFilterRowProps[] = [
     name: 'period',
     labelText: '조회기간',
     select: [
-      {name: '활성등록일', value: ''},
-      {name: '상품생성일', value: ''},
+      {name: '상품생성일', value: 'createdAtBetween'},
+      {name: '활성등록일', value: 'sellableAtBetween'},
     ],
     defaultQuickButtonValue: 'oneMonth',
     Component: Datepicker,

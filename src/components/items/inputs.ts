@@ -22,8 +22,8 @@ export const itemInputs: BoardFilterRowProps[] = [
     name: 'period',
     labelText: '조회기간',
     select: [
-      {name: '활성등록일', value: ''},
-      {name: '상품생성일', value: ''},
+      {name: '상품생성일', value: 'createdAtBetween'},
+      {name: '활성등록일', value: 'sellableAtBetween'},
     ],
     defaultQuickButtonValue: 'oneMonth',
     Component: Datepicker,
