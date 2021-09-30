@@ -57,7 +57,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     sorter: (a, b) => b.originalPrice - a.originalPrice,
   },
   {
-    title: '공급가',
+    title: '판매가',
     dataIndex: 'sellPrice',
     key: 'sellPrice',
     width: 120,
