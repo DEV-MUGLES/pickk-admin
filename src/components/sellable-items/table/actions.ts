@@ -64,8 +64,4 @@ export const sellableItemActions: TableActionType[] = [
   //   text: '상품 삭제',
   //   onClick: async () => null,
   // },
-  {
-    text: '상품가격',
-    onClick: async () => null,
-  },
 ];
