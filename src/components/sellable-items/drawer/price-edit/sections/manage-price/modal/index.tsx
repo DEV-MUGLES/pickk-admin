@@ -38,7 +38,7 @@ function PriceFormModal({
     ({isBase, endAt}) => !isBase && isBeforeDate(new Date(), endAt),
   );
 
-  const {addItemPrice, updateCache} = useAddItemPrice();
+  const {addItemPrice} = useAddItemPrice();
   const [updateItemPrice] = useUpdateItemPrice();
 
   const handleAddItemPrice = (_addItemPriceInput: PriceFormValueType) => {
@@ -53,7 +53,6 @@ function PriceFormModal({
         itemId: selectedRowId,
         addItemPriceInput,
       },
-      update: updateCache(selectedRowId),
     })
       .then(() => {
         message.success('새로운 가격을 추가했습니다.');

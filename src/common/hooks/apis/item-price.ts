@@ -1,4 +1,4 @@
-import {ApolloCache, gql, MutationUpdaterFn, useMutation} from '@apollo/client';
+import {gql, useMutation} from '@apollo/client';
 import {
   Mutation,
   MutationActivateItemPriceArgs,
@@ -28,31 +28,16 @@ export const useAddItemPrice = () => {
       $addItemPriceInput: AddItemPriceInput!
     ) {
       addItemPrice(itemId: $itemId, addItemPriceInput: $addItemPriceInput) {
-        ...ItemPriceFragment
+        id
+        prices {
+          ...ItemPriceFragment
+        }
       }
     }
     ${ITEM_PRICE_FRAGMENT}
   `);
 
-  const updateCache =
-    (itemId: number): MutationUpdaterFn =>
-    (cache: ApolloCache<unknown>, {data: {addItemPrice}}) => {
-      cache.modify({
-        id: `Item:${itemId}`,
-        fields: {
-          prices(existingPricesRefs) {
-            const newPriceRef = cache.writeFragment({
-              data: addItemPrice,
-              fragment: ITEM_PRICE_FRAGMENT,
-            });
-
-            return [...existingPricesRefs, newPriceRef];
-          },
-        },
-      });
-    };
-
-  return {addItemPrice, updateCache};
+  return {addItemPrice};
 };
 
 export const useUpdateItemPrice = () =>
@@ -65,7 +50,10 @@ export const useUpdateItemPrice = () =>
       $updateItemPriceInput: UpdateItemPriceInput!
     ) {
       updateItemPrice(id: $id, updateItemPriceInput: $updateItemPriceInput) {
-        ...ItemPriceFragment
+        id
+        prices {
+          ...ItemPriceFragment
+        }
       }
     }
     ${ITEM_PRICE_FRAGMENT}
