@@ -3,6 +3,7 @@ import {Product} from '@pickk/common';
 
 import StockEditColumn from './stock-edit-column';
 import {renderDateColumn} from '@src/common/helpers/ColumnRenderer';
+import {addCommaToNumber} from '@src/common/helpers';
 
 export const stockColumns: ColumnsType<Product> = [
   {
@@ -16,8 +17,13 @@ export const stockColumns: ColumnsType<Product> = [
     title: '재고',
     dataIndex: 'stock',
     key: 'stock',
-    width: 180,
     render: (value, {id}) => <StockEditColumn id={id} defaultValue={value} />,
+  },
+  {
+    title: '옵션별 추가금',
+    dataIndex: 'priceVariant',
+    key: 'priceVariant',
+    render: (value) => addCommaToNumber(value) + ' 원',
   },
   {
     title: '생성일',

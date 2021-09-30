@@ -64,6 +64,8 @@ export const PRODUCT_FRAG = gql`
     }
     stock
     updatedAt
+    priceVariant
+    isDeleted
   }
 `;
 
