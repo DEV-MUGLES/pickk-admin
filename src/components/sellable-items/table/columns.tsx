@@ -4,7 +4,10 @@ import {Item} from '@pickk/common';
 
 import SellableItemStock from './stock';
 import InfoTooltip from '@src/components/common/atoms/info-tooltip';
-import {renderBooleanColumn} from '@src/common/helpers/ColumnRenderer';
+import {
+  renderBooleanColumn,
+  renderDateColumn,
+} from '@src/common/helpers/ColumnRenderer';
 
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';
@@ -122,10 +125,11 @@ export const sellableItemColumns: ColumnsType<Item> = [
     ),
   },
   {
-    // TODO
     title: '활성전환일',
-    dataIndex: '',
-    key: '',
+    dataIndex: 'sellableAt',
+    key: 'sellableAt',
+    sorter: (a, b) => stringSorter(b.createdAt, a.createdAt),
+    render: (value) => (value ? renderDateColumn(value) : '-'),
     width: 120,
   },
 ];

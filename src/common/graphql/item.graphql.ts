@@ -102,6 +102,7 @@ export const ITEMS_QUERY = gql`
         url
       }
       createdAt
+      sellableAt
     }
   }
   ${ITEM_PRICE_FRAG}
