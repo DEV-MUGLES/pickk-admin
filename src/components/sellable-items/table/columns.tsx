@@ -81,7 +81,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     align: 'center',
     render: (_, {products, isInfiniteStock, isSoldout}) => (
       <SellableItemStock
-        products={products}
+        products={products.filter((v) => !v.isDeleted)}
         isInfiniteStock={isInfiniteStock}
         isSoldout={isSoldout}
       />
