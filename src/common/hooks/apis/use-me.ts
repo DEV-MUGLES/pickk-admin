@@ -15,7 +15,9 @@ const GET_ME = gql`
 type MeDataType = Pick<User, 'id' | 'name' | 'nickname' | 'role'>;
 
 export const useMe = () => {
-  const {data} = useQuery<{me: MeDataType}>(GET_ME);
+  const {data, client} = useQuery<{me: MeDataType}>(GET_ME, {
+    nextFetchPolicy: 'network-only',
+  });
 
-  return {data: data?.me};
+  return {data: data?.me, reset: client.resetStore};
 };

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import {useRouter} from 'next/router';
-import {Layout, Avatar, Dropdown, Menu, Typography} from 'antd';
+import {Layout, Avatar, Dropdown, Menu, Typography, message} from 'antd';
 import {DownOutlined, UserOutlined} from '@ant-design/icons';
 
 import IconButton from '../atoms/button/icon';
 import LogoDefaultIcon from '../icons/logo/_default';
 import {WHITE} from '../../../common/constants/colors';
+
+import {useMe} from '@src/common/hooks/apis';
 
 const {Title} = Typography;
 const {Header} = Layout;
@@ -13,10 +15,28 @@ const {Header} = Layout;
 export default function GHeader() {
   const router = useRouter();
 
+  const {reset} = useMe();
+
+  const signOut = async () => {
+    try {
+      if (confirm('로그아웃 하시겠습니까?')) {
+        await reset();
+
+        message.success('로그아웃 되었습니다.');
+        router.push('/login');
+      }
+    } catch (error) {
+      message.error('실패했습니다. err - ' + error);
+    }
+  };
+
   const dropDownMenu = (
     <Menu style={{width: 90, fontWeight: 300}}>
       <Menu.Item key="0" onClick={() => router.push('/mypage/edit')}>
         내 정보
+      </Menu.Item>
+      <Menu.Item key="1" onClick={signOut}>
+        로그아웃
       </Menu.Item>
     </Menu>
   );
