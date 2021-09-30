@@ -1,8 +1,6 @@
 import {gql, useQuery} from '@apollo/client';
 import {SellerReturnAddress, SellerClaimPolicy, Query} from '@pickk/common';
 
-import {SELLER_CLAIM_ACCOUNT_FRAGMENT} from '@src/common/graphql';
-
 export const SELLER_RETURN_ADDRESS_FRAGMENT = gql`
   fragment SellerReturnAddressFragment on SellerReturnAddress {
     id
@@ -18,12 +16,7 @@ export const SELLER_CLAIM_POLICY_FRAGMENT = gql`
     picName
     phoneNumber
     fee
-    feePayMethod
-    account {
-      ...SellerClaimAccountFragment
-    }
   }
-  ${SELLER_CLAIM_ACCOUNT_FRAGMENT}
 `;
 
 const GET_ME_SELLER_CLAIM_POLICY = gql`
