@@ -29,41 +29,6 @@ export type BaseRefundRequest = Pick<
   };
 };
 
-export const BASE_REFUND_REQUEST_FRAGMENT = gql`
-  fragment BaseRefundRequestFragment on RefundRequest {
-    merchantUid
-    orderMerchantUid
-    status
-    requestedAt
-    reason
-    amount
-    shippingFee
-    faultOf
-    orderItems {
-      id
-      itemName
-      productVariantName
-      quantity
-    }
-    order {
-      id
-      buyer {
-        id
-        name
-        phoneNumber
-      }
-    }
-    shipment {
-      id
-      trackCode
-      courier {
-        id
-        code
-      }
-    }
-  }
-`;
-
 export const GET_REFUND_REQUESTS = gql`
   query MeSellerRefundRequests(
     $pageInput: PageInput
@@ -73,8 +38,36 @@ export const GET_REFUND_REQUESTS = gql`
       pageInput: $pageInput
       refundRequestFilter: $refundRequestFilter
     ) {
-      ...BaseRefundRequestFragment
+      merchantUid
+      orderMerchantUid
+      status
+      requestedAt
+      reason
+      amount
+      shippingFee
+      faultOf
+      orderItems {
+        id
+        itemName
+        productVariantName
+        quantity
+      }
+      order {
+        id
+        buyer {
+          id
+          name
+          phoneNumber
+        }
+      }
+      shipment {
+        id
+        trackCode
+        courier {
+          id
+          code
+        }
+      }
     }
   }
-  ${BASE_REFUND_REQUEST_FRAGMENT}
 `;
