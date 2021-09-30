@@ -2,7 +2,6 @@ import {useState} from 'react';
 import {message} from 'antd';
 import {RefundRequestStatus} from '@pickk/common';
 
-import RefundConfirmModal from './table/modal/confirm';
 import Preview from '@src/components/common/organisms/Board/preview';
 import Header from '@src/components/common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
@@ -15,6 +14,8 @@ import {refundRequestPreviewData} from './preview-data';
 import {refundRequestColumns} from './table';
 import {BoardProps} from '../props';
 import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
+
+import {RefundConfirmModal} from './table/modal';
 
 import {
   useBulkPickMeSellerRefundRequests,
@@ -79,6 +80,8 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
 
         setSelectedRecord(tableData.find((record) => record.id === ids[0]));
         setIsModalOpen(true);
+
+        return {reloading: false};
       },
     },
   ];
