@@ -2,6 +2,7 @@ import {useQuery} from '@apollo/client';
 import {OrderItemStatus} from '@pickk/common';
 
 import ShipmentBoard from '@src/components/shipments';
+import {placementsRecordMapper} from '@src/components/placements/table';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {GET_ORDER_ITEMS} from '@src/common/graphql';
@@ -13,6 +14,7 @@ function ShipmentsBoardContainer() {
         useBoardData: () => useQuery(GET_ORDER_ITEMS),
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
+        mapRecord: placementsRecordMapper,
         filterRecord: (v) =>
           ([OrderItemStatus.Shipping, OrderItemStatus.Shipped].includes(
             v.status,
