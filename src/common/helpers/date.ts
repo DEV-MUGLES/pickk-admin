@@ -1,8 +1,5 @@
 import {addLeadingZeros} from './NumberParser';
 import dayjs from 'dayjs';
-import isBetween from 'dayjs/plugin/isBetween';
-
-dayjs.extend(isBetween);
 
 export const getDateTimeNumbers = (input?: number) => {
   const date = new Date(input);

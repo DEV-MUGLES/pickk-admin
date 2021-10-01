@@ -6,6 +6,7 @@ import {ApolloProvider, gql} from '@apollo/client';
 import {BackTop} from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import isBetween from 'dayjs/plugin/isBetween';
 import 'dayjs/locale/ko';
 import 'antd/dist/antd.css';
 import {UserRole} from '@pickk/common';
@@ -15,6 +16,7 @@ import MainLayout from '@src/components/common/templates/MainLayout';
 import {createApolloClient, useApolloClient} from '@src/providers/apollo';
 
 dayjs.extend(relativeTime);
+dayjs.extend(isBetween);
 dayjs.locale('ko');
 
 function PickkAdminApp({Component, pageProps}: AppProps) {

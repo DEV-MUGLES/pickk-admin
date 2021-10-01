@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import dayjs from 'dayjs';
 import {Button, Space, Table, Modal} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {PlusOutlined} from '@ant-design/icons';
@@ -8,7 +9,7 @@ import PriceFormModal, {PriceFormModalType} from './modal';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {useRemoveItemPrice} from '@src/common/hooks/apis';
-import {compareDate, isBeforeDate} from '@src/common/helpers/date';
+import {stringSorter} from '@src/common/helpers';
 
 import {itemPricesColumns} from './columns';
 
@@ -25,8 +26,8 @@ function ManagePriceSection() {
   const [removeItemPrice] = useRemoveItemPrice();
 
   const filteredPrices: Item['prices'] = selectedData?.prices
-    ?.filter(({isBase, endAt}) => !isBase && isBeforeDate(new Date(), endAt))
-    .sort((a, b) => compareDate(a.startAt, b.startAt));
+    ?.filter(({isBase, startAt}) => !isBase && dayjs(startAt).isAfter(dayjs()))
+    .sort((a, b) => stringSorter(a.startAt, b.startAt));
 
   const [isTableVisible, addButtonText]: [boolean, string] =
     filteredPrices?.length > 0
