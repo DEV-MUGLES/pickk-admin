@@ -5,14 +5,18 @@ import Table from '../common/organisms/Board/Table';
 import {BoardProps} from '../props';
 
 import {orderItemInputs} from './inputs';
-import {orderItemColumns} from './table';
+import {orderItemColumns, orderItemExcelColumns} from './table';
 
 function OrderItemBoard(props: BoardProps) {
   return (
     <>
       <Header {...props} />
       <Filter {...props} inputs={orderItemInputs} />
-      <Table {...props} columns={orderItemColumns} />
+      <Table
+        {...props}
+        columns={orderItemColumns}
+        excelColumns={orderItemExcelColumns}
+      />
     </>
   );
 }
