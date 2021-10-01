@@ -11,7 +11,7 @@ import {useBoardContext} from '@src/common/contexts/Board';
 
 import {refundRequestInputs} from './inputs';
 import {refundRequestPreviewData} from './preview-data';
-import {refundRequestColumns} from './table';
+import {refundRequestColumns, refundRequestExcelColumns} from './table';
 import {BoardProps} from '../props';
 import {TableActionType} from '@src/components/common/organisms/Board/Table/table';
 
@@ -96,6 +96,7 @@ function RefundRequestsBoard({title, subTitle}: BoardProps) {
       <Table
         title={title}
         columns={refundRequestColumns}
+        excelColumns={refundRequestExcelColumns}
         actions={newRefundActions}
       />
       <RefundConfirmModal
