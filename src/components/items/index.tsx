@@ -13,6 +13,7 @@ import {BoardProps} from '../props';
 
 import {itemInputs} from './inputs';
 import {itemColumns, itemActions} from './table';
+import {itemsExcelColumns} from './table/excel-columns';
 
 const {Text} = Typography;
 
@@ -61,7 +62,12 @@ function ItemsBoard(props: BoardProps) {
     <>
       <Header {...props} />
       <Filter {...props} inputs={itemInputs} />
-      <Table {...props} columns={newItemColumns} actions={itemActions} />
+      <Table
+        {...props}
+        columns={newItemColumns}
+        excelColumns={itemsExcelColumns}
+        actions={itemActions}
+      />
       {modalVisible && (
         <CategoryModal
           visible={modalVisible}
