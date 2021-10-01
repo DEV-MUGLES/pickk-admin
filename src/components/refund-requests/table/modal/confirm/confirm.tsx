@@ -5,7 +5,7 @@ import {RefundRequest} from '@pickk/common';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';
-import {useConfirmRefundRequest, useMeSellerShippingFees} from './hooks';
+import {useConfirmRefundRequest, useMeSellerClaimPolicyFee} from './hooks';
 
 const {Title, Text} = Typography;
 
@@ -36,7 +36,7 @@ export default function RefundConfirmModal({
 }: RefundConfirmModalProps) {
   const {reload} = useBoardContext().action;
 
-  const {claimPolicyFee, shippingPolicyFee} = useMeSellerShippingFees();
+  const {claimPolicyFee} = useMeSellerClaimPolicyFee();
   const {confirmRefundRequest} = useConfirmRefundRequest();
 
   const handleSubmit = (shippingFee: number) => async () => {
@@ -51,7 +51,7 @@ export default function RefundConfirmModal({
     }
   };
 
-  if (!record || claimPolicyFee == null || shippingPolicyFee == null) {
+  if (!record || claimPolicyFee == null) {
     return <></>;
   }
 
@@ -71,17 +71,16 @@ export default function RefundConfirmModal({
           <Title level={5}>구매자 귀책 사유</Title>
           <StyledRow>
             <Text>합배송 상품이거나 유료배송 상품일 시</Text>
-            <Button type="primary" onClick={handleSubmit(claimPolicyFee)}>
-              ({addCommaToNumber(claimPolicyFee)}) 원 차감 환불
+            <Button
+              type="primary"
+              onClick={handleSubmit(Math.ceil(claimPolicyFee / 2))}>
+              {addCommaToNumber(Math.ceil(claimPolicyFee / 2))}원 차감 환불
             </Button>
           </StyledRow>
           <StyledRow>
             <Text>단일 상품, 무료 배송 상품일 시</Text>
-            <Button
-              type="primary"
-              onClick={handleSubmit(claimPolicyFee + shippingPolicyFee)}>
-              ({addCommaToNumber(claimPolicyFee)} +{' '}
-              {addCommaToNumber(shippingPolicyFee)})원 차감 환불
+            <Button type="primary" onClick={handleSubmit(claimPolicyFee)}>
+              {addCommaToNumber(claimPolicyFee)}원 차감 환불
             </Button>
           </StyledRow>
           <Divider />
