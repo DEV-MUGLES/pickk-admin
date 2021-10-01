@@ -3,33 +3,34 @@ import styled from 'styled-components';
 import {Typography} from 'antd';
 
 import TableReloadButton from '@src/components/common/molecules/button/TableReload';
-import CsvDownloadButton, {
+import {
+  ExcelDownloadButton,
   ExcelDownloadButtonProps,
-} from '@src/components/common/molecules/button/CsvDownload';
-// import ExcelDownloadButton, {
-//   ExcelDownloadButtonProps,
-// } from '@src/components/common/molecules/button/ExcelDownload';
-import Space from '@src/components/common/atoms/space';
+  CSVDownloadButton,
+} from '@src/components/common/molecules/button';
 import {isEqualObject} from '@src/common/helpers';
 
 const {Text} = Typography;
 
-export type TableHeaderProps = ExcelDownloadButtonProps;
+export type TableHeaderProps = Pick<
+  ExcelDownloadButtonProps,
+  'title' | 'dataSource' | 'columns'
+>;
 
 function TableHeader(props: TableHeaderProps) {
   return (
-    <Wrapper>
-      <Text strong style={{marginRight: 'auto'}}>
+    <StyledWrapper>
+      <Text strong>
         {`${props.title} 목록 (총 ${
           props.dataSource ? props.dataSource.length : '...'
         }개)`}
       </Text>
-      <TableReloadButton />
-      <Space direction="ROW" />
-      {/* <ExcelDownloadButton {...props} /> */}
-      <Space direction="ROW" size={4} />
-      <CsvDownloadButton {...props} />
-    </Wrapper>
+      <StyledRow>
+        <TableReloadButton />
+        <CSVDownloadButton {...props} />
+        <ExcelDownloadButton {...props} />
+      </StyledRow>
+    </StyledWrapper>
   );
 }
 
@@ -37,8 +38,19 @@ export default React.memo(TableHeader, (prev, next) =>
   isEqualObject(prev.dataSource, next.dataSource),
 );
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  & > *:not(:last-child) {
+    margin-right: 0.6rem;
+  }
 `;

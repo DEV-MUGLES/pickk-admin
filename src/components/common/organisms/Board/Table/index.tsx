@@ -44,8 +44,8 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
               {...{
                 title,
                 columns: columns.map(({title, key}) => ({
-                  title: title.toString(),
-                  key: key.toString(),
+                  label: title.toString(),
+                  propName: key.toString(),
                 })),
                 dataSource: tableData,
               }}
