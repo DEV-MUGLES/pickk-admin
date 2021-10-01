@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {message} from 'antd';
-import {OrderStatus} from '@pickk/common';
+import {OrderItemStatus} from '@pickk/common';
 
 import Preview from '@src/components/common/organisms/Board/preview';
 import Header from '../common/organisms/Board/Header';
@@ -45,12 +45,12 @@ function PlacementBoard(props: BoardProps) {
   const newPlacementActions: TableActionType[] = [
     {
       text: '발주확인',
-      onClick: async (ids: number[]) => {
+      onClick: async (merchantUids: string[]) => {
         if (
-          !ids.every(
+          !merchantUids.every(
             (id) =>
               tableData.find((record) => record.id === id).status ===
-              OrderStatus.Paid,
+              OrderItemStatus.Paid,
           )
         ) {
           message.warning(
@@ -59,9 +59,6 @@ function PlacementBoard(props: BoardProps) {
           return;
         }
 
-        const merchantUids = ids.map(
-          (id) => tableData.find((record) => record.id === id).merchantUids,
-        );
         await bulkShipReadyMeSellerOrderItems(merchantUids);
       },
     },
@@ -74,6 +71,19 @@ function PlacementBoard(props: BoardProps) {
           );
           return;
         }
+
+        if (
+          !(
+            tableData.find((record) => record.id === ids[0]).status ===
+            OrderItemStatus.ShipReady
+          )
+        ) {
+          message.warning(
+            "주문상태가 '배송준비중'상태인 주문만 발주확인할 수 있습니다.",
+          );
+          return;
+        }
+
         toggleOpenModal('ship', true)();
         /** selectedRowKeys가 초기화 되기 때문에 reload를 하면 안된다. */
         return {reloading: false};
@@ -93,7 +103,7 @@ function PlacementBoard(props: BoardProps) {
         const isPaidOrderItem = ids.every(
           (id) =>
             tableData.find((record) => record.id === id).status ===
-            OrderStatus.Paid,
+            OrderItemStatus.Paid,
         );
         if (!isPaidOrderItem) {
           message.warning(
@@ -107,14 +117,28 @@ function PlacementBoard(props: BoardProps) {
         return {reloading: false};
       },
     },
-    {
-      // @TODO 발송지연 안내 액션 추가
-      text: '발송지연안내',
-      onClick: async (ids: number[]) => {
-        return;
-      },
-    },
+    // @TODO 추후 구현
+    // {
+    // text: '발송지연안내',
+    // onClick: async (ids: number[]) => {
+    //   return;
+    // },
+    // },
   ];
+
+  const handleShipModalSubmit = async (shipment) => {
+    try {
+      await shipMeSellerOrderItems(
+        shipment.merchantUid,
+        shipment.courierId,
+        shipment.trackCode,
+      );
+
+      message.success('적용되었습니다.');
+    } catch (error) {
+      message.error(`실패했습니다. - ${error}`);
+    }
+  };
 
   return (
     <>
@@ -135,13 +159,7 @@ function PlacementBoard(props: BoardProps) {
         modalData={
           tableData?.find((record) => record.id === selectedRowKeys[0]) ?? null
         }
-        onSubmit={(shipment) => {
-          shipMeSellerOrderItems(
-            shipment.merchantUid,
-            shipment.courierId,
-            shipment.trackCode,
-          );
-        }}
+        onSubmit={handleShipModalSubmit}
       />
       <CancelOrderItemModal
         isModalOpen={isModalOpen.cancelOrderItem}

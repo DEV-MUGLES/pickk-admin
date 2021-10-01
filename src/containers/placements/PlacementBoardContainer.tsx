@@ -1,4 +1,5 @@
 import {useQuery} from '@apollo/client';
+import {OrderItemStatus} from '@pickk/common';
 
 import PlacementBoard from '@src/components/placements';
 
@@ -14,6 +15,10 @@ function PlacementBoardContainer() {
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
         mapRecord: placementsRecordMapper,
+        filterRecord: (v) =>
+          [OrderItemStatus.Paid, OrderItemStatus.ShipReady].includes(
+            v.status,
+          ) && v.claimStatus == null,
       }}>
       <PlacementBoard
         title="발주/발송 관리"

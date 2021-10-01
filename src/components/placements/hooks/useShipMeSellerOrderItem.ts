@@ -1,11 +1,5 @@
 import {gql, useMutation} from '@apollo/client';
-import {
-  Mutation,
-  MutationShipMeSellerOrderItemArgs,
-  ShipOrderItemInput,
-} from '@pickk/common';
-
-import {message} from 'antd';
+import {Mutation, MutationShipMeSellerOrderItemArgs} from '@pickk/common';
 
 // 발송처리
 export const useShipMeSellerOrderItem = () => {
@@ -13,11 +7,11 @@ export const useShipMeSellerOrderItem = () => {
     Pick<Mutation, 'shipMeSellerOrderItem'>,
     MutationShipMeSellerOrderItemArgs
   >(gql`
-    mutation ShipMeSellerOrderItems(
+    mutation ShipMeSellerOrderItem(
       $merchantUid: String!
       $shipOrderItemInput: ShipOrderItemInput!
     ) {
-      shipMeSellerOrderItems(
+      shipMeSellerOrderItem(
         merchantUid: $merchantUid
         shipOrderItemInput: $shipOrderItemInput
       ) {
@@ -28,24 +22,18 @@ export const useShipMeSellerOrderItem = () => {
 
   const shipMeSellerOrderItems = async (
     merchantUid: string,
-    courierId: ShipOrderItemInput['courierId'],
-    trackCode: ShipOrderItemInput['trackCode'],
+    courierId: number,
+    trackCode: string,
   ) => {
-    try {
-      await _shipMeSellerOrderItems({
-        variables: {
-          merchantUid,
-          shipOrderItemInput: {
-            courierId,
-            trackCode,
-          },
+    await _shipMeSellerOrderItems({
+      variables: {
+        merchantUid,
+        shipOrderItemInput: {
+          courierId,
+          trackCode,
         },
-      });
-
-      message.success('적용되었습니다.');
-    } catch (error) {
-      message.error(`실패했습니다. - ${error}`);
-    }
+      },
+    });
   };
 
   return {shipMeSellerOrderItems};

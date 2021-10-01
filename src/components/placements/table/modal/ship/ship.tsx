@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Modal, Input, Button, Typography} from 'antd';
+import {Shipment} from '@pickk/common';
 
 import {GREY} from '@src/common/constants/colors';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {Shipment} from '@pickk/common';
+
+import CourierSelect from './courier-select';
 
 const {Text} = Typography;
 
@@ -52,6 +54,13 @@ export default function ShipModal({
     });
   }, [modalData]);
 
+  const handleCourierIdChange = (courierId: number) => {
+    setShipment({
+      ...shipment,
+      courierId,
+    });
+  };
+
   const handleShipmentsChange = async (e) => {
     setShipment({
       ...shipment,
@@ -87,11 +96,9 @@ export default function ShipModal({
               <MerchantUid>{modalData.merchantUid}</MerchantUid>
               <ItemName>{modalData.itemName}</ItemName>
               <BuyerName>{modalData.buyerName}</BuyerName>
-              <StyledInput
-                size="small"
-                name="courierId"
+              <CourierSelect
                 value={shipment.courierId ?? null}
-                onChange={handleShipmentsChange}
+                onChange={handleCourierIdChange}
               />
               <StyledInput
                 size="small"

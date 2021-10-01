@@ -58,7 +58,10 @@ export const orderItemColumns: ColumnsType<any> = [
     dataIndex: 'itemName',
     key: 'itemName',
     render: (value, record) => (
-      <a href={`https://pickk.one/item/${record.itemId}`} target="_blank" rel="noreferrer">
+      <a
+        href={`https://pickk.one/item/${record.itemId}`}
+        target="_blank"
+        rel="noreferrer">
         {getOrderItemStatusDisplayName(value)}
       </a>
     ),
@@ -100,9 +103,10 @@ export const orderItemColumns: ColumnsType<any> = [
   },
   {
     title: '수취인명',
-    dataIndex: 'receiverName',
-    key: 'receiverName',
-    sorter: (a, b) => stringSorter(b.receiverName, a.receiverName),
+    dataIndex: 'receiverReceiverName',
+    key: 'receiverReceiverName',
+    sorter: (a, b) =>
+      stringSorter(b.receiverReceiverName, a.receiverReceiverName),
     width: 75,
     ellipsis: true,
   },

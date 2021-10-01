@@ -6,6 +6,6 @@ export const orderItemsRecordMapper = (record: BaseOrderItem) => {
     ...record,
     buyerName: buyer?.name,
     buyerPhoneNumber: buyer?.phoneNumber,
-    receiverName: receiver?.name,
+    receiverReceiverName: receiver?.receiverName,
   };
 };

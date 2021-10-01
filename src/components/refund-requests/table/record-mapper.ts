@@ -5,6 +5,7 @@ export const refundRequestRecordMapper = (record: BaseRefundRequest) => {
   const {buyer} = order;
   return {
     ...record,
+    id: record.merchantUid,
     buyerName: buyer?.name,
     buyerPhoneNumber: buyer?.phoneNumber,
     courierCode: shipment?.courier.code,

@@ -1,4 +1,5 @@
 import {useQuery} from '@apollo/client';
+import {OrderItemStatus} from '@pickk/common';
 
 import OrderItemBoard from '@src/components/order-items';
 
@@ -14,6 +15,7 @@ function OrderItemsBoardContainer() {
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
         mapRecord: orderItemsRecordMapper,
+        filterRecord: (v) => v.status !== OrderItemStatus.Pending,
       }}>
       <OrderItemBoard
         title="주문 조회"

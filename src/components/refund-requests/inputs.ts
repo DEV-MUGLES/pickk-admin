@@ -6,8 +6,7 @@ export const refundRequestInputs = [
     name: 'search',
     labelText: '검색창',
     Component: InputBox,
-    guideText:
-      '수취인명/구매자명/구매자자연락처/상품명/주문번호/상품별주문번호/송장번호를 검색할 수 있습니다.',
+    guideText: '주문번호/운송장번호를 검색할 수 있습니다.',
   },
   {
     name: 'period',

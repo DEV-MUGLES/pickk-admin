@@ -43,10 +43,10 @@ function ShipmentBoard(props: BoardProps) {
     const selectedData = tableData.find(
       (record) => record.id === selectedRowKeys[0],
     );
-    // if (!selectedData?.shipment) {
-    //   message.warning('배송정보가 존재하지 않는 송장은 수정할 수 없습니다.');
-    //   return;
-    // }
+    if (!selectedData?.shipment) {
+      message.warning('배송정보가 존재하지 않는 송장은 수정할 수 없습니다.');
+      return;
+    }
 
     setIsModalOpen(true);
     return {reloading: false};
