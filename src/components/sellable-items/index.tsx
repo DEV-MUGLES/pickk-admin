@@ -13,7 +13,11 @@ import ItemPriceEditDrawer from './drawer/price-edit';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
 
-import {sellableItemColumns, sellableItemActions} from './table';
+import {
+  sellableItemColumns,
+  sellableItemActions,
+  sellableItemExcelColumns,
+} from './table';
 import {sellableItemInputs} from './inputs';
 
 type SellableItemsDrawerType = 'price' | 'optionStock' | 'info';
@@ -84,6 +88,7 @@ function SellableItemsBoard(props: BoardProps) {
       <Table
         {...props}
         columns={newSellableItemColumns}
+        excelColumns={sellableItemExcelColumns}
         actions={sellableItemActions}
       />
       <ItemPriceEditDrawer
