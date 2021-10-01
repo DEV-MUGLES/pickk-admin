@@ -45,6 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.15.4"],
             ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.8"],
             ["@pickk/eslint-plugin", "npm:0.0.8"],
+            ["@pickk/react-excel", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:0.0.8"],
             ["@types/apollo-upload-client", "npm:14.1.0"],
             ["@types/js-cookie", "npm:2.2.6"],
             ["@types/lodash", "npm:4.14.168"],
@@ -1348,6 +1349,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/experimental-utils", "virtual:7cab88ff8ad81f30e50585ef94e6e449b597062556dd5a787209f4f8567c4d558e26db91455877772e7120893249ac44d2929ea236dc0ada482840c86f4eb115#npm:4.28.2"],
             ["@typescript-eslint/scope-manager", "npm:4.28.2"],
             ["cross-env", "npm:5.0.5"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@pickk/react-excel", [
+        ["npm:0.0.8", {
+          "packageLocation": "./.yarn/cache/@pickk-react-excel-npm-0.0.8-7c86af153e-40dbbe296c.zip/node_modules/@pickk/react-excel/",
+          "packageDependencies": [
+            ["@pickk/react-excel", "npm:0.0.8"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:0.0.8", {
+          "packageLocation": "./.yarn/__virtual__/@pickk-react-excel-virtual-a36d0dd1e2/0/cache/@pickk-react-excel-npm-0.0.8-7c86af153e-40dbbe296c.zip/node_modules/@pickk/react-excel/",
+          "packageDependencies": [
+            ["@pickk/react-excel", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:0.0.8"],
+            ["@types/react", "npm:17.0.5"],
+            ["@types/xlsx", "npm:0.0.36"],
+            ["react", "npm:17.0.2"],
+            ["xlsx", "npm:0.15.6"]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "@types/xlsx",
+            "react",
+            "xlsx"
           ],
           "linkType": "HARD",
         }]
@@ -6406,6 +6433,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.15.4"],
             ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.8"],
             ["@pickk/eslint-plugin", "npm:0.0.8"],
+            ["@pickk/react-excel", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:0.0.8"],
             ["@types/apollo-upload-client", "npm:14.1.0"],
             ["@types/js-cookie", "npm:2.2.6"],
             ["@types/lodash", "npm:4.14.168"],
