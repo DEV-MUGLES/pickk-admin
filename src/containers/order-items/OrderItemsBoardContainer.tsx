@@ -15,7 +15,8 @@ function OrderItemsBoardContainer() {
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
         mapRecord: orderItemsRecordMapper,
-        filterRecord: (v) => v.status !== OrderItemStatus.Pending,
+        filterRecord: (v) =>
+          ![OrderItemStatus.Pending, OrderItemStatus.Failed].includes(v.status),
       }}>
       <OrderItemBoard
         title="주문 조회"
