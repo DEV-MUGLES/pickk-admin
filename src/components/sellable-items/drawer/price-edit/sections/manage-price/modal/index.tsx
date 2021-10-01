@@ -41,44 +41,46 @@ function PriceFormModal({
   const {addItemPrice} = useAddItemPrice();
   const [updateItemPrice] = useUpdateItemPrice();
 
-  const handleAddItemPrice = (_addItemPriceInput: PriceFormValueType) => {
+  const handleAddItemPrice = async (_addItemPriceInput: PriceFormValueType) => {
     const addItemPriceInput = {
       ..._addItemPriceInput,
       isCrawlUpdating: false,
       isActive: isSameDate(_addItemPriceInput.startAt, new Date()),
     };
 
-    addItemPrice({
-      variables: {
-        itemId: selectedRowId,
-        addItemPriceInput,
-      },
-    })
-      .then(() => {
-        message.success('새로운 가격을 추가했습니다.');
-        onClose();
-      })
-      .catch((err) => {
-        message.error('가격 추가를 실패했습니다. err - ' + err);
+    try {
+      await addItemPrice({
+        variables: {
+          itemId: selectedRowId,
+          addItemPriceInput,
+        },
       });
+
+      message.success('새로운 가격을 추가했습니다.');
+      reload();
+      onClose();
+    } catch (err) {
+      message.error('가격 추가를 실패했습니다. err - ', err);
+    }
   };
 
-  const handleUpdateItemPrice = (formInput: PriceFormValueType) => {
+  const handleUpdateItemPrice = async (formInput: PriceFormValueType) => {
     const {isActive, ...updateItemPriceInput} = formInput;
-    updateItemPrice({
-      variables: {
-        id: selectedPriceId,
-        updateItemPriceInput,
-      },
-    })
-      .then(() => {
-        message.success('가격을 수정했습니다.');
-        reload();
-        onClose();
-      })
-      .catch(() => {
-        message.error('가격 수정을 실패했습니다.');
+
+    try {
+      await updateItemPrice({
+        variables: {
+          id: selectedPriceId,
+          updateItemPriceInput,
+        },
       });
+
+      message.success('가격을 수정했습니다.');
+      reload();
+      onClose();
+    } catch (err) {
+      message.error('가격 수정을 실패했습니다. err - ', err);
+    }
   };
 
   const [title, submitButtonText, defaultValue, handleSave]: [
