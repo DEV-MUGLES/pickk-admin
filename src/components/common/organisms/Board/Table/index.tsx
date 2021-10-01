@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Table, Divider} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
+import {ExcelColumnsType} from '@pickk/react-excel';
 
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
@@ -13,10 +14,17 @@ import {useBoardContext} from '@src/common/contexts/Board';
 export type BoardTableProps = {
   title: string;
   columns: ColumnsType;
+  excelColumns?: ExcelColumnsType<unknown>;
   actions?: TableActionBarProps['tableActions'];
 } & Pick<TableFooterProps, 'footActions'>;
 
-function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
+function BoardTable({
+  title,
+  columns,
+  excelColumns,
+  actions,
+  footActions,
+}: BoardTableProps) {
   const {state, action} = useBoardContext();
   const {tableData, loading, selectedRowKeys} = state;
   const {setSelectedRowKeys} = action;
@@ -43,10 +51,12 @@ function BoardTable({title, columns, actions, footActions}: BoardTableProps) {
             <Header
               {...{
                 title,
-                columns: columns.map(({title, key}) => ({
-                  label: title.toString(),
-                  propName: key.toString(),
-                })),
+                columns:
+                  excelColumns ??
+                  columns.map(({title, key}) => ({
+                    label: title.toString(),
+                    propName: key.toString(),
+                  })),
                 dataSource: tableData,
               }}
             />
