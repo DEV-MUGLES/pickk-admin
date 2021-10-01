@@ -140,17 +140,8 @@ function PriceFormModal({
       return;
     }
 
-    const {pickkDiscountRate} = value;
-    if (
-      pickkDiscountRate == null ||
-      pickkDiscountRate < 0 ||
-      pickkDiscountRate > 100
-    ) {
-      message.error('쿠폰 적용률 범위는 0~100입니다.');
-      return;
-    }
-
-    handleSave(value);
+    // @TODO 할인률 -> 임시
+    handleSave({...value, pickkDiscountRate: 5});
   };
 
   return (
@@ -160,6 +151,8 @@ function PriceFormModal({
       onCancel={onClose}
       footer={false}
       width="80%">
+      {/** @TODO 할인률 -> 임시 */}
+      <p>[판매가에서 핔 할인률 5%가 적용됩니다.]</p>
       <BaseForm
         FORM_ITEMS={{
           ...FORM_ITEMS,
