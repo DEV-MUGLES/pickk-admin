@@ -69,7 +69,7 @@ export default function ShipModal({
   };
 
   const handleSubmit = async () => {
-    onSubmit(shipment);
+    await onSubmit(shipment);
 
     closeModal();
     reload();
