@@ -13,14 +13,14 @@ function ShippingPolicyForm() {
   const handleSaveClick = async (formInput) => {
     try {
       const {shippingPolicy} = formInput;
-      updateShippingPolicy({
+      await updateShippingPolicy({
         variables: {
           updateSellerShippingPolicyInput: shippingPolicy,
         },
       });
       message.success('저장되었습니다.');
-    } catch {
-      message.error('저장에 실패했습니다');
+    } catch (err) {
+      message.error('저장에 실패했습니다. err - ' + err);
     }
   };
 
