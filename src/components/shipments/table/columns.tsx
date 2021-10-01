@@ -10,7 +10,7 @@ export const shipmentsColumns: ColumnsType<any> = [
     title: '발송일시',
     dataIndex: 'shippingAt',
     key: 'shippingAt',
-    render: (value) => <div>{getTimeString(value)}</div>,
+    render: (value) => getTimeString(value),
     sorter: (a, b) => stringSorter(b.shippingAt, a.shippingAt),
     defaultSortOrder: 'ascend',
     width: 100,
