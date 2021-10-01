@@ -15,7 +15,11 @@ import {TableActionType} from '../common/organisms/Board/Table/table';
 import {BoardProps} from '../props';
 
 import {placementInputs} from './inputs';
-import {placementColumns, placementActions} from './table';
+import {
+  placementColumns,
+  placementExcelColumns,
+  placementActions,
+} from './table';
 import {placementPreviewData} from './preview-data';
 import {
   usePlacementPreview,
@@ -151,6 +155,7 @@ function PlacementBoard(props: BoardProps) {
       <Table
         {...props}
         columns={placementColumns}
+        excelColumns={placementExcelColumns}
         actions={newPlacementActions}
       />
       <ShipModal
