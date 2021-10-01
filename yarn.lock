@@ -1133,7 +1133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/xlsx@npm:0.0.36":
+"@types/xlsx@npm:^0.0.36":
   version: 0.0.36
   resolution: "@types/xlsx@npm:0.0.36"
   dependencies:
@@ -5502,7 +5502,7 @@ fsevents@~2.3.1:
     "@types/react-csv": ^1.1.1
     "@types/react-dom": ^17.0.3
     "@types/styled-components": ^5.1.9
-    "@types/xlsx": 0.0.36
+    "@types/xlsx": ^0.0.36
     "@typescript-eslint/eslint-plugin": ^2.8.0
     "@typescript-eslint/parser": ^2.8.0
     antd: ^4.15.4
