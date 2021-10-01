@@ -20,7 +20,11 @@ import {
 
 import {exchangeRequestPreviewData} from './preview-data';
 import {exchangeRequestInputs} from './inputs';
-import {exchangeRequestColumns, exchangeRequestActions} from './table';
+import {
+  exchangeRequestColumns,
+  exchangeRequestActions,
+  exchangeRequestExcelColumns,
+} from './table';
 
 function ExchangeRequestsBoard(props: BoardProps) {
   const {state} = useBoardContext();
@@ -92,6 +96,7 @@ function ExchangeRequestsBoard(props: BoardProps) {
       <Table
         {...props}
         columns={exchangeRequestColumns}
+        excelColumns={exchangeRequestExcelColumns}
         actions={newExchangeActions}
       />
       <ShipModal
