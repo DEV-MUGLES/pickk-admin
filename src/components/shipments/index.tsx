@@ -10,7 +10,7 @@ import {TrackCodeUpdateModal} from './table/modal';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {orderItemInputs} from '../order-items/inputs';
-import {shipmentsColumns} from './table/columns';
+import {shipmentsColumns, shipmentsExcelColumns} from './table';
 import {BoardProps} from '../props';
 import {TableActionType} from '../common/organisms/Board/Table/table';
 
@@ -61,7 +61,12 @@ function ShipmentBoard(props: BoardProps) {
       <Header {...props} />
       <Preview data={shipmentPreviewData} usePreviewData={useShipmentPreview} />
       <Filter {...props} inputs={orderItemInputs} />
-      <Table {...props} columns={shipmentsColumns} actions={placementActions} />
+      <Table
+        {...props}
+        columns={shipmentsColumns}
+        excelColumns={shipmentsExcelColumns}
+        actions={placementActions}
+      />
       {isModalOpen && (
         <TrackCodeUpdateModal
           visible={isModalOpen}

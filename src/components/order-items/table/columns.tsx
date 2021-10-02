@@ -62,7 +62,7 @@ export const orderItemColumns: ColumnsType<any> = [
         href={`https://pickk.one/item/${record.itemId}`}
         target="_blank"
         rel="noreferrer">
-        {getOrderItemStatusDisplayName(value)}
+        {value}
       </a>
     ),
     sorter: (a, b) => stringSorter(b.itemName, a.itemName),
@@ -97,7 +97,7 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '구매자 연락처',
     dataIndex: 'buyerPhoneNumber',
     key: 'buyerPhoneNumber',
-    render: (value) => <div>{value ? addDashToPhoneNumber(value) : null}</div>,
+    render: (value) => addDashToPhoneNumber(value),
     width: 75,
     ellipsis: true,
   },

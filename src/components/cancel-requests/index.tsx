@@ -7,7 +7,7 @@ import {canceldRequestPreviewData} from './preview-data';
 import {BoardProps} from '../props';
 
 import {orderItemInputs} from '../order-items/inputs';
-import {orderItemColumns} from '../order-items/table';
+import {orderItemColumns, orderItemExcelColumns} from '../order-items/table';
 
 function CancelRequestsBoard(props: BoardProps) {
   return (
@@ -18,7 +18,11 @@ function CancelRequestsBoard(props: BoardProps) {
         usePreviewData={useCancelRequestPreview}
       /> */}
       <Filter {...props} inputs={orderItemInputs} />
-      <Table {...props} columns={orderItemColumns} />
+      <Table
+        {...props}
+        columns={orderItemColumns}
+        excelColumns={orderItemExcelColumns}
+      />
     </>
   );
 }

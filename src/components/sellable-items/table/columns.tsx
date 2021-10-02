@@ -36,9 +36,8 @@ export const sellableItemColumns: ColumnsType<Item> = [
     dataIndex: 'category',
     key: 'category',
     width: 100,
-    render: (_, {majorCategory, minorCategory}) => (
-      <p>{`${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`}</p>
-    ),
+    render: (_, {majorCategory, minorCategory}) =>
+      `${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`,
   },
   {
     title: '상품명',
@@ -53,7 +52,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     key: 'originalPrice',
     width: 120,
     align: 'center',
-    render: (value) => <div>{addCommaToNumber(value)}원</div>,
+    render: (value) => addCommaToNumber(value) + '원',
     sorter: (a, b) => b.originalPrice - a.originalPrice,
   },
   {
@@ -62,7 +61,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     key: 'sellPrice',
     width: 120,
     align: 'center',
-    render: (value) => <div>{addCommaToNumber(value)}원</div>,
+    render: (value) => addCommaToNumber(value) + '원',
     sorter: (a, b) => b.sellPrice - a.sellPrice,
   },
   {
