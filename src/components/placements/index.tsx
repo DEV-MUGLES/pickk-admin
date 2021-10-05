@@ -18,7 +18,7 @@ import {placementInputs} from './inputs';
 import {
   placementColumns,
   placementExcelColumns,
-  placementActions,
+  BulkCSVShip,
   BulkExcelShip,
 } from './table';
 import {placementPreviewData} from './preview-data';
@@ -98,9 +98,11 @@ function PlacementBoard(props: BoardProps) {
       },
     },
     {
+      Component: () => <BulkCSVShip reload={reload} />,
+    },
+    {
       Component: () => <BulkExcelShip reload={reload} />,
     },
-    ...placementActions,
     {
       text: '주문 취소',
       onClick: async (ids: number[]) => {
