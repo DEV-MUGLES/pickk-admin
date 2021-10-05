@@ -3,6 +3,7 @@ import {ColumnsType} from 'antd/lib/table';
 import {BaseExchangeRequest} from '@src/common/graphql';
 import {
   addCommaToNumber,
+  getExchangeRequestStatusDisplayName,
   getOrderClaimFaultOfDisplayName,
   getTimeString,
 } from '@src/common/helpers';
@@ -30,6 +31,7 @@ export const exchangeRequestColumns: ColumnsType<any> = [
     title: '교환처리상태',
     dataIndex: 'status',
     key: 'status',
+    render: (value) => getExchangeRequestStatusDisplayName(value),
     sorter: (a, b) => stringSorter(b.status, a.status),
     width: 100,
     ellipsis: true,
