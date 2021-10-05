@@ -34,8 +34,8 @@ function OptionNameEditModal({
         message.success('옵션명을 변경했습니다.');
         onClose();
       })
-      .catch(() => {
-        message.error('저장에 실패했습니다.');
+      .catch((err) => {
+        message.error('저장에 실패했습니다. err - ' + err);
       });
   };
 

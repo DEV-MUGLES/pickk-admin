@@ -37,8 +37,8 @@ function StockEditColumn({id, defaultValue}) {
       .then(() => {
         setIsEditable(false);
       })
-      .catch(() => {
-        message.error('재고 수정에 실패했습니다.');
+      .catch((err) => {
+        message.error('재고 수정에 실패했습니다. err - ' + err);
       });
   };
 

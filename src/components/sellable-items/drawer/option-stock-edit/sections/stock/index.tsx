@@ -42,7 +42,7 @@ function StockManageSection() {
           .then(() => {
             message.success('설정했습니다.');
           })
-          .catch(() => message.error('설정에 실패했습니다.'));
+          .catch((err) => message.error('저장에 실패했습니다. err - ' + err));
       },
     });
   };

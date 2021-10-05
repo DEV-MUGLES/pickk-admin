@@ -26,8 +26,8 @@ function SettlePolicyForm() {
         },
       });
       message.success('저장되었습니다.');
-    } catch (error) {
-      message.error('저장에 실패했습니다');
+    } catch (err) {
+      message.error('저장에 실패했습니다. err - ' + err);
     }
   };
 

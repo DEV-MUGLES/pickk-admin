@@ -22,8 +22,8 @@ function ServiceCenterInfoForm() {
       .then(() => {
         message.success('저장되었습니다.');
       })
-      .catch(() => {
-        message.error('저장에 실패했습니다.');
+      .catch((err) => {
+        message.error('저장에 실패했습니다. err - ' + err);
       });
   };
 

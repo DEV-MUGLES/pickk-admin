@@ -45,7 +45,7 @@ function ClaimPolicyForm() {
       });
       message.success('저장되었습니다.');
     } catch (error) {
-      message.error('저장에 실패했습니다');
+      message.error('저장에 실패했습니다. err - ' + error);
     }
   };
 
