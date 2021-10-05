@@ -1,6 +1,6 @@
 import {Select} from 'antd';
 
-import {useCouriers} from './hooks';
+import {useCouriers} from '@src/common/hooks/apis';
 
 const {Option} = Select;
 

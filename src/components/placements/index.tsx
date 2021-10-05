@@ -18,7 +18,8 @@ import {placementInputs} from './inputs';
 import {
   placementColumns,
   placementExcelColumns,
-  placementActions,
+  CSVBulkShipButton,
+  ExcelBulkShipButton,
 } from './table';
 import {placementPreviewData} from './preview-data';
 import {
@@ -30,7 +31,10 @@ import {
 export type PlacementModalType = 'ship' | 'cancelOrderItem';
 
 function PlacementBoard(props: BoardProps) {
-  const {tableData, selectedRowKeys} = useBoardContext().state;
+  const {
+    state: {tableData, selectedRowKeys},
+    action: {reload},
+  } = useBoardContext();
   const [isModalOpen, setIsModalOpen] = useState<
     Record<PlacementModalType, boolean>
   >({
@@ -93,7 +97,12 @@ function PlacementBoard(props: BoardProps) {
         return {reloading: false};
       },
     },
-    ...placementActions,
+    {
+      Component: () => <CSVBulkShipButton reload={reload} />,
+    },
+    {
+      Component: () => <ExcelBulkShipButton reload={reload} />,
+    },
     {
       text: '주문 취소',
       onClick: async (ids: number[]) => {

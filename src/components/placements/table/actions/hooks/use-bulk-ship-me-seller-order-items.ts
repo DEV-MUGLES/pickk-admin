@@ -1,5 +1,4 @@
 import {gql, useMutation} from '@apollo/client';
-import {message} from 'antd';
 import {
   ExtendedShipOrderItemInput,
   Mutation,
@@ -26,19 +25,13 @@ export const useBulkShipMeSellerOrderItems = () => {
   const bulkShipMeSellerOrderItems = async (
     shipOrderItemInputs: Array<ExtendedShipOrderItemInput>,
   ) => {
-    try {
-      await _bulkShipMeSellerOrderItems({
-        variables: {
-          bulkShipOrderItemInput: {
-            shipOrderItemInputs,
-          },
+    await _bulkShipMeSellerOrderItems({
+      variables: {
+        bulkShipOrderItemInput: {
+          shipOrderItemInputs,
         },
-      });
-
-      message.success('적용되었습니다.');
-    } catch (err) {
-      message.error(`실패했습니다. - ${err}`);
-    }
+      },
+    });
   };
 
   return {bulkShipMeSellerOrderItems};
