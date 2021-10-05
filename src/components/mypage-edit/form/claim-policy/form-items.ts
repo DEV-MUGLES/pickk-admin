@@ -1,6 +1,10 @@
+import {Input} from 'antd';
+
 import AddressInput, {AddressType} from './address-input';
 
 import {BaseFormProps} from '@src/components/common/organisms/Form/base';
+
+const {TextArea} = Input;
 
 const checkAddressValidation = async (
   _,
@@ -60,5 +64,9 @@ export const FORM_ITEMS: BaseFormProps['FORM_ITEMS'] = {
         message: '교환/반품 배송비를 입력해주세요.',
       },
     ],
+  },
+  description: {
+    label: '교환/반품 문구',
+    CustomInput: TextArea,
   },
 };
