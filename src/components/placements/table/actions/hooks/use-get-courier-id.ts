@@ -8,7 +8,11 @@ export const useGetCourierId = () => {
       return {...acc, [curr.name]: curr.id};
     }, {}) ?? {};
 
-  const getCourierId = (name: string) => {
+  const getCourierId = (name: string): number => {
+    if (!name) {
+      return null;
+    }
+
     return courierIdMapper[name.replace(/\s/g, '')];
   };
 

@@ -20,7 +20,6 @@ export default function BulkExcelShip({reload}: BulkExcelShipProps) {
 
   const getShipValidData = (
     data: unknown[],
-    getCourierId: (name: string) => number,
   ): {merchantUid: string; courierId: number; trackCode: string}[] => {
     return data
       .filter(
@@ -32,9 +31,9 @@ export default function BulkExcelShip({reload}: BulkExcelShipProps) {
       .map((record) => {
         // record[0], record[4], record[5] : 주문상품번호, 택배사, 송장번호
         return {
-          merchantUid: record[0].toString(),
-          courierId: getCourierId(record[4].toString()),
-          trackCode: record[5].toString(),
+          merchantUid: record[0]?.toString(),
+          courierId: getCourierId(record[4]?.toString()),
+          trackCode: record[5]?.toString(),
         };
       })
       .filter((record) => Object.values(record).every((value) => !!value));
@@ -55,7 +54,7 @@ export default function BulkExcelShip({reload}: BulkExcelShipProps) {
           /* Convert array to json*/
           const dataParse = XLSX.utils.sheet_to_json(ws, {header: 1});
           const slicedData = dataParse.slice(1); // 헤더를 제외한 데이터
-          const result = getShipValidData(slicedData, getCourierId);
+          const result = getShipValidData(slicedData);
 
           confirm({
             title: '발송처리할 주문 개수를 확인해주세요.',
