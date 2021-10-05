@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Modal, Alert, Input, Typography, message} from 'antd';
 import {InquiryAnswer} from '@pickk/common';
 
-import {useMe} from '@src/common/hooks/apis';
+import {useMeSeller} from '@src/common/hooks/apis';
 import {useAnswerInquiry} from '@src/components/inquiry-detail/answer/hooks';
 import {useBoardContext} from '@src/common/contexts/Board';
 
@@ -53,7 +53,7 @@ export default function InquiryAnswerModal(props: InquiryAnswerModalProps) {
   const [displayAuthor, setDisplayAuthor] = useState('');
 
   const {answerInquiry} = useAnswerInquiry();
-  const {data} = useMe();
+  const {data} = useMeSeller();
 
   useEffect(() => {
     if (!data) {

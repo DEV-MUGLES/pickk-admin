@@ -7,7 +7,7 @@ import IconButton from '../atoms/button/icon';
 import LogoDefaultIcon from '../icons/logo/_default';
 import {WHITE} from '../../../common/constants/colors';
 
-import {useMe} from '@src/common/hooks/apis';
+import {useMeSeller} from '@src/common/hooks/apis';
 
 const {Title} = Typography;
 const {Header} = Layout;
@@ -15,7 +15,7 @@ const {Header} = Layout;
 export default function GHeader() {
   const router = useRouter();
 
-  const {reset} = useMe();
+  const {reset} = useMeSeller();
 
   const signOut = async () => {
     try {
