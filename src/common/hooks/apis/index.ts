@@ -5,3 +5,4 @@ export * from './item-option';
 export * from './product';
 export * from './use-couriers';
 export * from './use-me';
+export * from './use-my-jwt-payload';
