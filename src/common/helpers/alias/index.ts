@@ -1,4 +1,5 @@
 export * from './bankName.alias';
+export * from './exchange-request-status.alias';
 export * from './inquiry-type.alias';
 export * from './order-cliam-fault-of.alias';
 export * from './orderItemStatus.alias';
