@@ -18,8 +18,8 @@ import {placementInputs} from './inputs';
 import {
   placementColumns,
   placementExcelColumns,
-  BulkCSVShip,
-  BulkExcelShip,
+  CSVBulkShipButton,
+  ExcelBulkShipButton,
 } from './table';
 import {placementPreviewData} from './preview-data';
 import {
@@ -98,10 +98,10 @@ function PlacementBoard(props: BoardProps) {
       },
     },
     {
-      Component: () => <BulkCSVShip reload={reload} />,
+      Component: () => <CSVBulkShipButton reload={reload} />,
     },
     {
-      Component: () => <BulkExcelShip reload={reload} />,
+      Component: () => <ExcelBulkShipButton reload={reload} />,
     },
     {
       text: '주문 취소',

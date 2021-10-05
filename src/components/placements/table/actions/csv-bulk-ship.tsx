@@ -10,11 +10,11 @@ import {useBulkShipMeSellerOrderItems, useGetCourierId} from './hooks';
 
 const {confirm} = Modal;
 
-export type BulkCSVShipProps = {
+export type CSVBulkShipButtonProps = {
   reload: () => void;
 };
 
-export default function BulkCSVShip({reload}: BulkCSVShipProps) {
+export default function CSVBulkShipButton({reload}: CSVBulkShipButtonProps) {
   const {bulkShipMeSellerOrderItems} = useBulkShipMeSellerOrderItems();
   const {getCourierId} = useGetCourierId();
 

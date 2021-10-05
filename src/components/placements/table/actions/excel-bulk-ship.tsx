@@ -10,11 +10,13 @@ import {useBulkShipMeSellerOrderItems, useGetCourierId} from './hooks';
 
 const {confirm} = Modal;
 
-export type BulkExcelShipProps = {
+export type ExcelBulkShipButtonProps = {
   reload: () => void;
 };
 
-export default function BulkExcelShip({reload}: BulkExcelShipProps) {
+export default function ExcelBulkShipButton({
+  reload,
+}: ExcelBulkShipButtonProps) {
   const {bulkShipMeSellerOrderItems} = useBulkShipMeSellerOrderItems();
   const {getCourierId} = useGetCourierId();
 
