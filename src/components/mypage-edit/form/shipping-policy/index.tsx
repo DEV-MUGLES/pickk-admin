@@ -1,4 +1,5 @@
 import {message} from 'antd';
+import {UpdateSellerShippingPolicyInput} from '@pickk/common';
 
 import BaseForm from '../../../common/organisms/Form/base';
 
@@ -7,15 +8,24 @@ import {useShippingPolicyForm, useUpdateMySellerShippingPolicy} from './hooks';
 import {FORM_ITEMS} from './form-items';
 
 function ShippingPolicyForm() {
-  const {defaultValue} = useShippingPolicyForm();
+  const {data: defaultValue} = useShippingPolicyForm();
   const [updateShippingPolicy] = useUpdateMySellerShippingPolicy();
 
-  const handleSaveClick = async (formInput) => {
+  const handleSaveClick = async (formInput: {
+    shippingPolicy: Pick<
+      UpdateSellerShippingPolicyInput,
+      'fee' | 'minimumAmountForFree'
+    >;
+    description: string;
+  }) => {
     try {
-      const {shippingPolicy} = formInput;
+      const {shippingPolicy, description} = formInput;
       await updateShippingPolicy({
         variables: {
-          updateSellerShippingPolicyInput: shippingPolicy,
+          updateSellerShippingPolicyInput: {
+            ...shippingPolicy,
+            description,
+          },
         },
       });
       message.success('저장되었습니다.');
@@ -28,7 +38,10 @@ function ShippingPolicyForm() {
     <BaseForm
       FORM_ITEMS={FORM_ITEMS}
       onSaveClick={handleSaveClick}
-      defaultValue={defaultValue}
+      defaultValue={{
+        shippingPolicy: {...defaultValue.shippingPolicy},
+        description: defaultValue.shippingPolicy.description,
+      }}
     />
   );
 }

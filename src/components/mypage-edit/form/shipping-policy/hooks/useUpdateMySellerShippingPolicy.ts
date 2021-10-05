@@ -18,6 +18,7 @@ export const useUpdateMySellerShippingPolicy = () =>
         id
         fee
         minimumAmountForFree
+        description
       }
     }
   `);
