@@ -49,7 +49,9 @@ export default function InquiryDetailContainer({
     <StyledWrapper>
       <StyledSection>
         <InquiryDetailItemSection {...item} />
-        {!!orderItemMerchantUid && <InquiryDetailOrderSection {...orderItem} />}
+        {!!orderItemMerchantUid && !!orderItem && (
+          <InquiryDetailOrderSection {...orderItem} />
+        )}
       </StyledSection>
       <StyledSection>
         <InquiryDetailContentSection {...data} />
