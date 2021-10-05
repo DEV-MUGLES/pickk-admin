@@ -13,7 +13,7 @@ export const useReshipMeSellerOrderItem = () => {
   >(gql`
     mutation ReshipMeSellerExchangeRequest(
       $merchantUid: String!
-      $reshipExchangeRequestInput: ReshipExchangeRequestInput
+      $reshipExchangeRequestInput: ReshipExchangeRequestInput!
     ) {
       reshipMeSellerExchangeRequest(
         merchantUid: $merchantUid

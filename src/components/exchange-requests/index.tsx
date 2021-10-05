@@ -47,7 +47,7 @@ function ExchangeRequestsBoard(props: BoardProps) {
             const record = tableData.find(
               (record) => record.merchantUid === merchantUid,
             );
-            return record.exchangeStatus === ExchangeRequestStatus.Requested;
+            return record.status === ExchangeRequestStatus.Requested;
           })
         ) {
           message.warning('수거중인 요청만 완료처리할 수 있습니다.');
