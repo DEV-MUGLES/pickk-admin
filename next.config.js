@@ -6,4 +6,12 @@ module.exports = {
     config.plugins.push(new webpack.EnvironmentPlugin(localEnv || process.env));
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/sellable-items',
+      },
+    ];
+  },
 };
