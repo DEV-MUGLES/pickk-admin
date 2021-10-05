@@ -19,13 +19,13 @@ export const getOrderItemStatusDisplayName = (status: OrderItemStatus) => {
 
   return (
     {
-      [Pending]: '결제 대기',
-      [Failed]: '결제 취소',
-      [VbankReady]: '입금 대기',
-      [VbankDodged]: '입금 전 취소',
-      [Paid]: '결제 완료',
-      [ShipPending]: '배송 예약중',
-      [ShipReady]: '배송 준비중',
+      [Pending]: '결제대기',
+      [Failed]: '결제취소',
+      [VbankReady]: '입금대기',
+      [VbankDodged]: '입금전취소',
+      [Paid]: '결제완료',
+      [ShipPending]: '배송예약중',
+      [ShipReady]: '배송준비중',
       [Shipping]: '배송중',
       [Shipped]: '배송완료',
     }[status] || status

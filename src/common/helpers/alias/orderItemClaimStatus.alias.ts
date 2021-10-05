@@ -18,12 +18,12 @@ export const getOrderItemClaimStatusDisplayName = (
 
   return (
     {
-      [CancelRequested]: '취소 요청',
-      [Cancelled]: '취소 완료',
-      [ExchangeRequested]: '교환 요청',
-      [Exchanged]: '교환 완료',
-      [RefundRequested]: '환불 요청',
-      [Refunded]: '환불 완료',
+      [CancelRequested]: '취소요청',
+      [Cancelled]: '취소완료',
+      [ExchangeRequested]: '교환요청',
+      [Exchanged]: '교환완료',
+      [RefundRequested]: '환불요청',
+      [Refunded]: '환불완료',
     }[status] || status
   );
 };
