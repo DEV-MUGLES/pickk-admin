@@ -70,24 +70,24 @@ const MENU_ITEMS: MenuItemsType = [
       ,
     ],
   },
-  {
-    title: '정산 관리',
-    icon: DollarOutlined,
-    items: [
-      // {
-      //   text: '정산 내역',
-      //   link: '/settlements',
-      // },
-      // {
-      //   text: '정산 내역 상세',
-      //   link: '/settle/detail',
-      // },
-      // {
-      //   text: '세금계산서 조회',
-      //   link: '/tax',
-      // }
-    ],
-  },
+  // {
+  //   title: '정산 관리',
+  //   icon: DollarOutlined,
+  //   items: [
+  //     // {
+  //     //   text: '정산 내역',
+  //     //   link: '/settlements',
+  //     // },
+  //     // {
+  //     //   text: '정산 내역 상세',
+  //     //   link: '/settle/detail',
+  //     // },
+  //     // {
+  //     //   text: '세금계산서 조회',
+  //     //   link: '/tax',
+  //     // }
+  //   ],
+  // },
   {
     title: '문의 관리',
     icon: CommentOutlined,
