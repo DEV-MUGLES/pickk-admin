@@ -7,6 +7,7 @@ import IconButton from '../atoms/button/icon';
 import LogoDefaultIcon from '../icons/logo/_default';
 import {WHITE} from '../../../common/constants/colors';
 
+import {removeCookie} from '@src/common/helpers';
 import {useMeSeller} from '@src/common/hooks/apis';
 
 const {Title} = Typography;
@@ -20,9 +21,12 @@ export default function GHeader() {
   const signOut = async () => {
     try {
       if (confirm('로그아웃 하시겠습니까?')) {
-        await reset();
+        removeCookie('accessToken');
+        removeCookie('refreshToken');
 
         message.success('로그아웃 되었습니다.');
+
+        await reset();
         router.push('/login');
       }
     } catch (error) {
