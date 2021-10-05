@@ -1,6 +1,8 @@
 import {ExcelColumnsType} from '@pickk/react-excel';
 import {ExchangeRequest} from '@pickk/common';
 
+import {getOrderClaimFaultOfDisplayName} from '@src/common/helpers';
+
 import {exchangeRequestColumns} from './columns';
 
 const excelColumns = exchangeRequestColumns.map(({title, key}) => ({
@@ -13,7 +15,8 @@ export const exchangeRequestExcelColumns: ExcelColumnsType<ExchangeRequest> = [
   {
     label: '교환사유',
     propName: 'reason',
-    mapValue: ({faultOf, reason}) => `[${faultOf}] ${reason}`,
+    mapValue: ({faultOf, reason}) =>
+      `[${getOrderClaimFaultOfDisplayName(faultOf)}] ${reason}`,
   },
   ...excelColumns.slice(10),
 ];

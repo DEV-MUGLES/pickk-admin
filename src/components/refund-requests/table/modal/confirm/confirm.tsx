@@ -5,6 +5,8 @@ import {RefundRequest} from '@pickk/common';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';
+import {getOrderClaimFaultOfDisplayName} from '@src/common/helpers';
+
 import {useConfirmRefundRequest, useMeSellerClaimPolicyFee} from './hooks';
 
 const {Title, Text} = Typography;
@@ -65,7 +67,10 @@ export default function RefundConfirmModal({
       footer={null}
       width={'70%'}>
       <Wrapper>
-        <Text>클레임 사유 : {`[${faultOf}] ${reason}`}</Text>
+        <Text>
+          클레임 사유 :{' '}
+          {`[${getOrderClaimFaultOfDisplayName(faultOf)}] ${reason}`}
+        </Text>
         <Divider />
         <Space direction="vertical">
           <Title level={5}>구매자 귀책 사유</Title>

@@ -9,6 +9,7 @@ import {
   stringSorter,
   addCommaToNumber,
   getRefundRequestStatusStatusDisplayName,
+  getOrderClaimFaultOfDisplayName,
 } from '@src/common/helpers';
 
 export const refundRequestColumns: ColumnsType<any> = [
@@ -84,7 +85,7 @@ export const refundRequestColumns: ColumnsType<any> = [
     dataIndex: 'reason',
     key: 'reason',
     render: (value, record: BaseRefundRequest) =>
-      `[${record.faultOf}] ${value}`,
+      `[${getOrderClaimFaultOfDisplayName(record.faultOf)}] ${value}`,
     sorter: (a, b) => stringSorter(b.reason, a.reason),
     width: 100,
     ellipsis: true,

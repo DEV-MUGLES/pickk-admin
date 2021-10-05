@@ -1,7 +1,10 @@
 import {ExcelColumnsType} from '@pickk/react-excel';
 import {RefundRequest} from '@pickk/common';
 
-import {getRefundRequestStatusStatusDisplayName} from '@src/common/helpers';
+import {
+  getOrderClaimFaultOfDisplayName,
+  getRefundRequestStatusStatusDisplayName,
+} from '@src/common/helpers';
 
 import {refundRequestColumns} from './columns';
 
@@ -33,7 +36,8 @@ export const refundRequestExcelColumns: ExcelColumnsType<RefundRequest> = [
   {
     label: '반품사유',
     propName: 'reason',
-    mapValue: ({faultOf, reason}) => `[${faultOf}] ${reason}`,
+    mapValue: ({faultOf, reason}) =>
+      `[${getOrderClaimFaultOfDisplayName(faultOf)}] ${reason}`,
   },
   ...excelColumns.slice(9),
 ];

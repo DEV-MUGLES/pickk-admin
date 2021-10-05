@@ -1,7 +1,11 @@
 import {ColumnsType} from 'antd/lib/table';
 
 import {BaseExchangeRequest} from '@src/common/graphql';
-import {addCommaToNumber, getTimeString} from '@src/common/helpers';
+import {
+  addCommaToNumber,
+  getOrderClaimFaultOfDisplayName,
+  getTimeString,
+} from '@src/common/helpers';
 import {addDashToPhoneNumber} from '@src/common/helpers/PhoneNumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';
 
@@ -86,7 +90,7 @@ export const exchangeRequestColumns: ColumnsType<any> = [
     dataIndex: 'reason',
     key: 'reason',
     render: (value, record: BaseExchangeRequest) =>
-      `[${record.faultOf}] ${value}`,
+      `[${getOrderClaimFaultOfDisplayName(record.faultOf)}] ${value}`,
     width: 100,
     ellipsis: true,
   },
