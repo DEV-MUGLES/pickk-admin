@@ -41,10 +41,12 @@ function ExchangeRequestsBoard(props: BoardProps) {
   const newExchangeActions: TableActionType[] = [
     {
       text: '수거완료',
-      onClick: async (ids: number[]) => {
+      onClick: async (merchantUids: string[]) => {
         if (
-          !ids.every((id) => {
-            const record = tableData.find((row) => row.id === id);
+          !merchantUids.every((merchantUid) => {
+            const record = tableData.find(
+              (record) => record.merchantUid === merchantUid,
+            );
             return record.exchangeStatus === ExchangeRequestStatus.Requested;
           })
         ) {
@@ -52,8 +54,12 @@ function ExchangeRequestsBoard(props: BoardProps) {
           return;
         }
 
-        // @TODO merchantUids 넘기기
-        await bulkPickMeSellerExchangeRequests([]);
+        try {
+          await bulkPickMeSellerExchangeRequests(merchantUids);
+          message.success('수거 완료되었습니다.');
+        } catch (error) {
+          message.error(`실패했습니다. - ${error}`);
+        }
       },
     },
     {
@@ -103,13 +109,18 @@ function ExchangeRequestsBoard(props: BoardProps) {
         title="재발송처리"
         {...{
           modalData: getModalData(),
-          onSubmit: (shipment) => {
-            // @TODO merchantUid 로 변경
-            reshipMeSellerExchangeRequest(
-              shipment.id,
-              shipment.courierId,
-              shipment.trackCode,
-            );
+          onSubmit: async (shipment) => {
+            try {
+              await reshipMeSellerExchangeRequest(
+                shipment.merchantUid,
+                shipment.courierId,
+                shipment.trackCode,
+              );
+
+              message.success('적용되었습니다.');
+            } catch (error) {
+              message.error(`실패했습니다. - ${error}`);
+            }
           },
           isModalOpen,
           closeModal,

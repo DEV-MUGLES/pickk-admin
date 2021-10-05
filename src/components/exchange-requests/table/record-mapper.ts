@@ -5,6 +5,7 @@ export const exchangeRequestRecordMapper = (record: BaseExchangeRequest) => {
   const {buyer, receiver} = orderItem.order;
   return {
     ...record,
+    id: record.orderItemMerchantUid,
     merchantUid: record.orderItemMerchantUid,
     orderMerchantUid: orderItem.orderMerchantUid,
     itemName: orderItem.itemName,

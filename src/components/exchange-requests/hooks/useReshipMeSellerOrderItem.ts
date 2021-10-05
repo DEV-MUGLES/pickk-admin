@@ -1,5 +1,4 @@
 import {gql, useMutation} from '@apollo/client';
-import {message} from 'antd';
 import {
   Mutation,
   MutationReshipMeSellerExchangeRequestArgs,
@@ -30,21 +29,15 @@ export const useReshipMeSellerOrderItem = () => {
     courierId: ReshipExchangeRequestInput['courierId'],
     trackCode: ReshipExchangeRequestInput['trackCode'],
   ) => {
-    try {
-      await _reshipMeSellerExchangeRequest({
-        variables: {
-          merchantUid,
-          reshipExchangeRequestInput: {
-            courierId,
-            trackCode,
-          },
+    await _reshipMeSellerExchangeRequest({
+      variables: {
+        merchantUid,
+        reshipExchangeRequestInput: {
+          courierId,
+          trackCode,
         },
-      });
-
-      message.success('적용되었습니다.');
-    } catch (error) {
-      message.error(`실패했습니다. - ${error}`);
-    }
+      },
+    });
   };
 
   return {reshipMeSellerExchangeRequest};

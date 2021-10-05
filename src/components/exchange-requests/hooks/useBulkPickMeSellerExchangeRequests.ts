@@ -3,7 +3,6 @@ import {
   Mutation,
   MutationBulkPickMeSellerExchangeRequestsArgs,
 } from '@pickk/common';
-import {message} from 'antd';
 
 export const useBulkPickMeSellerExchangeRequests = () => {
   const [_bulkPickMeSellerExchangeRequests] = useMutation<
@@ -16,16 +15,11 @@ export const useBulkPickMeSellerExchangeRequests = () => {
   `);
 
   const bulkPickMeSellerExchangeRequests = async (merchantUids: string[]) => {
-    try {
-      await _bulkPickMeSellerExchangeRequests({
-        variables: {
-          merchantUids,
-        },
-      });
-      message.success('수거 완료되었습니다.');
-    } catch (error) {
-      message.error(`실패했습니다. - ${error}`);
-    }
+    await _bulkPickMeSellerExchangeRequests({
+      variables: {
+        merchantUids,
+      },
+    });
   };
 
   return {bulkPickMeSellerExchangeRequests};
