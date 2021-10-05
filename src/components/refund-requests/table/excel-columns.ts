@@ -3,7 +3,7 @@ import {RefundRequest} from '@pickk/common';
 
 import {
   getOrderClaimFaultOfDisplayName,
-  getRefundRequestStatusStatusDisplayName,
+  getRefundRequestStatusDisplayName,
 } from '@src/common/helpers';
 
 import {refundRequestColumns} from './columns';
@@ -18,7 +18,7 @@ export const refundRequestExcelColumns: ExcelColumnsType<RefundRequest> = [
   {
     label: '반품처리상태',
     propName: 'status',
-    mapValue: ({status}) => getRefundRequestStatusStatusDisplayName(status),
+    mapValue: ({status}) => getRefundRequestStatusDisplayName(status),
   },
   ...excelColumns.slice(3, 4),
   {

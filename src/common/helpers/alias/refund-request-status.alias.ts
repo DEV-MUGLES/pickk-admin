@@ -1,6 +1,6 @@
 import {RefundRequestStatus} from '@pickk/common';
 
-export const getRefundRequestStatusStatusDisplayName = (
+export const getRefundRequestStatusDisplayName = (
   status: RefundRequestStatus,
 ) => {
   if (!status) {
