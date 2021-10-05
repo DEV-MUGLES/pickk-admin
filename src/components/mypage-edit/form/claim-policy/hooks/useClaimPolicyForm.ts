@@ -10,15 +10,6 @@ export const SELLER_RETURN_ADDRESS_FRAGMENT = gql`
   }
 `;
 
-export const SELLER_CLAIM_POLICY_FRAGMENT = gql`
-  fragment SellerClaimPolicyFragment on SellerClaimPolicy {
-    id
-    picName
-    phoneNumber
-    fee
-  }
-`;
-
 const GET_ME_SELLER_CLAIM_POLICY = gql`
   query MeSeller {
     meSeller {
@@ -27,12 +18,15 @@ const GET_ME_SELLER_CLAIM_POLICY = gql`
         ...SellerReturnAddressFragment
       }
       claimPolicy {
-        ...SellerClaimPolicyFragment
+        id
+        picName
+        phoneNumber
+        fee
+        description
       }
     }
   }
   ${SELLER_RETURN_ADDRESS_FRAGMENT}
-  ${SELLER_CLAIM_POLICY_FRAGMENT}
 `;
 
 export type ClaimPolicyFormDefaultValue = {
