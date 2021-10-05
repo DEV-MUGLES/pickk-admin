@@ -5,6 +5,7 @@ import {InquiryAnswer} from '@pickk/common';
 
 import {useMe} from '@src/common/hooks/apis';
 import {useAnswerInquiry} from '@src/components/inquiry-detail/answer/hooks';
+import {useBoardContext} from '@src/common/contexts/Board';
 
 import AnswerList from './answer-list';
 
@@ -44,6 +45,10 @@ export type InquiryAnswerModalProps = {
 export default function InquiryAnswerModal(props: InquiryAnswerModalProps) {
   const {visible, onClose, inquiryId, answers = []} = props;
 
+  const {
+    action: {reload},
+  } = useBoardContext();
+
   const [content, setContent] = useState('');
   const [displayAuthor, setDisplayAuthor] = useState('');
 
@@ -76,6 +81,7 @@ export default function InquiryAnswerModal(props: InquiryAnswerModalProps) {
       setContent('');
       setDisplayAuthor('');
       onClose();
+      reload();
     } catch (err) {
       message.error(`답변 등록에 실패 했습니다. ${err}`);
     }
