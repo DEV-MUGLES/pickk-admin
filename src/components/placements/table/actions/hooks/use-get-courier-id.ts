@@ -9,7 +9,7 @@ export const useGetCourierId = () => {
     }, {}) ?? {};
 
   const getCourierId = (name: string) => {
-    return courierIdMapper[name];
+    return courierIdMapper[name.replace(/\s/g, '')];
   };
 
   return {getCourierId};

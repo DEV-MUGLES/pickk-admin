@@ -33,7 +33,7 @@ export default function BulkExcelShip({reload}: BulkExcelShipProps) {
         // record[0], record[4], record[5] : 주문상품번호, 택배사, 송장번호
         return {
           merchantUid: record[0].toString(),
-          courierId: getCourierId(record[4].toString().replace(/\s/g, '')),
+          courierId: getCourierId(record[4].toString()),
           trackCode: record[5].toString(),
         };
       })
