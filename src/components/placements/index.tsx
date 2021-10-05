@@ -19,6 +19,7 @@ import {
   placementColumns,
   placementExcelColumns,
   placementActions,
+  BulkExcelShip,
 } from './table';
 import {placementPreviewData} from './preview-data';
 import {
@@ -30,7 +31,10 @@ import {
 export type PlacementModalType = 'ship' | 'cancelOrderItem';
 
 function PlacementBoard(props: BoardProps) {
-  const {tableData, selectedRowKeys} = useBoardContext().state;
+  const {
+    state: {tableData, selectedRowKeys},
+    action: {reload},
+  } = useBoardContext();
   const [isModalOpen, setIsModalOpen] = useState<
     Record<PlacementModalType, boolean>
   >({
@@ -92,6 +96,9 @@ function PlacementBoard(props: BoardProps) {
         /** selectedRowKeys가 초기화 되기 때문에 reload를 하면 안된다. */
         return {reloading: false};
       },
+    },
+    {
+      Component: () => <BulkExcelShip reload={reload} />,
     },
     ...placementActions,
     {
