@@ -14,8 +14,8 @@ export const usePlacementPreview = (): PreviewDataResult => {
         | 'id'
         | 'Paid'
         | 'ShipReady'
-        | 'process_delayed_paid'
-        | 'process_delayed_ship_ready'
+        | 'process_delayed_Paid'
+        | 'process_delayed_ShipReady'
         | 'lastUpdatedAt'
       >;
     },
@@ -26,8 +26,8 @@ export const usePlacementPreview = (): PreviewDataResult => {
         id
         Paid
         ShipReady
-        process_delayed_paid
-        process_delayed_ship_ready
+        process_delayed_Paid
+        process_delayed_ShipReady
         lastUpdatedAt
       }
     }

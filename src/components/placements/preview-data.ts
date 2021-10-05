@@ -22,13 +22,13 @@ export const placementPreviewData: PreviewDataType[] = [
   },
   {
     label: '신규주문 지연',
-    name: 'process_delayed_paid',
+    name: 'process_delayed_Paid',
     icon: ClockCircleOutlined,
     filterValue: {status: OrderItemStatus.Paid, isProcessDelaying: true},
   },
   {
     label: '발송준비 지연',
-    name: 'process_delayed_ship_ready',
+    name: 'process_delayed_ShipReady',
     icon: ClockCircleOutlined,
     filterValue: {status: OrderItemStatus.ShipReady, isProcessDelaying: true},
   },
