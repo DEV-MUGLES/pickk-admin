@@ -32,8 +32,7 @@ function ClaimPolicyForm() {
 
   const handleSaveClick = async (formValues) => {
     try {
-      const {returnAddress, feePayReceive, ...updateSellerClaimPolicyInput} =
-        formValues;
+      const {returnAddress, ...updateSellerClaimPolicyInput} = formValues;
       await handleSaveReturnAddress(returnAddress);
 
       await updateMySellerClaimPolicy({

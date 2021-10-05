@@ -9,6 +9,7 @@ const GET_ME_SELLER_SHIPPING_POLICY = gql`
         id
         fee
         minimumAmountForFree
+        description
       }
     }
   }
@@ -18,15 +19,18 @@ export const useShippingPolicyForm = () => {
   const {data} = useQuery<Pick<Query, 'meSeller'>>(
     GET_ME_SELLER_SHIPPING_POLICY,
   );
-  const shippingPolicy = data?.meSeller?.shippingPolicy;
-  const fee = shippingPolicy?.fee || 0;
-  const minimumAmountForFree = shippingPolicy?.minimumAmountForFree || 0;
-  const defaultValue = {
-    shippingPolicy: {
-      fee,
-      minimumAmountForFree,
-    },
-  };
 
-  return {data, defaultValue};
+  if (!data) {
+    return {
+      data: {
+        shippingPolicy: {
+          fee: 0,
+          minimumAmountForFree: 0,
+          description: '',
+        },
+      },
+    };
+  }
+
+  return {data: data?.meSeller};
 };

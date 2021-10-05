@@ -4,8 +4,8 @@ import {
   MutationUpdateMySellerShippingPolicyArgs,
 } from '@pickk/common';
 
-export const useUpdateMySellerShippingPolicy = () =>
-  useMutation<
+export const useUpdateMySellerShippingPolicy = () => {
+  const [update] = useMutation<
     Pick<Mutation, 'updateMySellerShippingPolicy'>,
     MutationUpdateMySellerShippingPolicyArgs
   >(gql`
@@ -18,6 +18,26 @@ export const useUpdateMySellerShippingPolicy = () =>
         id
         fee
         minimumAmountForFree
+        description
       }
     }
   `);
+
+  const updateMySellerShippingPolicy = async (
+    fee: number,
+    minimumAmountForFree: number,
+    description: string,
+  ) => {
+    await update({
+      variables: {
+        updateSellerShippingPolicyInput: {
+          fee,
+          minimumAmountForFree,
+          description,
+        },
+      },
+    });
+  };
+
+  return {updateMySellerShippingPolicy};
+};

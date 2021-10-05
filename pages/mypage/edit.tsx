@@ -20,8 +20,8 @@ const {Title} = Typography;
 const TAB_PANE_INFO: {tab: string; content: React.ElementType}[] = [
   {tab: '기본정보', content: BaseInfoForm},
   {tab: '고객센터', content: ServiceCenterInfoForm},
-  {tab: '배송비 정보', content: ShippingPolicyForm},
-  {tab: '교환반품 정보', content: ClaimPolicyForm},
+  {tab: '배송 정책', content: ShippingPolicyForm},
+  {tab: '교환/반품 정책', content: ClaimPolicyForm},
   {tab: '정산정보', content: SettlePolicyForm},
 ];
 
