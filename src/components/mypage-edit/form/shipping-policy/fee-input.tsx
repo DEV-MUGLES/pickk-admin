@@ -41,9 +41,9 @@ function ShippingFeeInput({value, onChange}: ShippingFeeInputProps) {
   };
 
   return (
-    <>
+    <div>
       <Switch checked={isFree} onChange={handleSwitchChange} />
-      <InputWrapper style={{marginTop: '0.8rem'}}>
+      <InputWrapper>
         {!isFree && (
           <>
             <Label>기본 배송비</Label>
@@ -61,15 +61,14 @@ function ShippingFeeInput({value, onChange}: ShippingFeeInputProps) {
           </>
         )}
       </InputWrapper>
-    </>
+    </div>
   );
 }
 
 export default ShippingFeeInput;
 
 const InputWrapper = styled.div`
-  width: 100%;
-  height: 4rem;
+  margin-top: 0.8rem;
 `;
 
 const Label = styled(Tag).attrs({
