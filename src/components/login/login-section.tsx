@@ -43,7 +43,7 @@ export default function LoginSection() {
   return (
     <StyledForm layout="vertical" onFinish={handleFinish}>
       <LogoDefaultIcon />
-      <StyledTitle>슈퍼어드민</StyledTitle>
+      <StyledTitle>스토어 어드민</StyledTitle>
       <Space level={3} />
       <Form.Item
         label="아이디"
