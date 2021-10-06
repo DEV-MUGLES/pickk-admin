@@ -5,7 +5,7 @@ import {Form, Input, Button, message, Typography} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {LoginByCodeInput} from '@pickk/common';
 
-import LogoDefaultIcon from '@src/components/common/icons/logo/default';
+import {PickLogoIcon} from '@src/components/common/icons';
 import {Space} from '@src/components/common/atoms';
 
 import {setCookie} from '@src/common/helpers';
@@ -42,7 +42,7 @@ export default function LoginSection() {
 
   return (
     <StyledForm layout="vertical" onFinish={handleFinish}>
-      <LogoDefaultIcon />
+      <PickLogoIcon />
       <StyledTitle>스토어 어드민</StyledTitle>
       <Space level={3} />
       <Form.Item

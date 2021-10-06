@@ -3,8 +3,7 @@ import {useRouter} from 'next/router';
 import {Layout, Avatar, Dropdown, Menu, Typography, message} from 'antd';
 import {DownOutlined, UserOutlined} from '@ant-design/icons';
 
-import IconButton from '../atoms/button/icon';
-import LogoDefaultIcon from '../icons/logo/_default';
+import {PickLogoIcon} from '../icons';
 import {WHITE} from '../../../common/constants/colors';
 
 import {removeCookie} from '@src/common/helpers';
@@ -47,17 +46,9 @@ export default function GHeader() {
 
   return (
     <StyledHeader>
-      <IconButton
-        Icon={
-          <LogoDefaultIcon
-            style={{width: '2.4rem', height: '1.4rem'}}
-            fill={WHITE}
-          />
-        }
-        type="only-content"
-        size="small"
-        href="https://pickk.one"
-      />
+      <a href="https://pickk.one" target="_blank" rel="noreferrer">
+        <PickLogoIcon style={{width: '4rem'}} fill={WHITE} />
+      </a>
       <StyleTitle onClick={() => router.push('/dashboard')}>
         스토어 어드민
       </StyleTitle>
