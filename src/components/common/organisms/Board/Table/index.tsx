@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import {Table, Divider} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {ExcelColumnsType} from '@pickk/react-excel';
+import {palette} from '@pickk/design-token';
 
 import Header from './Header';
 import Footer, {TableFooterProps} from './Footer';
 import TableActionBar, {TableActionBarProps} from './ActionBar';
-import {WHITE} from '@src/common/constants/colors';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
@@ -85,7 +85,7 @@ function BoardTable({
 export default React.memo(BoardTable);
 
 const Wrapper = styled.div`
-  background-color: ${WHITE};
+  background-color: ${palette.white};
   display: flex;
   align-itmes: flex-start;
   text-align: left;

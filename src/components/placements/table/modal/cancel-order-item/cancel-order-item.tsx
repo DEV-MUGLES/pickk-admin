@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Modal, Checkbox, Button, message, Typography} from 'antd';
 import {CheckboxChangeEvent} from 'antd/lib/checkbox';
-
-import {GREY} from '@src/common/constants/colors';
+import {palette} from '@pickk/design-token';
 
 import {useCancelMeSellerOrderItem} from './hooks';
 import {useBoardContext} from '@src/common/contexts/Board';
@@ -66,7 +65,7 @@ export default function CancelOrderItemModal({
         <Checkbox
           value={restock}
           onChange={handleCheckboxChange}
-          style={{color: GREY[500]}}>
+          style={{color: palette.gray4}}>
           (재고 복구를 원하시면 체크해주세요)
         </Checkbox>
       </StyledRow>

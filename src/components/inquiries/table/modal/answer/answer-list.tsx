@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import {Typography} from 'antd';
+import {palette} from '@pickk/design-token';
 import {InquiryAnswer} from '@pickk/common';
-
-import {GREY} from '@src/common/constants/colors';
 
 const {Text} = Typography;
 
@@ -16,13 +15,13 @@ const StyledAnswerCard = styled.div`
   display: flex;
   flex-direction: column;
 
-  border: 1px solid ${GREY[300]};
+  border: 1px solid ${palette.gray2};
   padding: 1.2rem;
   margin-top: 0.8rem;
 `;
 
 const StyledText = styled.div`
-  color: ${GREY[600]};
+  color: ${palette.gray4};
 `;
 
 type InquiryAnswerModalAnswerListProps = {

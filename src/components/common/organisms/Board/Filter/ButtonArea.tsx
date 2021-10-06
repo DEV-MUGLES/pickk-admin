@@ -1,11 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import {Button} from 'antd';
 import {SearchOutlined, UndoOutlined} from '@ant-design/icons';
-import styled from 'styled-components';
+import {palette} from '@pickk/design-token';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
-import {INDIGO_BLUE} from '@src/common/constants/colors';
 import Space from '@src/components/common/atoms/space';
 
 export default function FilterButtonArea() {
@@ -40,6 +40,6 @@ const SubmitButton = styled(Button)`
 
 const ResetButton = styled(Button)`
   width: 6rem;
-  color: ${INDIGO_BLUE[900]};
-  border-color: ${INDIGO_BLUE[900]};
+  color: ${palette.gray5};
+  border-color: ${palette.gray5};
 `;

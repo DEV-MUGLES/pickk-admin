@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import {Typography} from 'antd';
+import {palette} from '@pickk/design-token';
 import {OrderItem, User} from '@pickk/common';
 
 import {addDashToPhoneNumber} from '@src/common/helpers';
-
-import {GREY} from '@src/common/constants/colors';
 
 const {Text, Title} = Typography;
 
@@ -14,7 +13,7 @@ const StyledWrapper = styled.div`
   flex: 1;
 
   margin-left: 1.6rem;
-  border-left: 1px solid ${GREY[200]};
+  border-left: 1px solid ${palette.gray2};
   padding-left: 1.6rem;
 `;
 

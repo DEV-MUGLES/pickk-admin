@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {PageHeader, Tabs, Typography} from 'antd';
+import {palette} from '@pickk/design-token';
 
 import {
   BrandInfoForm,
@@ -11,7 +12,6 @@ import {
   SettlePolicyForm,
 } from '@src/components/mypage-edit/form';
 import {Space} from '@src/components/common/atoms';
-import {WHITE} from '@src/common/constants/colors';
 
 const {TabPane} = Tabs;
 const {Title} = Typography;
@@ -57,7 +57,7 @@ function MyPageEditPage() {
 export default MyPageEditPage;
 
 export const Wrapper = styled.div`
-  background-color: ${WHITE};
+  background-color: ${palette.white};
   display: flex;
   flex-direction: column;
   padding: 16px 24px;

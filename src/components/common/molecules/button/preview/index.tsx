@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Typography} from 'antd';
-
-import {WHITE, INDIGO_BLUE} from '@src/common/constants/colors';
+import {palette} from '@pickk/design-token';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {PreviewDataType} from '@src/components/common/organisms/Board/preview';
@@ -31,7 +30,7 @@ function PreviewButton({icon: Icon, label, count, filterValue}: PreviewProps) {
   return (
     <Wrapper onClick={handleClick}>
       <IconBackground isSelected={isSelected}>
-        <Icon style={{color: WHITE, fontSize: '1.2rem'}} />
+        <Icon style={{color: palette.white, fontSize: '1.2rem'}} />
       </IconBackground>
       <DataWrapper>
         <StyledText isSelected={isSelected}>{label}</StyledText>
@@ -66,10 +65,10 @@ const IconBackground = styled.div<{isSelected: boolean}>`
   height: 3.2em;
   border-radius: 9999px;
   background-color: ${(props) =>
-    props.isSelected ? INDIGO_BLUE[900] : 'grey'};
+    props.isSelected ? palette.gray6 : palette.gray4};
   transition: 0.2s;
   ${Wrapper}:hover & {
-    background-color: ${INDIGO_BLUE[900]};
+    background-color: ${palette.gray6};
   }
 `;
 
@@ -84,9 +83,9 @@ const DataWrapper = styled.div`
 `;
 
 const StyledText = styled(Text)<{isSelected: boolean}>`
-  ${(props) => props.isSelected && `color: ${INDIGO_BLUE[900]}`};
+  ${(props) => props.isSelected && `color: ${palette.gray6}`};
   transition: 0.2s;
   ${Wrapper}:hover & {
-    color: ${INDIGO_BLUE[900]};
+    color: ${palette.gray6};
   }
 `;

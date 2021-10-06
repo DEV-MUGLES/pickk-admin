@@ -1,9 +1,9 @@
 import React from 'react';
 import {Typography} from 'antd';
 import styled from 'styled-components';
+import {palette} from '@pickk/design-token';
 
 import InfoTooltip from '@src/components/common/atoms/info-tooltip';
-import {GREY} from '@src/common/constants/colors';
 
 const {Text} = Typography;
 
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid ${GREY[200]};
+  border-bottom: 1px solid ${palette.gray2};
 `;
 
 const LabelWrapper = styled.div`
