@@ -1,15 +1,15 @@
-import {useQuery} from '@apollo/client';
 import {OrderItemClaimStatus} from '@pickk/common';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {GET_ORDER_ITEMS} from '@src/common/graphql';
 import CancelRequestsBoard from '@src/components/cancel-requests';
+
+import {useOrderItems} from '../order-items/hooks';
 
 function CancelRequestsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: () => useQuery(GET_ORDER_ITEMS),
+        useBoardData: useOrderItems,
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
         filterRecord: (v) =>
