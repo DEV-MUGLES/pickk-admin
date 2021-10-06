@@ -50,7 +50,9 @@ function ExchangeRequestsBoard(props: BoardProps) {
             return record.status === ExchangeRequestStatus.Requested;
           })
         ) {
-          message.warning('수거중인 요청만 완료처리할 수 있습니다.');
+          message.warning(
+            '수거중(교환요청 상태)인 요청만 완료처리할 수 있습니다.',
+          );
           return;
         }
 
@@ -64,14 +66,25 @@ function ExchangeRequestsBoard(props: BoardProps) {
     },
     {
       text: '교환품재발송',
-      onClick: async (ids: number[]) => {
-        if (ids.length !== 1) {
+      onClick: async (merchantUids: number[]) => {
+        if (merchantUids.length !== 1) {
           message.warning(
             '일괄 재발송처리는 지원하지 않습니다.\n1개의 주문건만 선택해주세요.',
           );
           return;
         }
+
+        const record = tableData.find(
+          (record) => record.merchantUid === merchantUids[0],
+        );
+        if (record?.status !== ExchangeRequestStatus.Picked) {
+          message.warning('수거완료 상태만 재발송 할 수 있습니다.');
+          return;
+        }
+
         setIsModalOpen(true);
+
+        return {reloading: false};
       },
     },
     ...exchangeRequestActions,
