@@ -2,7 +2,8 @@ import React from 'react';
 import ItemsBoard from '@src/components/items';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {useMeSellerItems} from '@src/common/hooks/apis';
+
+import {useMeSellerItems} from './hooks';
 
 function ItemsBoardContainer() {
   return (
