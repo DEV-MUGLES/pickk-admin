@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import {AntdIconProps} from '@ant-design/icons/lib/components/AntdIcon';
 import {Typography} from 'antd';
 import {ReloadOutlined} from '@ant-design/icons';
+import {palette} from '@pickk/design-token';
 
 import PreviewButton from '@src/components/common/molecules/button/preview';
-import {WHITE} from '@src/common/constants/colors';
 
 import {Filter} from '@src/common/contexts/Board/types';
 import {getTimeString} from '@src/common/helpers';
@@ -66,7 +66,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  background-color: ${WHITE};
+  background-color: ${palette.white};
   margin-bottom: 1.4rem;
 `;
 
@@ -89,7 +89,7 @@ const LastUpdateAtText = styled(Text).attrs({type: 'secondary'})`
 `;
 
 const StyledReloadOutlined = styled(ReloadOutlined)`
-  color: gray;
+  color: ${palette.gray4};
 
   &:hover {
     cursor: pointer;

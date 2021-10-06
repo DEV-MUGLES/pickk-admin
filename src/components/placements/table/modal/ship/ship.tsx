@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Modal, Input, Button, Typography} from 'antd';
+import {palette} from '@pickk/design-token';
 import {Shipment} from '@pickk/common';
-
-import {GREY} from '@src/common/constants/colors';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
@@ -145,7 +144,7 @@ const SubmitArea = styled.div`
   align-items: center;
   width: 100%;
   height: fit-content;
-  border-top: 1px solid ${GREY[200]};
+  border-top: 1px solid ${palette.gray2};
   padding-top: 16px;
 `;
 

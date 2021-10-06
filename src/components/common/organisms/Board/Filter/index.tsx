@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import {palette} from '@pickk/design-token';
 
 import FilterHeader, {BoardFilterHeaderProps} from './Header';
 import FilterBody, {BoardFilterBodyProps} from './Body';
 import FilterButtonArea from './ButtonArea';
-import {WHITE} from '@src/common/constants/colors';
 
 export type BoardFilterProps = BoardFilterHeaderProps & BoardFilterBodyProps;
 
@@ -25,7 +25,7 @@ export default function BoardFilter(props: BoardFilterProps) {
 }
 
 export const FilterWrapper = styled.div`
-  background-color: ${WHITE};
+  background-color: ${palette.white};
   display: flex;
   flex-direction: column;
   align-items: center;

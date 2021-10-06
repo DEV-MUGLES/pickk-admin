@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import dayjs from 'dayjs';
 import {Typography, Divider} from 'antd';
 import {LockOutlined} from '@ant-design/icons';
+import {palette} from '@pickk/design-token';
 import {Inquiry, User} from '@pickk/common';
 
 import {getInquiryTypeDisplayName} from '@src/common/helpers';
-
-import {INDIGO_BLUE, FIRE_RED, GREY} from '@src/common/constants/colors';
 
 const {Text, Title} = Typography;
 
@@ -21,17 +20,17 @@ const StyledContentWrapper = styled.div`
   flex-direction: column;
 
   padding: 0.8rem;
-  border: 1px solid ${GREY[200]};
+  border: 1px solid ${palette.gray2};
 `;
 
 const StyledIsAnswered = ({isAnswered}: {isAnswered: boolean}) => (
-  <Text strong style={{color: isAnswered ? INDIGO_BLUE[500] : FIRE_RED[500]}}>
+  <Text strong style={{color: isAnswered ? palette.blue : palette.orange6}}>
     {isAnswered ? '답변완료' : '미답변'}
   </Text>
 );
 
 const StyledLockOutlined = () => (
-  <LockOutlined style={{marginLeft: '0.4rem', color: GREY[500]}} />
+  <LockOutlined style={{marginLeft: '0.4rem', color: palette.gray3}} />
 );
 
 const getCreatedAtText = (createdAt: Date) => {

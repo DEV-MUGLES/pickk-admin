@@ -1,5 +1,6 @@
 import {ColumnsType} from 'antd/lib/table';
 import {Button, Image, Typography, Badge} from 'antd';
+import {palette} from '@pickk/design-token';
 import {Item} from '@pickk/common';
 
 import SellableItemStock from './stock';
@@ -152,7 +153,7 @@ export function ItemStockColumnTitle() {
             <Badge color="volcano" text="재고 전체 품절" />
           </div>
         }
-        color="white"
+        color={palette.white}
         iconStyle={{marginLeft: '0.2rem'}}
       />
     </Text>

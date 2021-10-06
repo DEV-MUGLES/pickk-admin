@@ -1,6 +1,6 @@
 import {Button} from 'antd';
+import {palette} from '@pickk/design-token';
 
-import {INDIGO_BLUE} from '@src/common/constants/colors';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {ReloadOutlined} from '@ant-design/icons';
 
@@ -12,7 +12,7 @@ export default function TableReloadButton() {
   return (
     <Button
       icon={<ReloadOutlined />}
-      style={{color: INDIGO_BLUE[900], borderColor: INDIGO_BLUE[900]}}
+      style={{color: palette.gray5, borderColor: palette.gray5}}
       loading={loading}
       onClick={reload}>
       새로 고침

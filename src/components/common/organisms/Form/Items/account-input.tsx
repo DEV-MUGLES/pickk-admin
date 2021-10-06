@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Col, Input, Select, Space, Tag} from 'antd';
+import {palette} from '@pickk/design-token';
 import {BankCode} from '@pickk/common';
 
 import {BankNameKorAlias} from '@src/common/helpers/alias';
@@ -69,9 +70,9 @@ function AccountInput({value, onChange}: AcccountInputProps) {
 export default AccountInput;
 
 const Label = styled(Tag).attrs({
-  color: '#f2f4f5',
+  color: palette.gray2,
 })`
-  color: black;
+  color: ${palette.black};
   margin-bottom: 0.4rem;
 `;
 

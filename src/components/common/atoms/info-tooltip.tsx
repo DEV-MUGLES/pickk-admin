@@ -1,7 +1,6 @@
 import {Tooltip, TooltipProps} from 'antd';
+import {palette} from '@pickk/design-token';
 import {InfoCircleOutlined} from '@ant-design/icons';
-
-import {GREY} from '@src/common/constants/colors';
 
 export type InfoTooltipProps = TooltipProps & {
   iconStyle?: React.CSSProperties;
@@ -10,7 +9,7 @@ export type InfoTooltipProps = TooltipProps & {
 function InfoTooltip({iconStyle, ...props}: InfoTooltipProps) {
   return (
     <Tooltip {...props}>
-      <InfoCircleOutlined style={{color: GREY[600], ...iconStyle}} />
+      <InfoCircleOutlined style={{color: palette.gray4, ...iconStyle}} />
     </Tooltip>
   );
 }

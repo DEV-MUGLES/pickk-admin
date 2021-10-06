@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import {useRouter} from 'next/router';
 import {Layout, Avatar, Dropdown, Menu, Typography, message} from 'antd';
 import {DownOutlined, UserOutlined} from '@ant-design/icons';
+import {palette} from '@pickk/design-token';
 
 import {PickLogoIcon} from '../icons';
-import {WHITE} from '../../../common/constants/colors';
 
 import {removeCookie} from '@src/common/helpers';
 import {useMeSeller} from '@src/common/hooks/apis';
@@ -47,13 +47,13 @@ export default function GHeader() {
   return (
     <StyledHeader>
       <a href="https://pickk.one" target="_blank" rel="noreferrer">
-        <PickLogoIcon style={{width: '4rem'}} fill={WHITE} />
+        <PickLogoIcon style={{width: '4rem'}} fill={palette.white} />
       </a>
       <StyleTitle onClick={() => router.push('/dashboard')}>
         스토어 어드민
       </StyleTitle>
       <StyledDropdown overlay={dropDownMenu} trigger={['click']}>
-        <a href="#" style={{color: WHITE}}>
+        <a href="#" style={{color: palette.white}}>
           <Avatar shape="square" icon={<UserOutlined />} size="small" />
           <DownOutlined style={{marginLeft: '0.6rem'}} />
         </a>
@@ -72,7 +72,7 @@ const StyledHeader = styled(Header)`
 const StyleTitle = styled(Title).attrs({
   level: 3,
   style: {
-    color: WHITE,
+    color: palette.white,
     margin: 0,
     marginLeft: '0.8rem',
   },

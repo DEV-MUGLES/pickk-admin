@@ -1,9 +1,8 @@
 import {ChangeEvent, useState} from 'react';
 import styled from 'styled-components';
 import {Typography, Divider, Input, Button, message} from 'antd';
+import {palette} from '@pickk/design-token';
 import {Inquiry} from '@pickk/common';
-
-import {GREY} from '@src/common/constants/colors';
 
 import InquiryAnswerCard from './card';
 import InquiryAnswerUpdateModal from './update-modal';
@@ -23,7 +22,7 @@ const StyledWrapper = styled.div`
   flex: 1;
 
   margin-left: 1.6rem;
-  border-left: 1px solid ${GREY[200]};
+  border-left: 1px solid ${palette.gray2};
   padding-left: 1.6rem;
 `;
 
@@ -33,7 +32,7 @@ const StyledAnswersWrapper = styled.div`
 
   padding: 0.8rem;
   margin-bottom: 0.8rem;
-  border: 1px solid ${GREY[200]};
+  border: 1px solid ${palette.gray2};
 `;
 
 const SyledRow = styled.div`

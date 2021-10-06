@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {palette} from '@pickk/design-token';
 
 import {
   InquiryDetailItemSection,
@@ -8,8 +9,6 @@ import {
 } from '@src/components/inquiry-detail';
 
 import {useInquiry} from './hooks';
-
-import {WHITE} from '@src/common/constants/colors';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -23,7 +22,7 @@ const StyledSection = styled.div`
   padding: 1.2rem 1.6rem;
   margin-bottom: 0.8rem;
 
-  background-color: ${WHITE};
+  background-color: ${palette.white};
 `;
 
 export type InquiryDetailContainerProps = {

@@ -1,12 +1,11 @@
 import React from 'react';
-
-import {GREY} from '@src/common/constants/colors';
+import {palette} from '@pickk/design-token';
 
 import {IconProps} from './icons';
 
 export default function PickLogoIcon({
   style = {},
-  fill = GREY[900],
+  fill = palette.gray6,
 }: IconProps) {
   return (
     <svg
