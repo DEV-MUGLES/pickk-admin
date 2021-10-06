@@ -2,9 +2,9 @@ import React from 'react';
 
 import {GREY} from '@src/common/constants/colors';
 
-import {IconProps} from '../icons';
+import {IconProps} from './icons';
 
-export default function LogoDefaultIcon({
+export default function PickLogoIcon({
   style = {},
   fill = GREY[900],
 }: IconProps) {

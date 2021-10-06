@@ -1,6 +1,6 @@
 import {Dispatch, SetStateAction} from 'react';
 
-import {Filter} from '@src/types';
+export type Filter = Record<string, any>;
 
 export interface IBoard {
   state: {
