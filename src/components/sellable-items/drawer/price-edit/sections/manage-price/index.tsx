@@ -8,9 +8,9 @@ import {Item} from '@pickk/common';
 import PriceFormModal, {PriceEditModalType} from './price-edit-modal';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {useRemoveItemPrice} from '@src/common/hooks/apis';
 import {stringSorter} from '@src/common/helpers';
 
+import {useRemoveItemPrice} from './hooks';
 import {itemPricesColumns} from './columns';
 
 const {confirm} = Modal;
@@ -23,7 +23,7 @@ function ManagePriceSection() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState<PriceEditModalType>();
   const [selectedPriceId, setSelectedPriceId] = useState<number>();
-  const [removeItemPrice] = useRemoveItemPrice();
+  const {removeItemPrice} = useRemoveItemPrice();
 
   const filteredPrices: Item['prices'] = selectedData?.prices
     ?.filter(({isBase, startAt}) => !isBase && dayjs(startAt).isAfter(dayjs()))
@@ -50,12 +50,7 @@ function ManagePriceSection() {
       title: '선택한 가격을 삭제하시겠습니까?',
       onOk: async () => {
         try {
-          await removeItemPrice({
-            variables: {
-              itemId: selectedRowId,
-              priceId,
-            },
-          });
+          await removeItemPrice(selectedRowId, priceId);
 
           reload();
         } catch (err) {

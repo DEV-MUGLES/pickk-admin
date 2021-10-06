@@ -2,7 +2,6 @@ import {gql, useMutation} from '@apollo/client';
 import {
   Mutation,
   MutationAddItemPriceArgs,
-  MutationRemoveItemPriceArgs,
   MutationUpdateItemPriceArgs,
 } from '@pickk/common';
 
@@ -56,16 +55,4 @@ export const useUpdateItemPrice = () =>
       }
     }
     ${ITEM_PRICE_FRAGMENT}
-  `);
-
-export const useRemoveItemPrice = () =>
-  useMutation<
-    Pick<Mutation, 'removeItemPrice'>,
-    MutationRemoveItemPriceArgs
-  >(gql`
-    mutation RemoveItemPrice($itemId: Int!, $priceId: Int!) {
-      removeItemPrice(itemId: $itemId, priceId: $priceId) {
-        id
-      }
-    }
   `);
