@@ -5,7 +5,7 @@ import {ColumnsType} from 'antd/lib/table';
 import {PlusOutlined} from '@ant-design/icons';
 import {Item} from '@pickk/common';
 
-import PriceFormModal, {PriceFormModalType} from './modal';
+import PriceFormModal, {PriceEditModalType} from './price-edit-modal';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {useRemoveItemPrice} from '@src/common/hooks/apis';
@@ -21,7 +21,7 @@ function ManagePriceSection() {
     action: {reload},
   } = useBoardContext();
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalType, setModalType] = useState<PriceFormModalType>();
+  const [modalType, setModalType] = useState<PriceEditModalType>();
   const [selectedPriceId, setSelectedPriceId] = useState<number>();
   const [removeItemPrice] = useRemoveItemPrice();
 
@@ -35,7 +35,7 @@ function ManagePriceSection() {
       : [false, '가격 예약설정'];
 
   const handleOpenModal =
-    (isOpen: boolean, type?: PriceFormModalType) => () => {
+    (isOpen: boolean, type?: PriceEditModalType) => () => {
       setModalVisible(isOpen);
       type && setModalType(type);
     };

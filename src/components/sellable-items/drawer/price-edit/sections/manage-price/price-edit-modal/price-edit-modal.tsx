@@ -1,5 +1,5 @@
 import {Modal, message} from 'antd';
-import {AddItemPriceInput, Item} from '@pickk/common';
+import {Item, AddItemPriceInput} from '@pickk/common';
 
 import BaseForm from '@src/components/common/organisms/Form/base';
 import StartAtInput from './start-at-input';
@@ -13,23 +13,14 @@ import {
 } from '@src/common/helpers/date';
 
 import {FORM_ITEMS} from './form-items';
+import {PriceEditModalProps} from './price-edit-modal.types';
 
-export type PriceFormModalType = 'add' | 'edit';
-export type PriceFormModalProps = {
-  type: PriceFormModalType;
-  visible: boolean;
-  onClose: () => void;
-  selectedPriceId: number;
-};
-
-export type PriceFormValueType = AddItemPriceInput;
-
-function PriceFormModal({
+export default function PriceEditModal({
   type,
   visible,
   onClose,
   selectedPriceId,
-}: PriceFormModalProps) {
+}: PriceEditModalProps) {
   const {
     state: {selectedRowId, selectedData},
     action: {reload},
@@ -41,7 +32,7 @@ function PriceFormModal({
   const {addItemPrice} = useAddItemPrice();
   const [updateItemPrice] = useUpdateItemPrice();
 
-  const handleAddItemPrice = async (_addItemPriceInput: PriceFormValueType) => {
+  const handleAddItemPrice = async (_addItemPriceInput: AddItemPriceInput) => {
     const addItemPriceInput = {
       ..._addItemPriceInput,
       isCrawlUpdating: false,
@@ -64,7 +55,7 @@ function PriceFormModal({
     }
   };
 
-  const handleUpdateItemPrice = async (formInput: PriceFormValueType) => {
+  const handleUpdateItemPrice = async (formInput: AddItemPriceInput) => {
     const {isActive, ...updateItemPriceInput} = formInput;
 
     try {
@@ -87,7 +78,7 @@ function PriceFormModal({
     string,
     string,
     AddItemPriceInput,
-    (input: PriceFormValueType) => void,
+    (input: AddItemPriceInput) => void,
   ] =
     type === 'add'
       ? ['가격 추가', '추가', undefined, handleAddItemPrice]
@@ -98,7 +89,7 @@ function PriceFormModal({
           handleUpdateItemPrice,
         ];
 
-  const validateDate = (formInput: PriceFormValueType): boolean => {
+  const validateDate = (formInput: AddItemPriceInput): boolean => {
     const {startAt, endAt} = formInput;
     if (isBeforeDate(startAt, new Date())) {
       message.error('시작일은 금일 이전일 수 없습니다.');
@@ -137,7 +128,7 @@ function PriceFormModal({
     return true;
   };
 
-  const handleSaveButtonClick = (value: PriceFormValueType) => {
+  const handleSaveButtonClick = (value: AddItemPriceInput) => {
     if (!validateDate(value)) {
       return;
     }
@@ -184,5 +175,3 @@ function PriceFormModal({
     </Modal>
   );
 }
-
-export default PriceFormModal;
