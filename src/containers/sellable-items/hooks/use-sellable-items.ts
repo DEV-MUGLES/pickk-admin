@@ -2,7 +2,7 @@ import {QueryHookOptions, gql, useQuery} from '@apollo/client';
 import {Query, QueryMeSellerItemsArgs} from '@pickk/common';
 
 // @TODO prices, products, options은 drawer에서 사용할때 fetching 하도록 변경
-export const ME_SELLER_ITEMS_QUERY = gql`
+const ME_SELLER_SELLABLE_ITEMS_QUERY = gql`
   query meSellerItems($itemFilter: ItemFilter, $pageInput: PageInput) {
     meSellerItems(itemFilter: $itemFilter, pageInput: $pageInput) {
       id
@@ -84,9 +84,9 @@ export const ME_SELLER_ITEMS_QUERY = gql`
   }
 `;
 
-export const useMeSellerSellableItems = (options?: QueryHookOptions) => {
+export const useSellableItems = (options?: QueryHookOptions) => {
   return useQuery<Pick<Query, 'meSellerItems'>, QueryMeSellerItemsArgs>(
-    ME_SELLER_ITEMS_QUERY,
+    ME_SELLER_SELLABLE_ITEMS_QUERY,
     options,
   );
 };
