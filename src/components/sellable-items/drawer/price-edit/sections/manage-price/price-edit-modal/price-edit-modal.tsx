@@ -5,14 +5,13 @@ import BaseForm from '@src/components/common/organisms/Form/base';
 import StartAtInput from './start-at-input';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {useUpdateItemPrice} from '@src/common/hooks/apis';
 import {
   isBeforeDate,
   isDateIncluded,
   isSameDate,
 } from '@src/common/helpers/date';
 
-import {useAddItemPrice} from './hooks';
+import {useAddItemPrice, useUpdateItemPrice} from './hooks';
 import {FORM_ITEMS} from './form-items';
 import {PriceEditModalProps} from './price-edit-modal.types';
 
@@ -31,7 +30,7 @@ export default function PriceEditModal({
   );
 
   const {addItemPrice} = useAddItemPrice();
-  const [updateItemPrice] = useUpdateItemPrice();
+  const {updateItemPrice} = useUpdateItemPrice();
 
   const handleAddItemPrice = async (addItemPriceInput: AddItemPriceInput) => {
     try {
@@ -53,12 +52,7 @@ export default function PriceEditModal({
     const {isActive, ...updateItemPriceInput} = formInput;
 
     try {
-      await updateItemPrice({
-        variables: {
-          id: selectedPriceId,
-          updateItemPriceInput,
-        },
-      });
+      await updateItemPrice(selectedPriceId, updateItemPriceInput);
 
       message.success('가격을 수정했습니다.');
       reload();
