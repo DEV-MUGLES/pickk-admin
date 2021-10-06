@@ -14,7 +14,6 @@ export const itemColumns: ColumnsType<Item> = [
     key: 'id',
     width: 40,
     sorter: (a, b) => b.id - a.id,
-    ellipsis: true,
     align: 'center',
   },
   {
@@ -23,7 +22,7 @@ export const itemColumns: ColumnsType<Item> = [
     key: 'itemView',
     width: 40,
     render: (_, {id, urls}) => (
-      <div>
+      <div style={{display: 'flex', flexDirection: 'column'}}>
         <Button
           size="small"
           href={`https://pickk.one/item/${id}`}
@@ -47,14 +46,12 @@ export const itemColumns: ColumnsType<Item> = [
     key: 'imageUrl',
     width: 120,
     render: (text) => <Image src={text} />,
-    ellipsis: true,
   },
   {
     title: '상품명',
     dataIndex: 'name',
     key: 'name',
     sorter: (a, b) => stringSorter(b.name, a.name),
-    width: 200,
   },
   {
     title: '정가',
@@ -62,7 +59,6 @@ export const itemColumns: ColumnsType<Item> = [
     key: 'originalPrice',
     render: (value) => addCommaToNumber(value) + ' 원',
     sorter: (a, b) => b.originalPrice - a.originalPrice,
-    width: 80,
     ellipsis: true,
     align: 'center',
   },
@@ -72,7 +68,6 @@ export const itemColumns: ColumnsType<Item> = [
     key: 'sellPrice',
     render: (value) => addCommaToNumber(value) + ' 원',
     sorter: (a, b) => b.sellPrice - a.sellPrice,
-    width: 80,
     ellipsis: true,
     align: 'center',
   },
@@ -99,7 +94,6 @@ export const itemColumns: ColumnsType<Item> = [
     title: '활성화 여부',
     dataIndex: 'isSellable',
     key: 'isSellable',
-    width: 60,
     render: renderBooleanColumn,
     align: 'center',
   },
@@ -107,7 +101,6 @@ export const itemColumns: ColumnsType<Item> = [
     title: '상품등록일',
     dataIndex: 'createdAt',
     key: 'createdAt',
-    width: 80,
     sorter: (a, b) => stringSorter(b.createdAt, a.createdAt),
     render: (text) => <>{dayjs(text).format('YYYY-MM-DD')}</>,
     ellipsis: true,

@@ -34,7 +34,7 @@ function ItemsBoard(props: BoardProps) {
       title: '카테고리',
       dataIndex: 'category',
       key: 'category',
-      width: 100,
+      width: 150,
       align: 'center',
       render: (_, {id, majorCategory, minorCategory}) => {
         return (
