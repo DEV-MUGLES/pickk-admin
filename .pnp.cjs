@@ -44,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/plugin-proposal-private-property-in-object", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.15.4"],
             ["@babel/runtime", "npm:7.15.4"],
             ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.10"],
+            ["@pickk/design-token", "npm:0.0.6"],
             ["@pickk/eslint-plugin", "npm:0.0.8"],
             ["@pickk/react-excel", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:0.0.8"],
             ["@types/apollo-upload-client", "npm:14.1.0"],
@@ -1337,6 +1338,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/react",
             "graphql",
             "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@pickk/design-token", [
+        ["npm:0.0.6", {
+          "packageLocation": "./.yarn/cache/@pickk-design-token-npm-0.0.6-4a82e37942-a129686abc.zip/node_modules/@pickk/design-token/",
+          "packageDependencies": [
+            ["@pickk/design-token", "npm:0.0.6"]
           ],
           "linkType": "HARD",
         }]
@@ -6747,6 +6757,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/plugin-proposal-private-property-in-object", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.15.4"],
             ["@babel/runtime", "npm:7.15.4"],
             ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.10"],
+            ["@pickk/design-token", "npm:0.0.6"],
             ["@pickk/eslint-plugin", "npm:0.0.8"],
             ["@pickk/react-excel", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:0.0.8"],
             ["@types/apollo-upload-client", "npm:14.1.0"],

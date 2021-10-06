@@ -951,6 +951,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pickk/design-token@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "@pickk/design-token@npm:0.0.6"
+  checksum: a129686abc9dfab42fe84e8f25c57ccdd3257c5cc905d9d37a4f6d9172ede2b3adc8627cc14a9fdc775bfb18adc6a2c2b40a95a056d96af824f9bfc46262700a
+  languageName: node
+  linkType: hard
+
 "@pickk/eslint-plugin@npm:^0.0.8":
   version: 0.0.8
   resolution: "@pickk/eslint-plugin@npm:0.0.8"
@@ -5492,6 +5499,7 @@ fsevents@~2.3.1:
     "@babel/plugin-proposal-private-property-in-object": ^7.15.4
     "@babel/runtime": ^7.15.4
     "@pickk/common": ^1.9.10
+    "@pickk/design-token": ^0.0.6
     "@pickk/eslint-plugin": ^0.0.8
     "@pickk/react-excel": ^0.0.8
     "@types/apollo-upload-client": ^14.1.0
