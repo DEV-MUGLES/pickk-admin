@@ -1,6 +1,6 @@
-import {BaseOrderItem} from '@src/common/graphql';
+import {OrderItemDataType} from '@src/containers/order-items/hooks';
 
-export const orderItemsRecordMapper = (record: BaseOrderItem) => {
+export const orderItemsRecordMapper = (record: OrderItemDataType) => {
   const {buyer, receiver} = record.order;
   return {
     ...record,

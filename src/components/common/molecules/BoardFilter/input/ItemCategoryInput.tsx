@@ -1,4 +1,4 @@
-import ItemCategoryCascader from '../../cascader/item-category';
+import ItemCategoryCascader from '../../item-category-cascader';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 

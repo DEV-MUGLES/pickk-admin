@@ -1,17 +1,17 @@
-import {useQuery} from '@apollo/client';
 import {OrderItemStatus} from '@pickk/common';
 
 import ShipmentBoard from '@src/components/shipments';
 import {placementsRecordMapper} from '@src/components/placements/table';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {GET_ORDER_ITEMS} from '@src/common/graphql';
+
+import {useOrderItems} from '../order-items/hooks';
 
 function ShipmentsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: () => useQuery(GET_ORDER_ITEMS),
+        useBoardData: useOrderItems,
         operationName: 'meSellerOrderItems',
         filterName: 'orderItemFilter',
         mapRecord: placementsRecordMapper,

@@ -1,26 +1,10 @@
-import {
-  ApolloCache,
-  gql,
-  QueryHookOptions,
-  useMutation,
-  useQuery,
-} from '@apollo/client';
+import {ApolloCache, gql, useMutation} from '@apollo/client';
 import {
   Mutation,
   MutationBulkUpdateItemsArgs,
   MutationUpdateItemArgs,
-  Query,
-  QueryMeSellerItemsArgs,
   UpdateItemInput,
 } from '@pickk/common';
-
-import {ME_SELLER_ITEMS_QUERY} from '@src/common/graphql';
-
-export const useMeSellerItems = (options?: QueryHookOptions) =>
-  useQuery<Pick<Query, 'meSellerItems'>, QueryMeSellerItemsArgs>(
-    ME_SELLER_ITEMS_QUERY,
-    options,
-  );
 
 export const useUpdateItem = () => {
   const [updateItem] = useMutation<unknown, MutationUpdateItemArgs>(gql`

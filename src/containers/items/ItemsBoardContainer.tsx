@@ -2,13 +2,14 @@ import React from 'react';
 import ItemsBoard from '@src/components/items';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {useMeSellerItems} from '@src/common/hooks/apis';
+
+import {useItems} from './hooks';
 
 function ItemsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: useMeSellerItems,
+        useBoardData: useItems,
         operationName: 'meSellerItems',
         filterName: 'itemFilter',
       }}>

@@ -1,6 +1,6 @@
-import {BaseRefundRequest} from '@src/common/graphql';
+import {RefundRequestDataType} from '@src/containers/refund-requests/hooks';
 
-export const refundRequestRecordMapper = (record: BaseRefundRequest) => {
+export const refundRequestRecordMapper = (record: RefundRequestDataType) => {
   const {order, shipment} = record;
   const {buyer} = order;
   return {
