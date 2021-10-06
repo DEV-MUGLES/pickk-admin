@@ -2,7 +2,7 @@ import {ColumnsType} from 'antd/lib/table';
 
 import TrackingViewLink from '@src/components/common/molecules/tracking-view-link';
 
-import {BaseRefundRequest} from '@src/common/graphql';
+import {RefundRequestDataType} from '@src/containers/refund-requests/hooks';
 import {
   getTimeString,
   addDashToPhoneNumber,
@@ -52,7 +52,7 @@ export const refundRequestColumns: ColumnsType<any> = [
     title: '반품상품',
     dataIndex: 'orderItems',
     key: 'orderItems',
-    render: (_, record: BaseRefundRequest) => {
+    render: (_, record: RefundRequestDataType) => {
       const orderItemsInfos = record.orderItems.map(
         (currItem) =>
           `${currItem.itemName} (${currItem.productVariantName} x ${currItem.quantity})`,
@@ -84,7 +84,7 @@ export const refundRequestColumns: ColumnsType<any> = [
     title: '반품사유',
     dataIndex: 'reason',
     key: 'reason',
-    render: (value, record: BaseRefundRequest) =>
+    render: (value, record: RefundRequestDataType) =>
       `[${getOrderClaimFaultOfDisplayName(record.faultOf)}] ${value}`,
     sorter: (a, b) => stringSorter(b.reason, a.reason),
     width: 100,

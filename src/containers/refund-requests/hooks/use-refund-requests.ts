@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import {gql, useQuery} from '@apollo/client';
 import {
   Courier,
   Order,
@@ -6,28 +6,8 @@ import {
   OrderItem,
   RefundRequest,
   Shipment,
+  QueryMeSellerRefundRequestsArgs,
 } from '@pickk/common';
-
-export type BaseRefundRequest = Pick<
-  RefundRequest,
-  | 'merchantUid'
-  | 'orderMerchantUid'
-  | 'requestedAt'
-  | 'reason'
-  | 'amount'
-  | 'shippingFee'
-  | 'faultOf'
-> & {
-  orderItems: Array<
-    Pick<OrderItem, 'id' | 'itemName' | 'productVariantName' | 'quantity'>
-  >;
-  order: Pick<Order, 'id'> & {
-    buyer: Pick<OrderBuyer, 'id' | 'name' | 'phoneNumber'>;
-  };
-  shipment: Pick<Shipment, 'id' | 'trackCode'> & {
-    courier: Pick<Courier, 'id' | 'code'>;
-  };
-};
 
 export const GET_REFUND_REQUESTS = gql`
   query MeSellerRefundRequests(
@@ -71,3 +51,31 @@ export const GET_REFUND_REQUESTS = gql`
     }
   }
 `;
+
+export type RefundRequestDataType = Pick<
+  RefundRequest,
+  | 'merchantUid'
+  | 'orderMerchantUid'
+  | 'requestedAt'
+  | 'reason'
+  | 'amount'
+  | 'shippingFee'
+  | 'faultOf'
+> & {
+  orderItems: Array<
+    Pick<OrderItem, 'id' | 'itemName' | 'productVariantName' | 'quantity'>
+  >;
+  order: Pick<Order, 'id'> & {
+    buyer: Pick<OrderBuyer, 'id' | 'name' | 'phoneNumber'>;
+  };
+  shipment: Pick<Shipment, 'id' | 'trackCode'> & {
+    courier: Pick<Courier, 'id' | 'code'>;
+  };
+};
+
+export const useRefundRequests = () => {
+  return useQuery<
+    {meSellerRefundRequests: RefundRequestDataType},
+    QueryMeSellerRefundRequestsArgs
+  >(GET_REFUND_REQUESTS);
+};

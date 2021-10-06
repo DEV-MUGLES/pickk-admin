@@ -1,16 +1,15 @@
-import {useQuery} from '@apollo/client';
-
 import RefundRequestsBoard from '@src/components/refund-requests';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {GET_REFUND_REQUESTS} from '@src/common/graphql';
 import {refundRequestRecordMapper} from '@src/components/refund-requests/table';
+
+import {useRefundRequests} from './hooks';
 
 function RefundRequestsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: () => useQuery(GET_REFUND_REQUESTS),
+        useBoardData: useRefundRequests,
         operationName: 'meSellerRefundRequests',
         filterName: 'refundRequestFilter',
         mapRecord: refundRequestRecordMapper,
