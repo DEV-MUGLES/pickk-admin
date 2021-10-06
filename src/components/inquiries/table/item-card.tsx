@@ -1,7 +1,5 @@
-import {Typography} from 'antd';
+import {Typography, Image} from 'antd';
 import styled from 'styled-components';
-
-import {Img} from '@src/components/common/atoms';
 
 const {Text} = Typography;
 
@@ -10,7 +8,9 @@ const StyledWrapper = styled.div`
   flex-direction: row;
 `;
 
-const StyledImg = styled(Img).attrs({width: '4rem'})``;
+const StyledText = styled(Text)`
+  margin-left: 0.4rem;
+`;
 
 type InquiriesTableItemCardProps = {
   imageUrl: string;
@@ -23,8 +23,8 @@ export default function InquiriesTableItemCard({
 }: InquiriesTableItemCardProps) {
   return (
     <StyledWrapper>
-      <StyledImg src={imageUrl} alt={name} />
-      <Text>{name}</Text>
+      <Image src={imageUrl} alt={name} width={80} />
+      <StyledText>{name}</StyledText>
     </StyledWrapper>
   );
 }
