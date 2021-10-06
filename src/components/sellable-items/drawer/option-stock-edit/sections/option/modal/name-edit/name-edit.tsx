@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Input, message, Modal} from 'antd';
 
-import {useUpdateItemOption} from '@src/common/hooks/apis';
+import {useUpdateItemOption} from './hooks';
 
 export type OptionNameEditModalProps = {
   optionId: number;
@@ -15,28 +15,21 @@ function OptionNameEditModal({
   onClose,
 }: OptionNameEditModalProps) {
   const [name, setName] = useState<string>();
-  const [updateItemOption] = useUpdateItemOption();
+  const {updateItemOption} = useUpdateItemOption();
 
   const handleChange = ({target: {value}}) => {
     setName(value);
   };
 
-  const handleOk = () => {
-    updateItemOption({
-      variables: {
-        id: optionId,
-        updateItemOptionInput: {
-          name,
-        },
-      },
-    })
-      .then(() => {
-        message.success('옵션명을 변경했습니다.');
-        onClose();
-      })
-      .catch((err) => {
-        message.error('저장에 실패했습니다. err - ' + err);
-      });
+  const handleOk = async () => {
+    try {
+      await updateItemOption(optionId, name);
+
+      message.success('옵션명을 변경했습니다.');
+      onClose();
+    } catch (err) {
+      message.error('저장에 실패했습니다. err - ' + err);
+    }
   };
 
   return (
