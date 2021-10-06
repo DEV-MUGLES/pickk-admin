@@ -16,7 +16,7 @@ export default function GFooter() {
 }
 
 const StyledGFooter = styled(Footer)`
-  padding: 2rem 0;
+  padding: 1.6rem;
   display: flex;
   flex-direction: column;
   text-align: center;
