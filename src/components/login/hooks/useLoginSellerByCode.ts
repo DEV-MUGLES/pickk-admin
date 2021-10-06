@@ -1,3 +1,4 @@
+import {gql} from '@apollo/client';
 import {
   Query,
   QueryLoginSellerByCodeArgs,
@@ -5,7 +6,14 @@ import {
   UserRole,
 } from '@pickk/common';
 
-import {LOGIN_SELLER_BY_CODE} from '@src/common/graphql';
+export const LOGIN_SELLER_BY_CODE = gql`
+  query loginSellerByCode($loginByCodeInput: LoginByCodeInput!) {
+    loginSellerByCode(loginByCodeInput: $loginByCodeInput) {
+      access
+      refresh
+    }
+  }
+`;
 
 export const useLoginSellerByCode = () => {
   const {callQuery: login} = useImperativeQuery<
