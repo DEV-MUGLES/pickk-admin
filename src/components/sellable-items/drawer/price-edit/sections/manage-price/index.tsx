@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import dayjs from 'dayjs';
-import {Button, Space, Table, Modal} from 'antd';
+import {Button, Space, Table, Modal, message} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {PlusOutlined} from '@ant-design/icons';
 import {Item} from '@pickk/common';
@@ -48,13 +48,19 @@ function ManagePriceSection() {
   const handleDeleteClick = (priceId: number) => () => {
     confirm({
       title: '선택한 가격을 삭제하시겠습니까?',
-      onOk() {
-        removeItemPrice({
-          variables: {
-            itemId: selectedRowId,
-            priceId,
-          },
-        }).then(reload);
+      onOk: async () => {
+        try {
+          await removeItemPrice({
+            variables: {
+              itemId: selectedRowId,
+              priceId,
+            },
+          });
+
+          reload();
+        } catch (err) {
+          message.error('실패했습니다. err - ' + err);
+        }
       },
     });
   };
