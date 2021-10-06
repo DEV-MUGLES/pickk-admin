@@ -1,6 +1,8 @@
-import {BaseExchangeRequest} from '@src/common/graphql';
+import {ExchangeRequestDataType} from '@src/containers/exchange-requests/hooks';
 
-export const exchangeRequestRecordMapper = (record: BaseExchangeRequest) => {
+export const exchangeRequestRecordMapper = (
+  record: ExchangeRequestDataType,
+) => {
   const {orderItem, reshipment} = record;
   const {buyer, receiver} = orderItem.order;
   return {

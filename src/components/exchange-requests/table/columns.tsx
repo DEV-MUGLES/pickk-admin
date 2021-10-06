@@ -1,6 +1,6 @@
 import {ColumnsType} from 'antd/lib/table';
 
-import {BaseExchangeRequest} from '@src/common/graphql';
+import {ExchangeRequestDataType} from '@src/containers/exchange-requests/hooks';
 import {
   addCommaToNumber,
   getExchangeRequestStatusDisplayName,
@@ -91,7 +91,7 @@ export const exchangeRequestColumns: ColumnsType<any> = [
     title: '교환사유',
     dataIndex: 'reason',
     key: 'reason',
-    render: (value, record: BaseExchangeRequest) =>
+    render: (value, record: ExchangeRequestDataType) =>
       `[${getOrderClaimFaultOfDisplayName(record.faultOf)}] ${value}`,
     width: 100,
     ellipsis: true,

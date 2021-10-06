@@ -1,16 +1,15 @@
-import {useQuery} from '@apollo/client';
-
 import ExchangeRequestsBoard from '@src/components/exchange-requests';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {GET_EXCHANGE_REQUEST} from '@src/common/graphql/exchange-request.graphql';
 import {exchangeRequestRecordMapper} from '@src/components/exchange-requests/table';
+
+import {useExchangeRequests} from './hooks';
 
 function ExchangeRequestsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: () => useQuery(GET_EXCHANGE_REQUEST),
+        useBoardData: useExchangeRequests,
         operationName: 'meSellerExchangeRequests',
         filterName: 'exchangeRequestFilter',
         mapRecord: exchangeRequestRecordMapper,
