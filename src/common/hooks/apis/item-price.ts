@@ -1,42 +1,5 @@
 import {gql, useMutation} from '@apollo/client';
-import {
-  Mutation,
-  MutationAddItemPriceArgs,
-  MutationUpdateItemPriceArgs,
-} from '@pickk/common';
-
-const ITEM_PRICE_FRAGMENT = gql`
-  fragment ItemPriceFragment on ItemPrice {
-    id
-    startAt
-    endAt
-    originalPrice
-    sellPrice
-    isActive
-  }
-`;
-
-export const useAddItemPrice = () => {
-  const [addItemPrice] = useMutation<
-    Pick<Mutation, 'addItemPrice'>,
-    MutationAddItemPriceArgs
-  >(gql`
-    mutation AddItemPrice(
-      $itemId: Int!
-      $addItemPriceInput: AddItemPriceInput!
-    ) {
-      addItemPrice(itemId: $itemId, addItemPriceInput: $addItemPriceInput) {
-        id
-        prices {
-          ...ItemPriceFragment
-        }
-      }
-    }
-    ${ITEM_PRICE_FRAGMENT}
-  `);
-
-  return {addItemPrice};
-};
+import {Mutation, MutationUpdateItemPriceArgs} from '@pickk/common';
 
 export const useUpdateItemPrice = () =>
   useMutation<
@@ -50,9 +13,13 @@ export const useUpdateItemPrice = () =>
       updateItemPrice(id: $id, updateItemPriceInput: $updateItemPriceInput) {
         id
         prices {
-          ...ItemPriceFragment
+          id
+          startAt
+          endAt
+          originalPrice
+          sellPrice
+          isActive
         }
       }
     }
-    ${ITEM_PRICE_FRAGMENT}
   `);

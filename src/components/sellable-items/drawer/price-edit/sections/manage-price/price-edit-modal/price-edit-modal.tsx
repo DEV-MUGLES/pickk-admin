@@ -5,13 +5,14 @@ import BaseForm from '@src/components/common/organisms/Form/base';
 import StartAtInput from './start-at-input';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {useAddItemPrice, useUpdateItemPrice} from '@src/common/hooks/apis';
+import {useUpdateItemPrice} from '@src/common/hooks/apis';
 import {
   isBeforeDate,
   isDateIncluded,
   isSameDate,
 } from '@src/common/helpers/date';
 
+import {useAddItemPrice} from './hooks';
 import {FORM_ITEMS} from './form-items';
 import {PriceEditModalProps} from './price-edit-modal.types';
 
@@ -32,19 +33,12 @@ export default function PriceEditModal({
   const {addItemPrice} = useAddItemPrice();
   const [updateItemPrice] = useUpdateItemPrice();
 
-  const handleAddItemPrice = async (_addItemPriceInput: AddItemPriceInput) => {
-    const addItemPriceInput = {
-      ..._addItemPriceInput,
-      isCrawlUpdating: false,
-      isActive: isSameDate(_addItemPriceInput.startAt, new Date()),
-    };
-
+  const handleAddItemPrice = async (addItemPriceInput: AddItemPriceInput) => {
     try {
-      await addItemPrice({
-        variables: {
-          itemId: selectedRowId,
-          addItemPriceInput,
-        },
+      await addItemPrice(selectedRowId, {
+        ...addItemPriceInput,
+        isCrawlUpdating: false,
+        isActive: isSameDate(addItemPriceInput.startAt, new Date()),
       });
 
       message.success('새로운 가격을 추가했습니다.');
