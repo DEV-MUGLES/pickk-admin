@@ -3,7 +3,8 @@ import {Button, Input, message, Space, Typography} from 'antd';
 import {ButtonType} from 'antd/lib/button';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {useUpdateProduct} from '@src/common/hooks/apis';
+
+import {useUpdateProduct} from './hooks';
 
 const {Text} = Typography;
 
@@ -14,7 +15,7 @@ function StockEditColumn({id, defaultValue}) {
   const {isInfiniteStock} = selectedData;
   const [isEditable, setIsEditable] = useState(false);
   const [stock, setStock] = useState<number>(defaultValue);
-  const [updateProduct] = useUpdateProduct();
+  const {updateProduct} = useUpdateProduct();
 
   useEffect(() => {
     setStock(defaultValue);
@@ -25,21 +26,14 @@ function StockEditColumn({id, defaultValue}) {
     setIsEditable(true);
   };
 
-  const handleSaveClick = () => {
-    updateProduct({
-      variables: {
-        id: id,
-        updateProductInput: {
-          stock,
-        },
-      },
-    })
-      .then(() => {
-        setIsEditable(false);
-      })
-      .catch((err) => {
-        message.error('재고 수정에 실패했습니다. err - ' + err);
-      });
+  const handleSaveClick = async () => {
+    try {
+      await updateProduct(id, stock);
+
+      setIsEditable(false);
+    } catch (err) {
+      message.error('재고 수정에 실패했습니다. err - ' + err);
+    }
   };
 
   const [handleSubmit, buttonType, buttonText]: [
