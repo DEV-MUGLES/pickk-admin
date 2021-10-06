@@ -9,7 +9,7 @@ import {
   QueryMeSellerRefundRequestsArgs,
 } from '@pickk/common';
 
-export const GET_REFUND_REQUESTS = gql`
+const GET_REFUND_REQUESTS = gql`
   query MeSellerRefundRequests(
     $pageInput: PageInput
     $refundRequestFilter: RefundRequestFilter
