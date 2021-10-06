@@ -3,13 +3,13 @@ import ItemsBoard from '@src/components/items';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
 
-import {useMeSellerItems} from './hooks';
+import {useItems} from './hooks';
 
 function ItemsBoardContainer() {
   return (
     <BoardStoreProvider
       dataFetchConfig={{
-        useBoardData: useMeSellerItems,
+        useBoardData: useItems,
         operationName: 'meSellerItems',
         filterName: 'itemFilter',
       }}>

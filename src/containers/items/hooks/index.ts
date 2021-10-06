@@ -1,1 +1,1 @@
-export * from './use-me-seller-items';
+export * from './use-items';

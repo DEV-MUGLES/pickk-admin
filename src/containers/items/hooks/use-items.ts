@@ -43,7 +43,7 @@ export type ItemDataType = Pick<
   minorCategory: Pick<ItemCategory, 'id' | 'name'>;
 };
 
-export const useMeSellerItems = () => {
+export const useItems = () => {
   return useQuery<{meSellerItems: ItemDataType}, QueryItemsArgs>(
     GET_ME_SELLER_ITEMS,
   );
