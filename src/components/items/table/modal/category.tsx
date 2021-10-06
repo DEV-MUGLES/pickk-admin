@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Modal} from 'antd';
 
-import ItemCategoryCascader from '@src/components/common/molecules/cascader/item-category';
+import ItemCategoryCascader from '@src/components/common/molecules/item-category-cascader';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {useUpdateItem} from '@src/common/hooks/apis';
