@@ -13,6 +13,7 @@ import {UserRole} from '@pickk/common';
 
 import MainLayout from '@src/components/common/templates/MainLayout';
 
+import {GlobalStyle} from '@src/common/styles';
 import {createApolloClient, useApolloClient} from '@src/providers/apollo';
 
 dayjs.extend(relativeTime);
@@ -29,6 +30,7 @@ function PickkAdminApp({Component, pageProps}: AppProps) {
         <title>핔 스토어 어드민</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <GlobalStyle />
       {router.pathname === '/login' ? (
         <Component {...pageProps} />
       ) : (
