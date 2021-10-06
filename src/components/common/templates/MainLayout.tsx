@@ -13,21 +13,19 @@ type IProps = {
 
 export default function MainLayout({children}: IProps) {
   return (
-    <>
-      <GHeader />
-      <StyledLayout>
-        <SiderGNB />
-        <Layout>
-          <StyledContent>{children}</StyledContent>
-          <GFooter />
-        </Layout>
-      </StyledLayout>
-    </>
+    <StyledLayout>
+      <SiderGNB />
+      <Layout>
+        <GHeader />
+        <StyledContent>{children}</StyledContent>
+        <GFooter />
+      </Layout>
+    </StyledLayout>
   );
 }
 
 const StyledLayout = styled(Layout)`
-  min-height: calc(100vh - 64px);
+  min-height: 100vh;
 `;
 
 const StyledContent = styled(Content)`
