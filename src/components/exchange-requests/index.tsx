@@ -20,11 +20,7 @@ import {
 
 import {exchangeRequestPreviewData} from './preview-data';
 import {exchangeRequestInputs} from './inputs';
-import {
-  exchangeRequestColumns,
-  exchangeRequestActions,
-  exchangeRequestExcelColumns,
-} from './table';
+import {exchangeRequestColumns, exchangeRequestExcelColumns} from './table';
 
 function ExchangeRequestsBoard(props: BoardProps) {
   const {state} = useBoardContext();
@@ -87,7 +83,6 @@ function ExchangeRequestsBoard(props: BoardProps) {
         return {reloading: false};
       },
     },
-    ...exchangeRequestActions,
   ];
 
   const getModalData = (): ShipModalDataType => {
