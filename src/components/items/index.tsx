@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Button, Typography} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
@@ -11,11 +10,10 @@ import CategoryModal from './table/modal/category';
 import {useBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
 
-import {itemInputs} from './inputs';
-import {itemColumns, itemActions} from './table';
-import {itemsExcelColumns} from './table/excel-columns';
+import {CategoryRenderer} from './table/renderers';
 
-const {Text} = Typography;
+import {itemInputs} from './inputs';
+import {itemColumns, itemsExcelColumns, itemActions} from './table';
 
 function ItemsBoard(props: BoardProps) {
   const {
@@ -36,24 +34,16 @@ function ItemsBoard(props: BoardProps) {
       key: 'category',
       width: 150,
       align: 'center',
-      render: (_, {id, majorCategory, minorCategory}) => {
-        return (
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-            <Text>{`${majorCategory?.name ?? '-'}/${
-              minorCategory?.name ?? '-'
-            }`}</Text>
-            <Button
-              size="small"
-              onClick={() => {
-                setSelectedRowId(id);
-                handleModalOpen(true);
-              }}
-              style={{marginTop: '0.6rem'}}>
-              수정
-            </Button>
-          </div>
-        );
-      },
+      render: (_, {id, majorCategory, minorCategory}) => (
+        <CategoryRenderer
+          majorCategoryName={majorCategory?.name}
+          minorCategoryName={minorCategory?.name}
+          onUpdateClick={() => {
+            setSelectedRowId(id);
+            handleModalOpen(true);
+          }}
+        />
+      ),
     },
     ...itemColumns.slice(3),
   ];

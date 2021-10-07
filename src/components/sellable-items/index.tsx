@@ -6,9 +6,11 @@ import Header from '@src/components/common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
 import SellableItemManageButtons from './table/manage-buttons';
+import {CategoryRenderer} from '@src/components/items/table/renderers';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
 import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
+import CategoryModal from '../items/table/modal/category';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
@@ -27,6 +29,8 @@ function SellableItemsBoard(props: BoardProps) {
     action: {setSelectedRowId},
   } = useBoardContext();
 
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+
   const [drawerVisible, setDrawerVisible] = useState<
     Record<SellableItemsDrawerType, boolean>
   >({
@@ -34,6 +38,10 @@ function SellableItemsBoard(props: BoardProps) {
     optionStock: false,
     info: false,
   });
+
+  const handleModalOpen = (open: boolean) => {
+    setModalVisible(open);
+  };
 
   const handleDrawerOpen =
     (name: SellableItemsDrawerType) => (open: boolean) => () => {
@@ -78,7 +86,25 @@ function SellableItemsBoard(props: BoardProps) {
         />
       ),
     },
-    ...sellableItemColumns.slice(1),
+    ...sellableItemColumns.slice(1, 2),
+    {
+      title: '카테고리',
+      dataIndex: 'category',
+      key: 'category',
+      width: 100,
+      align: 'center',
+      render: (_, {id, majorCategory, minorCategory}) => (
+        <CategoryRenderer
+          majorCategoryName={majorCategory?.name}
+          minorCategoryName={minorCategory?.name}
+          onUpdateClick={() => {
+            setSelectedRowId(id);
+            handleModalOpen(true);
+          }}
+        />
+      ),
+    },
+    ...sellableItemColumns.slice(2),
   ];
 
   return (
@@ -103,6 +129,12 @@ function SellableItemsBoard(props: BoardProps) {
         visible={drawerVisible.info}
         onClose={handleDrawerOpen('info')(false)}
       />
+      {modalVisible && (
+        <CategoryModal
+          visible={modalVisible}
+          onClose={() => handleModalOpen(false)}
+        />
+      )}
     </>
   );
 }

@@ -16,18 +16,18 @@ export const sellableItemExcelColumns: ExcelColumnsType<Item> = [
     mapValue: ({majorCategory, minorCategory}) =>
       `${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`,
   },
-  ...excelColumns.slice(3, 7),
+  ...excelColumns.slice(2, 6),
   {
     label: '보유재고',
     propName: 'stock',
     mapValue: ({products}) =>
       products.reduce((acc, {stock}) => (acc += stock), 0),
   },
-  excelColumns[8],
+  excelColumns[7],
   {
     label: '공홈링크',
     propName: 'urls',
     mapValue: ({urls}) => urls.find((url) => url.isPrimary)?.url,
   },
-  excelColumns[10],
+  excelColumns[9],
 ];
