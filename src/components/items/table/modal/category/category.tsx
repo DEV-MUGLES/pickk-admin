@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Modal} from 'antd';
+import {message, Modal} from 'antd';
 
 import ItemCategoryCascader from '@src/components/common/molecules/item-category-cascader';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {useUpdateItem} from '@src/common/hooks/apis';
+
+import {useUpdateItemCategory} from './hooks';
 
 export type CategoryModalProps = {
   visible: boolean;
@@ -16,22 +17,22 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
     state: {selectedRowId, selectedData},
   } = useBoardContext();
 
-  const [value, setValue] = useState<[number, number]>([
+  const [values, setValues] = useState<[number, number]>([
     selectedData?.majorCategory?.id,
     selectedData?.minorCategory?.id,
   ]);
-  const {updateItem, updateCategoryCache} = useUpdateItem();
+  const {updateItemCategory} = useUpdateItemCategory();
 
   const handleOk = async () => {
-    const [majorCategoryId, minorCategoryId] = value;
-    const updateItemInput = {majorCategoryId, minorCategoryId};
-    await updateItem({
-      variables: {
-        itemId: selectedRowId,
-        updateItemInput,
-      },
-      update: updateCategoryCache(selectedRowId, updateItemInput),
-    });
+    try {
+      const [majorCategoryId, minorCategoryId] = values;
+
+      await updateItemCategory(selectedRowId, majorCategoryId, minorCategoryId);
+      message.success('카테고리가 변경되었습니다.');
+    } catch (error) {
+      message.error('실패했습니다. err - ' + error);
+    }
+
     onClose();
   };
 
@@ -43,7 +44,7 @@ function CategoryModal({visible, onClose}: CategoryModalProps) {
         onClose();
       }}
       onOk={handleOk}>
-      <ItemCategoryCascader value={value} onChange={setValue} />
+      <ItemCategoryCascader value={values} onChange={setValues} />
     </Modal>
   );
 }
