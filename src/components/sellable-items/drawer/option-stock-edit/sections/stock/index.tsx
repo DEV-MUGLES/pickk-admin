@@ -1,47 +1,36 @@
 import {useState} from 'react';
 import {Button, message, Table, Modal} from 'antd';
-import {Item} from '@pickk/common';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {useUpdateItem} from '@src/common/hooks/apis';
 
 import {stockColumns} from './columns';
 import ShippingReservePolicyModal from './shipping-reserve-policy-modal';
+import {useToggleIsInfiniteStock} from './hooks';
 
 const {confirm} = Modal;
 
 function StockManageSection() {
   const [modalVisible, setModalVisible] = useState(false);
-  const {updateItem} = useUpdateItem();
+  const {toggleIsInfiniteStock: toggle} = useToggleIsInfiniteStock();
   const {
     state: {selectedRowId, selectedData},
   } = useBoardContext();
 
   const {isInfiniteStock} = selectedData;
-  const [buttonText, newIsInfiniteStock, confirmText] = !isInfiniteStock
-    ? ['전체 무한재고로 설정', true, '전체 상품을 무한재고로 설정하시겠습니까?']
-    : [
-        '전체 무한재고 설정 취소',
-        false,
-        '전체 상품을 무한재고에서 해제하시겠습니까?',
-      ];
+  const [buttonText, confirmText] = !isInfiniteStock
+    ? ['전체 무한재고로 설정', '전체 상품을 무한재고로 설정하시겠습니까?']
+    : ['전체 무한재고 설정 취소', '전체 상품을 무한재고에서 해제하시겠습니까?'];
 
-  const handleInfiniteSettingButtonClick = (value: boolean) => () => {
+  const toggleIsInfiniteStock = (input: boolean) => () => {
     confirm({
       title: confirmText,
-      onOk: () => {
-        updateItem({
-          variables: {
-            itemId: selectedRowId,
-            updateItemInput: {
-              isInfiniteStock: value,
-            },
-          },
-        })
-          .then(() => {
-            message.success('설정했습니다.');
-          })
-          .catch((err) => message.error('저장에 실패했습니다. err - ' + err));
+      onOk: async () => {
+        try {
+          await toggle(selectedRowId, input);
+          message.success('설정했습니다.');
+        } catch (err) {
+          message.error('저장에 실패했습니다. err - ' + err);
+        }
       },
     });
   };
@@ -50,26 +39,15 @@ function StockManageSection() {
     setModalVisible(isOpen);
   };
 
-  const newStockColumns = [
-    ...stockColumns,
-    // @TODO 추후 구현
-    // {
-    //   title: '예약발송',
-    //   dataIndex: '',
-    //   key: '',
-    //   render: (_, {id}) => <Button size="small">예약발송</Button>,
-    // },
-  ];
-
   return (
     <>
       <Button
         style={{marginBottom: '0.8rem'}}
-        onClick={handleInfiniteSettingButtonClick(newIsInfiniteStock)}>
+        onClick={toggleIsInfiniteStock(!isInfiniteStock)}>
         {buttonText}
       </Button>
       <Table
-        columns={newStockColumns}
+        columns={stockColumns}
         dataSource={
           selectedData
             ? [...selectedData.products]

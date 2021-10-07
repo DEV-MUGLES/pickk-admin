@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {message} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
@@ -10,16 +11,17 @@ import {CategoryRenderer} from '@src/components/items/table/renderers';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
 import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
-import CategoryModal from '../items/table/modal/category';
+import {CategoryModal} from '../items/table/modal';
 
 import {useBoardContext} from '@src/common/contexts/Board';
+import {TableActionType} from '../common/organisms/Board/Table/table';
 import {BoardProps} from '../props';
 
 import {
-  sellableItemColumns,
-  sellableItemActions,
-  sellableItemExcelColumns,
-} from './table';
+  useBulkUpdateIsMdRecommended,
+  useBulkUpdateIsSellable,
+} from './table/hooks';
+import {sellableItemColumns, sellableItemExcelColumns} from './table';
 import {sellableItemInputs} from './inputs';
 
 type SellableItemsDrawerType = 'price' | 'optionStock' | 'info';
@@ -28,6 +30,9 @@ function SellableItemsBoard(props: BoardProps) {
   const {
     action: {setSelectedRowId},
   } = useBoardContext();
+
+  const {bulkUpdateIsMdRecommended} = useBulkUpdateIsMdRecommended();
+  const {bulkUpdateIsSellable} = useBulkUpdateIsSellable();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
@@ -105,6 +110,45 @@ function SellableItemsBoard(props: BoardProps) {
       ),
     },
     ...sellableItemColumns.slice(2),
+  ];
+
+  const sellableItemActions: TableActionType[] = [
+    {
+      text: 'MD추천 ON',
+      onClick: async (ids: number[]) => {
+        try {
+          if (confirm('MD 추천 상품으로 설정합니다.')) {
+            await bulkUpdateIsMdRecommended(ids, true);
+          }
+        } catch (err) {
+          message.error('실패했습니다. err - ' + err);
+        }
+      },
+    },
+    {
+      text: 'MD추천 OFF',
+      onClick: async (ids: number[]) => {
+        try {
+          if (confirm('MD 추천 상품을 해제합니다.')) {
+            await bulkUpdateIsMdRecommended(ids, false);
+          }
+        } catch (err) {
+          message.error('실패했습니다. err - ' + err);
+        }
+      },
+    },
+    {
+      text: '상품 비활성화',
+      onClick: async (ids: number[]) => {
+        try {
+          if (confirm('상품을 비활성화 하시겠습니까?')) {
+            await bulkUpdateIsSellable(ids, false);
+          }
+        } catch (err) {
+          message.error('실패했습니다. err - ' + err);
+        }
+      },
+    },
   ];
 
   return (
