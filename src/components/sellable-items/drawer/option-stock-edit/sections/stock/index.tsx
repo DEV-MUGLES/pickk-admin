@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {Button, message, Table, Modal} from 'antd';
-import {Item} from '@pickk/common';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {useUpdateItem} from '@src/common/hooks/apis';
@@ -50,17 +49,6 @@ function StockManageSection() {
     setModalVisible(isOpen);
   };
 
-  const newStockColumns = [
-    ...stockColumns,
-    // @TODO 추후 구현
-    // {
-    //   title: '예약발송',
-    //   dataIndex: '',
-    //   key: '',
-    //   render: (_, {id}) => <Button size="small">예약발송</Button>,
-    // },
-  ];
-
   return (
     <>
       <Button
@@ -69,7 +57,7 @@ function StockManageSection() {
         {buttonText}
       </Button>
       <Table
-        columns={newStockColumns}
+        columns={stockColumns}
         dataSource={
           selectedData
             ? [...selectedData.products]
