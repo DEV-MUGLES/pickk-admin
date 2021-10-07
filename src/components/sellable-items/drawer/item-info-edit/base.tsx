@@ -8,7 +8,8 @@ import ImageUpload from '@src/components/common/molecules/image-upload';
 import ItemCategoryCascader from '@src/components/common/molecules/item-category-cascader';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {useUpdateItem} from '@src/common/hooks/apis';
+
+import {useUpdateItem} from './hooks';
 
 const {TextArea} = Input;
 
@@ -18,33 +19,28 @@ function ItemBaseInfoEditSection() {
   } = useBoardContext();
   const selectedItem: Item = selectedData;
   const [imageUrl, setImageUrl] = useState<string>();
-  const {updateItem, updateCategoryCache} = useUpdateItem();
+  const {updateItem} = useUpdateItem();
 
   useEffect(() => {
     setImageUrl(null);
   }, [selectedRowId]);
 
-  const handleSaveClick = async (value) => {
-    const {
-      imageUrl: _i,
-      category: [majorCategoryId, minorCategoryId],
-      ..._updateItemInput
-    } = value;
-    const itemId = selectedItem.id;
-    const updateItemInput = {
-      ..._updateItemInput,
-      majorCategoryId,
-      minorCategoryId,
-      imageUrl: imageUrl?.[0] ?? selectedItem.imageUrl,
-    };
+  const handleSaveClick = async ({
+    name,
+    category,
+  }: {
+    imageUrl: string;
+    name: string;
+    category: [number, number];
+  }) => {
+    const [majorCategoryId, minorCategoryId] = category;
 
     try {
-      await updateItem({
-        variables: {
-          itemId,
-          updateItemInput,
-        },
-        update: updateCategoryCache(itemId, updateItemInput),
+      await updateItem(selectedItem.id, {
+        imageUrl: imageUrl?.[0] ?? selectedItem.imageUrl,
+        name,
+        majorCategoryId,
+        minorCategoryId,
       });
       message.success('아이템 정보를 수정했습니다!');
     } catch (error) {
@@ -55,7 +51,7 @@ function ItemBaseInfoEditSection() {
   return (
     <Wrapper>
       <Col>
-        <Image width={200} src={selectedItem?.imageUrl} />
+        <Image width={200} src={selectedItem?.imageUrl} alt="상품이미지" />
       </Col>
       <Col style={{marginLeft: '1.6rem', flex: 1}}>
         <BaseForm
