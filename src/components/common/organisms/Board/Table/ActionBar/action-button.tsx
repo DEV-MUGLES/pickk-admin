@@ -14,12 +14,11 @@ function TableActionButton({
   tableAction,
 }: TableActionButtonProps) {
   const {reload} = useBoardContext().action;
-  const {icon, text, useTableAction = () => [], onClick} = tableAction;
-  const [mutate] = useTableAction();
+  const {icon, text, onClick} = tableAction;
 
   const handleActionButtonClick = async () => {
     try {
-      const result = await onClick(selectedRowKeys, mutate);
+      const result = await onClick(selectedRowKeys);
       if (!result || result.reloading) {
         reload();
       }
