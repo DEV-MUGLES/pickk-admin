@@ -16,7 +16,6 @@ function StockManageSection() {
   const {
     state: {selectedRowId, selectedData},
   } = useBoardContext();
-  const products: Item['products'] = selectedData.products;
 
   const {isInfiniteStock} = selectedData;
   const [buttonText, newIsInfiniteStock, confirmText] = !isInfiniteStock
@@ -71,7 +70,13 @@ function StockManageSection() {
       </Button>
       <Table
         columns={newStockColumns}
-        dataSource={products.filter(({isDeleted}) => !isDeleted)}
+        dataSource={
+          selectedData
+            ? [...selectedData.products]
+                .sort((a, b) => a.createdAt - b.createdAt)
+                .filter(({isDeleted}) => !isDeleted)
+            : []
+        }
       />
       <ShippingReservePolicyModal
         visible={modalVisible}

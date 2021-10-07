@@ -57,6 +57,7 @@ const ME_SELLER_SELLABLE_ITEMS_QUERY = gql`
           id
           name
           priceVariant
+          itemOptionId
         }
         shippingReservePolicy {
           createdAt
@@ -74,6 +75,7 @@ const ME_SELLER_SELLABLE_ITEMS_QUERY = gql`
       options {
         id
         name
+        order
         values {
           id
           name

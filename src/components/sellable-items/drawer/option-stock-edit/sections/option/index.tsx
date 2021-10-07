@@ -1,7 +1,6 @@
 import {useState, Fragment} from 'react';
 import {Button, Table, Tooltip} from 'antd';
 import {PlusOutlined, EditOutlined} from '@ant-design/icons';
-import {Item} from '@pickk/common';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
@@ -19,15 +18,7 @@ function OptionManageSection() {
   });
   const [selectedOptionId, setSelectedOptionId] = useState<number>();
 
-  const options: Item['options'] = selectedData.options;
-  const optionDataSource = options?.map(({id, name, values}) => ({
-    key: name,
-    id,
-    name,
-    values: values.map(({name}) => name).join(', '),
-  }));
-
-  const hasOption = options?.length > 0;
+  const hasOption = selectedData.options?.length > 0;
   const [buttonText, ButtonIcon, warningMessage] = hasOption
     ? [
         '옵션 수정',
@@ -76,7 +67,18 @@ function OptionManageSection() {
           },
           {title: '옵션값', dataIndex: 'values', key: 'values'},
         ]}
-        dataSource={optionDataSource}
+        dataSource={
+          selectedData
+            ? [...selectedData.options]
+                ?.sort((a, b) => a.order - b.order)
+                .map(({id, name, values}) => ({
+                  key: name,
+                  id,
+                  name,
+                  values: values.map(({name}) => name).join(', '),
+                }))
+            : []
+        }
         pagination={false}
       />
       {modalVisible.createOption && (
