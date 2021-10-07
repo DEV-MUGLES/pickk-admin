@@ -5,11 +5,11 @@ import {Item} from '@pickk/common';
 import Header from '@src/components/common/organisms/Board/Header';
 import Filter from '@src/components/common/organisms/Board/Filter';
 import Table from '@src/components/common/organisms/Board/Table';
-import CategoryModal from './table/modal/category';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
 
+import {CategoryModal} from './table/modal';
 import {CategoryRenderer} from './table/renderers';
 
 import {itemInputs} from './inputs';

@@ -10,7 +10,7 @@ import {CategoryRenderer} from '@src/components/items/table/renderers';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
 import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
-import CategoryModal from '../items/table/modal/category';
+import {CategoryModal} from '../items/table/modal';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
