@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {Button, Typography} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
@@ -9,6 +10,7 @@ import SellableItemManageButtons from './table/manage-buttons';
 import ItemInfoEditDrawer from './drawer/item-info-edit';
 import ItemOptionStockEditDrawer from './drawer/option-stock-edit';
 import ItemPriceEditDrawer from './drawer/price-edit';
+import CategoryModal from '../items/table/modal/category';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 import {BoardProps} from '../props';
@@ -20,12 +22,16 @@ import {
 } from './table';
 import {sellableItemInputs} from './inputs';
 
+const {Text} = Typography;
+
 type SellableItemsDrawerType = 'price' | 'optionStock' | 'info';
 
 function SellableItemsBoard(props: BoardProps) {
   const {
     action: {setSelectedRowId},
   } = useBoardContext();
+
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const [drawerVisible, setDrawerVisible] = useState<
     Record<SellableItemsDrawerType, boolean>
@@ -34,6 +40,10 @@ function SellableItemsBoard(props: BoardProps) {
     optionStock: false,
     info: false,
   });
+
+  const handleModalOpen = (open: boolean) => {
+    setModalVisible(open);
+  };
 
   const handleDrawerOpen =
     (name: SellableItemsDrawerType) => (open: boolean) => () => {
@@ -78,7 +88,33 @@ function SellableItemsBoard(props: BoardProps) {
         />
       ),
     },
-    ...sellableItemColumns.slice(1),
+    ...sellableItemColumns.slice(1, 2),
+    {
+      title: '카테고리',
+      dataIndex: 'category',
+      key: 'category',
+      width: 100,
+      align: 'center',
+      render: (_, {id, majorCategory, minorCategory}) => {
+        return (
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <Text>{`${majorCategory?.name ?? '-'}/${
+              minorCategory?.name ?? '-'
+            }`}</Text>
+            <Button
+              size="small"
+              onClick={() => {
+                setSelectedRowId(id);
+                handleModalOpen(true);
+              }}
+              style={{marginTop: '0.6rem'}}>
+              수정
+            </Button>
+          </div>
+        );
+      },
+    },
+    ...sellableItemColumns.slice(2),
   ];
 
   return (
@@ -103,6 +139,12 @@ function SellableItemsBoard(props: BoardProps) {
         visible={drawerVisible.info}
         onClose={handleDrawerOpen('info')(false)}
       />
+      {modalVisible && (
+        <CategoryModal
+          visible={modalVisible}
+          onClose={() => handleModalOpen(false)}
+        />
+      )}
     </>
   );
 }
