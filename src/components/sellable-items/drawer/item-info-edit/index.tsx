@@ -22,17 +22,6 @@ const MODAL_COLLAPSE: CollapseType[] = [
       },
     ],
   },
-  {
-    panels: [
-      {
-        props: {
-          header: '상세 이미지 수정',
-          key: '1',
-        },
-        Content: () => <p>상세 이미지 수정</p>,
-      },
-    ],
-  },
 ];
 
 function ItemInfoEditDrawer({visible, onClose}: ItemInfoEditDrawerProps) {
