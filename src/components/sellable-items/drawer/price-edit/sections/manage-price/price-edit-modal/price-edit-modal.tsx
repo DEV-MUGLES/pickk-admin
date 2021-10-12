@@ -11,7 +11,11 @@ import {
   isSameDate,
 } from '@src/common/helpers/date';
 
-import {useAddItemPrice, useUpdateItemPrice} from './hooks';
+import {
+  useAddItemPrice,
+  usePickkDiscountRate,
+  useUpdateItemPrice,
+} from './hooks';
 import {FORM_ITEMS} from './form-items';
 import {PriceEditModalProps} from './price-edit-modal.types';
 
@@ -31,6 +35,7 @@ export default function PriceEditModal({
 
   const {addItemPrice} = useAddItemPrice();
   const {updateItemPrice} = useUpdateItemPrice();
+  const {data: pickkDiscountRate} = usePickkDiscountRate();
 
   const handleAddItemPrice = async (addItemPriceInput: AddItemPriceInput) => {
     try {
@@ -121,8 +126,7 @@ export default function PriceEditModal({
       return;
     }
 
-    // @TODO 할인률 -> 임시
-    handleSave({...value, pickkDiscountRate: 5});
+    handleSave({...value, pickkDiscountRate});
   };
 
   return (
@@ -132,8 +136,7 @@ export default function PriceEditModal({
       onCancel={onClose}
       footer={false}
       width="80%">
-      {/** @TODO 할인률 -> 임시 */}
-      <p>[판매가에서 핔 할인률 5%가 적용됩니다.]</p>
+      <p>[판매가에서 핔 할인률 {pickkDiscountRate}%가 적용됩니다.]</p>
       <BaseForm
         FORM_ITEMS={{
           ...FORM_ITEMS,
