@@ -113,14 +113,17 @@ function PlacementBoard(props: BoardProps) {
           return;
         }
 
-        const isPaidOrderItem = ids.every(
-          (id) =>
-            tableData.find((record) => record.id === id).status ===
-            OrderItemStatus.Paid,
-        );
+        const isPaidOrderItem = ids.every((id) => {
+          const record = tableData.find((record) => record.id === id);
+
+          return (
+            record.status === OrderItemStatus.Paid ||
+            record.status === OrderItemStatus.ShipReady
+          );
+        });
         if (!isPaidOrderItem) {
           message.warning(
-            "주문상태가 '결제 완료'인 주문만 취소확인할 수 있습니다.",
+            "주문상태가 '결제 완료' 또는 '배송준비중'인 주문상품만 취소처리할 수 있습니다.",
           );
           return;
         }
