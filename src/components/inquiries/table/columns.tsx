@@ -2,6 +2,7 @@ import {ColumnsType} from 'antd/lib/table';
 
 import {InquiryDataType} from '@src/containers/inquiries/hooks';
 import {
+  addDashToPhoneNumber,
   getInquiryTypeDisplayName,
   getTimeString,
   renderBooleanColumn,
@@ -49,18 +50,24 @@ export const inquiriesColumns: ColumnsType<InquiryDataType> = [
     ellipsis: true,
   },
   {
+    title: '작성자 연락처',
+    dataIndex: 'userPhoneNumber',
+    key: 'userPhoneNumber',
+    render: (_, record) => addDashToPhoneNumber(record.user.phoneNumber),
+    width: 80,
+    ellipsis: true,
+  },
+  {
     title: '제목',
     dataIndex: 'title',
     key: 'title',
-    width: 120,
-    ellipsis: true,
+    width: 140,
   },
   {
     title: '내용',
     dataIndex: 'content',
     key: 'content',
-    width: 160,
-    ellipsis: true,
+    width: 200,
   },
   {
     title: '문의발생시간',

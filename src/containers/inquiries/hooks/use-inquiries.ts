@@ -20,6 +20,7 @@ const GET_INQUIRIES = gql`
       user {
         id
         nickname
+        phoneNumber
       }
       answers {
         id
@@ -43,7 +44,7 @@ export type InquiryDataType = Pick<
   | 'createdAt'
 > & {
   item: Pick<Item, 'id' | 'name' | 'imageUrl'>;
-  user: Pick<User, 'id' | 'nickname'>;
+  user: Pick<User, 'id' | 'nickname' | 'phoneNumber'>;
   answers: Pick<
     InquiryAnswer,
     'id' | 'content' | 'displayAuthor' | 'createdAt'
