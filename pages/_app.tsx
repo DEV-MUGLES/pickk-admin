@@ -31,7 +31,7 @@ function PickkAdminApp({Component, pageProps}: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <GlobalStyle />
-      {router.pathname === '/login' ? (
+      {router.pathname === '/login' || router.pathname === '/cheat-login' ? (
         <Component {...pageProps} />
       ) : (
         <MainLayout>
@@ -49,7 +49,10 @@ PickkAdminApp.getInitialProps = async (appContext: AppContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appContext);
 
-  if (appContext.ctx.pathname === '/login') {
+  if (
+    appContext.ctx.pathname === '/login' ||
+    appContext.ctx.pathname === '/cheat-login'
+  ) {
     return appProps;
   }
 
