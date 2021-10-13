@@ -79,7 +79,7 @@ function BaseForm({
 
   const handleFinish = (value) => {
     confirm({
-      title: `변경 내용을 저장하시겠습니까?`,
+      title: `정말로 제출하시겠습니까?`,
       onOk: () => {
         onSaveClick(value);
         form.resetFields();

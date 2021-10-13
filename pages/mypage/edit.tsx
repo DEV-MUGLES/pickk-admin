@@ -10,6 +10,7 @@ import {
   ShippingPolicyForm,
   ClaimPolicyForm,
   SettlePolicyForm,
+  PasswordForm,
 } from '@src/components/mypage-edit/form';
 import {Space} from '@src/components/common/atoms';
 
@@ -49,6 +50,11 @@ function MyPageEditPage() {
             </StyledTabPane>
           ))}
         </StyledTabs>
+      </Wrapper>
+      <Space level={2} />
+      <Wrapper>
+        <Title level={4}>비밀번호 변경</Title>
+        <PasswordForm />
       </Wrapper>
     </>
   );
