@@ -78,14 +78,14 @@ export default function RefundConfirmModal({
             <Text>합배송 상품이거나 유료배송 상품일 시</Text>
             <Button
               type="primary"
-              onClick={handleSubmit(Math.ceil(claimPolicyFee / 2))}>
-              {addCommaToNumber(Math.ceil(claimPolicyFee / 2))}원 차감 환불
+              onClick={handleSubmit(Math.ceil(claimPolicyFee))}>
+              {addCommaToNumber(Math.ceil(claimPolicyFee))}원 차감 환불
             </Button>
           </StyledRow>
           <StyledRow>
             <Text>단일 상품, 무료 배송 상품일 시</Text>
-            <Button type="primary" onClick={handleSubmit(claimPolicyFee)}>
-              {addCommaToNumber(claimPolicyFee)}원 차감 환불
+            <Button type="primary" onClick={handleSubmit(claimPolicyFee * 2)}>
+              {addCommaToNumber(claimPolicyFee * 2)}원 차감 환불
             </Button>
           </StyledRow>
           <Divider />
