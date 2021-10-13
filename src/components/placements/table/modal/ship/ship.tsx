@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ChangeEvent, ReactNode} from 'react';
 import styled from 'styled-components';
-import {Modal, Input, Button, Typography} from 'antd';
-import {palette} from '@pickk/design-token';
+import {Modal, Input, Typography} from 'antd';
 import {Shipment} from '@pickk/common';
 
 import {useBoardContext} from '@src/common/contexts/Board';
@@ -9,6 +8,24 @@ import {useBoardContext} from '@src/common/contexts/Board';
 import CourierSelect from './courier-select';
 
 const {Text} = Typography;
+
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  & > *:not(:last-child) {
+    margin-bottom: 0.4rem;
+  }
+`;
+
+const Label = ({title, children}: {title: string; children: ReactNode}) => (
+  <div>
+    <Text strong>{title}</Text>
+    <div>{children}</div>
+  </div>
+);
 
 export type ShipModalDataType = {
   id: string;
@@ -21,6 +38,7 @@ export type ShipmentType = Pick<
   ShipModalDataType,
   'id' | 'merchantUid' | 'courierId' | 'trackCode'
 >;
+
 export type ShipModalProps = {
   title?: string;
   modalData: ShipModalDataType;
@@ -60,10 +78,16 @@ export default function ShipModal({
     });
   };
 
-  const handleShipmentsChange = async (e) => {
+  const handleShipmentsChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+    /** 숫자만 입력 가능 */
+    if (value.match(/[0-9]/g)?.length !== value.length) {
+      return;
+    }
+
     setShipment({
       ...shipment,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
@@ -80,90 +104,27 @@ export default function ShipModal({
         title={title}
         visible={isModalOpen}
         onCancel={closeModal}
-        footer={null}
-        width="fit-content">
-        <OptionsWrapper>
-          <Row style={{width: 'fit-content'}}>
-            <MerchantUid strong>상품주문번호</MerchantUid>
-            <ItemName strong>상품명</ItemName>
-            <BuyerName strong>구매자명</BuyerName>
-            <Courier strong>택배사</Courier>
-            <TrackingCode strong>송장번호</TrackingCode>
-          </Row>
-          {modalData && (
-            <Row key={modalData.id} style={{width: 'fit-content'}}>
-              <MerchantUid>{modalData.merchantUid}</MerchantUid>
-              <ItemName>{modalData.itemName}</ItemName>
-              <BuyerName>{modalData.buyerName}</BuyerName>
-              <CourierSelect
-                value={shipment.courierId ?? null}
-                onChange={handleCourierIdChange}
-              />
-              <StyledInput
-                size="small"
-                name="trackCode"
-                value={shipment.trackCode ?? null}
-                onChange={handleShipmentsChange}
-              />
-            </Row>
-          )}
-        </OptionsWrapper>
-        <SubmitArea>
-          <Button type="primary" onClick={handleSubmit}>
-            완료
-          </Button>
-        </SubmitArea>
+        onOk={handleSubmit}>
+        <StyledWrapper>
+          <Label title="상품주문번호">{modalData.merchantUid}</Label>
+          <Label title="상품명">{modalData.itemName}</Label>
+          <Label title="구매자명">{modalData.buyerName}</Label>
+          <Label title="택배사">
+            <CourierSelect
+              value={shipment.courierId ?? null}
+              onChange={handleCourierIdChange}
+            />
+          </Label>
+          <Label title="송장번호">
+            <Input
+              name="trackCode"
+              value={shipment.trackCode ?? null}
+              onChange={handleShipmentsChange}
+            />
+          </Label>
+        </StyledWrapper>
       </Modal>
     );
   }
   return <></>;
 }
-
-const OptionsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  height: 500px;
-  overflow: auto;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  margin-bottom: 8px;
-`;
-
-const StyledInput = styled(Input)`
-  width: 150px;
-`;
-
-const SubmitArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: fit-content;
-  border-top: 1px solid ${palette.gray2};
-  padding-top: 16px;
-`;
-
-const MerchantUid = styled(Text)`
-  width: 300px;
-`;
-
-const ItemName = styled(Text)`
-  width: 250px;
-`;
-
-const BuyerName = styled(Text)`
-  width: 75px;
-`;
-
-const Courier = styled(Text)`
-  width: 150px;
-`;
-
-const TrackingCode = styled(Text)`
-  width: 150px;
-`;

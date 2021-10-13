@@ -6,9 +6,13 @@ import {useBoardContext} from '@src/common/contexts/Board';
 
 const {Text} = Typography;
 
-const StyledColumn = styled.div`
+const StyledModal = styled(Modal)`
   display: flex;
   flex-direction: column;
+`;
+
+const StyledInput = styled(Input)`
+  margin-top: 0.4rem;
 `;
 
 export type TrackCodeUpdateModalProps = {
@@ -33,7 +37,13 @@ export default function TrackCodeUpdateModal({
   const {updateOrderItemTrackCode} = useUpdateOrderItemTrackCode();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTrackCode(e.target.value);
+    const {value} = e.target;
+    /** 숫자만 입력 가능 */
+    if (value.match(/[0-9]/g)?.length !== value.length) {
+      return;
+    }
+
+    setTrackCode(value);
   };
 
   const handleSubmit = () => {
@@ -55,17 +65,13 @@ export default function TrackCodeUpdateModal({
   };
 
   return (
-    <Modal
+    <StyledModal
       title="송장수정"
       visible={visible}
       onCancel={onClose}
       onOk={handleSubmit}>
-      <StyledColumn>
-        <Text style={{marginBottom: '0.4rem'}}>
-          송장번호 (10자리 또는 12자리):
-        </Text>
-        <Input value={trackCode} onChange={handleChange} type="number" />
-      </StyledColumn>
-    </Modal>
+      <Text>송장번호 (10자리 또는 12자리):</Text>
+      <StyledInput type="number" value={trackCode} onChange={handleChange} />
+    </StyledModal>
   );
 }
