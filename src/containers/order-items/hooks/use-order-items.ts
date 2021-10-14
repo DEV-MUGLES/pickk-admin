@@ -32,6 +32,7 @@ const GET_ORDER_ITEMS = gql`
       itemFinalPrice
       recommenderNickname
       isConfirmed
+      confirmedAt
 
       shipment {
         id
@@ -81,6 +82,7 @@ export type OrderItemDataType = Pick<
   | 'itemFinalPrice'
   | 'recommenderNickname'
   | 'isConfirmed'
+  | 'confirmedAt'
 > & {
   shipment: Pick<Shipment, 'id' | 'trackCode' | 'courierId'> & {
     courier: Pick<Courier, 'id' | 'name' | 'code'>;

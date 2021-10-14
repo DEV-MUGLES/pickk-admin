@@ -36,6 +36,16 @@ export const orderItemColumns: ColumnsType<any> = [
     ellipsis: true,
   },
   {
+    title: '구매확정 일시',
+    dataIndex: 'confirmedAt',
+    key: 'confirmedAt',
+    render: (value) => <div>{getTimeString(value)}</div>,
+    sorter: (a, b) => stringSorter(b.confirmedAt, a.confirmedAt),
+    defaultSortOrder: 'ascend',
+    width: 100,
+    ellipsis: true,
+  },
+  {
     title: '주문상태',
     dataIndex: 'status',
     key: 'status',
