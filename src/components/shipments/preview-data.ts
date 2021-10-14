@@ -12,7 +12,7 @@ export const shipmentPreviewData = [
     label: '배송완료',
     name: 'Shipped',
     icon: CheckOutlined,
-    filterValue: {status: OrderItemStatus.Shipped},
+    filterValue: {status: OrderItemStatus.Shipped, isConfirmed: false},
   },
   {
     label: '구매확정',

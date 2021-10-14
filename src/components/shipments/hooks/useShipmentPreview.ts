@@ -11,7 +11,7 @@ export const useShipmentPreview = (): PreviewDataResult => {
     {
       meSellerOrderItemsCount: Pick<
         OrderItemsCountOutput,
-        'id' | 'Shipping' | 'Shipped' | 'lastUpdatedAt'
+        'id' | 'Shipping' | 'Shipped' | 'confirmed' | 'lastUpdatedAt'
       >;
     },
     QueryMeSellerOrderItemsCountArgs
@@ -27,8 +27,20 @@ export const useShipmentPreview = (): PreviewDataResult => {
     }
   `);
 
+  const getCalculatedData = () => {
+    if (!data?.meSellerOrderItemsCount) {
+      return {};
+    }
+
+    const {Shipped, confirmed} = data.meSellerOrderItemsCount;
+    return {
+      ...data.meSellerOrderItemsCount,
+      Shipped: Shipped - confirmed,
+    };
+  };
+
   return {
-    data: data?.meSellerOrderItemsCount ?? {},
+    data: getCalculatedData(),
     reload: () => refetch({forceUpdate: true}),
   };
 };
