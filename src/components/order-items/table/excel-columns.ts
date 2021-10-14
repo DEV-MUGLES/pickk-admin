@@ -18,7 +18,8 @@ export const orderItemExcelColumns: ExcelColumnsType<OrderItem> = [
   {
     label: '주문상태',
     propName: 'status',
-    mapValue: ({status}) => getOrderItemStatusDisplayName(status),
+    mapValue: ({status, isConfirmed}) =>
+      getOrderItemStatusDisplayName(status, isConfirmed),
   },
   {
     label: '클레임 상태',

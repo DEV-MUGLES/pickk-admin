@@ -28,7 +28,7 @@ export default function ExcelBulkShipButton({
         (record) =>
           // record[2] : 주문상태
           record[2] ===
-          getOrderItemStatusDisplayName(OrderItemStatus.ShipReady),
+          getOrderItemStatusDisplayName(OrderItemStatus.ShipReady, false),
       )
       .map((record) => {
         // record[0], record[4], record[5] : 주문상품번호, 택배사, 송장번호

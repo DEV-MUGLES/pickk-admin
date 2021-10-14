@@ -31,7 +31,7 @@ export default function CSVBulkShipButton({reload}: CSVBulkShipButtonProps) {
       .filter(
         (record) =>
           record['주문상태'] ===
-          getOrderItemStatusDisplayName(OrderItemStatus.ShipReady),
+          getOrderItemStatusDisplayName(OrderItemStatus.ShipReady, false),
       )
       .map((record) => {
         return {

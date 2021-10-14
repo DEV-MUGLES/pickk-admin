@@ -15,7 +15,8 @@ export const placementExcelColumns: ExcelColumnsType<OrderItem> = [
   {
     label: '주문상태',
     propName: 'status',
-    mapValue: ({status}) => getOrderItemStatusDisplayName(status),
+    mapValue: ({status, isConfirmed}) =>
+      getOrderItemStatusDisplayName(status, isConfirmed),
   },
   ...excelColumns.slice(3, 6),
   ...excelColumns.slice(7),
