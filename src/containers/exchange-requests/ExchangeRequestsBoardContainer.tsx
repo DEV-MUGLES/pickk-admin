@@ -1,3 +1,5 @@
+import {ExchangeRequestStatus} from '@pickk/common';
+
 import ExchangeRequestsBoard from '@src/components/exchange-requests';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
@@ -13,6 +15,7 @@ function ExchangeRequestsBoardContainer() {
         operationName: 'meSellerExchangeRequests',
         filterName: 'exchangeRequestFilter',
         mapRecord: exchangeRequestRecordMapper,
+        filterRecord: (v) => v.status !== ExchangeRequestStatus.Pending,
       }}>
       <ExchangeRequestsBoard
         title="교환 관리"
