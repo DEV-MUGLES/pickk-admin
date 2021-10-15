@@ -20,6 +20,7 @@ const GET_EXCHANGE_REQUESTS = gql`
       pageInput: $pageInput
     ) {
       orderItemMerchantUid
+      productVariantName
       status
       requestedAt
       faultOf
@@ -64,7 +65,12 @@ const GET_EXCHANGE_REQUESTS = gql`
 
 export type ExchangeRequestDataType = Pick<
   ExchangeRequest,
-  'orderItemMerchantUid' | 'status' | 'requestedAt' | 'faultOf' | 'reason'
+  | 'orderItemMerchantUid'
+  | 'status'
+  | 'productVariantName'
+  | 'requestedAt'
+  | 'faultOf'
+  | 'reason'
 > & {
   orderItem: Pick<
     OrderItem,

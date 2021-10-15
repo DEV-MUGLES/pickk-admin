@@ -58,7 +58,11 @@ export const exchangeRequestColumns: ColumnsType<any> = [
     title: '옵션',
     dataIndex: 'productVariantName',
     key: 'productVariantName',
-    sorter: (a, b) => stringSorter(b.productVariantName, a.productVariantName),
+    sorter: (a, b) =>
+      stringSorter(
+        b.exchangeRequest.productVariantName,
+        a.exchangeRequest.productVariantName,
+      ),
     width: 100,
     ellipsis: true,
   },

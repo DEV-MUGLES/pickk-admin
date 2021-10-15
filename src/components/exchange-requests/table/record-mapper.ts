@@ -11,7 +11,7 @@ export const exchangeRequestRecordMapper = (
     merchantUid: record.orderItemMerchantUid,
     orderMerchantUid: orderItem.orderMerchantUid,
     itemName: orderItem.itemName,
-    productVariantName: orderItem.productVariantName,
+    productVariantName: record.productVariantName,
     quantity: orderItem.quantity,
     buyerName: buyer.name,
     buyerPhoneNumber: buyer.phoneNumber,
