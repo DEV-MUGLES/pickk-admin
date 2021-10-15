@@ -1,6 +1,6 @@
-import {removeDashFromNumber} from '../PhoneNumberParser';
+import {removeDashFromNumber} from '../NumberParser';
 
-describe('PhoneNumberParser', () => {
+describe('NumberParser', () => {
   it('removeDashFromNumber', () => {
     expect(removeDashFromNumber('')).toBe(undefined);
     expect(removeDashFromNumber(null)).toBe(undefined);
