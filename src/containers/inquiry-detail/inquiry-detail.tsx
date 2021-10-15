@@ -34,8 +34,8 @@ export default function InquiryDetailContainer({
 }: InquiryDetailContainerProps) {
   const {data, loading} = useInquiry(id);
 
-  if (!data) {
-    return null;
+  if (loading) {
+    return <StyledSection>로딩중...</StyledSection>;
   }
 
   if (!data && !loading) {
