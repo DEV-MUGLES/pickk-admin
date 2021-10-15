@@ -1,8 +1,11 @@
 import {ChangeEvent, useState} from 'react';
 import styled from 'styled-components';
 import {Modal, Input, Typography, message} from 'antd';
-import {useUpdateOrderItemTrackCode} from './hooks';
+
 import {useBoardContext} from '@src/common/contexts/Board';
+import {removeDashFromNumber} from '@src/common/helpers';
+
+import {useUpdateOrderItemTrackCode} from './hooks';
 
 const {Text} = Typography;
 
@@ -37,23 +40,19 @@ export default function TrackCodeUpdateModal({
   const {updateOrderItemTrackCode} = useUpdateOrderItemTrackCode();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {value} = e.target;
-    /** 숫자만 입력 가능 */
-    if (value.match(/[0-9]/g)?.length !== value.length) {
-      return;
-    }
-
-    setTrackCode(value);
+    setTrackCode(e.target.value);
   };
 
-  const handleSubmit = () => {
-    if (trackCode.length !== 10 && trackCode.length !== 12) {
+  const handleSubmit = async () => {
+    const parsedTrackCode = removeDashFromNumber(trackCode);
+
+    if (parsedTrackCode.length !== 10 && parsedTrackCode.length !== 12) {
       message.warning('운송장 번호는 10자리 혹은 12자리입니다.');
       return;
     }
 
     try {
-      updateOrderItemTrackCode(merchantUid, trackCode);
+      await updateOrderItemTrackCode(merchantUid, parsedTrackCode);
       setTrackCode('');
 
       message.success('송장정보를 수정했습니다.');
@@ -71,7 +70,7 @@ export default function TrackCodeUpdateModal({
       onCancel={onClose}
       onOk={handleSubmit}>
       <Text>송장번호 (10자리 또는 12자리):</Text>
-      <StyledInput type="number" value={trackCode} onChange={handleChange} />
+      <StyledInput value={trackCode} onChange={handleChange} />
     </StyledModal>
   );
 }

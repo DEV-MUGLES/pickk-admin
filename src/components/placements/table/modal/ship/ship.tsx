@@ -4,6 +4,7 @@ import {Modal, Input, Typography} from 'antd';
 import {Shipment} from '@pickk/common';
 
 import {useBoardContext} from '@src/common/contexts/Board';
+import {removeDashFromNumber} from '@src/common/helpers';
 
 import CourierSelect from './courier-select';
 
@@ -78,21 +79,18 @@ export default function ShipModal({
     });
   };
 
-  const handleShipmentsChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
-    /** 숫자만 입력 가능 */
-    if (value.match(/[0-9]/g)?.length !== value.length) {
-      return;
-    }
-
+  const handleTrackCodeChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setShipment({
       ...shipment,
-      [name]: value,
+      trackCode: e.target.value,
     });
   };
 
   const handleSubmit = async () => {
-    await onSubmit(shipment);
+    await onSubmit({
+      ...shipment,
+      trackCode: removeDashFromNumber(shipment.trackCode),
+    });
 
     closeModal();
     reload();
@@ -119,7 +117,7 @@ export default function ShipModal({
             <Input
               name="trackCode"
               value={shipment.trackCode ?? null}
-              onChange={handleShipmentsChange}
+              onChange={handleTrackCodeChange}
             />
           </Label>
         </StyledWrapper>
