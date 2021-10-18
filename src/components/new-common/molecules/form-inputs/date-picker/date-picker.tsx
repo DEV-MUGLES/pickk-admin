@@ -16,8 +16,9 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-const StyledSelect = styled(Select)`
-  width: 20rem;
+const StyledSelect = styled(Select).attrs({
+  style: {width: '20rem'},
+})`
   margin-bottom: 0.8rem;
 `;
 

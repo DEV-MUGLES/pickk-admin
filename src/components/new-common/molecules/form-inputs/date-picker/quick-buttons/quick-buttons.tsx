@@ -18,6 +18,10 @@ const StyledRadioGroup = styled(Radio.Group)`
   margin-bottom: 0.8rem;
 `;
 
+const StyledRadioButton = styled(Radio.Button).attrs({
+  style: {width: '4rem'},
+})``;
+
 export default function DatePickerQuickButtons(
   props: DatePickerQuickButtonsProps,
 ) {
@@ -41,9 +45,9 @@ export default function DatePickerQuickButtons(
       value={selectedQuickButton}
       onChange={handleChoicedQuickButtonChange}>
       {QuickButtonValues.map((value) => (
-        <Radio.Button key={value} value={value}>
+        <StyledRadioButton key={value} value={value}>
           {quickBtnValue2Name(value)}
-        </Radio.Button>
+        </StyledRadioButton>
       ))}
     </StyledRadioGroup>
   );

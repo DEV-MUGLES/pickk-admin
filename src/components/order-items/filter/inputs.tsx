@@ -8,7 +8,7 @@ export const orderItemsFilterInputs: BoardFilterInputType[] = [
   {
     name: 'search',
     label: '검색창',
-    Component: Input,
+    Component: (props) => <Input {...props} style={{width: '20rem'}} />,
     guideText: '주문번호/주문상품번호/아이템명으로 검색할 수 있습니다.',
   },
   {
