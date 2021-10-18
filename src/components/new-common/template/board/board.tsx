@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import {PageHeader} from 'antd';
 import {palette} from '@pickk/design-token';
 
-import {BoardFilter, BoardTable} from '@components/new-common/organisms';
+import {
+  BoardPreview,
+  BoardFilter,
+  BoardTable,
+} from '@components/new-common/organisms';
 
 import {removeDashFromNumber} from '@common/helpers';
 
@@ -38,8 +42,10 @@ export default function BoardTemplate(props: BoardTemplateProps) {
     title,
     subTitle,
     useBoardData,
-    defaultFilter,
+    defaultFilter = {},
     filterInputs,
+    previews,
+    usePreviewData,
     defaultPageSize,
     onRowClick = () => null,
   } = propsWithDefault;
@@ -116,6 +122,14 @@ export default function BoardTemplate(props: BoardTemplateProps) {
         subTitle={subTitle}
         onBack={router.back}
       />
+      {!!previews && !!usePreviewData && (
+        <BoardPreview
+          previews={previews}
+          usePreviewData={usePreviewData}
+          filter={filter}
+          onPreviewClick={handleFilterChange}
+        />
+      )}
       {!!filterInputs && (
         <BoardFilter
           defaultFilter={filter}

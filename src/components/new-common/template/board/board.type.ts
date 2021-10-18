@@ -1,6 +1,7 @@
 import {PageInput} from '@pickk/common';
 
 import {
+  BoardPreviewProps,
   BoardFilterProps,
   BoardTableProps,
 } from '@components/new-common/organisms';
@@ -41,4 +42,5 @@ export type BoardTemplateProps<
     | 'onRowSelectionChange'
     | 'columns'
     | 'excelColumns'
-  >;
+  > &
+  Partial<BoardPreviewProps>;
