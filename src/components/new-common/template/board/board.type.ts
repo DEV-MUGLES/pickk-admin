@@ -38,6 +38,7 @@ export type BoardTemplateProps<
   Pick<
     BoardTableProps<DataType>,
     | 'onRowClick'
+    | 'keyField'
     | 'selectedRowKeys'
     | 'onRowSelectionChange'
     | 'columns'

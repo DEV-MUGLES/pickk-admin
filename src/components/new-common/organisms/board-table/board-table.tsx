@@ -14,6 +14,7 @@ const StyledWrapper = styled.div`
 `;
 
 export default function BoardTable(props: BoardTableProps) {
+  const propsWithDefault: BoardTableProps = {keyField: 'id', ...props};
   const {
     title,
     totalDataSize,
@@ -23,12 +24,13 @@ export default function BoardTable(props: BoardTableProps) {
     selectedRowKeys,
     page,
     pageSize,
+    keyField,
     onPageChange,
     onPageSizeChange,
     onRefreshClick,
     onRowClick,
     onRowSelectionChange,
-  } = props;
+  } = propsWithDefault;
 
   const rowSelection: TableRowSelection<unknown> = {
     selectedRowKeys,
@@ -43,9 +45,9 @@ export default function BoardTable(props: BoardTableProps) {
   return (
     <StyledWrapper>
       <Table
-        {...props}
+        {...propsWithDefault}
         {...(selectedRowKeys != null ? {rowSelection} : {})}
-        dataSource={dataSource.map((v) => ({...v, key: v.id}))}
+        dataSource={dataSource.map((v) => ({...v, key: v[keyField]}))}
         size="small"
         title={() => (
           <BoardTableHeader
