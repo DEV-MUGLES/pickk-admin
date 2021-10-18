@@ -6,6 +6,8 @@ import {palette} from '@pickk/design-token';
 
 import {BoardFilter, BoardTable} from '@components/new-common/organisms';
 
+import {removeDashFromNumber} from '@common/helpers';
+
 import {BoardTemplateProps} from './board.type';
 
 const StyledWrapper = styled.div`
@@ -64,12 +66,43 @@ export default function BoardTemplate(props: BoardTemplateProps) {
     ...(query ? {query} : {}),
   });
 
-  const handleFilterChange = (newFilter: Record<string, unknown>) => {
-    /** query 필드는 filter에서 제외한다. */
-    setQuery(newFilter.query ?? null);
-    delete newFilter.query;
+  const formatFilter = (
+    inputs: Record<string, unknown>,
+  ): Record<string, unknown> => {
+    let result = {};
 
-    setFilter(newFilter);
+    /**  조회 기간 필터를 형식에 맞게 변경한다. */
+    const datePeriodFilter = inputs.period;
+    result = {
+      ...inputs,
+      ...(datePeriodFilter
+        ? {[datePeriodFilter['lookup']]: datePeriodFilter['range']}
+        : {}),
+    };
+    delete result['period'];
+
+    /**  검색어가 숫자와 '-'의 조합인 경우 '-' 를 제거한다.  */
+    result = {
+      ...result,
+      ...(result['search']
+        ? {search: removeDashFromNumber(result['search'])}
+        : {}),
+      ...(result['query']
+        ? {query: removeDashFromNumber(result['query'])}
+        : {}),
+    };
+
+    return result;
+  };
+
+  const handleFilterChange = (newFilter: Record<string, unknown>) => {
+    const formattedFilter = formatFilter(newFilter);
+
+    /** query 필드는 filter에서 제외한다. */
+    setQuery(formattedFilter.query ?? null);
+    delete formattedFilter.query;
+
+    setFilter(formattedFilter);
   };
 
   if (!data && !loading) {
