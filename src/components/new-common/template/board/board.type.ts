@@ -4,7 +4,6 @@ import {
   BoardFilterProps,
   BoardTableProps,
 } from '@components/new-common/organisms';
-import {ColumnsType} from 'antd/lib/table';
 
 export type BoardDataFetcher<
   DataType = object,
@@ -24,16 +23,22 @@ export type BoardDataFetcher<
   refetch: () => Promise<unknown>;
 };
 
-export type BoardTemplateProps<DataType = any> = {
+export type BoardTemplateProps<
+  DataType = object,
+  FilterType = Record<string, unknown>,
+> = {
   title: string;
   subTitle: string;
-  useBoardData: BoardDataFetcher;
-  tableColumns: ColumnsType<DataType>;
+  useBoardData: BoardDataFetcher<DataType, FilterType>;
   filterInputs?: BoardFilterProps['inputs'];
   /** @default 20 */
   defaultPageSize?: number;
 } & Pick<BoardFilterProps, 'defaultFilter'> &
   Pick<
-    BoardTableProps,
-    'onRowClick' | 'selectedRowKeys' | 'onRowSelectionChange'
+    BoardTableProps<DataType>,
+    | 'onRowClick'
+    | 'selectedRowKeys'
+    | 'onRowSelectionChange'
+    | 'columns'
+    | 'excelColumns'
   >;

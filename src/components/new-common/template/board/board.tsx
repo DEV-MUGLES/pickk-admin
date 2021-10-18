@@ -36,7 +36,6 @@ export default function BoardTemplate(props: BoardTemplateProps) {
     title,
     subTitle,
     useBoardData,
-    tableColumns,
     defaultFilter,
     filterInputs,
     defaultPageSize,
@@ -96,7 +95,6 @@ export default function BoardTemplate(props: BoardTemplateProps) {
         dataSource={data}
         totalDataSize={total}
         loading={loading}
-        columns={tableColumns}
         page={page}
         pageSize={pageSize}
         onPageChange={setPage}
