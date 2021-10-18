@@ -13,10 +13,6 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@src/*": ["src/*"]
-    },
     "typeRoots": ["./node_modules/@types"],
     "lib": ["dom", "es2015", "es2016"],
     "strict": false,
@@ -24,7 +20,15 @@
     "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@common/*": ["src/common/*"],
+      "@components/*": ["src/components/*"],
+      "@containers/*": ["src/containers/*"],
+      "@providers/*": ["src/providers/*"],
+      "@src/*": ["src/*"]
+    }
   },
   "exclude": [
     "node_modules",

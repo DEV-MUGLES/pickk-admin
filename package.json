@@ -10,9 +10,6 @@
     "build": "next build",
     "start": "next start"
   },
-  "_moduleAliases": {
-    "@src": "./src"
-  },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@apollo/client": "^3.3.16",
