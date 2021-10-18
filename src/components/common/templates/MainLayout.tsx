@@ -17,7 +17,7 @@ export default function MainLayout({children}: IProps) {
       <SiderGNB />
       <Layout>
         <GHeader />
-        <StyledContent>{children}</StyledContent>
+        <Content>{children}</Content>
         <GFooter />
       </Layout>
     </StyledLayout>
@@ -26,8 +26,4 @@ export default function MainLayout({children}: IProps) {
 
 const StyledLayout = styled(Layout)`
   min-height: 100vh;
-`;
-
-const StyledContent = styled(Content)`
-  padding: 1.2rem;
 `;
