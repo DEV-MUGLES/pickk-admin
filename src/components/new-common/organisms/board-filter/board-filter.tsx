@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import styled from 'styled-components';
-import { Typography, Button, Space, Form } from 'antd';
-import { palette } from '@pickk/design-token';
+import {Typography, Button, Space, Form, Divider} from 'antd';
+import {palette} from '@pickk/design-token';
 
-import { BoardFilterProps } from './board-filter.types';
+import {BoardFilterProps} from './board-filter.types';
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const StyledFooter = styled(Space)`
 `;
 
 export default function BoardFilter(props: BoardFilterProps) {
-  const { defaultFilter = {}, onFilterChange, inputs } = props;
+  const {defaultFilter = {}, onFilterChange, inputs} = props;
 
   const [form] = Form.useForm();
 
@@ -55,10 +55,24 @@ export default function BoardFilter(props: BoardFilterProps) {
   };
 
   const renderInputs = () => {
-    return inputs.map(({ name, label, Component }) => (
-      <Form.Item key={label} name={name} label={label}>
-        <Component />
-      </Form.Item>
+    return inputs.map(({name, label, Component, guideText}) => (
+      <>
+        <Form.Item
+          key={label}
+          name={name}
+          label={label}
+          extra={guideText}
+          labelCol={{
+            xs: {span: 24},
+            sm: {span: 5},
+          }}
+          labelAlign="left"
+          colon={false}
+          style={{marginBottom: 0}}>
+          <Component />
+        </Form.Item>
+        <Divider style={{margin: '0.6rem 0'}} />
+      </>
     ));
   };
 
