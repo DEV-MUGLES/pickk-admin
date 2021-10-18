@@ -3,7 +3,7 @@ import {OrderItemClaimStatus} from '@pickk/common';
 import BoardStoreProvider from '@src/common/contexts/Board';
 import CancelRequestsBoard from '@src/components/cancel-requests';
 
-import {useOrderItems} from '../order-items/hooks';
+import {useOrderItems} from '../deprecated-order-items/hooks';
 
 function CancelRequestsBoardContainer() {
   return (

@@ -5,7 +5,7 @@ import PlacementBoard from '@src/components/placements';
 import BoardStoreProvider from '@src/common/contexts/Board';
 import {placementsRecordMapper} from '@src/components/placements/table';
 
-import {useOrderItems} from '../order-items/hooks';
+import {useOrderItems} from '../deprecated-order-items/hooks';
 
 function PlacementBoardContainer() {
   return (

@@ -9,7 +9,7 @@ import Table from '@src/components/common/organisms/Board/Table';
 import {TrackCodeUpdateModal} from './table/modal';
 
 import {useBoardContext} from '@src/common/contexts/Board';
-import {orderItemInputs} from '../order-items/inputs';
+import {orderItemInputs} from '../deprecated-order-items/inputs';
 import {shipmentsColumns, shipmentsExcelColumns} from './table';
 import {BoardProps} from '../props';
 import {TableActionType} from '../common/organisms/Board/Table/table';

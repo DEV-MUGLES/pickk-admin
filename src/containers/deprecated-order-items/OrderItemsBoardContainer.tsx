@@ -1,9 +1,9 @@
 import {OrderItemStatus} from '@pickk/common';
 
-import OrderItemBoard from '@src/components/order-items';
+import OrderItemBoard from '@components/deprecated-order-items';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
-import {orderItemsRecordMapper} from '@src/components/order-items/table';
+import {orderItemsRecordMapper} from '@components/deprecated-order-items/table';
 
 import {useOrderItems} from './hooks';
 

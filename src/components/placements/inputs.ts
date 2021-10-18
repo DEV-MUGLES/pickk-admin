@@ -1,4 +1,4 @@
-import {orderItemInputs} from '../order-items/inputs';
+import {orderItemInputs} from '../deprecated-order-items/inputs';
 
 import CheckBox from '../common/molecules/BoardFilter/input/CheckBox';
 

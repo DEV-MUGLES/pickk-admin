@@ -4,7 +4,7 @@ import TrackingViewLink from '@src/components/common/molecules/tracking-view-lin
 
 import {addDashToPhoneNumber, stringSorter} from '@src/common/helpers';
 
-import {orderItemColumns} from '@src/components/order-items/table';
+import {orderItemColumns} from '@components/deprecated-order-items/table';
 
 export const placementColumns: ColumnsType<any> = [
   ...orderItemColumns.slice(0, 3), // 주문상품번호, 주문번호, 주문 일시

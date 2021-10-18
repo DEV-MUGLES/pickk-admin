@@ -6,8 +6,11 @@ import Table from '@src/components/common/organisms/Board/Table';
 import {canceldRequestPreviewData} from './preview-data';
 import {BoardProps} from '../props';
 
-import {orderItemInputs} from '../order-items/inputs';
-import {orderItemColumns, orderItemExcelColumns} from '../order-items/table';
+import {orderItemInputs} from '../deprecated-order-items/inputs';
+import {
+  orderItemColumns,
+  orderItemExcelColumns,
+} from '../deprecated-order-items/table';
 
 function CancelRequestsBoard(props: BoardProps) {
   return (
