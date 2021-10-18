@@ -1,7 +1,8 @@
-import { Key } from 'react';
-import { TableProps } from 'antd';
+import {Key} from 'react';
+import {TableProps} from 'antd';
+import {ExcelColumnsType} from '@pickk/react-excel';
 
-export type BoardTableProps<DataType = object & { id?: Key }> = Pick<
+export type BoardTableProps<DataType = object & {id?: Key}> = Pick<
   TableProps<DataType>,
   'dataSource' | 'loading' | 'columns'
 > & {
@@ -11,6 +12,7 @@ export type BoardTableProps<DataType = object & { id?: Key }> = Pick<
   pageSize: number;
   defaultPageSize?: number;
   selectedRowKeys?: Key[];
+  excelColumns?: ExcelColumnsType<DataType>;
   onRefreshClick: () => void;
   onPageChange: (page: number) => void;
   onPageSizeChange: (pageSize: number) => void;

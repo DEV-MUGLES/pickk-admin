@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import {Table, Typography, Button} from 'antd';
+import {Table} from 'antd';
 import {TableRowSelection} from 'antd/lib/table/interface';
-import {ReloadOutlined} from '@ant-design/icons';
 import {palette} from '@pickk/design-token';
 
-import {BoardTableProps} from './board-table.types';
+import BoardTableHeader from './header';
 
-const {Title} = Typography;
+import {BoardTableProps} from './board-table.types';
 
 const StyledWrapper = styled.div`
   padding: 0.4rem 0;
@@ -14,46 +13,32 @@ const StyledWrapper = styled.div`
   background-color: ${palette.white};
 `;
 
-const StyledTableTitleWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  padding: 0 0.8rem;
-`;
-
 export default function BoardTable(props: BoardTableProps) {
   const {
     title,
-    dataSource,
     totalDataSize,
+    dataSource,
+    columns,
+    excelColumns,
+    selectedRowKeys,
     page,
     pageSize,
     onPageChange,
     onPageSizeChange,
     onRefreshClick,
     onRowClick,
-    selectedRowKeys,
     onRowSelectionChange,
   } = props;
-
-  const renderTitle = () => {
-    return (
-      <StyledTableTitleWrapper>
-        <Title level={5}>
-          {title} 목록 (총 {totalDataSize} 개)
-        </Title>
-        <Button onClick={() => onRefreshClick()} icon={<ReloadOutlined />}>
-          새로고침
-        </Button>
-      </StyledTableTitleWrapper>
-    );
-  };
 
   const rowSelection: TableRowSelection<unknown> = {
     selectedRowKeys,
     onChange: onRowSelectionChange,
   };
+
+  const defaultExcelColumns = columns.map(({title, key}) => ({
+    label: title.toString(),
+    propName: key.toString(),
+  }));
 
   return (
     <StyledWrapper>
@@ -62,7 +47,15 @@ export default function BoardTable(props: BoardTableProps) {
         {...(selectedRowKeys != null ? {rowSelection} : {})}
         dataSource={dataSource.map((v) => ({...v, key: v.id}))}
         size="small"
-        title={renderTitle}
+        title={() => (
+          <BoardTableHeader
+            title={title}
+            totalDataSize={totalDataSize}
+            dataSource={dataSource}
+            excelColumns={excelColumns ?? defaultExcelColumns}
+            onRefreshClick={onRefreshClick}
+          />
+        )}
         pagination={{
           total: totalDataSize,
           current: page,
