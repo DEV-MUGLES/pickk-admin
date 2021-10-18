@@ -5,7 +5,7 @@ import {
   addDashToPhoneNumber,
   getInquiryTypeDisplayName,
   getTimeString,
-  renderBooleanColumn,
+  renderBoolean,
   stringSorter,
 } from '@src/common/helpers';
 
@@ -24,7 +24,7 @@ export const inquiriesColumns: ColumnsType<InquiryDataType> = [
     title: '답변여부',
     dataIndex: 'isAnswered',
     key: 'isAnswered',
-    render: renderBooleanColumn,
+    render: renderBoolean,
     width: 60,
     ellipsis: true,
     align: 'center',
@@ -94,7 +94,7 @@ export const inquiriesColumns: ColumnsType<InquiryDataType> = [
     title: '비밀글여부',
     dataIndex: 'isSecret',
     key: 'isSecret',
-    render: renderBooleanColumn,
+    render: renderBoolean,
     width: 80,
     ellipsis: true,
     align: 'center',

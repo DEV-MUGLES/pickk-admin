@@ -2,7 +2,7 @@ import {ColumnsType} from 'antd/lib/table';
 import {Product} from '@pickk/common';
 
 import StockEditColumn from './stock-edit-column';
-import {renderDateColumn} from '@src/common/helpers/ColumnRenderer';
+import {renderDate} from '@src/common/helpers';
 import {addCommaToNumber, stringSorter} from '@src/common/helpers';
 
 export const stockColumns: ColumnsType<Product> = [
@@ -35,12 +35,12 @@ export const stockColumns: ColumnsType<Product> = [
     key: 'createdAt',
     defaultSortOrder: 'ascend',
     sorter: (a, b) => stringSorter(a.createdAt, b.createdAt),
-    render: renderDateColumn,
+    render: renderDate,
   },
   {
     title: '최근 수정일',
     dataIndex: 'updatedAt',
     key: 'updatedAt',
-    render: renderDateColumn,
+    render: renderDate,
   },
 ];

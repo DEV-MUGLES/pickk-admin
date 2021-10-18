@@ -3,7 +3,7 @@ import {Button, Image} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
 import {Item} from '@pickk/common';
 
-import {renderBooleanColumn} from '@src/common/helpers/ColumnRenderer';
+import {renderBoolean} from '@src/common/helpers';
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';
 
@@ -94,7 +94,7 @@ export const itemColumns: ColumnsType<Item> = [
     title: '활성화 여부',
     dataIndex: 'isSellable',
     key: 'isSellable',
-    render: renderBooleanColumn,
+    render: renderBoolean,
     align: 'center',
   },
   {

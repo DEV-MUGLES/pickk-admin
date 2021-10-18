@@ -5,10 +5,7 @@ import {Item} from '@pickk/common';
 
 import SellableItemStock from './stock';
 import InfoTooltip from '@src/components/common/atoms/info-tooltip';
-import {
-  renderBooleanColumn,
-  renderDateColumn,
-} from '@src/common/helpers/ColumnRenderer';
+import {renderBoolean, renderDate} from '@src/common/helpers';
 
 import {addCommaToNumber} from '@src/common/helpers/NumberParser';
 import {stringSorter} from '@src/common/helpers/sorter';
@@ -63,7 +60,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     key: 'isInfiniteStock',
     width: 100,
     align: 'center',
-    render: renderBooleanColumn,
+    render: renderBoolean,
   },
   {
     title: ItemStockColumnTitle,
@@ -103,7 +100,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     key: 'isMdRecommended',
     width: 120,
     align: 'center',
-    render: renderBooleanColumn,
+    render: renderBoolean,
   },
   {
     title: '공홈링크',
@@ -121,7 +118,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     dataIndex: 'sellableAt',
     key: 'sellableAt',
     sorter: (a, b) => stringSorter(b.createdAt, a.createdAt),
-    render: renderDateColumn,
+    render: renderDate,
     width: 120,
   },
 ];
