@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Modal, Button, Typography, Space, Divider, message} from 'antd';
+import {Modal, Button, Typography, Space, Divider} from 'antd';
 import {RefundRequest} from '@pickk/common';
 
-import {useBoardContext} from '@src/common/contexts/Board';
-import {addCommaToNumber} from '@src/common/helpers/NumberParser';
-import {getOrderClaimFaultOfDisplayName} from '@src/common/helpers';
+import {
+  addCommaToNumber,
+  getOrderClaimFaultOfDisplayName,
+} from '@src/common/helpers';
 
-import {useConfirmRefundRequest, useMeSellerClaimPolicyFee} from './hooks';
+import {useMeSellerClaimPolicyFee} from './hooks';
 
 const {Title, Text} = Typography;
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -29,28 +30,19 @@ export type RefundConfirmModalProps = {
   record: RefundRequest;
   isModalOpen: boolean;
   closeModal: () => void;
+  onSubmit: (merchantUid: string, shippingFee: number) => void;
 };
 
 export default function RefundConfirmModal({
   record,
   isModalOpen,
   closeModal,
+  onSubmit,
 }: RefundConfirmModalProps) {
-  const {reload} = useBoardContext().action;
-
   const {claimPolicyFee} = useMeSellerClaimPolicyFee();
-  const {confirmRefundRequest} = useConfirmRefundRequest();
 
   const handleSubmit = (shippingFee: number) => async () => {
-    try {
-      await confirmRefundRequest(record.merchantUid, shippingFee);
-
-      message.success('반품이 완료되었습니다.');
-      reload();
-      closeModal();
-    } catch (err) {
-      message.error('실패했습니다. err - ' + err);
-    }
+    onSubmit(record.merchantUid, shippingFee);
   };
 
   if (!record || claimPolicyFee == null) {
@@ -66,7 +58,7 @@ export default function RefundConfirmModal({
       onCancel={closeModal}
       footer={null}
       width={'70%'}>
-      <Wrapper>
+      <StyledWrapper>
         <Text>
           클레임 사유 :{' '}
           {`[${getOrderClaimFaultOfDisplayName(faultOf)}] ${reason}`}
@@ -97,7 +89,7 @@ export default function RefundConfirmModal({
             </Button>
           </StyledRow>
         </Space>
-      </Wrapper>
+      </StyledWrapper>
     </Modal>
   );
 }

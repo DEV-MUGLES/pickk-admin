@@ -5,8 +5,8 @@ import {
 } from '@pickk/common';
 
 // 수거완료
-export const useBulkPickMeSellerRefundRequests = () => {
-  const [_bulkPickMeSellerRefundRequests] = useMutation<
+export const useBulkPickRefundRequests = () => {
+  const [_bulkPickRefundRequests] = useMutation<
     Pick<Mutation, 'bulkPickMeSellerRefundRequests'>,
     MutationBulkPickMeSellerRefundRequestsArgs
   >(gql`
@@ -15,13 +15,13 @@ export const useBulkPickMeSellerRefundRequests = () => {
     }
   `);
 
-  const bulkPickMeSellerRefundRequests = async (merchantUids: string[]) => {
-    await _bulkPickMeSellerRefundRequests({
+  const bulkPickRefundRequests = async (merchantUids: string[]) => {
+    await _bulkPickRefundRequests({
       variables: {
         merchantUids,
       },
     });
   };
 
-  return {bulkPickMeSellerRefundRequests};
+  return {bulkPickRefundRequests};
 };

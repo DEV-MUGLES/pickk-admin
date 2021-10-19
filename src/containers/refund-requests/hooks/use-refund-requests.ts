@@ -7,7 +7,12 @@ import {
   RefundRequest,
   Shipment,
   QueryMeSellerRefundRequestsArgs,
+  RefundRequestFilter,
 } from '@pickk/common';
+
+import {BoardDataFetcher} from '@components/new-common/template/board';
+
+import {useRefundRequestsCount} from './use-refund-requests-count';
 
 const GET_REFUND_REQUESTS = gql`
   query MeSellerRefundRequests(
@@ -56,6 +61,7 @@ export type RefundRequestDataType = Pick<
   RefundRequest,
   | 'merchantUid'
   | 'orderMerchantUid'
+  | 'status'
   | 'requestedAt'
   | 'reason'
   | 'amount'
@@ -73,9 +79,49 @@ export type RefundRequestDataType = Pick<
   };
 };
 
-export const useRefundRequests = () => {
-  return useQuery<
-    {meSellerRefundRequests: RefundRequestDataType},
+export type FlattenRefundRequestDataType = RefundRequestDataType & {
+  buyerName: OrderBuyer['name'];
+  buyerPhoneNumber: OrderBuyer['phoneNumber'];
+  courierCode: Courier['code'];
+  trackCode: Shipment['trackCode'];
+};
+
+export const flattenRefundRequestRecord = (
+  record: RefundRequestDataType,
+): FlattenRefundRequestDataType => {
+  const {order, shipment} = record;
+  const {buyer} = order;
+  return {
+    ...record,
+    buyerName: buyer?.name,
+    buyerPhoneNumber: buyer?.phoneNumber,
+    courierCode: shipment?.courier.code,
+    trackCode: shipment?.trackCode,
+  };
+};
+
+export const useRefundRequests: BoardDataFetcher<
+  FlattenRefundRequestDataType,
+  RefundRequestFilter
+> = ({filter, pageInput}) => {
+  const {data, loading, refetch} = useQuery<
+    {meSellerRefundRequests: RefundRequestDataType[]},
     QueryMeSellerRefundRequestsArgs
-  >(GET_REFUND_REQUESTS);
+  >(GET_REFUND_REQUESTS, {
+    variables: {
+      refundRequestFilter: filter,
+      pageInput,
+    },
+  });
+
+  const total = useRefundRequestsCount({filter});
+
+  return {
+    data: !!data?.meSellerRefundRequests
+      ? data.meSellerRefundRequests.map(flattenRefundRequestRecord)
+      : [],
+    total,
+    loading,
+    refetch,
+  };
 };
