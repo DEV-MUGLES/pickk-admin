@@ -46,3 +46,5 @@ export type BoardTemplateProps<
     | 'actions'
   > &
   Partial<BoardPreviewProps>;
+
+export type BoardTemplateHandle = {reload: () => void};
