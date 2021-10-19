@@ -10,7 +10,7 @@ import {
   BoardTable,
 } from '@components/new-common/organisms';
 
-import {removeDashFromNumber} from '@common/helpers';
+import {parseRecordWithDeepKey, removeDashFromNumber} from '@common/helpers';
 
 import {BoardTemplateProps, BoardTemplateHandle} from './board.type';
 
@@ -88,7 +88,12 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
       result = {
         ...inputs,
         ...(datePeriodFilter
-          ? {[datePeriodFilter['lookup']]: datePeriodFilter['range']}
+          ? {
+              ...parseRecordWithDeepKey(
+                datePeriodFilter['lookup'],
+                datePeriodFilter['range'],
+              ),
+            }
           : {}),
       };
       delete result['period'];
