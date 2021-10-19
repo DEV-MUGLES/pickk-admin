@@ -12,7 +12,7 @@ import {BoardTableProps} from './board-table.types';
 
 const {Title} = Typography;
 
-const StyledTableTitleWrapper = styled.div`
+const StyledWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,7 +50,7 @@ export default function BoardTableHeader({
   };
 
   return (
-    <StyledTableTitleWrapper>
+    <StyledWrapper>
       <Title level={5}>
         {title} 목록 (총 {totalDataSize} 개)
       </Title>
@@ -61,6 +61,6 @@ export default function BoardTableHeader({
         <CSVDownloadButton {...excelDownloadButtonProps} />
         <ExcelDownloadButton {...excelDownloadButtonProps} />
       </StyledRow>
-    </StyledTableTitleWrapper>
+    </StyledWrapper>
   );
 }

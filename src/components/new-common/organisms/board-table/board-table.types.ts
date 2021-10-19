@@ -3,6 +3,8 @@ import {TableProps} from 'antd';
 import {TableRowSelection} from 'antd/lib/table/interface';
 import {ExcelColumnsType} from '@pickk/react-excel';
 
+import {TableActionType} from './actions';
+
 export type BoardTableProps<DataType = object & {id?: Key}> = Pick<
   TableProps<DataType>,
   'dataSource' | 'loading' | 'columns'
@@ -15,6 +17,7 @@ export type BoardTableProps<DataType = object & {id?: Key}> = Pick<
   keyField?: string;
   selectedRowKeys?: Key[];
   excelColumns?: ExcelColumnsType<DataType>;
+  actions?: TableActionType[];
   onRefreshClick: () => void;
   onPageChange: (page: number) => void;
   onPageSizeChange: (pageSize: number) => void;

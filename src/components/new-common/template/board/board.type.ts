@@ -43,5 +43,6 @@ export type BoardTemplateProps<
     | 'onRowSelectionChange'
     | 'columns'
     | 'excelColumns'
+    | 'actions'
   > &
   Partial<BoardPreviewProps>;

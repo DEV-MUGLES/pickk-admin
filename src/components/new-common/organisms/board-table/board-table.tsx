@@ -4,6 +4,7 @@ import {TableRowSelection} from 'antd/lib/table/interface';
 import {palette} from '@pickk/design-token';
 
 import BoardTableHeader from './header';
+import BoardTableActions from './actions';
 
 import {BoardTableProps} from './board-table.types';
 
@@ -11,6 +12,11 @@ const StyledWrapper = styled.div`
   padding: 0.4rem 0;
 
   background-color: ${palette.white};
+`;
+
+const StyledTitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export default function BoardTable(props: BoardTableProps) {
@@ -25,6 +31,7 @@ export default function BoardTable(props: BoardTableProps) {
     page,
     pageSize,
     keyField,
+    actions,
     onPageChange,
     onPageSizeChange,
     onRefreshClick,
@@ -50,13 +57,21 @@ export default function BoardTable(props: BoardTableProps) {
         dataSource={dataSource.map((v) => ({...v, key: v[keyField]}))}
         size="small"
         title={() => (
-          <BoardTableHeader
-            title={title}
-            totalDataSize={totalDataSize}
-            dataSource={dataSource}
-            excelColumns={excelColumns ?? defaultExcelColumns}
-            onRefreshClick={onRefreshClick}
-          />
+          <StyledTitleWrapper>
+            <BoardTableHeader
+              title={title}
+              totalDataSize={totalDataSize}
+              dataSource={dataSource}
+              excelColumns={excelColumns ?? defaultExcelColumns}
+              onRefreshClick={onRefreshClick}
+            />
+            {actions && (
+              <BoardTableActions
+                isDisabled={selectedRowKeys.length === 0}
+                actions={actions}
+              />
+            )}
+          </StyledTitleWrapper>
         )}
         pagination={{
           total: totalDataSize,
