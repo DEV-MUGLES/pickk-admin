@@ -1,31 +1,31 @@
-import {ExcelColumnsType} from '@pickk/react-excel';
-import {ExchangeRequest} from '@pickk/common';
-
+import {FlattenExchangeRequestDataType} from '@containers/exchange-requests/hooks';
 import {
+  generateExcelColumns,
+  renderDateWithTime,
   getExchangeRequestStatusDisplayName,
   getOrderClaimFaultOfDisplayName,
+  addDashToPhoneNumber,
 } from '@src/common/helpers';
 
-import {exchangeRequestColumns} from './columns';
+import {exchangeRequestsColumns} from './columns';
 
-const excelColumns = exchangeRequestColumns.map(({title, key}) => ({
-  label: title.toString(),
-  propName: key.toString(),
-}));
+export const exchangeRequestsExcelValueMapper: Record<
+  string,
+  (record: FlattenExchangeRequestDataType) => string
+> = {
+  status: ({status}) => getExchangeRequestStatusDisplayName(status),
+  requestedAt: ({requestedAt}) => renderDateWithTime(requestedAt),
+  buyerPhoneNumber: ({buyerPhoneNumber}) =>
+    addDashToPhoneNumber(buyerPhoneNumber),
+  reason: ({faultOf, reason}) =>
+    `[${getOrderClaimFaultOfDisplayName(faultOf)}] ${reason}`,
+  receiverPhoneNumber: ({receiverPhoneNumber}) =>
+    addDashToPhoneNumber(receiverPhoneNumber),
+};
 
-export const exchangeRequestExcelColumns: ExcelColumnsType<ExchangeRequest> = [
-  ...excelColumns.slice(0, 2),
-  {
-    label: '교환처리상태',
-    propName: 'status',
-    mapValue: ({status}) => getExchangeRequestStatusDisplayName(status),
-  },
-  ...excelColumns.slice(3, 9),
-  {
-    label: '교환사유',
-    propName: 'reason',
-    mapValue: ({faultOf, reason}) =>
-      `[${getOrderClaimFaultOfDisplayName(faultOf)}] ${reason}`,
-  },
-  ...excelColumns.slice(10),
-];
+export const exchangeRequestsExcelColumns =
+  generateExcelColumns<FlattenExchangeRequestDataType>(
+    exchangeRequestsColumns,
+    exchangeRequestsExcelValueMapper,
+    ['trackingViewUrl'],
+  );

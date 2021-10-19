@@ -6,8 +6,8 @@ import {
 } from '@pickk/common';
 
 // 재발송처리
-export const useReshipMeSellerOrderItem = () => {
-  const [_reshipMeSellerExchangeRequest] = useMutation<
+export const useReshipExchangeRequest = () => {
+  const [_reshipExchangeRequest] = useMutation<
     Pick<Mutation, 'reshipMeSellerExchangeRequest'>,
     MutationReshipMeSellerExchangeRequestArgs
   >(gql`
@@ -24,12 +24,12 @@ export const useReshipMeSellerOrderItem = () => {
     }
   `);
 
-  const reshipMeSellerExchangeRequest = async (
+  const reshipExchangeRequest = async (
     merchantUid: string,
     courierId: ReshipExchangeRequestInput['courierId'],
     trackCode: ReshipExchangeRequestInput['trackCode'],
   ) => {
-    await _reshipMeSellerExchangeRequest({
+    await _reshipExchangeRequest({
       variables: {
         merchantUid,
         reshipExchangeRequestInput: {
@@ -40,5 +40,5 @@ export const useReshipMeSellerOrderItem = () => {
     });
   };
 
-  return {reshipMeSellerExchangeRequest};
+  return {reshipExchangeRequest};
 };

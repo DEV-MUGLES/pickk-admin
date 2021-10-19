@@ -7,38 +7,38 @@ import {
 } from '@ant-design/icons';
 import {ExchangeRequestStatus} from '@pickk/common';
 
-import {PreviewDataType} from '../common/organisms/Board/preview';
+import {PreviewType} from '@components/new-common/organisms/board-preview';
 
-export const exchangeRequestPreviewData: PreviewDataType[] = [
+export const exchangeRequestsPreviews: PreviewType[] = [
   {
     label: '교환 요청',
     name: 'Requested',
-    icon: UnorderedListOutlined,
-    filterValue: {status: ExchangeRequestStatus.Requested},
+    Icon: UnorderedListOutlined,
+    filter: {status: ExchangeRequestStatus.Requested},
   },
   {
     label: '교환 수거 완료',
     name: 'Picked',
-    icon: ImportOutlined,
-    filterValue: {status: ExchangeRequestStatus.Picked},
+    Icon: ImportOutlined,
+    filter: {status: ExchangeRequestStatus.Picked},
   },
   {
     label: '교환 배송 중',
     name: 'Reshipping',
-    icon: CarOutlined,
-    filterValue: {status: ExchangeRequestStatus.Reshipping},
+    Icon: CarOutlined,
+    filter: {status: ExchangeRequestStatus.Reshipping},
   },
   {
     label: '교환 배송 완료',
     name: 'Reshipped',
-    icon: ShoppingOutlined,
-    filterValue: {status: ExchangeRequestStatus.Reshipped},
+    Icon: ShoppingOutlined,
+    filter: {status: ExchangeRequestStatus.Reshipped},
   },
   {
     label: '교환 처리 지연',
     name: 'process_delayed',
-    icon: ClockCircleOutlined,
-    filterValue: {
+    Icon: ClockCircleOutlined,
+    filter: {
       statusIn: [ExchangeRequestStatus.Picked, ExchangeRequestStatus.Requested],
       isProcessDelaying: true,
     },
