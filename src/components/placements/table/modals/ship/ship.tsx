@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {Modal, Input, Typography} from 'antd';
 import {Shipment} from '@pickk/common';
 
-import {useBoardContext} from '@src/common/contexts/Board';
 import {removeDashFromNumber} from '@src/common/helpers';
 
 import CourierSelect from './courier-select';
@@ -55,9 +54,6 @@ export default function ShipModal({
   isModalOpen,
   closeModal,
 }: ShipModalProps) {
-  const {action} = useBoardContext();
-  const {reload} = action;
-
   const [shipment, setShipment] = useState<ShipmentType>(null);
 
   useEffect(() => {
@@ -93,7 +89,6 @@ export default function ShipModal({
     });
 
     closeModal();
-    reload();
   };
 
   if (modalData && shipment) {

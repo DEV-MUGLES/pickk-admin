@@ -4,9 +4,22 @@ import {
   QueryMeSellerOrderItemsCountArgs,
 } from '@pickk/common';
 
-import {PreviewDataResult} from '@src/components/common/organisms/Board/preview';
+import {PreviewDataResult} from '@components/new-common/organisms/board-preview';
 
-export const usePlacementPreview = (): PreviewDataResult => {
+const GET_PLACEMENTS_COUNT = gql`
+  query MeSellerOrderItemsCount($forceUpdate: Boolean) {
+    meSellerOrderItemsCount(forceUpdate: $forceUpdate) {
+      id
+      Paid
+      ShipReady
+      process_delayed_Paid
+      process_delayed_ShipReady
+      lastUpdatedAt
+    }
+  }
+`;
+
+export const usePlacementsPreviewData = (): PreviewDataResult => {
   const {data, refetch} = useQuery<
     {
       meSellerOrderItemsCount: Pick<
@@ -20,18 +33,7 @@ export const usePlacementPreview = (): PreviewDataResult => {
       >;
     },
     QueryMeSellerOrderItemsCountArgs
-  >(gql`
-    query MeSellerOrderItemsCount($forceUpdate: Boolean) {
-      meSellerOrderItemsCount(forceUpdate: $forceUpdate) {
-        id
-        Paid
-        ShipReady
-        process_delayed_Paid
-        process_delayed_ShipReady
-        lastUpdatedAt
-      }
-    }
-  `);
+  >(GET_PLACEMENTS_COUNT);
 
   return {
     data: data?.meSellerOrderItemsCount ?? {},

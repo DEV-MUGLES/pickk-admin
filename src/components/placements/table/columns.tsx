@@ -2,13 +2,50 @@ import {ColumnsType} from 'antd/lib/table';
 
 import TrackingViewLink from '@src/components/common/molecules/tracking-view-link';
 
-import {addDashToPhoneNumber, stringSorter} from '@src/common/helpers';
+import {FlattenPlacementDataType} from '@containers/placements/hooks';
+import {
+  addDashToPhoneNumber,
+  getOrderItemStatusDisplayName,
+  renderDateWithTime,
+  stringSorter,
+} from '@src/common/helpers';
 
-import {orderItemColumns} from '@components/deprecated-order-items/table';
-
-export const placementColumns: ColumnsType<any> = [
-  ...orderItemColumns.slice(0, 3), // 주문상품번호, 주문번호, 주문 일시
-  ...orderItemColumns.slice(4, 6), // 주문상태, 클레임상태
+export const placementsColumns: ColumnsType<FlattenPlacementDataType> = [
+  {
+    title: '주문상품번호',
+    dataIndex: 'merchantUid',
+    key: 'merchantUid',
+    sorter: (a, b) => stringSorter(b.merchantUid, a.merchantUid),
+    width: 140,
+    ellipsis: true,
+  },
+  {
+    title: '주문번호',
+    dataIndex: 'orderMerchantUid',
+    key: 'orderMerchantUid',
+    sorter: (a, b) => stringSorter(b.orderMerchantUid, a.orderMerchantUid),
+    width: 120,
+    ellipsis: true,
+  },
+  {
+    title: '주문상태',
+    dataIndex: 'status',
+    key: 'status',
+    render: (value, {isConfirmed}) =>
+      getOrderItemStatusDisplayName(value, isConfirmed),
+    sorter: (a, b) => stringSorter(b.status, a.status),
+    width: 90,
+    ellipsis: true,
+  },
+  {
+    title: '주문 일시',
+    dataIndex: 'paidAt',
+    key: 'paidAt',
+    render: renderDateWithTime,
+    sorter: (a, b) => stringSorter(b.paidAt, a.paidAt),
+    width: 100,
+    ellipsis: true,
+  },
   {
     title: '택배사',
     dataIndex: 'courierName',
@@ -21,7 +58,7 @@ export const placementColumns: ColumnsType<any> = [
     title: '송장번호',
     dataIndex: 'trackCode',
     key: 'trackCode',
-    sorter: (a, b) => b.trackCode - a.trackCode,
+    sorter: (a, b) => stringSorter(b.trackCode, a.trackCode),
     width: 120,
     ellipsis: true,
   },
@@ -29,19 +66,59 @@ export const placementColumns: ColumnsType<any> = [
     title: '배송추적',
     dataIndex: 'trackingViewUrl',
     key: 'trackingViewUrl',
-    render: (_, record) =>
-      record.trackCode ? (
-        <TrackingViewLink
-          courierCode={record.courierCode}
-          trackCode={record.trackCode}
-        />
-      ) : (
-        '-'
-      ),
-    sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
+    render: (_, {courierCode, trackCode}) => (
+      <TrackingViewLink courierCode={courierCode} trackCode={trackCode} />
+    ),
     width: 90,
   },
-  ...orderItemColumns.slice(6, 10), // 상품명, 옵션, 수량, 구매자명, 구매자 연락처
+  {
+    title: '상품명',
+    dataIndex: 'itemName',
+    key: 'itemName',
+    render: (value, record) => (
+      <a
+        href={`https://pickk.one/item/${record.itemId}`}
+        target="_blank"
+        rel="noreferrer">
+        {value}
+      </a>
+    ),
+    sorter: (a, b) => stringSorter(b.itemName, a.itemName),
+    width: 200,
+    ellipsis: true,
+  },
+  {
+    title: '옵션',
+    dataIndex: 'productVariantName',
+    key: 'productVariantName',
+    sorter: (a, b) => stringSorter(b.productVariantName, a.productVariantName),
+    width: 200,
+    ellipsis: true,
+  },
+  {
+    title: '수량',
+    dataIndex: 'quantity',
+    key: 'quantity',
+    sorter: (a, b) => b.quantity - a.quantity,
+    width: 75,
+    ellipsis: true,
+  },
+  {
+    title: '구매자명',
+    dataIndex: 'buyerName',
+    key: 'buyerName',
+    sorter: (a, b) => stringSorter(b.buyerName, a.buyerName),
+    width: 75,
+    ellipsis: true,
+  },
+  {
+    title: '구매자 연락처',
+    dataIndex: 'buyerPhoneNumber',
+    key: 'buyerPhoneNumber',
+    render: (value) => addDashToPhoneNumber(value),
+    width: 75,
+    ellipsis: true,
+  },
   {
     title: '구매자 이메일',
     dataIndex: 'buyerEmail',
@@ -50,7 +127,23 @@ export const placementColumns: ColumnsType<any> = [
     width: 100,
     ellipsis: true,
   },
-  ...orderItemColumns.slice(10),
+  {
+    title: '구매자 연락처',
+    dataIndex: 'buyerPhoneNumber',
+    key: 'buyerPhoneNumber',
+    render: (value) => addDashToPhoneNumber(value),
+    width: 75,
+    ellipsis: true,
+  },
+  {
+    title: '수취인명',
+    dataIndex: 'receiverReceiverName',
+    key: 'receiverReceiverName',
+    sorter: (a, b) =>
+      stringSorter(b.receiverReceiverName, a.receiverReceiverName),
+    width: 75,
+    ellipsis: true,
+  },
   {
     title: '수취인 연락처',
     dataIndex: 'receiverPhoneNumber',

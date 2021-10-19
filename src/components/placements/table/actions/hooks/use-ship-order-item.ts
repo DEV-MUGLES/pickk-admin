@@ -2,8 +2,8 @@ import {gql, useMutation} from '@apollo/client';
 import {Mutation, MutationShipMeSellerOrderItemArgs} from '@pickk/common';
 
 // 발송처리
-export const useShipMeSellerOrderItem = () => {
-  const [_shipMeSellerOrderItems] = useMutation<
+export const useShipOrderItem = () => {
+  const [_shipOrderItem] = useMutation<
     Pick<Mutation, 'shipMeSellerOrderItem'>,
     MutationShipMeSellerOrderItemArgs
   >(gql`
@@ -20,12 +20,12 @@ export const useShipMeSellerOrderItem = () => {
     }
   `);
 
-  const shipMeSellerOrderItems = async (
+  const shipOrderItem = async (
     merchantUid: string,
     courierId: number,
     trackCode: string,
   ) => {
-    await _shipMeSellerOrderItems({
+    await _shipOrderItem({
       variables: {
         merchantUid,
         shipOrderItemInput: {
@@ -36,5 +36,5 @@ export const useShipMeSellerOrderItem = () => {
     });
   };
 
-  return {shipMeSellerOrderItems};
+  return {shipOrderItem};
 };

@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import {Modal, Checkbox, Button, message, Typography} from 'antd';
+import {Modal, Checkbox, Button, Typography} from 'antd';
 import {CheckboxChangeEvent} from 'antd/lib/checkbox';
 import {palette} from '@pickk/design-token';
-
-import {useCancelMeSellerOrderItem} from './hooks';
-import {useBoardContext} from '@src/common/contexts/Board';
 
 const {Text} = Typography;
 
@@ -22,36 +19,23 @@ export type CancelOrderItemModalProps = {
   isModalOpen: boolean;
   closeModal: () => void;
   merchantUid: string;
+  onSubmit: (merchantUid: string, restock: boolean) => void;
 };
 
 export default function CancelOrderItemModal({
   isModalOpen,
   closeModal,
   merchantUid,
+  onSubmit,
 }: CancelOrderItemModalProps) {
-  const {
-    action: {reload},
-  } = useBoardContext();
-
   const [restock, setRestock] = useState(false);
-
-  const {cancelMeSellerOrderItem} = useCancelMeSellerOrderItem();
 
   const handleCheckboxChange = (e: CheckboxChangeEvent) => {
     setRestock(e.target.checked);
   };
 
-  const handleSubmit = async () => {
-    try {
-      await cancelMeSellerOrderItem(merchantUid, restock);
-
-      message.success(`취소 완료되었습니다.`);
-      reload();
-    } catch (error) {
-      message.error('실패했습니다. - ' + error);
-    } finally {
-      closeModal();
-    }
+  const handleSubmit = () => {
+    onSubmit(merchantUid, restock);
   };
 
   return (

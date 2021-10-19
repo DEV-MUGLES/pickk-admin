@@ -1,23 +1,33 @@
-import {ExcelColumnsType} from '@pickk/react-excel';
-import {OrderItem} from '@pickk/common';
+import {FlattenPlacementDataType} from '@containers/placements/hooks';
+import {
+  generateExcelColumns,
+  addDashToPhoneNumber,
+  getOrderItemClaimStatusDisplayName,
+  getOrderItemStatusDisplayName,
+  renderDateWithTime,
+} from '@src/common/helpers';
 
-import {getOrderItemStatusDisplayName} from '@src/common/helpers';
+import {placementsColumns} from './columns';
 
-import {placementColumns} from './columns';
+export const placementsExcelValueMapper: Record<
+  string,
+  (record: FlattenPlacementDataType) => string
+> = {
+  paidAt: ({paidAt}) => renderDateWithTime(paidAt),
+  confirmedAt: ({confirmedAt}) => renderDateWithTime(confirmedAt),
+  status: ({status, isConfirmed}) =>
+    getOrderItemStatusDisplayName(status, isConfirmed),
+  claimStatus: ({claimStatus}) =>
+    getOrderItemClaimStatusDisplayName(claimStatus),
+  buyerPhoneNumber: ({buyerPhoneNumber}) =>
+    addDashToPhoneNumber(buyerPhoneNumber),
+  receiverPhoneNumber: ({receiverPhoneNumber}) =>
+    addDashToPhoneNumber(receiverPhoneNumber),
+};
 
-const excelColumns = placementColumns.map(({title, key}) => ({
-  label: title.toString(),
-  propName: key.toString(),
-}));
-
-export const placementExcelColumns: ExcelColumnsType<OrderItem> = [
-  ...excelColumns.slice(0, 2),
-  {
-    label: '주문상태',
-    propName: 'status',
-    mapValue: ({status, isConfirmed}) =>
-      getOrderItemStatusDisplayName(status, isConfirmed),
-  },
-  ...excelColumns.slice(3, 6),
-  ...excelColumns.slice(7),
-];
+export const placementsExcelColumns =
+  generateExcelColumns<FlattenPlacementDataType>(
+    placementsColumns,
+    placementsExcelValueMapper,
+    ['trackingViewUrl'],
+  );
