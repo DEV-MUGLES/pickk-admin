@@ -1,7 +1,7 @@
 import {OrderItemStatus} from '@pickk/common';
 
 import ShipmentBoard from '@src/components/shipments';
-import {placementsRecordMapper} from '@src/components/placements/table';
+import {placementsRecordMapper} from '@components/deprecated-placements/table';
 
 import BoardStoreProvider from '@src/common/contexts/Board';
 

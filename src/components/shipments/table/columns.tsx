@@ -2,7 +2,7 @@ import {ColumnsType} from 'antd/lib/table';
 
 import {getTimeString, stringSorter} from '@src/common/helpers';
 
-import {placementColumns} from '@src/components/placements/table';
+import {placementColumns} from '@components/deprecated-placements/table';
 
 export const shipmentsColumns: ColumnsType<any> = [
   ...placementColumns.slice(0, 3),

@@ -3,7 +3,7 @@ import {OrderItem} from '@pickk/common';
 
 import {getTimeString} from '@src/common/helpers';
 
-import {placementExcelColumns} from '@src/components/placements/table';
+import {placementExcelColumns} from '@components/deprecated-placements/table';
 
 export const shipmentsExcelColumns: ExcelColumnsType<OrderItem> = [
   ...placementExcelColumns.slice(0, 3),
