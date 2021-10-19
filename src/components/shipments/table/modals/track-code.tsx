@@ -2,10 +2,7 @@ import {ChangeEvent, useState} from 'react';
 import styled from 'styled-components';
 import {Modal, Input, Typography, message} from 'antd';
 
-import {useBoardContext} from '@src/common/contexts/Board';
 import {removeDashFromNumber} from '@src/common/helpers';
-
-import {useUpdateOrderItemTrackCode} from './hooks';
 
 const {Text} = Typography;
 
@@ -23,6 +20,7 @@ export type TrackCodeUpdateModalProps = {
   onClose: () => void;
   merchantUid: string;
   defaultTrackCode: string;
+  onSubmit: (merchantUid: string, trackCode: string) => void;
 };
 
 export default function TrackCodeUpdateModal({
@@ -30,14 +28,9 @@ export default function TrackCodeUpdateModal({
   onClose,
   merchantUid,
   defaultTrackCode = '',
+  onSubmit,
 }: TrackCodeUpdateModalProps) {
-  const {
-    action: {reload},
-  } = useBoardContext();
-
   const [trackCode, setTrackCode] = useState(defaultTrackCode);
-
-  const {updateOrderItemTrackCode} = useUpdateOrderItemTrackCode();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTrackCode(e.target.value);
@@ -51,16 +44,8 @@ export default function TrackCodeUpdateModal({
       return;
     }
 
-    try {
-      await updateOrderItemTrackCode(merchantUid, parsedTrackCode);
-      setTrackCode('');
-
-      message.success('송장정보를 수정했습니다.');
-      reload();
-      onClose();
-    } catch (err) {
-      message.error('실패했습니다. err - ' + err);
-    }
+    await onSubmit(merchantUid, parsedTrackCode);
+    setTrackCode('');
   };
 
   return (

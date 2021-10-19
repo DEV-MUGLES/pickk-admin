@@ -1,3 +1,1 @@
-import ShipmentsBoardContainer from './ShipmentsBoardContainer';
-
-export default ShipmentsBoardContainer;
+export {default as ShipmentsBoardContainer} from './board';

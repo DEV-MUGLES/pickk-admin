@@ -1,6 +1,6 @@
 import {gql, useMutation} from '@apollo/client';
 
-const UPDATE_ME_SELLER_ORDER_ITEM_TRACK_CODE = gql`
+const UPDATE_ORDER_ITEM_TRACK_CODE = gql`
   mutation updateMeSellerOrderItemTrackCode(
     $merchantUid: String!
     $trackCode: String!
@@ -20,15 +20,13 @@ const UPDATE_ME_SELLER_ORDER_ITEM_TRACK_CODE = gql`
 `;
 
 export const useUpdateOrderItemTrackCode = () => {
-  const [updateMeSellerOrderItemTrackCode] = useMutation(
-    UPDATE_ME_SELLER_ORDER_ITEM_TRACK_CODE,
-  );
+  const [_updateOrderItemTrackCode] = useMutation(UPDATE_ORDER_ITEM_TRACK_CODE);
 
   const updateOrderItemTrackCode = async (
     merchantUid: string,
     trackCode: string,
   ) => {
-    await updateMeSellerOrderItemTrackCode({
+    await _updateOrderItemTrackCode({
       variables: {
         merchantUid,
         trackCode,

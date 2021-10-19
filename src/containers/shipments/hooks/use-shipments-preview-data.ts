@@ -4,9 +4,21 @@ import {
   QueryMeSellerOrderItemsCountArgs,
 } from '@pickk/common';
 
-import {PreviewDataResult} from '@src/components/common/organisms/Board/preview';
+import {PreviewDataResult} from '@components/new-common/organisms/board-preview';
 
-export const useShipmentPreview = (): PreviewDataResult => {
+const GET_SHIPMENTS_COUNT = gql`
+  query MeSellerOrderItemsCount($forceUpdate: Boolean) {
+    meSellerOrderItemsCount(forceUpdate: $forceUpdate) {
+      id
+      Shipping
+      Shipped
+      confirmed
+      lastUpdatedAt
+    }
+  }
+`;
+
+export const useShipmentsPreviewData = (): PreviewDataResult => {
   const {data, refetch} = useQuery<
     {
       meSellerOrderItemsCount: Pick<
@@ -15,17 +27,7 @@ export const useShipmentPreview = (): PreviewDataResult => {
       >;
     },
     QueryMeSellerOrderItemsCountArgs
-  >(gql`
-    query MeSellerOrderItemsCount($forceUpdate: Boolean) {
-      meSellerOrderItemsCount(forceUpdate: $forceUpdate) {
-        id
-        Shipping
-        Shipped
-        confirmed
-        lastUpdatedAt
-      }
-    }
-  `);
+  >(GET_SHIPMENTS_COUNT);
 
   const getCalculatedData = () => {
     if (!data?.meSellerOrderItemsCount) {
