@@ -94,13 +94,16 @@ export const refundRequestColumns: ColumnsType<any> = [
     title: '수거배송추적',
     dataIndex: 'trackingViewUrl',
     key: 'trackingViewUrl',
-    render: (_, record) => (
-      <TrackingViewLink
-        label="수거배송추적"
-        courierCode={record.courierCode}
-        trackCode={record.trackCode}
-      />
-    ),
+    render: (_, record) =>
+      record.trackCode ? (
+        <TrackingViewLink
+          label="배송추적"
+          courierCode={record.courierCode}
+          trackCode={record.trackCode}
+        />
+      ) : (
+        '-'
+      ),
     sorter: (a, b) => stringSorter(b._, a._),
     width: 100,
     ellipsis: true,
