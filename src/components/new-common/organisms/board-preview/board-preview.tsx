@@ -67,6 +67,12 @@ export default function BoardPreview({
     return <></>;
   }
 
+  const clearFilter = () => {
+    if (confirm('미니 대시보드 필터를 해제하시겠습니까?')) {
+      onPreviewClick({});
+    }
+  };
+
   const renderPreviews = () => {
     return previews.map((preview) => {
       const isSelected = Object.keys(preview.filter).every(
@@ -79,7 +85,7 @@ export default function BoardPreview({
           {...preview}
           count={previewData[preview.name]}
           isSelected={isSelected}
-          onClick={onPreviewClick}
+          onClick={isSelected ? clearFilter : onPreviewClick}
         />
       );
     });
