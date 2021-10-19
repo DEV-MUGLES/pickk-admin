@@ -27,33 +27,35 @@ const flattenShipmentRecord = flattenPlacementRecord;
 
 const {Shipping, Shipped} = OrderItemStatus;
 
-export const useShipments: BoardDataFetcher<ShipmentDataType, OrderItemFilter> =
-  ({filter, pageInput}) => {
-    const orderItemFilter: OrderItemFilter = {
-      ...filter,
-      /** status 필터가 있는 경우 statusIn은 무시된다. */
-      ...(filter.status ? {} : {statusIn: [Shipping, Shipped]}),
-      claimStatus: null,
-    };
-
-    const {data, loading, refetch} = useQuery<
-      {meSellerOrderItems: ShipmentDataType[]},
-      QueryMeSellerOrderItemsArgs
-    >(GET_PLACEMENTS, {
-      variables: {
-        orderItemFilter,
-        pageInput,
-      },
-    });
-
-    const total = useOrderItemsCount({filter: orderItemFilter});
-
-    return {
-      data: !!data?.meSellerOrderItems
-        ? data.meSellerOrderItems.map(flattenShipmentRecord)
-        : [],
-      total,
-      loading,
-      refetch,
-    };
+export const useShipments: BoardDataFetcher<
+  FlattenShipmentDataType,
+  OrderItemFilter
+> = ({filter, pageInput}) => {
+  const orderItemFilter: OrderItemFilter = {
+    ...filter,
+    /** status 필터가 있는 경우 statusIn은 무시된다. */
+    ...(filter.status ? {} : {statusIn: [Shipping, Shipped]}),
+    claimStatus: null,
   };
+
+  const {data, loading, refetch} = useQuery<
+    {meSellerOrderItems: ShipmentDataType[]},
+    QueryMeSellerOrderItemsArgs
+  >(GET_PLACEMENTS, {
+    variables: {
+      orderItemFilter,
+      pageInput,
+    },
+  });
+
+  const total = useOrderItemsCount({filter: orderItemFilter});
+
+  return {
+    data: !!data?.meSellerOrderItems
+      ? data.meSellerOrderItems.map(flattenShipmentRecord)
+      : [],
+    total,
+    loading,
+    refetch,
+  };
+};

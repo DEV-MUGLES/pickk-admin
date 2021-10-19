@@ -21,26 +21,7 @@ export const GET_PLACEMENTS = GET_ORDER_ITEMS;
 
 export type PlacementDataType = OrderItemDataType;
 
-export type FlattenPlacementDataType = PlacementDataType & {
-  courierId: Shipment['courierId'];
-  trackCode: Shipment['trackCode'];
-  courierName: Courier['name'];
-  courierCode: Courier['code'];
-  buyerName: OrderBuyer['name'];
-  buyerEmail: OrderBuyer['email'];
-  buyerPhoneNumber: OrderBuyer['phoneNumber'];
-  receiverReceiverName: OrderReceiver['receiverName'];
-  receiverPhoneNumber: OrderReceiver['phoneNumber'];
-  receiverPostalCode: OrderReceiver['postalCode'];
-  receiverBaseAddress: OrderReceiver['baseAddress'];
-  receiverDetailAddress: OrderReceiver['detailAddress'];
-  receiverFullAddress: string;
-  receiverMessage: OrderReceiver['message'];
-};
-
-export const flattenPlacementRecord = (
-  record: PlacementDataType,
-): FlattenPlacementDataType => {
+export const flattenPlacementRecord = (record: PlacementDataType) => {
   const {order, shipment} = record;
   const {buyer, receiver} = order;
   return {
@@ -62,10 +43,14 @@ export const flattenPlacementRecord = (
   };
 };
 
+export type FlattenPlacementDataType = ReturnType<
+  typeof flattenPlacementRecord
+>;
+
 const {Paid, ShipReady} = OrderItemStatus;
 
 export const usePlacements: BoardDataFetcher<
-  PlacementDataType,
+  FlattenPlacementDataType,
   OrderItemFilter
 > = ({filter, pageInput}) => {
   const orderItemFilter = {

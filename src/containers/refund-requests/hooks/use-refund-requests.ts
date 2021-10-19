@@ -79,16 +79,7 @@ export type RefundRequestDataType = Pick<
   };
 };
 
-export type FlattenRefundRequestDataType = RefundRequestDataType & {
-  buyerName: OrderBuyer['name'];
-  buyerPhoneNumber: OrderBuyer['phoneNumber'];
-  courierCode: Courier['code'];
-  trackCode: Shipment['trackCode'];
-};
-
-export const flattenRefundRequestRecord = (
-  record: RefundRequestDataType,
-): FlattenRefundRequestDataType => {
+export const flattenRefundRequestRecord = (record: RefundRequestDataType) => {
   const {order, shipment} = record;
   const {buyer} = order;
   return {
@@ -99,6 +90,10 @@ export const flattenRefundRequestRecord = (
     trackCode: shipment?.trackCode,
   };
 };
+
+export type FlattenRefundRequestDataType = ReturnType<
+  typeof flattenRefundRequestRecord
+>;
 
 export const useRefundRequests: BoardDataFetcher<
   FlattenRefundRequestDataType,
