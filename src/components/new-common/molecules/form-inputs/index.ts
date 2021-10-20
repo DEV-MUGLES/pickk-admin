@@ -11,3 +11,6 @@ export {default as RangePicker} from './range-picker';
 
 export type {SelectInputProps} from './select';
 export {default as SelectInput} from './select';
+
+export type {TripleSwitchProps} from './triple-switch';
+export {default as TripleSwitch} from './triple-switch';
