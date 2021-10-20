@@ -74,8 +74,12 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
       ...(query ? {query} : {}),
     });
 
+    const reload = async () => {
+      await refetch();
+    };
+
     useImperativeHandle(ref, () => ({
-      reload: () => refetch(),
+      reload,
     }));
 
     const formatFilter = (
@@ -160,7 +164,7 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
           pageSize={pageSize}
           onPageChange={setPage}
           onPageSizeChange={setPageSize}
-          onRefreshClick={() => refetch()}
+          onRefreshClick={reload}
           onRowClick={onRowClick}
         />
       </StyledWrapper>
