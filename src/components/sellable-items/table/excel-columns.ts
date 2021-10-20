@@ -1,33 +1,43 @@
-import {ExcelColumnsType} from '@pickk/react-excel';
-import {Item} from '@pickk/common';
+import {ColumnsType} from 'antd/lib/table';
 
-import {sellableItemColumns} from './columns';
+import {SellableItemDataType} from '@containers/sellable-items/hooks';
+import {generateExcelColumns, renderDate} from '@src/common/helpers';
 
-const excelColumns = sellableItemColumns.map(({title, key}) => ({
-  label: title.toString(),
-  propName: key.toString(),
-}));
+import {sellableItemsColumns} from './columns';
 
-export const sellableItemExcelColumns: ExcelColumnsType<Item> = [
-  ...excelColumns.slice(0, 2),
+const newSellableItemsColumns: ColumnsType<SellableItemDataType> = [
+  ...sellableItemsColumns.slice(0, 2),
   {
-    label: '카테고리',
-    propName: 'category',
-    mapValue: ({majorCategory, minorCategory}) =>
-      `${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`,
+    title: '카테고리',
+    dataIndex: 'category',
+    key: 'category',
   },
-  ...excelColumns.slice(2, 6),
+  ...sellableItemsColumns.slice(2, 6),
   {
-    label: '보유재고',
-    propName: 'stock',
-    mapValue: ({products}) =>
-      products.reduce((acc, {stock}) => (acc += stock), 0),
+    title: '보유재고',
+    dataIndex: 'stock',
+    key: 'stock',
   },
-  excelColumns[7],
-  {
-    label: '공홈링크',
-    propName: 'urls',
-    mapValue: ({urls}) => urls.find((url) => url.isPrimary)?.url,
-  },
-  excelColumns[9],
+  ...sellableItemsColumns.slice(7),
 ];
+
+const sellableItemsExcelValueMapper: Record<
+  string,
+  (record: SellableItemDataType) => string
+> = {
+  category: ({majorCategory, minorCategory}) =>
+    `${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`,
+  stock: ({products}) =>
+    products
+      .filter((v) => !v.isDeleted)
+      .reduce((acc, {stock}) => (acc += stock), 0)
+      .toString(),
+  urls: ({urls}) => urls.find((url) => url.isPrimary)?.url,
+  sellableAt: ({sellableAt}) => renderDate(sellableAt),
+};
+
+export const sellableItemsExcelColumns =
+  generateExcelColumns<SellableItemDataType>(
+    newSellableItemsColumns,
+    sellableItemsExcelValueMapper,
+  );

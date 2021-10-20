@@ -8,28 +8,25 @@ export type SellableItemStockProps = Pick<
   'products' | 'isInfiniteStock' | 'isSoldout'
 >;
 
-function SellableItemStock({
-  products,
-  isInfiniteStock,
-  isSoldout,
-}: SellableItemStockProps) {
-  const allStocks = products.reduce((acc, {stock}) => (acc += stock), 0);
-  const badgeColor = getColor(products, isInfiniteStock, isSoldout);
+export default function SellableItemStock(props: SellableItemStockProps) {
+  const {products, isInfiniteStock} = props;
+  const allStocks = products
+    .filter((v) => !v.isDeleted)
+    .reduce((acc, {stock}) => (acc += stock), 0);
+  const badgeColor = getColor(props);
 
   return (
     <Badge color={badgeColor} offset={[6, 0]}>
-      <Text>{allStocks}</Text>
+      <Text>{isInfiniteStock ? '무한재고' : allStocks}</Text>
     </Badge>
   );
 }
 
-export default SellableItemStock;
-
-function getColor(
-  products: Item['products'],
-  isInfiniteStock: Item['isInfiniteStock'],
-  isSoldout: Item['isSoldout'],
-) {
+function getColor({
+  products,
+  isInfiniteStock,
+  isSoldout,
+}: SellableItemStockProps) {
   if (isInfiniteStock) {
     return 'lime';
   }

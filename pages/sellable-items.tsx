@@ -1,7 +1,5 @@
-import SellableItemsBoardContainer from '@src/containers/sellable-items';
+import {SellableItemsBoardContainer} from '@containers/sellable-items';
 
-function SellableItems() {
+export default function SellableItems() {
   return <SellableItemsBoardContainer />;
 }
-
-export default SellableItems;

@@ -1,1 +1,1 @@
-export {default as CategoryRenderer} from './category';
+export {default as CategoryRenderer} from '../../../sellable-items/table/category';

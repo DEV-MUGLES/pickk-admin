@@ -1,23 +1,27 @@
 import {ColumnsType} from 'antd/lib/table';
 import {Button, Image, Typography, Badge} from 'antd';
 import {palette} from '@pickk/design-token';
-import {Item} from '@pickk/common';
+import {Product} from '@pickk/common';
+
+import InfoTooltip from '@src/components/common/atoms/info-tooltip';
+import {
+  renderBoolean,
+  renderDate,
+  renderPrice,
+  stringSorter,
+} from '@src/common/helpers';
+
+import {SellableItemDataType} from '@containers/sellable-items/hooks';
 
 import SellableItemStock from './stock';
-import InfoTooltip from '@src/components/common/atoms/info-tooltip';
-import {renderBoolean, renderDate} from '@src/common/helpers';
-
-import {addCommaToNumber} from '@src/common/helpers/NumberParser';
-import {stringSorter} from '@src/common/helpers/sorter';
 
 const {Text} = Typography;
 
-export const sellableItemColumns: ColumnsType<Item> = [
+export const sellableItemsColumns: ColumnsType<SellableItemDataType> = [
   {
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
-    sorter: (a, b) => b.id - a.id,
     width: 40,
   },
   {
@@ -25,7 +29,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     dataIndex: 'imageUrl',
     key: 'imageUrl',
     width: 120,
-    render: (text) => <Image src={text} />,
+    render: (value) => <Image src={value} alt="대표이미지" />,
     ellipsis: true,
     align: 'center',
   },
@@ -34,7 +38,6 @@ export const sellableItemColumns: ColumnsType<Item> = [
     dataIndex: 'name',
     key: 'name',
     width: 200,
-    sorter: (a, b) => stringSorter(b.name, a.name),
   },
   {
     title: '정가',
@@ -42,8 +45,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     key: 'originalPrice',
     width: 120,
     align: 'center',
-    render: (value) => addCommaToNumber(value) + '원',
-    sorter: (a, b) => b.originalPrice - a.originalPrice,
+    render: renderPrice,
   },
   {
     title: '판매가',
@@ -51,8 +53,7 @@ export const sellableItemColumns: ColumnsType<Item> = [
     key: 'sellPrice',
     width: 120,
     align: 'center',
-    render: (value) => addCommaToNumber(value) + '원',
-    sorter: (a, b) => b.sellPrice - a.sellPrice,
+    render: renderPrice,
   },
   {
     title: '무한재고여부',
@@ -70,30 +71,13 @@ export const sellableItemColumns: ColumnsType<Item> = [
     align: 'center',
     render: (_, {products, isInfiniteStock, isSoldout}) => (
       <SellableItemStock
-        products={products.filter((v) => !v.isDeleted)}
+        products={products as Array<Product>}
         isInfiniteStock={isInfiniteStock}
         isSoldout={isSoldout}
       />
     ),
     ellipsis: true,
   },
-  // @TODO: uncomment when the field is ready
-  // {
-  //   title: '리뷰수',
-  //   dataIndex: 'reviewCount',
-  //   key: 'reviewCount',
-  //   width: 80,
-  //   align: 'center',
-  //   sorter: (a, b) => b.reviewCount - a.reviewCount,
-  // },
-  // {
-  //   title: '구매수',
-  //   dataIndex: 'purchasedCount',
-  //   key: 'purchasedCount',
-  //   width: 80,
-  //   align: 'center',
-  //   sorter: (a, b) => b.purchasedCount - a.purchasedCount,
-  // },
   {
     title: 'MD 추천 여부',
     dataIndex: 'isMdRecommended',
@@ -117,7 +101,6 @@ export const sellableItemColumns: ColumnsType<Item> = [
     title: '활성전환일',
     dataIndex: 'sellableAt',
     key: 'sellableAt',
-    sorter: (a, b) => stringSorter(b.createdAt, a.createdAt),
     render: renderDate,
     width: 120,
   },

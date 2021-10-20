@@ -16,7 +16,7 @@ import {CategoryRenderer} from './table/renderers';
 
 import {itemInputs} from './inputs';
 import {itemColumns, itemsExcelColumns} from './table';
-import {useBulkUpdateIsSellable} from '../sellable-items/table/hooks';
+import {useBulkUpdateIsSellable} from '../sellable-items/table/actions/hooks';
 
 function ItemsBoard(props: BoardProps) {
   const {
