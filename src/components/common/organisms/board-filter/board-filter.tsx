@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 
   padding: 0.8rem 1.2rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.2rem;
 
   background-color: ${palette.white};
 `;

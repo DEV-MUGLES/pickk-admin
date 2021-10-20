@@ -17,7 +17,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 
   background-color: ${palette.white};
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.2rem;
 `;
 
 const PreviewHeader = styled.div`

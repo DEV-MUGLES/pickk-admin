@@ -19,13 +19,13 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 
   min-height: 100vh;
-  padding: 0.8rem;
+  padding: 1.2rem;
 
   background-color: ${palette.gray1};
 `;
 
 const StyledPageHeader = styled(PageHeader)`
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.2rem;
 
   background-color: ${palette.white};
 `;
