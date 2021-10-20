@@ -85,6 +85,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-is", "npm:17.0.2"],
             ["styled-components", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:5.3.0"],
             ["typescript", "patch:typescript@npm%3A4.3.3#~builtin<compat/typescript>::version=4.3.3&hash=ddd1e8"],
+            ["vscode-zipfs", "npm:0.1.0"],
             ["xlsx", "npm:0.17.2"]
           ],
           "linkType": "SOFT",
@@ -6798,6 +6799,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-is", "npm:17.0.2"],
             ["styled-components", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:5.3.0"],
             ["typescript", "patch:typescript@npm%3A4.3.3#~builtin<compat/typescript>::version=4.3.3&hash=ddd1e8"],
+            ["vscode-zipfs", "npm:0.1.0"],
             ["xlsx", "npm:0.17.2"]
           ],
           "linkType": "SOFT",
@@ -9746,6 +9748,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/vm-browserify-npm-1.1.2-f96404b36f-10a1c50aab.zip/node_modules/vm-browserify/",
           "packageDependencies": [
             ["vm-browserify", "npm:1.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["vscode-zipfs", [
+        ["npm:0.1.0", {
+          "packageLocation": "./.yarn/cache/vscode-zipfs-npm-0.1.0-136d087fc6-0d0ef4385a.zip/node_modules/vscode-zipfs/",
+          "packageDependencies": [
+            ["vscode-zipfs", "npm:0.1.0"]
           ],
           "linkType": "HARD",
         }]
