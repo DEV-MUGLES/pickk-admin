@@ -1,4 +1,4 @@
-import {gql, useQuery} from '@apollo/client';
+import {gql, useLazyQuery, useQuery} from '@apollo/client';
 import {
   Item,
   ItemFilter,
@@ -103,6 +103,7 @@ export const useSellableItems: BoardDataFetcher<
       pageInput,
     },
   });
+
   const total = useSellableItemsCount({filter: itemFilter});
 
   return {data: data?.meSellerItems, total, loading, refetch};

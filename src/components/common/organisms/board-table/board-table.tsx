@@ -37,6 +37,7 @@ export default function BoardTable(props: BoardTableProps) {
     onRefreshClick,
     onRowClick,
     onRowSelectionChange,
+    useExcelData,
   } = propsWithDefault;
 
   const rowSelection: TableRowSelection<unknown> = {
@@ -61,9 +62,9 @@ export default function BoardTable(props: BoardTableProps) {
             <BoardTableHeader
               title={title}
               totalDataSize={totalDataSize}
-              dataSource={dataSource}
               excelColumns={excelColumns ?? defaultExcelColumns}
               onRefreshClick={onRefreshClick}
+              useExcelData={useExcelData}
             />
             {actions && (
               <BoardTableActions

@@ -74,6 +74,9 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
       ...(query ? {query} : {}),
     });
 
+    const useExcelData = () =>
+      useBoardData({pageInput: undefined, filter, ...(query ? {query} : {})});
+
     const reload = async () => {
       await refetch();
     };
@@ -166,6 +169,7 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
           onPageSizeChange={setPageSize}
           onRefreshClick={reload}
           onRowClick={onRowClick}
+          useExcelData={useExcelData}
         />
       </StyledWrapper>
     );

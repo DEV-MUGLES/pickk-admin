@@ -23,4 +23,5 @@ export type BoardTableProps<DataType = object & {id?: Key}> = Pick<
   onPageSizeChange: (pageSize: number) => void;
   onRowClick?: (record: DataType) => void;
   onRowSelectionChange?: TableRowSelection<DataType>['onChange'];
+  useExcelData?: () => {data: DataType[]; loading: boolean};
 };
