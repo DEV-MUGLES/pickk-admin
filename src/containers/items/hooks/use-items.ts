@@ -1,7 +1,17 @@
 import {gql, useQuery} from '@apollo/client';
-import {Item, ItemUrl, ItemCategory, QueryItemsArgs} from '@pickk/common';
+import {
+  Item,
+  ItemFilter,
+  QueryMeSellerItemsArgs,
+  ItemUrl,
+  ItemCategory,
+} from '@pickk/common';
 
-const GET_ME_SELLER_ITEMS = gql`
+import {BoardDataFetcher} from '@components/new-common/template/board';
+
+import {useItemsCount} from './use-items-count';
+
+const GET_ITEMS = gql`
   query meSellerItems($itemFilter: ItemFilter, $pageInput: PageInput) {
     meSellerItems(itemFilter: $itemFilter, pageInput: $pageInput) {
       id
@@ -43,8 +53,40 @@ export type ItemDataType = Pick<
   minorCategory: Pick<ItemCategory, 'id' | 'name'>;
 };
 
-export const useItems = () => {
-  return useQuery<{meSellerItems: ItemDataType}, QueryItemsArgs>(
-    GET_ME_SELLER_ITEMS,
-  );
+const formatItemFilter = (filter: ItemFilter) => {
+  const result = {
+    ...filter,
+    ...(filter['category']
+      ? {
+          majorCategoryId: filter['category'][0],
+          minorCategoryId: filter['category'][1],
+        }
+      : {}),
+  };
+
+  delete result['category'];
+
+  return result;
+};
+
+export const useItems: BoardDataFetcher<ItemDataType, ItemFilter> = ({
+  filter,
+  pageInput,
+}) => {
+  const itemFilter: ItemFilter = {
+    ...formatItemFilter(filter),
+  };
+
+  const {data, loading, refetch} = useQuery<
+    {meSellerItems: ItemDataType[]},
+    QueryMeSellerItemsArgs
+  >(GET_ITEMS, {
+    variables: {
+      itemFilter,
+      pageInput,
+    },
+  });
+  const total = useItemsCount({filter: itemFilter});
+
+  return {data: data?.meSellerItems, total, loading, refetch};
 };

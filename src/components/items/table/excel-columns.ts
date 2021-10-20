@@ -1,21 +1,29 @@
-import {ExcelColumnsType} from '@pickk/react-excel';
-import {Item} from '@pickk/common';
+import {ColumnsType} from 'antd/lib/table';
 
-import {itemColumns} from './columns';
+import {ItemDataType} from '@containers/items/hooks';
+import {generateExcelColumns, renderDate} from '@src/common/helpers';
 
-const excelColumns = itemColumns.map(({title, key}) => ({
-  label: title.toString(),
-  propName: key.toString(),
-}));
+import {itemsColumns} from './columns';
 
-export const itemsExcelColumns: ExcelColumnsType<Item> = [
-  excelColumns[0],
-  ...excelColumns.slice(2, 3),
+export const newItemsColumns: ColumnsType<ItemDataType> = [
+  ...itemsColumns.slice(0, 3),
   {
-    label: '카테고리',
-    propName: 'category',
-    mapValue: ({majorCategory, minorCategory}) =>
-      `${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`,
+    title: '카테고리',
+    dataIndex: 'category',
+    key: 'category',
   },
-  ...excelColumns.slice(4),
+  ...itemsColumns.slice(3),
 ];
+
+const itemsExcelValueMapper: Record<string, (record: ItemDataType) => string> =
+  {
+    category: ({majorCategory, minorCategory}) =>
+      `${majorCategory?.name ?? '-'}/${minorCategory?.name ?? '-'}`,
+    createdAt: ({createdAt}) => renderDate(createdAt),
+  };
+
+export const itemsExcelColumns = generateExcelColumns<ItemDataType>(
+  newItemsColumns,
+  itemsExcelValueMapper,
+  ['itemView'],
+);

@@ -1,5 +1,4 @@
 import {useRef, useState} from 'react';
-import {Item} from '@pickk/common';
 
 import {BoardTemplate} from '@components/new-common/template';
 import {
