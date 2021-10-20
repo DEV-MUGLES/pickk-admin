@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {CSSProperties} from 'react';
 import {Cascader} from 'antd';
 
 import {CustomInputProps} from '@src/components/common/organisms/Form/base';
@@ -7,12 +7,14 @@ import {useItemCategoryTree} from './hooks';
 
 export type ItemCategoryCascaderProps = CustomInputProps<[number, number]> & {
   hasAll?: boolean;
+  style?: CSSProperties;
 };
 
 function ItemCategoryCascader({
   value,
   onChange,
   hasAll = false,
+  style,
 }: ItemCategoryCascaderProps) {
   const {data: majorCategories = []} = useItemCategoryTree();
   const options = (
@@ -39,7 +41,15 @@ function ItemCategoryCascader({
     onChange([value[0], value[1] || undefined]);
   };
 
-  return <Cascader value={value} options={options} onChange={handleChange} />;
+  return (
+    <Cascader
+      style={style}
+      value={value}
+      options={options}
+      onChange={handleChange}
+      {...(hasAll ? {placeholder: null} : {})}
+    />
+  );
 }
 
 export default ItemCategoryCascader;

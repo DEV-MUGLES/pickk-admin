@@ -1,4 +1,4 @@
-import ItemCategoryCascader from '../../item-category-cascader';
+import ItemCategoryCascader from '../../../../new-common/molecules/form-inputs/item-category-cascader';
 
 import {useBoardContext} from '@src/common/contexts/Board';
 
