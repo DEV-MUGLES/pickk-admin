@@ -1,22 +1,20 @@
 import {ColumnsType} from 'antd/lib/table';
 
-import {InquiryDataType} from '@src/containers/inquiries/hooks';
+import {FlattenInquiryDataType} from '@src/containers/inquiries/hooks';
 import {
   addDashToPhoneNumber,
   getInquiryTypeDisplayName,
-  getTimeString,
   renderBoolean,
-  stringSorter,
+  renderDateWithTime,
 } from '@src/common/helpers';
 
 import InquiriesTableItemCard from './item-card';
 
-export const inquiriesColumns: ColumnsType<InquiryDataType> = [
+export const inquiriesColumns: ColumnsType<FlattenInquiryDataType> = [
   {
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
-    sorter: (a, b) => stringSorter(b.id, a.id),
     width: 60,
     ellipsis: true,
   },
@@ -33,19 +31,15 @@ export const inquiriesColumns: ColumnsType<InquiryDataType> = [
     title: '상품정보',
     dataIndex: 'itemInfo',
     key: 'itemInfo',
-    render: (_, record) => (
-      <InquiriesTableItemCard
-        imageUrl={record.item.imageUrl}
-        name={record.item.name}
-      />
+    render: (_, {itemImageUrl, itemName}) => (
+      <InquiriesTableItemCard imageUrl={itemImageUrl} name={itemName} />
     ),
     width: 160,
   },
   {
     title: '작성자',
-    dataIndex: 'userName',
-    key: 'userName',
-    render: (_, record) => record.user.nickname,
+    dataIndex: 'userNickname',
+    key: 'userNickname',
     width: 80,
     ellipsis: true,
   },
@@ -53,7 +47,7 @@ export const inquiriesColumns: ColumnsType<InquiryDataType> = [
     title: '작성자 연락처',
     dataIndex: 'userPhoneNumber',
     key: 'userPhoneNumber',
-    render: (_, record) => addDashToPhoneNumber(record.user.phoneNumber),
+    render: (value) => addDashToPhoneNumber(value),
     width: 80,
     ellipsis: true,
   },
@@ -73,8 +67,7 @@ export const inquiriesColumns: ColumnsType<InquiryDataType> = [
     title: '문의발생시간',
     dataIndex: 'createdAt',
     key: 'createdAt',
-    sorter: (a, b) => stringSorter(b.createdAt, a.createdAt),
-    render: (value) => getTimeString(value),
+    render: renderDateWithTime,
     width: 80,
   },
   {

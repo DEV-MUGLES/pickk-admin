@@ -5,7 +5,6 @@ import {InquiryAnswer} from '@pickk/common';
 
 import {useMeSeller} from '@src/common/hooks/apis';
 import {useAnswerInquiry} from '@src/components/inquiry-detail/answer/hooks';
-import {useBoardContext} from '@src/common/contexts/Board';
 
 import AnswerList from './answer-list';
 
@@ -33,21 +32,18 @@ const StyledAlert = styled(Alert).attrs({
 `;
 
 export type InquiryAnswerModalProps = {
-  visible: boolean;
-  onClose: () => void;
   inquiryId: number;
   answers?: Pick<
     InquiryAnswer,
     'id' | 'content' | 'displayAuthor' | 'createdAt'
   >[];
+  visible: boolean;
+  onClose: () => void;
+  reload: () => void;
 };
 
 export default function InquiryAnswerModal(props: InquiryAnswerModalProps) {
-  const {visible, onClose, inquiryId, answers = []} = props;
-
-  const {
-    action: {reload},
-  } = useBoardContext();
+  const {inquiryId, answers = [], visible, onClose, reload} = props;
 
   const [content, setContent] = useState('');
   const [displayAuthor, setDisplayAuthor] = useState('');

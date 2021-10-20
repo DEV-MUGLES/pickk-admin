@@ -12,7 +12,7 @@ const GET_ME_SELLER_INQUIRIES_COUNT = gql`
   }
 `;
 
-export const useInquiriesPreview = () => {
+export const useInquiriesPreviewData = () => {
   const {data, refetch} = useQuery<
     Pick<Query, 'meSellerInquiriesCount'>,
     QueryMeSellerInquiriesCountArgs

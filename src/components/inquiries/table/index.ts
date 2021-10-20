@@ -1,3 +1,3 @@
-import InquiriesTable from './table';
-
-export default InquiriesTable;
+export * from './modals';
+export * from './columns';
+export * from './excel-columns';

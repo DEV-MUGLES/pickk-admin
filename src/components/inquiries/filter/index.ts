@@ -1,3 +1,1 @@
-import InquiriesFilter from './filter';
-
-export default InquiriesFilter;
+export * from './inputs';
