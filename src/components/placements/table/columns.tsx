@@ -39,7 +39,7 @@ export const placementColumns: ColumnsType<any> = [
     sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
     width: 90,
   },
-  ...orderItemColumns.slice(5, 10), // 상품명, 옵션, 수량, 구매자명, 구매자 연락처
+  ...orderItemColumns.slice(4, 10), // 상품명, 옵션, 수량, 구매자명, 구매자 연락처
   {
     title: '구매자 이메일',
     dataIndex: 'buyerEmail',
