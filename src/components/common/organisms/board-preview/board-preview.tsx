@@ -30,7 +30,12 @@ const PreviewHeader = styled.div`
 
 const TitleText = styled(Text).attrs({
   strong: true,
+})``;
+
+const InfoText = styled(Text).attrs({
+  type: 'secondary',
 })`
+  margin-left: 0.2rem;
   margin-right: auto;
 `;
 
@@ -95,6 +100,7 @@ export default function BoardPreview({
     <StyledWrapper>
       <PreviewHeader>
         <TitleText>미니 대시보드</TitleText>
+        <InfoText>(최근 3개월 건 개수)</InfoText>
         <LastUpdateAtText>
           마지막 업데이트: {getTimeString(previewData.lastUpdatedAt)}
         </LastUpdateAtText>
