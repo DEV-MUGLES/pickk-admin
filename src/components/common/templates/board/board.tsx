@@ -1,5 +1,4 @@
 import {forwardRef, useImperativeHandle, useState, Ref} from 'react';
-import {useRouter} from 'next/router';
 import styled from 'styled-components';
 import {PageHeader} from 'antd';
 import {palette} from '@pickk/design-token';
@@ -50,8 +49,6 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
       defaultPageSize,
       onRowClick = () => null,
     } = propsWithDefault;
-
-    const router = useRouter();
 
     const [filter, setFilter] =
       useState<Record<string, unknown>>(defaultFilter);
@@ -138,11 +135,7 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
 
     return (
       <StyledWrapper>
-        <StyledPageHeader
-          title={title}
-          subTitle={subTitle}
-          onBack={router.back}
-        />
+        <StyledPageHeader title={title} subTitle={subTitle} />
         {!!previews && !!usePreviewData && (
           <BoardPreview
             previews={previews}
