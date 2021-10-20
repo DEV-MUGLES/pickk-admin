@@ -1,14 +1,10 @@
 import React from 'react';
 import dayjs, {Dayjs} from 'dayjs';
 
-import DayjsDatePicker from '../../../molecules/BoardFilter/input/DayjsDatePicker';
+import {DayjsDatePicker} from '@components/new-common/molecules';
 
 import {CustomInputProps} from '../base';
-import {
-  getTimeString,
-  setEndOfDay,
-  setStartOfDay,
-} from '@src/common/helpers/date';
+import {setEndOfDay, setStartOfDay} from '@src/common/helpers/date';
 
 export type DatePickerFormItemProps = CustomInputProps<Dayjs> & {
   style?: React.CSSProperties;
