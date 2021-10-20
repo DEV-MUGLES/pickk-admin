@@ -120,6 +120,9 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
       delete formattedFilter.query;
 
       setFilter(formattedFilter);
+
+      /** 첫페이지 초기화 */
+      setPage(1);
     };
 
     if (!data && !loading) {
