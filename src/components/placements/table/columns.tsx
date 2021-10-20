@@ -2,14 +2,13 @@ import {ColumnsType} from 'antd/lib/table';
 
 import TrackingViewLink from '@src/components/common/molecules/tracking-view-link';
 
-import {stringSorter} from '@src/common/helpers';
+import {addDashToPhoneNumber, stringSorter} from '@src/common/helpers';
 
 import {orderItemColumns} from '@src/components/order-items/table';
 
 export const placementColumns: ColumnsType<any> = [
-  ...orderItemColumns.slice(0, 2), // 주문상품번호, 주문번호
-  orderItemColumns[3], // 주문상태
-  orderItemColumns[2], // 주문일시
+  ...orderItemColumns.slice(0, 3), // 주문상품번호, 주문번호, 주문 일시
+  ...orderItemColumns.slice(4, 6), // 주문상태, 클레임상태
   {
     title: '택배사',
     dataIndex: 'courierName',
@@ -42,7 +41,7 @@ export const placementColumns: ColumnsType<any> = [
     sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
     width: 90,
   },
-  ...orderItemColumns.slice(4, 10), // 상품명, 옵션, 수량, 구매자명, 구매자 연락처
+  ...orderItemColumns.slice(6, 10), // 상품명, 옵션, 수량, 구매자명, 구매자 연락처
   {
     title: '구매자 이메일',
     dataIndex: 'buyerEmail',
@@ -58,6 +57,7 @@ export const placementColumns: ColumnsType<any> = [
     key: 'receiverPhoneNumber',
     sorter: (a, b) =>
       stringSorter(b.receiverPhoneNumber, a.receiverPhoneNumber),
+    render: (value) => addDashToPhoneNumber(value),
     width: 100,
     ellipsis: true,
   },
@@ -71,24 +71,6 @@ export const placementColumns: ColumnsType<any> = [
   },
   {
     title: '배송지 주소',
-    dataIndex: 'receiverBaseAddress',
-    key: 'receiverBaseAddress',
-    sorter: (a, b) =>
-      stringSorter(b.receiverBaseAddress, a.receiverBaseAddress),
-    width: 100,
-    ellipsis: true,
-  },
-  {
-    title: '배송지 상세주소',
-    dataIndex: 'receiverDetailAddress',
-    key: 'receiverDetailAddress',
-    sorter: (a, b) =>
-      stringSorter(b.receiverDetailAddress, a.receiverDetailAddress),
-    width: 100,
-    ellipsis: true,
-  },
-  {
-    title: '배송지 주소 (통합)',
     dataIndex: 'receiverFullAddress',
     key: 'receiverFullAddress',
     sorter: (a, b) =>
