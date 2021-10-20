@@ -81,12 +81,12 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
     const formatFilter = (
       inputs: Record<string, unknown>,
     ): Record<string, unknown> => {
-      let result = {};
+      let result = {...inputs};
 
       /**  조회 기간 필터를 형식에 맞게 변경한다. */
       const datePeriodFilter = inputs.period;
       result = {
-        ...inputs,
+        ...result,
         ...(datePeriodFilter
           ? {
               ...parseRecordWithDeepKey(
@@ -102,10 +102,10 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
       result = {
         ...result,
         ...(result['search']
-          ? {search: removeDashFromNumber(result['search'])}
+          ? {search: removeDashFromNumber(result['search'] as string)}
           : {}),
         ...(result['query']
-          ? {query: removeDashFromNumber(result['query'])}
+          ? {query: removeDashFromNumber(result['query'] as string)}
           : {}),
       };
 
