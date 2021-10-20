@@ -30,12 +30,15 @@ export const placementColumns: ColumnsType<any> = [
     title: '배송추적',
     dataIndex: 'trackingViewUrl',
     key: 'trackingViewUrl',
-    render: (_, record) => (
-      <TrackingViewLink
-        courierCode={record.courierCode}
-        trackCode={record.trackCode}
-      />
-    ),
+    render: (_, record) =>
+      record.trackCode ? (
+        <TrackingViewLink
+          courierCode={record.courierCode}
+          trackCode={record.trackCode}
+        />
+      ) : (
+        '-'
+      ),
     sorter: (a, b) => b.trackingViewUrl - a.trackingViewUrl,
     width: 90,
   },
