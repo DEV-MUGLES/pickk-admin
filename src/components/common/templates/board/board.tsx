@@ -8,7 +8,7 @@ import {
   BoardPreview,
   BoardFilter,
   BoardTable,
-} from '@components/new-common/organisms';
+} from '@components/common/organisms';
 
 import {parseRecordWithDeepKey, removeDashFromNumber} from '@common/helpers';
 

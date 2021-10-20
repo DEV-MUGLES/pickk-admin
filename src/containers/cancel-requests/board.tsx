@@ -1,4 +1,4 @@
-import {BoardTemplate} from '@components/new-common/template';
+import {BoardTemplate} from '@components/common/templates';
 import {
   orderItemsColumns,
   orderItemsExcelColumns,

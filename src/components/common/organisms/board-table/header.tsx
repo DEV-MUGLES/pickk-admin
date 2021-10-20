@@ -6,7 +6,7 @@ import {
   ExcelDownloadButton,
   CSVDownloadButton,
   ExcelDownloadButtonProps,
-} from '@src/components/common/molecules/button';
+} from '@components/common/molecules';
 
 import {BoardTableProps} from './board-table.types';
 

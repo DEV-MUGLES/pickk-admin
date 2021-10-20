@@ -1,6 +1,6 @@
 import {useState, useRef} from 'react';
 
-import {BoardTemplate} from '@components/new-common/template';
+import {BoardTemplate} from '@components/common/templates';
 import {
   shipmentsColumns,
   shipmentsExcelColumns,
@@ -9,7 +9,7 @@ import {
   TrackCodeUpdateModal,
 } from '@components/shipments';
 
-import {BoardTemplateHandle} from '@components/new-common/template/board';
+import {BoardTemplateHandle} from '@components/common/templates/board';
 
 import {
   FlattenShipmentDataType,

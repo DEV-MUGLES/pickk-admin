@@ -1,6 +1,6 @@
 import {useRef} from 'react';
 
-import {BoardTemplate} from '@components/new-common/template';
+import {BoardTemplate} from '@components/common/templates';
 import {
   inquiriesExcelColumns,
   inquiriesFilterInputs,
@@ -8,7 +8,7 @@ import {
   InquiryAnswerModal,
 } from '@components/inquiries';
 
-import {BoardTemplateHandle} from '@components/new-common/template/board';
+import {BoardTemplateHandle} from '@components/common/templates/board';
 
 import {
   useInquiries,

@@ -5,7 +5,7 @@ import {Item} from '@pickk/common';
 
 import BaseForm from '@src/components/common/organisms/Form/base';
 import ImageUpload from '@src/components/common/molecules/image-upload';
-import ItemCategoryCascader from '@components/new-common/molecules/form-inputs/item-category-cascader';
+import ItemCategoryCascader from '@components/common/molecules/form-inputs/item-category-cascader';
 
 import {useUpdateItem} from './hooks';
 

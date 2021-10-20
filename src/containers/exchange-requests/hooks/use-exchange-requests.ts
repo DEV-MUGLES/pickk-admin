@@ -12,7 +12,7 @@ import {
   QueryMeSellerExchangeRequestsArgs,
 } from '@pickk/common';
 
-import {BoardDataFetcher} from '@components/new-common/template/board';
+import {BoardDataFetcher} from '@components/common/templates/board';
 
 import {useExchangeRequestsCount} from './use-exchange-requests-count';
 

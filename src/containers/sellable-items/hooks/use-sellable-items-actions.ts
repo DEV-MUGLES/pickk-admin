@@ -1,6 +1,6 @@
 import {message} from 'antd';
 
-import {TableActionType} from '@components/new-common/organisms/board-table/actions';
+import {TableActionType} from '@components/common/organisms/board-table/actions';
 import {
   useBulkUpdateIsMdRecommended,
   useBulkUpdateIsSellable,

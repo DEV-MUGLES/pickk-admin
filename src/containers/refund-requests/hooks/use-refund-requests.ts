@@ -10,7 +10,7 @@ import {
   RefundRequestFilter,
 } from '@pickk/common';
 
-import {BoardDataFetcher} from '@components/new-common/template/board';
+import {BoardDataFetcher} from '@components/common/templates/board';
 
 import {useRefundRequestsCount} from './use-refund-requests-count';
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Select, Typography} from 'antd';
 import dayjs, {Dayjs} from 'dayjs';
 
-import {RangePicker} from '@components/new-common/molecules/form-inputs';
+import {RangePicker} from '@components/common/molecules/form-inputs';
 
 import DatePickerQuickButtons, {quickBtnValue2StartDate} from './quick-buttons';
 

@@ -1,7 +1,7 @@
 import {message} from 'antd';
 import {OrderItemStatus, Shipment} from '@pickk/common';
 
-import {TableActionType} from '@components/new-common/organisms/board-table/actions';
+import {TableActionType} from '@components/common/organisms/board-table/actions';
 import {CSVBulkShipButton, ExcelBulkShipButton} from '@components/placements';
 
 import {useToggleModals} from '@common/hooks';

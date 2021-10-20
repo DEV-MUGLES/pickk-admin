@@ -9,7 +9,7 @@ import {
   OrderReceiver,
 } from '@pickk/common';
 
-import {BoardDataFetcher} from '@components/new-common/template/board';
+import {BoardDataFetcher} from '@components/common/templates/board';
 import {useOrderItemsCount} from '@containers/order-items/hooks';
 
 import {

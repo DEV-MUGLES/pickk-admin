@@ -4,7 +4,7 @@ import {
   BoardPreviewProps,
   BoardFilterProps,
   BoardTableProps,
-} from '@components/new-common/organisms';
+} from '@components/common/organisms';
 
 export type BoardDataFetcher<
   DataType = object,

@@ -5,7 +5,7 @@ import {
 } from '@ant-design/icons';
 import {OrderItemStatus, OrderItemFilter} from '@pickk/common';
 
-import {PreviewType} from '@components/new-common/organisms/board-preview';
+import {PreviewType} from '@components/common/organisms/board-preview';
 
 export const placementPreviews: PreviewType<OrderItemFilter>[] = [
   {

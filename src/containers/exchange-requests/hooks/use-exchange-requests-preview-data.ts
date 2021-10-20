@@ -1,7 +1,7 @@
 import {gql, useQuery} from '@apollo/client';
 import {Query, QueryMeSellerExchangeRequestsCountArgs} from '@pickk/common';
 
-import {PreviewDataResult} from '@components/new-common/organisms/board-preview';
+import {PreviewDataResult} from '@components/common/organisms/board-preview';
 
 export const useExchangeRequestsPreveiwData = (): PreviewDataResult => {
   const {data, refetch} = useQuery<

@@ -1,6 +1,6 @@
 import {useState, useRef} from 'react';
 
-import {BoardTemplate} from '@components/new-common/template';
+import {BoardTemplate} from '@components/common/templates';
 import {
   placementsColumns,
   placementsExcelColumns,
@@ -10,7 +10,7 @@ import {
   CancelOrderItemModal,
 } from '@components/placements';
 
-import {BoardTemplateHandle} from '@components/new-common/template/board';
+import {BoardTemplateHandle} from '@components/common/templates/board';
 
 import {
   FlattenPlacementDataType,

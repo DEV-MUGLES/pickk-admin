@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {message, Modal} from 'antd';
 
-import ItemCategoryCascader from '@components/new-common/molecules/form-inputs/item-category-cascader';
+import ItemCategoryCascader from '@components/common/molecules/form-inputs/item-category-cascader';
 
 import {useUpdateItemCategory} from './hooks';
 

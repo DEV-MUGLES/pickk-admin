@@ -4,7 +4,7 @@ import {
   QueryMeSellerOrderItemsCountArgs,
 } from '@pickk/common';
 
-import {PreviewDataResult} from '@components/new-common/organisms/board-preview';
+import {PreviewDataResult} from '@components/common/organisms/board-preview';
 
 const GET_PLACEMENTS_COUNT = gql`
   query MeSellerOrderItemsCount($forceUpdate: Boolean) {

@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import {ExchangeRequestStatus} from '@pickk/common';
 
-import {PreviewType} from '@components/new-common/organisms/board-preview';
+import {PreviewType} from '@components/common/organisms/board-preview';
 
 export const exchangeRequestsPreviews: PreviewType[] = [
   {

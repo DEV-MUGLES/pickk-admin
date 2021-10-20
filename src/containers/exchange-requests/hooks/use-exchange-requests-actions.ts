@@ -1,7 +1,7 @@
 import {message} from 'antd';
 import {ExchangeRequestStatus} from '@pickk/common';
 
-import {TableActionType} from '@components/new-common/organisms/board-table/actions';
+import {TableActionType} from '@components/common/organisms/board-table/actions';
 import {useToggleModals} from '@common/hooks';
 import {
   useBulkPickExchangeRequests,

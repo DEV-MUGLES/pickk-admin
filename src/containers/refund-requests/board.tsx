@@ -1,6 +1,6 @@
 import {useState, useRef} from 'react';
 
-import {BoardTemplate} from '@components/new-common/template';
+import {BoardTemplate} from '@components/common/templates';
 import {
   refundRequestsColumns,
   refundRequestsExcelColumns,
@@ -9,7 +9,7 @@ import {
   RefundConfirmModal,
 } from '@components/refund-requests';
 
-import {BoardTemplateHandle} from '@components/new-common/template/board';
+import {BoardTemplateHandle} from '@components/common/templates/board';
 
 import {
   FlattenRefundRequestDataType,

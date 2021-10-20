@@ -1,6 +1,6 @@
 import {useState, useRef} from 'react';
 
-import {BoardTemplate} from '@components/new-common/template';
+import {BoardTemplate} from '@components/common/templates';
 import {ShipModal} from '@components/placements';
 import {ShipModalDataType} from '@components/placements/table/modals/ship';
 import {
@@ -10,7 +10,7 @@ import {
   exchangeRequestsPreviews,
 } from '@components/exchange-requests';
 
-import {BoardTemplateHandle} from '@components/new-common/template/board';
+import {BoardTemplateHandle} from '@components/common/templates/board';
 
 import {
   FlattenExchangeRequestDataType,

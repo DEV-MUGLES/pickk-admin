@@ -1,13 +1,13 @@
 import {useRef, useState} from 'react';
 
-import {BoardTemplate} from '@components/new-common/template';
+import {BoardTemplate} from '@components/common/templates';
 import {itemsExcelColumns} from '@components/items';
 import {
   sellableItemsFilterInputs,
   CategoryModal,
 } from '@components/sellable-items';
 
-import {BoardTemplateHandle} from '@components/new-common/template/board';
+import {BoardTemplateHandle} from '@components/common/templates/board';
 
 import {useItems, useItemsActions, useItemsColumns} from './hooks';
 

@@ -11,7 +11,7 @@ import {
   OrderItemStatus,
 } from '@pickk/common';
 
-import {BoardDataFetcher} from '@components/new-common/template/board';
+import {BoardDataFetcher} from '@components/common/templates/board';
 
 import {useOrderItemsCount} from './use-order-items-count';
 

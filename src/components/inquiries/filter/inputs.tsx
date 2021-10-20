@@ -1,8 +1,8 @@
 import {Input} from 'antd';
 
-import {TripleSwitch} from '@components/new-common/molecules';
+import {TripleSwitch} from '@components/common/molecules';
 
-import {BoardFilterInputType} from '@components/new-common/organisms/board-filter';
+import {BoardFilterInputType} from '@components/common/organisms/board-filter';
 
 export const inquiriesFilterInputs: BoardFilterInputType[] = [
   {

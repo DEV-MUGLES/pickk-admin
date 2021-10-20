@@ -1,9 +1,9 @@
 import {Input} from 'antd';
 
-import {DatePicker} from '@components/new-common/molecules';
-import ItemCategoryCascader from '@components/new-common/molecules/form-inputs/item-category-cascader';
+import {DatePicker} from '@components/common/molecules';
+import ItemCategoryCascader from '@components/common/molecules/form-inputs/item-category-cascader';
 
-import {BoardFilterInputType} from '@components/new-common/organisms/board-filter';
+import {BoardFilterInputType} from '@components/common/organisms/board-filter';
 
 export const sellableItemsFilterInputs: BoardFilterInputType[] = [
   {

@@ -8,7 +8,7 @@ import {
   Product,
 } from '@pickk/common';
 
-import {BoardDataFetcher} from '@components/new-common/template/board';
+import {BoardDataFetcher} from '@components/common/templates/board';
 import {useSellableItemsCount} from './use-sellable-items-count';
 
 const GET_SELLABLE_ITEMS = gql`

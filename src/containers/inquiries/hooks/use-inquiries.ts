@@ -8,7 +8,7 @@ import {
   QueryMeSellerInquiriesArgs,
 } from '@pickk/common';
 
-import {BoardDataFetcher} from '@components/new-common/template/board';
+import {BoardDataFetcher} from '@components/common/templates/board';
 
 const GET_INQUIRIES = gql`
   query meSellerInquiries($filter: InquiryFilter) {

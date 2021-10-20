@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs, {Dayjs} from 'dayjs';
 
-import {DayjsDatePicker} from '@components/new-common/molecules';
+import {DayjsDatePicker} from '@components/common/molecules';
 
 import {CustomInputProps} from '../base';
 import {setEndOfDay, setStartOfDay} from '@src/common/helpers/date';
