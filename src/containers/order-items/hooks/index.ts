@@ -1,2 +1,2 @@
-export * from './use-order-items-count';
+export * from './use-base-order-items';
 export * from './use-order-items';
