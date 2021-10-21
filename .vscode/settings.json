@@ -1,7 +1,5 @@
 {
-  "conventionalCommits.scopes": [
-    "yarn"
-  ],
+  "conventionalCommits.scopes": ["yarn", "deps"],
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
