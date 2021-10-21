@@ -1,27 +1,13 @@
-import {useQuery} from '@apollo/client';
-import {
-  QueryMeSellerOrderItemsArgs,
-  OrderItemFilter,
-  OrderItemStatus,
-  Shipment,
-  Courier,
-  OrderBuyer,
-  OrderReceiver,
-} from '@pickk/common';
+import {OrderItemStatus, OrderItemSearchFilter} from '@pickk/common';
 
 import {BoardDataFetcher} from '@components/common/templates/board';
-import {useOrderItemsCount} from '@containers/order-items/hooks';
 
 import {
-  GET_ORDER_ITEMS,
   OrderItemDataType,
+  useBaseOrderItems,
 } from '@containers/order-items/hooks';
 
-export const GET_PLACEMENTS = GET_ORDER_ITEMS;
-
-export type PlacementDataType = OrderItemDataType;
-
-export const flattenPlacementRecord = (record: PlacementDataType) => {
+export const flattenPlacementRecord = (record: OrderItemDataType) => {
   const {order, shipment} = record;
   const {buyer, receiver} = order;
   return {
@@ -51,33 +37,21 @@ const {Paid, ShipReady} = OrderItemStatus;
 
 export const usePlacements: BoardDataFetcher<
   FlattenPlacementDataType,
-  OrderItemFilter
-> = ({filter, pageInput}) => {
-  const orderItemFilter = {
-    ...filter,
-    /** status 필터가 있는 경우 statusIn은 무시된다. */
-    ...(filter.status ? {} : {statusIn: [Paid, ShipReady]}),
-    claimStatus: null,
-  };
-
-  const {data, loading, refetch} = useQuery<
-    {meSellerOrderItems: PlacementDataType[]},
-    QueryMeSellerOrderItemsArgs
-  >(GET_PLACEMENTS, {
-    variables: {
-      orderItemFilter,
-      pageInput,
+  OrderItemSearchFilter
+> = ({filter, pageInput, query}) => {
+  const result = useBaseOrderItems({
+    filter: {
+      ...filter,
+      /** status 필터가 있는 경우 statusIn은 무시된다. */
+      ...(filter.status ? {} : {statusIn: [Paid, ShipReady]}),
+      claimStatusIsNull: true,
     },
+    pageInput,
+    query,
   });
 
-  const total = useOrderItemsCount({filter: orderItemFilter});
-
   return {
-    data: !!data?.meSellerOrderItems
-      ? data.meSellerOrderItems.map(flattenPlacementRecord)
-      : [],
-    total,
-    loading,
-    refetch,
+    ...result,
+    data: !!result.data ? result.data.map(flattenPlacementRecord) : [],
   };
 };
