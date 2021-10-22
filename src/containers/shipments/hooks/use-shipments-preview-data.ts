@@ -1,48 +1,9 @@
-import {gql, useQuery} from '@apollo/client';
-import {
-  OrderItemsCountOutput,
-  QueryMeSellerOrderItemsCountArgs,
-} from '@pickk/common';
-
 import {PreviewDataResult} from '@components/common/organisms/board-preview';
+import {useOrderItemsPreveiwData} from '@containers/order-items/hooks';
+import {shipmentPreviews} from '@components/shipments';
 
-const GET_SHIPMENTS_COUNT = gql`
-  query MeSellerOrderItemsCount($forceUpdate: Boolean) {
-    meSellerOrderItemsCount(forceUpdate: $forceUpdate) {
-      id
-      Shipping
-      Shipped
-      confirmed
-      lastUpdatedAt
-    }
-  }
-`;
+import {shipmentsBaseFilter} from './use-shipments';
 
 export const useShipmentsPreviewData = (): PreviewDataResult => {
-  const {data, refetch} = useQuery<
-    {
-      meSellerOrderItemsCount: Pick<
-        OrderItemsCountOutput,
-        'id' | 'Shipping' | 'Shipped' | 'confirmed' | 'lastUpdatedAt'
-      >;
-    },
-    QueryMeSellerOrderItemsCountArgs
-  >(GET_SHIPMENTS_COUNT);
-
-  const getCalculatedData = () => {
-    if (!data?.meSellerOrderItemsCount) {
-      return {};
-    }
-
-    const {Shipped, confirmed} = data.meSellerOrderItemsCount;
-    return {
-      ...data.meSellerOrderItemsCount,
-      Shipped: Shipped - confirmed,
-    };
-  };
-
-  return {
-    data: getCalculatedData(),
-    reload: () => refetch({forceUpdate: true}),
-  };
+  return useOrderItemsPreveiwData(shipmentPreviews, shipmentsBaseFilter);
 };
