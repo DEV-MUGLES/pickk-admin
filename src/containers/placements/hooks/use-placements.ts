@@ -35,6 +35,11 @@ export type FlattenPlacementDataType = ReturnType<
 
 const {Paid, ShipReady} = OrderItemStatus;
 
+export const placementsBaseFilter: OrderItemSearchFilter = {
+  claimStatusIsNull: true,
+  statusIn: [Paid, ShipReady],
+};
+
 export const usePlacements: BoardDataFetcher<
   FlattenPlacementDataType,
   OrderItemSearchFilter
@@ -42,9 +47,9 @@ export const usePlacements: BoardDataFetcher<
   const result = useBaseOrderItems({
     filter: {
       ...filter,
+      ...placementsBaseFilter,
       /** status 필터가 있는 경우 statusIn은 무시된다. */
-      ...(filter.status ? {} : {statusIn: [Paid, ShipReady]}),
-      claimStatusIsNull: true,
+      ...(filter.status ? {statusIn: undefined} : {}),
     },
     pageInput,
     query,

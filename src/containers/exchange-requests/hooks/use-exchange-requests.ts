@@ -135,15 +135,21 @@ export type FlattenExchangeRequestDataType = ReturnType<
   typeof flattenExchangeRequestRecord
 >;
 
+const {Pending, ...exchangeRequestStatus} = ExchangeRequestStatus;
+
+export const exchangeRequestsBaseFilter: ExchangeRequestFilter = {
+  statusIn: Object.values(exchangeRequestStatus),
+};
+
 export const useExchangeRequests: BoardDataFetcher<
   FlattenExchangeRequestDataType,
   ExchangeRequestFilter
 > = ({filter, pageInput}) => {
-  const {Pending, ...statusIn} = ExchangeRequestStatus;
   const exchangeRequestFilter: ExchangeRequestFilter = {
     ...filter,
+    ...exchangeRequestsBaseFilter,
     /** status 필터가 있는 경우 statusIn은 무시된다. */
-    ...(filter.status ? {} : {statusIn: Object.values(statusIn)}),
+    ...(filter.status ? {statusIn: undefined} : {}),
   };
 
   const {data, loading, refetch} = useQuery<
