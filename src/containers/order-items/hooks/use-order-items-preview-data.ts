@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {gql, useQuery} from '@apollo/client';
+import dayjs from 'dayjs';
 import {OrderItemSearchFilter} from '@pickk/common';
 
 import {
@@ -25,10 +26,16 @@ export const useOrderItemsPreveiwData = (
   >(GET_ORDER_ITEMS_COUNT);
 
   const getPreviewData = async () => {
+    /** 최근 3개월에 해당하는 주문건을 보여주기 위함 */
+    const merchantUidMt = dayjs()
+      .add(-3, 'month')
+      .format('YYMMDD0000000000000');
+
     await Promise.all(
       previews.map(async ({name, filter}) => {
         const {data} = await refetch({
           searchFilter: {
+            merchantUidMt,
             ...defaultFilter,
             ...filter,
             /** status 필터가 있는 경우 statusIn은 무시된다. */
