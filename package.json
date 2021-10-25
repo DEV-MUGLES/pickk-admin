@@ -66,5 +66,5 @@
     "prettier": "latest",
     "typescript": "4.3.3"
   },
-  "packageManager": "yarn@3.0.1"
+  "packageManager": "yarn@2.4.3"
 }
