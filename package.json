@@ -61,7 +61,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^1.10.6",
-    "eslint": "latest",
+    "eslint": "7.29.0",
     "eslint-config-next": "^11.1.2",
     "prettier": "latest",
     "typescript": "4.3.3"
