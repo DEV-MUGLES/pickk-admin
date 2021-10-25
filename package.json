@@ -13,7 +13,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@apollo/client": "^3.3.16",
-    "@pickk/common": "1.9.14",
+    "@pickk/common": "^1.9.15",
     "@pickk/design-token": "^0.0.6",
     "@pickk/react-excel": "^0.0.8",
     "antd": "^4.15.4",

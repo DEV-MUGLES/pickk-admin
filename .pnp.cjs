@@ -43,7 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/plugin-proposal-private-methods", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.14.5"],
             ["@babel/plugin-proposal-private-property-in-object", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.15.4"],
             ["@babel/runtime", "npm:7.15.4"],
-            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.14"],
+            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.15"],
             ["@pickk/design-token", "npm:0.0.6"],
             ["@pickk/eslint-plugin", "npm:0.0.8"],
             ["@pickk/react-excel", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:0.0.8"],
@@ -1115,17 +1115,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@pickk/common", [
-        ["npm:1.9.14", {
-          "packageLocation": "./.yarn/cache/@pickk-common-npm-1.9.14-4f0047c15d-54e636fb39.zip/node_modules/@pickk/common/",
+        ["npm:1.9.15", {
+          "packageLocation": "./.yarn/cache/@pickk-common-npm-1.9.15-67071e86ef-3fb7e1f4bb.zip/node_modules/@pickk/common/",
           "packageDependencies": [
-            ["@pickk/common", "npm:1.9.14"]
+            ["@pickk/common", "npm:1.9.15"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.14", {
-          "packageLocation": "./.yarn/__virtual__/@pickk-common-virtual-fc8f0aef81/0/cache/@pickk-common-npm-1.9.14-4f0047c15d-54e636fb39.zip/node_modules/@pickk/common/",
+        ["virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.15", {
+          "packageLocation": "./.yarn/__virtual__/@pickk-common-virtual-4673dfc289/0/cache/@pickk-common-npm-1.9.15-67071e86ef-3fb7e1f4bb.zip/node_modules/@pickk/common/",
           "packageDependencies": [
-            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.14"],
+            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.15"],
             ["@apollo/client", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:3.4.16"],
             ["@types/apollo__client", null],
             ["@types/graphql", null],
@@ -6085,7 +6085,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/plugin-proposal-private-methods", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.14.5"],
             ["@babel/plugin-proposal-private-property-in-object", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:7.15.4"],
             ["@babel/runtime", "npm:7.15.4"],
-            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.14"],
+            ["@pickk/common", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.9.15"],
             ["@pickk/design-token", "npm:0.0.6"],
             ["@pickk/eslint-plugin", "npm:0.0.8"],
             ["@pickk/react-excel", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:0.0.8"],
