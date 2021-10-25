@@ -6715,11 +6715,11 @@ typescript@4.3.3:
 
 "typescript@patch:typescript@4.3.3#~builtin<compat/typescript>":
   version: 4.3.3
-  resolution: "typescript@patch:typescript@npm%3A4.3.3#~builtin<compat/typescript>::version=4.3.3&hash=32657b"
+  resolution: "typescript@patch:typescript@npm%3A4.3.3#~builtin<compat/typescript>::version=4.3.3&hash=d8b4e7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 848a27d0b2a2833f251a3ed20ba7ca925bbd127336e0172643158dbe9d22a23d97632ef4689ce3a505b8dba82f0c8b91ef2422c625a5599a837f80ab5e9c3e0b
+  checksum: 4d6ca2ba48932bbac77253ccfc3fd431151703f30a2e4bbd2cf292c92b96957b6d2a5e4794cf1f9410a74700e4ac485b3a247d18730eba364cc2c98ddc1a4a1e
   languageName: node
   linkType: hard
 
