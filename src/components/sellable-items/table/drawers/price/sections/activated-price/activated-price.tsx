@@ -8,8 +8,8 @@ const {Text} = Typography;
 
 type CurrentPriceInfoSectionProps = Pick<
   ItemPrice,
-  'originalPrice' | 'sellPrice' | 'finalPrice' | 'isBase'
->;
+  'originalPrice' | 'sellPrice' | 'finalPrice'
+> & {isBase: boolean};
 
 export default function ActivatedPriceSection(
   props: CurrentPriceInfoSectionProps,

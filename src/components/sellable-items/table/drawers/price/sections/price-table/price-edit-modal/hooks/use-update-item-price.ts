@@ -12,6 +12,9 @@ const UPDATE_ITEM_PRICE = gql`
   ) {
     updateItemPrice(id: $id, updateItemPriceInput: $updateItemPriceInput) {
       id
+      originalPrice
+      sellPrice
+      finalPrice
       prices {
         id
         startAt

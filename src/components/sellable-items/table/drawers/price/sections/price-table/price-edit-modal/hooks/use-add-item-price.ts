@@ -9,6 +9,9 @@ const ADD_ITEM_PRICE = gql`
   mutation AddItemPrice($itemId: Int!, $addItemPriceInput: AddItemPriceInput!) {
     addItemPrice(itemId: $itemId, addItemPriceInput: $addItemPriceInput) {
       id
+      originalPrice
+      sellPrice
+      finalPrice
       prices {
         id
         startAt
@@ -31,7 +34,6 @@ export const useAddItemPrice = () => {
     itemId: number,
     addItemPriceInput: AddItemPriceInput,
   ) => {
-    console.log('addItemPrice', itemId, addItemPriceInput);
     await add({
       variables: {
         itemId,

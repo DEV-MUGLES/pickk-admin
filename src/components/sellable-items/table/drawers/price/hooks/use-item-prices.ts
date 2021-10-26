@@ -5,6 +5,9 @@ const GET_ITEM_PRICES = gql`
   query item($id: Int!) {
     item(id: $id) {
       id
+      originalPrice
+      sellPrice
+      finalPrice
       prices {
         createdAt
         displayPrice
@@ -28,14 +31,19 @@ const GET_ITEM_PRICES = gql`
 `;
 
 export const useItemPrices = (itemId: number) => {
-  const {data} = useQuery<{item: Pick<Item, 'id' | 'prices'>}, QueryItemArgs>(
-    GET_ITEM_PRICES,
+  const {data} = useQuery<
     {
-      variables: {
-        id: itemId,
-      },
+      item: Pick<
+        Item,
+        'id' | 'originalPrice' | 'sellPrice' | 'finalPrice' | 'prices'
+      >;
     },
-  );
+    QueryItemArgs
+  >(GET_ITEM_PRICES, {
+    variables: {
+      id: itemId,
+    },
+  });
 
-  return {data: data?.item?.prices};
+  return {data: data?.item};
 };

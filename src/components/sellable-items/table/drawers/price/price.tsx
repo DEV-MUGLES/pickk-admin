@@ -21,7 +21,8 @@ function ItemPriceManageDrawer({
   onClose,
   itemId,
 }: ItemPriceEditDrawerProps) {
-  const {data: prices = []} = useItemPrices(itemId);
+  const {data: item} = useItemPrices(itemId);
+  const prices = item?.prices || [];
 
   /** 연동가 제외, 현재 시점 이후의 가격을 오래된 순으로 정렬한다. */
   const filteredPrices = filterOutOfDatePrices(prices)
@@ -33,7 +34,10 @@ function ItemPriceManageDrawer({
       <Space direction="vertical" style={{width: '100%'}} size="small">
         <Collapse defaultActiveKey="1">
           <CollapsePanel key="1" header="적용 중인 가격">
-            <ActivatedPriceSection {...getActivatedPrice(prices)} />
+            <ActivatedPriceSection
+              {...item}
+              isBase={getActivatedPrice(prices).isBase}
+            />
           </CollapsePanel>
         </Collapse>
         <Collapse defaultActiveKey="1">
