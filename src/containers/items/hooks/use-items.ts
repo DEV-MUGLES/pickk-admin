@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {gql, useQuery} from '@apollo/client';
 import {
   Item,
@@ -5,6 +6,7 @@ import {
   QueryMeSellerItemsArgs,
   ItemUrl,
   ItemCategory,
+  Product,
 } from '@pickk/common';
 
 import {BoardDataFetcher} from '@components/common/templates/board';
@@ -19,8 +21,13 @@ const GET_ITEMS = gql`
       name
       originalPrice
       sellPrice
+      finalPrice
+      isInfiniteStock
+      isSoldout
+      isMdRecommended
       isSellable
       createdAt
+      sellableAt
       urls {
         id
         isPrimary
@@ -34,6 +41,11 @@ const GET_ITEMS = gql`
         id
         name
       }
+      products {
+        id
+        stock
+        isDeleted
+      }
     }
   }
 `;
@@ -45,12 +57,18 @@ export type ItemDataType = Pick<
   | 'name'
   | 'originalPrice'
   | 'sellPrice'
+  | 'finalPrice'
+  | 'isInfiniteStock'
+  | 'isSoldout'
+  | 'isMdRecommended'
   | 'isSellable'
   | 'createdAt'
+  | 'sellableAt'
 > & {
   urls: Array<Pick<ItemUrl, 'id' | 'isPrimary' | 'url'>>;
   majorCategory: Pick<ItemCategory, 'id' | 'name'>;
   minorCategory: Pick<ItemCategory, 'id' | 'name'>;
+  products: Array<Pick<Product, 'id' | 'stock' | 'isDeleted'>>;
 };
 
 const formatItemFilter = (filter: ItemFilter) => {
@@ -87,6 +105,11 @@ export const useItems: BoardDataFetcher<ItemDataType, ItemFilter> = ({
     },
   });
   const total = useItemsCount({filter: itemFilter});
+
+  useEffect(() => {
+    /** 첫 로딩시 아이템 활성화, 비활성화 캐시를 업데이트 하기 위함 */
+    refetch();
+  }, []);
 
   return {data: data?.meSellerItems, total, loading, refetch};
 };
