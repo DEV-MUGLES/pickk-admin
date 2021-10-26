@@ -16,7 +16,7 @@ export default function SellableItemStock(props: SellableItemStockProps) {
   const badgeColor = getColor(props);
 
   return (
-    <Badge color={badgeColor} offset={[6, 0]}>
+    <Badge color={badgeColor} dot offset={[6, 0]}>
       <Text>{isInfiniteStock ? '무한재고' : allStocks}</Text>
     </Badge>
   );
