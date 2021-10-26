@@ -2484,13 +2484,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^8.2.0":
-  version: 8.6.0
-  resolution: "dotenv@npm:8.6.0"
-  checksum: 38e902c80b0666ab59e9310a3d24ed237029a7ce34d976796349765ac96b8d769f6df19090f1f471b77a25ca391971efde8a1ea63bb83111bd8bec8e5cc9b2cd
-  languageName: node
-  linkType: hard
-
 "electron-to-chromium@npm:^1.3.723, electron-to-chromium@npm:^1.3.878":
   version: 1.3.878
   resolution: "electron-to-chromium@npm:1.3.878"
@@ -4865,7 +4858,6 @@ fsevents@~2.3.1:
     babel-plugin-styled-components: ^1.10.6
     dayjs: 1.10.7
     deepmerge: ^4.2.2
-    dotenv: ^8.2.0
     eslint: 7.29.0
     eslint-config-next: 12
     graphql: ^15.5.0

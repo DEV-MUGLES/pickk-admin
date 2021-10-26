@@ -15,12 +15,12 @@ import {APOLLO_STATE_PROP_NAME} from './apollo.constants';
 
 let apolloClient: ApolloClient<unknown>;
 
-if (!process.env.NEW_API_URL) {
-  throw new Error('env.NEW_API_URL not found!');
+if (!process.env.NEXT_PUBLIC_API_URL) {
+  throw new Error('env.NEXT_PUBLIC_API_URL not found!');
 }
 
 const httpLink = createHttpLink({
-  uri: process.env.NEW_API_URL + '/graphql',
+  uri: process.env.NEXT_PUBLIC_API_URL + '/graphql',
 });
 
 const authLink = (req?: IncomingMessage) =>

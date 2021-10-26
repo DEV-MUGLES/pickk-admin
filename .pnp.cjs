@@ -67,7 +67,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-plugin-styled-components", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.13.3"],
             ["dayjs", "npm:1.10.7"],
             ["deepmerge", "npm:4.2.2"],
-            ["dotenv", "npm:8.6.0"],
             ["eslint", "npm:7.29.0"],
             ["eslint-config-next", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:12.0.0"],
             ["graphql", "npm:15.6.1"],
@@ -3346,15 +3345,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["dotenv", [
-        ["npm:8.6.0", {
-          "packageLocation": "./.yarn/cache/dotenv-npm-8.6.0-2ce3e9f7bb-38e902c80b.zip/node_modules/dotenv/",
-          "packageDependencies": [
-            ["dotenv", "npm:8.6.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["electron-to-chromium", [
         ["npm:1.3.878", {
           "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.3.878-04ea704154-d5b4ab14d4.zip/node_modules/electron-to-chromium/",
@@ -6066,7 +6056,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-plugin-styled-components", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:1.13.3"],
             ["dayjs", "npm:1.10.7"],
             ["deepmerge", "npm:4.2.2"],
-            ["dotenv", "npm:8.6.0"],
             ["eslint", "npm:7.29.0"],
             ["eslint-config-next", "virtual:b757034084469dfff0e468f7cce6053e9ea056327ec5d6008fcb5656ff33e03126754a89c0107c74b8a7c611ba5d78f1c5ad1d931fe926ef2a809d12b3fb910e#npm:12.0.0"],
             ["graphql", "npm:15.6.1"],

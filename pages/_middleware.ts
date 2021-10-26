@@ -15,7 +15,7 @@ export async function middleware(req: NextRequest) {
 
     const {
       data: {me},
-    } = await fetch(process.env.NEW_API_URL + '/graphql', {
+    } = await fetch(process.env.NEXT_PUBLIC_API_URL + '/graphql', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${accessToken}`,
