@@ -101,7 +101,7 @@ export type ExchangeRequestDataType = Pick<
       >;
     };
   };
-  reshipment: Pick<Shipment, 'id' | 'courierId' | 'trackCode'> & {
+  reShipment: Pick<Shipment, 'id' | 'courierId' | 'trackCode'> & {
     courier: Pick<Courier, 'id' | 'name'>;
   };
 };
@@ -109,7 +109,7 @@ export type ExchangeRequestDataType = Pick<
 export const flattenExchangeRequestRecord = (
   record: ExchangeRequestDataType,
 ) => {
-  const {orderItem, reshipment} = record;
+  const {orderItem, reShipment} = record;
   const {buyer, receiver} = orderItem.order;
   return {
     ...record,
@@ -119,9 +119,9 @@ export const flattenExchangeRequestRecord = (
     buyerPhoneNumber: buyer.phoneNumber,
     receiverReceiverName: receiver.receiverName,
     receiverPhoneNumber: receiver.phoneNumber,
-    reshipmentCourierId: reshipment?.courierId,
-    reshipmentCourierName: reshipment?.courier.name,
-    reshipmentTrackCode: reshipment?.trackCode,
+    reShipmentCourierId: reShipment?.courierId,
+    reShipmentCourierName: reShipment?.courier.name,
+    reShipmentTrackCode: reShipment?.trackCode,
     receiverPostalCode: receiver.postalCode,
     receiverBaseAddress: receiver.baseAddress,
     receiverDetailAddress: receiver.detailAddress,
