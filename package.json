@@ -2,6 +2,7 @@
   "name": "pickk-admin",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": false,
   "scripts": {
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "type-check": "tsc --noEmit",
