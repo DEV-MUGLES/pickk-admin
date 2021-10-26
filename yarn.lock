@@ -52,9 +52,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/client@npm:^3.1.3, @apollo/client@npm:^3.2.5, @apollo/client@npm:^3.3.16":
-  version: 3.4.16
-  resolution: "@apollo/client@npm:3.4.16"
+"@apollo/client@npm:3.4.10":
+  version: 3.4.10
+  resolution: "@apollo/client@npm:3.4.10"
   dependencies:
     "@graphql-typed-document-node/core": ^3.0.0
     "@wry/context": ^0.6.0
@@ -67,7 +67,7 @@ __metadata:
     symbol-observable: ^4.0.0
     ts-invariant: ^0.9.0
     tslib: ^2.3.0
-    zen-observable-ts: ~1.1.0
+    zen-observable-ts: ^1.1.0
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0
     react: ^16.8.0 || ^17.0.0
@@ -77,7 +77,7 @@ __metadata:
       optional: true
     subscriptions-transport-ws:
       optional: true
-  checksum: 919f8f1f4cf3a91024470cd48f1505e11147792445a52bac5bfae093b5acd202765db4c6beeadbb8f3d84ccae054768d0776fd066460469241e84fe51a326a6b
+  checksum: 2d8a943b082558a43439d9801e868a690f2db1f3f4beccbde04b7b9cda81babc58332fb70eb9a919af2c758c460468da4c8967b101c81898891cbe2ee4b7d92f
   languageName: node
   linkType: hard
 
@@ -837,17 +837,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/apollo-upload-client@npm:^14.1.0":
-  version: 14.1.0
-  resolution: "@types/apollo-upload-client@npm:14.1.0"
-  dependencies:
-    "@apollo/client": ^3.1.3
-    "@types/extract-files": "*"
-    graphql: ^15.3.0
-  checksum: a5b8fa32774c00b3a80a19aeb37d27ff66496049aa3e64fffbc9f440620623cfe8100e8cedaeafc51985bec2b00a3d554c3c7f2e301570fd6aeca06eb52d03f3
-  languageName: node
-  linkType: hard
-
 "@types/cookie@npm:^0.3.3":
   version: 0.3.3
   resolution: "@types/cookie@npm:0.3.3"
@@ -859,13 +848,6 @@ __metadata:
   version: 1.0.0
   resolution: "@types/eslint-visitor-keys@npm:1.0.0"
   checksum: a90f0b023e357a59ea04268e0387cfb0ea06703068cc48fe2ca97fa158bcf3c51a6611a56bdbdf763e3451150b92bba3fb5d0b689fc55f856cae8555ec366a63
-  languageName: node
-  linkType: hard
-
-"@types/extract-files@npm:*":
-  version: 8.1.1
-  resolution: "@types/extract-files@npm:8.1.1"
-  checksum: cc26ced9c199b787cf833121247c084b41a5f9058da6947a3368947e5d85a34328752234ab6a04c950579ba91ae7800a0735bc10380225f131b868c25ab89899
   languageName: node
   linkType: hard
 
@@ -990,13 +972,6 @@ __metadata:
   dependencies:
     xlsx: "*"
   checksum: f3fe3325963293bd7e949cbdeb2be21f1cf385ea0ab11c252a5c035c2453c077436c288a27abc80da70a2fd851833aa4e1878045aa7861f07ba84da0c66ac4b1
-  languageName: node
-  linkType: hard
-
-"@types/zen-observable@npm:0.8.3":
-  version: 0.8.3
-  resolution: "@types/zen-observable@npm:0.8.3"
-  checksum: 08c88354abcf03a2176a2ec32e07da1f25fdad94fbc2f419bea53d77deb04ad4759518b4fe3fc695e61065dd4bdf7c8bd26b5211a6cd5be2233872806bdee48d
   languageName: node
   linkType: hard
 
@@ -1441,19 +1416,6 @@ __metadata:
     normalize-path: ^3.0.0
     picomatch: ^2.0.4
   checksum: 985163db2292fac9e5a1e072bf99f1b5baccf196e4de25a0b0b81865ebddeb3b3eb4480734ef0a2ac8c002845396b91aa89121f5b84f93981a4658164a9ec6e9
-  languageName: node
-  linkType: hard
-
-"apollo-upload-client@npm:^14.1.3":
-  version: 14.1.3
-  resolution: "apollo-upload-client@npm:14.1.3"
-  dependencies:
-    "@apollo/client": ^3.2.5
-    "@babel/runtime": ^7.12.5
-    extract-files: ^9.0.0
-  peerDependencies:
-    graphql: 14 - 15
-  checksum: 28c05092af2f77b111febda5cb979b9827d08d4c6fa4dbe0ece69217cf8af9d15807db48667d95451208239ec4ffb825a5e3435ae33f36391658892e329d8769
   languageName: node
   linkType: hard
 
@@ -2956,13 +2918,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"extract-files@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "extract-files@npm:9.0.0"
-  checksum: c31781d090f8d8f62cc541f1023b39ea863f24bd6fb3d4011922d71cbded70cef8191f2b70b43ec6cb5c5907cdad1dc5e9f29f78228936c10adc239091d8ab64
-  languageName: node
-  linkType: hard
-
 "fast-deep-equal@npm:^3.1.1, fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
   resolution: "fast-deep-equal@npm:3.1.3"
@@ -3325,7 +3280,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"graphql@npm:^15.3.0, graphql@npm:^15.5.0":
+"graphql@npm:^15.5.0":
   version: 15.6.1
   resolution: "graphql@npm:15.6.1"
   checksum: 4c6dcf385f7a87a5103fcb7640394244ae8d1d4ede521085192a1cf1e60115c4f6285d783961575d908709f7ee3e4cdd16b3f7c54eb37499c0420c6301e98968
@@ -4827,7 +4782,7 @@ fsevents@~2.3.1:
   resolution: "pickk-admin@workspace:."
   dependencies:
     "@ant-design/icons": ^4.6.2
-    "@apollo/client": ^3.3.16
+    "@apollo/client": 3.4.10
     "@babel/core": ^7.14.0
     "@babel/plugin-proposal-class-properties": ^7.13.0
     "@babel/plugin-proposal-decorators": ^7.13.15
@@ -4838,7 +4793,6 @@ fsevents@~2.3.1:
     "@pickk/design-token": ^0.0.6
     "@pickk/eslint-plugin": ^0.0.8
     "@pickk/react-excel": ^0.0.8
-    "@types/apollo-upload-client": ^14.1.0
     "@types/js-cookie": ^2.2.6
     "@types/lodash": ^4.14.168
     "@types/node": ^15.0.1
@@ -4851,7 +4805,6 @@ fsevents@~2.3.1:
     "@typescript-eslint/parser": ^2.8.0
     antd: ^4.15.4
     antd-prompt: ^0.4.0
-    apollo-upload-client: ^14.1.3
     axios: ^0.21.1
     babel-loader: ^8.0.6
     babel-plugin-module-resolver: ^4.1.0
@@ -6880,13 +6833,12 @@ typescript@4.3.3:
   languageName: node
   linkType: hard
 
-"zen-observable-ts@npm:~1.1.0":
-  version: 1.1.0
-  resolution: "zen-observable-ts@npm:1.1.0"
+"zen-observable-ts@npm:^1.1.0":
+  version: 1.2.2
+  resolution: "zen-observable-ts@npm:1.2.2"
   dependencies:
-    "@types/zen-observable": 0.8.3
     zen-observable: 0.8.15
-  checksum: 1772727f2c96af228c52b008260e1e4ae512782abc9d4f4a78d1a61913aa3b55ae672ad343ecf6895d9b968b5e3f4a41b5a317702cdc6cd5f6f93bc0dacf8103
+  checksum: 8df13f7c7523e3aa91fba40416f458a004049b67da6c1267709881d54382510fa98575d012eb14eac45b0f584955d45a424d522663702b97783165d319973f50
   languageName: node
   linkType: hard
 
