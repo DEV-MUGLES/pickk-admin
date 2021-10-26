@@ -52,7 +52,9 @@ export const isDateIncluded = (
   date: dayjs.ConfigType,
   from: dayjs.ConfigType,
   to: dayjs.ConfigType,
-) => dayjs(date).isBetween(dayjs(from), dayjs(to), 'd', '[]');
+) => {
+  return dayjs(date).isBetween(dayjs(from), dayjs(to), 'm');
+};
 
 // set Date time to 00:00:00
 export const setStartOfDay = (date: dayjs.ConfigType) => {
