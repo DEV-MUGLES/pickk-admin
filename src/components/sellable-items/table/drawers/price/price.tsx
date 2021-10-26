@@ -36,7 +36,7 @@ function ItemPriceManageDrawer({
           <CollapsePanel key="1" header="적용 중인 가격">
             <ActivatedPriceSection
               {...item}
-              isBase={getActivatedPrice(prices).isBase}
+              isBase={getActivatedPrice(prices)?.isBase}
             />
           </CollapsePanel>
         </Collapse>
