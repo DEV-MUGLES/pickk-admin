@@ -1,3 +1,1 @@
-import ExchangeRequestsBoardContainer from './ExchangeRequestsBoardContainer';
-
-export default ExchangeRequestsBoardContainer;
+export {default as ExchangeRequestsBoardContainer} from './board';

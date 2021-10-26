@@ -20,9 +20,7 @@ type MeSellerDataType = Pick<Seller, 'id'> & {
 };
 
 export const useMeSeller = () => {
-  const {data, client} = useQuery<{meSeller: MeSellerDataType}>(GET_ME_SELLER, {
-    nextFetchPolicy: 'network-only',
-  });
+  const {data} = useQuery<{meSeller: MeSellerDataType}>(GET_ME_SELLER);
 
-  return {data: data?.meSeller?.user, reset: client.resetStore};
+  return {data: data?.meSeller?.user};
 };

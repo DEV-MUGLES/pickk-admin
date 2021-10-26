@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router';
+import {PageHeader} from 'antd';
 
-import BoardHeader from '@src/components/common/organisms/Board/Header';
 import InquiryDetailContainer from '@src/containers/inquiry-detail';
 
 export default function InquiryDetailPage() {
@@ -14,7 +14,7 @@ export default function InquiryDetailPage() {
 
   return (
     <>
-      <BoardHeader title="문의 상세" />
+      <PageHeader title="문의 상세" />
       <InquiryDetailContainer id={inquiryId} />
     </>
   );

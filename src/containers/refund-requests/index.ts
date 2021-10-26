@@ -1,3 +1,1 @@
-import RefundRequestsBoardContainer from './RefundRequestsBoardContainer';
-
-export default RefundRequestsBoardContainer;
+export {default as RefundRequestsBoardContainer} from './board';

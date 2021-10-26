@@ -1,31 +1,26 @@
-import {ExcelColumnsType} from '@pickk/react-excel';
-import {OrderItem} from '@pickk/common';
-
+import {OrderItemDataType} from '@containers/order-items/hooks';
 import {
+  generateExcelColumns,
+  addDashToPhoneNumber,
   getOrderItemClaimStatusDisplayName,
   getOrderItemStatusDisplayName,
+  renderDateWithTime,
 } from '@src/common/helpers';
 
-import {orderItemColumns} from './columns';
+import {orderItemsColumns} from './columns';
 
-const excelColumns = orderItemColumns.map(({title, key}) => ({
-  label: title.toString(),
-  propName: key.toString(),
-}));
-
-export const orderItemExcelColumns: ExcelColumnsType<OrderItem> = [
-  ...excelColumns.slice(0, 2),
+export const orderItemsExcelColumns = generateExcelColumns<OrderItemDataType>(
+  orderItemsColumns,
   {
-    label: '주문상태',
-    propName: 'status',
-    mapValue: ({status, isConfirmed}) =>
+    paidAt: ({paidAt}) => renderDateWithTime(paidAt),
+    confirmedAt: ({confirmedAt}) => renderDateWithTime(confirmedAt),
+    status: ({status, isConfirmed}) =>
       getOrderItemStatusDisplayName(status, isConfirmed),
-  },
-  {
-    label: '클레임 상태',
-    propName: 'claimStatus',
-    mapValue: ({claimStatus}) =>
+    claimStatus: ({claimStatus}) =>
       getOrderItemClaimStatusDisplayName(claimStatus),
+    buyerName: ({order}) => order?.buyer?.name,
+    buyerPhoneNumber: ({order}) =>
+      addDashToPhoneNumber(order?.buyer?.phoneNumber),
+    receiverReceiverName: ({order}) => order?.receiver?.receiverName,
   },
-  ...excelColumns.slice(5),
-];
+);

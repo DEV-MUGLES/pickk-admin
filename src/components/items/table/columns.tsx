@@ -1,19 +1,15 @@
-import dayjs from 'dayjs';
 import {Button, Image} from 'antd';
 import {ColumnsType} from 'antd/lib/table';
-import {Item} from '@pickk/common';
 
-import {renderBooleanColumn} from '@src/common/helpers/ColumnRenderer';
-import {addCommaToNumber} from '@src/common/helpers/NumberParser';
-import {stringSorter} from '@src/common/helpers/sorter';
+import {ItemDataType} from '@containers/items/hooks';
+import {renderBoolean, renderDate, renderPrice} from '@src/common/helpers';
 
-export const itemColumns: ColumnsType<Item> = [
+export const itemsColumns: ColumnsType<ItemDataType> = [
   {
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
     width: 40,
-    sorter: (a, b) => b.id - a.id,
     align: 'center',
   },
   {
@@ -44,21 +40,20 @@ export const itemColumns: ColumnsType<Item> = [
     title: '대표이미지',
     dataIndex: 'imageUrl',
     key: 'imageUrl',
+    render: (text) => <Image src={text} alt="대표이미지" />,
     width: 120,
-    render: (text) => <Image src={text} />,
   },
   {
     title: '상품명',
     dataIndex: 'name',
     key: 'name',
-    sorter: (a, b) => stringSorter(b.name, a.name),
+    width: 240,
   },
   {
     title: '정가',
     dataIndex: 'originalPrice',
     key: 'originalPrice',
-    render: (value) => addCommaToNumber(value) + ' 원',
-    sorter: (a, b) => b.originalPrice - a.originalPrice,
+    render: renderPrice,
     ellipsis: true,
     align: 'center',
   },
@@ -66,43 +61,22 @@ export const itemColumns: ColumnsType<Item> = [
     title: '판매가',
     dataIndex: 'sellPrice',
     key: 'sellPrice',
-    render: (value) => addCommaToNumber(value) + ' 원',
-    sorter: (a, b) => b.sellPrice - a.sellPrice,
+    render: renderPrice,
     ellipsis: true,
     align: 'center',
   },
-  // @TODO: uncomment when we the field is ready
-  // {
-  //   title: '리뷰수',
-  //   dataIndex: 'reviewCount',
-  //   key: 'reviewCount',
-  //   sorter: (a, b) => b.reviewCount - a.reviewCount,
-  //   width: 60,
-  //   ellipsis: true,
-  //   align: 'center',
-  // },
-  // {
-  //   title: '구매수',
-  //   dataIndex: 'purchasedCount',
-  //   key: 'purchasedCount',
-  //   sorter: (a, b) => b.purchasedCount - a.purchasedCount,
-  //   width: 60,
-  //   ellipsis: true,
-  //   align: 'center',
-  // },
   {
     title: '활성화 여부',
     dataIndex: 'isSellable',
     key: 'isSellable',
-    render: renderBooleanColumn,
+    render: renderBoolean,
     align: 'center',
   },
   {
     title: '상품등록일',
     dataIndex: 'createdAt',
     key: 'createdAt',
-    sorter: (a, b) => stringSorter(b.createdAt, a.createdAt),
-    render: (text) => <>{dayjs(text).format('YYYY-MM-DD')}</>,
+    render: renderDate,
     ellipsis: true,
   },
 ];

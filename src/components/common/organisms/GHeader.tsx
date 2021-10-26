@@ -7,7 +7,6 @@ import {palette} from '@pickk/design-token';
 import {PickLogoIcon} from '../icons';
 
 import {removeCookie} from '@src/common/helpers';
-import {useMeSeller} from '@src/common/hooks/apis';
 
 const {Title} = Typography;
 const {Header} = Layout;
@@ -15,17 +14,15 @@ const {Header} = Layout;
 export default function GHeader() {
   const router = useRouter();
 
-  const {reset} = useMeSeller();
-
   const signOut = async () => {
     try {
       if (confirm('로그아웃 하시겠습니까?')) {
+        message.success('로그아웃 되었습니다.');
+
         removeCookie('accessToken');
         removeCookie('refreshToken');
 
-        message.success('로그아웃 되었습니다.');
-
-        await reset();
+        router.reload(); /** clear apollo cache store */
         router.push('/login');
       }
     } catch (error) {

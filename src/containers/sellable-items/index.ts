@@ -1,3 +1,1 @@
-import SellableItemsBoardContainer from './SellableItemsBoardContainer';
-
-export default SellableItemsBoardContainer;
+export {default as SellableItemsBoardContainer} from './board';

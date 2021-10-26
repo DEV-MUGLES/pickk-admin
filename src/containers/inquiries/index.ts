@@ -1,3 +1,1 @@
-import InquiriesBoardContainer from './inquiries';
-
-export default InquiriesBoardContainer;
+export {default as InquiriesBoardContainer} from './board';

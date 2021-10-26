@@ -1,3 +1,1 @@
-import PlacementBoardContainer from './PlacementBoardContainer';
-
-export default PlacementBoardContainer;
+export {default as PlacementsBoardContainer} from './board';

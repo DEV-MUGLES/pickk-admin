@@ -1,3 +1,1 @@
-import CancelRequestsBoardContainer from './CancelRequestsBoardContainer';
-
-export default CancelRequestsBoardContainer;
+export {default as CancelRequestsBoardContainer} from './board';

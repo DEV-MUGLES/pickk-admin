@@ -1,3 +1,1 @@
-import OrderItemsBoardContainer from './OrderItemsBoardContainer';
-
-export default OrderItemsBoardContainer;
+export {default as OrderItemsBoardContainer} from './board';

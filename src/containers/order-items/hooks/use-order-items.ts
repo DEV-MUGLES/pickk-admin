@@ -1,110 +1,21 @@
-import {gql, useQuery} from '@apollo/client';
-import {
-  Courier,
-  Order,
-  OrderBuyer,
-  OrderItem,
-  OrderReceiver,
-  Shipment,
-  QueryMeSellerOrderItemsArgs,
-} from '@pickk/common';
+import {OrderItemSearchFilter, OrderItemStatus} from '@pickk/common';
 
-const GET_ORDER_ITEMS = gql`
-  query MeSellerOrderItems(
-    $orderItemFilter: OrderItemFilter
-    $pageInput: PageInput
-  ) {
-    meSellerOrderItems(
-      orderItemFilter: $orderItemFilter
-      pageInput: $pageInput
-    ) {
-      id
-      merchantUid
-      orderMerchantUid
-      status
-      shippingAt
-      paidAt
-      claimStatus
-      itemId
-      itemName
-      productVariantName
-      quantity
-      itemFinalPrice
-      recommenderNickname
-      isConfirmed
-      confirmedAt
+import {BoardDataFetcher} from '@components/common/templates/board';
 
-      shipment {
-        id
-        trackCode
-        courierId
-        courier {
-          id
-          name
-          code
-        }
-      }
-      order {
-        id
-        buyer {
-          id
-          name
-          phoneNumber
-          email
-        }
-        receiver {
-          id
-          receiverName
-          phoneNumber
-          postalCode
-          baseAddress
-          detailAddress
-          message
-        }
-      }
-    }
-  }
-`;
+import {OrderItemDataType, useBaseOrderItems} from './use-base-order-items';
 
-export type OrderItemDataType = Pick<
-  OrderItem,
-  | 'id'
-  | 'merchantUid'
-  | 'orderMerchantUid'
-  | 'status'
-  | 'shippingAt'
-  | 'paidAt'
-  | 'claimStatus'
-  | 'itemId'
-  | 'itemName'
-  | 'productVariantName'
-  | 'quantity'
-  | 'itemFinalPrice'
-  | 'recommenderNickname'
-  | 'isConfirmed'
-  | 'confirmedAt'
-> & {
-  shipment: Pick<Shipment, 'id' | 'trackCode' | 'courierId'> & {
-    courier: Pick<Courier, 'id' | 'name' | 'code'>;
-  };
-  order: Pick<Order, 'id'> & {
-    buyer: Pick<OrderBuyer, 'id' | 'name' | 'phoneNumber' | 'email'>;
-    receiver: Pick<
-      OrderReceiver,
-      | 'id'
-      | 'receiverName'
-      | 'phoneNumber'
-      | 'postalCode'
-      | 'baseAddress'
-      | 'detailAddress'
-      | 'message'
-    >;
-  };
-};
+const {Pending, Failed, ...statusIn} = OrderItemStatus;
 
-export const useOrderItems = () => {
-  return useQuery<
-    {meSellerOrderItems: OrderItemDataType},
-    QueryMeSellerOrderItemsArgs
-  >(GET_ORDER_ITEMS);
+export const useOrderItems: BoardDataFetcher<
+  OrderItemDataType,
+  OrderItemSearchFilter
+> = ({filter, pageInput, query}) => {
+  return useBaseOrderItems({
+    filter: {
+      ...filter,
+      statusIn: Object.values(statusIn),
+    },
+    pageInput,
+    query,
+  });
 };

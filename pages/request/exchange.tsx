@@ -1,4 +1,4 @@
-import ExchangeRequestsBoardContainer from '@src/containers/exchange-requests';
+import {ExchangeRequestsBoardContainer} from '@containers/exchange-requests';
 
 export default function ExchangeRequests() {
   return <ExchangeRequestsBoardContainer />;

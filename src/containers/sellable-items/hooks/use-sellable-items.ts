@@ -1,94 +1,13 @@
-import {QueryHookOptions, gql, useQuery} from '@apollo/client';
-import {Query, QueryMeSellerItemsArgs} from '@pickk/common';
+import {ItemFilter} from '@pickk/common';
 
-// @TODO prices, products, options은 drawer에서 사용할때 fetching 하도록 변경
-const ME_SELLER_SELLABLE_ITEMS_QUERY = gql`
-  query meSellerItems($itemFilter: ItemFilter, $pageInput: PageInput) {
-    meSellerItems(itemFilter: $itemFilter, pageInput: $pageInput) {
-      id
-      imageUrl
-      name
-      originalPrice
-      sellPrice
-      finalPrice
-      isInfiniteStock
-      isSoldout
-      isMdRecommended
-      isSellable
-      createdAt
-      sellableAt
-      urls {
-        id
-        isPrimary
-        url
-      }
-      majorCategory {
-        id
-        name
-      }
-      minorCategory {
-        id
-        name
-      }
+import {BoardDataFetcher} from '@components/common/templates/board';
+import {ItemDataType, useItems} from '@containers/items/hooks';
 
-      prices {
-        createdAt
-        displayPrice
-        endAt
-        finalPrice
-        id
-        isActive
-        isBase
-        isCrawlUpdating
-        itemId
-        originalPrice
-        pickkDiscountAmount
-        pickkDiscountRate
-        sellPrice
-        startAt
-        unit
-        updatedAt
-      }
+export type SellableItemDataType = ItemDataType;
 
-      products {
-        createdAt
-        id
-        itemOptionValues {
-          id
-          name
-          priceVariant
-          itemOptionId
-        }
-        shippingReservePolicy {
-          createdAt
-          estimatedShippingBegginDate
-          id
-          stock
-          updatedAt
-        }
-        stock
-        updatedAt
-        priceVariant
-        isDeleted
-      }
-
-      options {
-        id
-        name
-        order
-        values {
-          id
-          name
-          priceVariant
-        }
-      }
-    }
-  }
-`;
-
-export const useSellableItems = (options?: QueryHookOptions) => {
-  return useQuery<Pick<Query, 'meSellerItems'>, QueryMeSellerItemsArgs>(
-    ME_SELLER_SELLABLE_ITEMS_QUERY,
-    options,
-  );
+export const useSellableItems: BoardDataFetcher<
+  SellableItemDataType,
+  ItemFilter
+> = ({filter, pageInput}) => {
+  return useItems({filter: {isSellable: true, ...filter}, pageInput});
 };

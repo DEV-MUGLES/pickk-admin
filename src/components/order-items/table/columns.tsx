@@ -1,19 +1,18 @@
 import {ColumnsType} from 'antd/lib/table';
 
 import {
-  getTimeString,
   addDashToPhoneNumber,
-  stringSorter,
   getOrderItemClaimStatusDisplayName,
   getOrderItemStatusDisplayName,
+  renderDateWithTime,
 } from '@src/common/helpers';
+import {OrderItemDataType} from '@containers/order-items/hooks';
 
-export const orderItemColumns: ColumnsType<any> = [
+export const orderItemsColumns: ColumnsType<OrderItemDataType> = [
   {
     title: '주문상품번호',
     dataIndex: 'merchantUid',
     key: 'merchantUid',
-    sorter: (a, b) => b.merchantUid - a.merchantUid,
     width: 140,
     ellipsis: true,
   },
@@ -21,7 +20,6 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '주문번호',
     dataIndex: 'orderMerchantUid',
     key: 'orderMerchantUid',
-    sorter: (a, b) => b.orderMerchantUid - a.orderMerchantUid,
     width: 120,
     ellipsis: true,
   },
@@ -29,9 +27,7 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '주문 일시',
     dataIndex: 'paidAt',
     key: 'paidAt',
-    render: (value) => <div>{getTimeString(value)}</div>,
-    sorter: (a, b) => stringSorter(b.paidAt, a.paidAt),
-    defaultSortOrder: 'ascend',
+    render: renderDateWithTime,
     width: 100,
     ellipsis: true,
   },
@@ -39,9 +35,7 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '구매확정 일시',
     dataIndex: 'confirmedAt',
     key: 'confirmedAt',
-    render: (value) => <div>{getTimeString(value)}</div>,
-    sorter: (a, b) => stringSorter(b.confirmedAt, a.confirmedAt),
-    defaultSortOrder: 'ascend',
+    render: renderDateWithTime,
     width: 100,
     ellipsis: true,
   },
@@ -49,10 +43,8 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '주문상태',
     dataIndex: 'status',
     key: 'status',
-    render: (value, {isConfirmed}) => (
-      <div>{getOrderItemStatusDisplayName(value, isConfirmed)}</div>
-    ),
-    sorter: (a, b) => stringSorter(b.status, a.status),
+    render: (value, {isConfirmed}) =>
+      getOrderItemStatusDisplayName(value, isConfirmed),
     width: 90,
     ellipsis: true,
   },
@@ -60,8 +52,7 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '클레임 상태',
     dataIndex: 'claimStatus',
     key: 'claimStatus',
-    render: (value) => <div>{getOrderItemClaimStatusDisplayName(value)}</div>,
-    sorter: (a, b) => stringSorter(b.claimStatus, a.claimStatus),
+    render: (value) => getOrderItemClaimStatusDisplayName(value),
     width: 140,
     ellipsis: true,
   },
@@ -77,7 +68,6 @@ export const orderItemColumns: ColumnsType<any> = [
         {value}
       </a>
     ),
-    sorter: (a, b) => stringSorter(b.itemName, a.itemName),
     width: 200,
     ellipsis: true,
   },
@@ -85,7 +75,6 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '옵션',
     dataIndex: 'productVariantName',
     key: 'productVariantName',
-    sorter: (a, b) => stringSorter(b.productVariantName, a.productVariantName),
     width: 200,
     ellipsis: true,
   },
@@ -93,7 +82,6 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '수량',
     dataIndex: 'quantity',
     key: 'quantity',
-    sorter: (a, b) => b.quantity - a.quantity,
     width: 75,
     ellipsis: true,
   },
@@ -101,7 +89,7 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '구매자명',
     dataIndex: 'buyerName',
     key: 'buyerName',
-    sorter: (a, b) => stringSorter(b.buyerName, a.buyerName),
+    render: (_, {order}) => order?.buyer?.name,
     width: 75,
     ellipsis: true,
   },
@@ -109,7 +97,7 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '구매자 연락처',
     dataIndex: 'buyerPhoneNumber',
     key: 'buyerPhoneNumber',
-    render: (value) => addDashToPhoneNumber(value),
+    render: (_, {order}) => addDashToPhoneNumber(order?.buyer?.phoneNumber),
     width: 75,
     ellipsis: true,
   },
@@ -117,8 +105,7 @@ export const orderItemColumns: ColumnsType<any> = [
     title: '수취인명',
     dataIndex: 'receiverReceiverName',
     key: 'receiverReceiverName',
-    sorter: (a, b) =>
-      stringSorter(b.receiverReceiverName, a.receiverReceiverName),
+    render: (_, {order}) => order?.receiver?.receiverName,
     width: 75,
     ellipsis: true,
   },

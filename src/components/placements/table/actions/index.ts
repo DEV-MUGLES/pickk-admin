@@ -1,2 +1,2 @@
-export {default as CSVBulkShipButton} from './csv-bulk-ship';
-export {default as ExcelBulkShipButton} from './excel-bulk-ship';
+export * from './bulk-ship';
+export * from './hooks';

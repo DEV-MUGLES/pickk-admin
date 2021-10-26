@@ -1,43 +1,36 @@
-import {ExcelColumnsType} from '@pickk/react-excel';
-import {RefundRequest} from '@pickk/common';
-
+import {FlattenRefundRequestDataType} from '@containers/refund-requests/hooks';
 import {
-  getOrderClaimFaultOfDisplayName,
+  generateExcelColumns,
+  renderDateWithTime,
   getRefundRequestStatusDisplayName,
+  getOrderClaimFaultOfDisplayName,
+  addDashToPhoneNumber,
 } from '@src/common/helpers';
 
-import {refundRequestColumns} from './columns';
+import {refundRequestsColumns} from './columns';
 
-const excelColumns = refundRequestColumns.map(({title, key}) => ({
-  label: title.toString(),
-  propName: key.toString(),
-}));
+export const refundRequestsExcelValueMapper: Record<
+  string,
+  (record: FlattenRefundRequestDataType) => string
+> = {
+  status: ({status}) => getRefundRequestStatusDisplayName(status),
+  requestedAt: ({requestedAt}) => renderDateWithTime(requestedAt),
+  orderItems: ({orderItems}) =>
+    orderItems
+      .map(
+        (currItem) =>
+          `${currItem.itemName} (${currItem.productVariantName} x ${currItem.quantity})`,
+      )
+      .join(', '),
+  buyerPhoneNumber: ({buyerPhoneNumber}) =>
+    addDashToPhoneNumber(buyerPhoneNumber),
+  reason: ({faultOf, reason}) =>
+    `[${getOrderClaimFaultOfDisplayName(faultOf)}] ${reason}`,
+};
 
-export const refundRequestExcelColumns: ExcelColumnsType<RefundRequest> = [
-  ...excelColumns.slice(0, 2),
-  {
-    label: '반품처리상태',
-    propName: 'status',
-    mapValue: ({status}) => getRefundRequestStatusDisplayName(status),
-  },
-  ...excelColumns.slice(3, 4),
-  {
-    label: '반품상품',
-    propName: 'orderItems',
-    mapValue: ({orderItems}) =>
-      orderItems
-        .map(
-          (currItem) =>
-            `${currItem.itemName} (${currItem.productVariantName} x ${currItem.quantity})`,
-        )
-        .join(', '),
-  },
-  ...excelColumns.slice(5, 7),
-  {
-    label: '반품사유',
-    propName: 'reason',
-    mapValue: ({faultOf, reason}) =>
-      `[${getOrderClaimFaultOfDisplayName(faultOf)}] ${reason}`,
-  },
-  ...excelColumns.slice(9),
-];
+export const refundRequestsExcelColumns =
+  generateExcelColumns<FlattenRefundRequestDataType>(
+    refundRequestsColumns,
+    refundRequestsExcelValueMapper,
+    ['trackingViewUrl'],
+  );

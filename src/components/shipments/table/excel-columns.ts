@@ -1,16 +1,20 @@
-import {ExcelColumnsType} from '@pickk/react-excel';
-import {OrderItem} from '@pickk/common';
+import {generateExcelColumns, renderDateWithTime} from '@src/common/helpers';
+import {placementsExcelValueMapper} from '@components/placements';
+import {FlattenShipmentDataType} from '@containers/shipments/hooks';
 
-import {getTimeString} from '@src/common/helpers';
+import {shipmentsColumns} from './columns';
 
-import {placementExcelColumns} from '@src/components/placements/table';
+export const shipmentsExcelValueMapper: Record<
+  string,
+  (record: FlattenShipmentDataType) => string
+> = {
+  ...placementsExcelValueMapper,
+  shippingAt: ({shippingAt}) => renderDateWithTime(shippingAt),
+};
 
-export const shipmentsExcelColumns: ExcelColumnsType<OrderItem> = [
-  ...placementExcelColumns.slice(0, 3),
-  {
-    label: '발송일시',
-    propName: 'shippingAt',
-    mapValue: ({shippingAt}) => getTimeString(shippingAt),
-  },
-  ...placementExcelColumns.slice(3),
-];
+export const shipmentsExcelColumns =
+  generateExcelColumns<FlattenShipmentDataType>(
+    shipmentsColumns,
+    shipmentsExcelValueMapper,
+    ['trackingViewUrl'],
+  );
