@@ -1,5 +1,4 @@
 import {NextRequest, NextResponse} from 'next/server';
-import {UserRole} from '@pickk/common';
 
 export async function middleware(req: NextRequest) {
   const {pathname} = req.nextUrl;
@@ -24,7 +23,7 @@ export async function middleware(req: NextRequest) {
       body: JSON.stringify({query: GET_ME}),
     }).then(async (response) => await response.json());
 
-    if (!me || me.role !== UserRole.Seller) {
+    if (!me || me.role !== 'Seller') {
       throw new Error('권한 없음');
     }
 
