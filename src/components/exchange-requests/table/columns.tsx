@@ -74,13 +74,12 @@ export const exchangeRequestsColumns: ColumnsType<FlattenExchangeRequestDataType
       key: 'reason',
       render: (value, {faultOf}) =>
         `[${getOrderClaimFaultOfDisplayName(faultOf)}] ${value}`,
-      width: 260,
+      ellipsis: true,
     },
     {
       title: '수취인명',
       dataIndex: 'receiverReceiverName',
       key: 'receiverReceiverName',
-      width: 100,
       ellipsis: true,
     },
     {
@@ -88,21 +87,18 @@ export const exchangeRequestsColumns: ColumnsType<FlattenExchangeRequestDataType
       dataIndex: 'receiverPhoneNumber',
       key: 'receiverPhoneNumber',
       render: (value) => addDashToPhoneNumber(value),
-      width: 100,
       ellipsis: true,
     },
     {
       title: '재배송 택배사',
       dataIndex: 'reShipmentCourierName',
       key: 'reShipmentCourierName',
-      width: 100,
       ellipsis: true,
     },
     {
       title: '재배송 송장번호',
       dataIndex: 'reShipmentTrackCode',
       key: 'reShipmentTrackCode',
-      width: 100,
       ellipsis: true,
     },
     {
@@ -115,19 +111,19 @@ export const exchangeRequestsColumns: ColumnsType<FlattenExchangeRequestDataType
       title: '배송지 주소',
       dataIndex: 'receiverBaseAddress',
       key: 'receiverBaseAddress',
-      width: 240,
+      ellipsis: true,
     },
     {
       title: '배송지 상세주소',
       dataIndex: 'receiverDetailAddress',
       key: 'receiverDetailAddress',
-      width: 160,
+      ellipsis: true,
     },
     {
       title: '배송지 주소 (통합)',
       dataIndex: 'receiverFullAddress',
       key: 'receiverFullAddress',
-      width: 240,
+      ellipsis: true,
     },
     {
       title: '판매가격',
