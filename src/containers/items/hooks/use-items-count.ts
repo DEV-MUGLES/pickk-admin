@@ -1,13 +1,11 @@
 import {gql, useQuery} from '@apollo/client';
-import {Query, QueryMeSellerItemsArgs, ItemFilter} from '@pickk/common';
+import {QueryMeSellerItemsArgs, ItemFilter} from '@pickk/common';
 
 export const useItemsCount = ({filter}: {filter: ItemFilter}) => {
-  const {data} = useQuery<Pick<Query, 'meSellerItems'>, QueryMeSellerItemsArgs>(
+  const {data} = useQuery<{meSellerItemsCount: number}, QueryMeSellerItemsArgs>(
     gql`
-      query meSellerItems($itemFilter: ItemFilter) {
-        meSellerItems(itemFilter: $itemFilter) {
-          id
-        }
+      query meSellerItemsCount($itemFilter: ItemFilter) {
+        meSellerItemsCount(itemFilter: $itemFilter)
       }
     `,
     {
@@ -17,5 +15,5 @@ export const useItemsCount = ({filter}: {filter: ItemFilter}) => {
     },
   );
 
-  return (data?.meSellerItems || []).length;
+  return data?.meSellerItemsCount;
 };
