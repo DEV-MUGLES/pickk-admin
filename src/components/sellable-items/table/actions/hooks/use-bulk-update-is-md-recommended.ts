@@ -2,17 +2,17 @@ import {gql, useMutation} from '@apollo/client';
 import {Mutation} from '@pickk/common';
 
 const BULK_UPDATE_IS_MD_RECOMMENDED = gql`
-  mutation BulkUpdateItems($ids: [Int!]!, $isMdRecommended: Boolean) {
-    bulkUpdateItems(
+  mutation bulkUpdateMeSellerItems($ids: [Int!]!, $isMdRecommended: Boolean) {
+    bulkUpdateMeSellerItems(
       ids: $ids
-      bulkUpdateItemInput: {isMdRecommended: $isMdRecommended}
+      input: {isMdRecommended: $isMdRecommended}
     )
   }
 `;
 
 export const useBulkUpdateIsMdRecommended = () => {
   const [bulkUpdate] = useMutation<
-    Pick<Mutation, 'bulkUpdateItems'>,
+    Pick<Mutation, 'bulkUpdateMeSellerItems'>,
     {ids: number[]; isMdRecommended: boolean}
   >(BULK_UPDATE_IS_MD_RECOMMENDED);
 

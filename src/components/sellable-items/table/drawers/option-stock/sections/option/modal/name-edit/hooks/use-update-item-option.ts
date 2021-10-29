@@ -1,12 +1,9 @@
 import {gql, useMutation} from '@apollo/client';
-import {Mutation, MutationUpdateItemOptionArgs} from '@pickk/common';
+import {Mutation, MutationUpdateMeSellerItemOptionArgs} from '@pickk/common';
 
 const UPDATE_ITEM_OPTION = gql`
-  mutation updateItemOption(
-    $id: Int!
-    $updateItemOptionInput: UpdateItemOptionInput!
-  ) {
-    updateItemOption(id: $id, updateItemOptionInput: $updateItemOptionInput) {
+  mutation updateMeSellerItemOption($id: Int!, $input: UpdateItemOptionInput!) {
+    updateMeSellerItemOption(id: $id, input: $input) {
       id
       name
       values {
@@ -19,15 +16,15 @@ const UPDATE_ITEM_OPTION = gql`
 
 export const useUpdateItemOption = () => {
   const [update] = useMutation<
-    Pick<Mutation, 'updateItemOption'>,
-    MutationUpdateItemOptionArgs
+    Pick<Mutation, 'updateMeSellerItemOption'>,
+    MutationUpdateMeSellerItemOptionArgs
   >(UPDATE_ITEM_OPTION);
 
   const updateItemOption = async (id: number, name: string) => {
     await update({
       variables: {
         id,
-        updateItemOptionInput: {
+        input: {
           name,
         },
       },
