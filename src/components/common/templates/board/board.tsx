@@ -71,7 +71,14 @@ const BoardTemplate = forwardRef<BoardTemplateHandle, BoardTemplateProps>(
     });
 
     const useExcelData = () =>
-      useBoardData({pageInput: undefined, filter, ...(query ? {query} : {})});
+      useBoardData({
+        pageInput: {
+          offset: 0,
+          limit: total,
+        },
+        filter,
+        ...(query ? {query} : {}),
+      });
 
     const reload = async () => {
       await refetch();
